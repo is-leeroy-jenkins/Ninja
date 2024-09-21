@@ -1,20 +1,19 @@
-﻿using PcapDotNet.Packets;
-using PcapDotNet.Packets.IpV4;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-
-using static Ninja.Models.SnifferStatsModel;
-
+﻿
 namespace Ninja.Models
 {
+    using PcapDotNet.Packets;
+    using PcapDotNet.Packets.IpV4;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Linq;
+
     public static class SnifferStatsProcess
     {
         public static Stopwatch StopWatch { get; private set; }
         public static long PacketCount { get; private set; }
         public static long ByteCount { get; private set; }
         public static ObservableCollection<SnifferStatsModel.Ipv4ProtocolStats> ProtocolStats { get; private set; }
-        public static ObservableCollection<SnifferStatsModel.Ipv4ConnectionStats> ConnectionStats { get; private set; }
+        public static ObservableCollection<Ipv4ConnectionStats> ConnectionStats { get; private set; }
         public static void Start()
         {
             StopWatch.Start();
@@ -70,12 +69,12 @@ namespace Ninja.Models
             }
 
 
-            SnifferStatsModel.Ipv4ConnectionStats connStats = ConnectionStats.Where(c =>
+            Ipv4ConnectionStats connStats = ConnectionStats.Where(c =>
             (c.AddressA == newPacket.Ethernet.IpV4.Source || c.AddressA == newPacket.Ethernet.IpV4.Destination) &&
             (c.AddressB == newPacket.Ethernet.IpV4.Source || c.AddressB == newPacket.Ethernet.IpV4.Destination)).FirstOrDefault();
             if (connStats == null)
             {
-                connStats = new SnifferStatsModel.Ipv4ConnectionStats(newPacket.Ethernet.IpV4.Source, newPacket.Ethernet.IpV4.Destination);
+                connStats = new Ipv4ConnectionStats(newPacket.Ethernet.IpV4.Source, newPacket.Ethernet.IpV4.Destination);
                 connStats.ByteCountAToB = newPacket.Length;
                 connStats.PacketCountAToB++;
                 ConnectionStats.Add(connStats);
@@ -106,7 +105,7 @@ namespace Ninja.Models
                 new SnifferStatsModel.Ipv4ProtocolStats( IpV4Protocol.InternetControlMessageProtocol),
                 new SnifferStatsModel.Ipv4ProtocolStats( IpV4Protocol.InternetGroupManagementProtocol),
             };
-            ConnectionStats = new ObservableCollection<SnifferStatsModel.Ipv4ConnectionStats>();
+            ConnectionStats = new ObservableCollection<Ipv4ConnectionStats>();
             PacketCount = 0;
             ByteCount = 0;
         }

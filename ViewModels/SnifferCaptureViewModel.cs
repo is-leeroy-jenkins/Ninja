@@ -1,20 +1,21 @@
-﻿using Ninja.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Windows.Input;
-using System.Windows;
-using System.Collections.ObjectModel;
-using PcapDotNet.Packets;
-using PcapDotNet.Core;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using Microsoft.Win32;
+﻿
 
 namespace Ninja.ViewModels
 {
     using Models;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using System.Windows.Input;
+    using System.Windows;
+    using PcapDotNet.Packets;
+    using System.Collections.ObjectModel;
+    using System.Threading.Tasks;
+    using System.Diagnostics;
+    using Microsoft.Win32;
+    using PcapDotNet;
+    using PcapDotNet.Core;
 
     public class SnifferCaptureViewModel : MainWindowBase
     {

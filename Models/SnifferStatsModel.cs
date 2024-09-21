@@ -1,8 +1,7 @@
-﻿using Ninja.ViewModels;
-using PcapDotNet.Packets.IpV4;
-
+﻿
 namespace Ninja.Models
 {
+    using PcapDotNet.Packets.IpV4;
     using ViewModels;
 
     public class SnifferStatsModel : MainWindowBase
@@ -39,38 +38,17 @@ namespace Ninja.Models
                     }
                 }
             }
-            public Ipv4ProtocolStats(IpV4Protocol protocol)
+
+            public Ipv4ProtocolStats( IpV4Protocol protocol )
             {
                 Protocol = protocol;
                 PacketCount = 0;
                 ByteCount = 0;
             }
         }
-
         #endregion
-
-        public class Ipv4ConnectionStats
-        {
-            public IpV4Address AddressA { get; set; }
-            public IpV4Address AddressB { get; set; }
-            public long PacketCountAToB { get; set; }
-            public long PacketCountBToA { get; set; }
-            public long ByteCountAToB { get; set; }
-            public long ByteCountBToA { get; set; }
-            public Ipv4ConnectionStats(IpV4Address addressA, IpV4Address addressB)
-            {
-                AddressA = addressA;
-                AddressB = addressB;
-                PacketCountAToB = 0;
-                PacketCountBToA = 0;
-                ByteCountAToB = 0;
-                ByteCountBToA = 0;
-            }
-        }
-
         public SnifferStatsModel()
         {
-
         }
     }
 }

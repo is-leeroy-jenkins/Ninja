@@ -63,9 +63,16 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="OxyPlot.Wpf" Version="2.2.0" />
+    <PackageReference Include="PacketDotNet" Version="1.4.7" />
+    <PackageReference Include="PacketDotNet.Standard" Version="0.16.0" />
+    <PackageReference Include="Pcap.Net.x64" Version="1.0.4.1" />
+    <PackageReference Include="Pcap.Net.x86" Version="1.0.4.1" />
+    <PackageReference Include="PcapDotNet.Packets" Version="1.0.4.1" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="System.Data.OleDb" Version="8.0.0" />
+    <PackageReference Include="websocket-sharp.net" Version="1.0.3.3" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\reload.png" />
@@ -79,12 +86,8 @@
     <Resource Include="Resources\sniffer.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="OxyPlot.Core" Version="2.1.0" />
-    <PackageReference Include="OxyPlot.Wpf" Version="2.1.0" />
-    <PackageReference Include="OxyPlot.Wpf.Shared" Version="2.1.0" />
-    <PackageReference Include="Pcap.Net.x64" Version="1.0.4.1" />
-    <PackageReference Include="Pcap.Net.x86" Version="1.0.4.1" />
-    <PackageReference Include="WebSocketSharp" Version="1.0.3-rc11" />
+    <PackageReference Include="OxyPlot.Core" Version="2.2.0" />
+    <PackageReference Include="OxyPlot.Wpf.Shared" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Views\NumberTextBox.cs" />

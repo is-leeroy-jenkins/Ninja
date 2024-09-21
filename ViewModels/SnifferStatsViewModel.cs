@@ -1,22 +1,22 @@
-﻿using Ninja.Models;
-using System;
-using System.Windows.Threading;
-using System.Collections.ObjectModel;
-
-using OxyPlot;
-using OxyPlot.Axes;
-using OxyPlot.Series;
-using System.Diagnostics;
-using static Ninja.Models.SnifferStatsModel;
+﻿
 
 namespace Ninja.ViewModels
 {
     using Models;
+    using Ninja.Models;
+    using System;
+    using System.Windows.Threading;
+    using System.Collections.ObjectModel;
+    using OxyPlot;
+    using OxyPlot.Axes;
+    using OxyPlot.Series;
+    using System.Diagnostics;
+    using static Ninja.Models.SnifferStatsModel;
 
     public class SnifferStatsViewModel : MainWindowBase
     {
-        public ObservableCollection<SnifferStatsModel.Ipv4ProtocolStats> ProtocolStats { get; private set; }
-        public ObservableCollection<SnifferStatsModel.Ipv4ConnectionStats> ConnectionStats { get; private set; }
+        public ObservableCollection<Ipv4ProtocolStats> ProtocolStats { get; private set; }
+        public ObservableCollection<Ipv4ConnectionStats> ConnectionStats { get; private set; }
 
         private string captureTime;
         public string CaptureTime
