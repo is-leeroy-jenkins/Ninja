@@ -1,0 +1,826 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrl="clr-namespace:Syncfusion.Windows.Tools.Controls;assembly=Syncfusion.Shared.WPF"
+    xmlns:shared="clr-namespace:Syncfusion.Windows.Shared;assembly=Syncfusion.Shared.WPF"
+    xmlns:skin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
+    xmlns:sync="clr-namespace:Syncfusion.Windows.Shared;assembly=Syncfusion.Shared.WPF"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:theme="clr-namespace:Syncfusion.Themes.FluentDark.WPF">
+
+    <ResourceDictionary.MergedDictionaries>
+        <skin:ResourceDictionaryProvider
+            DictionaryName="Common"
+            ThemeName="FluentDark" />
+        <skin:ResourceDictionaryProvider
+            DictionaryName="Brushes"
+            ThemeName="FluentDark" />
+        <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/MSControl/TextBox.xaml" />
+        <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/MSControl/Button.xaml" />
+        <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/MSControl/FlatButton.xaml" />
+        <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/MSControl/FlatPrimaryButton.xaml" />
+        <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/MSControl/PrimaryButton.xaml" />
+        <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/MSControl/GlyphDropdownExpander.xaml" />
+        <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/MSControl/GlyphEditableDropdownExpander.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <SolidColorBrush
+        x:Key="ComboBoxItemAdv.Selection.Background"
+        Color="#d0d1d4" />
+
+    <BooleanToVisibilityConverter x:Key="VisiblityConverter" />
+    <ctrl:TemplateToVisibilityConverter x:Key="DropDownTemplateConvertor" />
+
+    <Style x:Key="SyncfusionComboBoxItemFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle SnapsToDevicePixels="true" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style
+        x:Key="CloseTokenButtonStyle"
+        TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}">
+                        <Path
+                            x:Name="Token_Path"
+                            Width="8"
+                            Height="8"
+                            Margin="3,2,3,2"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Fill="{StaticResource LightBlueBrush}"
+                            SnapsToDevicePixels="True"
+                            Stretch="Fill">
+                            <Path.Data>
+                                <PathGeometry>M0.70800017,0 L4.498001,3.7964015 8.2880024,0 8.9960006,0.70600033 5.2044057,4.5039992 8.9960006,8.3019981 8.2880024,9.0079994 4.498001,5.2115974 0.70800017,9.0079994 0,8.3019981 3.7915958,4.5039992 0,0.70600033 z</PathGeometry>
+                            </Path.Data>
+                        </Path>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger
+                            Binding="{Binding IsMouseOver, ElementName=Token_CloseButton}"
+                            Value="True">
+                            <Setter TargetName="Token_Path" Property="Fill" Value="{StaticResource LightBlueBrush}" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type ctrl:ComboBoxTokenItem}">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Foreground" Value="{StaticResource SecondaryForeground}" />
+        <Setter Property="BorderBrush" Value="{StaticResource SecondaryBorder}" />
+        <Setter Property="Background" Value="{StaticResource SecondaryBackground}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrl:ComboBoxTokenItem}">
+                    <Border
+                        x:Name="rootBorder"
+                        Margin="2"
+                        Padding="3"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="4">
+                        <Grid HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="24" />
+                            </Grid.ColumnDefinitions>
+                            <ContentPresenter
+                                x:Name="Token_ContentPresenter"
+                                Grid.Column="0"
+                                Margin="4,0,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Content="{TemplateBinding Content}" />
+                            <Button
+                                x:Name="Token_CloseButton"
+                                Grid.Column="1"
+                                Padding="1"
+                                HorizontalAlignment="Right"
+                                Background="Transparent"
+                                Focusable="False"
+                                Style="{StaticResource CloseTokenButtonStyle}" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger
+                            Binding="{Binding IsMouseOver, ElementName=Token_CloseButton}"
+                            Value="True">
+                            <Setter TargetName="Token_CloseButton" Property="Cursor" Value="Hand" />
+                            <Setter TargetName="Token_CloseButton" Property="Background" Value="{StaticResource SecondaryBackgroundHovered}" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate
+        x:Key="MultiSelectTemplate"
+        TargetType="ctrl:ComboBoxAdv">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition
+                    Width="0"
+                    MinWidth="{StaticResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" />
+            </Grid.ColumnDefinitions>
+            <Popup
+                x:Name="PART_Popup"
+                Grid.ColumnSpan="2"
+                AllowsTransparency="true"
+                IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                Placement="Bottom"
+                SnapsToDevicePixels="True"
+                StaysOpen="False">
+
+                <Border
+                    x:Name="DropDownBorder"
+                    MinWidth="{TemplateBinding ActualWidth}"
+                    MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                    Background="{StaticResource MenuBackground}"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="{StaticResource FluentDark.BorderThickness1}"
+                    CornerRadius="{StaticResource FluentDark.CornerRadius4}"
+                    Effect="{StaticResource Default.ShadowDepth3}">
+                    <Border.Margin>
+                        <Thickness>6,1,6,8</Thickness>
+                    </Border.Margin>
+                    <Border.Padding>
+                        <Thickness>0,4,0,4</Thickness>
+                    </Border.Padding>
+
+                    <Grid>
+                        <Grid Visibility="{TemplateBinding DropDownContentTemplate, Converter={StaticResource DropDownTemplateConvertor}, ConverterParameter='Item_Presenter'}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <ScrollViewer
+                                x:Name="DropDownScrollViewer"
+                                Background="{StaticResource MenuBackground}">
+                                <ScrollViewer.Padding>
+                                    <Thickness>0,4,0,4</Thickness>
+                                </ScrollViewer.Padding>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Canvas
+                                        Width="0"
+                                        Height="0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top">
+                                        <Rectangle
+                                            x:Name="OpaqueRect"
+                                            Width="{Binding ActualWidth, ElementName=DropDownBorder}"
+                                            Height="{Binding ActualHeight, ElementName=DropDownBorder}"
+                                            Fill="{Binding Background, ElementName=DropDownBorder}" />
+                                    </Canvas>
+                                    <ItemsPresenter
+                                        x:Name="ItemsPresenter"
+                                        Grid.Row="1"
+                                        ClipToBounds="True"
+                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                    <ctrl:ComboBoxItemAdv
+                                        x:Name="PART_SelectAll"
+                                        Grid.Row="0"
+                                        Margin="0.2,0,0,0.5"
+                                        Content="{sync:SharedLocalizationResourceExtension ResourceName=SelectAll}"
+                                        Visibility="{TemplateBinding AllowSelectAll,
+                                                                     Converter={StaticResource VisiblityConverter}}" />
+                                    <Border
+                                        Grid.RowSpan="1"
+                                        BorderBrush="{StaticResource BorderBrush}"
+                                        BorderThickness="0,0,0,1"
+                                        SnapsToDevicePixels="True"
+                                        Visibility="Collapsed" />
+                                    <TextBlock
+                                        x:Name="No_Records"
+                                        Padding="3"
+                                        Background="{Binding Background, ElementName=DropDownBorder}"
+                                        Focusable="False"
+                                        Text="{shared:SharedLocalizationResourceExtension ResourceName=NoRecords}"
+                                        Visibility="Collapsed" />
+                                </Grid>
+                            </ScrollViewer>
+                            <Separator
+                                Grid.Row="1"
+                                Height="1"
+                                Visibility="{Binding Path=EnableOKCancel, Converter={StaticResource VisiblityConverter}, RelativeSource={RelativeSource AncestorType={x:Type ctrl:ComboBoxAdv}}}" />
+                            <StackPanel
+                                Grid.Row="2"
+                                Margin="4"
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal"
+                                Visibility="{TemplateBinding EnableOKCancel,
+                                                             Converter={StaticResource VisiblityConverter}}">
+                                <Button
+                                    x:Name="PART_OKButton"
+                                    Width="70"
+                                    Height="{StaticResource FluentDark.MinHeight}"
+                                    Margin="0,0,10,0"
+                                    Content="{sync:SharedLocalizationResourceExtension ResourceName=OKText}"
+                                    Style="{StaticResource WPFButtonStyle}" />
+                                <Button
+                                    x:Name="PART_CancelButton"
+                                    Width="70"
+                                    Height="{StaticResource FluentDark.MinHeight}"
+                                    Content="{sync:SharedLocalizationResourceExtension ResourceName=CancelText}"
+                                    Style="{StaticResource WPFButtonStyle}" />
+                            </StackPanel>
+                        </Grid>
+                        <ContentControl
+                            ContentTemplate="{TemplateBinding DropDownContentTemplate}"
+                            Visibility="{TemplateBinding DropDownContentTemplate,
+                                                         Converter={StaticResource DropDownTemplateConvertor},
+                                                         ConverterParameter='Content_Control'}" />
+                    </Grid>
+                </Border>
+            </Popup>
+            <Border
+                Grid.ColumnSpan="2"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{StaticResource FluentDark.CornerRadius2}" />
+            <ToggleButton
+                x:Name="PART_ToggleButton"
+                Grid.ColumnSpan="2"
+                Margin="0,0,5,0"
+                HorizontalContentAlignment="Right"
+                IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                Style="{StaticResource WPFGlyphDropdownExpanderStyle}" />
+
+            <ContentPresenter
+                x:Name="ContentPresenter"
+                Margin="{TemplateBinding Padding}"
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                Content="{TemplateBinding SelectionBoxItem}"
+                ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
+                ContentTemplate="{TemplateBinding SelectionBoxTemplate}"
+                ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                IsHitTestVisible="false"
+                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+            <ItemsControl
+                x:Name="PART_SelectedItems"
+                Margin="{TemplateBinding Padding}"
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                Focusable="False"
+                IsHitTestVisible="false"
+                IsTabStop="False">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+
+            <TextBlock
+                x:Name="PART_DefaultText"
+                Margin="{TemplateBinding Padding}"
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                IsHitTestVisible="false"
+                Opacity="0.5"
+                Text="{TemplateBinding DefaultText}" />
+
+            <Border
+                x:Name="PART_Border"
+                Margin="0"
+                Background="{StaticResource ControlBackground}"
+                BorderBrush="Transparent"
+                BorderThickness="1,1,0,1"
+                CornerRadius="0"
+                Visibility="Collapsed">
+                <ItemsControl
+                    x:Name="PART_TokenItems"
+                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                    DisplayMemberPath="{Binding DisplayMemberPath, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                    Focusable="False">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.Items>
+                        <TextBox
+                            x:Name="PART_Editable"
+                            Margin="1,2,0,2"
+                            Padding="2,0,2,5"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            BorderThickness="{StaticResource FluentDark.BorderThickness}"
+                            Focusable="True"
+                            FontFamily="{TemplateBinding FontFamily}"
+                            FontSize="{TemplateBinding FontSize}"
+                            FontWeight="{TemplateBinding FontWeight}"
+                            Foreground="{TemplateBinding Foreground}"
+                            IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}"
+                            Style="{StaticResource WPFBorderlessTextBoxStyle}" />
+                    </ItemsControl.Items>
+                </ItemsControl>
+            </Border>
+
+            <TextBox
+                x:Name="PART_IsEditDefaultText"
+                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                BorderThickness="0"
+                FontFamily="{TemplateBinding FontFamily}"
+                FontSize="{TemplateBinding FontSize}"
+                FontWeight="{TemplateBinding FontWeight}"
+                Foreground="{TemplateBinding Foreground}"
+                Opacity="0.5"
+                Style="{StaticResource WPFBorderlessTextBoxStyle}"
+                Text="{TemplateBinding DefaultText}"
+                Visibility="Collapsed" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="skin:SfSkinManager.SizeMode" Value="Touch">
+                <Setter Property="MinHeight" Value="{StaticResource TouchMode.MinHeight}" />
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="EnableToken" Value="True" />
+                    <Condition Property="IsEditable" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="PART_Editable" Property="Visibility" Value="Visible" />
+                <Setter TargetName="PART_DefaultText" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="ContentPresenter" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="PART_IsEditDefaultText" Property="Visibility" Value="Visible" />
+                <Setter TargetName="PART_SelectedItems" Property="MinHeight" Value="30" />
+                <Setter TargetName="PART_ToggleButton" Property="Style" Value="{StaticResource WPFGlyphEditableDropdownExpanderStyle}" />
+                <Setter TargetName="PART_ToggleButton" Property="Width" Value="20" />
+                <Setter TargetName="PART_ToggleButton" Property="Margin" Value="0" />
+                <Setter TargetName="PART_ToggleButton" Property="Padding">
+                    <Setter.Value>
+                        <Thickness>0,0,2,2</Thickness>
+                    </Setter.Value>
+                </Setter>
+                <Setter TargetName="PART_ToggleButton" Property="HorizontalAlignment" Value="Right" />
+                <Setter TargetName="PART_ToggleButton" Property="HorizontalContentAlignment" Value="Center" />
+            </MultiTrigger>
+            <Trigger Property="EnableToken" Value="True">
+                <Setter TargetName="PART_SelectedItems" Property="Focusable" Value="False" />
+                <Setter TargetName="PART_Border" Property="Visibility" Value="Visible" />
+                <Setter TargetName="PART_DefaultText" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="PART_IsEditDefaultText" Property="Visibility" Value="Visible" />
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="EnableToken" Value="True" />
+                    <Condition Property="IsEditable" Value="False" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="PART_Border" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="PART_DefaultText" Property="Visibility" Value="Visible" />
+                <Setter TargetName="PART_IsEditDefaultText" Property="Visibility" Value="Collapsed" />
+            </MultiTrigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource WhiteForeground}" />
+                <Setter Property="BorderBrush" Value="{StaticResource ControlHoverColor}" />
+                <Setter Property="Background" Value="{StaticResource ControlHoverColor}" />
+            </Trigger>
+            <Trigger SourceName="PART_Editable" Property="IsFocused" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource ContentForeground}" />
+                <Setter Property="BorderBrush" Value="{StaticResource PrimaryBackground}" />
+                <Setter Property="BorderThickness" Value="{StaticResource FluentDark.ThemeBorderThicknessVariant2}" />
+                <Setter TargetName="PART_Border" Property="BorderThickness" Value="{StaticResource FluentDark.ThemeBorderThicknessVariant2}" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource ContentForeground}" />
+                <Setter Property="BorderBrush" Value="{StaticResource PrimaryBackground}" />
+                <Setter Property="BorderThickness" Value="{StaticResource FluentDark.ThemeBorderThicknessVariant2}" />
+                <Setter TargetName="PART_Border" Property="BorderThickness" Value="{StaticResource FluentDark.ThemeBorderThicknessVariant2}" />
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsDropDownOpen" Value="True" />
+                    <Condition SourceName="PART_Border" Property="Visibility" Value="Collapsed" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Foreground" Value="{StaticResource ContentForeground}" />
+                <Setter Property="BorderBrush" Value="{StaticResource PrimaryBackground}" />
+                <Setter Property="Background" Value="{StaticResource ContentBackground}" />
+                <Setter Property="BorderThickness" Value="{StaticResource FluentDark.BorderThickness2}" />
+            </MultiTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style
+        x:Key="SyncfusionComboBoxAdvStyle"
+        TargetType="{x:Type ctrl:ComboBoxAdv}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
+        <Setter Property="Background" Value="{StaticResource ContentBackground}" />
+        <Setter Property="Foreground" Value="{StaticResource ContentForeground}" />
+        <Setter Property="FontFamily" Value="{StaticResource FluentDark.ThemeFontFamily}" />
+        <Setter Property="FontWeight" Value="{StaticResource FluentDark.FontWeightNormal}" />
+        <Setter Property="FontSize" Value="{StaticResource FluentDark.BodyTextStyle}" />
+        <Setter Property="BorderThickness" Value="{StaticResource FluentDark.ThemeBorderThicknessVariant1}" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="Padding">
+            <Setter.Value>
+                <Thickness>4,2,2,2</Thickness>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrl:ComboBoxAdv}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition
+                                Width="0"
+                                MinWidth="{StaticResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" />
+                        </Grid.ColumnDefinitions>
+
+                        <Popup
+                            x:Name="PART_Popup"
+                            Grid.ColumnSpan="2"
+                            AllowsTransparency="true"
+                            IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                            Placement="Bottom"
+                            SnapsToDevicePixels="True"
+                            StaysOpen="False">
+
+                            <Border
+                                x:Name="DropDownBorder"
+                                MinWidth="{TemplateBinding ActualWidth}"
+                                MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                                Background="{StaticResource PopupBackground}"
+                                BorderBrush="{StaticResource BorderAlt}"
+                                BorderThickness="{StaticResource FluentDark.BorderThickness1}"
+                                CornerRadius="{StaticResource FluentDark.CornerRadius4}"
+                                Effect="{StaticResource Default.ShadowDepth3}">
+                                <Border.Margin>
+                                    <Thickness>6,1,6,8</Thickness>
+                                </Border.Margin>
+                                <Border.Padding>
+                                    <Thickness>0,4,0,4</Thickness>
+                                </Border.Padding>
+                                <Border.RenderTransform>
+                                    <TranslateTransform />
+                                </Border.RenderTransform>
+                                <Grid>
+                                    <Grid Visibility="{TemplateBinding DropDownContentTemplate, Converter={StaticResource DropDownTemplateConvertor}, ConverterParameter='Item_Presenter'}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <ScrollViewer
+                                            x:Name="DropDownScrollViewer"
+                                            Background="{StaticResource MenuBackground}">
+                                            <ScrollViewer.Padding>
+                                                <Thickness>0,4,0,4</Thickness>
+                                            </ScrollViewer.Padding>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="*" />
+                                                </Grid.RowDefinitions>
+                                                <Canvas
+                                                    Width="0"
+                                                    Height="0"
+                                                    HorizontalAlignment="Left"
+                                                    VerticalAlignment="Top">
+                                                    <Rectangle
+                                                        x:Name="OpaqueRect"
+                                                        Width="{Binding ActualWidth, ElementName=DropDownBorder}"
+                                                        Height="{Binding ActualHeight, ElementName=DropDownBorder}"
+                                                        Fill="{Binding Background, ElementName=DropDownBorder}" />
+                                                </Canvas>
+                                                <ItemsPresenter
+                                                    x:Name="ItemsPresenter"
+                                                    Grid.Row="1"
+                                                    ClipToBounds="True"
+                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                                <TextBlock
+                                                    x:Name="No_Records"
+                                                    Padding="3"
+                                                    Background="{Binding Background, ElementName=DropDownBorder}"
+                                                    Focusable="False"
+                                                    Text="{shared:SharedLocalizationResourceExtension ResourceName=NoRecords}"
+                                                    Visibility="Collapsed" />
+                                            </Grid>
+                                        </ScrollViewer>
+                                    </Grid>
+                                    <ContentControl
+                                        ContentTemplate="{TemplateBinding DropDownContentTemplate}"
+                                        Visibility="{TemplateBinding DropDownContentTemplate,
+                                                                     Converter={StaticResource DropDownTemplateConvertor},
+                                                                     ConverterParameter='Content_Control'}" />
+                                </Grid>
+                            </Border>
+                        </Popup>
+                        <Border
+                            Grid.ColumnSpan="2"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{StaticResource FluentDark.CornerRadius2}" />
+                        <ToggleButton
+                            x:Name="PART_ToggleButton"
+                            Grid.ColumnSpan="2"
+                            Margin="0,0,5,0"
+                            HorizontalContentAlignment="Right"
+                            IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                            Style="{StaticResource WPFGlyphDropdownExpanderStyle}" />
+
+                        <ContentPresenter
+                            x:Name="ContentPresenter"
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding SelectionBoxItem}"
+                            ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
+                            ContentTemplate="{TemplateBinding SelectionBoxTemplate}"
+                            ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                            IsHitTestVisible="false"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <ContentPresenter.Resources>
+                                <Style
+                                    BasedOn="{x:Null}"
+                                    TargetType="{x:Type TextBlock}" />
+                            </ContentPresenter.Resources>
+                        </ContentPresenter>
+
+                        <TextBlock
+                            x:Name="PART_DefaultText"
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            IsHitTestVisible="false"
+                            Opacity="0.5"
+                            Text="{TemplateBinding DefaultText}" />
+
+                        <TextBox
+                            x:Name="PART_Editable"
+                            Margin="1,2,0,2"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            BorderThickness="{StaticResource FluentDark.BorderThickness}"
+                            FontFamily="{TemplateBinding FontFamily}"
+                            FontSize="{TemplateBinding FontSize}"
+                            FontWeight="{TemplateBinding FontWeight}"
+                            Foreground="{TemplateBinding Foreground}"
+                            IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}"
+                            Style="{StaticResource WPFBorderlessTextBoxStyle}"
+                            Visibility="Collapsed" />
+
+                        <TextBox
+                            x:Name="PART_IsEditDefaultText"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            BorderThickness="0"
+                            FontFamily="{TemplateBinding FontFamily}"
+                            FontSize="{TemplateBinding FontSize}"
+                            FontWeight="{TemplateBinding FontWeight}"
+                            Foreground="{TemplateBinding Foreground}"
+                            Opacity="0.5"
+                            Style="{StaticResource WPFBorderlessTextBoxStyle}"
+                            Text="{TemplateBinding DefaultText}"
+                            Visibility="Collapsed" />
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEditable" Value="True">
+                            <Setter TargetName="PART_Editable" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_DefaultText" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="ContentPresenter" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_IsEditDefaultText" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_ToggleButton" Property="Style" Value="{StaticResource WPFGlyphEditableDropdownExpanderStyle}" />
+                            <Setter TargetName="PART_ToggleButton" Property="Width" Value="20" />
+                            <Setter TargetName="PART_ToggleButton" Property="Margin">
+                                <Setter.Value>
+                                    <Thickness>0</Thickness>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="PART_ToggleButton" Property="Padding">
+                                <Setter.Value>
+                                    <Thickness>0,0,2,2</Thickness>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="PART_ToggleButton" Property="HorizontalAlignment" Value="Right" />
+                            <Setter TargetName="PART_ToggleButton" Property="HorizontalContentAlignment" Value="Center" />
+                        </Trigger>
+                        <Trigger Property="skin:SfSkinManager.SizeMode" Value="Touch">
+                            <Setter Property="MinHeight" Value="{StaticResource TouchMode.MinHeight}" />
+                        </Trigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=HasItems, RelativeSource={RelativeSource Self}}" Value="false" />
+                                <Condition Binding="{Binding Path=AutoCompleteMode, RelativeSource={RelativeSource Self}}" Value="Suggest" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="DropDownBorder" Property="Height" Value="{Binding Height, ElementName=No_Records}" />
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=HasItems, RelativeSource={RelativeSource Self}}" Value="false" />
+                                <Condition Binding="{Binding Path=AutoCompleteMode, RelativeSource={RelativeSource Self}}" Value="None" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95" />
+                        </MultiDataTrigger>
+                        <Trigger Property="IsGrouping" Value="true">
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource ContentForeground}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource BorderAlt2}" />
+                            <Setter Property="Background" Value="{StaticResource ContentBackgroundAlt4}" />
+                        </Trigger>
+                        <Trigger SourceName="PART_Editable" Property="IsFocused" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource ContentForeground}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource PrimaryBackground}" />
+                            <Setter Property="Background" Value="{StaticResource ContentBackground}" />
+                            <Setter Property="BorderThickness" Value="{StaticResource FluentDark.BorderThickness2}" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource ContentForeground}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource PrimaryBackground}" />
+                            <Setter Property="Background" Value="{StaticResource ContentBackground}" />
+                            <Setter Property="BorderThickness" Value="{StaticResource FluentDark.BorderThickness2}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{StaticResource DisabledForeground}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource BorderAlt}" />
+                            <Setter Property="Background" Value="{StaticResource BorderAlt}" />
+                        </Trigger>
+                        <Trigger Property="IsDropDownOpen" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource ContentForeground}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource PrimaryBackground}" />
+                            <Setter Property="Background" Value="{StaticResource ContentBackground}" />
+                            <Setter Property="BorderThickness" Value="{StaticResource FluentDark.BorderThickness2}" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="AllowMultiSelect" Value="True" />
+                                <Condition Property="IsEditable" Value="True" />
+                                <Condition Property="EnableToken" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_Editable" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_DefaultText" Property="Visibility" Value="Visible" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="AllowMultiSelect" Value="True">
+                <Setter Property="Template" Value="{StaticResource MultiSelectTemplate}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionComboBoxAdvStyle}"
+        TargetType="{x:Type ctrl:ComboBoxAdv}" />
+
+    <Style
+        x:Key="SyncfusionComboBoxItemAdvStyle"
+        TargetType="{x:Type ctrl:ComboBoxItemAdv}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource SyncfusionComboBoxItemFocusVisual}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding">
+            <Setter.Value>
+                <Thickness>2,0,2,0</Thickness>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Margin">
+            <Setter.Value>
+                <Thickness>0,0,0,0</Thickness>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="{StaticResource FluentDark.BorderThickness}" />
+        <Setter Property="Background" Value="{StaticResource PopupBackground}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderAlt}" />
+        <Setter Property="Foreground" Value="{StaticResource ContentForeground}" />
+        <Setter Property="FontFamily" Value="{StaticResource FluentDark.ThemeFontFamily}" />
+        <Setter Property="MinHeight" Value="{StaticResource FluentDark.MinHeight1}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrl:ComboBoxItemAdv}">
+                    <Grid>
+                        <Border
+                            x:Name="SelectionIndicator"
+                            Width="2"
+                            Height="12"
+                            HorizontalAlignment="Left"
+                            Background="{StaticResource ComboBoxItemAdv.Selection.Background}"
+                            CornerRadius="1.5"
+                            Visibility="Collapsed" />
+
+                        <Border
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="0"
+                            SnapsToDevicePixels="true">
+                            <Grid Margin="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <CheckBox
+                                    x:Name="PART_CheckBox"
+                                    Margin="2"
+                                    IsHitTestVisible="False"
+                                    Visibility="{Binding Path=AllowMultiSelect, Converter={StaticResource VisiblityConverter}, RelativeSource={RelativeSource AncestorType={x:Type ctrl:ComboBoxAdv}}}" />
+
+                                <ContentPresenter
+                                    Grid.Column="1"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                    <ContentPresenter.Resources>
+                                        <Style
+                                            BasedOn="{x:Null}"
+                                            TargetType="{x:Type TextBlock}" />
+                                    </ContentPresenter.Resources>
+                                </ContentPresenter>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="skin:SfSkinManager.SizeMode" Value="Touch">
+                            <Setter Property="MinHeight" Value="{StaticResource TouchMode.MinHeight}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="BorderBrush" Value="{StaticResource BorderAlt}" />
+                            <Setter Property="Background" Value="{StaticResource ContentBackgroundHovered}" />
+                            <Setter Property="Foreground" Value="{StaticResource HoveredForeground}" />
+                        </Trigger>
+                        <Trigger Property="IsHighlighted" Value="true">
+                            <Setter Property="BorderBrush" Value="{StaticResource BorderAlt}" />
+                            <Setter Property="Background" Value="{StaticResource ContentBackgroundHovered}" />
+                            <Setter Property="Foreground" Value="{StaticResource HoveredForeground}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="BorderBrush" Value="{StaticResource BorderAlt}" />
+                            <Setter Property="Background" Value="{StaticResource ContentBackgroundSelected}" />
+                            <Setter Property="Foreground" Value="{StaticResource SelectedForeground}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="BorderBrush" Value="{StaticResource BorderAlt}" />
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Foreground" Value="{StaticResource DisabledForeground}" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="true">
+                            <Setter Property="BorderBrush" Value="{StaticResource BorderAlt}" />
+                            <Setter Property="Background" Value="{StaticResource ContentBackgroundHovered}" />
+                            <Setter Property="Foreground" Value="{StaticResource HoveredForeground}" />
+                        </Trigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Self}}" Value="true" />
+                                <Condition Binding="{Binding Path=IsHighlighted, RelativeSource={RelativeSource Self}}" Value="false" />
+                                <Condition Binding="{Binding MultiSelect, RelativeSource={RelativeSource Self}}" Value="False" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Background" Value="{StaticResource ContentBackgroundSelected}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource BorderAlt}" />
+                            <Setter Property="Foreground" Value="{StaticResource SelectedForeground}" />
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Self}}" Value="true" />
+                                <Condition Binding="{Binding Path=IsHighlighted, RelativeSource={RelativeSource Self}}" Value="true" />
+                                <Condition Binding="{Binding MultiSelect, RelativeSource={RelativeSource Self}}" Value="False" />
+                            </MultiDataTrigger.Conditions>
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="skin:SkinManagerHelper.FocusVisualKind" Value="HighVisibility">
+                <Setter Property="FocusVisualStyle" Value="{StaticResource FlatKeyboardFocusVisualStyle}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionComboBoxItemAdvStyle}"
+        TargetType="{x:Type ctrl:ComboBoxItemAdv}" />
+
+</ResourceDictionary>

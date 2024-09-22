@@ -52,7 +52,7 @@
         <Setter Property="FontFamily" Value="Fonts/Roboto-Regular.ttf #Roboto Regular" />
         <Setter Property="FontSize" Value="17" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Background" Value="#FF494E5A" />
+        <Setter Property="Background" Value="#FF2D2D2D" />
         <Setter Property="Foreground" Value="#E8EAEC" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Padding" Value="8,7,0,0" />

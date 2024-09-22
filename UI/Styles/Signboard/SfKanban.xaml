@@ -1,0 +1,379 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Syncfusion.UI.Xaml.Kanban;assembly=Syncfusion.SfKanban.WPF"
+    xmlns:sfskin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:themelocal="clr-namespace:Syncfusion.Themes.FluentDark.WPF">
+
+    <ResourceDictionary.MergedDictionaries>
+        <sfskin:ResourceDictionaryProvider
+            DictionaryName="Common"
+            ThemeName="FluentDark" />
+        <sfskin:ResourceDictionaryProvider
+            DictionaryName="Brushes"
+            ThemeName="FluentDark" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <local:CardCountConverter x:Key="CardCountConverter" />
+
+    <DataTemplate x:Key="DefaultSwimlaneColumnHeaderTemplate">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="4*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                x:Name="Header"
+                Grid.Row="0"
+                Margin="8,8,8,4"
+                VerticalAlignment="Center"
+                FontSize="{StaticResource FluentDark.TitleTextStyle}"
+                FontWeight="{StaticResource FluentDark.FontWeightMedium}"
+                Foreground="{StaticResource ContentForeground}"
+                Text="{Binding Header}"
+                TextWrapping="NoWrap" />
+
+            <StackPanel
+                x:Name="WIPPanel"
+                Grid.Row="1"
+                Orientation="Horizontal">
+                <TextBlock
+                    Margin="8,4,0,8"
+                    VerticalAlignment="Center"
+                    FontSize="{StaticResource FluentDark.CaptionText}"
+                    FontWeight="{StaticResource FluentDark.FontWeightNormal}"
+                    Foreground="{StaticResource ContentForegroundAlt1}"
+                    Text="{Binding [ItemsCount]}" />
+                <TextBlock
+                    Margin="3,4,0,8"
+                    VerticalAlignment="Center"
+                    FontSize="{StaticResource FluentDark.CaptionText}"
+                    FontWeight="{StaticResource FluentDark.FontWeightNormal}"
+                    Foreground="{StaticResource ContentForegroundAlt1}"
+                    Text="{Binding CardCount}" />
+                <TextBlock
+                    Margin="3,4,0,8"
+                    VerticalAlignment="Center"
+                    FontSize="{StaticResource FluentDark.CaptionText}"
+                    FontWeight="{StaticResource FluentDark.FontWeightNormal}"
+                    Foreground="{StaticResource ContentForegroundAlt1}"
+                    Text="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}, ConverterParameter=MinMaxLimit, Converter={StaticResource CardCountConverter}}" />
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DefaultSwimlaneHeaderTemplate">
+        <StackPanel
+            x:Name="SwimlaneHeaderPanel"
+            Background="Transparent"
+            Orientation="Horizontal">
+            <Border
+                x:Name="PART_Border"
+                Width="24"
+                Height="24"
+                Margin="2"
+                Background="Transparent"
+                CornerRadius="{StaticResource FluentDark.CornerRadius2}">
+                <Grid
+                    x:Name="CollapsedIcon"
+                    Background="Transparent">
+                    <Path
+                        x:Name="ExpandedPath"
+                        Width="10"
+                        Height="10"
+                        Fill="Transparent"
+                        IsHitTestVisible="False"
+                        RenderTransformOrigin="0.5,0.5"
+                        Stretch="Uniform"
+                        Stroke="{StaticResource IconColor}">
+                        <Path.Data>
+                            <PathGeometry>M1 1L7 7L13 1</PathGeometry>
+                        </Path.Data>
+                        <Path.RenderTransform>
+                            <TransformGroup>
+                                <TransformGroup.Children>
+                                    <RotateTransform Angle="0" />
+                                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                                </TransformGroup.Children>
+                            </TransformGroup>
+                        </Path.RenderTransform>
+                    </Path>
+                    <Path
+                        x:Name="CollapsedPath"
+                        Width="10"
+                        Height="10"
+                        Fill="Transparent"
+                        IsHitTestVisible="False"
+                        RenderTransformOrigin="0.5,0.5"
+                        Stretch="Uniform"
+                        Stroke="{StaticResource IconColor}"
+                        Visibility="Collapsed">
+                        <Path.Data>
+                            <PathGeometry>M1 1L7 7L1 13</PathGeometry>
+                        </Path.Data>
+                        <Path.RenderTransform>
+                            <TransformGroup>
+                                <TransformGroup.Children>
+                                    <RotateTransform Angle="0" />
+                                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                                </TransformGroup.Children>
+                            </TransformGroup>
+                        </Path.RenderTransform>
+                    </Path>
+                </Grid>
+            </Border>
+
+            <TextBlock
+                VerticalAlignment="Center"
+                FontSize="{StaticResource FluentDark.TitleTextStyle}"
+                FontWeight="{StaticResource FluentDark.FontWeightMedium}"
+                Foreground="{StaticResource ContentForeground}"
+                IsHitTestVisible="False"
+                Text="{Binding Title}"
+                TextWrapping="NoWrap" />
+
+            <TextBlock
+                Margin="5,0,0,0"
+                VerticalAlignment="Center"
+                FontSize="{StaticResource FluentDark.CaptionText}"
+                FontWeight="{StaticResource FluentDark.FontWeightNormal}"
+                Foreground="{StaticResource ContentForegroundAlt1}"
+                IsHitTestVisible="False"
+                Text="-"
+                TextWrapping="NoWrap" />
+
+            <TextBlock
+                Margin="5,0,0,0"
+                VerticalAlignment="Center"
+                FontSize="{StaticResource FluentDark.CaptionText}"
+                FontWeight="{StaticResource FluentDark.FontWeightNormal}"
+                Foreground="{StaticResource ContentForegroundAlt1}"
+                IsHitTestVisible="False"
+                Text="{Binding ItemsCount, ConverterParameter=SwimlaneCardCount, Converter={StaticResource CardCountConverter}}"
+                TextWrapping="NoWrap" />
+        </StackPanel>
+        <DataTemplate.Triggers>
+            <DataTrigger
+                Binding="{Binding ElementName=CollapsedIcon, Path=IsMouseOver}"
+                Value="True">
+                <Setter TargetName="PART_Border" Property="Cursor" Value="Hand" />
+                <Setter TargetName="PART_Border" Property="Background" Value="{StaticResource ContentBackgroundHovered}" />
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DefaultKanbanHeaderTemplate">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="9*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="4*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                x:Name="Header"
+                Grid.Row="0"
+                Grid.ColumnSpan="1"
+                Margin="0,5,0,5"
+                VerticalAlignment="Center"
+                FontSize="{StaticResource FluentDark.TitleTextStyle}"
+                FontWeight="{StaticResource FluentDark.FontWeightMedium}"
+                Foreground="{StaticResource ContentForeground}"
+                Text="{Binding Header}"
+                TextWrapping="NoWrap" />
+
+            <StackPanel
+                x:Name="WIPPanel"
+                Grid.Row="1"
+                Grid.Column="0"
+                Orientation="Horizontal">
+                <TextBlock
+                    Margin="0,2,0,5"
+                    VerticalAlignment="Center"
+                    FontSize="{StaticResource FluentDark.CaptionText}"
+                    FontWeight="{StaticResource FluentDark.FontWeightNormal}"
+                    Foreground="{StaticResource ContentForegroundAlt1}"
+                    Text="{Binding [ItemsCount]}" />
+                <TextBlock
+                    Margin="5,2,0,5"
+                    VerticalAlignment="Center"
+                    FontSize="{StaticResource FluentDark.CaptionText}"
+                    FontWeight="{StaticResource FluentDark.FontWeightNormal}"
+                    Foreground="{StaticResource ContentForegroundAlt1}"
+                    Text="{Binding CardCount}" />
+                <TextBlock
+                    Margin="0,2,0,5"
+                    VerticalAlignment="Center"
+                    FontSize="{StaticResource FluentDark.CaptionText}"
+                    FontWeight="{StaticResource FluentDark.FontWeightNormal}"
+                    Foreground="{StaticResource ContentForegroundAlt1}"
+                    Text="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource CardCountConverter}}" />
+            </StackPanel>
+
+            <Border
+                x:Name="CollapsedIcon"
+                Grid.Row="1"
+                Grid.Column="1"
+                Background="Transparent">
+                <Path
+                    Width="7"
+                    Height="14"
+                    HorizontalAlignment="Right"
+                    Data="M172.444,310.778 L158.444,317.111 L171.222,324.222"
+                    IsHitTestVisible="False"
+                    Stretch="Fill"
+                    Stroke="{StaticResource IconColor}"
+                    StrokeLineJoin="Miter"
+                    StrokeThickness="2"
+                    UseLayoutRounding="False" />
+            </Border>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="TagsTemplate">
+        <Border
+            Background="{Binding CardStyle.TagBackground, RelativeSource={RelativeSource FindAncestor, AncestorType=local:SfKanban}}"
+            BorderBrush="{StaticResource BorderAlt}"
+            CornerRadius="2">
+            <TextBlock
+                Margin="10,1,10,1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                FontWeight="{StaticResource FluentDark.FontWeightNormal}"
+                Foreground="{Binding CardStyle.TagForeground, RelativeSource={RelativeSource FindAncestor, AncestorType=local:SfKanban}}"
+                Text="{Binding}"
+                TextTrimming="CharacterEllipsis" />
+        </Border>
+    </DataTemplate>
+
+    <Style
+        x:Key="SyncfusionSfKanbanPlaceholderStyle"
+        TargetType="local:PlaceholderStyle">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="RadiusX" Value="6" />
+        <Setter Property="RadiusY" Value="6" />
+        <Setter Property="Fill" Value="{StaticResource ContentBackground}" />
+        <Setter Property="FontSize" Value="{StaticResource FluentDark.BodyTextStyle}" />
+        <Setter Property="FontWeight" Value="{StaticResource FluentDark.FontWeightNormal}" />
+        <Setter Property="Foreground" Value="{StaticResource ContentForegroundAlt1}" />
+        <Setter Property="Stroke" Value="{StaticResource BorderAlt1}" />
+        <Setter Property="StrokeDashArray" Value="4,2" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="TextHorizontalAlignment" Value="Center" />
+        <Setter Property="TextVerticalAlignment" Value="Top" />
+        <Setter Property="SelectedBackground" Value="{StaticResource ContentBackground}" />
+        <Setter Property="SelectedForeground" Value="{StaticResource ContentForegroundAlt1}" />
+        <Setter Property="SelectedFontSize" Value="{StaticResource FluentDark.BodyTextStyle}" />
+        <Setter Property="SelectedFontWeight" Value="{StaticResource FluentDark.FontWeightNormal}" />
+        <Setter Property="SelectedStroke" Value="{StaticResource Border}" />
+        <Setter Property="Effect" Value="{StaticResource Default.ShadowDepth1}" />
+    </Style>
+    <Style
+        BasedOn="{StaticResource SyncfusionSfKanbanPlaceholderStyle}"
+        TargetType="local:PlaceholderStyle" />
+
+    <Style
+        x:Key="SyncfusionSfKanbanCardStyle"
+        TargetType="local:KanbanCardStyle">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="TitleColor" Value="{StaticResource ContentForeground}" />
+        <Setter Property="TitleFontSize" Value="{StaticResource FluentDark.TitleTextStyle}" />
+        <Setter Property="TitleHorizontalAlignment" Value="Left" />
+        <Setter Property="TitleFontWeight" Value="{StaticResource FluentDark.FontWeightMedium}" />
+        <Setter Property="CornerRadius" Value="{StaticResource FluentDark.ThemeCornerRadiusVariant2}" />
+        <Setter Property="TagVisibility" Value="Visible" />
+        <Setter Property="IndicatorVisibility" Value="Visible" />
+        <Setter Property="IconVisibility" Value="Visible" />
+        <Setter Property="TagBackground" Value="{StaticResource ContentBackgroundAlt1}" />
+        <Setter Property="TagForeground" Value="{StaticResource ContentForeground}" />
+
+        <Setter Property="FontSize" Value="{StaticResource FluentDark.CaptionText}" />
+        <Setter Property="Foreground" Value="{StaticResource ContentForeground}" />
+        <Setter Property="FontWeight" Value="{StaticResource FluentDark.FontWeightNormal}" />
+
+        <Setter Property="BorderBrush" Value="{StaticResource BorderAlt}" />
+        <Setter Property="BorderThickness" Value="1.5" />
+
+        <Setter Property="Background" Value="{StaticResource ContentBackgroundAlt1}" />
+        <Setter Property="Effect" Value="{StaticResource Default.ShadowDepth1}" />
+    </Style>
+
+    <Style
+        x:Key="SyncfusionSfKanbanStyle"
+        TargetType="local:SfKanban">
+        <Setter Property="Background" Value="{StaticResource ContentBackgroundAlt4}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderAlt}" />
+        <Setter Property="FontFamily" Value="{StaticResource FluentDark.ThemeFontFamily}" />
+        <Setter Property="CardStyle">
+            <Setter.Value>
+                <local:KanbanCardStyle Style="{StaticResource SyncfusionSfKanbanCardStyle}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="{StaticResource FluentDark.BorderThickness}" />
+        <Setter Property="ColumnHeaderTemplate" Value="{StaticResource DefaultSwimlaneColumnHeaderTemplate}" />
+        <Setter Property="SwimlaneHeaderTemplate" Value="{StaticResource DefaultSwimlaneHeaderTemplate}" />
+        <Setter Property="PlaceholderStyle">
+            <Setter.Value>
+                <local:PlaceholderStyle Style="{StaticResource SyncfusionSfKanbanPlaceholderStyle}" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style
+        x:Key="SyncfusionSwimlaneStyle"
+        TargetType="local:Swimlane">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderAlt}" />
+        <Setter Property="Background" Value="{StaticResource ContentBackgroundAlt2}" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionSwimlaneStyle}"
+        TargetType="local:Swimlane" />
+
+    <Style
+        x:Key="SyncfusionKanbanColumnStyle"
+        TargetType="local:KanbanColumn">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderAlt}" />
+        <Setter Property="Background" Value="{StaticResource ContentBackgroundAlt2}" />
+        <Setter Property="Margin" Value="0,0,4,0" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionKanbanColumnStyle}"
+        TargetType="local:KanbanColumn" />
+
+    <Style
+        x:Key="SyncfusionSwinlaneColumnStyle"
+        TargetType="local:SwimlaneColumn">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderAlt}" />
+        <Setter Property="Background" Value="{StaticResource ContentBackgroundAlt2}" />
+        <Setter Property="Margin" Value="0,0,4,0" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionSwinlaneColumnStyle}"
+        TargetType="local:SwimlaneColumn" />
+
+    <Style
+        x:Key="SyncfusionTagsStackPanelStyle"
+        TargetType="local:TagsStackPanel">
+        <Setter Property="ContentTemplate" Value="{StaticResource TagsTemplate}" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionTagsStackPanelStyle}"
+        TargetType="local:TagsStackPanel" />
+
+    <Style
+        BasedOn="{StaticResource SyncfusionSfKanbanStyle}"
+        TargetType="local:SfKanban" />
+</ResourceDictionary>

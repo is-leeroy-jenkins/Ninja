@@ -6,7 +6,6 @@
         <ResourceDictionary Source="Fonts.xaml" />
         <ResourceDictionary Source="Sizes.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    <!--  基样式  -->
     <Style
         x:Key="BaseStyle"
         BasedOn="{x:Null}"

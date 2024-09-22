@@ -30,7 +30,7 @@
     <StartupObject>Ninja.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\favicon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Assets\ApplicationImages\favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -40,6 +40,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+    <PackageIcon>favicon.png</PackageIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <WarningLevel>6</WarningLevel>
@@ -52,7 +53,34 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Libraries\PcapDotNet\PcapDotNet.Core.dll" />
-    <Resource Include="Resources\favicon.ico" />
+    <Resource Include="Resources\Assets\ApplicationImages\access.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\Analysis.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\baby.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\Calculation.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\calendar.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\csharp.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\DataTable.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\document.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\documentation.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\edit.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\epa.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\excel.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\features.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\Maps.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\n-icon.ico" />
+    <Resource Include="Resources\Assets\ApplicationImages\n-icon.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\Providers.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\sql.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\system_requirements.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\tools.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\web.png" />
+    <Resource Include="Resources\Assets\demo\iperf.png" />
+    <Resource Include="Resources\Assets\demo\portlisten.png" />
+    <Resource Include="Resources\Assets\demo\routetable.png" />
+    <Resource Include="Resources\Assets\demo\sniffer.png" />
+    <Resource Include="Resources\Assets\demo\snifferstats.png" />
+    <Resource Include="Resources\Assets\demo\websocket.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\favicon.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
@@ -67,7 +95,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\favicon.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\favicon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UI\Themes\down_arrow.png" />
@@ -99,21 +127,51 @@
     <PackageReference Include="ToastNotifications.Net6" Version="1.0.4" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\reload.png" />
-    <Resource Include="Resources\Speed.png" />
-    <Resource Include="Resources\Download.png" />
-    <Resource Include="Resources\IP.png" />
-    <Resource Include="Resources\port.png" />
-    <Resource Include="Resources\route.png" />
-    <Resource Include="Resources\portlisten.png" />
-    <Resource Include="Resources\servers.png" />
-    <Resource Include="Resources\sniffer.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\reload.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\Speed.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\Download.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\IP.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\port.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\route.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\portlisten.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\servers.png" />
+    <Resource Include="Resources\Assets\ApplicationImages\sniffer.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="UI\Views\NumberTextBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Libraries\PcapDotNet\PcapDotNet.Core.dll" />
+    <None Remove="Resources\Assets\ApplicationImages\access.png" />
+    <None Remove="Resources\Assets\ApplicationImages\Analysis.png" />
+    <None Remove="Resources\Assets\ApplicationImages\baby.png" />
+    <None Remove="Resources\Assets\ApplicationImages\Calculation.png" />
+    <None Remove="Resources\Assets\ApplicationImages\calendar.png" />
+    <None Remove="Resources\Assets\ApplicationImages\csharp.png" />
+    <None Remove="Resources\Assets\ApplicationImages\DataTable.png" />
+    <None Remove="Resources\Assets\ApplicationImages\document.png" />
+    <None Remove="Resources\Assets\ApplicationImages\documentation.png" />
+    <None Remove="Resources\Assets\ApplicationImages\edit.png" />
+    <None Remove="Resources\Assets\ApplicationImages\epa.png" />
+    <None Remove="Resources\Assets\ApplicationImages\excel.png" />
+    <None Remove="Resources\Assets\ApplicationImages\features.png" />
+    <None Remove="Resources\Assets\ApplicationImages\Maps.png" />
+    <None Remove="Resources\Assets\ApplicationImages\n-icon.ico" />
+    <None Remove="Resources\Assets\ApplicationImages\n-icon.png" />
+    <None Remove="Resources\Assets\ApplicationImages\Providers.png" />
+    <None Remove="Resources\Assets\ApplicationImages\sql.png" />
+    <None Remove="Resources\Assets\ApplicationImages\system_requirements.png" />
+    <None Remove="Resources\Assets\ApplicationImages\tools.png" />
+    <None Remove="Resources\Assets\ApplicationImages\web.png" />
+    <None Remove="Resources\Assets\demo\iperf.png" />
+    <None Remove="Resources\Assets\demo\portlisten.png" />
+    <None Remove="Resources\Assets\demo\routetable.png" />
+    <None Remove="Resources\Assets\demo\sniffer.png" />
+    <None Remove="Resources\Assets\demo\snifferstats.png" />
+    <None Remove="Resources\Assets\demo\websocket.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Assets\ApplicationImages\favicon.ico" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="LinqStatistics">
@@ -158,5 +216,11 @@
     <Reference Include="websocket-sharp">
       <HintPath>Libraries\WebSocketSharp\websocket-sharp.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Resources\Assets\ApplicationImages\favicon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 </Project>
