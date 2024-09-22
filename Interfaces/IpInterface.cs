@@ -12,67 +12,67 @@ namespace Ninja.Interfaces
     {
         public PingReply PingSweep(string ip)
         {
-            PingReply reply = null;
-            Ping pingSender = null;
+            PingReply _reply = null;
+            Ping _pingSender = null;
             try
             {
-                pingSender = new Ping();
+                _pingSender = new Ping();
 
-                PingOptions options = new PingOptions();
-                options.DontFragment = true;
+                var _options = new PingOptions();
+                _options.DontFragment = true;
 
-                string data = "hello";
-                byte[] buffer = Encoding.ASCII.GetBytes(data);
-                int timeout = 1000;
+                var _data = "hello";
+                var _buffer = Encoding.ASCII.GetBytes(_data);
+                var _timeout = 1000;
 
-                IPAddress ipa = IPAddress.Parse(ip);
-                PingReply replyPing = pingSender.Send(ipa, timeout, buffer, options);// .Send(ip, timeout, buffer, options);
-                reply = replyPing;
+                var _ipa = IPAddress.Parse(ip);
+                var _replyPing = _pingSender.Send(_ipa, _timeout, _buffer, _options);// .Send(ip, timeout, buffer, options);
+                _reply = _replyPing;
             }
             catch (Exception ex)
             {
-                reply = null;
+                _reply = null;
             }
             finally
             {
-                pingSender.Dispose();
+                _pingSender.Dispose();
             }
-            return reply;
+            return _reply;
         }
 
         public string GetHostName(string ip)
         {
-            string host = null;
+            string _host = null;
             try
             {
-                host = Dns.GetHostEntry(ip).HostName;
+                _host = Dns.GetHostEntry(ip).HostName;
                 //host = Dns.GetHostEntryAsync(ip).HostName;
             }
             catch (Exception ex)
             {
-                host = null;
+                _host = null;
             }
-            return host;
+            return _host;
         }
-        public void GetIP()
+        public void GetIp()
         {
-            NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
-            int len = interfaces.Length;
+            var _interfaces = NetworkInterface.GetAllNetworkInterfaces();
+            var _len = _interfaces.Length;
 
-            for (int i = 0; i < len; i++)
+            for (var _i = 0; _i < _len; _i++)
             {
-                NetworkInterface ni = interfaces[i];
+                var _ni = _interfaces[_i];
 
-                if (ni.OperationalStatus == OperationalStatus.Up)
+                if (_ni.OperationalStatus == OperationalStatus.Up)
                 {
-                    IPInterfaceProperties property = ni.GetIPProperties();
-                    foreach (UnicastIPAddressInformation ip in property.UnicastAddresses)
+                    var _property = _ni.GetIPProperties();
+                    foreach (var _ip in _property.UnicastAddresses)
                     {
-                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        if (_ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                         {
-                            string address = ip.Address.ToString();
-                            string niname = ni.Name.ToString();
-                            Console.WriteLine("【" + niname + "】：" + address);
+                            var _address = _ip.Address.ToString();
+                            var _niname = _ni.Name.ToString();
+                            Console.WriteLine("【" + _niname + "】：" + _address);
                         }
                     }
                 }
@@ -82,17 +82,17 @@ namespace Ninja.Interfaces
         /// Converts a uint representation of an Ip address to a
         /// string.
         /// </summary>
-        /// <param name="IPAddr">The IP address to convert</param>
+        /// <param name="ipAddr">The IP address to convert</param>
         /// <returns>A string representation of the IP address.</returns>
-        public string LongToIPAddress(uint IPAddr)
+        public string LongToIpAddress(uint ipAddr)
         {
             //return new System.Net.IPAddress(IPAddr).ToString();
-            byte a = (byte)((IPAddr & 0xFF000000) >> 24);
-            byte b = (byte)((IPAddr & 0x00FF0000) >> 16);
-            byte c = (byte)((IPAddr & 0x0000FF00) >> 8);
-            byte d = (byte)(IPAddr & 0x000000FF);
-            string ipStr = String.Format("{0}.{1}.{2}.{3}", a, b, c, d);
-            return ipStr;
+            var _a = (byte)((ipAddr & 0xFF000000) >> 24);
+            var _b = (byte)((ipAddr & 0x00FF0000) >> 16);
+            var _c = (byte)((ipAddr & 0x0000FF00) >> 8);
+            var _d = (byte)(ipAddr & 0x000000FF);
+            var _ipStr = String.Format("{0}.{1}.{2}.{3}", _a, _b, _c, _d);
+            return _ipStr;
         }
         //public string Int2IP(uint IPAddr)
         //{
@@ -109,21 +109,21 @@ namespace Ninja.Interfaces
         /// networking functions such
         /// as the System.Net.IPAddress class.
         /// </summary>
-        /// <param name="IPAddr">The Ip address to convert.</param>
+        /// <param name="ipAddr">The Ip address to convert.</param>
         /// <returns>Returns a uint representation of the IP
         /// address.</returns>
-        public uint IPAddressToLong(string IPAddr)
+        public uint IpAddressToLong(string ipAddr)
         {
-            System.Net.IPAddress oIP = System.Net.IPAddress.Parse(IPAddr);
-            byte[] byteIP = oIP.GetAddressBytes();
+            var _oIp = System.Net.IPAddress.Parse(ipAddr);
+            var _byteIp = _oIp.GetAddressBytes();
 
 
-            uint ip = (uint)byteIP[3] << 24;
-            ip += (uint)byteIP[2] << 16;
-            ip += (uint)byteIP[1] << 8;
-            ip += (uint)byteIP[0];
+            var _ip = (uint)_byteIp[3] << 24;
+            _ip += (uint)_byteIp[2] << 16;
+            _ip += (uint)_byteIp[1] << 8;
+            _ip += (uint)_byteIp[0];
 
-            return ip;
+            return _ip;
         }
         /// <summary>
         /// This encodes the string representation of an IP address
@@ -132,22 +132,22 @@ namespace Ninja.Interfaces
         /// for comparison and is not valid for valid encoding of
         /// IP address information.
         /// </summary>
-        /// <param name="IPAddr">A string representation of the IP
+        /// <param name="ipAddr">A string representation of the IP
         /// address to convert</param>
         /// <returns>Returns a backwards uint representation of the
         /// string.</returns>
-        public uint IPAddressToLongBackwards(string IPAddr)
+        public uint IpAddressToLongBackwards(string ipAddr)
         {
-            System.Net.IPAddress oIP = System.Net.IPAddress.Parse(IPAddr);
-            byte[] byteIP = oIP.GetAddressBytes();
+            var _oIp = System.Net.IPAddress.Parse(ipAddr);
+            var _byteIp = _oIp.GetAddressBytes();
 
 
-            uint ip = (uint)byteIP[0] << 24;
-            ip += (uint)byteIP[1] << 16;
-            ip += (uint)byteIP[2] << 8;
-            ip += (uint)byteIP[3];
+            var _ip = (uint)_byteIp[0] << 24;
+            _ip += (uint)_byteIp[1] << 16;
+            _ip += (uint)_byteIp[2] << 8;
+            _ip += (uint)_byteIp[3];
 
-            return ip;
+            return _ip;
         }
     }
 }

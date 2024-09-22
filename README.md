@@ -20,12 +20,12 @@ Can be used  for network study by WPF MVVM.
 - [ ] MQTT
 - [x] Sniffer(Using pcap, packets capture, save, filter, statistics, plot. etc.)
 - [ ] ...
-<img src="https://github.com/linkmeta/Ninja/blob/main/demo/iperf.png" width="700">
-<img src="https://github.com/linkmeta/Ninja/blob/main/demo/sniffer.png" width="700">
-<img src="https://github.com/linkmeta/Ninja/blob/main/demo/snifferstats.png" width="700">
-<img src="https://github.com/linkmeta/Ninja/blob/main/demo/websocket.png" width="700">
-<img src="https://github.com/linkmeta/Ninja/blob/main/demo/portlisten.png" width="700">
-<img src="https://github.com/linkmeta/Ninja/blob/main/demo/routetable.png" width="700">
+<img src="https://github.com/is-leeroy-jenkins/Ninja/blob/main/demo/iperf.png" width="700">
+<img src="https://github.com/is-leeroy-jenkins/Ninja/blob/main/demo/sniffer.png" width="700">
+<img src="https://github.com/is-leeroy-jenkins/Ninja/blob/main/demo/snifferstats.png" width="700">
+<img src="https://github.com/is-leeroy-jenkins/Ninja/blob/main/demo/websocket.png" width="700">
+<img src="https://github.com/is-leeroy-jenkins/Ninja/blob/main/demo/portlisten.png" width="700">
+<img src="https://github.com/is-leeroy-jenkins/Ninja/blob/main/demo/routetable.png" width="700">
 
 
 ## Build
@@ -33,7 +33,7 @@ Can be used  for network study by WPF MVVM.
 - [x] VisualStudio 2022（Based .NET WPF）
 
 ```bash
-$ git clone https://github.com/linkmeta/Ninja.git
+$ git clone https://github.com/is-leeroy-jenkins/Ninja.git
 $ cd Ninja
 ```
 Run `Ninja.sln`

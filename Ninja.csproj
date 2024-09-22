@@ -23,6 +23,8 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <Optimize>True</Optimize>
+    <WarningLevel>6</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>Ninja.App</StartupObject>
@@ -39,7 +41,17 @@
   <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <WarningLevel>6</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Fonts\**" />
+    <EmbeddedResource Remove="Fonts\**" />
+    <None Remove="Fonts\**" />
+    <Page Remove="Fonts\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Libraries\PcapDotNet\PcapDotNet.Core.dll" />
     <Resource Include="Resources\favicon.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -58,21 +70,11 @@
     <Resource Include="Resources\favicon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Themes\down_arrow.png" />
-    <Resource Include="Themes\up_arrow.png" />
+    <Resource Include="UI\Themes\down_arrow.png" />
+    <Resource Include="UI\Themes\up_arrow.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="OxyPlot.Wpf" Version="2.2.0" />
-    <PackageReference Include="PacketDotNet" Version="1.4.7" />
-    <PackageReference Include="PacketDotNet.Standard" Version="0.16.0" />
-    <PackageReference Include="Pcap.Net.x64" Version="1.0.4.1" />
-    <PackageReference Include="Pcap.Net.x86" Version="1.0.4.1" />
-    <PackageReference Include="PcapDotNet.Packets" Version="1.0.4.1" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
-    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="System.Data.OleDb" Version="8.0.0" />
-    <PackageReference Include="websocket-sharp.net" Version="1.0.3.3" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\reload.png" />
@@ -86,10 +88,59 @@
     <Resource Include="Resources\sniffer.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="OxyPlot.Core" Version="2.2.0" />
-    <PackageReference Include="OxyPlot.Wpf.Shared" Version="2.2.0" />
+    <Compile Remove="UI\Views\NumberTextBox.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Views\NumberTextBox.cs" />
+    <None Remove="Libraries\PcapDotNet\PcapDotNet.Core.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="LinqStatistics">
+      <HintPath>Libraries\LinqStatistics\LinqStatistics.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot">
+      <HintPath>Libraries\OxyPlot\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf">
+      <HintPath>Libraries\OxyPlot\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf.Shared">
+      <HintPath>Libraries\OxyPlot\OxyPlot.Wpf.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="PacketDotNet">
+      <HintPath>Libraries\PacketDotNet\PacketDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="PcapDotNet.Base">
+      <HintPath>Libraries\PcapDotNet\PcapDotNet.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="PcapDotNet.Core">
+      <HintPath>Libraries\PcapDotNet\PcapDotNet.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="PcapDotNet.Core.Extensions">
+      <HintPath>Libraries\PcapDotNet\PcapDotNet.Core.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="PcapDotNet.Packets">
+      <HintPath>Libraries\PcapDotNet\PcapDotNet.Packets.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.OleDb">
+      <HintPath>Libraries\System.Data\System.Data.OleDb.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite">
+      <HintPath>Libraries\System.Data\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6">
+      <HintPath>Libraries\System.Data\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq">
+      <HintPath>Libraries\System.Data\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SqlServerCe">
+      <HintPath>Libraries\System.Data\System.Data.SqlServerCe.dll</HintPath>
+    </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>Libraries\WebSocketSharp\websocket-sharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>
