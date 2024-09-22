@@ -67,7 +67,7 @@ namespace Ninja.ViewModels
         /// <param name="field">The field.</param>
         /// <param name="value">The value.</param>
         /// <param name="propertyName">Name of the property.</param>
-        internal void Update<T>( ref T field, T value,
+        public void Update<T>( ref T field, T value,
             [ CallerMemberName ] 
             string propertyName = null )
 
@@ -85,7 +85,7 @@ namespace Ninja.ViewModels
         /// Called when [property changed].
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
-        internal void OnPropertyChanged( [ CallerMemberName ] string propertyName = null )
+        public void OnPropertyChanged( [ CallerMemberName ] string propertyName = null )
         {
             var _handler = PropertyChanged;
             _handler?.Invoke( this, new PropertyChangedEventArgs( propertyName ) );

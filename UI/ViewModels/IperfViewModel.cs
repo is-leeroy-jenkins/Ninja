@@ -1,10 +1,10 @@
 ﻿// ******************************************************************************************
 //     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 09-21-2024
+//     Created:                 09-22-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        09-21-2024
+//     Last Modified On:        09-22-2024
 // ******************************************************************************************
 // <copyright file="IperfViewModel.cs" company="Terry D. Eppler">
 // 
@@ -44,59 +44,51 @@ namespace Ninja.ViewModels
 {
     using Interfaces;
     using Models;
-    using Models;
-    using Interfaces;
     using OxyPlot;
     using OxyPlot.Axes;
     using OxyPlot.Series;
     using System;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Threading;
-    using System.Threading.Tasks;
     using System.Windows.Input;
     using System.Text.RegularExpressions;
     using Microsoft.Win32;
     using System.IO;
 
+    /// <inheritdoc />
     /// <summary>
-    /// 
     /// </summary>
-    /// <seealso cref="Ninja.ViewModels.MainWindowBase" />
+    /// <seealso cref="T:Ninja.ViewModels.MainWindowBase" />
+    [ SuppressMessage( "ReSharper", "FieldCanBeMadeReadOnly.Global" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
     public class IperfViewModel : MainWindowBase
     {
+        /// <summary>
+        /// The cancel plot token
+        /// </summary>
+        private CancellationToken _cancelPlotToken;
+
+        /// <summary>
+        /// The m plot model data
+        /// </summary>
+        private PlotModel _plotModelData = new PlotModel( );
+
+        /// <summary>
+        /// The plot token source
+        /// </summary>
+        private CancellationTokenSource _plotTokenSource;
+
         /// <summary>
         /// The iperf process
         /// </summary>
         public ProcessInterface IperfProcess;
 
         /// <summary>
-        /// Gets or sets the iperf model.
+        /// The line series current value
         /// </summary>
-        /// <value>
-        /// The iperf model.
-        /// </value>
-        public IperfModel IperfModel { get; set; }
-
-        /// <summary>
-        /// The m plot model data
-        /// </summary>
-        private PlotModel _mPlotModelData = new PlotModel( );
-
-        /// <summary>
-        /// Gets or sets the plot model data.
-        /// </summary>
-        /// <value>
-        /// The plot model data.
-        /// </value>
-        public PlotModel PlotModelData
-        {
-            get { return _mPlotModelData; }
-            set
-            {
-                _mPlotModelData = value;
-                OnPropertyChanged( nameof( PlotModelData ) );
-            }
-        }
+        public LineSeries LineSeriesCurrentVal;
 
         /// <summary>
         /// The x time axis
@@ -107,11 +99,6 @@ namespace Ninja.ViewModels
         /// The y throughput value
         /// </summary>
         public LinearAxis YThroughputVal;
-
-        /// <summary>
-        /// The line series current value
-        /// </summary>
-        public LineSeries LineSeriesCurrentVal;
 
         /// <summary>
         /// The y zoom factor
@@ -204,21 +191,11 @@ namespace Ninja.ViewModels
         }
 
         /// <summary>
-        /// The plot token source
-        /// </summary>
-        internal CancellationTokenSource plotTokenSource;
-
-        /// <summary>
-        /// The cancel plot token
-        /// </summary>
-        internal CancellationToken cancelPlotToken;
-
-        /// <summary>
         /// Stops the update plot task.
         /// </summary>
         internal void StopUpdatePlotTask( )
         {
-            plotTokenSource.Cancel( );
+            _plotTokenSource.Cancel( );
         }
 
         //public void UpdatePlotTask()
@@ -339,6 +316,87 @@ namespace Ninja.ViewModels
         }
 
         /// <summary>
+        /// Clears the output.
+        /// </summary>
+        /// <param name="parameter">The parameter.</param>
+        public void ClearOutput( object parameter )
+        {
+            IperfModel.Output = "";
+        }
+
+        /// <summary>
+        /// Saves the output.
+        /// </summary>
+        /// <param name="parameter">The parameter.</param>
+        public async void SaveOutput( object parameter )
+        {
+            ///*IperfModel.Output*/ = "";
+            var _receDataSaveFileDialog = new SaveFileDialog
+            {
+                Title = "save iperf result",
+                FileName = DateTime.Now.ToString( "yyyyMMddmmss" ),
+                DefaultExt = ".txt",
+
+                //Filter = string.Format("en", "*.*")
+                Filter = "txt files(*.txt)|*.txt|All files(*.*)|*.*"
+            };
+
+            if( _receDataSaveFileDialog.ShowDialog( ) == true )
+            {
+                var _dataRecvPath = _receDataSaveFileDialog.FileName;
+
+                //SavePathInfo = string.Format(CultureInfos, "{0}", DataRecvPath);
+                await using var _defaultReceDataPath = new StreamWriter( _dataRecvPath, true );
+                await _defaultReceDataPath.WriteAsync( IperfModel.Output ).ConfigureAwait( false );
+            }
+        }
+
+        /// <summary>
+        /// Iperfs the help.
+        /// </summary>
+        /// <param name="parameter">The parameter.</param>
+        public void IperfHelp( object parameter )
+        {
+            var _iperfPath = @"Libraries\iperf\" + IperfModel.Version;
+            IperfProcess.StartProcess( _iperfPath, "--help", ProcessOutputDataReceived );
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="IperfViewModel"/> class.
+        /// </summary>
+        public IperfViewModel( )
+        {
+            IperfProcess = new ProcessInterface( );
+            IperfModel = new IperfModel( );
+            InitPlot( );
+        }
+
+        /// <summary>
+        /// Gets or sets the iperf model.
+        /// </summary>
+        /// <value>
+        /// The iperf model.
+        /// </value>
+        public IperfModel IperfModel { get; set; }
+
+        /// <summary>
+        /// Gets or sets the plot model data.
+        /// </summary>
+        /// <value>
+        /// The plot model data.
+        /// </value>
+        public PlotModel PlotModelData
+        {
+            get { return _plotModelData; }
+            set
+            {
+                _plotModelData = value;
+                OnPropertyChanged( nameof( PlotModelData ) );
+            }
+        }
+
+        /// <summary>
         /// Gets the run iperf command.
         /// </summary>
         /// <value>
@@ -367,15 +425,6 @@ namespace Ninja.ViewModels
         }
 
         /// <summary>
-        /// Clears the output.
-        /// </summary>
-        /// <param name="parameter">The parameter.</param>
-        public void ClearOutput( object parameter )
-        {
-            IperfModel.Output = "";
-        }
-
-        /// <summary>
         /// Gets the clear output command.
         /// </summary>
         /// <value>
@@ -386,36 +435,6 @@ namespace Ninja.ViewModels
             get
             {
                 return new RelayCommand( param => ClearOutput( param ) );
-            }
-        }
-
-        /// <summary>
-        /// Saves the output.
-        /// </summary>
-        /// <param name="parameter">The parameter.</param>
-        public async void SaveOutput( object parameter )
-        {
-            ///*IperfModel.Output*/ = "";
-            var _receDataSaveFileDialog = new SaveFileDialog
-            {
-                Title = "save iperf result",
-                FileName = DateTime.Now.ToString( "yyyyMMddmmss" ),
-                DefaultExt = ".txt",
-
-                //Filter = string.Format("en", "*.*")
-                Filter = "txt files(*.txt)|*.txt|All files(*.*)|*.*"
-            };
-
-            if( _receDataSaveFileDialog.ShowDialog( ) == true )
-            {
-                var _dataRecvPath = _receDataSaveFileDialog.FileName;
-
-                //SavePathInfo = string.Format(CultureInfos, "{0}", DataRecvPath);
-                using( var _defaultReceDataPath = new StreamWriter( _dataRecvPath, true ) )
-                {
-                    await _defaultReceDataPath.WriteAsync( IperfModel.Output )
-                        .ConfigureAwait( false );
-                }
             }
         }
 
@@ -434,16 +453,6 @@ namespace Ninja.ViewModels
         }
 
         /// <summary>
-        /// Iperfs the help.
-        /// </summary>
-        /// <param name="parameter">The parameter.</param>
-        public void IperfHelp( object parameter )
-        {
-            var _iperfPath = @"Third-party\iperf\" + IperfModel.Version;
-            IperfProcess.StartProcess( _iperfPath, "--help", ProcessOutputDataReceived );
-        }
-
-        /// <summary>
         /// Gets the iperf help command.
         /// </summary>
         /// <value>
@@ -455,16 +464,6 @@ namespace Ninja.ViewModels
             {
                 return new RelayCommand( param => IperfHelp( param ) );
             }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="IperfViewModel"/> class.
-        /// </summary>
-        public IperfViewModel( )
-        {
-            IperfProcess = new ProcessInterface( );
-            IperfModel = new IperfModel( );
-            InitPlot( );
         }
     }
 }

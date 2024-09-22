@@ -348,3 +348,8 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+Network/Clients/Baby/runtimes/win-arm64/native/libcef.dll
+Data/Clients/SQLite/DB Browser for SQLCipher.exe
+Network/Clients/Baby/runtimes/win-x64/native/libcef.dll
+Network/Clients/Baby/runtimes/win-x86/native/libcef.dll
+Network/Clients/Baby/runtimes/win-x64/native/libcef.zip

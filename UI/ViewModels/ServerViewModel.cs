@@ -114,7 +114,13 @@ namespace Ninja.ViewModels
         /// <value>
         /// The server views.
         /// </value>
-        public ObservableCollection<object> ServerViews { get { return _serverViews; } }
+        public ObservableCollection<object> ServerViews 
+        {
+            get
+            {
+                return _serverViews;
+            }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ServerViewModel"/> class.

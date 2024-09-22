@@ -45,12 +45,14 @@ namespace Ninja.ViewModels
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
 
+    /// <inheritdoc />
     /// <summary>
-    /// 
     /// </summary>
-    /// <seealso cref="Ninja.ViewModels.MainWindowBase" />
+    /// <seealso cref="T:Ninja.ViewModels.MainWindowBase" />
     [ SuppressMessage( "ReSharper", "FieldCanBeMadeReadOnly.Local" ) ]
     [ SuppressMessage( "ReSharper", "ConvertToAutoPropertyWhenPossible" ) ]
+    [ SuppressMessage( "ReSharper", "ConvertToAutoProperty" ) ]
+    [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
     public class SnifferViewModel : MainWindowBase
     {
         /// <summary>
@@ -71,9 +73,11 @@ namespace Ninja.ViewModels
         /// </summary>
         public SnifferViewModel( )
         {
-            _snifferViews = new ObservableCollection<object>( );
-            _snifferViews.Add( new SnifferCaptureViewModel( ) );
-            _snifferViews.Add( new SnifferStatsViewModel( ) );
+            _snifferViews =
+            [
+                new SnifferCaptureViewModel( ),
+                new SnifferStatsViewModel( )
+            ];
         }
     }
 }

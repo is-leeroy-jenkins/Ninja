@@ -53,124 +53,14 @@ namespace Ninja.Models
     public class RouteModel : MainWindowBase
     {
         /// <summary>
-        /// The net information item source
-        /// </summary>
-        private NetInterfaceInfo[ ] _netInfoItemSource;
-
-        /// <summary>
-        /// Gets or sets the net information item source.
-        /// </summary>
-        /// <value>
-        /// The net information item source.
-        /// </value>
-        public NetInterfaceInfo[ ] NetInfoItemSource
-        {
-            get { return _netInfoItemSource; }
-            set
-            {
-                if( _netInfoItemSource != value )
-                {
-                    _netInfoItemSource = value;
-                    OnPropertyChanged( nameof( NetInfoItemSource ) );
-                }
-            }
-        }
-
-        /// <summary>
-        /// The start ip
-        /// </summary>
-        private string _startIp;
-
-        /// <summary>
-        /// Gets or sets the start ip.
-        /// </summary>
-        /// <value>
-        /// The start ip.
-        /// </value>
-        public string StartIp
-        {
-            get { return _startIp; }
-            set
-            {
-                if( _startIp != value )
-                {
-                    _startIp = value;
-                    OnPropertyChanged( nameof( StartIp ) );
-                }
-            }
-        }
-
-        /// <summary>
-        /// The stop ip
-        /// </summary>
-        private string _stopIp;
-
-        /// <summary>
-        /// Gets or sets the stop ip.
-        /// </summary>
-        /// <value>
-        /// The stop ip.
-        /// </value>
-        public string StopIp
-        {
-            get { return _stopIp; }
-            set
-            {
-                if( _stopIp != value )
-                {
-                    _stopIp = value;
-                    OnPropertyChanged( nameof( StopIp ) );
-                }
-            }
-        }
-
-        /// <summary>
         /// The ip
         /// </summary>
         private string _ip;
 
         /// <summary>
-        /// Gets or sets the ip.
+        /// The net information item source
         /// </summary>
-        /// <value>
-        /// The ip.
-        /// </value>
-        public string Ip
-        {
-            get { return _ip; }
-            set
-            {
-                if( _ip != value )
-                {
-                    _ip = value;
-                    OnPropertyChanged( nameof( Ip ) );
-                }
-            }
-        }
-
-        /// <summary>
-        /// The online count
-        /// </summary>
-        private int _onlineCnt;
-
-        /// <summary>
-        /// Gets or sets the online count.
-        /// </summary>
-        /// <value>
-        /// The online count.
-        /// </value>
-        public int OnlineCnt
-        {
-            get { return _onlineCnt; }
-            set
-            {
-                if( _onlineCnt != value )
-                {
-                    _onlineCnt = value;
-                    OnPropertyChanged( nameof( OnlineCnt ) );
-                }
-            }
-        }
+        private NetInterfaceInfo[ ] _netInfoItemSource;
 
         /// <summary>
         /// The offline count
@@ -178,23 +68,9 @@ namespace Ninja.Models
         private int _offlineCnt;
 
         /// <summary>
-        /// Gets or sets the offline count.
+        /// The online count
         /// </summary>
-        /// <value>
-        /// The offline count.
-        /// </value>
-        public int OfflineCnt
-        {
-            get { return _offlineCnt; }
-            set
-            {
-                if( _offlineCnt != value )
-                {
-                    _offlineCnt = value;
-                    OnPropertyChanged( nameof( OfflineCnt ) );
-                }
-            }
-        }
+        private int _onlineCnt;
 
         /// <summary>
         /// The scan button name
@@ -202,23 +78,14 @@ namespace Ninja.Models
         private string _scanButtonName;
 
         /// <summary>
-        /// Gets or sets the name of the scan button.
+        /// The start ip
         /// </summary>
-        /// <value>
-        /// The name of the scan button.
-        /// </value>
-        public string ScanButtonName
-        {
-            get { return _scanButtonName; }
-            set
-            {
-                if( _scanButtonName != value )
-                {
-                    _scanButtonName = value;
-                    OnPropertyChanged( nameof( ScanButtonName ) );
-                }
-            }
-        }
+        private string _startIp;
+
+        /// <summary>
+        /// The stop ip
+        /// </summary>
+        private string _stopIp;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RouteModel"/> class.
@@ -230,6 +97,160 @@ namespace Ninja.Models
             ScanButtonName = "Start";
             OfflineCnt = 0;
             OnlineCnt = 0;
+        }
+
+        /// <summary>
+        /// Gets or sets the net information item source.
+        /// </summary>
+        /// <value>
+        /// The net information item source.
+        /// </value>
+        public NetInterfaceInfo[ ] NetInfoItemSource
+        {
+            get
+            {
+                return _netInfoItemSource;
+            }
+            set
+            {
+                if( _netInfoItemSource != value )
+                {
+                    _netInfoItemSource = value;
+                    OnPropertyChanged( nameof( NetInfoItemSource ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the start ip.
+        /// </summary>
+        /// <value>
+        /// The start ip.
+        /// </value>
+        public string StartIp
+        {
+            get
+            {
+                return _startIp;
+            }
+            set
+            {
+                if( _startIp != value )
+                {
+                    _startIp = value;
+                    OnPropertyChanged( nameof( StartIp ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the stop ip.
+        /// </summary>
+        /// <value>
+        /// The stop ip.
+        /// </value>
+        public string StopIp
+        {
+            get
+            {
+                return _stopIp;
+            }
+            set
+            {
+                if( _stopIp != value )
+                {
+                    _stopIp = value;
+                    OnPropertyChanged( nameof( StopIp ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the ip.
+        /// </summary>
+        /// <value>
+        /// The ip.
+        /// </value>
+        public string Ip
+        {
+            get
+            {
+                return _ip;
+            }
+            set
+            {
+                if( _ip != value )
+                {
+                    _ip = value;
+                    OnPropertyChanged( nameof( Ip ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the online count.
+        /// </summary>
+        /// <value>
+        /// The online count.
+        /// </value>
+        public int OnlineCnt
+        {
+            get
+            {
+                return _onlineCnt;
+            }
+            set
+            {
+                if( _onlineCnt != value )
+                {
+                    _onlineCnt = value;
+                    OnPropertyChanged( nameof( OnlineCnt ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the offline count.
+        /// </summary>
+        /// <value>
+        /// The offline count.
+        /// </value>
+        public int OfflineCnt
+        {
+            get
+            {
+                return _offlineCnt;
+            }
+            set
+            {
+                if( _offlineCnt != value )
+                {
+                    _offlineCnt = value;
+                    OnPropertyChanged( nameof( OfflineCnt ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the name of the scan button.
+        /// </summary>
+        /// <value>
+        /// The name of the scan button.
+        /// </value>
+        public string ScanButtonName
+        {
+            get
+            {
+                return _scanButtonName;
+            }
+            set
+            {
+                if( _scanButtonName != value )
+                {
+                    _scanButtonName = value;
+                    OnPropertyChanged( nameof( ScanButtonName ) );
+                }
+            }
         }
     }
 }

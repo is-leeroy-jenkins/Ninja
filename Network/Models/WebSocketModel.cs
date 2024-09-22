@@ -52,6 +52,25 @@ namespace Ninja.Models
     [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
     public class WebSocketModel : MainWindowBase
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WebSocketModel"/> class.
+        /// </summary>
+        public WebSocketModel( )
+        {
+            ServerAddress = "ws://127.0.0.1:65432";
+            ServerSendStr = "Hello Client!";
+            ServerSendInterval = 1000;
+            ServerSend = "Hello Client!";
+            ServerSendBtnName = "Auto Send Start";
+            ServerListenBtnName = "Start Listen";
+            ServerIp = "ws://127.0.0.1:65432/echo";
+            ClientSendStr = "Hello Server!";
+            ClientSendInterval = 1000;
+            ClientSend = "Hello Server!";
+            ClientConnectBtnName = "Connect";
+            ClientSendBtnName = "Auto Send Start";
+        }
+
         #region WebSocket Server
         /// <summary>
         /// The server address
@@ -66,7 +85,10 @@ namespace Ninja.Models
         /// </value>
         public string ServerAddress
         {
-            get { return _serverAddress; }
+            get
+            {
+                return _serverAddress;
+            }
             set
             {
                 if( _serverAddress != value )
@@ -90,7 +112,10 @@ namespace Ninja.Models
         /// </value>
         public string ServerListenBtnName
         {
-            get { return _serverListenBtnName; }
+            get
+            {
+                return _serverListenBtnName;
+            }
             set
             {
                 if( _serverListenBtnName != value )
@@ -114,7 +139,10 @@ namespace Ninja.Models
         /// </value>
         public string ServerSendStr
         {
-            get { return _serverSendStr; }
+            get
+            {
+                return _serverSendStr;
+            }
             set
             {
                 if( _serverSendStr != value )
@@ -138,7 +166,10 @@ namespace Ninja.Models
         /// </value>
         public int ServerSendInterval
         {
-            get { return _serverSendInterval; }
+            get
+            {
+                return _serverSendInterval;
+            }
             set
             {
                 if( _serverSendInterval != value )
@@ -162,7 +193,10 @@ namespace Ninja.Models
         /// </value>
         public string ServerSendBtnName
         {
-            get { return _serverSendBtnName; }
+            get
+            {
+                return _serverSendBtnName;
+            }
             set
             {
                 if( _serverSendBtnName != value )
@@ -186,7 +220,10 @@ namespace Ninja.Models
         /// </value>
         public string ServerRecv
         {
-            get { return _serverRecv; }
+            get
+            {
+                return _serverRecv;
+            }
             set
             {
                 if( _serverRecv != value )
@@ -210,7 +247,10 @@ namespace Ninja.Models
         /// </value>
         public string ServerSend
         {
-            get { return _serverSend; }
+            get
+            {
+                return _serverSend;
+            }
             set
             {
                 if( _serverSend != value )
@@ -236,7 +276,10 @@ namespace Ninja.Models
         /// </value>
         public string ServerIp
         {
-            get { return _serverIp; }
+            get
+            {
+                return _serverIp;
+            }
             set
             {
                 if( _serverIp != value )
@@ -260,7 +303,10 @@ namespace Ninja.Models
         /// </value>
         public string ClientConnectBtnName
         {
-            get { return _clientConnectBtnName; }
+            get
+            {
+                return _clientConnectBtnName;
+            }
             set
             {
                 if( _clientConnectBtnName != value )
@@ -284,7 +330,10 @@ namespace Ninja.Models
         /// </value>
         public string ClientSendStr
         {
-            get { return _clientSendStr; }
+            get
+            {
+                return _clientSendStr;
+            }
             set
             {
                 if( _clientSendStr != value )
@@ -308,7 +357,10 @@ namespace Ninja.Models
         /// </value>
         public int ClientSendInterval
         {
-            get { return _clientSendInterval; }
+            get
+            {
+                return _clientSendInterval;
+            }
             set
             {
                 if( _clientSendInterval != value )
@@ -332,7 +384,10 @@ namespace Ninja.Models
         /// </value>
         public string ClientSendBtnName
         {
-            get { return _clientSendBtnName; }
+            get
+            {
+                return _clientSendBtnName;
+            }
             set
             {
                 if( _clientSendBtnName != value )
@@ -356,7 +411,10 @@ namespace Ninja.Models
         /// </value>
         public string ClientRecv
         {
-            get { return _clientRecv; }
+            get
+            {
+                return _clientRecv;
+            }
             set
             {
                 if( _clientRecv != value )
@@ -380,7 +438,10 @@ namespace Ninja.Models
         /// </value>
         public string ClientSend
         {
-            get { return _clientSend; }
+            get
+            {
+                return _clientSend;
+            }
             set
             {
                 if( _clientSend != value )
@@ -391,24 +452,5 @@ namespace Ninja.Models
             }
         }
         #endregion
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WebSocketModel"/> class.
-        /// </summary>
-        public WebSocketModel( )
-        {
-            ServerAddress = "ws://127.0.0.1:65432";
-            ServerSendStr = "Hello Client!";
-            ServerSendInterval = 1000;
-            ServerSend = "Hello Client!";
-            ServerSendBtnName = "Auto Send Start";
-            ServerListenBtnName = "Start Listen";
-            ServerIp = "ws://127.0.0.1:65432/echo";
-            ClientSendStr = "Hello Server!";
-            ClientSendInterval = 1000;
-            ClientSend = "Hello Server!";
-            ClientConnectBtnName = "Connect";
-            ClientSendBtnName = "Auto Send Start";
-        }
     }
 }

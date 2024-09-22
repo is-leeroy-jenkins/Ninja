@@ -65,49 +65,14 @@ namespace Ninja.ViewModels
     public class RouteViewModel : MainWindowBase
     {
         /// <summary>
-        /// Gets or sets the route model.
+        /// The ip interface
         /// </summary>
-        /// <value>
-        /// The route model.
-        /// </value>
-        public RouteModel RouteModel { get; set; }
+        public IpInterface IpInterface;
 
         /// <summary>
         /// The route process
         /// </summary>
         public ProcessInterface RouteProcess;
-
-        /// <summary>
-        /// Gets the refresh command.
-        /// </summary>
-        /// <value>
-        /// The refresh command.
-        /// </value>
-        public ICommand RefreshCommand
-        {
-            get
-            {
-                return new RelayCommand( param => RunRoute( param ) );
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the ipv4 results.
-        /// </summary>
-        /// <value>
-        /// The ipv4 results.
-        /// </value>
-        public ObservableCollection<Ipv4Result> Ipv4Results { get; set; } =
-            new ObservableCollection<Ipv4Result>( );
-
-        ///<summary>
-        /// Gets or sets the ipv6 results.
-        /// </summary>
-        /// <value>
-        /// The ipv6 results.
-        /// </value>
-        public ObservableCollection<Ipv6Result> Ipv6Results { get; set; } =
-            new ObservableCollection<Ipv6Result>( );
 
         /// <summary>
         /// Gets the local network interface.
@@ -148,11 +113,6 @@ namespace Ninja.ViewModels
 
             return _info;
         }
-
-        /// <summary>
-        /// The ip interface
-        /// </summary>
-        public IpInterface IpInterface;
 
         /// <summary>
         /// Processes the route information.
@@ -267,5 +227,45 @@ namespace Ninja.ViewModels
             GetRouteInfo( );
             RouteModel.NetInfoItemSource = GetLocalNetworkInterface( );
         }
+
+        /// <summary>
+        /// Gets or sets the route model.
+        /// </summary>
+        /// <value>
+        /// The route model.
+        /// </value>
+        public RouteModel RouteModel { get; set; }
+
+        /// <summary>
+        /// Gets the refresh command.
+        /// </summary>
+        /// <value>
+        /// The refresh command.
+        /// </value>
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                return new RelayCommand( param => RunRoute( param ) );
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the ipv4 results.
+        /// </summary>
+        /// <value>
+        /// The ipv4 results.
+        /// </value>
+        public ObservableCollection<Ipv4Result> Ipv4Results { get; set; } =
+            new ObservableCollection<Ipv4Result>( );
+
+        ///<summary>
+        /// Gets or sets the ipv6 results.
+        /// </summary>
+        /// <value>
+        /// The ipv6 results.
+        /// </value>
+        public ObservableCollection<Ipv6Result> Ipv6Results { get; set; } =
+            new ObservableCollection<Ipv6Result>( );
     }
 }

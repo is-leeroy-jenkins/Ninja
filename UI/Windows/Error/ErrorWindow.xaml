@@ -1,0 +1,66 @@
+﻿<Window
+    x:Class="Ninja.ErrorWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Ninja"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="ErrorView"
+    Width="560"
+    Height="250"
+    Margin="3,3,3,3"
+    Background="{StaticResource RedBackground}"
+    BorderBrush="{StaticResource RedForeground}"
+    BorderThickness="1"
+    Foreground="{StaticResource WhiteForeground}"
+    ResizeMode="NoResize"
+    SnapsToDevicePixels="True"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Canvas x:Name="ErrorCanvas">
+        <Image
+            x:Name="PictureBox"
+            Canvas.Left="2"
+            Canvas.Top="3"
+            Width="20"
+            Height="18"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Source="/Resources/Assets/DialogImages/SplashNotification.png" />
+        <Label
+            x:Name="Header"
+            Canvas.Left="35"
+            Canvas.Top="6"
+            Width="305"
+            Height="29"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Content="Title"
+            Foreground="White" />
+        <local:MetroLabel
+            x:Name="StatusLabel"
+            Canvas.Left="385"
+            Canvas.Top="5"
+            Width="165"
+            Height="20"
+            Padding="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Right"
+            Content="MetroLabel"
+            FontSize="9"
+            Foreground="White" />
+        <local:MetroLabel
+            x:Name="MessageText"
+            Canvas.Left="78"
+            Canvas.Top="55"
+            Width="402"
+            Height="145"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="MetroLabel"
+            FontSize="10"
+            Foreground="{StaticResource WhiteForeground}" />
+    </Canvas>
+</Window>

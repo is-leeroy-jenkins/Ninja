@@ -53,9 +53,59 @@ namespace Ninja.Models
     public class PortScanModel : MainWindowBase
     {
         /// <summary>
+        /// The close count
+        /// </summary>
+        private int _closeCnt;
+
+        /// <summary>
+        /// The ip
+        /// </summary>
+        private string _ip;
+
+        /// <summary>
+        /// The open count
+        /// </summary>
+        private int _openCnt;
+
+        /// <summary>
+        /// The port
+        /// </summary>
+        private string _port;
+
+        /// <summary>
+        /// The scan button name
+        /// </summary>
+        private string _scanButtonName;
+
+        /// <summary>
+        /// The socket timeout
+        /// </summary>
+        private int _socketTimeout;
+
+        /// <summary>
         /// The start port
         /// </summary>
         private int _startPort;
+
+        /// <summary>
+        /// The stop port
+        /// </summary>
+        private int _stopPort;
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="PortScanModel"/> class.
+        /// </summary>
+        public PortScanModel( )
+        {
+            Ip = "192.168.1.1";
+            StartPort = 1;
+            StopPort = 65535;
+            SocketTimeout = 1000;
+            ScanButtonName = "Start";
+            CloseCnt = 0;
+            OpenCnt = 0;
+        }
 
         /// <summary>
         /// Gets or sets the start port.
@@ -65,7 +115,10 @@ namespace Ninja.Models
         /// </value>
         public int StartPort
         {
-            get { return _startPort; }
+            get
+            {
+                return _startPort;
+            }
             set
             {
                 if( _startPort != value )
@@ -77,11 +130,6 @@ namespace Ninja.Models
         }
 
         /// <summary>
-        /// The stop port
-        /// </summary>
-        private int _stopPort;
-
-        /// <summary>
         /// Gets or sets the stop port.
         /// </summary>
         /// <value>
@@ -89,7 +137,10 @@ namespace Ninja.Models
         /// </value>
         public int StopPort
         {
-            get { return _stopPort; }
+            get
+            {
+                return _stopPort;
+            }
             set
             {
                 if( _stopPort != value )
@@ -101,11 +152,6 @@ namespace Ninja.Models
         }
 
         /// <summary>
-        /// The ip
-        /// </summary>
-        private string _ip;
-
-        /// <summary>
         /// Gets or sets the ip.
         /// </summary>
         /// <value>
@@ -113,7 +159,10 @@ namespace Ninja.Models
         /// </value>
         public string Ip
         {
-            get { return _ip; }
+            get
+            {
+                return _ip;
+            }
             set
             {
                 if( _ip != value )
@@ -125,11 +174,6 @@ namespace Ninja.Models
         }
 
         /// <summary>
-        /// The port
-        /// </summary>
-        private string _port;
-
-        /// <summary>
         /// Gets or sets the port.
         /// </summary>
         /// <value>
@@ -137,7 +181,10 @@ namespace Ninja.Models
         /// </value>
         public string Port
         {
-            get { return _port; }
+            get
+            {
+                return _port;
+            }
             set
             {
                 if( _port != value )
@@ -149,11 +196,6 @@ namespace Ninja.Models
         }
 
         /// <summary>
-        /// The open count
-        /// </summary>
-        private int _openCnt;
-
-        /// <summary>
         /// Gets or sets the open count.
         /// </summary>
         /// <value>
@@ -161,7 +203,10 @@ namespace Ninja.Models
         /// </value>
         public int OpenCnt
         {
-            get { return _openCnt; }
+            get
+            {
+                return _openCnt;
+            }
             set
             {
                 if( _openCnt != value )
@@ -173,11 +218,6 @@ namespace Ninja.Models
         }
 
         /// <summary>
-        /// The close count
-        /// </summary>
-        private int _closeCnt;
-
-        /// <summary>
         /// Gets or sets the close count.
         /// </summary>
         /// <value>
@@ -185,7 +225,10 @@ namespace Ninja.Models
         /// </value>
         public int CloseCnt
         {
-            get { return _closeCnt; }
+            get
+            {
+                return _closeCnt;
+            }
             set
             {
                 if( _closeCnt != value )
@@ -197,11 +240,6 @@ namespace Ninja.Models
         }
 
         /// <summary>
-        /// The scan button name
-        /// </summary>
-        private string _scanButtonName;
-
-        /// <summary>
         /// Gets or sets the name of the scan button.
         /// </summary>
         /// <value>
@@ -209,7 +247,10 @@ namespace Ninja.Models
         /// </value>
         public string ScanButtonName
         {
-            get { return _scanButtonName; }
+            get
+            {
+                return _scanButtonName;
+            }
             set
             {
                 if( _scanButtonName != value )
@@ -221,11 +262,6 @@ namespace Ninja.Models
         }
 
         /// <summary>
-        /// The socket timeout
-        /// </summary>
-        private int _socketTimeout;
-
-        /// <summary>
         /// Gets or sets the socket timeout.
         /// </summary>
         /// <value>
@@ -233,7 +269,10 @@ namespace Ninja.Models
         /// </value>
         public int SocketTimeout
         {
-            get { return _socketTimeout; }
+            get
+            {
+                return _socketTimeout;
+            }
             set
             {
                 if( _socketTimeout != value )
@@ -242,20 +281,6 @@ namespace Ninja.Models
                     OnPropertyChanged( nameof( SocketTimeout ) );
                 }
             }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PortScanModel"/> class.
-        /// </summary>
-        public PortScanModel( )
-        {
-            Ip = "192.168.1.1";
-            StartPort = 1;
-            StopPort = 65535;
-            SocketTimeout = 1000;
-            ScanButtonName = "Start";
-            CloseCnt = 0;
-            OpenCnt = 0;
         }
     }
 }

@@ -60,68 +60,9 @@ namespace Ninja.ViewModels
     public class SnifferStatsViewModel : MainWindowBase
     {
         /// <summary>
-        /// Gets the protocol stats.
+        /// The plot timer
         /// </summary>
-        /// <value>
-        /// The protocol stats.
-        /// </value>
-        public ObservableCollection<Ipv4ProtocolStats> ProtocolStats { get; private set; }
-
-        /// <summary>
-        /// Gets the connection stats.
-        /// </summary>
-        /// <value>
-        /// The connection stats.
-        /// </value>
-        public ObservableCollection<Ipv4ConnectionStats> ConnectionStats { get; private set; }
-
-        /// <summary>
-        /// The capture time
-        /// </summary>
-        private string _captureTime;
-
-        /// <summary>
-        /// Gets or sets the capture time.
-        /// </summary>
-        /// <value>
-        /// The capture time.
-        /// </value>
-        public string CaptureTime
-        {
-            get { return _captureTime; }
-            set
-            {
-                if( _captureTime != value )
-                {
-                    _captureTime = value;
-                    OnPropertyChanged( nameof( CaptureTime ) );
-                }
-            }
-        }
-
-        /// <summary>
-        /// The packet count
-        /// </summary>
-        private long _packetCount;
-
-        /// <summary>
-        /// Gets or sets the packet count.
-        /// </summary>
-        /// <value>
-        /// The packet count.
-        /// </value>
-        public long PacketCount
-        {
-            get { return _packetCount; }
-            set
-            {
-                if( _packetCount != value )
-                {
-                    _packetCount = value;
-                    OnPropertyChanged( nameof( PacketCount ) );
-                }
-            }
-        }
+        private readonly DispatcherTimer _plotTimer = new DispatcherTimer( );
 
         /// <summary>
         /// The byte count
@@ -129,46 +70,24 @@ namespace Ninja.ViewModels
         private long _byteCount;
 
         /// <summary>
-        /// Gets or sets the byte count.
+        /// The capture time
         /// </summary>
-        /// <value>
-        /// The byte count.
-        /// </value>
-        public long ByteCount
-        {
-            get { return _byteCount; }
-            set
-            {
-                if( _byteCount != value )
-                {
-                    _byteCount = value;
-                    OnPropertyChanged( nameof( ByteCount ) );
-                }
-            }
-        }
+        private string _captureTime;
 
         /// <summary>
-        /// Gets the plot model data.
+        /// The packet count
         /// </summary>
-        /// <value>
-        /// The plot model data.
-        /// </value>
-        public PlotModel PlotModelData { get; private set; }
-
-        /// <summary>
-        /// The plot timer
-        /// </summary>
-        private readonly DispatcherTimer _plotTimer = new DispatcherTimer( );
-
-        /// <summary>
-        /// The previous time elapsed
-        /// </summary>
-        private long _prevTimeElapsed;
+        private long _packetCount;
 
         /// <summary>
         /// The previous byte count
         /// </summary>
         private long _prevByteCount;
+
+        /// <summary>
+        /// The previous time elapsed
+        /// </summary>
+        private long _prevTimeElapsed;
 
         /// <summary>
         /// Initializes the plot.
@@ -220,7 +139,8 @@ namespace Ninja.ViewModels
                     ? ByteCount - _prevByteCount
                     : 0;
 
-                var _kBPerSec = _diffCount / ( _timeElapsed - _prevTimeElapsed ) * 0.001 * 1024;
+                var _denominator = ( _timeElapsed - _prevTimeElapsed ) * 0.001 * 1024;
+                var _kBPerSec = _diffCount / _denominator;
                 lock( PlotModelData.SyncRoot )
                 {
                     var _bandWidthLine = ( LineSeries )PlotModelData.Series[ 0 ];
@@ -245,5 +165,86 @@ namespace Ninja.ViewModels
             _prevTimeElapsed = 0;
             _prevByteCount = 0;
         }
+
+        /// <summary>
+        /// Gets the protocol stats.
+        /// </summary>
+        /// <value>
+        /// The protocol stats.
+        /// </value>
+        public ObservableCollection<Ipv4ProtocolStats> ProtocolStats { get; private set; }
+
+        /// <summary>
+        /// Gets the connection stats.
+        /// </summary>
+        /// <value>
+        /// The connection stats.
+        /// </value>
+        public ObservableCollection<Ipv4ConnectionStats> ConnectionStats { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the capture time.
+        /// </summary>
+        /// <value>
+        /// The capture time.
+        /// </value>
+        public string CaptureTime
+        {
+            get { return _captureTime; }
+            set
+            {
+                if( _captureTime != value )
+                {
+                    _captureTime = value;
+                    OnPropertyChanged( nameof( CaptureTime ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the packet count.
+        /// </summary>
+        /// <value>
+        /// The packet count.
+        /// </value>
+        public long PacketCount
+        {
+            get { return _packetCount; }
+            set
+            {
+                if( _packetCount != value )
+                {
+                    _packetCount = value;
+                    OnPropertyChanged( nameof( PacketCount ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the byte count.
+        /// </summary>
+        /// <value>
+        /// The byte count.
+        /// </value>
+        public long ByteCount
+        {
+            get { return _byteCount; }
+            set
+            {
+                if( _byteCount != value )
+                {
+                    _byteCount = value;
+                    OnPropertyChanged( nameof( ByteCount ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the plot model data.
+        /// </summary>
+        /// <value>
+        /// The plot model data.
+        /// </value>
+        public PlotModel PlotModelData { get; private set; }
     }
 }

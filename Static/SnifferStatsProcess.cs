@@ -208,7 +208,7 @@ namespace Ninja.Models
                 new Ipv4ProtocolStats( IpV4Protocol.Udp ),
                 new Ipv4ProtocolStats( IpV4Protocol.Ip ),
                 new Ipv4ProtocolStats( IpV4Protocol.Stream ),
-                new Ipv4ProtocolStats(IpV4Protocol.InternetControlMessageProtocol ),
+                new Ipv4ProtocolStats( IpV4Protocol.InternetControlMessageProtocol ),
                 new Ipv4ProtocolStats( IpV4Protocol.InternetGroupManagementProtocol )
             };
 

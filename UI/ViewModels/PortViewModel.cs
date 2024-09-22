@@ -54,21 +54,20 @@ namespace Ninja.ViewModels
     using System.Windows;
     using System.Windows.Input;
 
+    /// <inheritdoc />
     /// <summary>
-    /// 
     /// </summary>
-    /// <seealso cref="Ninja.ViewModels.MainWindowBase" />
+    /// <seealso cref="T:Ninja.ViewModels.MainWindowBase" />
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    [ SuppressMessage( "ReSharper", "FieldCanBeMadeReadOnly.Global" ) ]
+    [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
     public class PortViewModel : MainWindowBase
     {
         /// <summary>
-        /// Gets or sets the port model.
+        /// The ip interface
         /// </summary>
-        /// <value>
-        /// The port model.
-        /// </value>
-        public PortModel PortModel { get; set; }
+        public IpInterface IpInterface;
 
         /// <summary>
         /// The port process
@@ -76,29 +75,20 @@ namespace Ninja.ViewModels
         public ProcessInterface PortProcess;
 
         /// <summary>
-        /// Gets or sets the port listen stats.
-        /// </summary>
-        /// <value>
-        /// The port listen stats.
-        /// </value>
-        public ObservableCollection<PortListenStat> PortListenStats { get; set; } =
-            new ObservableCollection<PortListenStat>( );
-
-        /// <summary>
         /// Gets the local network interface.
         /// </summary>
         /// <returns></returns>
-        public PortModel.NetInterfaceInfo[ ] GetLocalNetworkInterface( )
+        public NetInterfaceInfo[ ] GetLocalNetworkInterface( )
         {
             var _interfaces = NetworkInterface.GetAllNetworkInterfaces( );
             var _len = _interfaces.Length;
-            var _info = new PortModel.NetInterfaceInfo[ _len ];
+            var _info = new NetInterfaceInfo[ _len ];
 
             //string[] name = new string[len];
             for( var _i = 0; _i < _len; _i++ )
             {
                 var _ni = _interfaces[ _i ];
-                _info[ _i ] = new PortModel.NetInterfaceInfo( );
+                _info[ _i ] = new NetInterfaceInfo( );
                 _info[ _i ].Description = _ni.Description;
                 if( _ni.OperationalStatus == OperationalStatus.Up )
                 {
@@ -120,11 +110,6 @@ namespace Ninja.ViewModels
 
             return _info;
         }
-
-        /// <summary>
-        /// The ip interface
-        /// </summary>
-        public IpInterface IpInterface;
 
         /// <summary>
         /// Lookups the process.
@@ -281,6 +266,35 @@ namespace Ninja.ViewModels
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="PortViewModel"/> class.
+        /// </summary>
+        public PortViewModel( )
+        {
+            PortModel = new PortModel( );
+            IpInterface = new IpInterface( );
+            PortProcess = new ProcessInterface( );
+            GetPortInfo( );
+            PortModel.NetInfoItemSource = GetLocalNetworkInterface( );
+        }
+
+        /// <summary>
+        /// Gets or sets the port model.
+        /// </summary>
+        /// <value>
+        /// The port model.
+        /// </value>
+        public PortModel PortModel { get; set; }
+
+        /// <summary>
+        /// Gets or sets the port listen stats.
+        /// </summary>
+        /// <value>
+        /// The port listen stats.
+        /// </value>
+        public ObservableCollection<PortListenStat> PortListenStats { get; set; } =
+            new ObservableCollection<PortListenStat>( );
+
+        /// <summary>
         /// Gets the refresh command.
         /// </summary>
         /// <value>
@@ -292,18 +306,6 @@ namespace Ninja.ViewModels
             {
                 return new RelayCommand( param => RunPortCmd( param ) );
             }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PortViewModel"/> class.
-        /// </summary>
-        public PortViewModel( )
-        {
-            PortModel = new PortModel( );
-            IpInterface = new IpInterface( );
-            PortProcess = new ProcessInterface( );
-            GetPortInfo( );
-            PortModel.NetInfoItemSource = GetLocalNetworkInterface( );
         }
     }
 }

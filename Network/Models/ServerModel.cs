@@ -42,8 +42,10 @@
 
 namespace Ninja.Models
 {
+    using System.Diagnostics.CodeAnalysis;
     using ViewModels;
 
+    [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
     public class ServerModel : MainWindowBase
     {
         /// <summary>

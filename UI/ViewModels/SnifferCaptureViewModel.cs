@@ -45,7 +45,6 @@ namespace Ninja.ViewModels
     using Models;
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading;
     using System.Windows.Input;
     using System.Windows;
@@ -55,7 +54,6 @@ namespace Ninja.ViewModels
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using Microsoft.Win32;
-    using PcapDotNet;
     using PcapDotNet.Core;
     using PcapDotNet.Packets.Ethernet;
 
@@ -70,176 +68,6 @@ namespace Ninja.ViewModels
     public class SnifferCaptureViewModel : MainWindowBase
     {
         /// <summary>
-        /// The packets
-        /// </summary>
-        private ObservableCollection<Packet> _packets;
-
-        /// <summary>
-        /// Gets the packets.
-        /// </summary>
-        /// <value>
-        /// The packets.
-        /// </value>
-        public ObservableCollection<Packet> Packets
-        {
-            get
-            {
-                return _packets;
-            }
-            private set
-            {
-                _packets = value;
-            }
-        }
-
-        /// <summary>
-        /// The start capture BTN name
-        /// </summary>
-        private string _startCaptureBtnName;
-
-        /// <summary>
-        /// Gets or sets the start name of the capture BTN.
-        /// </summary>
-        /// <value>
-        /// The start name of the capture BTN.
-        /// </value>
-        public string StartCaptureBtnName
-        {
-            get
-            {
-                return _startCaptureBtnName;
-            }
-            set
-            {
-                if( _startCaptureBtnName != value )
-                {
-                    _startCaptureBtnName = value;
-                    OnPropertyChanged( nameof( StartCaptureBtnName ) );
-                }
-            }
-        }
-
-        /// <summary>
-        /// The save status
-        /// </summary>
-        private bool _saveStatus;
-
-        /// <summary>
-        /// Gets or sets a value indicating whether [save status].
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if [save status]; otherwise, <c>false</c>.
-        /// </value>
-        public bool SaveStatus
-        {
-            get { return _saveStatus; }
-            set
-            {
-                if( _saveStatus != value )
-                {
-                    _saveStatus = value;
-                    OnPropertyChanged( nameof( SaveStatus ) );
-                }
-            }
-        }
-
-        /// <summary>
-        /// The network interface list
-        /// </summary>
-        private List<IPacketDevice> _networkInterfaceList;
-
-        /// <summary>
-        /// Gets or sets the network interface list.
-        /// </summary>
-        /// <value>
-        /// The network interface list.
-        /// </value>
-        public List<IPacketDevice> NetworkInterfaceList
-        {
-            get { return _networkInterfaceList; }
-            set
-            {
-                if( _networkInterfaceList != value )
-                {
-                    _networkInterfaceList = value;
-                    OnPropertyChanged( nameof( NetworkInterfaceList ) );
-                }
-            }
-        }
-
-        /// <summary>
-        /// The selected interface
-        /// </summary>
-        private IPacketDevice _selectedInterface;
-
-        /// <summary>
-        /// Gets or sets the selected interface.
-        /// </summary>
-        /// <value>
-        /// The selected interface.
-        /// </value>
-        public IPacketDevice SelectedInterface
-        {
-            get { return _selectedInterface; }
-            set
-            {
-                if( _selectedInterface != value )
-                {
-                    _selectedInterface = value;
-                    OnPropertyChanged( nameof( SelectedInterface ) );
-                }
-            }
-        }
-
-        /// <summary>
-        /// The selected packet
-        /// </summary>
-        private Packet _selectedPacket;
-
-        /// <summary>
-        /// Gets or sets the selected packet.
-        /// </summary>
-        /// <value>
-        /// The selected packet.
-        /// </value>
-        public Packet SelectedPacket
-        {
-            get { return _selectedPacket; }
-            set
-            {
-                if( _selectedPacket != value )
-                {
-                    _selectedPacket = value;
-                    OnPropertyChanged( nameof( SelectedPacket ) );
-                }
-            }
-        }
-
-        /// <summary>
-        /// The packet filter
-        /// </summary>
-        private string _packetFilter;
-
-        /// <summary>
-        /// Gets or sets the packet filter.
-        /// </summary>
-        /// <value>
-        /// The packet filter.
-        /// </value>
-        public string PacketFilter
-        {
-            get { return _packetFilter; }
-            set
-            {
-                if( _packetFilter != value )
-                {
-                    _packetFilter = value;
-                    OnPropertyChanged( nameof( PacketFilter ) );
-                }
-            }
-        }
-
-        /// <summary>
         /// The capture token source
         /// </summary>
         private CancellationTokenSource _captureTokenSource;
@@ -248,6 +76,41 @@ namespace Ninja.ViewModels
         /// The communicator
         /// </summary>
         private PacketCommunicator _communicator;
+
+        /// <summary>
+        /// The network interface list
+        /// </summary>
+        private List<IPacketDevice> _networkInterfaceList;
+
+        /// <summary>
+        /// The packet filter
+        /// </summary>
+        private string _packetFilter;
+
+        /// <summary>
+        /// The packets
+        /// </summary>
+        private ObservableCollection<Packet> _packets;
+
+        /// <summary>
+        /// The save status
+        /// </summary>
+        private bool _saveStatus;
+
+        /// <summary>
+        /// The selected interface
+        /// </summary>
+        private IPacketDevice _selectedInterface;
+
+        /// <summary>
+        /// The selected packet
+        /// </summary>
+        private Packet _selectedPacket;
+
+        /// <summary>
+        /// The start capture BTN name
+        /// </summary>
+        private string _startCaptureBtnName;
 
         /// <summary>
         /// Starts the capture asynchronous.
@@ -281,7 +144,7 @@ namespace Ninja.ViewModels
                             }
                             case PacketCommunicatorReceiveResult.Ok:
                             {
-                                if(_packet.Ethernet.EtherType == EthernetType.IpV4 )
+                                if( _packet.Ethernet.EtherType == EthernetType.IpV4 )
                                 {
                                     Application.Current.Dispatcher.Invoke( ( ) =>
                                     {
@@ -294,7 +157,8 @@ namespace Ninja.ViewModels
                             }
                             default:
                             {
-                                throw new InvalidOperationException( "PacketCommunicator InvalidOperationException" );
+                                var _msg = "PacketCommunicator InvalidOperationException";
+                                throw new InvalidOperationException( _msg );
                             }
                         }
                     }
@@ -323,17 +187,6 @@ namespace Ninja.ViewModels
         }
 
         /// <summary>
-        /// Gets the start capture command.
-        /// </summary>
-        /// <value>
-        /// The start capture command.
-        /// </value>
-        public ICommand StartCaptureCommand
-        {
-            get { return new RelayCommand( param => StartCapture( param ) ); }
-        }
-
-        /// <summary>
         /// Starts the capture.
         /// </summary>
         /// <param name="parameter">The parameter.</param>
@@ -356,17 +209,6 @@ namespace Ninja.ViewModels
         }
 
         /// <summary>
-        /// Gets the filter help command.
-        /// </summary>
-        /// <value>
-        /// The filter help command.
-        /// </value>
-        public ICommand FilterHelpCommand
-        {
-            get { return new RelayCommand( param => FilterHelp( param ) ); }
-        }
-
-        /// <summary>
         /// Filters the help.
         /// </summary>
         /// <param name="parameter">The parameter.</param>
@@ -379,17 +221,6 @@ namespace Ninja.ViewModels
             };
 
             Process.Start( _sInfo );
-        }
-
-        /// <summary>
-        /// Gets the save packets command.
-        /// </summary>
-        /// <value>
-        /// The save packets command.
-        /// </value>
-        public ICommand SavePacketsCommand
-        {
-            get { return new RelayCommand( param => SavePackets( param ) ); }
         }
 
         /// <summary>
@@ -444,6 +275,174 @@ namespace Ninja.ViewModels
             Packets = new ObservableCollection<Packet>( );
             StartCaptureBtnName = "Start Capture";
             GetNetworkInterfaceList( );
+        }
+
+        /// <summary>
+        /// Gets the packets.
+        /// </summary>
+        /// <value>
+        /// The packets.
+        /// </value>
+        public ObservableCollection<Packet> Packets
+        {
+            get
+            {
+                return _packets;
+            }
+            private set
+            {
+                _packets = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the start name of the capture BTN.
+        /// </summary>
+        /// <value>
+        /// The start name of the capture BTN.
+        /// </value>
+        public string StartCaptureBtnName
+        {
+            get
+            {
+                return _startCaptureBtnName;
+            }
+            set
+            {
+                if( _startCaptureBtnName != value )
+                {
+                    _startCaptureBtnName = value;
+                    OnPropertyChanged( nameof( StartCaptureBtnName ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [save status].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [save status]; otherwise, <c>false</c>.
+        /// </value>
+        public bool SaveStatus
+        {
+            get { return _saveStatus; }
+            set
+            {
+                if( _saveStatus != value )
+                {
+                    _saveStatus = value;
+                    OnPropertyChanged( nameof( SaveStatus ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the network interface list.
+        /// </summary>
+        /// <value>
+        /// The network interface list.
+        /// </value>
+        public List<IPacketDevice> NetworkInterfaceList
+        {
+            get { return _networkInterfaceList; }
+            set
+            {
+                if( _networkInterfaceList != value )
+                {
+                    _networkInterfaceList = value;
+                    OnPropertyChanged( nameof( NetworkInterfaceList ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the selected interface.
+        /// </summary>
+        /// <value>
+        /// The selected interface.
+        /// </value>
+        public IPacketDevice SelectedInterface
+        {
+            get { return _selectedInterface; }
+            set
+            {
+                if( _selectedInterface != value )
+                {
+                    _selectedInterface = value;
+                    OnPropertyChanged( nameof( SelectedInterface ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the selected packet.
+        /// </summary>
+        /// <value>
+        /// The selected packet.
+        /// </value>
+        public Packet SelectedPacket
+        {
+            get { return _selectedPacket; }
+            set
+            {
+                if( _selectedPacket != value )
+                {
+                    _selectedPacket = value;
+                    OnPropertyChanged( nameof( SelectedPacket ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the packet filter.
+        /// </summary>
+        /// <value>
+        /// The packet filter.
+        /// </value>
+        public string PacketFilter
+        {
+            get { return _packetFilter; }
+            set
+            {
+                if( _packetFilter != value )
+                {
+                    _packetFilter = value;
+                    OnPropertyChanged( nameof( PacketFilter ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the start capture command.
+        /// </summary>
+        /// <value>
+        /// The start capture command.
+        /// </value>
+        public ICommand StartCaptureCommand
+        {
+            get { return new RelayCommand( param => StartCapture( param ) ); }
+        }
+
+        /// <summary>
+        /// Gets the filter help command.
+        /// </summary>
+        /// <value>
+        /// The filter help command.
+        /// </value>
+        public ICommand FilterHelpCommand
+        {
+            get { return new RelayCommand( param => FilterHelp( param ) ); }
+        }
+
+        /// <summary>
+        /// Gets the save packets command.
+        /// </summary>
+        /// <value>
+        /// The save packets command.
+        /// </value>
+        public ICommand SavePacketsCommand
+        {
+            get { return new RelayCommand( param => SavePackets( param ) ); }
         }
     }
 }
