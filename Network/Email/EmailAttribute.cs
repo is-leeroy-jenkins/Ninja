@@ -1,14 +1,17 @@
 ﻿// ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 07-28-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        07-28-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="EmailAttribute.cs" company="Terry D. Eppler">
-//    Badger is data analysis and reporting tool for EPA Analysts.
-//    Copyright ©  2024  Terry D. Eppler
+// 
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -30,7 +33,7 @@
 //    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //    DEALINGS IN THE SOFTWARE.
 // 
-//    You can contact me at: terryeppler@gmail.com or eppler.terry@epa.gov
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
 //   EmailAttribute.cs
@@ -50,8 +53,7 @@ namespace Ninja
     /// <remarks>
     /// An attribute that validates the syntax of an email address.
     /// </remarks>
-    [ AttributeUsage( AttributeTargets.Property
-        | AttributeTargets.Field
+    [ AttributeUsage( AttributeTargets.Property | AttributeTargets.Field
         | AttributeTargets.Parameter ) ]
     [ SuppressMessage( "ReSharper", "MissingBlankLines" ) ]
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Global" ) ]
@@ -60,55 +62,6 @@ namespace Ninja
     [ SuppressMessage( "ReSharper", "GrammarMistakeInComment" ) ]
     public class EmailAttribute : ValidationAttribute
     {
-        /// <summary>
-        /// Get or set whether or not the validator
-        /// should allow top-level domains.
-        /// </summary>
-        /// <remarks>
-        /// Gets or sets whether or not the validator
-        /// should allow top-level domains.
-        /// </remarks>
-        /// <value><c>true</c> if top-level domains
-        /// should be allowed;
-        /// otherwise, <c>false</c>.</value>
-        private bool AllowTopLevelDomains { get; set; }
-
-        /// <summary>
-        /// Get or set whether or not the validator s
-        /// should allow international characters.
-        /// </summary>
-        /// <remarks>
-        /// Gets or sets whether or not the validator
-        /// should allow international characters.
-        /// </remarks>
-        /// <value><c>true</c> if international characters
-        /// should be allowed; otherwise,
-        /// <c>false</c>.</value>
-        private bool AllowInternational { get; set; }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Instantiates a new instance of
-        /// <see cref="T:Ninja.EmailAttribute" />.
-        /// </summary>
-        /// <remarks>
-        /// Creates a new
-        /// <see cref="T:Ninja.EmailAttribute" />.
-        /// </remarks>
-        /// <param name="allowTopLevelDomains"><c>true</c>
-        /// if the validator should allow addresses
-        /// at top-level domains; otherwise,
-        /// <c>false</c>.</param>
-        /// <param name="allowInternational"><c>true</c>
-        /// if the validator should allow
-        /// international characters; otherwise,
-        /// <c>false</c>.</param>
-        public EmailAttribute( bool allowTopLevelDomains = false, bool allowInternational = false )
-        {
-            AllowTopLevelDomains = allowTopLevelDomains;
-            AllowInternational = allowInternational;
-        }
-
         /// <inheritdoc />
         /// <summary>
         /// Validates the value.
@@ -134,7 +87,7 @@ namespace Ninja
             };
 
             if( value == null
-                || EmailValidator.Validate( (string)value, AllowTopLevelDomains,
+                || EmailValidator.Validate( ( string )value, AllowTopLevelDomains,
                     AllowInternational ) )
             {
                 return ValidationResult.Success;
@@ -156,9 +109,57 @@ namespace Ninja
         /// <param name="value">The value to validate.</param>
         public override bool IsValid( object value )
         {
-            return value == null
-                || EmailValidator.Validate( (string)value, AllowTopLevelDomains,
-                    AllowInternational );
+            return value == null || EmailValidator.Validate( ( string )value, AllowTopLevelDomains,
+                AllowInternational );
         }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Instantiates a new instance of
+        /// <see cref="T:Ninja.EmailAttribute" />.
+        /// </summary>
+        /// <remarks>
+        /// Creates a new
+        /// <see cref="T:Ninja.EmailAttribute" />.
+        /// </remarks>
+        /// <param name="allowTopLevelDomains"><c>true</c>
+        /// if the validator should allow addresses
+        /// at top-level domains; otherwise,
+        /// <c>false</c>.</param>
+        /// <param name="allowInternational"><c>true</c>
+        /// if the validator should allow
+        /// international characters; otherwise,
+        /// <c>false</c>.</param>
+        public EmailAttribute( bool allowTopLevelDomains = false, bool allowInternational = false )
+        {
+            AllowTopLevelDomains = allowTopLevelDomains;
+            AllowInternational = allowInternational;
+        }
+
+        /// <summary>
+        /// Get or set whether or not the validator
+        /// should allow top-level domains.
+        /// </summary>
+        /// <remarks>
+        /// Gets or sets whether or not the validator
+        /// should allow top-level domains.
+        /// </remarks>
+        /// <value><c>true</c> if top-level domains
+        /// should be allowed;
+        /// otherwise, <c>false</c>.</value>
+        private bool AllowTopLevelDomains { get; set; }
+
+        /// <summary>
+        /// Get or set whether or not the validator s
+        /// should allow international characters.
+        /// </summary>
+        /// <remarks>
+        /// Gets or sets whether or not the validator
+        /// should allow international characters.
+        /// </remarks>
+        /// <value><c>true</c> if international characters
+        /// should be allowed; otherwise,
+        /// <c>false</c>.</value>
+        private bool AllowInternational { get; set; }
     }
 }

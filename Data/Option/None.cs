@@ -1,14 +1,17 @@
 ﻿// ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 07-28-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        07-28-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="None.cs" company="Terry D. Eppler">
-//    Badger is data analysis and reporting tool for EPA Analysts.
-//    Copyright ©  2024  Terry D. Eppler
+// 
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -30,7 +33,7 @@
 //    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //    DEALINGS IN THE SOFTWARE.
 // 
-//    You can contact me at: terryeppler@gmail.com or eppler.terry@epa.gov
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
 //   None.cs
@@ -53,6 +56,54 @@ namespace Ninja
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
     public class None<T> : Option<T>
     {
+        /// <inheritdoc/>
+        /// <summary>
+        /// Maps the specified function.
+        /// </summary>
+        /// <typeparam name="TResult"> The type of the result. </typeparam>
+        /// <param name="func"> The function. </param>
+        /// <returns> </returns>
+        public override Option<TResult> Map<TResult>( Func<T, TResult> func )
+        {
+            try
+            {
+                return new None<TResult>( );
+            }
+            catch( Exception ex )
+            {
+                Fail( ex );
+                return default( Option<TResult> );
+            }
+        }
+
+        /// <inheritdoc/>
+        /// <summary> Matches the specified some function. </summary>
+        /// <typeparam name="TResult"> The type of the result. </typeparam>
+        /// <param name="someFunc"> Some function. </param>
+        /// <param name="noneFunc"> The none function. </param>
+        /// <returns> </returns>
+        public override TResult Match<TResult>( Func<T, TResult> someFunc, Func<TResult> noneFunc )
+        {
+            try
+            {
+                return noneFunc( );
+            }
+            catch( Exception ex )
+            {
+                Fail( ex );
+                return default( TResult );
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="None{T}"/>
+        /// class.
+        /// </summary>
+        public None( )
+        {
+        }
+
         /// <inheritdoc/>
         /// <summary>
         /// Gets the value.
@@ -92,54 +143,6 @@ namespace Ninja
         public override bool IsNone
         {
             get { return true; }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="None{T}"/>
-        /// class.
-        /// </summary>
-        public None( )
-        {
-        }
-
-        /// <inheritdoc/>
-        /// <summary>
-        /// Maps the specified function.
-        /// </summary>
-        /// <typeparam name="TResult"> The type of the result. </typeparam>
-        /// <param name="func"> The function. </param>
-        /// <returns> </returns>
-        public override Option<TResult> Map<TResult>( Func<T, TResult> func )
-        {
-            try
-            {
-                return new None<TResult>( );
-            }
-            catch( Exception ex )
-            {
-                Fail( ex );
-                return default( Option<TResult> );
-            }
-        }
-
-        /// <inheritdoc/>
-        /// <summary> Matches the specified some function. </summary>
-        /// <typeparam name="TResult"> The type of the result. </typeparam>
-        /// <param name="someFunc"> Some function. </param>
-        /// <param name="noneFunc"> The none function. </param>
-        /// <returns> </returns>
-        public override TResult Match<TResult>( Func<T, TResult> someFunc, Func<TResult> noneFunc )
-        {
-            try
-            {
-                return noneFunc( );
-            }
-            catch( Exception ex )
-            {
-                Fail( ex );
-                return default( TResult );
-            }
         }
     }
 }

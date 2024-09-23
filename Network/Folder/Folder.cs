@@ -1,10 +1,10 @@
 ﻿// ******************************************************************************************
 //     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 09-22-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        09-22-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="Folder.cs" company="Terry D. Eppler">
 // 
@@ -244,55 +244,6 @@ namespace Ninja
             }
         }
 
-        /// <inheritdoc />
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="T:Ninja.Folder" /> class.
-        /// </summary>
-        public Folder( )
-            : base( )
-        {
-        }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="T:Ninja.Folder" /> class.
-        /// </summary>
-        /// <param name="input"></param>
-        public Folder( string input )
-            : base( input )
-        {
-            _input = input;
-            _fullPath = input;
-            _folderExists = Directory.Exists( input );
-            _folderName = Path.GetDirectoryName( input );
-            _hasSubFiles = Directory.GetFiles( input )?.Length > 0;
-            _fileCount = Directory.GetFiles( input ).Length;
-            _hasSubFolders = Directory.GetDirectories( input )?.Length > 0;
-            _folderCount = Directory.GetDirectories( input ).Length;
-            _created = Directory.GetCreationTime( input );
-            _modified = Directory.GetLastWriteTime( input );
-        }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="T:Ninja.Folder" /> class.
-        /// </summary>
-        /// <param name="folder">The folder.</param>
-        public Folder( Folder folder )
-            : this( )
-        {
-            _input = folder.Input;
-            _fullPath = folder.FullPath;
-            _folderName = folder.FolderName;
-            _hasSubFiles = Directory.GetFiles( folder.FullPath )?.Length > 0;
-            _hasSubFolders = Directory.GetDirectories( folder.FullPath )?.Length > 0;
-            _created = folder.Created;
-            _modified = folder.Modified;
-        }
-
         /// <summary>
         /// Deconstructs the specified buffer.
         /// </summary>
@@ -346,8 +297,8 @@ namespace Ninja
                     + "Folder Path: " + _tb + _path + _nl + _nl + _tb + "Parent Path: " + _tb
                     + _dirPath + _nl + _nl + _tb + "Sub-Files: " + _tb + _subfiles + _nl + _nl + _tb
                     + "Sub-Folders: " + _tb + _subfolders + _nl + _nl + _tb + "File Size: " + _tb
-                    + _bytes + _nl + _nl + _tb + "Created On: " + _tb + _create.ToShortDateString()
-                    + _nl + _nl + _tb + "Modified On: " + _tb + _modify.ToShortDateString() + _nl
+                    + _bytes + _nl + _nl + _tb + "Created On: " + _tb + _create.ToShortDateString( )
+                    + _nl + _nl + _tb + "Modified On: " + _tb + _modify.ToShortDateString( ) + _nl
                     + _nl + _tb + "Path Separator: " + _tb + _pathsep + _nl + _nl + _tb
                     + "Drive Separator: " + _tb + _drivesep + _nl + _nl + _tb + "Folder Separator: "
                     + _tb + _foldersep + _nl + _nl;
@@ -361,6 +312,55 @@ namespace Ninja
                 PathBase.Fail( ex );
                 return string.Empty;
             }
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="T:Ninja.Folder" /> class.
+        /// </summary>
+        public Folder( )
+            : base( )
+        {
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="T:Ninja.Folder" /> class.
+        /// </summary>
+        /// <param name="input"></param>
+        public Folder( string input )
+            : base( input )
+        {
+            _input = input;
+            _fullPath = input;
+            _folderExists = Directory.Exists( input );
+            _folderName = Path.GetDirectoryName( input );
+            _hasSubFiles = Directory.GetFiles( input )?.Length > 0;
+            _fileCount = Directory.GetFiles( input ).Length;
+            _hasSubFolders = Directory.GetDirectories( input )?.Length > 0;
+            _folderCount = Directory.GetDirectories( input ).Length;
+            _created = Directory.GetCreationTime( input );
+            _modified = Directory.GetLastWriteTime( input );
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="T:Ninja.Folder" /> class.
+        /// </summary>
+        /// <param name="folder">The folder.</param>
+        public Folder( Folder folder )
+            : this( )
+        {
+            _input = folder.Input;
+            _fullPath = folder.FullPath;
+            _folderName = folder.FolderName;
+            _hasSubFiles = Directory.GetFiles( folder.FullPath )?.Length > 0;
+            _hasSubFolders = Directory.GetDirectories( folder.FullPath )?.Length > 0;
+            _created = folder.Created;
+            _modified = folder.Modified;
         }
 
         /// <summary>

@@ -1,14 +1,17 @@
 ﻿// ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 07-28-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        07-28-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="AsyncFileBase.cs" company="Terry D. Eppler">
-//    Badger is data analysis and reporting tool for EPA Analysts.
-//    Copyright ©  2024  Terry D. Eppler
+// 
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -30,7 +33,7 @@
 //    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //    DEALINGS IN THE SOFTWARE.
 // 
-//    You can contact me at: terryeppler@gmail.com or eppler.terry@epa.gov
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
 //   AsyncFileBase.cs
@@ -59,25 +62,6 @@ namespace Ninja
         private protected bool _fileExists;
 
         /// <summary>
-        /// Prevents a default instance of the
-        /// <see cref="AsyncFileBase"/> class from being created.
-        /// </summary>
-        /// <inheritdoc />
-        protected AsyncFileBase( )
-        {
-        }
-
-        /// <summary>
-        /// Prevents a default instance of the
-        /// <see cref="AsyncFileBase"/> class from being created.
-        /// </summary>
-        /// <inheritdoc />
-        protected AsyncFileBase( string input )
-            : base( input )
-        {
-        }
-
-        /// <summary>
         /// Moves the specified file path.
         /// </summary>
         /// <param name="filePath">
@@ -93,7 +77,7 @@ namespace Ninja
             }
             catch( IOException ex )
             {
-                AsyncFileBase.Fail( ex );
+                AsyncPathBase.Fail( ex );
             }
         }
 
@@ -117,7 +101,7 @@ namespace Ninja
             catch( IOException ex )
             {
                 _async.SetException( ex );
-                AsyncFileBase.Fail( ex );
+                AsyncPathBase.Fail( ex );
                 return default( Task<object> );
             }
         }
@@ -142,7 +126,7 @@ namespace Ninja
             catch( IOException ex )
             {
                 _async.SetException( ex );
-                AsyncFileBase.Fail( ex );
+                AsyncPathBase.Fail( ex );
                 return default( Task<object> );
             }
         }
@@ -165,7 +149,7 @@ namespace Ninja
             catch( Exception ex )
             {
                 _async.SetException( ex );
-                AsyncFileBase.Fail( ex );
+                AsyncPathBase.Fail( ex );
                 return default( Task<FileStream> );
             }
         }
@@ -197,7 +181,7 @@ namespace Ninja
                 }
                 catch( IOException ex )
                 {
-                    AsyncFileBase.Fail( ex );
+                    AsyncPathBase.Fail( ex );
                     return default( Task<IList<string>> );
                 }
             }
@@ -226,7 +210,7 @@ namespace Ninja
                 catch( IOException ex )
                 {
                     _async.SetException( ex );
-                    AsyncFileBase.Fail( ex );
+                    AsyncPathBase.Fail( ex );
                     return default( Task<byte[ ]> );
                 }
             }
@@ -246,9 +230,7 @@ namespace Ninja
                 try
                 {
                     var _text = string.Empty;
-                    var _list = File.ReadLines( _fullPath )
-                        ?.ToList( );
-
+                    var _list = File.ReadLines( _fullPath )?.ToList( );
                     for( var _i = 0; _i < _list.Count; _i++ )
                     {
                         _text += _list[ _i ];
@@ -262,12 +244,31 @@ namespace Ninja
                 catch( IOException ex )
                 {
                     _async.SetException( ex );
-                    AsyncFileBase.Fail( ex );
+                    AsyncPathBase.Fail( ex );
                     return default( Task<string> );
                 }
             }
 
             return default( Task<string> );
+        }
+
+        /// <summary>
+        /// Prevents a default instance of the
+        /// <see cref="AsyncFileBase"/> class from being created.
+        /// </summary>
+        /// <inheritdoc />
+        protected AsyncFileBase( )
+        {
+        }
+
+        /// <summary>
+        /// Prevents a default instance of the
+        /// <see cref="AsyncFileBase"/> class from being created.
+        /// </summary>
+        /// <inheritdoc />
+        protected AsyncFileBase( string input )
+            : base( input )
+        {
         }
     }
 }

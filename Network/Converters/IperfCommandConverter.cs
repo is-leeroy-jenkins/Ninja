@@ -1,10 +1,10 @@
 ﻿// ******************************************************************************************
 //     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 09-22-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        09-22-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="IperfCommandConverter.cs" company="Terry D. Eppler">
 // 
@@ -73,6 +73,7 @@ namespace Ninja.Interfaces
 
         //Binding sequences end <-----
         //public string Command { get; set; }
+        /// <inheritdoc />
         /// <summary>
         /// Converts source values to a value for the binding target.
         /// The data binding engine calls this method when it propagates
@@ -181,6 +182,7 @@ namespace Ninja.Interfaces
             }
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Converts a binding target value to the source binding values.
         /// </summary>
@@ -191,7 +193,7 @@ namespace Ninja.Interfaces
         /// <returns>
         /// An array of values that have been converted from the target value back to the source values.
         /// </returns>
-        /// <exception cref="NotImplementedException"></exception>
+        /// <exception cref="T:System.NotImplementedException"></exception>
         public object[ ] ConvertBack( object value, Type[ ] targetTypes, object parameter,
             CultureInfo culture )
         {

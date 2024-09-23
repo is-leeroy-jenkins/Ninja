@@ -1,14 +1,17 @@
 ﻿// ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 07-28-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        07-28-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="DataMeasure.cs" company="Terry D. Eppler">
-//    Badger is data analysis and reporting tool for EPA Analysts.
-//    Copyright ©  2024  Terry D. Eppler
+// 
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -30,7 +33,7 @@
 //    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //    DEALINGS IN THE SOFTWARE.
 // 
-//    You can contact me at: terryeppler@gmail.com or eppler.terry@epa.gov
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
 //   DataMeasure.cs
@@ -61,6 +64,67 @@ namespace Ninja
     [ SuppressMessage( "ReSharper", "InconsistentNaming" ) ]
     public class DataMeasure : Calculation, IDataMeasure
     {
+        /// <summary>
+        /// Gets the fields.
+        /// </summary>
+        /// <returns>
+        /// IList(string)
+        /// </returns>
+        private protected IList<string> GetTextColumnNames( )
+        {
+            try
+            {
+                var _textColumns = _dataTable?.GetTextColumns( );
+                var _list = _textColumns?.Select( c => c.ColumnName )?.ToList( );
+                return _list?.Any( ) == true
+                    ? _list
+                    : default( IList<string> );
+            }
+            catch( Exception ex )
+            {
+                Fail( ex );
+                return default( IList<string> );
+            }
+        }
+
+        /// <summary>
+        /// Gets the date column names.
+        /// </summary>
+        /// <returns>
+        /// IList(string)
+        /// </returns>
+        private protected IList<string> GetDateColumnNames( )
+        {
+            try
+            {
+                var _dateColumns = _dataTable?.GetDateColumns( );
+                var _list = _dateColumns?.Select( c => c.ColumnName )?.ToList( );
+                return _list?.Any( ) == true
+                    ? _list
+                    : default( IList<string> );
+            }
+            catch( Exception ex )
+            {
+                Fail( ex );
+                return default( IList<string> );
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="DataMeasure"/> class.
+        /// </summary>
+        /// <param name="dataTable">
+        /// The data table.
+        /// </param>
+        public DataMeasure( DataTable dataTable )
+        {
+            _dataTable = dataTable;
+            _fields = GetTextColumnNames( );
+            _numerics = GetNumericColumnNames( );
+            _dates = GetDateColumns( );
+        }
+
         /// <inheritdoc />
         /// <summary>
         /// Gets the dates.
@@ -155,21 +219,6 @@ namespace Ninja
             }
         }
 
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="DataMeasure"/> class.
-        /// </summary>
-        /// <param name="dataTable">
-        /// The data table.
-        /// </param>
-        public DataMeasure( DataTable dataTable )
-        {
-            _dataTable = dataTable;
-            _fields = GetTextColumnNames( );
-            _numerics = GetNumericColumnNames( );
-            _dates = GetDateColumns( );
-        }
-
         /// <inheritdoc />
         /// <summary>
         /// Calculates the maximum.
@@ -184,9 +233,7 @@ namespace Ninja
             try
             {
                 ThrowIfNotNumeric( numeric );
-                var _query = _dataTable
-                    ?.AsEnumerable( )
-                    ?.Select( p => p.Field<double>( numeric ) )
+                var _query = _dataTable?.AsEnumerable( )?.Select( p => p.Field<double>( numeric ) )
                     ?.Max( );
 
                 return _query > 0
@@ -214,9 +261,7 @@ namespace Ninja
             try
             {
                 ThrowIfNotNumeric( numeric );
-                var _query = _dataTable
-                    .AsEnumerable( )
-                    .Select( p => p.Field<double>( numeric ) )
+                var _query = _dataTable.AsEnumerable( ).Select( p => p.Field<double>( numeric ) )
                     .Min( );
 
                 return _query;
@@ -225,58 +270,6 @@ namespace Ninja
             {
                 Fail( ex );
                 return 0.0d;
-            }
-        }
-
-        /// <summary>
-        /// Gets the fields.
-        /// </summary>
-        /// <returns>
-        /// IList(string)
-        /// </returns>
-        private protected IList<string> GetTextColumnNames( )
-        {
-            try
-            {
-                var _textColumns = _dataTable?.GetTextColumns( );
-                var _list = _textColumns
-                    ?.Select( c => c.ColumnName )
-                    ?.ToList( );
-
-                return _list?.Any( ) == true
-                    ? _list
-                    : default( IList<string> );
-            }
-            catch( Exception ex )
-            {
-                Fail( ex );
-                return default( IList<string> );
-            }
-        }
-
-        /// <summary>
-        /// Gets the date column names.
-        /// </summary>
-        /// <returns>
-        /// IList(string)
-        /// </returns>
-        private protected IList<string> GetDateColumnNames( )
-        {
-            try
-            {
-                var _dateColumns = _dataTable?.GetDateColumns( );
-                var _list = _dateColumns
-                    ?.Select( c => c.ColumnName )
-                    ?.ToList( );
-
-                return _list?.Any( ) == true
-                    ? _list
-                    : default( IList<string> );
-            }
-            catch( Exception ex )
-            {
-                Fail( ex );
-                return default( IList<string> );
             }
         }
     }

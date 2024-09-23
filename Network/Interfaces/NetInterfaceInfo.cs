@@ -1,10 +1,10 @@
 ﻿// ******************************************************************************************
 //     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 09-22-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        09-22-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="NetInterfaceInfo.cs" company="Terry D. Eppler">
 // 
@@ -52,6 +52,14 @@ namespace Ninja.Models
     public class NetInterfaceInfo
     {
         /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="NetInterfaceInfo"/> class.
+        /// </summary>
+        public NetInterfaceInfo( )
+        {
+        }
+
+        /// <summary>
         /// Gets or sets the name.
         /// </summary>
         /// <value>
@@ -82,13 +90,5 @@ namespace Ninja.Models
         /// The mask.
         /// </value>
         public string Mask { get; set; }
-
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="NetInterfaceInfo"/> class.
-        /// </summary>
-        public NetInterfaceInfo( )
-        {
-        }
     }
 }

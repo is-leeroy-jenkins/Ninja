@@ -1,10 +1,10 @@
 ﻿// ******************************************************************************************
 //     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 09-21-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        09-21-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="Ipv4ConnectionStats.cs" company="Terry D. Eppler">
 // 
@@ -54,6 +54,30 @@ namespace Ninja.Models
     public class Ipv4ConnectionStats
     {
         /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="Ipv4ConnectionStats"/> class.
+        /// </summary>
+        /// <param name="addressA">The address a.</param>
+        /// <param name="addressB">The address b.</param>
+        public Ipv4ConnectionStats( IpV4Address addressA, IpV4Address addressB )
+        {
+            AddressA = addressA;
+            AddressB = addressB;
+            PacketCountAToB = 0;
+            PacketCountBToA = 0;
+            ByteCountAToB = 0;
+            ByteCountBToA = 0;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="Ipv4ConnectionStats"/> class.
+        /// </summary>
+        public Ipv4ConnectionStats( )
+        {
+        }
+
+        /// <summary>
         /// Gets or sets the address a.
         /// </summary>
         /// <value>
@@ -100,29 +124,5 @@ namespace Ninja.Models
         /// The byte count b to a.
         /// </value>
         public long ByteCountBToA { get; set; }
-
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="Ipv4ConnectionStats"/> class.
-        /// </summary>
-        /// <param name="addressA">The address a.</param>
-        /// <param name="addressB">The address b.</param>
-        public Ipv4ConnectionStats( IpV4Address addressA, IpV4Address addressB )
-        {
-            AddressA = addressA;
-            AddressB = addressB;
-            PacketCountAToB = 0;
-            PacketCountBToA = 0;
-            ByteCountAToB = 0;
-            ByteCountBToA = 0;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="Ipv4ConnectionStats"/> class.
-        /// </summary>
-        public Ipv4ConnectionStats( )
-        {
-        }
     }
 }

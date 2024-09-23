@@ -1,14 +1,17 @@
 ﻿// ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 07-28-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        07-28-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="EmailConfig.cs" company="Terry D. Eppler">
-//    Badger is data analysis and reporting tool for EPA Analysts.
-//    Copyright ©  2024  Terry D. Eppler
+// 
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -30,7 +33,7 @@
 //    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //    DEALINGS IN THE SOFTWARE.
 // 
-//    You can contact me at: terryeppler@gmail.com or eppler.terry@epa.gov
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
 //   EmailConfig.cs
@@ -57,6 +60,132 @@ namespace Ninja
     [ SuppressMessage( "ReSharper", "InconsistentNaming" ) ]
     public class EmailConfig : EmailBase
     {
+        /// <summary>
+        /// Deconstructs the specified sender.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="displayName"> </param>
+        /// <param name="recipients">The recipients.</param>
+        /// <param name="copies">The copies.</param>
+        /// <param name="priority"> </param>
+        public void Deconstruct( out string sender, out string displayName,
+            out IList<string> recipients, out IList<string> copies, out MailPriority priority )
+        {
+            sender = _sender;
+            displayName = _displayName;
+            recipients = _recipients;
+            copies = _copies;
+            priority = _priority;
+        }
+
+        /// <summary>
+        /// Converts to string.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" />
+        /// that represents this instance.
+        /// </returns>
+        public override string ToString( )
+        {
+            try
+            {
+                return !string.IsNullOrEmpty( _displayName )
+                    ? _displayName
+                    : string.Empty;
+            }
+            catch( Exception ex )
+            {
+                Fail( ex );
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// Adds the attachment.
+        /// </summary>
+        /// <param name="address">The attachment.</param>
+        public void AddCopy( string address )
+        {
+            try
+            {
+                ThrowIf.Null( address, nameof( address ) );
+                if( !_copies.Contains( address ) )
+                {
+                    _copies?.Add( address );
+                }
+            }
+            catch( Exception ex )
+            {
+                Fail( ex );
+            }
+        }
+
+        /// <summary>
+        /// Adds the recipient.
+        /// </summary>
+        /// <param name="address">The address.</param>
+        public void AddRecipient( string address )
+        {
+            try
+            {
+                ThrowIf.Null( address, nameof( address ) );
+                if( !_recipients.Contains( address ) )
+                {
+                    _recipients?.Add( address );
+                }
+            }
+            catch( Exception ex )
+            {
+                Fail( ex );
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="EmailConfig" /> class.
+        /// </summary>
+        /// <inheritdoc />
+        public EmailConfig( )
+        {
+            _recipients = new List<string>( );
+            _copies = new List<string>( );
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="T:Ninja.EmailConfig" /> class.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="recipients">The recipients.</param>
+        /// <param name="copies">The copies.</param>
+        /// <param name="priority">The priority.</param>
+        public EmailConfig( string sender, IList<string> recipients, IList<string> copies,
+            MailPriority priority = MailPriority.Normal )
+            : this( )
+        {
+            _sender = sender;
+            _displayName = sender;
+            _recipients = recipients;
+            _copies = copies;
+            _priority = priority;
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="T:Ninja.EmailConfig" /> class.
+        /// </summary>
+        /// <param name="config">The configuration.</param>
+        public EmailConfig( EmailConfig config )
+        {
+            _sender = config.Sender;
+            _displayName = config.DisplayName;
+            _priority = config.Priority;
+            _recipients = config.Recipients;
+            _copies = config.Copies;
+        }
+
         /// <summary>
         /// Gets the address.
         /// </summary>
@@ -162,132 +291,6 @@ namespace Ninja
             private protected set
             {
                 _copies = value;
-            }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="EmailConfig" /> class.
-        /// </summary>
-        /// <inheritdoc />
-        public EmailConfig( )
-        {
-            _recipients = new List<string>( );
-            _copies = new List<string>( );
-        }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="T:Ninja.EmailConfig" /> class.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="recipients">The recipients.</param>
-        /// <param name="copies">The copies.</param>
-        /// <param name="priority">The priority.</param>
-        public EmailConfig( string sender, IList<string> recipients, IList<string> copies,
-            MailPriority priority = MailPriority.Normal )
-            : this( )
-        {
-            _sender = sender;
-            _displayName = sender;
-            _recipients = recipients;
-            _copies = copies;
-            _priority = priority;
-        }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="T:Ninja.EmailConfig" /> class.
-        /// </summary>
-        /// <param name="config">The configuration.</param>
-        public EmailConfig( EmailConfig config )
-        {
-            _sender = config.Sender;
-            _displayName = config.DisplayName;
-            _priority = config.Priority;
-            _recipients = config.Recipients;
-            _copies = config.Copies;
-        }
-
-        /// <summary>
-        /// Deconstructs the specified sender.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="displayName"> </param>
-        /// <param name="recipients">The recipients.</param>
-        /// <param name="copies">The copies.</param>
-        /// <param name="priority"> </param>
-        public void Deconstruct( out string sender, out string displayName,
-            out IList<string> recipients, out IList<string> copies, out MailPriority priority )
-        {
-            sender = _sender;
-            displayName = _displayName;
-            recipients = _recipients;
-            copies = _copies;
-            priority = _priority;
-        }
-
-        /// <summary>
-        /// Converts to string.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String" />
-        /// that represents this instance.
-        /// </returns>
-        public override string ToString( )
-        {
-            try
-            {
-                return !string.IsNullOrEmpty( _displayName )
-                    ? _displayName
-                    : string.Empty;
-            }
-            catch( Exception ex )
-            {
-                Fail( ex );
-                return string.Empty;
-            }
-        }
-
-        /// <summary>
-        /// Adds the attachment.
-        /// </summary>
-        /// <param name="address">The attachment.</param>
-        public void AddCopy( string address )
-        {
-            try
-            {
-                ThrowIf.Null( address, nameof( address ) );
-                if( !_copies.Contains( address ) )
-                {
-                    _copies?.Add( address );
-                }
-            }
-            catch( Exception ex )
-            {
-                Fail( ex );
-            }
-        }
-
-        /// <summary>
-        /// Adds the recipient.
-        /// </summary>
-        /// <param name="address">The address.</param>
-        public void AddRecipient( string address )
-        {
-            try
-            {
-                ThrowIf.Null( address, nameof( address ) );
-                if( !_recipients.Contains( address ) )
-                {
-                    _recipients?.Add( address );
-                }
-            }
-            catch( Exception ex )
-            {
-                Fail( ex );
             }
         }
     }

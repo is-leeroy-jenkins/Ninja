@@ -1,14 +1,17 @@
 ﻿// ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 07-28-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        07-28-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="FileBase.cs" company="Terry D. Eppler">
-//    Badger is data analysis and reporting tool for EPA Analysts.
-//    Copyright ©  2024  Terry D. Eppler
+// 
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -30,7 +33,7 @@
 //    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //    DEALINGS IN THE SOFTWARE.
 // 
-//    You can contact me at: terryeppler@gmail.com or eppler.terry@epa.gov
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
 //   FileBase.cs
@@ -57,11 +60,6 @@ namespace Ninja
     public abstract class FileBase : DataPath
     {
         /// <summary>
-        /// The locked object
-        /// </summary>
-        private object _path = new object( );
-
-        /// <summary>
         /// The busy
         /// </summary>
         private protected bool _busy;
@@ -70,11 +68,6 @@ namespace Ninja
         /// The exists
         /// </summary>
         private protected bool _fileExists;
-
-        /// <summary>
-        /// The size
-        /// </summary>
-        private protected long _size;
 
         /// <summary>
         /// The parent name
@@ -87,43 +80,14 @@ namespace Ninja
         private protected string _parentPath;
 
         /// <summary>
-        /// Gets a value indicating whether this instance is busy.
+        /// The locked object
         /// </summary>
-        /// <value>
-        /// <c> true </c>
-        /// if this instance is busy; otherwise,
-        /// <c> false </c>
-        /// </value>
-        public bool IsBusy
-        {
-            get
-            {
-                lock( _path )
-                {
-                    return _busy;
-                }
-            }
-        }
+        private object _path = new object( );
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="FileBase"/> class.
+        /// The size
         /// </summary>
-        /// <inheritdoc />
-        protected FileBase( )
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="FileBase"/> class.
-        /// </summary>
-        /// <param name="input">The input.</param>
-        /// <inheritdoc />
-        protected FileBase( string input )
-            : base( input )
-        {
-        }
+        private protected long _size;
 
         /// <summary>
         /// Begins the initialize.
@@ -139,7 +103,7 @@ namespace Ninja
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                PathBase.Fail( ex );
             }
         }
 
@@ -157,7 +121,7 @@ namespace Ninja
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                PathBase.Fail( ex );
             }
         }
 
@@ -185,7 +149,7 @@ namespace Ninja
             }
             catch( IOException ex )
             {
-                Fail( ex );
+                PathBase.Fail( ex );
             }
         }
 
@@ -213,7 +177,7 @@ namespace Ninja
             }
             catch( IOException ex )
             {
-                Fail( ex );
+                PathBase.Fail( ex );
             }
         }
 
@@ -231,7 +195,7 @@ namespace Ninja
             }
             catch( IOException ex )
             {
-                Fail( ex );
+                PathBase.Fail( ex );
             }
         }
 
@@ -251,7 +215,7 @@ namespace Ninja
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    PathBase.Fail( ex );
                     return default( FileStream );
                 }
             }
@@ -284,7 +248,7 @@ namespace Ninja
                 }
                 catch( IOException ex )
                 {
-                    Fail( ex );
+                    PathBase.Fail( ex );
                     return default( IList<string> );
                 }
             }
@@ -310,7 +274,7 @@ namespace Ninja
                 }
                 catch( IOException ex )
                 {
-                    Fail( ex );
+                    PathBase.Fail( ex );
                     return default( byte[ ] );
                 }
             }
@@ -341,12 +305,51 @@ namespace Ninja
                 }
                 catch( IOException ex )
                 {
-                    Fail( ex );
+                    PathBase.Fail( ex );
                     return string.Empty;
                 }
             }
 
             return string.Empty;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="FileBase"/> class.
+        /// </summary>
+        /// <inheritdoc />
+        protected FileBase( )
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="FileBase"/> class.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <inheritdoc />
+        protected FileBase( string input )
+            : base( input )
+        {
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is busy.
+        /// </summary>
+        /// <value>
+        /// <c> true </c>
+        /// if this instance is busy; otherwise,
+        /// <c> false </c>
+        /// </value>
+        public bool IsBusy
+        {
+            get
+            {
+                lock( _path )
+                {
+                    return _busy;
+                }
+            }
         }
     }
 }

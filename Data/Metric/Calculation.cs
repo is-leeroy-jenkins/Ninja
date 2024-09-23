@@ -1,14 +1,17 @@
 ﻿// ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 07-28-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        07-28-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="Calculation.cs" company="Terry D. Eppler">
-//    Badger is data analysis and reporting tool for EPA Analysts.
-//    Copyright ©  2024  Terry D. Eppler
+// 
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -30,7 +33,7 @@
 //    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //    DEALINGS IN THE SOFTWARE.
 // 
-//    You can contact me at: terryeppler@gmail.com or eppler.terry@epa.gov
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
 //   Calculation.cs
@@ -71,8 +74,7 @@ namespace Ninja
             try
             {
                 ThrowIf.Null( numeric, nameof( numeric ) );
-                var _dataRows = _dataTable
-                    ?.AsEnumerable( )
+                var _dataRows = _dataTable?.AsEnumerable( )
                     ?.Select( p => p.Field<double>( numeric ) );
 
                 return _dataRows?.Any( ) == true
@@ -100,8 +102,7 @@ namespace Ninja
             {
                 ThrowIf.Null( numeric, nameof( numeric ) );
                 ThrowIfNotCriteria( where );
-                var _dataRows = _dataTable
-                    ?.Filter( where )
+                var _dataRows = _dataTable?.Filter( where )
                     ?.Select( p => p.Field<double>( numeric ) );
 
                 return _dataRows?.Any( ) == true
@@ -127,9 +128,7 @@ namespace Ninja
             try
             {
                 ThrowIf.Null( numeric, nameof( numeric ) );
-                var _select = _dataTable
-                    ?.AsEnumerable( )
-                    ?.Select( p => p.Field<double>( numeric ) )
+                var _select = _dataTable?.AsEnumerable( )?.Select( p => p.Field<double>( numeric ) )
                     ?.Sum( );
 
                 return _select > 0
@@ -155,9 +154,7 @@ namespace Ninja
             {
                 ThrowIfNotNumeric( numeric );
                 ThrowIfNotCriteria( where );
-                var _select = _dataTable
-                    ?.Filter( where )
-                    ?.Select( p => p.Field<double>( numeric ) )
+                var _select = _dataTable?.Filter( where )?.Select( p => p.Field<double>( numeric ) )
                     ?.Sum( );
 
                 return _select > 0
@@ -181,9 +178,7 @@ namespace Ninja
             try
             {
                 ThrowIfNotNumeric( numeric );
-                var _query = _dataTable
-                    ?.AsEnumerable( )
-                    ?.Select( p => p.Field<double>( numeric ) )
+                var _query = _dataTable?.AsEnumerable( )?.Select( p => p.Field<double>( numeric ) )
                     ?.Average( );
 
                 return _query > 0
@@ -209,9 +204,7 @@ namespace Ninja
             {
                 ThrowIfNotNumeric( numeric );
                 ThrowIfNotCriteria( where );
-                var _query = _dataTable
-                    ?.Filter( where )
-                    ?.Select( p => p.Field<double>( numeric ) )
+                var _query = _dataTable?.Filter( where )?.Select( p => p.Field<double>( numeric ) )
                     ?.Average( );
 
                 return _query > 0
@@ -237,14 +230,10 @@ namespace Ninja
             {
                 ThrowIfNotCriteria( where );
                 ThrowIf.Null( numeric, nameof( numeric ) );
-                var _total = _dataTable
-                    .AsEnumerable( )
-                    .Select( p => p.Field<double>( numeric ) )
+                var _total = _dataTable.AsEnumerable( ).Select( p => p.Field<double>( numeric ) )
                     .Sum( );
 
-                var _select = _dataTable
-                    .Filter( where )
-                    .Select( p => p.Field<double>( numeric ) )
+                var _select = _dataTable.Filter( where ).Select( p => p.Field<double>( numeric ) )
                     .Sum( );
 
                 var _ratio = ( _select / _total ) * 100;
@@ -269,9 +258,7 @@ namespace Ninja
             try
             {
                 ThrowIfNotNumeric( numeric );
-                var _query = _dataTable
-                    ?.AsEnumerable( )
-                    ?.Select( p => p.Field<double>( numeric ) )
+                var _query = _dataTable?.AsEnumerable( )?.Select( p => p.Field<double>( numeric ) )
                     ?.StandardDeviation( );
 
                 return _query > 0
@@ -299,9 +286,7 @@ namespace Ninja
             {
                 ThrowIfNotNumeric( numeric );
                 ThrowIfNotCriteria( where );
-                var _query = _dataTable
-                    ?.Filter( where )
-                    ?.Select( p => p.Field<double>( numeric ) )
+                var _query = _dataTable?.Filter( where )?.Select( p => p.Field<double>( numeric ) )
                     ?.StandardDeviation( );
 
                 return _query > 0
@@ -329,9 +314,7 @@ namespace Ninja
             try
             {
                 ThrowIfNotNumeric( numeric );
-                var _query = _dataTable
-                    ?.AsEnumerable( )
-                    ?.Select( p => p.Field<double>( numeric ) )
+                var _query = _dataTable?.AsEnumerable( )?.Select( p => p.Field<double>( numeric ) )
                     ?.Variance( );
 
                 return _query > 0
@@ -363,9 +346,7 @@ namespace Ninja
             {
                 ThrowIfNotCriteria( where );
                 ThrowIfNotNumeric( numeric );
-                var _query = _dataTable
-                    ?.Filter( where )
-                    ?.Select( p => p.Field<double>( numeric ) )
+                var _query = _dataTable?.Filter( where )?.Select( p => p.Field<double>( numeric ) )
                     ?.Variance( );
 
                 return _query > 0
@@ -392,8 +373,7 @@ namespace Ninja
                 var _names = new List<string>( );
                 foreach( DataColumn _dataColumn in _dataTable.Columns )
                 {
-                    if( ( !_dataColumn.ColumnName.EndsWith( "Id" )
-                            && ( _dataColumn.Ordinal > 0 )
+                    if( ( !_dataColumn.ColumnName.EndsWith( "Id" ) && ( _dataColumn.Ordinal > 0 )
                             && ( _dataColumn.DataType == typeof( double ) ) )
                         | ( _dataColumn.DataType == typeof( short ) )
                         | ( _dataColumn.DataType == typeof( int ) )

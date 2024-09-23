@@ -1,16 +1,17 @@
 ﻿// ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 08-25-2020
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        08-25-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="Dimension.cs" company="Terry D. Eppler">
-//    Badger is budget execution and data analysis tool for EPA Analysts
-//    based on WPF, NET6.0, and is written in C-Sharp.
 // 
-//     Copyright ©  2020, 2022, 2204 Terry D. Eppler
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -55,14 +56,17 @@ namespace Ninja
     public abstract class Dimension
     {
         /// <summary>
-        /// The records
-        /// </summary>
-        private protected int _records;
-
-        /// <summary>
         /// The columns
         /// </summary>
         private protected int _columns;
+
+        /// <summary>
+        /// Gets or sets the data table.
+        /// </summary>
+        /// <value>
+        /// The data table.
+        /// </value>
+        private protected DataTable _dataTable;
 
         /// <summary>
         /// The dates
@@ -86,20 +90,17 @@ namespace Ninja
         private protected IList<string> _numerics;
 
         /// <summary>
+        /// The records
+        /// </summary>
+        private protected int _records;
+
+        /// <summary>
         /// Gets or sets the values.
         /// </summary>
         /// <value>
         /// The values.
         /// </value>
         private protected IDictionary<string, double> _values;
-
-        /// <summary>
-        /// Gets or sets the data table.
-        /// </summary>
-        /// <value>
-        /// The data table.
-        /// </value>
-        private protected DataTable _dataTable;
 
         /// <summary>
         /// Throws if null numeric.

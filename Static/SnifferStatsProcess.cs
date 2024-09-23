@@ -1,10 +1,10 @@
 ﻿// ******************************************************************************************
 //     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 09-22-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        09-22-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="SnifferStatsProcess.cs" company="Terry D. Eppler">
 // 
@@ -53,54 +53,6 @@ namespace Ninja.Models
     /// </summary>
     public static class SnifferStatsProcess
     {
-        /// <summary>
-        /// Gets the stop watch.
-        /// </summary>
-        /// <value>
-        /// The stop watch.
-        /// </value>
-        public static Stopwatch StopWatch { get; private set; }
-
-        /// <summary>
-        /// Gets the packet count.
-        /// </summary>
-        /// <value>
-        /// The packet count.
-        /// </value>
-        public static long PacketCount { get; private set; }
-
-        /// <summary>
-        /// Gets the byte count.
-        /// </summary>
-        /// <value>
-        /// The byte count.
-        /// </value>
-        public static long ByteCount { get; private set; }
-
-        /// <summary>
-        /// Gets the protocol stats.
-        /// </summary>
-        /// <value>
-        /// The protocol stats.
-        /// </value>
-        public static ObservableCollection<Ipv4ProtocolStats> ProtocolStats
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Gets the connection stats.
-        /// </summary>
-        /// <value>
-        /// The connection stats.
-        /// </value>
-        public static ObservableCollection<Ipv4ConnectionStats> ConnectionStats
-        {
-            get;
-            private set;
-        }
-
         /// <summary>
         /// Starts this instance.
         /// </summary>
@@ -215,6 +167,54 @@ namespace Ninja.Models
             ConnectionStats = new ObservableCollection<Ipv4ConnectionStats>( );
             PacketCount = 0;
             ByteCount = 0;
+        }
+
+        /// <summary>
+        /// Gets the stop watch.
+        /// </summary>
+        /// <value>
+        /// The stop watch.
+        /// </value>
+        public static Stopwatch StopWatch { get; private set; }
+
+        /// <summary>
+        /// Gets the packet count.
+        /// </summary>
+        /// <value>
+        /// The packet count.
+        /// </value>
+        public static long PacketCount { get; private set; }
+
+        /// <summary>
+        /// Gets the byte count.
+        /// </summary>
+        /// <value>
+        /// The byte count.
+        /// </value>
+        public static long ByteCount { get; private set; }
+
+        /// <summary>
+        /// Gets the protocol stats.
+        /// </summary>
+        /// <value>
+        /// The protocol stats.
+        /// </value>
+        public static ObservableCollection<Ipv4ProtocolStats> ProtocolStats
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the connection stats.
+        /// </summary>
+        /// <value>
+        /// The connection stats.
+        /// </value>
+        public static ObservableCollection<Ipv4ConnectionStats> ConnectionStats
+        {
+            get;
+            private set;
         }
     }
 }

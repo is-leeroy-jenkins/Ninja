@@ -1,14 +1,17 @@
 ﻿// ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 07-28-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        07-28-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="Workbook.cs" company="Terry D. Eppler">
-//    Badger is data analysis and reporting tool for EPA Analysts.
-//    Copyright ©  2024  Terry D. Eppler
+// 
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -30,7 +33,7 @@
 //    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //    DEALINGS IN THE SOFTWARE.
 // 
-//    You can contact me at: terryeppler@gmail.com or eppler.terry@epa.gov
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
 //   Workbook.cs
@@ -59,71 +62,6 @@ namespace Ninja
     [ SuppressMessage( "ReSharper", "RedundantBaseConstructorCall" ) ]
     public abstract class Workbook : SheetConfig
     {
-        /// <summary>
-        /// Gets or sets the color of the font.
-        /// </summary>
-        /// <value>
-        /// The color of the font.
-        /// </value>
-        public Color FontColor
-        {
-            get
-            {
-                return _fontColor;
-            }
-
-            private protected set
-            {
-                _fontColor = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the font.
-        /// </summary>
-        /// <value>
-        /// The font.
-        /// </value>
-        public Font Font
-        {
-            get
-            {
-                return _font;
-            }
-
-            private protected set
-            {
-                _font = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the title font.
-        /// </summary>
-        /// <value>
-        /// The title font.
-        /// </value>
-        public Font TitleFont
-        {
-            get
-            {
-                return _titleFont;
-            }
-
-            private protected set
-            {
-                _titleFont = value;
-            }
-        }
-
-        /// <inheritdoc />
-        ///  <summary>
-        ///  </summary>
-        protected Workbook( )
-            : base( )
-        {
-        }
-
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
@@ -236,9 +174,7 @@ namespace Ninja
                 _startColumn = excelRange.Start.Column;
                 var _endRow = excelRange.End.Row + 1;
                 var _endColumn = excelRange.End.Column;
-                _footerRange = _dataWorksheet.Cells[ _footer, _startColumn,
-                    _endRow, _endColumn ];
-
+                _footerRange = _dataWorksheet.Cells[ _footer, _startColumn, _endRow, _endColumn ];
                 foreach( var _item in labels )
                 {
                     if( _startColumn <= _endColumn )
@@ -269,9 +205,7 @@ namespace Ninja
                 _startColumn = excelRange.Start.Column;
                 var _endRow = excelRange.End.Row;
                 var _endColumn = excelRange.End.Column;
-                _dataRange = _dataWorksheet.Cells[ _startRow, _startColumn,
-                    _endRow, _endColumn ];
-
+                _dataRange = _dataWorksheet.Cells[ _startRow, _startColumn, _endRow, _endColumn ];
                 for( var _i = _startRow; _i < _endRow; _i++ )
                 {
                     if( _i % 2 == 0 )
@@ -310,9 +244,7 @@ namespace Ninja
                 _startColumn = excelRange.Start.Column;
                 var _endRow = excelRange.End.Row;
                 var _endColumn = excelRange.End.Column;
-                _dataRange = _dataWorksheet.Cells[ _startRow, _startColumn,
-                    _endRow, _endColumn ];
-
+                _dataRange = _dataWorksheet.Cells[ _startRow, _startColumn, _endRow, _endColumn ];
                 _dataRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.CenterContinuous;
                 _dataRange.Style.Numberformat.Format = "#,###";
             }
@@ -336,9 +268,7 @@ namespace Ninja
                 _startColumn = excelRange.Start.Column;
                 var _endRow = excelRange.End.Row;
                 var _endColumn = excelRange.End.Column;
-                _dataRange = _dataWorksheet.Cells[ _startRow, _startColumn,
-                    _endRow, _endColumn ];
-
+                _dataRange = _dataWorksheet.Cells[ _startRow, _startColumn, _endRow, _endColumn ];
                 _dataRange.Style.Fill.PatternType = ExcelFillStyle.Solid;
                 _dataRange.Style.Fill.BackgroundColor.SetColor( _secondaryBackColor );
                 _dataRange.Style.Border.Bottom.Style = ExcelBorderStyle.Double;
@@ -347,6 +277,71 @@ namespace Ninja
             {
                 Dispose( );
                 Fail( ex );
+            }
+        }
+
+        /// <inheritdoc />
+        ///  <summary>
+        ///  </summary>
+        protected Workbook( )
+            : base( )
+        {
+        }
+
+        /// <summary>
+        /// Gets or sets the color of the font.
+        /// </summary>
+        /// <value>
+        /// The color of the font.
+        /// </value>
+        public Color FontColor
+        {
+            get
+            {
+                return _fontColor;
+            }
+
+            private protected set
+            {
+                _fontColor = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the font.
+        /// </summary>
+        /// <value>
+        /// The font.
+        /// </value>
+        public Font Font
+        {
+            get
+            {
+                return _font;
+            }
+
+            private protected set
+            {
+                _font = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the title font.
+        /// </summary>
+        /// <value>
+        /// The title font.
+        /// </value>
+        public Font TitleFont
+        {
+            get
+            {
+                return _titleFont;
+            }
+
+            private protected set
+            {
+                _titleFont = value;
             }
         }
     }

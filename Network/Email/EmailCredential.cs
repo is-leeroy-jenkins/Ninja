@@ -1,14 +1,17 @@
 ﻿// ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 07-28-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        07-28-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="EmailCredential.cs" company="Terry D. Eppler">
-//    Badger is data analysis and reporting tool for EPA Analysts.
-//    Copyright ©  2024  Terry D. Eppler
+// 
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -30,7 +33,7 @@
 //    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //    DEALINGS IN THE SOFTWARE.
 // 
-//    You can contact me at: terryeppler@gmail.com or eppler.terry@epa.gov
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
 //   EmailCredential.cs
@@ -53,16 +56,6 @@ namespace Ninja
     public class EmailCredential
     {
         /// <summary>
-        /// The user name
-        /// </summary>
-        private string _userName;
-
-        /// <summary>
-        /// The password
-        /// </summary>
-        private string _password;
-
-        /// <summary>
         /// The first name
         /// </summary>
         private string _firstName;
@@ -71,6 +64,102 @@ namespace Ninja
         /// The last name
         /// </summary>
         private string _lastName;
+
+        /// <summary>
+        /// The password
+        /// </summary>
+        private string _password;
+
+        /// <summary>
+        /// The user name
+        /// </summary>
+        private string _userName;
+
+        /// <summary>
+        /// Deconstructs the specified first name.
+        /// </summary>
+        /// <param name="firstName">The first name.</param>
+        /// <param name="lastName">The last name.</param>
+        /// <param name="userName">Name of the user.</param>
+        /// <param name="password">The password.</param>
+        public void Deconstruct( out string firstName, out string lastName, out string userName,
+            out string password )
+        {
+            firstName = _firstName;
+            lastName = _lastName;
+            userName = _userName;
+            password = _password;
+        }
+
+        /// <summary> Converts to string. </summary>
+        /// <returns>
+        /// A
+        /// <see cref="System.String"/>
+        /// that represents this instance.
+        /// </returns>
+        public override string ToString( )
+        {
+            try
+            {
+                return !string.IsNullOrEmpty( _userName )
+                    ? _userName
+                    : string.Empty;
+            }
+            catch( Exception ex )
+            {
+                Fail( ex );
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// Fails the specified ex.
+        /// </summary>
+        /// <param name="ex">The ex.</param>
+        private protected void Fail( Exception ex )
+        {
+            var _error = new ErrorWindow( ex );
+            _error?.SetText( );
+            _error?.ShowDialog( );
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="EmailCredential"/> class.
+        /// </summary>
+        public EmailCredential( )
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="EmailCredential"/> class.
+        /// </summary>
+        /// <param name="firstName"> </param>
+        /// <param name="lastName"> </param>
+        /// <param name="userName">Name of the user.</param>
+        /// <param name="password">The password.</param>
+        public EmailCredential( string firstName, string lastName, string userName,
+            string password )
+        {
+            _firstName = firstName;
+            _lastName = lastName;
+            _userName = userName;
+            _password = password;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="EmailCredential"/> class.
+        /// </summary>
+        /// <param name="credential">The credential.</param>
+        public EmailCredential( EmailCredential credential )
+        {
+            _firstName = credential.FirstName;
+            _lastName = credential.LastName;
+            _userName = credential.UserName;
+            _password = credential.Password;
+        }
 
         /// <summary>
         /// Gets the first name.
@@ -142,92 +231,6 @@ namespace Ninja
             {
                 _password = value;
             }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="EmailCredential"/> class.
-        /// </summary>
-        public EmailCredential( )
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="EmailCredential"/> class.
-        /// </summary>
-        /// <param name="firstName"> </param>
-        /// <param name="lastName"> </param>
-        /// <param name="userName">Name of the user.</param>
-        /// <param name="password">The password.</param>
-        public EmailCredential( string firstName, string lastName,
-            string userName, string password )
-        {
-            _firstName = firstName;
-            _lastName = lastName;
-            _userName = userName;
-            _password = password;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="EmailCredential"/> class.
-        /// </summary>
-        /// <param name="credential">The credential.</param>
-        public EmailCredential( EmailCredential credential )
-        {
-            _firstName = credential.FirstName;
-            _lastName = credential.LastName;
-            _userName = credential.UserName;
-            _password = credential.Password;
-        }
-
-        /// <summary>
-        /// Deconstructs the specified first name.
-        /// </summary>
-        /// <param name="firstName">The first name.</param>
-        /// <param name="lastName">The last name.</param>
-        /// <param name="userName">Name of the user.</param>
-        /// <param name="password">The password.</param>
-        public void Deconstruct( out string firstName, out string lastName,
-            out string userName, out string password )
-        {
-            firstName = _firstName;
-            lastName = _lastName;
-            userName = _userName;
-            password = _password;
-        }
-
-        /// <summary> Converts to string. </summary>
-        /// <returns>
-        /// A
-        /// <see cref="System.String"/>
-        /// that represents this instance.
-        /// </returns>
-        public override string ToString( )
-        {
-            try
-            {
-                return !string.IsNullOrEmpty( _userName )
-                    ? _userName
-                    : string.Empty;
-            }
-            catch( Exception ex )
-            {
-                Fail( ex );
-                return string.Empty;
-            }
-        }
-
-        /// <summary>
-        /// Fails the specified ex.
-        /// </summary>
-        /// <param name="ex">The ex.</param>
-        private protected void Fail( Exception ex )
-        {
-            var _error = new ErrorWindow( ex );
-            _error?.SetText( );
-            _error?.ShowDialog( );
         }
     }
 }

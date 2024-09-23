@@ -1,10 +1,10 @@
 ﻿// ******************************************************************************************
 //     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 09-22-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        09-22-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="WindowExtenstions.cs" company="Terry D. Eppler">
 // 
@@ -103,7 +103,7 @@ namespace Ninja
             try
             {
                 ThrowIf.Null( message, nameof( message ) );
-                var _notification = WindowExtenstions.CreateNotifier( window );
+                var _notification = window.CreateNotifier( );
                 _notification.ShowInformation( message );
             }
             catch( Exception ex )

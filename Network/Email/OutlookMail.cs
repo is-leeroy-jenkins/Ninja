@@ -1,14 +1,17 @@
 ﻿// ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 07-28-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        07-28-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="OutlookMail.cs" company="Terry D. Eppler">
-//    Badger is data analysis and reporting tool for EPA Analysts.
-//    Copyright ©  2024  Terry D. Eppler
+// 
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -30,7 +33,7 @@
 //    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //    DEALINGS IN THE SOFTWARE.
 // 
-//    You can contact me at: terryeppler@gmail.com or eppler.terry@epa.gov
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
 //   OutlookMail.cs
@@ -63,9 +66,9 @@ namespace Ninja
     public class OutlookMail : EmailManager
     {
         /// <summary>
-        /// The host name
+        /// The email configuration
         /// </summary>
-        private string _hostName;
+        private EmailConfig _emailConfig;
 
         /// <summary>
         /// The email content
@@ -78,117 +81,9 @@ namespace Ninja
         private EmailCredential _emailCredential;
 
         /// <summary>
-        /// The email configuration
+        /// The host name
         /// </summary>
-        private EmailConfig _emailConfig;
-
-        /// <summary>
-        /// Gets the address.
-        /// </summary>
-        /// <value>
-        /// The address.
-        /// </value>
-        public string HostName
-        {
-            get
-            {
-                return _hostName;
-            }
-            private protected set
-            {
-                _hostName = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets the credentials.
-        /// </summary>
-        /// <value>
-        /// The credentials.
-        /// </value>
-        public EmailCredential Credentials
-        {
-            get
-            {
-                return _emailCredential;
-            }
-            private set
-            {
-                _emailCredential = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets the configuration.
-        /// </summary>
-        /// <value>
-        /// The configuration.
-        /// </value>
-        public EmailConfig Configuration
-        {
-            get
-            {
-                return _emailConfig;
-            }
-            private set
-            {
-                _emailConfig = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets the content.
-        /// </summary>
-        /// <value>
-        /// The content.
-        /// </value>
-        public EmailContent Content
-        {
-            get
-            {
-                return _emailContent;
-            }
-            private set
-            {
-                _emailContent = value;
-            }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="OutlookMail"/> class.
-        /// </summary>
-        public OutlookMail( )
-        {
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="emailCredentials"></param>
-        /// <param name="emailConfig"></param>
-        /// <param name="emailContent"></param>
-        public OutlookMail( EmailCredential emailCredentials, EmailConfig emailConfig,
-            EmailContent emailContent )
-        {
-            _hostName = emailConfig.HostName;
-            _emailCredential = emailCredentials;
-            _emailConfig = emailConfig;
-            _emailContent = emailContent;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="OutlookMail"/> class.
-        /// </summary>
-        /// <param name="outlook">The outlook.</param>
-        public OutlookMail( OutlookMail outlook )
-        {
-            _emailCredential = outlook.Credentials;
-            _emailConfig = outlook.Configuration;
-            _emailContent = outlook.Content;
-            _hostName = outlook.HostName;
-        }
+        private string _hostName;
 
         /// <summary>
         /// Deconstructs the specified email credentials.
@@ -315,8 +210,8 @@ namespace Ninja
                     }
                 }
 
-                _message.From = new MailAddress( _emailConfig.Sender,
-                    _emailConfig.DisplayName, Encoding.UTF8 );
+                _message.From = new MailAddress( _emailConfig.Sender, _emailConfig.DisplayName,
+                    Encoding.UTF8 );
 
                 _message.IsBodyHtml = _emailContent.IsHtml;
                 _message.Body = _emailContent.Message;
@@ -326,9 +221,7 @@ namespace Ninja
                 _message.SubjectEncoding = Encoding.UTF8;
                 if( _emailContent.Attachments != null )
                 {
-                    var _attachment =
-                        new Attachment( _emailContent.Attachments[ 0 ] );
-
+                    var _attachment = new Attachment( _emailContent.Attachments[ 0 ] );
                     _message.Attachments.Add( _attachment );
                 }
 
@@ -415,6 +308,114 @@ namespace Ninja
             {
                 Fail( ex );
                 return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="OutlookMail"/> class.
+        /// </summary>
+        public OutlookMail( )
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="emailCredentials"></param>
+        /// <param name="emailConfig"></param>
+        /// <param name="emailContent"></param>
+        public OutlookMail( EmailCredential emailCredentials, EmailConfig emailConfig,
+            EmailContent emailContent )
+        {
+            _hostName = emailConfig.HostName;
+            _emailCredential = emailCredentials;
+            _emailConfig = emailConfig;
+            _emailContent = emailContent;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="OutlookMail"/> class.
+        /// </summary>
+        /// <param name="outlook">The outlook.</param>
+        public OutlookMail( OutlookMail outlook )
+        {
+            _emailCredential = outlook.Credentials;
+            _emailConfig = outlook.Configuration;
+            _emailContent = outlook.Content;
+            _hostName = outlook.HostName;
+        }
+
+        /// <summary>
+        /// Gets the address.
+        /// </summary>
+        /// <value>
+        /// The address.
+        /// </value>
+        public string HostName
+        {
+            get
+            {
+                return _hostName;
+            }
+            private protected set
+            {
+                _hostName = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets the credentials.
+        /// </summary>
+        /// <value>
+        /// The credentials.
+        /// </value>
+        public EmailCredential Credentials
+        {
+            get
+            {
+                return _emailCredential;
+            }
+            private set
+            {
+                _emailCredential = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets the configuration.
+        /// </summary>
+        /// <value>
+        /// The configuration.
+        /// </value>
+        public EmailConfig Configuration
+        {
+            get
+            {
+                return _emailConfig;
+            }
+            private set
+            {
+                _emailConfig = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets the content.
+        /// </summary>
+        /// <value>
+        /// The content.
+        /// </value>
+        public EmailContent Content
+        {
+            get
+            {
+                return _emailContent;
+            }
+            private set
+            {
+                _emailContent = value;
             }
         }
     }

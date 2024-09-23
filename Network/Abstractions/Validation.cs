@@ -1,14 +1,17 @@
 ﻿// ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 07-28-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        07-28-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="Validation.cs" company="Terry D. Eppler">
-//    Badger is data analysis and reporting tool for EPA Analysts.
-//    Copyright ©  2024  Terry D. Eppler
+// 
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -30,7 +33,7 @@
 //    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //    DEALINGS IN THE SOFTWARE.
 // 
-//    You can contact me at: terryeppler@gmail.com or eppler.terry@epa.gov
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
 //   Validation.cs
@@ -53,6 +56,31 @@ namespace Ninja
     public abstract class Validation
     {
         /// <summary>
+        /// The drive separator
+        /// </summary>
+        private protected char DriveSeparator = Path.VolumeSeparatorChar;
+
+        /// <summary>
+        /// The folder separator
+        /// </summary>
+        private protected char FolderSeparator = Path.DirectorySeparatorChar;
+
+        /// <summary>
+        /// The invalid file name characters
+        /// </summary>
+        private protected char[ ] InvalidFileNameCharacters = Path.GetInvalidFileNameChars( );
+
+        /// <summary>
+        /// The invalid path characters
+        /// </summary>
+        private protected char[ ] InvalidPathCharacters = Path.GetInvalidPathChars( );
+
+        /// <summary>
+        /// The path separator
+        /// </summary>
+        private protected char PathSeparator = Path.PathSeparator;
+
+        /// <summary>
         /// The atom characters
         /// </summary>
         private protected const string AtomCharacters = "!#$%&'*+-/=?^_`{|}~";
@@ -71,31 +99,6 @@ namespace Ninja
         /// The maximum local part length
         /// </summary>
         private protected const int MaxLocalPartLength = 64;
-
-        /// <summary>
-        /// The invalid path characters
-        /// </summary>
-        private protected char[ ] InvalidPathCharacters = Path.GetInvalidPathChars( );
-
-        /// <summary>
-        /// The invalid file name characters
-        /// </summary>
-        private protected char[ ] InvalidFileNameCharacters = Path.GetInvalidFileNameChars( );
-
-        /// <summary>
-        /// The path separator
-        /// </summary>
-        private protected char PathSeparator = Path.PathSeparator;
-
-        /// <summary>
-        /// The folder separator
-        /// </summary>
-        private protected char FolderSeparator = Path.DirectorySeparatorChar;
-
-        /// <summary>
-        /// The drive separator
-        /// </summary>
-        private protected char DriveSeparator = Path.VolumeSeparatorChar;
 
         /// <summary>
         /// 
@@ -239,8 +242,7 @@ namespace Ninja
                 }
 
                 return c < 128
-                    ? Validation.IsLetterOrDigit( c )
-                    || Validation.AtomCharacters.Contains( c.ToString( ) )
+                    ? Validation.IsLetterOrDigit( c ) || AtomCharacters.Contains( c.ToString( ) )
                     : allowInternational && !char.IsWhiteSpace( c );
             }
             catch( Exception ex )
@@ -304,8 +306,7 @@ namespace Ninja
         /// <param name="allowInternational"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        private static bool IsDomainStart( char c, bool allowInternational,
-            out SubDomainType type )
+        private static bool IsDomainStart( char c, bool allowInternational, out SubDomainType type )
         {
             try
             {
@@ -410,7 +411,7 @@ namespace Ninja
                 return false;
             }
 
-            return length <= Validation.MaxDomainLabelLength && text[ index - 1 ] != '-';
+            return length <= MaxDomainLabelLength && text[ index - 1 ] != '-';
         }
 
         /// <summary>

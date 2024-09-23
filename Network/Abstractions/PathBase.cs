@@ -1,14 +1,17 @@
 ﻿// ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 07-28-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        07-28-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
-// <copyright file="BasicPath.cs" company="Terry D. Eppler">
-//    Badger is data analysis and reporting tool for EPA Analysts.
-//    Copyright ©  2024  Terry D. Eppler
+// <copyright file="PathBase.cs" company="Terry D. Eppler">
+// 
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -30,10 +33,10 @@
 //    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //    DEALINGS IN THE SOFTWARE.
 // 
-//    You can contact me at: terryeppler@gmail.com or eppler.terry@epa.gov
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
-//   BasicPath.cs
+//   PathBase.cs
 // </summary>
 // ******************************************************************************************
 
@@ -58,6 +61,74 @@ namespace Ninja
     public abstract class PathBase : INotifyPropertyChanged
     {
         /// <summary>
+        /// Gets or sets the absolute path.
+        /// </summary>
+        /// <value>
+        /// The absolute path.
+        /// </value>
+        private protected string _absolutePath;
+
+        /// <summary>
+        /// Gets or sets the created.
+        /// </summary>
+        /// <value>
+        /// The created.
+        /// </value>
+        private protected DateTime _created;
+
+        /// <summary>
+        /// The drive 
+        /// </summary>
+        private protected string _drive;
+
+        /// <summary>
+        /// The drive separator
+        /// </summary>
+        private protected char _driveSeparator;
+
+        /// <summary>
+        /// Gets or sets the attributes.
+        /// </summary>
+        /// <value>
+        /// The attributes.
+        /// </value>
+        private protected FileAttributes _fileAttributes;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private protected string _fileExtension;
+
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        private protected string _fileName;
+
+        /// <summary>
+        /// Gets or sets the file security.
+        /// </summary>
+        /// <value>
+        /// The file security.
+        /// </value>
+        private protected FileSecurity _fileSecurity;
+
+        /// <summary>
+        /// The directory separator
+        /// </summary>
+        private protected char _folderSeparator;
+
+        /// <summary>
+        /// Gets or sets the full path.
+        /// </summary>
+        /// <value>
+        /// The full path.
+        /// </value>
+        private protected string _fullPath;
+
+        /// <summary>
         /// The has extension
         /// </summary>
         private protected bool _hasExtension;
@@ -75,26 +146,6 @@ namespace Ninja
         private protected bool _hasParent;
 
         /// <summary>
-        /// The directory separator
-        /// </summary>
-        private protected char _folderSeparator;
-
-        /// <summary>
-        /// The path separator
-        /// </summary>
-        private protected char _pathSeparator;
-
-        /// <summary>
-        /// The drive separator
-        /// </summary>
-        private protected char _driveSeparator;
-
-        /// <summary>
-        /// The drive 
-        /// </summary>
-        private protected string _drive;
-
-        /// <summary>
         /// Gets or sets the buffer.
         /// </summary>
         /// <value>
@@ -103,49 +154,14 @@ namespace Ninja
         private protected string _input;
 
         /// <summary>
-        /// Gets or sets the name.
+        /// The invalid name chars
         /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
-        private protected string _fileName;
+        private protected char[ ] _invalidNameChars;
 
         /// <summary>
-        /// Gets or sets the full path.
+        /// The invalid path chars
         /// </summary>
-        /// <value>
-        /// The full path.
-        /// </value>
-        private protected string _fullPath;
-
-        /// <summary>
-        /// Gets or sets the absolute path.
-        /// </summary>
-        /// <value>
-        /// The absolute path.
-        /// </value>
-        private protected string _absolutePath;
-
-        /// <summary>
-        /// The relative path
-        /// </summary>
-        private protected string _relativePath;
-
-        /// <summary>
-        /// Gets or sets the modified.
-        /// </summary>
-        /// <value>
-        /// The modified.
-        /// </value>
-        private protected DateTime _modified;
-
-        /// <summary>
-        /// Gets or sets the created.
-        /// </summary>
-        /// <value>
-        /// The created.
-        /// </value>
-        private protected DateTime _created;
+        private protected char[ ] _invalidPathChars;
 
         /// <summary>
         /// The is rooted
@@ -161,41 +177,22 @@ namespace Ninja
         private protected long _length;
 
         /// <summary>
-        /// 
-        /// </summary>
-        private protected string _fileExtension;
-
-        /// <summary>
-        /// Gets or sets the attributes.
+        /// Gets or sets the modified.
         /// </summary>
         /// <value>
-        /// The attributes.
+        /// The modified.
         /// </value>
-        private protected FileAttributes _fileAttributes;
+        private protected DateTime _modified;
 
         /// <summary>
-        /// Gets or sets the file security.
+        /// The path separator
         /// </summary>
-        /// <value>
-        /// The file security.
-        /// </value>
-        private protected FileSecurity _fileSecurity;
+        private protected char _pathSeparator;
 
         /// <summary>
-        /// The invalid path chars
+        /// The relative path
         /// </summary>
-        private protected char[ ] _invalidPathChars;
-
-        /// <summary>
-        /// The invalid name chars
-        /// </summary>
-        private protected char[ ] _invalidNameChars;
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Occurs when a property value changes.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        private protected string _relativePath;
 
         /// <summary>
         /// Updates the specified field.
@@ -205,8 +202,7 @@ namespace Ninja
         /// <param name="value">The value.</param>
         /// <param name="propertyName">Name of the property.</param>
         public void Update<T>( ref T field, T value,
-            [ CallerMemberName ]
-            string propertyName = null )
+            [ CallerMemberName ] string propertyName = null )
 
         {
             if( EqualityComparer<T>.Default.Equals( field, value ) )
@@ -238,5 +234,11 @@ namespace Ninja
             _error?.SetText( );
             _error?.ShowDialog( );
         }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

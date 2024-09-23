@@ -1,14 +1,17 @@
 ﻿// ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 07-28-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        07-28-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
-// <copyright file="BabyServer.cs" company="Terry D. Eppler">
-//    Badger is data analysis and reporting tool for EPA Analysts.
-//    Copyright ©  2024  Terry D. Eppler
+// <copyright file="ServerBase.cs" company="Terry D. Eppler">
+// 
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -30,10 +33,10 @@
 //    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //    DEALINGS IN THE SOFTWARE.
 // 
-//    You can contact me at: terryeppler@gmail.com or eppler.terry@epa.gov
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
-//   BabyServer.cs
+//   ServerBase.cs
 // </summary>
 // ******************************************************************************************
 
@@ -55,14 +58,14 @@ namespace Ninja
     public abstract class ServerBase
     {
         /// <summary>
-        /// The locked object
-        /// </summary>
-        private protected object _path;
-
-        /// <summary>
         /// The busy
         /// </summary>
         private protected bool _busy;
+
+        /// <summary>
+        /// The is connected
+        /// </summary>
+        private protected bool _connected;
 
         /// <summary>
         /// The bytes
@@ -70,24 +73,9 @@ namespace Ninja
         private protected int _count;
 
         /// <summary>
-        /// The port
-        /// </summary>
-        private protected int _port;
-
-        /// <summary>
         /// The data
         /// </summary>
         private protected byte[ ] _data;
-
-        /// <summary>
-        /// The message
-        /// </summary>
-        private protected string _message;
-
-        /// <summary>
-        /// The socket
-        /// </summary>
-        private protected Socket _socket;
 
         /// <summary>
         /// The ip address
@@ -100,28 +88,24 @@ namespace Ninja
         private protected IPEndPoint _ipEndPoint;
 
         /// <summary>
-        /// The is connected
+        /// The message
         /// </summary>
-        private protected bool _connected;
+        private protected string _message;
 
         /// <summary>
-        /// Gets a value indicating whether this instance is busy.
+        /// The locked object
         /// </summary>
-        /// <value>
-        /// <c> true </c>
-        /// if this instance is busy; otherwise,
-        /// <c> false </c>
-        /// </value>
-        public bool IsBusy
-        {
-            get
-            {
-                lock( _path )
-                {
-                    return _busy;
-                }
-            }
-        }
+        private protected object _path;
+
+        /// <summary>
+        /// The port
+        /// </summary>
+        private protected int _port;
+
+        /// <summary>
+        /// The socket
+        /// </summary>
+        private protected Socket _socket;
 
         /// <summary>
         /// Pings the network.
@@ -240,6 +224,25 @@ namespace Ninja
             var _error = new ErrorWindow( ex );
             _error?.SetText( );
             _error?.ShowDialog( );
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is busy.
+        /// </summary>
+        /// <value>
+        /// <c> true </c>
+        /// if this instance is busy; otherwise,
+        /// <c> false </c>
+        /// </value>
+        public bool IsBusy
+        {
+            get
+            {
+                lock( _path )
+                {
+                    return _busy;
+                }
+            }
         }
     }
 }

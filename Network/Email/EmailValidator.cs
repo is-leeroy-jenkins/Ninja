@@ -1,14 +1,17 @@
 ﻿// ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 07-28-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        07-28-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="EmailValidator.cs" company="Terry D. Eppler">
-//    Badger is data analysis and reporting tool for EPA Analysts.
-//    Copyright ©  2024  Terry D. Eppler
+// 
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -30,7 +33,7 @@
 //    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //    DEALINGS IN THE SOFTWARE.
 // 
-//    You can contact me at: terryeppler@gmail.com or eppler.terry@epa.gov
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
 //   EmailValidator.cs
@@ -66,7 +69,7 @@ namespace Ninja
             {
                 ThrowIf.Null( text, nameof( text ) );
                 ThrowIf.NegativeOrZero( index, nameof( index ) );
-                if( !EmailValidator.SkipSubDomain( text, ref index, allowInternational,
+                if( !Validation.SkipSubDomain( text, ref index, allowInternational,
                     out var _type ) )
                 {
                     return false;
@@ -83,7 +86,7 @@ namespace Ninja
                             return false;
                         }
 
-                        if( !EmailValidator.SkipSubDomain( text, ref index, allowInternational,
+                        if( !Validation.SkipSubDomain( text, ref index, allowInternational,
                             out _type ) )
                         {
                             return false;
@@ -101,7 +104,7 @@ namespace Ninja
             }
             catch( Exception ex )
             {
-                EmailValidator.Fail( ex );
+                Validation.Fail( ex );
                 return false;
             }
         }
@@ -123,7 +126,7 @@ namespace Ninja
                 index++;
                 while( index < text.Length )
                 {
-                    if( EmailValidator.IsControl( text[ index ] )
+                    if( Validation.IsControl( text[ index ] )
                         || ( text[ index ] >= 128 && !allowInternational ) )
                     {
                         return false;
@@ -159,7 +162,7 @@ namespace Ninja
             }
             catch( Exception ex )
             {
-                EmailValidator.Fail( ex );
+                Validation.Fail( ex );
                 return false;
             }
         }
@@ -183,7 +186,7 @@ namespace Ninja
                     var _startIndex = index;
                     var _value = 0;
                     while( index < text.Length
-                        && EmailValidator.IsDigit( text[ index ] ) )
+                        && Validation.IsDigit( text[ index ] ) )
                     {
                         _value = _value * 10 + ( text[ index ] - '0' );
                         index++;
@@ -209,7 +212,7 @@ namespace Ninja
             }
             catch( Exception ex )
             {
-                EmailValidator.Fail( ex );
+                Validation.Fail( ex );
                 return false;
             }
         }
@@ -225,13 +228,12 @@ namespace Ninja
             {
                 var _test = c.ToString( );
                 ThrowIf.Null( _test, nameof( c ) );
-                return ( c >= 'A' && c <= 'F' )
-                    || ( c >= 'a' && c <= 'f' )
+                return ( c >= 'A' && c <= 'F' ) || ( c >= 'a' && c <= 'f' )
                     || ( c >= '0' && c <= '9' );
             }
             catch( Exception ex )
             {
-                EmailValidator.Fail( ex );
+                Validation.Fail( ex );
                 return false;
             }
         }
@@ -338,14 +340,13 @@ namespace Ninja
                     }
                 }
 
-                return !_needGroup
-                    && ( _compact
-                        ? _groups <= 6
-                        : _groups == 8 );
+                return !_needGroup && ( _compact
+                    ? _groups <= 6
+                    : _groups == 8 );
             }
             catch( Exception ex )
             {
-                EmailValidator.Fail( ex );
+                Validation.Fail( ex );
                 return false;
             }
         }
@@ -371,8 +372,8 @@ namespace Ninja
                 }
 
                 if( email.Length == 0
-                    || EmailValidator.Measure( email, 0, email.Length, allowInternational )
-                    > EmailValidator.MaxEmailAddressLength )
+                    || Validation.Measure( email, 0, email.Length, allowInternational )
+                    > MaxEmailAddressLength )
                 {
                     return false;
                 }
@@ -387,7 +388,7 @@ namespace Ninja
                 }
                 else
                 {
-                    if( !EmailValidator.SkipAtom( email, ref _index, allowInternational )
+                    if( !Validation.SkipAtom( email, ref _index, allowInternational )
                         || _index >= email.Length )
                     {
                         return false;
@@ -401,7 +402,7 @@ namespace Ninja
                             return false;
                         }
 
-                        if( !EmailValidator.SkipAtom( email, ref _index, allowInternational ) )
+                        if( !Validation.SkipAtom( email, ref _index, allowInternational ) )
                         {
                             return false;
                         }
@@ -413,11 +414,9 @@ namespace Ninja
                     }
                 }
 
-                var _localPartLength =
-                    EmailValidator.Measure( email, 0, _index, allowInternational );
-
+                var _localPartLength = Validation.Measure( email, 0, _index, allowInternational );
                 if( _index + 1 >= email.Length
-                    || _localPartLength > EmailValidator.MaxLocalPartLength
+                    || _localPartLength > MaxLocalPartLength
                     || email[ _index++ ] != '@' )
                 {
                     return false;
@@ -440,9 +439,8 @@ namespace Ninja
                     return false;
                 }
 
-                if( string.Compare( email, _index, "IPv6:", 0, 5,
-                        StringComparison.OrdinalIgnoreCase )
-                    == 0 )
+                if( string.Compare( email, _index, "IPv6:", 0,
+                    5, StringComparison.OrdinalIgnoreCase ) == 0 )
                 {
                     _index += "IPv6:".Length;
                     if( !EmailValidator.SkipIPv6Literal( email, ref _index ) )
@@ -468,7 +466,7 @@ namespace Ninja
             }
             catch( Exception ex )
             {
-                EmailValidator.Fail( ex );
+                Validation.Fail( ex );
                 return false;
             }
         }

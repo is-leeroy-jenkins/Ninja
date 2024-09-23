@@ -1,14 +1,17 @@
 ﻿// ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 07-28-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        07-28-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="PartFactory.cs" company="Terry D. Eppler">
-//    Badger is data analysis and reporting tool for EPA Analysts.
-//    Copyright ©  2024  Terry D. Eppler
+// 
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -30,7 +33,7 @@
 //    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //    DEALINGS IN THE SOFTWARE.
 // 
-//    You can contact me at: terryeppler@gmail.com or eppler.terry@epa.gov
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
 //   PartFactory.cs
@@ -68,54 +71,6 @@ namespace Ninja
     [ SuppressMessage( "ReSharper", "RedundantBaseConstructorCall" ) ]
     public abstract class PartFactory : Workbook
     {
-        /// <inheritdoc />
-        /// <summary>
-        /// Gets or sets the file path.
-        /// </summary>
-        /// <value>
-        /// The file path.
-        /// </value>
-        public string FilePath
-        {
-            get
-            {
-                return _filePath;
-            }
-
-            private protected set
-            {
-                _filePath = value;
-            }
-        }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Gets or sets the name of the file.
-        /// </summary>
-        /// <value>
-        /// The name of the file.
-        /// </value>
-        public string FileName
-        {
-            get
-            {
-                return _fileName;
-            }
-
-            private protected set
-            {
-                _fileName = value;
-            }
-        }
-
-        /// <inheritdoc />
-        ///  <summary>
-        ///  </summary>
-        protected PartFactory( )
-            : base( )
-        {
-        }
-
         /// <summary>
         /// Creates the excel table.
         /// </summary>
@@ -124,7 +79,7 @@ namespace Ninja
             try
             {
                 ThrowIf.Null( dataTable, nameof( dataTable ) );
-                _dataRange = (ExcelRange)_dataWorksheet.Cells[ "A2" ]
+                _dataRange = ( ExcelRange )_dataWorksheet.Cells[ "A2" ]
                     ?.LoadFromDataTable( dataTable, true, TableStyles.Light1 );
 
                 var _title = _dataTable.TableName.SplitPascal( ) ?? "Badger";
@@ -161,8 +116,8 @@ namespace Ninja
         /// <returns>
         /// DataTable
         /// </returns>
-        private protected DataTable CreateDataTable( int startRow, int startColumn,
-            int endRow, int endColumn )
+        private protected DataTable CreateDataTable( int startRow, int startColumn, int endRow,
+            int endColumn )
         {
             try
             {
@@ -199,8 +154,8 @@ namespace Ninja
         /// <returns>
         /// ExcelPivotTable
         /// </returns>
-        private protected ExcelPivotTable CreatePivotTable( ExcelRange excelRange,
-            string tableName, IList<string> rows, IList<string> data )
+        private protected ExcelPivotTable CreatePivotTable( ExcelRange excelRange, string tableName,
+            IList<string> rows, IList<string> data )
         {
             try
             {
@@ -298,8 +253,8 @@ namespace Ninja
                 var _dataField = _pivotTable.DataFields.Add( _pivotTable.Fields[ column ] );
                 _dataField.Format = "#,##0";
                 _pivotTable.DataOnRows = true;
-                _pieChart = _chartWorksheet.Drawings
-                    ?.AddPieChart( "Chart", ePieChartType.PieExploded3D, _pivotTable );
+                _pieChart = _chartWorksheet.Drawings?.AddPieChart( "Chart",
+                    ePieChartType.PieExploded3D, _pivotTable );
 
                 _pieChart.SetPosition( 1, 0, 4, 0 );
                 _pieChart.SetSize( 800, 600 );
@@ -345,8 +300,8 @@ namespace Ninja
                 var _dataField = _pivotTable.DataFields.Add( _pivotTable.Fields[ column ] );
                 _dataField.Format = "#,##0";
                 _pivotTable.DataOnRows = true;
-                _barChart = _chartWorksheet.Drawings
-                    ?.AddBarChart( "Chart", eBarChartType.BarClustered3D, _pivotTable );
+                _barChart = _chartWorksheet.Drawings?.AddBarChart( "Chart",
+                    eBarChartType.BarClustered3D, _pivotTable );
 
                 _barChart.SetPosition( 1, 0, 4, 0 );
                 _barChart.SetSize( 800, 600 );
@@ -392,8 +347,8 @@ namespace Ninja
                 var _dataField = _pivotTable.DataFields.Add( _pivotTable.Fields[ column ] );
                 _dataField.Format = "#,##0";
                 _pivotTable.DataOnRows = true;
-                _areaChart = _chartWorksheet.Drawings
-                    ?.AddAreaChart( "Chart", eAreaChartType.AreaStacked3D, _pivotTable );
+                _areaChart = _chartWorksheet.Drawings?.AddAreaChart( "Chart",
+                    eAreaChartType.AreaStacked3D, _pivotTable );
 
                 _areaChart.SetPosition( 1, 0, 4, 0 );
                 _areaChart.SetSize( 800, 600 );
@@ -444,6 +399,54 @@ namespace Ninja
             {
                 Dispose( );
                 Fail( ex );
+            }
+        }
+
+        /// <inheritdoc />
+        ///  <summary>
+        ///  </summary>
+        protected PartFactory( )
+            : base( )
+        {
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets or sets the file path.
+        /// </summary>
+        /// <value>
+        /// The file path.
+        /// </value>
+        public string FilePath
+        {
+            get
+            {
+                return _filePath;
+            }
+
+            private protected set
+            {
+                _filePath = value;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets or sets the name of the file.
+        /// </summary>
+        /// <value>
+        /// The name of the file.
+        /// </value>
+        public string FileName
+        {
+            get
+            {
+                return _fileName;
+            }
+
+            private protected set
+            {
+                _fileName = value;
             }
         }
     }

@@ -1,14 +1,17 @@
 ﻿// ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 07-28-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        07-28-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="FolderBase.cs" company="Terry D. Eppler">
-//    Badger is data analysis and reporting tool for EPA Analysts.
-//    Copyright ©  2024  Terry D. Eppler
+// 
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -30,7 +33,7 @@
 //    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //    DEALINGS IN THE SOFTWARE.
 // 
-//    You can contact me at: terryeppler@gmail.com or eppler.terry@epa.gov
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
 //   FolderBase.cs
@@ -59,11 +62,6 @@ namespace Ninja
     public abstract class FolderBase : DataFile
     {
         /// <summary>
-        /// The folder exists
-        /// </summary>
-        private protected bool _folderExists;
-
-        /// <summary>
         /// The sub files
         /// </summary>
         private protected int _fileCount;
@@ -72,6 +70,21 @@ namespace Ninja
         /// The sub folders
         /// </summary>
         private protected int _folderCount;
+
+        /// <summary>
+        /// The folder exists
+        /// </summary>
+        private protected bool _folderExists;
+
+        /// <summary>
+        /// The folder name
+        /// </summary>
+        private protected string _folderName;
+
+        /// <summary>
+        /// The security
+        /// </summary>
+        private protected DirectorySecurity _folderSecurity;
 
         /// <summary>
         /// The sub files
@@ -84,40 +97,9 @@ namespace Ninja
         private protected bool _hasSubFolders;
 
         /// <summary>
-        /// The folder name
-        /// </summary>
-        private protected string _folderName;
-
-        /// <summary>
         /// The parent folder
         /// </summary>
         private protected DirectoryInfo _parentFolder;
-
-        /// <summary>
-        /// The security
-        /// </summary>
-        private protected DirectorySecurity _folderSecurity;
-
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="FolderBase"/> class.
-        /// </summary>
-        /// <inheritdoc />
-        protected FolderBase( ) 
-            : base( )
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="FolderBase"/> class.
-        /// </summary>
-        /// <param name="input">The input.</param>
-        /// <inheritdoc />
-        protected FolderBase( string input )
-            : base( input )
-        {
-        }
 
         /// <summary>
         /// Gets the special folders.
@@ -135,7 +117,7 @@ namespace Ninja
             }
             catch( IOException ex )
             {
-                Fail( ex );
+                PathBase.Fail( ex );
                 return default( IEnumerable<string> );
             }
         }
@@ -172,7 +154,7 @@ namespace Ninja
                 }
                 catch( IOException ex )
                 {
-                    Fail( ex );
+                    PathBase.Fail( ex );
                     return default( IDictionary<string, FileInfo> );
                 }
             }
@@ -213,7 +195,7 @@ namespace Ninja
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    PathBase.Fail( ex );
                     return default( IDictionary<string, DirectoryInfo> );
                 }
             }
@@ -236,10 +218,8 @@ namespace Ninja
                     var _paths = Directory.GetFiles( _input );
                     foreach( var _fp in _paths )
                     {
-                        var _first = Directory.GetFiles( _fp )
-                            ?.Where( f => File.Exists( f ) )
-                            ?.Select( f => Path.GetFullPath( f ) )
-                            ?.ToList( );
+                        var _first = Directory.GetFiles( _fp )?.Where( f => File.Exists( f ) )
+                            ?.Select( f => Path.GetFullPath( f ) )?.ToList( );
 
                         _list.AddRange( _first );
                         var _folders = Directory.GetDirectories( _fp );
@@ -249,8 +229,7 @@ namespace Ninja
                             {
                                 var _second = Directory.GetFiles( _fr )
                                     ?.Where( s => File.Exists( s ) )
-                                    ?.Select( s => Path.GetFullPath( s ) )
-                                    ?.ToList( );
+                                    ?.Select( s => Path.GetFullPath( s ) )?.ToList( );
 
                                 _list.AddRange( _second );
                                 var _subfolders = Directory.GetDirectories( _fr );
@@ -259,8 +238,7 @@ namespace Ninja
                                     var _path = _subfolders[ _i ];
                                     var _last = Directory.GetFiles( _path )
                                         ?.Where( l => File.Exists( l ) )
-                                        ?.Select( l => Path.GetFullPath( l ) )
-                                        ?.ToList( );
+                                        ?.Select( l => Path.GetFullPath( l ) )?.ToList( );
 
                                     _list.AddRange( _last );
                                 }
@@ -274,12 +252,33 @@ namespace Ninja
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    PathBase.Fail( ex );
                     return default( IEnumerable<string> );
                 }
             }
 
             return default( IEnumerable<string> );
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="FolderBase"/> class.
+        /// </summary>
+        /// <inheritdoc />
+        protected FolderBase( )
+            : base( )
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="FolderBase"/> class.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <inheritdoc />
+        protected FolderBase( string input )
+            : base( input )
+        {
         }
     }
 }

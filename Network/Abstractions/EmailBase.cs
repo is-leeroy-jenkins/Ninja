@@ -1,14 +1,17 @@
 ﻿// ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 07-28-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        07-28-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="EmailBase.cs" company="Terry D. Eppler">
-//    Badger is data analysis and reporting tool for EPA Analysts.
-//    Copyright ©  2024  Terry D. Eppler
+// 
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -30,7 +33,7 @@
 //    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //    DEALINGS IN THE SOFTWARE.
 // 
-//    You can contact me at: terryeppler@gmail.com or eppler.terry@epa.gov
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
 //   EmailBase.cs
@@ -51,14 +54,9 @@ namespace Ninja
     public abstract class EmailBase
     {
         /// <summary>
-        /// The host
+        /// The carbon copy
         /// </summary>
-        private protected string _hostName;
-
-        /// <summary>
-        /// The sender
-        /// </summary>
-        private protected string _sender;
+        private protected IList<string> _copies;
 
         /// <summary>
         /// The display name
@@ -66,9 +64,9 @@ namespace Ninja
         private protected string _displayName;
 
         /// <summary>
-        /// The receiver
+        /// The host
         /// </summary>
-        private protected string _receiver;
+        private protected string _hostName;
 
         /// <summary>
         /// The priority
@@ -76,14 +74,19 @@ namespace Ninja
         private protected MailPriority _priority;
 
         /// <summary>
+        /// The receiver
+        /// </summary>
+        private protected string _receiver;
+
+        /// <summary>
         /// The recipient
         /// </summary>
         private protected IList<string> _recipients;
 
         /// <summary>
-        /// The carbon copy
+        /// The sender
         /// </summary>
-        private protected IList<string> _copies;
+        private protected string _sender;
 
         /// <summary>
         /// Fails the specified _ex.

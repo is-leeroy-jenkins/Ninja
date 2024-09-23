@@ -1,14 +1,17 @@
 ﻿// ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 07-28-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        07-28-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
-// <copyright file="BasicReport.cs" company="Terry D. Eppler">
-//    Badger is data analysis and reporting tool for EPA Analysts.
-//    Copyright ©  2024  Terry D. Eppler
+// <copyright file="ReportBase.cs" company="Terry D. Eppler">
+// 
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -30,10 +33,10 @@
 //    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //    DEALINGS IN THE SOFTWARE.
 // 
-//    You can contact me at: terryeppler@gmail.com or eppler.terry@epa.gov
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
-//   BasicReport.cs
+//   ReportBase.cs
 // </summary>
 // ******************************************************************************************
 
@@ -66,144 +69,9 @@ namespace Ninja
     public abstract class ReportBase
     {
         /// <summary>
-        /// The primary back color
+        /// The area chart
         /// </summary>
-        private protected Color _primaryBackColor;
-
-        /// <summary>
-        /// The secondary back color
-        /// </summary>
-        private protected Color _secondaryBackColor;
-
-        /// <summary>
-        /// The row height
-        /// </summary>
-        private protected double _rowHeight;
-
-        /// <summary>
-        /// The column width
-        /// </summary>
-        private protected double _columnWidth;
-
-        /// <summary>
-        /// The zoom level
-        /// </summary>
-        private protected int _zoomLevel;
-
-        /// <summary>
-        /// The font color
-        /// </summary>
-        private protected Color _fontColor;
-
-        /// <summary>
-        /// The font
-        /// </summary>
-        private protected Font _font;
-
-        /// <summary>
-        /// The title font
-        /// </summary>
-        private protected Font _titleFont;
-
-        /// <summary>
-        /// The left margin
-        /// </summary>
-        private protected decimal _leftMargin;
-
-        /// <summary>
-        /// The right margin
-        /// </summary>
-        private protected decimal _rightMargin;
-
-        /// <summary>
-        /// The header margin
-        /// </summary>
-        private protected decimal _headerMargin;
-
-        /// <summary>
-        /// The top margin
-        /// </summary>
-        private protected decimal _topMargin;
-
-        /// <summary>
-        /// The footer margin
-        /// </summary>
-        private protected decimal _footerMargin;
-
-        /// <summary>
-        /// The bottom margin
-        /// </summary>
-        private protected decimal _bottomMargin;
-
-        /// <summary>
-        /// The data connection
-        /// </summary>
-        private protected OleDbConnection _dataConnection;
-
-        /// <summary>
-        /// The data command
-        /// </summary>
-        private protected OleDbCommand _dataCommand;
-
-        /// <summary>
-        /// The data adapter
-        /// </summary>
-        private protected OleDbDataAdapter _dataAdapter;
-
-        /// <summary>
-        /// The file information
-        /// </summary>
-        private protected FileInfo _fileInfo;
-
-        /// <summary>
-        /// The comment range
-        /// </summary>
-        private protected ExcelRange _commentRange;
-
-        /// <summary>
-        /// The header range
-        /// </summary>
-        private protected ExcelRange _headerRange;
-
-        /// <summary>
-        /// The footer range
-        /// </summary>
-        private protected ExcelRange _footerRange;
-
-        /// <summary>
-        /// The data range
-        /// </summary>
-        private protected ExcelRange _dataRange;
-
-        /// <summary>
-        /// The excel package
-        /// </summary>
-        private protected ExcelPackage _excelPackage;
-
-        /// <summary>
-        /// The pivot range
-        /// </summary>
-        private protected ExcelRange _pivotRange;
-
-        /// <summary>
-        /// The chart range
-        /// </summary>
-        private protected ExcelRange _chartRange;
-
-        /// <summary>
-        /// The excel workbook
-        /// </summary>
-        private protected ExcelWorkbook _excelWorkbook;
-
-        /// <summary>
-        /// The excel table
-        /// </summary>
-        private protected ExcelTable _excelTable;
-
-        /// <summary>
-        /// The pie chart
-        /// </summary>
-        private protected ExcelPieChart _pieChart;
+        private protected ExcelAreaChart _areaChart;
 
         /// <summary>
         /// The bar chart
@@ -211,24 +79,14 @@ namespace Ninja
         private protected ExcelBarChart _barChart;
 
         /// <summary>
-        /// The area chart
+        /// The bottom margin
         /// </summary>
-        private protected ExcelAreaChart _areaChart;
+        private protected decimal _bottomMargin;
 
         /// <summary>
-        /// The pivot table
+        /// The chart range
         /// </summary>
-        private protected ExcelPivotTable _pivotTable;
-
-        /// <summary>
-        /// The data worksheet
-        /// </summary>
-        private protected ExcelWorksheet _dataWorksheet;
-
-        /// <summary>
-        /// The pivot worksheet
-        /// </summary>
-        private protected ExcelWorksheet _pivotWorksheet;
+        private protected ExcelRange _chartRange;
 
         /// <summary>
         /// The chart worksheet
@@ -236,14 +94,44 @@ namespace Ninja
         private protected ExcelWorksheet _chartWorksheet;
 
         /// <summary>
+        /// The column count
+        /// </summary>
+        private protected int _columnCount;
+
+        /// <summary>
+        /// The column width
+        /// </summary>
+        private protected double _columnWidth;
+
+        /// <summary>
+        /// The comment range
+        /// </summary>
+        private protected ExcelRange _commentRange;
+
+        /// <summary>
         /// The comments
         /// </summary>
         private protected IList<ExcelComment> _comments;
 
         /// <summary>
-        /// The theme path
+        /// The data adapter
         /// </summary>
-        private protected string _themePath;
+        private protected OleDbDataAdapter _dataAdapter;
+
+        /// <summary>
+        /// The data command
+        /// </summary>
+        private protected OleDbCommand _dataCommand;
+
+        /// <summary>
+        /// The data connection
+        /// </summary>
+        private protected OleDbConnection _dataConnection;
+
+        /// <summary>
+        /// The data range
+        /// </summary>
+        private protected ExcelRange _dataRange;
 
         /// <summary>
         /// The data table
@@ -251,24 +139,29 @@ namespace Ninja
         private protected DataTable _dataTable;
 
         /// <summary>
-        /// The data metric
+        /// The data worksheet
         /// </summary>
-        private protected DataMeasure DataMeasure;
+        private protected ExcelWorksheet _dataWorksheet;
 
         /// <summary>
-        /// The internal path
+        /// The excel package
         /// </summary>
-        private protected string _internalPath;
+        private protected ExcelPackage _excelPackage;
 
         /// <summary>
-        /// The save path
+        /// The excel table
         /// </summary>
-        private protected string _savePath;
+        private protected ExcelTable _excelTable;
 
         /// <summary>
-        /// The file path
+        /// The excel workbook
         /// </summary>
-        private protected string _filePath;
+        private protected ExcelWorkbook _excelWorkbook;
+
+        /// <summary>
+        /// The file information
+        /// </summary>
+        private protected FileInfo _fileInfo;
 
         /// <summary>
         /// The file name
@@ -276,9 +169,79 @@ namespace Ninja
         private protected string _fileName;
 
         /// <summary>
-        /// The row index
+        /// The file path
         /// </summary>
-        private protected int _startRow;
+        private protected string _filePath;
+
+        /// <summary>
+        /// The font
+        /// </summary>
+        private protected Font _font;
+
+        /// <summary>
+        /// The font color
+        /// </summary>
+        private protected Color _fontColor;
+
+        /// <summary>
+        /// The footer margin
+        /// </summary>
+        private protected decimal _footerMargin;
+
+        /// <summary>
+        /// The footer range
+        /// </summary>
+        private protected ExcelRange _footerRange;
+
+        /// <summary>
+        /// The header margin
+        /// </summary>
+        private protected decimal _headerMargin;
+
+        /// <summary>
+        /// The header range
+        /// </summary>
+        private protected ExcelRange _headerRange;
+
+        /// <summary>
+        /// The internal path
+        /// </summary>
+        private protected string _internalPath;
+
+        /// <summary>
+        /// The left margin
+        /// </summary>
+        private protected decimal _leftMargin;
+
+        /// <summary>
+        /// The pie chart
+        /// </summary>
+        private protected ExcelPieChart _pieChart;
+
+        /// <summary>
+        /// The pivot range
+        /// </summary>
+        private protected ExcelRange _pivotRange;
+
+        /// <summary>
+        /// The pivot table
+        /// </summary>
+        private protected ExcelPivotTable _pivotTable;
+
+        /// <summary>
+        /// The pivot worksheet
+        /// </summary>
+        private protected ExcelWorksheet _pivotWorksheet;
+
+        /// <summary>
+        /// The primary back color
+        /// </summary>
+        private protected Color _primaryBackColor;
+
+        /// <summary>
+        /// The right margin
+        /// </summary>
+        private protected decimal _rightMargin;
 
         /// <summary>
         /// The row count
@@ -286,61 +249,54 @@ namespace Ninja
         private protected int _rowCount;
 
         /// <summary>
+        /// The row height
+        /// </summary>
+        private protected double _rowHeight;
+
+        /// <summary>
+        /// The save path
+        /// </summary>
+        private protected string _savePath;
+
+        /// <summary>
+        /// The secondary back color
+        /// </summary>
+        private protected Color _secondaryBackColor;
+
+        /// <summary>
         /// The row index
         /// </summary>
         private protected int _startColumn;
 
         /// <summary>
-        /// The column count
+        /// The row index
         /// </summary>
-        private protected int _columnCount;
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Gets or sets the index.
-        /// </summary>
-        /// <value>
-        /// The index.
-        /// </value>
-        public int StartRow
-        {
-            get
-            {
-                return _startRow;
-            }
-
-            private protected set
-            {
-                _startRow = value;
-            }
-        }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Gets or sets the index.
-        /// </summary>
-        /// <value>
-        /// The index.
-        /// </value>
-        public int StartColumn
-        {
-            get
-            {
-                return _startColumn;
-            }
-
-            private protected set
-            {
-                _startColumn = value;
-            }
-        }
+        private protected int _startRow;
 
         /// <summary>
-        ///
+        /// The theme path
         /// </summary>
-        protected ReportBase( )
-        {
-        }
+        private protected string _themePath;
+
+        /// <summary>
+        /// The title font
+        /// </summary>
+        private protected Font _titleFont;
+
+        /// <summary>
+        /// The top margin
+        /// </summary>
+        private protected decimal _topMargin;
+
+        /// <summary>
+        /// The zoom level
+        /// </summary>
+        private protected int _zoomLevel;
+
+        /// <summary>
+        /// The data metric
+        /// </summary>
+        private protected DataMeasure DataMeasure;
 
         /// <summary>
         /// Sets the color of the range background.
@@ -380,11 +336,11 @@ namespace Ninja
                 ThrowIf.NegativeOrZero( columnIndex, nameof( columnIndex ) );
                 if( columnIndex < 26 )
                 {
-                    return ( (char)( 'A' + columnIndex ) ).ToString( );
+                    return ( ( char )( 'A' + columnIndex ) ).ToString( );
                 }
 
-                var _first = (char)( 'A' + columnIndex / 26 - 1 );
-                var _second = (char)( 'A' + columnIndex % 26 );
+                var _first = ( char )( 'A' + columnIndex / 26 - 1 );
+                var _second = ( char )( 'A' + columnIndex % 26 );
                 return $"{_first}{_second}";
             }
             catch( Exception ex )
@@ -406,10 +362,8 @@ namespace Ninja
         {
             try
             {
-                return type == typeof( string )
-                    || type.IsArray
-                    || ( type.IsGenericType
-                        && type.GetGenericTypeDefinition( ) == typeof( Nullable<> ) );
+                return type == typeof( string ) || type.IsArray || ( type.IsGenericType
+                    && type.GetGenericTypeDefinition( ) == typeof( Nullable<> ) );
             }
             catch( Exception ex )
             {
@@ -477,6 +431,53 @@ namespace Ninja
             var _error = new ErrorWindow( ex );
             _error?.SetText( );
             _error?.ShowDialog( );
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        protected ReportBase( )
+        {
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets or sets the index.
+        /// </summary>
+        /// <value>
+        /// The index.
+        /// </value>
+        public int StartRow
+        {
+            get
+            {
+                return _startRow;
+            }
+
+            private protected set
+            {
+                _startRow = value;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Gets or sets the index.
+        /// </summary>
+        /// <value>
+        /// The index.
+        /// </value>
+        public int StartColumn
+        {
+            get
+            {
+                return _startColumn;
+            }
+
+            private protected set
+            {
+                _startColumn = value;
+            }
         }
     }
 }

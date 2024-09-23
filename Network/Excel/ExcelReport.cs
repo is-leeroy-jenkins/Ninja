@@ -1,14 +1,17 @@
 ﻿// ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 07-28-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        07-28-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="ExcelReport.cs" company="Terry D. Eppler">
-//    Badger is data analysis and reporting tool for EPA Analysts.
-//    Copyright ©  2024  Terry D. Eppler
+// 
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -30,7 +33,7 @@
 //    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //    DEALINGS IN THE SOFTWARE.
 // 
-//    You can contact me at: terryeppler@gmail.com or eppler.terry@epa.gov
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
 //   ExcelReport.cs
@@ -67,56 +70,151 @@ namespace Ninja
     public class ExcelReport : PartFactory
     {
         /// <summary>
-        /// Gets or sets the height of the row.
+        /// Initializes the worksheets.
         /// </summary>
-        /// <value>
-        /// The height of the row.
-        /// </value>
-        public double RowHeight
+        private void InitializeSheetView( )
         {
-            get
+            try
             {
-                return _rowHeight;
+                for( var _i = 0; _i < _excelWorkbook.Worksheets.Count; _i++ )
+                {
+                    _excelWorkbook.Worksheets[ _i ].View.ShowGridLines = false;
+                    _excelWorkbook.Worksheets[ _i ].View.PageLayoutView = true;
+                    _excelWorkbook.Worksheets[ _i ].View.ShowHeaders = true;
+                    _excelWorkbook.Worksheets[ _i ].View.ZoomScale = _zoomLevel;
+                }
             }
-
-            private protected set
+            catch( Exception ex )
             {
-                _rowHeight = value;
+                Fail( ex );
+                Dispose( );
             }
         }
 
         /// <summary>
-        /// Gets or sets the width of the column.
+        /// Initializes the printer settings.
         /// </summary>
-        /// <value>
-        /// The width of the column.
-        /// </value>
-        public double ColumnWidth
+        private void InitializePrinterSettings( )
         {
-            get
+            try
             {
-                return _columnWidth;
+                for( var _i = 0; _i < _excelWorkbook.Worksheets.Count; _i++ )
+                {
+                    _excelWorkbook.Worksheets[ _i ].PrinterSettings.LeftMargin = _leftMargin;
+                    _excelWorkbook.Worksheets[ _i ].PrinterSettings.RightMargin = _rightMargin;
+                    _excelWorkbook.Worksheets[ _i ].PrinterSettings.HeaderMargin = _headerMargin;
+                    _excelWorkbook.Worksheets[ _i ].PrinterSettings.FooterMargin = _footerMargin;
+                    _excelWorkbook.Worksheets[ _i ].PrinterSettings.TopMargin = _topMargin;
+                    _excelWorkbook.Worksheets[ _i ].PrinterSettings.BottomMargin = _bottomMargin;
+                    _excelWorkbook.Worksheets[ _i ].PrinterSettings.Orientation =
+                        eOrientation.Landscape;
+                }
             }
-
-            private protected set
+            catch( Exception ex )
             {
-                _columnWidth = value;
+                Fail( ex );
+                Dispose( );
             }
         }
 
         /// <summary>
-        /// The configuration
+        /// Initializes the header footer.
         /// </summary>
-        public string InternalPath
+        private void InitializeHeaderFooter( )
         {
-            get
+            try
             {
-                return _internalPath;
-            }
+                var _rows = _dataTable.Rows.Count.ToString( "N0" );
+                var _cols = _dataTable.Columns.Count.ToString( );
+                _dataWorksheet.HeaderFooter.OddFooter.RightAlignedText = "Records:" + '\t' + "  "
+                    + _rows.PadLeft( 16 ) + Environment.NewLine + "Columns:" + '\t' + "  "
+                    + _cols.PadLeft( 19 );
 
-            private protected set
+                _dataWorksheet.HeaderFooter.OddFooter.CenteredText = "Page" + '\r' + '\n'
+                    + ExcelHeaderFooter.PageNumber + " of " + ExcelHeaderFooter.NumberOfPages;
+
+                _dataWorksheet.HeaderFooter.OddFooter.LeftAlignedText = "Data as of:"
+                    + Environment.NewLine + DateTime.Today.ToLongDateString( );
+            }
+            catch( Exception ex )
             {
-                _internalPath = value;
+                Fail( ex );
+                Dispose( );
+            }
+        }
+
+        /// <summary>
+        /// Initializes the range cells.
+        /// </summary>
+        private void InitializeActiveGrid( )
+        {
+            try
+            {
+                if( _dataTable == null )
+                {
+                    _dataRange = _dataWorksheet.Cells[ 2, 1, 57, 11 ];
+                    _dataRange.Style.Font.Name = "Segoe UI";
+                    _dataRange.Style.Font.Size = 8;
+                    _dataRange.Style.Font.Bold = false;
+                    _dataRange.Style.Font.Italic = false;
+                    _dataRange.EntireRow.CustomHeight = true;
+                    _dataRange.Style.Font.Color.SetColor( _fontColor );
+                    _dataRange.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                    _dataRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                    FormatHeader( _dataRange );
+                    SetAlternatingRowColor( _dataRange );
+                    FormatFooter( _dataRange );
+                }
+                else
+                {
+                    _excelTable = CreateExcelTable( _dataTable );
+                    var _fields = DataMeasure?.Fields;
+                    var _numerics = DataMeasure?.Numerics;
+                    _pivotTable = CreatePivotTable( _dataRange, "PivotData", _fields, _numerics );
+                }
+            }
+            catch( Exception ex )
+            {
+                Fail( ex );
+                Dispose( );
+            }
+        }
+
+        /// <summary>
+        /// Initializes the workbook properties.
+        /// </summary>
+        private void InitializeWorkbook( )
+        {
+            try
+            {
+                _excelWorkbook.Properties.Author = "Terry D. Eppler, PhD.";
+                _excelWorkbook.Properties.Application = "Badger";
+                _excelWorkbook.Properties.Company = "US EPA";
+                _excelWorkbook.Properties.Modified = DateTime.Now;
+            }
+            catch( Exception ex )
+            {
+                Fail( ex );
+                Dispose( );
+            }
+        }
+
+        /// <summary>
+        /// Saves this instance.
+        /// </summary>
+        public void SaveDialog( )
+        {
+            try
+            {
+                var _browser = new SaveFileDialog( );
+                _browser.ShowDialog( );
+                _savePath = _browser.FileName + @"\" + _dataTable.TableName + ".xlsx";
+                _excelPackage.SaveAs( _savePath );
+            }
+            catch( Exception ex )
+            {
+                Fail( ex );
+                Dispose( );
             }
         }
 
@@ -260,160 +358,56 @@ namespace Ninja
         }
 
         /// <summary>
-        /// Initializes the worksheets.
+        /// Gets or sets the height of the row.
         /// </summary>
-        private void InitializeSheetView( )
+        /// <value>
+        /// The height of the row.
+        /// </value>
+        public double RowHeight
         {
-            try
+            get
             {
-                for( var _i = 0; _i < _excelWorkbook.Worksheets.Count; _i++ )
-                {
-                    _excelWorkbook.Worksheets[ _i ].View.ShowGridLines = false;
-                    _excelWorkbook.Worksheets[ _i ].View.PageLayoutView = true;
-                    _excelWorkbook.Worksheets[ _i ].View.ShowHeaders = true;
-                    _excelWorkbook.Worksheets[ _i ].View.ZoomScale = _zoomLevel;
-                }
+                return _rowHeight;
             }
-            catch( Exception ex )
+
+            private protected set
             {
-                Fail( ex );
-                Dispose( );
+                _rowHeight = value;
             }
         }
 
         /// <summary>
-        /// Initializes the printer settings.
+        /// Gets or sets the width of the column.
         /// </summary>
-        private void InitializePrinterSettings( )
+        /// <value>
+        /// The width of the column.
+        /// </value>
+        public double ColumnWidth
         {
-            try
+            get
             {
-                for( var _i = 0; _i < _excelWorkbook.Worksheets.Count; _i++ )
-                {
-                    _excelWorkbook.Worksheets[ _i ].PrinterSettings.LeftMargin = _leftMargin;
-                    _excelWorkbook.Worksheets[ _i ].PrinterSettings.RightMargin = _rightMargin;
-                    _excelWorkbook.Worksheets[ _i ].PrinterSettings.HeaderMargin = _headerMargin;
-                    _excelWorkbook.Worksheets[ _i ].PrinterSettings.FooterMargin = _footerMargin;
-                    _excelWorkbook.Worksheets[ _i ].PrinterSettings.TopMargin = _topMargin;
-                    _excelWorkbook.Worksheets[ _i ].PrinterSettings.BottomMargin = _bottomMargin;
-                    _excelWorkbook.Worksheets[ _i ].PrinterSettings.Orientation =
-                        eOrientation.Landscape;
-                }
+                return _columnWidth;
             }
-            catch( Exception ex )
+
+            private protected set
             {
-                Fail( ex );
-                Dispose( );
+                _columnWidth = value;
             }
         }
 
         /// <summary>
-        /// Initializes the header footer.
+        /// The configuration
         /// </summary>
-        private void InitializeHeaderFooter( )
+        public string InternalPath
         {
-            try
+            get
             {
-                var _rows = _dataTable.Rows.Count.ToString( "N0" );
-                var _cols = _dataTable.Columns.Count.ToString( );
-                _dataWorksheet.HeaderFooter.OddFooter.RightAlignedText = "Records:" + '\t'
-                    + "  "
-                    + _rows.PadLeft( 16 )
-                    + Environment.NewLine
-                    + "Columns:" + '\t'
-                    + "  "
-                    + _cols.PadLeft( 19 );
+                return _internalPath;
+            }
 
-                _dataWorksheet.HeaderFooter.OddFooter.CenteredText =
-                    "Page" + '\r' + '\n' +
-                    ExcelHeaderFooter.PageNumber
-                    + " of "
-                    + ExcelHeaderFooter.NumberOfPages;
-
-                _dataWorksheet.HeaderFooter.OddFooter.LeftAlignedText =
-                    "Data as of:"
-                    + Environment.NewLine
-                    + DateTime.Today.ToLongDateString( );
-            }
-            catch( Exception ex )
+            private protected set
             {
-                Fail( ex );
-                Dispose( );
-            }
-        }
-
-        /// <summary>
-        /// Initializes the range cells.
-        /// </summary>
-        private void InitializeActiveGrid( )
-        {
-            try
-            {
-                if( _dataTable == null )
-                {
-                    _dataRange = _dataWorksheet.Cells[ 2, 1, 57, 11 ];
-                    _dataRange.Style.Font.Name = "Segoe UI";
-                    _dataRange.Style.Font.Size = 8;
-                    _dataRange.Style.Font.Bold = false;
-                    _dataRange.Style.Font.Italic = false;
-                    _dataRange.EntireRow.CustomHeight = true;
-                    _dataRange.Style.Font.Color.SetColor( _fontColor );
-                    _dataRange.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
-                    _dataRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
-                    FormatHeader( _dataRange );
-                    SetAlternatingRowColor( _dataRange );
-                    FormatFooter( _dataRange );
-                }
-                else
-                {
-                    _excelTable = CreateExcelTable( _dataTable );
-                    var _fields = DataMeasure?.Fields;
-                    var _numerics = DataMeasure?.Numerics;
-                    _pivotTable = CreatePivotTable( _dataRange, "PivotData", _fields, _numerics );
-                }
-            }
-            catch( Exception ex )
-            {
-                Fail( ex );
-                Dispose( );
-            }
-        }
-
-        /// <summary>
-        /// Initializes the workbook properties.
-        /// </summary>
-        private void InitializeWorkbook( )
-        {
-            try
-            {
-                _excelWorkbook.Properties.Author = "Terry D. Eppler, PhD.";
-                _excelWorkbook.Properties.Application = "Badger";
-                _excelWorkbook.Properties.Company = "US EPA";
-                _excelWorkbook.Properties.Modified = DateTime.Now;
-            }
-            catch( Exception ex )
-            {
-                Fail( ex );
-                Dispose( );
-            }
-        }
-
-        /// <summary>
-        /// Saves this instance.
-        /// </summary>
-        public void SaveDialog( )
-        {
-            try
-            {
-                var _browser = new SaveFileDialog( );
-                _browser.ShowDialog( );
-                _savePath = _browser.FileName + @"\" + _dataTable.TableName + ".xlsx";
-                _excelPackage.SaveAs( _savePath );
-            }
-            catch( Exception ex )
-            {
-                Fail( ex );
-                Dispose( );
+                _internalPath = value;
             }
         }
     }
