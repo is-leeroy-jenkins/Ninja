@@ -8,6 +8,7 @@ namespace Ninja.Views
     using System.Threading;
     using System.Windows;
 
+    /// <inheritdoc />
     /// <summary>
     /// MainWindow.xaml 
     /// </summary>
@@ -17,7 +18,7 @@ namespace Ninja.Views
         /// <summary>
         /// The path
         /// </summary>
-        private protected object _entry = new object();
+        private protected object _entry = new object( );
 
         /// <summary>
         /// The time
@@ -39,9 +40,10 @@ namespace Ninja.Views
         /// </summary>
         public MainWindowViewModel MainWindowViewModel = null;
 
+        /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="MainWindow"/> class.
+        /// <see cref="T:Ninja.Views.MainWindow" /> class.
         /// </summary>
         public MainWindow( )
         {
@@ -244,11 +246,11 @@ namespace Ninja.Views
         /// and unmanaged resources;
         /// <c>false</c> to release only unmanaged resources.
         /// </param>
-        protected virtual void Dispose(bool disposing)
+        protected virtual void Dispose( bool disposing )
         {
-            if(disposing)
+            if( disposing )
             {
-                _timer?.Dispose();
+                _timer?.Dispose( );
             }
         }
 
@@ -260,19 +262,19 @@ namespace Ninja.Views
         /// </summary>
         public void Dispose( )
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            Dispose( true );
+            GC.SuppressFinalize( this );
         }
 
         /// <summary>
         /// Fails the specified ex.
         /// </summary>
         /// <param name="ex">The ex.</param>
-        private protected void Fail(Exception ex)
+        private protected void Fail( Exception ex )
         {
             var _error = new ErrorWindow(ex);
-            _error?.SetText();
-            _error?.ShowDialog();
+            _error?.SetText( );
+            _error?.ShowDialog( );
         }
     }
 }

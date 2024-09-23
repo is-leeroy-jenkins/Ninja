@@ -7,7 +7,5 @@
         <Setter Property="Background" Value="{DynamicResource FormBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource FormForeground}" />
         <Setter Property="Margin" Value="1" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
-        <Setter Property="FontSize" Value="12" />
     </Style>
 </ResourceDictionary>

@@ -7,10 +7,10 @@
 
     <Style TargetType="{x:Type tbex:TextBoxEx}">
         <!--  Default style  -->
-        <Setter Property="BorderBrush" Value="LightGray" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BlueBorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Foreground" Value="#3E3E3E" />
-        <Setter Property="Background" Value="White" />
+        <Setter Property="Foreground" Value="{DynamicResource FormForeground}" />
+        <Setter Property="Background" Value="{DynamicResource ControlInterior}" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Height" Value="30" />
         <Setter Property="Width" Value="100" />
@@ -56,11 +56,11 @@
                                         Width="25"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
-                                        Background="White"
-                                        BorderBrush="White"
+                                        Background="{DynamicResource ControlInterior}"
+                                        BorderBrush="{DynamicResource BlueBorderBrush}"
                                         Visibility="{Binding Path=(tbex:TextBoxEx.IsAddBtnVisible), RelativeSource={RelativeSource AncestorType=TextBox}, Converter={StaticResource TextBoxExConverter}}">
                                         <RepeatButton.Content>
-                                            <Image Source="/Themes/up_arrow.png" />
+                                            <Image Source="/UI/Themes/up_arrow.png" />
                                         </RepeatButton.Content>
                                     </RepeatButton>
                                 </Grid>
@@ -70,11 +70,11 @@
                                         Width="25"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
-                                        Background="White"
-                                        BorderBrush="White"
+                                        Background="{DynamicResource ControlInterior}"
+                                        BorderBrush="{DynamicResource BlueBorderBrush}"
                                         Visibility="{Binding Path=(tbex:TextBoxEx.IsRemoveBtnVisible), RelativeSource={RelativeSource AncestorType=TextBox}, Converter={StaticResource TextBoxExConverter}}">
                                         <RepeatButton.Content>
-                                            <Image Source="/Themes/down_arrow.png" />
+                                            <Image Source="/UI/Themes/down_arrow.png" />
                                         </RepeatButton.Content>
                                     </RepeatButton>
                                 </Grid>

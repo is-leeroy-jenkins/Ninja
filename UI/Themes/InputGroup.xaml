@@ -5,7 +5,7 @@
         <ResourceDictionary Source="Button.xaml" />
         <ResourceDictionary Source="Label.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    <!--  按钮  -->
+
     <Style
         x:Key="InputGroupButtonBaseStyle"
         BasedOn="{StaticResource ButtonBaseBaseStyle}"
@@ -18,8 +18,8 @@
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush-Default1}" />
-        <Setter Property="Foreground" Value="{DynamicResource Foreground-Default}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BlueBorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource FormForeground}" />
     </Style>
     <Style
         x:Key="InputGroupButtonLeftStyle"
@@ -45,7 +45,6 @@
                                     ShadowDepth="0"
                                     Color="#9966afe9" />
                             </Border.Effect>
-                            <!--  点击时显示  -->
                             <Grid
                                 x:Name="PressedLayer"
                                 Visibility="Collapsed">

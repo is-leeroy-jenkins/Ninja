@@ -1,17 +1,18 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:n="clr-namespace:Ninja">
+
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="BaseStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    <!--  按钮 源码行数:2782-3171  -->
-    <!--  ButtonBase基样式  -->
+
     <Style
         x:Key="ButtonBaseBaseStyle"
         BasedOn="{StaticResource BaseStyle}"
         TargetType="{x:Type ButtonBase}">
         <Setter Property="Height" Value="{DynamicResource DefaultControlHeight}" />
-        <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource FormForeground}" />
         <Setter Property="Padding" Value="{DynamicResource DefaultControlPadding}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Cursor" Value="Hand" />
@@ -20,7 +21,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
-    <!--  Button基样式  -->
+   
     <Style
         x:Key="ButtonBaseStyle"
         BasedOn="{StaticResource ButtonBaseBaseStyle}"
@@ -37,7 +38,7 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="4"
                             SnapsToDevicePixels="true">
-                            <!--  点击时显示  -->
+                     
                             <Grid
                                 x:Name="PressedLayer"
                                 Visibility="Collapsed">
@@ -69,7 +70,7 @@
                                 RecognizesAccessKey="True"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
-                        <!--  禁用时显示  -->
+               
                         <Rectangle
                             x:Name="EnabledLayer"
                             Fill="#4CFFFFFF"
@@ -90,7 +91,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <!--  ToggleButton基样式  -->
+
     <Style
         x:Key="ToggleButtonBaseStyle"
         BasedOn="{StaticResource ButtonBaseBaseStyle}"
@@ -107,7 +108,7 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="4"
                             SnapsToDevicePixels="true">
-                            <!--  点下时显示  -->
+       
                             <Grid
                                 x:Name="CheckedLayer"
                                 Visibility="Collapsed">
@@ -139,7 +140,7 @@
                                 RecognizesAccessKey="True"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
-                        <!--  禁用时显示  -->
+
                         <Rectangle
                             x:Name="EnabledLayer"
                             Fill="#4CFFFFFF"
@@ -316,6 +317,37 @@
                 <Setter Property="Background" Value="#c9302c" />
                 <Setter Property="BorderBrush" Value="#ac2925" />
             </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!--  *********************************************** MetroButton *****************************************************  -->
+
+    <Style TargetType="{x:Type n:MetroButton}">
+        <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BlueBorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource LightBlueBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="Margin" Value="1" />
+        <Setter Property="FontStyle" Value="Normal" />
+
+        <Style.Triggers>
+
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource ControlHoverBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource LightBlueBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
+            </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource BlueBorderBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource LightBlueBrush}" />
+            </Trigger>
+
+
         </Style.Triggers>
     </Style>
 </ResourceDictionary>

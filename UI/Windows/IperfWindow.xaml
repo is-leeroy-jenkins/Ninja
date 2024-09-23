@@ -9,13 +9,131 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:oxy="http://oxyplot.org/wpf"
     xmlns:src="clr-namespace:Ninja.Themes"
+    xmlns:sync="http://schemas.syncfusion.com/wpf"
     xmlns:tbex="clr-namespace:TextBoxEx"
+    xmlns:ninja="clr-namespace:Ninja"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+
+    <!--  ******************************************** Resources ******************************************  -->
+
     <UserControl.Resources>
         <cov:IperfCommandConverter x:Key="IperfCommandConverter" />
+        <Style TargetType="ToolTip">
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="{StaticResource BlueBorderBrush}" />
+            <Setter Property="Background" Value="{StaticResource BlackBackground}" />
+            <Setter Property="Foreground" Value="{StaticResource LightBlueBrush}" />
+        </Style>
     </UserControl.Resources>
+
+    <!--  ******************************************** Context Menu ******************************************  -->
+
+    <UserControl.ContextMenu>
+        <ContextMenu Name="DataWindowContextMenu">
+            <sync:MenuItemAdv
+                Click="OnFileMenuOptionClick"
+                Header="File"
+                ToolTip="Browse File System">
+                <sync:MenuItemAdv.Icon>
+                    <Image Source="/Resources/Assets/MenuImages/FileItem.png" />
+                </sync:MenuItemAdv.Icon>
+            </sync:MenuItemAdv>
+
+            <sync:MenuItemAdv
+                Click="OnFolderMenuOptionClick"
+                Foreground="{StaticResource LightBlueBrush}"
+                Header="Folder"
+                ToolTip="Browse Directories">
+                <sync:MenuItemAdv.Icon>
+                    <Image Source="/Resources/Assets/MenuImages/FolderItem.png" />
+                </sync:MenuItemAdv.Icon>
+            </sync:MenuItemAdv>
+
+            <Separator Background="{StaticResource BlueBorderBrush}" />
+
+            <sync:MenuItemAdv
+                Click="OnChromeOptionClick"
+                Foreground="{StaticResource LightBlueBrush}"
+                Header="Chrome"
+                ToolTip="Launch Chrome Browser">
+                <sync:MenuItemAdv.Icon>
+                    <Image Source="/Resources/Assets/MenuImages/ChromeItem.png" />
+                </sync:MenuItemAdv.Icon>
+            </sync:MenuItemAdv>
+
+            <sync:MenuItemAdv
+                Click="OnEdgeOptionClick"
+                Foreground="{StaticResource LightBlueBrush}"
+                Header="Edge"
+                ToolTip="Launch Edge Browser">
+                <sync:MenuItemAdv.Icon>
+                    <Image Source="/Resources/Assets/MenuImages/EdgeItem.png" />
+                </sync:MenuItemAdv.Icon>
+            </sync:MenuItemAdv>
+
+            <sync:MenuItemAdv
+                Click="OnFirefoxOptionClick"
+                Foreground="{StaticResource LightBlueBrush}"
+                Header="FireFox"
+                ToolTip="Launch Firefox Browser">
+                <sync:MenuItemAdv.Icon>
+                    <Image Source="/Resources/Assets/MenuImages/FirefoxItem.png" />
+                </sync:MenuItemAdv.Icon>
+            </sync:MenuItemAdv>
+
+            <Separator Background="{StaticResource BlueBorderBrush}" />
+
+            <sync:MenuItemAdv
+                Click="OnCalculatorMenuOptionClick"
+                Foreground="{StaticResource LightBlueBrush}"
+                Header="Calculator"
+                ToolTip="Open Calculator">
+                <sync:MenuItemAdv.Icon>
+                    <Image Source="/Resources/Assets/MenuImages/CalculatorItem.png" />
+                </sync:MenuItemAdv.Icon>
+            </sync:MenuItemAdv>
+
+            <sync:MenuItemAdv
+                Click="OnControlPanelOptionClick"
+                Foreground="{StaticResource LightBlueBrush}"
+                Header="Control Panel"
+                ToolTip="Windows Control Panel">
+                <sync:MenuItemAdv.Icon>
+                    <Image Source="/Resources/Assets/MenuImages/ControlPanelItem.png" />
+                </sync:MenuItemAdv.Icon>
+            </sync:MenuItemAdv>
+
+            <sync:MenuItemAdv
+                Click="OnTaskManagerOptionClick"
+                Foreground="{StaticResource LightBlueBrush}"
+                Header="Task Manager"
+                ToolTip="Windows Task Manager">
+                <sync:MenuItemAdv.Icon>
+                    <Image Source="/Resources/Assets/MenuImages/TaskManagerItem.png" />
+                </sync:MenuItemAdv.Icon>
+            </sync:MenuItemAdv>
+
+            <Separator Background="{StaticResource BlueBorderBrush}" />
+
+            <sync:MenuItemAdv
+                Click="OnCloseOptionClick"
+                Foreground="{StaticResource LightBlueBrush}"
+                Header="Exit"
+                ToolTip="Exit Application">
+                <sync:MenuItemAdv.Icon>
+                    <Image Source="/Resources/Assets/MenuImages/CloseItem.png" />
+                </sync:MenuItemAdv.Icon>
+            </sync:MenuItemAdv>
+
+        </ContextMenu>
+    </UserControl.ContextMenu>
+
+
+
+    <!--  ******************************************** Layout  *********************************************  -->
+
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -25,7 +143,7 @@
         <Grid
             Grid.Column="0"
             Grid.ColumnSpan="1"
-            Background="#f4f5f6"
+            Background="{StaticResource FormBackground}"
             UseLayoutRounding="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -41,6 +159,7 @@
             <TextBlock
                 Grid.Row="0"
                 Margin="10,10,0,0"
+                Foreground="{StaticResource BlueBorderBrush}"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Top"
                 FontSize="24"
@@ -59,7 +178,7 @@
                 <GroupBox
                     Header="Iperf Config"
                     Style="{StaticResource AccentGroupBox}">
-                    <Grid Background="White">
+                    <Grid Background="{StaticResource FormBackground}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -79,39 +198,48 @@
 
                         <TextBlock
                             Grid.Row="1"
+                            Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Version" />
-                        <ComboBox
+                        <ninja:MetroComboBox
                             Grid.Row="1"
                             Width="130"
                             Margin="0,15,10,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
+                            Background="{StaticResource ControlInterior}"
+                            Foreground="{StaticResource WhiteForeground}"
+                            BorderBrush="{StaticResource BlueBorderBrush}"
                             SelectedItem="{Binding IperfModel.Version}"
                             Text="{Binding IperfModel.Version, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem>iperf.exe</ComboBoxItem>
-                            <ComboBoxItem>iperf3.exe</ComboBoxItem>
-                        </ComboBox>
+                            <ninja:MetroComboBoxItem>iperf.exe</ninja:MetroComboBoxItem>
+                            <ninja:MetroComboBoxItem>iperf3.exe</ninja:MetroComboBoxItem>
+                        </ninja:MetroComboBox>
                         <TextBlock
                             Grid.Row="2"
+                            Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Role" />
-                        <ComboBox
+                        <ninja:MetroComboBox
                             Grid.Row="2"
                             Width="130"
                             Margin="0,5,10,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
+                            Background="{StaticResource ControlInterior}"
+                            Foreground="{StaticResource WhiteForeground}"
+                            BorderBrush="{StaticResource BlueBorderBrush}"
                             SelectedItem="{Binding IperfModel.Role}"
                             Text="{Binding IperfModel.Role, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem>-s</ComboBoxItem>
-                            <ComboBoxItem>-c</ComboBoxItem>
-                        </ComboBox>
+                            <ninja:MetroComboBoxItem>-s</ninja:MetroComboBoxItem>
+                            <ninja:MetroComboBoxItem>-c</ninja:MetroComboBoxItem>
+                        </ninja:MetroComboBox>
                         <TextBlock
                             Grid.Row="3"
+                            Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Server IP" />
-                        <TextBox
+                        <tbex:TextBoxEx
                             Grid.Row="3"
                             Width="130"
                             Margin="0,5,10,0"
@@ -119,6 +247,7 @@
                             Text="{Binding IperfModel.ServerIp}" />
                         <TextBlock
                             Grid.Row="4"
+                            Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Port" />
                         <tbex:TextBoxEx
@@ -128,60 +257,79 @@
 
                         <TextBlock
                             Grid.Row="5"
+                            Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Parallel" />
                         <tbex:TextBoxEx
                             Grid.Row="5"
                             Minimum="1"
+                            Background="{StaticResource ControlInterior}"
+                            Foreground="{StaticResource WhiteForeground}"
+                            BorderBrush="{StaticResource BlueBorderBrush}"
+                            BorderThickness="1"
                             Text="{Binding IperfModel.Parallel}" />
 
                         <TextBlock
                             Grid.Row="6"
+                            Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Time(s)" />
                         <tbex:TextBoxEx
                             Grid.Row="6"
-                            Minimum="1"
+                            Background="{StaticResource ControlInterior}"
+                            Foreground="{StaticResource WhiteForeground}"
+                            BorderBrush="{StaticResource BlueBorderBrush}"
+                            BorderThickness="1"
                             Text="{Binding IperfModel.Time}" />
 
                         <TextBlock
                             Grid.Row="7"
+                            Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Interval(s)" />
                         <tbex:TextBoxEx
                             Grid.Row="7"
-                            Minimum="1"
+                            Background="{StaticResource ControlInterior}"
+                            Foreground="{StaticResource WhiteForeground}"
+                            BorderBrush="{StaticResource BlueBorderBrush}"
+                            BorderThickness="1"
                             Text="{Binding IperfModel.Interval}" />
 
                         <RadioButton
                             Grid.Row="8"
                             Content="TCP Window Size"
                             GroupName="TcpUdp"
+                            Foreground="{StaticResource WhiteForeground}"
                             IsChecked="{Binding IperfModel.TcpFlag}"
                             Style="{StaticResource MenuItemRadioButton}" />
                         <tbex:TextBoxEx
                             Grid.Row="8"
                             Width="45"
                             Margin="0,5,65,0"
+                            Background="{StaticResource ControlInterior}"
+                            Foreground="{StaticResource WhiteForeground}"
+                            BorderBrush="{StaticResource BlueBorderBrush}"
+                            BorderThickness="1"
                             Text="{Binding IperfModel.TcpWindowSize}" />
-                        <ComboBox
+                        <ninja:MetroComboBox
                             Grid.Row="8"
                             Width="55"
                             Margin="0,5,10,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             HorizontalContentAlignment="Left"
-                            FontSize="12"
+                            FontSize="10"
                             SelectedItem="{Binding IperfModel.TcpWindowUnit}"
                             Text="{Binding IperfModel.TcpWindowUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem>M</ComboBoxItem>
-                            <ComboBoxItem>m</ComboBoxItem>
-                            <ComboBoxItem>K</ComboBoxItem>
-                            <ComboBoxItem>k</ComboBoxItem>
-                        </ComboBox>
+                            <ninja:MetroComboBoxItem>M</ninja:MetroComboBoxItem>
+                            <ninja:MetroComboBoxItem>m</ninja:MetroComboBoxItem>
+                            <ninja:MetroComboBoxItem>K</ninja:MetroComboBoxItem>
+                            <ninja:MetroComboBoxItem>k</ninja:MetroComboBoxItem>
+                        </ninja:MetroComboBox>
 
                         <RadioButton
                             Grid.Row="9"
+                            Foreground="{StaticResource WhiteForeground}"
                             Content="UDP Bandwidth"
                             GroupName="TcpUdp"
                             IsChecked="{Binding IperfModel.UdpFlag}"
@@ -192,28 +340,37 @@
                             Width="45"
                             Margin="0,5,65,0"
                             Cursor="Hand"
+                            Background="{StaticResource ControlInterior}"
+                            Foreground="{StaticResource WhiteForeground}"
+                            BorderBrush="{StaticResource BlueBorderBrush}"
+                            BorderThickness="1"
                             Text="{Binding IperfModel.BandWidth}" />
 
-                        <ComboBox
+                        <ninja:MetroComboBox
                             Grid.Row="9"
                             Width="55"
                             Margin="0,5,10,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
-                            FontSize="12"
+                            FontSize="10"
                             SelectedItem="{Binding IperfModel.BandWidthUnit}"
                             Text="{Binding IperfModel.BandWidthUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem>M</ComboBoxItem>
-                            <ComboBoxItem>m</ComboBoxItem>
-                            <ComboBoxItem>K</ComboBoxItem>
-                            <ComboBoxItem>k</ComboBoxItem>
-                        </ComboBox>
+                            <ninja:MetroComboBoxItem>M</ninja:MetroComboBoxItem>
+                            <ninja:MetroComboBoxItem>m</ninja:MetroComboBoxItem>
+                            <ninja:MetroComboBoxItem>K</ninja:MetroComboBoxItem>
+                            <ninja:MetroComboBoxItem>k</ninja:MetroComboBoxItem>
+                        </ninja:MetroComboBox>
                         <TextBlock
                             Grid.Row="10"
+                            Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Packet Length" />
                         <tbex:TextBoxEx
                             Grid.Row="10"
+                            Background="{StaticResource ControlInterior}"
+                            Foreground="{StaticResource WhiteForeground}"
+                            BorderBrush="{StaticResource BlueBorderBrush}"
+                            BorderThickness="1"
                             Text="{Binding IperfModel.PacketLen}" />
                         <CheckBox
                             Grid.Row="11"
@@ -228,7 +385,7 @@
         </Grid>
         <Grid
             Grid.Column="1"
-            Background="White"
+            Background="{StaticResource FormBackground}"
             ClipToBounds="True"
             SnapsToDevicePixels="True">
             <Grid.RowDefinitions>
@@ -244,16 +401,19 @@
                     <!--<ColumnDefinition Width="150"/>-->
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                <TextBox
+                <ninja:MetroTextBox
                     x:Name="IperfCommand"
                     Grid.Column="0"
                     Width="Auto"
                     Height="30"
                     Margin="10,0,0,0"
                     HorizontalAlignment="Stretch"
+                    Background="{StaticResource ControlInterior}"
+                    Foreground="{StaticResource WhiteForeground}"
+                    BorderBrush="{StaticResource BlueBorderBrush}"
                     Style="{DynamicResource input-group-addon left}"
                     Tag="{Binding IperfModel.Version}">
-                    <TextBox.Text>
+                    <ninja:MetroTextBox.Text>
                         <MultiBinding
                             Converter="{StaticResource IperfCommandConverter}"
                             Mode="TwoWay">
@@ -273,26 +433,35 @@
                             <Binding Path="IperfModel.Reverse" />
                             <Binding Path="IperfModel.Command" />
                         </MultiBinding>
-                    </TextBox.Text>
-                </TextBox>
+                    </ninja:MetroTextBox.Text>
+                </ninja:MetroTextBox>
 
-                <btnex:ButtonEx
+                <ninja:MetroButton
                     Grid.Column="1"
                     Margin="10,0,0,0"
-                    ButtonType="Normal"
                     Command="{Binding RunIperfCommand}"
+                    Background="{StaticResource ControlInterior}"
+                    Foreground="{StaticResource WhiteForeground}"
+                    BorderBrush="{StaticResource BlueBorderBrush}"
+                    BorderThickness="1"
                     CommandParameter="{Binding ElementName=IperfCommand, Path=Text}"
                     Content="Run" />
-                <btnex:ButtonEx
+                <ninja:MetroButton
                     Grid.Column="1"
                     Margin="45,0,0,0"
-                    ButtonType="Normal"
+                    Background="{StaticResource ControlInterior}"
+                    Foreground="{StaticResource WhiteForeground}"
+                    BorderBrush="{StaticResource BlueBorderBrush}"
+                    BorderThickness="1"
                     Command="{Binding StopIperfCommand}"
                     Content="Stop" />
-                <btnex:ButtonEx
+                <ninja:MetroButton
                     Grid.Column="1"
                     Margin="80,0,0,0"
-                    ButtonType="Normal"
+                Background="{StaticResource ControlInterior}"
+                Foreground="{StaticResource WhiteForeground}"
+                BorderBrush="{StaticResource BlueBorderBrush}"
+                BorderThickness="1"
                     Command="{Binding IperfHelpCommand}"
                     Content="Help" />
 

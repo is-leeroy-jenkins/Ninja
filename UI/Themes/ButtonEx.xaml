@@ -6,14 +6,14 @@
     <Style TargetType="{x:Type btnex:ButtonEx}">
         <Style.Triggers>
             <Trigger Property="ButtonType" Value="Normal">
-                <Setter Property="Background" Value="#2d6bdc" />
-                <Setter Property="MouseOverBackground" Value="#1e54b6" />
-                <Setter Property="MousePressedBackground" Value="#0963c5" />
-                <Setter Property="Foreground" Value="White" />
-                <Setter Property="MouseOverForeground" Value="White" />
-                <Setter Property="MousePressedForeground" Value="White" />
-                <Setter Property="BorderBrush" Value="Transparent" />
-                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Background" Value="{StaticResource ControlInterior}" />
+                <Setter Property="MouseOverBackground" Value="{StaticResource ControlHoverBrush}" />
+                <Setter Property="MousePressedBackground" Value="{StaticResource SteelBlueBackground}" />
+                <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
+                <Setter Property="MouseOverForeground" Value="{StaticResource WhiteForeground}" />
+                <Setter Property="MousePressedForeground" Value="{StaticResource WhiteForeground}" />
+                <Setter Property="BorderBrush" Value="{StaticResource BlueBorderBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
                 <Setter Property="Height" Value="25" />
                 <Setter Property="Width" Value="30" />
                 <Setter Property="CornerRadius" Value="2" />
@@ -41,7 +41,7 @@
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsEnabled" Value="False">
-                                    <Setter TargetName="border" Property="Background" Value="Gray" />
+                                    <Setter TargetName="border" Property="Background" Value="{StaticResource ControlInterior}" />
                                     <Setter TargetName="txt" Property="Foreground" Value="{Binding MouseOverForeground, RelativeSource={RelativeSource TemplatedParent}}" />
                                     <Setter TargetName="border" Property="BorderBrush" Value="{Binding MouseOverBorderbrush, RelativeSource={RelativeSource TemplatedParent}}" />
                                 </Trigger>
@@ -89,9 +89,9 @@
             </Trigger>
             <Trigger Property="ButtonType" Value="Text">
                 <Setter Property="Cursor" Value="Hand" />
-                <Setter Property="Foreground" Value="#002c99" />
-                <Setter Property="MouseOverForeground" Value="#FF2c99" />
-                <Setter Property="MousePressedForeground" Value="#002c99" />
+                <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
+                <Setter Property="MouseOverForeground" Value="{StaticResource WhiteForeground}" />
+                <Setter Property="MousePressedForeground" Value="{StaticResource WhiteForeground}" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type btnex:ButtonEx}">
@@ -115,9 +115,9 @@
             </Trigger>
             <Trigger Property="ButtonType" Value="IconText">
                 <Setter Property="Cursor" Value="Hand" />
-                <Setter Property="Foreground" Value="#555" />
-                <Setter Property="MouseOverForeground" Value="#555" />
-                <Setter Property="MousePressedForeground" Value="#555" />
+                <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
+                <Setter Property="MouseOverForeground" Value="{StaticResource WhiteForeground}" />
+                <Setter Property="MousePressedForeground" Value="{StaticResource WhiteForeground}" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type btnex:ButtonEx}">

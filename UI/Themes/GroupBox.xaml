@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
     <!--<ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Styles;component/Themes/Styles/Colors.xaml" />
         <ResourceDictionary Source="/Styles;component/Themes/Styles/CommonControls.xaml" />
@@ -8,7 +9,7 @@
 
     <BorderGapMaskConverter x:Key="BorderGapMaskConverter" />
     <Style TargetType="{x:Type GroupBox}">
-        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BlueBorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Template">
             <Setter.Value>
@@ -111,7 +112,7 @@
                             x:Name="Header"
                             Grid.Row="0"
                             Padding="6,3"
-                            Background="#1e54b6">
+                            Background="{StaticResource ControlInterior}">
                             <ContentPresenter
                                 ContentSource="Header"
                                 RecognizesAccessKey="True"
@@ -134,7 +135,7 @@
         x:Key="GrayGroupBox"
         BasedOn="{StaticResource AccentGroupBox}"
         TargetType="{x:Type GroupBox}">
-        <Setter Property="Background" Value="{StaticResource BackgroundBrush.Dark}" />
-        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+        <Setter Property="Background" Value="{StaticResource ControlInterior}" />
+        <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
     </Style>
 </ResourceDictionary>

@@ -1,11 +1,11 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:bdgr="clr-namespace:Ninja">
+    xmlns:n="clr-namespace:Ninja">
 
     <!--  *********************************************** MetroButton *****************************************************  -->
 
-    <Style TargetType="{x:Type bdgr:MetroButton}">
+    <Style TargetType="{x:Type n:MetroButton}">
         <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BlueBorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource LightBlueBrush}" />
@@ -14,8 +14,6 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="1" />
         <Setter Property="Margin" Value="1" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
-        <Setter Property="FontSize" Value="12" />
         <Setter Property="FontStyle" Value="Normal" />
 
         <Style.Triggers>

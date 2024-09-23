@@ -131,8 +131,6 @@
     <Style
         x:Key="SyncfusionButtonAdvStyle"
         TargetType="{x:Type sync:ButtonAdv}">
-        <Setter Property="SmallIcon" Value="/Network/Clients/Baby/Properties/Images/WordArt16.png" />
-        <Setter Property="LargeIcon" Value="/Network/Clients/Baby/Properties/Images/WordArt32.png" />
         <Setter Property="Label" Value="Button" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="BorderThickness" Value="1" />

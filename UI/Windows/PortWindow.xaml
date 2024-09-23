@@ -1,103 +1,284 @@
-﻿<UserControl x:Class="Ninja.Views.PortWindow"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             
-             xmlns:local="clr-namespace:Ninja.Views"
-             xmlns:tbex="clr-namespace:TextBoxEx"
-             xmlns:btnex="clr-namespace:ButtonEx"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-   
-    <Grid >
+﻿<UserControl
+    x:Class="Ninja.Views.PortWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:btnex="clr-namespace:ButtonEx"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Ninja.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sync="http://schemas.syncfusion.com/wpf"
+    xmlns:tbex="clr-namespace:TextBoxEx"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <!--  ******************************************** Resources *********************************************  -->
+
+    <UserControl.Resources>
+        <Style TargetType="ToolTip">
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+            <Setter Property="Background" Value="{StaticResource BlackBackground}" />
+            <Setter Property="Foreground" Value="{StaticResource LightBlueBrush}" />
+        </Style>
+    </UserControl.Resources>
+
+    <!--  ******************************************** Context Menu ******************************************  -->
+
+    <UserControl.ContextMenu>
+        <ContextMenu Name="DataWindowContextMenu">
+            <sync:MenuItemAdv
+                Click="OnFileMenuOptionClick"
+                Header="File"
+                ToolTip="Browse File System">
+                <sync:MenuItemAdv.Icon>
+                    <Image Source="/Resources/Assets/MenuImages/FileItem.png" />
+                </sync:MenuItemAdv.Icon>
+            </sync:MenuItemAdv>
+
+            <sync:MenuItemAdv
+                Click="OnFolderMenuOptionClick"
+                Foreground="{StaticResource LightBlueBrush}"
+                Header="Folder"
+                ToolTip="Browse Directories">
+                <sync:MenuItemAdv.Icon>
+                    <Image Source="/Resources/Assets/MenuImages/FolderItem.png" />
+                </sync:MenuItemAdv.Icon>
+            </sync:MenuItemAdv>
+
+            <Separator Background="{StaticResource BorderBrush}" />
+
+            <sync:MenuItemAdv
+                Click="OnChromeOptionClick"
+                Foreground="{StaticResource LightBlueBrush}"
+                Header="Chrome"
+                ToolTip="Launch Chrome Browser">
+                <sync:MenuItemAdv.Icon>
+                    <Image Source="/Resources/Assets/MenuImages/ChromeItem.png" />
+                </sync:MenuItemAdv.Icon>
+            </sync:MenuItemAdv>
+
+            <sync:MenuItemAdv
+                Click="OnEdgeOptionClick"
+                Foreground="{StaticResource LightBlueBrush}"
+                Header="Edge"
+                ToolTip="Launch Edge Browser">
+                <sync:MenuItemAdv.Icon>
+                    <Image Source="/Resources/Assets/MenuImages/EdgeItem.png" />
+                </sync:MenuItemAdv.Icon>
+            </sync:MenuItemAdv>
+
+            <sync:MenuItemAdv
+                Click="OnFirefoxOptionClick"
+                Foreground="{StaticResource LightBlueBrush}"
+                Header="FireFox"
+                ToolTip="Launch Firefox Browser">
+                <sync:MenuItemAdv.Icon>
+                    <Image Source="/Resources/Assets/MenuImages/FirefoxItem.png" />
+                </sync:MenuItemAdv.Icon>
+            </sync:MenuItemAdv>
+
+            <Separator Background="{StaticResource BorderBrush}" />
+
+            <sync:MenuItemAdv
+                Click="OnCalculatorMenuOptionClick"
+                Foreground="{StaticResource LightBlueBrush}"
+                Header="Calculator"
+                ToolTip="Open Calculator">
+                <sync:MenuItemAdv.Icon>
+                    <Image Source="/Resources/Assets/MenuImages/CalculatorItem.png" />
+                </sync:MenuItemAdv.Icon>
+            </sync:MenuItemAdv>
+
+            <sync:MenuItemAdv
+                Click="OnControlPanelOptionClick"
+                Foreground="{StaticResource LightBlueBrush}"
+                Header="Control Panel"
+                ToolTip="Windows Control Panel">
+                <sync:MenuItemAdv.Icon>
+                    <Image Source="/Resources/Assets/MenuImages/ControlPanelItem.png" />
+                </sync:MenuItemAdv.Icon>
+            </sync:MenuItemAdv>
+
+            <sync:MenuItemAdv
+                Click="OnTaskManagerOptionClick"
+                Foreground="{StaticResource LightBlueBrush}"
+                Header="Task Manager"
+                ToolTip="Windows Task Manager">
+                <sync:MenuItemAdv.Icon>
+                    <Image Source="/Resources/Assets/MenuImages/TaskManagerItem.png" />
+                </sync:MenuItemAdv.Icon>
+            </sync:MenuItemAdv>
+
+            <Separator Background="{StaticResource BorderBrush}" />
+
+            <sync:MenuItemAdv
+                Click="OnCloseOptionClick"
+                Foreground="{StaticResource LightBlueBrush}"
+                Header="Exit"
+                ToolTip="Exit Application">
+                <sync:MenuItemAdv.Icon>
+                    <Image Source="/Resources/Assets/MenuImages/CloseItem.png" />
+                </sync:MenuItemAdv.Icon>
+            </sync:MenuItemAdv>
+
+        </ContextMenu>
+    </UserControl.ContextMenu>
+
+    <!--  ******************************************** Layout ******************************************  -->
+
+    <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="250" />
             <!--<ColumnDefinition Width="150"/>-->
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" Background="#f4f5f6" UseLayoutRounding="True" Grid.ColumnSpan="1" >
+        <Grid
+            Grid.Column="0"
+            Grid.ColumnSpan="1"
+            Background="#f4f5f6"
+            UseLayoutRounding="True">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
 
             </Grid.RowDefinitions>
-            <TextBlock Margin="10,10,0,0" HorizontalAlignment="Stretch" Text="Port Listen" VerticalAlignment="Top" FontSize="24" Grid.Row="0" FontWeight="Bold"/>
-            <Separator Margin="10,50,10,0" VerticalAlignment="Bottom"  HorizontalAlignment="Stretch" Grid.Row="0"></Separator>
-            <!--<TextBlock Style="{StaticResource MenuItemText}" Text="Network Interfaces" Grid.Row="1"/>-->
-            <StackPanel Margin="10,10,10,0" MinWidth="200" Grid.Row="1">
-                <GroupBox
-                Width="Auto"
-                Height="Auto"
+            <TextBlock
+                Grid.Row="0"
+                Margin="10,10,0,0"
                 HorizontalAlignment="Stretch"
-                Header="Network Interfaces"
-                Style="{StaticResource AccentGroupBox}" >
-                    <Grid Background="White" >
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <ComboBox x:Name="NetInfoCombox" Margin="0,10,0,0" ItemsSource="{Binding PortModel.NetInfoItemSource}" DisplayMemberPath="description" SelectedIndex="0" SelectedItem="{Binding PortModel.NetInfoItemSource}" HorizontalAlignment="Stretch" Grid.Row="0" VerticalAlignment="Center" Width="Auto">
-                    </ComboBox>
-                        <TextBlock Margin="5,10,0,0" Grid.Row="1" Text="Name:"/>
-                        <TextBlock Margin="50,10,0,0" Grid.Row="1" Text="{Binding ElementName=NetInfoCombox, Path=SelectedItem.Name}"/>
-                        <TextBlock Margin="5,10,0,0" Grid.Row="2" Text="IP:"/>
-                        <TextBlock Margin="50,10,0,0" Grid.Row="2" Text="{Binding ElementName=NetInfoCombox, Path=SelectedItem.Ip}"/>
-                        <TextBlock Margin="5,10,0,10" Grid.Row="3" Text="Mask:"/>
-                        <TextBlock Margin="50,10,0,10" Grid.Row="3" Text="{Binding ElementName=NetInfoCombox, Path=SelectedItem.Mask}"/>
-                    </Grid>
-
-                </GroupBox>
-            </StackPanel>
-
-            <StackPanel Margin="10,10,10,0" MinWidth="200" Grid.Row="2">
-                <GroupBox Header="Port Config" Style="{StaticResource AccentGroupBox}" >
+                VerticalAlignment="Top"
+                FontSize="24"
+                FontWeight="Bold"
+                Text="Port Listen" />
+            <Separator
+                Grid.Row="0"
+                Margin="10,50,10,0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
+            <!--<TextBlock Style="{StaticResource MenuItemText}" Text="Network Interfaces" Grid.Row="1"/>-->
+            <StackPanel
+                Grid.Row="1"
+                MinWidth="200"
+                Margin="10,10,10,0">
+                <GroupBox
+                    Width="Auto"
+                    Height="Auto"
+                    HorizontalAlignment="Stretch"
+                    Header="Network Interfaces"
+                    Style="{StaticResource AccentGroupBox}">
                     <Grid Background="White">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <btnex:ButtonEx Margin="0,15,0,10" Content="Refresh" ButtonType="Normal" Grid.Row="3" HorizontalAlignment="Center" Width="100" Height="30" Command="{Binding RefreshCommand}" />
+                        <ComboBox
+                            x:Name="NetInfoCombox"
+                            Grid.Row="0"
+                            Width="Auto"
+                            Margin="0,10,0,0"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            DisplayMemberPath="description"
+                            ItemsSource="{Binding PortModel.NetInfoItemSource}"
+                            SelectedIndex="0"
+                            SelectedItem="{Binding PortModel.NetInfoItemSource}" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Margin="5,10,0,0"
+                            Text="Name:" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Margin="50,10,0,0"
+                            Text="{Binding ElementName=NetInfoCombox, Path=SelectedItem.Name}" />
+                        <TextBlock
+                            Grid.Row="2"
+                            Margin="5,10,0,0"
+                            Text="IP:" />
+                        <TextBlock
+                            Grid.Row="2"
+                            Margin="50,10,0,0"
+                            Text="{Binding ElementName=NetInfoCombox, Path=SelectedItem.Ip}" />
+                        <TextBlock
+                            Grid.Row="3"
+                            Margin="5,10,0,10"
+                            Text="Mask:" />
+                        <TextBlock
+                            Grid.Row="3"
+                            Margin="50,10,0,10"
+                            Text="{Binding ElementName=NetInfoCombox, Path=SelectedItem.Mask}" />
+                    </Grid>
+
+                </GroupBox>
+            </StackPanel>
+
+            <StackPanel
+                Grid.Row="2"
+                MinWidth="200"
+                Margin="10,10,10,0">
+                <GroupBox
+                    Header="Port Config"
+                    Style="{StaticResource AccentGroupBox}">
+                    <Grid Background="White">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <btnex:ButtonEx
+                            Grid.Row="3"
+                            Width="100"
+                            Height="30"
+                            Margin="0,15,0,10"
+                            HorizontalAlignment="Center"
+                            ButtonType="Normal"
+                            Command="{Binding RefreshCommand}"
+                            Content="Refresh" />
                     </Grid>
                 </GroupBox>
             </StackPanel>
- 
+
         </Grid>
         <Grid Grid.Column="1">
-            <Grid >
+            <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*" />
 
                 </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0" SnapsToDevicePixels="True" ClipToBounds="True" Margin="0,0,0,0">
+                <Grid
+                    Grid.Row="0"
+                    Margin="0,0,0,0"
+                    ClipToBounds="True"
+                    SnapsToDevicePixels="True">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="6*"/>
-                        <RowDefinition Height="59*"/>
+                        <RowDefinition Height="6*" />
+                        <RowDefinition Height="59*" />
                     </Grid.RowDefinitions>
                     <DataGrid
+                        Grid.RowSpan="2"
                         Width="Auto"
                         Height="Auto"
                         Margin="4,6,4,6"
-                            AutoGenerateColumns="True"  ColumnWidth="*"
+                        AutoGenerateColumns="True"
+                        ColumnWidth="*"
                         HeadersVisibility="Column"
                         ItemsSource="{Binding PortListenStats}"
-                        RowHeight="22" Grid.RowSpan="2" />
+                        RowHeight="22" />
                 </Grid>
             </Grid>
         </Grid>
-  
+
     </Grid>
 </UserControl>

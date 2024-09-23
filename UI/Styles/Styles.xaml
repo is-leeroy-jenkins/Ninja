@@ -3,6 +3,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ResourceDictionary.MergedDictionaries>
+
+<!--*****************************************  Ninja  ********************************-->
+        
         <ResourceDictionary Source="/UI/Themes/TextBoxEx.xaml" />
         <ResourceDictionary Source="/UI/Themes/ButtonEx.xaml" />
         <ResourceDictionary Source="/UI/Themes/GroupBox.xaml" />
@@ -11,34 +14,115 @@
         <ResourceDictionary Source="/UI/Themes/DataGrid.xaml" />
         <ResourceDictionary Source="/UI/Themes/Checkbox.xaml" />
         <ResourceDictionary Source="/UI/Themes/TabControlEx.xaml" />
+
+<!--*****************************************  Sync  ********************************-->
+        
+        <ResourceDictionary Source="/UI/Styles/Accordion/SfAccordion.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Button/Button.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Button/ButtonAdv.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Calculator/SfCalculator.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Calendar/CalendarEdit.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Chart/ChartArea.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Chart/ChartAxis.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Chart/SfChart.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Chart/ChartToolBar.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Chart/SfChartCommon.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Chart/SfChart3D.xaml" />
+        <ResourceDictionary Source="/UI/Styles/CheckBox/CheckBox.xaml" />
+        <ResourceDictionary Source="/UI/Styles/CheckList/CheckList.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Common/Colors.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Common/AnimationStyles.xaml" />
+        <ResourceDictionary Source="/UI/Styles/ComboBox/ComboBox.xaml" />
+        <ResourceDictionary Source="/UI/Styles/ComboBox/ComboBoxAdv.xaml" />
+        <ResourceDictionary Source="/UI/Styles/DataGrid/DataGrid.xaml" />
+        <ResourceDictionary Source="/UI/Styles/DataGrid/SfDataGrid.xaml" />
+        <ResourceDictionary Source="/UI/Styles/DropDown/DropDown.xaml" />
+        <ResourceDictionary Source="/UI/Styles/DropDown/DropDownButtonAdv.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Editor/EditControl.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Image/SfImageEditor.xaml" />
+        <ResourceDictionary Source="/UI/Styles/ListBox/ListBox.xaml" />
+        <ResourceDictionary Source="/UI/Styles/ListView/ListView.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Map/SfMap.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Menu/Menu.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Menu/MenuItem.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Menu/ContextMenu.xaml" />
+        <ResourceDictionary Source="/UI/Styles/MultiSelectionBox/SfMultiColumnDropDownControl.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Navigation/SfNavigationDrawer.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Navigation/PrimarySfNavigationDrawer.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Page/Page.xaml" />
+        <ResourceDictionary Source="/UI/Styles/PDF/PdfViewerControl.xaml " />
+        <ResourceDictionary Source="/UI/Styles/Pivot/PivotGrid.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Pivot/PivotGridControl.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Pivot/PivotGridResources.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Pivot/PivotSchemaDesigner.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Progress/SfCircularProgressBar.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Progress/SfLinearProgressBar.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Progress/SfStepProgressBar.xaml" />
+        <ResourceDictionary Source="/UI/Styles/RichTextBox/ContextMenu.xaml" />
+        <ResourceDictionary Source="/UI/Styles/RichTextBox/FormatDialogs.xaml" />
+        <ResourceDictionary Source="/UI/Styles/RichTextBox/Dialogs.xaml" />
+        <ResourceDictionary Source="/UI/Styles/RichTextBox/MiniToolBar.xaml" />
+        <ResourceDictionary Source="/UI/Styles/RichTextBox/SfRichTextBoxAdv.xaml" />
+        <ResourceDictionary Source="/UI/Styles/RichTextBox/SfRichTextBoxCommon.xaml" />
+        <ResourceDictionary Source="/UI/Styles/RichTextBox/SfRichTextRibbon.xaml" />
+        <ResourceDictionary Source="/UI/Styles/RichTextBox/StyleDialogs.xaml" />
+        <ResourceDictionary Source="/UI/Styles/RichTextBox/TableDialogs.xaml" />
+        <ResourceDictionary Source="/UI/Styles/ScrollBar/ScrollBar.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Signboard/SfKanban.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Spreadsheet/SfSpreadsheet.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Spreadsheet/SfSpreadsheetIcons.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Spreadsheet/SfSpreadsheetRibbon.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Spreadsheet/SpreadsheetFilterControl.xaml" />
+        <ResourceDictionary Source="/UI/Styles/TextBlock/TextBlock.xaml" />
+        <ResourceDictionary Source="/UI/Styles/TextBox/TextBox.xaml" />
+        <ResourceDictionary Source="/UI/Styles/TextBox/SfTextBoxExt.xaml" />
+        <ResourceDictionary Source="/UI/Styles/TextInput/SfTextInputLayout.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Tile/Tile.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Tile/TileViewControl.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Tile/SfHubTile.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Tile/SfPulsingTile.xaml" />
+        <ResourceDictionary Source="/UI/Styles/ToolTip/ToolTip.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Tree/SfTreeGrid.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Tree/SfTreeNavigator.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Tree/SfTreeView.xaml" />
+        <ResourceDictionary Source="/UI/Styles/Window/ChromelessWindow.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style
         x:Key="MenuItemText"
         TargetType="TextBlock">
         <Setter Property="Margin" Value="10,5,0,0" />
+        <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontSize" Value="12" />
     </Style>
+
     <Style
         x:Key="MenuItemComboBox"
         TargetType="ComboBox">
         <Setter Property="Margin" Value="0,5,10,0" />
+        <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
+        <Setter Property="Background" Value="{StaticResource ControlInterior}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BlueBorderBrush}" />
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
+
     <Style
         x:Key="MenuItemCheckBox"
         TargetType="CheckBox">
         <Setter Property="Margin" Value="10,5,0,0" />
+        <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
+
     <Style
         x:Key="MenuItemRadioButton"
         TargetType="RadioButton">
         <Setter Property="Margin" Value="10,5,0,0" />
+        <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
@@ -47,16 +131,7 @@
     <Style
         x:Key="SearchBoxStyle"
         TargetType="{x:Type TextBox}">
-        <Setter Property="Height" Value="35" />
-        <Setter Property="Width" Value="180" />
-        <Setter Property="FontFamily" Value="Fonts/Roboto-Regular.ttf #Roboto Regular" />
-        <Setter Property="FontSize" Value="17" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Background" Value="{StaticResource FormBackground}" />
-        <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Padding" Value="8,7,0,0" />
-        <Setter Property="CaretBrush" Value="{StaticResource WhiteForeground}" />
+
         <Setter Property="Template">
 
             <Setter.Value>
@@ -76,6 +151,19 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+
+        <Setter Property="Height" Value="35" />
+        <Setter Property="Width" Value="180" />
+        <Setter Property="FontFamily" Value="Fonts/Roboto-Regular.ttf #Roboto Regular" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Background" Value="{StaticResource ControlBackground}" />
+        <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BlueBorderBrush}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="8,7,0,0" />
+        <Setter Property="CaretBrush" Value="{StaticResource WhiteForeground}" />
+
     </Style>
 
 
@@ -85,7 +173,7 @@
         <Setter Property="IsHitTestVisible" Value="False" />
         <Setter Property="Visibility" Value="Collapsed" />
         <Setter Property="FontFamily" Value="Fonts/Roboto-Regular.ttf #Roboto Regular" />
-        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontSize" Value="14" />
         <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -120,7 +208,7 @@
 
                         <Border
                             x:Name="border"
-                            Background="Transparent"
+                            Background="{StaticResource BlueBorderBrush}"
                             BorderThickness="0"
                             CornerRadius="5" />
 
@@ -141,7 +229,7 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             FontSize="14"
-                            Foreground="#F8F9FA"
+                            Foreground="{StaticResource FormForeground}"
                             Text="{TemplateBinding Property=Content}" />
 
                         <Border
@@ -150,7 +238,7 @@
                             Height="20"
                             Margin="0,0,5,0"
                             HorizontalAlignment="Left"
-                            Background="{StaticResource BorderBrush}"
+                            Background="{StaticResource BlueBorderBrush}"
                             CornerRadius="2"
                             Visibility="Collapsed" />
 
