@@ -69,7 +69,7 @@ Run `Ninja.sln`
   <package id="WebSocketSharp" version="1.0.3-rc11" targetFramework="net48" />
 </packages>
 ```
-## Contribute
+## Libraries
 
 * [Iperf](https://github.com/esnet/iperf)
 * [oxyplot](https://github.com/oxyplot/oxyplot)
