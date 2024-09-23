@@ -1,6 +1,6 @@
 # Ninja
 
-![logo](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/GithubImages/flavicon.png)
+![logo](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/GitHubImages/flavicon.png)
 
 Ninja is a network toolkit, support iperf, tcp, udp, websocket, 
 mqtt, sniffer, pcap, port scan, listen, ip scan .etc.
@@ -22,7 +22,7 @@ Can be used  for network study by WPF MVVM.
 - [ ] ...
 
 
-## ![](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/GithubImages/csharp.png) Code
+## ![](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/GitHubImages/csharp.png) Code
 
 - Ninja supports AnyCPU as well as x86/x64 specific builds
 - [Controls](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/Controls) - main UI layer and associated controls and related functionality.
@@ -47,7 +47,7 @@ $ cd Ninja
 Run `Ninja.sln`
 
 
-## !(https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/GithubImages/documentation.png) Documentation
+## !(https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/GitHubImages/documentation.png) Documentation
 
 - [User Guide](Resources/Github/Users.md)
 - [Compilation Guide](Resources/Github/Compilation.md)
