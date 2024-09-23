@@ -1,13 +1,13 @@
 # Ninja
 
-![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/ApplicationImages/flavicon.ico)
+![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/ApplicationImages/favicon.png)
 
 Ninja is a network toolkit, support iperf, tcp, udp, websocket, 
 mqtt, sniffer, pcap, port scan, listen, ip scan .etc.
-
 Can be used  for network study by WPF MVVM.
 
-## Functionality
+
+## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/GitHubImages/features.png)Functionality
 
 - [x] Iperf2/Iperf3 Server and Client(Realtime plot and result save)
 - [x] Network Scan(IP multi-thread scan)
@@ -36,9 +36,10 @@ Can be used  for network study by WPF MVVM.
 - `bin` - Binaries are included in the `bin` folder due to the complex Baby setup required. Don't empty this folder.
 - `bin/storage` - HTML and JS required for downloads manager and custom error pages
 
-## Build
+## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/GitHubImages/tools.png) Build
 
-- [x] VisualStudio 2022（Based on .NET8 and WPF）
+- [x] VisualStudio 2022
+- [x] Based on .NET8 and WPF
 
 ```bash
 $ git clone https://github.com/is-leeroy-jenkins/Ninja.git
