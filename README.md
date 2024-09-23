@@ -20,12 +20,6 @@ Can be used  for network study by WPF MVVM.
 - [ ] MQTT
 - [x] Sniffer(Using pcap, packets capture, save, filter, statistics, plot. etc.)
 - [ ] ...
-<img src="https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/demo/iperf.png" width="700">
-<img src="https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/demo/sniffer.png" width="700">
-<img src="https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/demo/snifferstats.png" width="700">
-<img src="https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/demo/websocket.png" width="700">
-<img src="https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/demo/portlisten.png" width="700">
-<img src="https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/demo/routetable.png" width="700">
 
 
 ## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/main/Resources/Assets/GitHubImages/csharp.png) Code
@@ -79,6 +73,13 @@ Run `Ninja.sln`
 * [Iperf](https://github.com/esnet/iperf)
 * [oxyplot](https://github.com/oxyplot/oxyplot)
 
+## Screenshots
+- [iperf](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/demo/iperf.png)-Iperf2/Iperf3 Server and Client(Realtime plot and result save)
+- [sniffer](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/demo/sniffer.png)
+- [stats](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/demo/snifferstats.png)
+- [websocket](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/demo/websocket.png)
+- [portlisten](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/demo/portlisten.png)
+- [routetable](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/demo/routetable.png)
 ## License
 
 MIT License（[License MIT](./LICENSE)）
