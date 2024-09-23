@@ -74,12 +74,12 @@ Run `Ninja.sln`
 * [oxyplot](https://github.com/oxyplot/oxyplot)
 
 ## Screenshots
-- [iperf]!(https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/demo/iperf.png)
-- [sniffer]!(https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/demo/sniffer.png)
-- [stats]1(https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/demo/snifferstats.png)
-- [websocket]!(https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/demo/websocket.png)
-- [portlisten]!(https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/demo/portlisten.png)
-- [routetable]!(https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/demo/routetable.png)
+- [iperf]!(https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/demo/iperf.png)
+- [sniffer]!(https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/demo/sniffer.png)
+- [stats]1(https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/demo/snifferstats.png)
+- [websocket]!(https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/demo/websocket.png)
+- [portlisten]!(https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/demo/portlisten.png)
+- [routetable]!(https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/demo/routetable.png)
 ## License
 
 MIT License（[License MIT](./LICENSE)）
