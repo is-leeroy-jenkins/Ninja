@@ -1,6 +1,6 @@
 # Ninja
 
-![logo](/Resources/favicon.png)
+![logo](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/ApplicationImages/flavicon.png)
 
 Ninja is a network toolkit, support iperf, tcp, udp, websocket, 
 mqtt, sniffer, pcap, port scan, listen, ip scan .etc.
@@ -25,14 +25,14 @@ Can be used  for network study by WPF MVVM.
 ## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/main/Resources/Assets/GitHubImages/csharp.png) Code
 
 - Ninja supports AnyCPU as well as x86/x64 specific builds
-- [Controls](https://github.com/is-leeroy-jenkins/Ninja/tree/main/Controls) - main UI layer and associated controls and related functionality.
-- [Enumerations](https://github.com/is-leeroy-jenkins/Ninja/tree/main/Enumerations) - various enumerations used for budgetary accounting.
-- [Extensions](https://github.com/is-leeroy-jenkins/Ninja/tree/main/Extensions)- useful extension methods for budget analysis by type.
-- [Clients](https://github.com/is-leeroy-jenkins/Ninja/tree/main/Clients) - other tools used and available.
-- [Ninja](https://github.com/is-leeroy-jenkins/Ninja/tree/main/Ninja) - models used in EPA budget data analysis.
-- [IO](https://github.com/is-leeroy-jenkins/Ninja/tree/main/IO) - input output classes used for networking and the file systemm.
-- [Static](https://github.com/is-leeroy-jenkins/Ninja/tree/main/Static) - static types used by Ninja.
-- [Interfaces](https://github.com/is-leeroy-jenkins/Ninja/tree/Interfaces) - abstractions used in network analysis.
+- [Controls](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/Controls) - main UI layer and associated controls and related functionality.
+- [Enumerations](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Enumerations) - various enumerations used for budgetary accounting.
+- [Extensions](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Extensions)- useful extension methods for budget analysis by type.
+- [Clients](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Clients) - other tools used and available.
+- [Models](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Network/Models) - models used in network analysis
+- [Services](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Services) - networking service classes used in Ninja.
+- [Static](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Static) - static types used by Ninja.
+- [Interfaces](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Network/Interfaces) - abstractions used in network analysis.
 - `bin` - Binaries are included in the `bin` folder due to the complex Baby setup required. Don't empty this folder.
 - `bin/storage` - HTML and JS required for downloads manager and custom error pages
 
