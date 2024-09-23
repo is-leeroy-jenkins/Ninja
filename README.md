@@ -1,6 +1,6 @@
 # Ninja
 
-![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/ApplicationImages/ProjectTemplate.png)
+![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/GitHubImages/ProjectTemplate.png)
 
 Ninja is a network toolkit, support iperf, tcp, udp, websocket, 
 mqtt, sniffer, pcap, port scan, listen, ip scan .etc.
