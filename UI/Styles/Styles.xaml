@@ -52,11 +52,11 @@
         <Setter Property="FontFamily" Value="Fonts/Roboto-Regular.ttf #Roboto Regular" />
         <Setter Property="FontSize" Value="17" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Background" Value="#FF2D2D2D" />
-        <Setter Property="Foreground" Value="#E8EAEC" />
+        <Setter Property="Background" Value="{StaticResource FormBackground}" />
+        <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Padding" Value="8,7,0,0" />
-        <Setter Property="CaretBrush" Value="#FFFFFF" />
+        <Setter Property="CaretBrush" Value="{StaticResource WhiteForeground}" />
         <Setter Property="Template">
 
             <Setter.Value>
@@ -86,7 +86,7 @@
         <Setter Property="Visibility" Value="Collapsed" />
         <Setter Property="FontFamily" Value="Fonts/Roboto-Regular.ttf #Roboto Regular" />
         <Setter Property="FontSize" Value="16" />
-        <Setter Property="Foreground" Value="#f4f5f6" />
+        <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Margin" Value="10,0,0,0" />
@@ -150,7 +150,7 @@
                             Height="20"
                             Margin="0,0,5,0"
                             HorizontalAlignment="Left"
-                            Background="#278af3"
+                            Background="{StaticResource BorderBrush}"
                             CornerRadius="2"
                             Visibility="Collapsed" />
 
@@ -160,13 +160,13 @@
 
                         <Trigger Property="IsMouseOver" Value="True">
 
-                            <Setter TargetName="border" Property="Background" Value="#FF494E5A" />
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource ControlHoverBrush}" />
 
                         </Trigger>
 
                         <Trigger Property="IsChecked" Value="True">
 
-                            <Setter TargetName="border" Property="Background" Value="#FF494E5A" />
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource SteelBlueBackground}" />
 
 
                             <Setter TargetName="Highlighter" Property="Visibility" Value="Visible" />

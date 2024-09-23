@@ -79,10 +79,10 @@ namespace Ninja
         /// <summary>
         /// Fails the specified _ex.
         /// </summary>
-        /// <param name="_ex">The _ex.</param>
-        private protected void Fail( Exception _ex )
+        /// <param name="ex">The _ex.</param>
+        private protected void Fail( Exception ex )
         {
-            var _error = new ErrorWindow( _ex );
+            var _error = new ErrorWindow( ex );
             _error?.SetText( );
             _error?.ShowDialog( );
         }

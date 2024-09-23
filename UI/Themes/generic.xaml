@@ -1,0 +1,625 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:skin="clr-namespace:Syncfusion.Themes.FluentDark.WPF;assembly=Syncfusion.Themes.FluentDark.WPF">
+
+    <Style TargetType="{x:Type skin:RevealItem}">
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="#40000000" />
+        <Setter Property="HoverBorder" Value="#40000000" />
+        <Setter Property="PressedBackground" Value="#33000000" />
+        <Setter Property="HoverBackground" Value="#1A000000" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type skin:RevealItem}">
+                    <Grid x:Name="rootGrid">
+                        <Grid.Resources>
+                            <Storyboard x:Key="PressedRevealStoryboard">
+                                <DoubleAnimation
+                                    Storyboard.TargetName="backgroundBorder"
+                                    Storyboard.TargetProperty="(UIElement.Opacity)"
+                                    To="0.8"
+                                    Duration="0:0:0.600">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut" />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+
+                                <DoubleAnimation
+                                    Storyboard.TargetName="pressedRect"
+                                    Storyboard.TargetProperty="(UIElement.Opacity)"
+                                    To="1"
+                                    Duration="0:0:0.200">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut" />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation
+                                    BeginTime="0:0:0.150"
+                                    Storyboard.TargetName="pressedRect"
+                                    Storyboard.TargetProperty="(UIElement.Opacity)"
+                                    To="0.1"
+                                    Duration="0:0:1.000">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut" />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+
+                                <DoubleAnimation
+                                    Storyboard.TargetName="pressedRectBrush"
+                                    Storyboard.TargetProperty="(RadialGradientBrush.RadiusX)"
+                                    From="100"
+                                    To="50"
+                                    Duration="0:0:0.100">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut" />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation
+                                    BeginTime="0:0:0.150"
+                                    Storyboard.TargetName="pressedRectBrush"
+                                    Storyboard.TargetProperty="(RadialGradientBrush.RadiusX)"
+                                    To="200"
+                                    Duration="0:0:1.000">
+                                    <DoubleAnimation.EasingFunction>
+                                        <SineEase EasingMode="EaseInOut" />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation
+                                    Storyboard.TargetName="pressedRectBrush"
+                                    Storyboard.TargetProperty="(RadialGradientBrush.RadiusY)"
+                                    From="100"
+                                    To="50"
+                                    Duration="0:0:0.100">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut" />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation
+                                    BeginTime="0:0:0.150"
+                                    Storyboard.TargetName="pressedRectBrush"
+                                    Storyboard.TargetProperty="(RadialGradientBrush.RadiusY)"
+                                    To="200"
+                                    Duration="0:0:1.000">
+                                    <DoubleAnimation.EasingFunction>
+                                        <SineEase EasingMode="EaseInOut" />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation
+                                    Storyboard.TargetName="pressedRectOffset"
+                                    Storyboard.TargetProperty="Offset"
+                                    To="0"
+                                    Duration="0:0:0.000">
+                                    <DoubleAnimation.EasingFunction>
+                                        <SineEase EasingMode="EaseInOut" />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation
+                                    BeginTime="0:0:0.150"
+                                    Storyboard.TargetName="pressedRectOffset"
+                                    Storyboard.TargetProperty="Offset"
+                                    From="0"
+                                    To="0.8"
+                                    Duration="0:0:1.000">
+                                    <DoubleAnimation.EasingFunction>
+                                        <SineEase EasingMode="EaseOut" />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+
+                                <DoubleAnimation
+                                    BeginTime="0:0:0.200"
+                                    Storyboard.TargetName="pressedRectBrush"
+                                    Storyboard.TargetProperty="Opacity"
+                                    To="0"
+                                    Duration="0:0:1.500">
+                                    <DoubleAnimation.EasingFunction>
+                                        <SineEase EasingMode="EaseInOut" />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+
+                            <Storyboard x:Key="PressedGlowStoryboard">
+                                <DoubleAnimation
+                                    Storyboard.TargetName="pressedGlowBorder"
+                                    Storyboard.TargetProperty="(UIElement.Opacity)"
+                                    To="1"
+                                    Duration="0:0:0.200">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut" />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </Grid.Resources>
+                        <Border x:Name="backgroundBorder">
+                            <Grid ClipToBounds="True">
+                                <Border
+                                    x:Name="backgroundMouseOver"
+                                    Visibility="Collapsed" />
+                                <Rectangle
+                                    x:Name="pressedRect"
+                                    Opacity="0.1">
+                                    <Rectangle.Fill>
+                                        <RadialGradientBrush x:Name="pressedRectBrush" MappingMode="Absolute" RadiusX="200" RadiusY="200">
+                                            <GradientStop Offset="0" Color="Transparent" />
+                                            <GradientStop x:Name="pressedRectOffset" Offset="0.5" Color="#33000000" />
+                                            <GradientStop Offset="1" Color="Transparent" />
+                                        </RadialGradientBrush>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </Grid>
+                        </Border>
+                        <Grid x:Name="border">
+                            <Border
+                                x:Name="borderMouseOver"
+                                Background="Transparent"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{Binding Path=BorderThickness, RelativeSource={RelativeSource TemplatedParent}}"
+                                CornerRadius="{Binding Path=CornerRadius, RelativeSource={RelativeSource TemplatedParent}}">
+                                <Border
+                                    x:Name="pressedGlowBorder"
+                                    Margin="-3"
+                                    Background="Transparent"
+                                    BorderThickness="2"
+                                    Opacity="0">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            BlurRadius="10"
+                                            ShadowDepth="0" />
+                                    </Border.Effect>
+                                </Border>
+                            </Border>
+
+                            <Border
+                                x:Name="borderOpacityMask"
+                                Background="Transparent"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{Binding Path=BorderThickness, RelativeSource={RelativeSource TemplatedParent}}"
+                                CornerRadius="{Binding Path=CornerRadius, RelativeSource={RelativeSource TemplatedParent}}"
+                                Visibility="Collapsed" />
+                        </Grid>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="HoverEffectMode" Value="Border" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="borderMouseOver" Property="Opacity" Value="{Binding Path=HoverBorderOpacity, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="borderMouseOver" Property="BorderBrush" Value="{Binding Path=HoverBorder, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="borderOpacityMask" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="backgroundMouseOver" Property="Visibility" Value="Collapsed" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="PressedEffectMode" Value="Glow" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="borderMouseOver" Property="Background" Value="{Binding Path=HoverBackground, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="borderMouseOver" Property="Opacity" Value="{Binding Path=HoverBorderOpacity, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="borderMouseOver" Property="BorderBrush" Value="{Binding Path=HoverBorder, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="borderOpacityMask" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="backgroundMouseOver" Property="Visibility" Value="Collapsed" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="HoverEffectMode" Value="Background" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="PressedEffectMode" Value="Reveal" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="backgroundMouseOver" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="borderMouseOver" Property="Opacity" Value="{Binding Path=HoverBorderOpacity, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="borderMouseOver" Property="Background" Value="{Binding Path=HoverBackground, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="borderMouseOver" Property="BorderBrush" Value="Transparent" />
+                            <Setter TargetName="borderOpacityMask" Property="Visibility" Value="Collapsed" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="HoverEffectMode" Value="BackgroundAndBorder" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="PressedEffectMode" Value="Reveal" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="backgroundMouseOver" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="borderMouseOver" Property="Opacity" Value="{Binding Path=HoverBorderOpacity, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="borderMouseOver" Property="Background" Value="{Binding Path=HoverBackground, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="borderMouseOver" Property="BorderBrush" Value="{Binding Path=HoverBorder, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="borderOpacityMask" Property="Visibility" Value="Visible" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPressed" Value="True" />
+                                <Condition Property="PressedEffectMode" Value="Glow" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="backgroundBorder" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="borderOpacityMask" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="pressedGlowBorder" Property="Background" Value="{Binding Path=HoverBorder, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPressed" Value="True" />
+                                <Condition Property="PressedEffectMode" Value="Reveal" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="borderMouseOver" Property="Opacity" Value="{Binding Path=PressedBorderOpacity, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type skin:SfAcrylicPanel}">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="ClipToBounds" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type skin:SfAcrylicPanel}">
+                    <Grid ClipToBounds="True">
+                        <Canvas>
+                            <ContentControl>
+                                <ContentControl.CacheMode>
+                                    <BitmapCache RenderAtScale="0.2" />
+                                </ContentControl.CacheMode>
+                                <Rectangle
+                                    x:Name="panelRect"
+                                    Width="{Binding Target.ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type skin:SfAcrylicPanel}}}"
+                                    Height="{Binding Target.ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type skin:SfAcrylicPanel}}}"
+                                    ClipToBounds="False"
+                                    IsHitTestVisible="False">
+                                    <Rectangle.Fill>
+                                        <VisualBrush
+                                            AlignmentX="Left"
+                                            AlignmentY="Top"
+                                            Stretch="None"
+                                            ViewboxUnits="Absolute"
+                                            Visual="{Binding Target, RelativeSource={RelativeSource AncestorType={x:Type skin:SfAcrylicPanel}}}" />
+                                    </Rectangle.Fill>
+                                    <Rectangle.Effect>
+                                        <BlurEffect Radius="100" />
+                                    </Rectangle.Effect>
+                                </Rectangle>
+                            </ContentControl>
+                        </Canvas>
+
+                        <!--  tint layer  -->
+                        <Rectangle
+                            Fill="{Binding Path=TintBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                            Opacity="{Binding Path=TintOpacity, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+
+                        <!--  noise layer  -->
+                        <Rectangle
+                            Fill="{Binding Path=NoiseBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                            Opacity="{Binding Path=NoiseOpacity, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                            <Rectangle.Effect>
+                                <BlurEffect Radius="{Binding Path=BlurRadius, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            </Rectangle.Effect>
+                        </Rectangle>
+
+
+                        <ContentPresenter
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  Context Menu Resources  -->
+
+    <Image
+        x:Key="CalculatorMenuItem"
+        Source="/Resources/Assets/MenuImages/CalculatorItem.png" />
+
+    <Image
+        x:Key="CalendarMenuItem"
+        Source="/Resources/Assets/MenuImages/CalendarItem.png" />
+
+    <Image
+        x:Key="ChromeMenuItem"
+        Source="/Resources/Assets/MenuImages/ChromeItem.png" />
+
+    <Image
+        x:Key="ClockMenuItem"
+        Source="/Resources/Assets/MenuImages/ClockItem.png" />
+
+    <Image
+        x:Key="CloseMenuItem"
+        Source="/Resources/Assets/MenuImages/CloseItem.png" />
+
+    <Image
+        x:Key="ControlPanelMenuItem"
+        Source="/Resources/Assets/MenuImages/ControlPanelItem.png" />
+
+    <Image
+        x:Key="DocumentationMenuItem"
+        Source="/Resources/Assets/MenuImages/DocumentaionItem.png" />
+
+    <Image
+        x:Key="EdgeMenuItem"
+        Source="/Resources/Assets/MenuImages/EdgeItem.png" />
+
+    <Image
+        x:Key="ExitMenuItem"
+        Source="/Resources/Assets/MenuImages/ExitItem.png" />
+
+    <Image
+        x:Key="FileMenuItem"
+        Source="/Resources/Assets/MenuImages/FileItem.png" />
+
+    <Image
+        x:Key="FireFoxMenuItem"
+        Source="/Resources/Assets/MenuImages/FirefoxItem.png" />
+
+    <Image
+        x:Key="FolderMenuItem"
+        Source="/Resources/Assets/MenuImages/FolderItem.png" />
+
+    <Image
+        x:Key="MapMenuItem"
+        Source="/Resources/Assets/MenuImages/MapItem.png" />
+
+    <Image
+        x:Key="MediaPlayerMenuItem"
+        Source="/Resources/Assets/MenuImages/MediaPlayerItem.png" />
+
+    <Image
+        x:Key="OneDriveMenuItem"
+        Source="/Resources/Assets/MenuImages/OneDriveItem.png" />
+
+    <Image
+        x:Key="RefreshMenuItem"
+        Source="/Resources/Assets/MenuImages/RefreshItem.png" />
+
+    <Image
+        x:Key="SaveMenuItem"
+        Source="/Resources/Assets/MenuImages/SaveItem.png" />
+
+    <Image
+        x:Key="TaskManagerMenuItem"
+        Source="/Resources/Assets/MenuImages/TaskManagerItem.png" />
+
+    <!--  ToolStrip Resources  -->
+
+    <Image
+        x:Key="BrowseButton"
+        Source="/Resources/Assets/ToolStripImages/BrowseButton.png" />
+
+    <Image
+        x:Key="DataSourceButton"
+        Source="/Resources/Assets/ToolStripImages/DataSourceButton.png" />
+
+    <Image
+        x:Key="DateButton"
+        Source="/Resources/Assets/ToolStripImages/DateButton.png" />
+
+    <Image
+        x:Key="DeleteButton"
+        Source="/Resources/Assets/ToolStripImages/DeleteButton.png" />
+
+    <Image
+        x:Key="EditButton"
+        Source="/Resources/Assets/ToolStripImages/EditButton.png" />
+
+    <Image
+        x:Key="ExcelButton"
+        Source="/Resources/Assets/ToolStripImages/ExcelButton.png" />
+
+    <Image
+        x:Key="ExitButton"
+        Source="/Resources/Assets/ToolStripImages/ExportButton.png" />
+
+    <Image
+        x:Key="ExportButton"
+        Source="/Resources/Assets/ToolStripImages/ExportButton.png" />
+
+    <Image
+        x:Key="FilterButton"
+        Source="/Resources/Assets/ToolStripImages/FirstButton.png" />
+
+    <Image
+        x:Key="FirstButton"
+        Source="/Resources/Assets/ToolStripImages/BrowseButton.png" />
+
+    <Image
+        x:Key="PreviousButton"
+        Source="/Resources/Assets/ToolStripImages/FirstButton.png" />
+
+    <Image
+        x:Key="NextButton"
+        Source="/Resources/Assets/ToolStripImages/NextButton.png" />
+
+    <Image
+        x:Key="LastButton"
+        Source="/Resources/Assets/ToolStripImages/LastButton.png" />
+
+    <Image
+        x:Key="RefreshButton"
+        Source="/Resources/Assets/ToolStripImages/RefreshButton.png" />
+
+    <Image
+        x:Key="SaveButton"
+        Source="/Resources/Assets/ToolStripImages/SaveButton.png" />
+
+    <Image
+        x:Key="GridButton"
+        Source="/Resources/Assets/ToolStripImages/GridButton.png" />
+
+    <Image
+        x:Key="GroupButton"
+        Source="/Resources/Assets/ToolStripImages/GroupButton.png" />
+
+    <Image
+        x:Key="LookupButton"
+        Source="/Resources/Assets/ToolStripImages/LookupButton.png" />
+
+    <Image
+        x:Key="SchemaButton"
+        Source="/Resources/Assets/ToolStripImages/SchemaButton.png" />
+
+    <Image
+        x:Key="SqlButton"
+        Source="/Resources/Assets/ToolStripImages/SqlButton.png" />
+
+    <Image
+        x:Key="ToggleButton"
+        Source="/Resources/Assets/ToolStripImages/MenuButton.png" />
+
+
+    <!--  Tile Resources  -->
+
+    <Image
+        x:Key="AccessTile"
+        Source="/Resources/Assets/TileImages/AccessTile.png" />
+    <Image
+        x:Key="BrowserTile"
+        Source="/Resources/Assets/TileImages/BrowserTile.png" />
+    <Image
+        x:Key="CalendarTile"
+        Source="/Resources/Assets/TileImages/CalendarTile.png" />
+    <Image
+        x:Key="DataTile"
+        Source="/Resources/Assets/TileImages/DataTile.png" />
+    <Image
+        x:Key="ExcelTile"
+        Source="/Resources/Assets/TileImages/ExcelTile.png" />
+    <Image
+        x:Key="EmailTile"
+        Source="/Resources/Assets/TileImages/EmailTile.png" />
+    <Image
+        x:Key="GuidanceTile"
+        Source="/Resources/Assets/TileImages/GuidanceTile.png" />
+    <Image
+        x:Key="MapTile"
+        Source="/Resources/Assets/TileImages/MapTile.png" />
+    <Image
+        x:Key="PivotTile"
+        Source="/Resources/Assets/TileImages/PivotTile.png" />
+    <Image
+        x:Key="ProgramTile"
+        Source="/Resources/Assets/TileImages/ProgramTile.png" />
+    <Image
+        x:Key="SqlCeTile"
+        Source="/Resources/Assets/TileImages/SqlCeTile.png" />
+    <Image
+        x:Key="SqlEditorTile"
+        Source="/Resources/Assets/TileImages/SqlEditorTile.png" />
+    <Image
+        x:Key="SQLiteTile"
+        Source="/Resources/Assets/TileImages/SQLiteTile.png" />
+    <Image
+        x:Key="SqlServerTile"
+        Source="/Resources/Assets/TileImages/SqlServerTile.png" />
+    <Image
+        x:Key="VisualizationTile"
+        Source="/Resources/Assets/TileImages/VisualizationTile.png" />
+
+    <!--  Extension Resources  -->
+
+    <Image
+        x:Key="ACCDB"
+        Source="/Resources/Assets/ExtensionImages/ACCDB.png" />
+
+    <Image
+        x:Key="CSV"
+        Source="/Resources/Assets/ExtensionImages/CSV.png" />
+
+    <Image
+        x:Key="DB"
+        Source="/Resources/Assets/ExtensionImages/DB.png" />
+
+    <Image
+        x:Key="DLL"
+        Source="/Resources/Assets/ExtensionImages/DLL.png" />
+
+    <Image
+        x:Key="DOC"
+        Source="/Resources/Assets/ExtensionImages/DOC.png" />
+
+    <Image
+        x:Key="DOCX"
+        Source="/Resources/Assets/ExtensionImages/DOCX.png" />
+
+    <Image
+        x:Key="EXE"
+        Source="/Resources/Assets/ExtensionImages/EXE.png" />
+
+    <Image
+        x:Key="MDB"
+        Source="/Resources/Assets/ExtensionImages/MDB.png" />
+
+    <Image
+        x:Key="MDF"
+        Source="/Resources/Assets/ExtensionImages/MDF.png" />
+
+    <Image
+        x:Key="PDF"
+        Source="/Resources/Assets/ExtensionImages/PDF.png" />
+
+    <Image
+        x:Key="PNG"
+        Source="/Resources/Assets/ExtensionImages/PNG.png" />
+
+    <Image
+        x:Key="PPTX"
+        Source="/Resources/Assets/ExtensionImages/PPTX.png" />
+
+    <Image
+        x:Key="PY"
+        Source="/Resources/Assets/ExtensionImages/PY.png" />
+
+    <Image
+        x:Key="SDF"
+        Source="/Resources/Assets/ExtensionImages/SDF.png" />
+
+    <Image
+        x:Key="SQL"
+        Source="/Resources/Assets/ExtensionImages/SQL.png" />
+    <Image
+        x:Key="TXT"
+        Source="/Resources/Assets/ExtensionImages/TXT.png" />
+
+    <Image
+        x:Key="XLS"
+        Source="/Resources/Assets/ExtensionImages/XLS.png" />
+
+    <Image
+        x:Key="XLSX"
+        Source="/Resources/Assets/ExtensionImages/XLSX.png" />
+
+    <Image
+        x:Key="XML"
+        Source="/Resources/Assets/ExtensionImages/XML.png" />
+
+    <Image
+        x:Key="HTML"
+        Source="/Resources/Assets/ExtensionImages/HTML.png" />
+
+    <!--  Provider Resources  -->
+
+    <Image
+        x:Key="Access"
+        Source="/Resources/Assets/ProviderImages/Access.png" />
+
+    <Image
+        x:Key="Excel"
+        Source="/Resources/Assets/ProviderImages/Excel.png" />
+
+    <Image
+        x:Key="SqlCe"
+        Source="/Resources/Assets/ProviderImages/SqlCe.png" />
+
+    <Image
+        x:Key="SqlServer"
+        Source="/Resources/Assets/ProviderImages/SqlServer.png" />
+
+    <Image
+        x:Key="SQLite"
+        Source="/Resources/Assets/ProviderImages/SQLite.png" />
+
+
+</ResourceDictionary>

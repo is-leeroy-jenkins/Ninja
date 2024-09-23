@@ -1,10 +1,10 @@
 ﻿// ******************************************************************************************
 //     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 09-22-2024
+//     Created:                 09-23-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        09-22-2024
+//     Last Modified On:        09-23-2024
 // ******************************************************************************************
 // <copyright file="IperfViewModel.cs" company="Terry D. Eppler">
 // 
@@ -55,6 +55,7 @@ namespace Ninja.ViewModels
     using System.Text.RegularExpressions;
     using Microsoft.Win32;
     using System.IO;
+    using System.Threading.Tasks;
 
     /// <inheritdoc />
     /// <summary>
@@ -198,35 +199,36 @@ namespace Ninja.ViewModels
             _plotTokenSource.Cancel( );
         }
 
-        //public void UpdatePlotTask()
-        //{
-        //    double val = 300;
-        //    plotTokenSource = new CancellationTokenSource();
-        //    cancelPlotToken = plotTokenSource.Token;
-        //    Task.Run(
-        //        () =>
-        //        {
-        //            while (true)
-        //            {
-        //                if (plotTokenSource.IsCancellationRequested)
-        //                {
-        //                    break;
-        //                }
-        //                val = Convert.ToDouble(IperfModel.Throughput);
-        //                var date = DateTime.Now;
-        //                lineSeriesCurrentVal.Points.Add(DateTimeAxis.CreateDataPoint(date, val));
+        public void UpdatePlotTask( )
+        {
+            double _val = 300;
+            _plotTokenSource = new CancellationTokenSource( );
+            _cancelPlotToken = _plotTokenSource.Token;
+            Task.Run( ( ) =>
+            {
+                while( true )
+                {
+                    if( _plotTokenSource.IsCancellationRequested )
+                    {
+                        break;
+                    }
 
-        //                PlotModelData.InvalidatePlot(true);
+                    _val = Convert.ToDouble( IperfModel.Throughput );
+                    var _date = DateTime.Now;
+                    LineSeriesCurrentVal.Points.Add( DateTimeAxis.CreateDataPoint( _date, _val ) );
+                    PlotModelData.InvalidatePlot( true );
+                    if( _date.ToOADate( ) > XTimeAxis.ActualMaximum )
+                    {
+                        var _xPan = ( XTimeAxis.ActualMaximum - XTimeAxis.DataMaximum )
+                            * XTimeAxis.Scale;
 
-        //                if (date.ToOADate() > XTimeAxis.ActualMaximum)
-        //                {
-        //                    var xPan = (XTimeAxis.ActualMaximum - XTimeAxis.DataMaximum) * XTimeAxis.Scale;
-        //                    XTimeAxis.Pan(xPan);
-        //                }
-        //                Thread.Sleep(1000);
-        //            }
-        //        }, cancelPlotToken);
-        //}
+                        XTimeAxis.Pan( _xPan );
+                    }
+
+                    Thread.Sleep( 1000 );
+                }
+            }, _cancelPlotToken );
+        }
 
         /// <summary>
         /// Runs the iperf.
@@ -234,7 +236,7 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void RunIperf( object parameter )
         {
-            var _iperfPath = @"Third-party\iperf\" + IperfModel.Version;
+            var _iperfPath = @"Libraries\iperf\" + IperfModel.Version;
             IperfProcess.StartProcess( _iperfPath, ( string )parameter, ProcessOutputDataReceived );
             LineSeriesCurrentVal.Points.Clear( );
             PlotModelData.InvalidatePlot( true );
@@ -259,12 +261,10 @@ namespace Ninja.ViewModels
             }
 
             var _m = Regex.Match( str, _pattern );
-
-            //str = "";
-            //Regex r = new Regex("/(\\d+)[^\\d]+Mbits/sec/");
+            str = "";
+            var _r = new Regex( "/(\\d+)[^\\d]+Mbits/sec/" );
             if( _m.Success )
             {
-                //return "此次验证不通过";
                 var _timeA = _m.Groups[ "a" ].Value;
                 var _timeB = _m.Groups[ "b" ].Value;
                 var _bytes = _m.Groups[ "c" ].Value;
@@ -311,7 +311,6 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void StopIperf( object parameter )
         {
-            //iperfProcess.Kill();
             IperfProcess.StopProcess( );
         }
 
@@ -330,22 +329,17 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public async void SaveOutput( object parameter )
         {
-            ///*IperfModel.Output*/ = "";
             var _receDataSaveFileDialog = new SaveFileDialog
             {
-                Title = "save iperf result",
+                Title = "Save Iperf Result",
                 FileName = DateTime.Now.ToString( "yyyyMMddmmss" ),
                 DefaultExt = ".txt",
-
-                //Filter = string.Format("en", "*.*")
                 Filter = "txt files(*.txt)|*.txt|All files(*.*)|*.*"
             };
 
             if( _receDataSaveFileDialog.ShowDialog( ) == true )
             {
                 var _dataRecvPath = _receDataSaveFileDialog.FileName;
-
-                //SavePathInfo = string.Format(CultureInfos, "{0}", DataRecvPath);
                 await using var _defaultReceDataPath = new StreamWriter( _dataRecvPath, true );
                 await _defaultReceDataPath.WriteAsync( IperfModel.Output ).ConfigureAwait( false );
             }
@@ -388,7 +382,10 @@ namespace Ninja.ViewModels
         /// </value>
         public PlotModel PlotModelData
         {
-            get { return _plotModelData; }
+            get
+            {
+                return _plotModelData;
+            }
             set
             {
                 _plotModelData = value;

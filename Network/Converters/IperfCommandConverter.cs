@@ -72,7 +72,8 @@ namespace Ninja.Interfaces
         //< Binding Path="IperfModel.Reverse"/>
 
         //Binding sequences end <-----
-        //public string Command { get; set; }
+        public string Command { get; set; }
+
         /// <inheritdoc />
         /// <summary>
         /// Converts source values to a value for the binding target.

@@ -46,27 +46,27 @@ namespace Ninja
     using System.Diagnostics.CodeAnalysis;
 
     /// <summary> </summary>
-    /// <typeparam name="T"> </typeparam>
+    /// <typeparam name="_"> </typeparam>
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     [ SuppressMessage( "ReSharper", "UnassignedGetOnlyAutoProperty" ) ]
-    public interface IOption<out T>
+    public interface IOption<out _>
     {
         /// <summary> Maps the specified function. </summary>
-        /// <typeparam name="TResult"> The type of the result. </typeparam>
+        /// <typeparam name="_result"> The type of the result. </typeparam>
         /// <param name="func"> The function. </param>
         /// <returns> </returns>
-        Option<TResult> Map<TResult>( Func<T, TResult> func );
+        Option<_result> Map<_result>( Func<_, _result> func );
 
         /// <summary> Matches the specified some function. </summary>
-        /// <typeparam name="TResult"> The type of the result. </typeparam>
+        /// <typeparam name="_result"> The type of the result. </typeparam>
         /// <param name="someFunc"> Some function. </param>
         /// <param name="noneFunc"> The none function. </param>
         /// <returns> </returns>
-        TResult Match<TResult>( Func<T, TResult> someFunc, Func<TResult> noneFunc );
+        _result Match<_result>( Func<_, _result> someFunc, Func<_result> noneFunc );
 
         /// <summary> Gets the value. </summary>
         /// <value> The value. </value>
-        T Value { get; }
+        _ Value { get; }
 
         /// <summary> Gets a value indicating whether this instance is some. </summary>
         /// <value>

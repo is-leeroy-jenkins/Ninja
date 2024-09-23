@@ -47,42 +47,42 @@ namespace Ninja
 
     /// <inheritdoc/>
     /// <summary> </summary>
-    /// <typeparam name="T"> </typeparam>
+    /// <typeparam name="_"> </typeparam>
     /// <seealso cref="T:Ninja.IOption`1"/>
     /// <seealso cref="T:Ninja.IOption`1"/>
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
     [ SuppressMessage( "ReSharper", "UnassignedGetOnlyAutoProperty" ) ]
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
-    public class None<T> : Option<T>
+    public class None<_> : Option<_>
     {
         /// <inheritdoc/>
         /// <summary>
         /// Maps the specified function.
         /// </summary>
-        /// <typeparam name="TResult"> The type of the result. </typeparam>
+        /// <typeparam name="_result"> The type of the result. </typeparam>
         /// <param name="func"> The function. </param>
         /// <returns> </returns>
-        public override Option<TResult> Map<TResult>( Func<T, TResult> func )
+        public override Option<_result> Map<_result>( Func<_, _result> func )
         {
             try
             {
-                return new None<TResult>( );
+                return new None<_result>( );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default( Option<TResult> );
+                return default( Option<_result> );
             }
         }
 
         /// <inheritdoc/>
         /// <summary> Matches the specified some function. </summary>
-        /// <typeparam name="TResult"> The type of the result. </typeparam>
+        /// <typeparam name="_result"> The type of the result. </typeparam>
         /// <param name="someFunc"> Some function. </param>
         /// <param name="noneFunc"> The none function. </param>
         /// <returns> </returns>
-        public override TResult Match<TResult>( Func<T, TResult> someFunc, Func<TResult> noneFunc )
+        public override _result Match<_result>( Func<_, _result> someFunc, Func<_result> noneFunc )
         {
             try
             {
@@ -91,7 +91,7 @@ namespace Ninja
             catch( Exception ex )
             {
                 Fail( ex );
-                return default( TResult );
+                return default( _result );
             }
         }
 
@@ -109,11 +109,11 @@ namespace Ninja
         /// Gets the value.
         /// </summary>
         /// <value> The value. </value>
-        public override T Value { get; }
+        public override _ Value { get; }
 
         /// <summary> Gets the default. </summary>
         /// <value> The default. </value>
-        public static T Default { get; }
+        public static _ Default { get; }
 
         /// <inheritdoc/>
         /// <summary>

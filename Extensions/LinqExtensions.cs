@@ -59,12 +59,12 @@ namespace Ninja
         /// <summary>
         /// The specified predicate.
         /// </summary>
-        /// <typeparam name="TSource">The type of the source.</typeparam>
+        /// <typeparam name="T">The type of the source.</typeparam>
         /// <param name="source">The source.</param>
         /// <param name="predicate">The predicate.</param>
         /// <returns></returns>
-        public static bool None<TSource>( this IEnumerable<TSource> source,
-            Func<TSource, bool> predicate )
+        public static bool None<T>( this IEnumerable<T> source,
+            Func<T, bool> predicate )
         {
             try
             {
@@ -80,7 +80,7 @@ namespace Ninja
         /// <summary>
         /// Determines whether [has at least] [the specified minimum count].
         /// </summary>
-        /// <typeparam name="TSource">The type of the source.</typeparam>
+        /// <typeparam name="T">The type of the source.</typeparam>
         /// <param name="source">The source.</param>
         /// <param name="minCount">The minimum count.</param>
         /// <returns>
@@ -89,7 +89,7 @@ namespace Ninja
         /// <c> false </c>
         /// .
         /// </returns>
-        public static bool HasAtLeast<TSource>( this IEnumerable<TSource> source, int minCount )
+        public static bool HasAtLeast<T>( this IEnumerable<T> source, int minCount )
         {
             try
             {
@@ -105,7 +105,7 @@ namespace Ninja
         /// <summary>
         /// Determines whether [has at least] [the specified minimum count].
         /// </summary>
-        /// <typeparam name="TSource">The type of the source.</typeparam>
+        /// <typeparam name="T">The type of the source.</typeparam>
         /// <param name="source">The source.</param>
         /// <param name="minCount">The minimum count.</param>
         /// <param name="predicate">The predicate.</param>
@@ -115,8 +115,8 @@ namespace Ninja
         /// <c> false </c>
         /// .
         /// </returns>
-        public static bool HasAtLeast<TSource>( this IEnumerable<TSource> source, int minCount,
-            Func<TSource, bool> predicate )
+        public static bool HasAtLeast<T>( this IEnumerable<T> source, int minCount,
+            Func<T, bool> predicate )
         {
             if( minCount == 0 )
             {
@@ -145,7 +145,7 @@ namespace Ninja
         /// <summary>
         /// Determines whether the specified count has exactly.
         /// </summary>
-        /// <typeparam name="TSource">The type of the source.</typeparam>
+        /// <typeparam name="T">The type of the source.</typeparam>
         /// <param name="source">The source.</param>
         /// <param name="count">The count.</param>
         /// <returns>
@@ -154,7 +154,7 @@ namespace Ninja
         /// <c> false </c>
         /// .
         /// </returns>
-        public static bool HasExactly<TSource>( this IEnumerable<TSource> source, int count )
+        public static bool HasExactly<T>( this IEnumerable<T> source, int count )
         {
             try
             {
@@ -172,7 +172,7 @@ namespace Ninja
         /// <summary>
         /// Determines whether the specified count has exactly.
         /// </summary>
-        /// <typeparam name="TSource">The type of the source.</typeparam>
+        /// <typeparam name="T">The type of the source.</typeparam>
         /// <param name="source">The source.</param>
         /// <param name="count">The count.</param>
         /// <param name="predicate">The predicate.</param>
@@ -182,8 +182,8 @@ namespace Ninja
         /// <c> false </c>
         /// .
         /// </returns>
-        public static bool HasExactly<TSource>( this IEnumerable<TSource> source, int count,
-            Func<TSource, bool> predicate )
+        public static bool HasExactly<T>( this IEnumerable<T> source, int count,
+            Func<T, bool> predicate )
         {
             try
             {
@@ -216,7 +216,7 @@ namespace Ninja
         /// <summary>
         /// Determines whether [has at most] [the specified limit].
         /// </summary>
-        /// <typeparam name="TSource">The type of the source.</typeparam>
+        /// <typeparam name="T">The type of the source.</typeparam>
         /// <param name="source">The source.</param>
         /// <param name="limit">The limit.</param>
         /// <returns>
@@ -225,7 +225,7 @@ namespace Ninja
         /// <c> false </c>
         /// .
         /// </returns>
-        public static bool HasAtMost<TSource>( this IEnumerable<TSource> source, int limit )
+        public static bool HasAtMost<T>( this IEnumerable<T> source, int limit )
         {
             try
             {
@@ -241,7 +241,7 @@ namespace Ninja
         /// <summary>
         /// Determines whether [has at most] [the specified limit].
         /// </summary>
-        /// <typeparam name="TSource">The type of the source.</typeparam>
+        /// <typeparam name="T">The type of the source.</typeparam>
         /// <param name="source">The source.</param>
         /// <param name="limit">The limit.</param>
         /// <param name="predicate">The predicate.</param>
@@ -251,8 +251,8 @@ namespace Ninja
         /// <c> false </c>
         /// .
         /// </returns>
-        public static bool HasAtMost<TSource>( this IEnumerable<TSource> source, int limit,
-            Func<TSource, bool> predicate )
+        public static bool HasAtMost<T>( this IEnumerable<T> source, int limit,
+            Func<T, bool> predicate )
         {
             try
             {

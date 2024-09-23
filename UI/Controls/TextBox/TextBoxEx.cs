@@ -124,8 +124,8 @@ namespace TextBoxEx
         private static void OnTextBoxHookChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _textbox = d as TextBox;
-            _textbox.RemoveHandler(Button.ClickEvent, new RoutedEventHandler(ClearBtnClicked));
-            _textbox.AddHandler(Button.ClickEvent, new RoutedEventHandler(ClearBtnClicked));
+            _textbox.RemoveHandler(ButtonBase.ClickEvent, new RoutedEventHandler(ClearBtnClicked));
+            _textbox.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(ClearBtnClicked));
         }
 
         private static void ClearBtnClicked(object sender, RoutedEventArgs e)
@@ -186,8 +186,8 @@ namespace TextBoxEx
                 _textbox.MouseWheel -= Textbox_MouseWheel;
             }
 
-            _textbox.RemoveHandler(Button.ClickEvent, new RoutedEventHandler(ButtonClicked));
-            _textbox.AddHandler(Button.ClickEvent, new RoutedEventHandler(ButtonClicked));
+            _textbox.RemoveHandler(ButtonBase.ClickEvent, new RoutedEventHandler(ButtonClicked));
+            _textbox.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(ButtonClicked));
         }
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace TextBoxEx
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private static void Textbox_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        private static void Textbox_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             var _textboxex = e.Source as TextBoxEx;
             double _step = 1;

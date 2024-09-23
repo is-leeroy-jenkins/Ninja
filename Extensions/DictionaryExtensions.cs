@@ -68,20 +68,20 @@ namespace Ninja
         /// <summary>
         /// Updates a IDictionary( K, V ) with a TKey and TValue or adds it
         /// </summary>
-        /// <typeparam name="TKey">The type of the key.</typeparam>
-        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <typeparam name="K">The type of the key.</typeparam>
+        /// <typeparam name="_value">The type of the value.</typeparam>
         /// <param name="dict">The dictionary.</param>
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
         /// <returns></returns>
-        public static TValue AddOrUpdate<TKey, TValue>( this IDictionary<TKey, TValue> dict,
-            TKey key, TValue value )
+        public static V AddOrUpdate<K, V>( this IDictionary<K, V> dict,
+            K key, V value )
         {
             try
             {
                 if( !dict.ContainsKey( key ) )
                 {
-                    dict.Add( new KeyValuePair<TKey, TValue>( key, value ) );
+                    dict.Add( new KeyValuePair<K, V>( key, value ) );
                 }
                 else
                 {
@@ -93,7 +93,7 @@ namespace Ninja
             catch( Exception ex )
             {
                 DictionaryExtensions.Fail( ex );
-                return default( TValue );
+                return default( V );
             }
         }
 
@@ -420,7 +420,7 @@ namespace Ninja
         /// <summary>
         /// Converts to Key bindinglist.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="_"></typeparam>
         /// <param name="dict">The dictionary.</param>
         /// <returns></returns>
         public static BindingList<string> ToKeyBindingList<T>(
@@ -453,7 +453,7 @@ namespace Ninja
         /// <summary>
         /// Converts to value bindinglist.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="_"></typeparam>
         /// <param name="dict">The dictionary.</param>
         /// <returns></returns>
         public static BindingList<object> ToValueBindingList<T>(

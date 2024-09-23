@@ -54,26 +54,8 @@
   <ItemGroup>
     <Resource Include="Libraries\PcapDotNet\PcapDotNet.Core.dll" />
     <Resource Include="Resources\Assets\ApplicationImages\access.png" />
-    <Resource Include="Resources\Assets\ApplicationImages\Analysis.png" />
-    <Resource Include="Resources\Assets\ApplicationImages\baby.png" />
-    <Resource Include="Resources\Assets\ApplicationImages\Calculation.png" />
-    <Resource Include="Resources\Assets\ApplicationImages\calendar.png" />
-    <Resource Include="Resources\Assets\ApplicationImages\csharp.png" />
     <Resource Include="Resources\Assets\ApplicationImages\DataTable.png" />
-    <Resource Include="Resources\Assets\ApplicationImages\document.png" />
-    <Resource Include="Resources\Assets\ApplicationImages\documentation.png" />
-    <Resource Include="Resources\Assets\ApplicationImages\edit.png" />
-    <Resource Include="Resources\Assets\ApplicationImages\epa.png" />
-    <Resource Include="Resources\Assets\ApplicationImages\excel.png" />
-    <Resource Include="Resources\Assets\ApplicationImages\features.png" />
-    <Resource Include="Resources\Assets\ApplicationImages\Maps.png" />
     <Resource Include="Resources\Assets\ApplicationImages\n-icon.ico" />
-    <Resource Include="Resources\Assets\ApplicationImages\n-icon.png" />
-    <Resource Include="Resources\Assets\ApplicationImages\Providers.png" />
-    <Resource Include="Resources\Assets\ApplicationImages\sql.png" />
-    <Resource Include="Resources\Assets\ApplicationImages\system_requirements.png" />
-    <Resource Include="Resources\Assets\ApplicationImages\tools.png" />
-    <Resource Include="Resources\Assets\ApplicationImages\web.png" />
     <Resource Include="Resources\Assets\demo\iperf.png" />
     <Resource Include="Resources\Assets\demo\portlisten.png" />
     <Resource Include="Resources\Assets\demo\routetable.png" />
@@ -125,6 +107,7 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
     <PackageReference Include="ToastNotifications.Messages.Net6" Version="1.0.4" />
     <PackageReference Include="ToastNotifications.Net6" Version="1.0.4" />
+    <PackageReference Include="XamlAnimatedGif" Version="2.3.0" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Assets\ApplicationImages\reload.png" />

@@ -89,7 +89,7 @@ namespace Ninja
         /// <summary>
         /// Adds the range.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="_"></typeparam>
         /// <param name="collection">
         /// The collection.
         /// </param>
@@ -118,7 +118,7 @@ namespace Ninja
         /// <summary>
         /// Determines whether this instance is empty.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="_"></typeparam>
         /// <param name="collection">The collection.</param>
         /// <returns>
         /// <c> true </c>
@@ -142,7 +142,7 @@ namespace Ninja
         /// <summary>
         /// Removes if contains.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="_"></typeparam>
         /// <param name="collection">The collection.</param>
         /// <param name="value">The value.</param>
         public static void RemoveIfContains<T>( this ICollection<T> collection, T value )
@@ -163,7 +163,7 @@ namespace Ninja
         /// <summary>
         /// Removes the range.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="_"></typeparam>
         /// <param name="collection">The collection.</param>
         /// <param name="values">The values.</param>
         public static void RemoveRange<T>( this ICollection<T> collection, params T[ ] values )
@@ -187,7 +187,7 @@ namespace Ninja
         /// <summary>
         /// Removes the where.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="_"></typeparam>
         /// <param name="collection">The collection.</param>
         /// <param name="predicate">The predicate.</param>
         public static void RemoveWhere<T>( this ICollection<T> collection, Predicate<T> predicate )
@@ -232,7 +232,7 @@ namespace Ninja
         /// <summary>
         /// Converts to bindinglist.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="_"></typeparam>
         /// <param name="collection">The collection.</param>
         /// <returns></returns>
         public static BindingList<T> ToBindingList<T>( this ICollection<T> collection )

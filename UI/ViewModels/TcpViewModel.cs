@@ -1,4 +1,44 @@
-﻿
+﻿// ******************************************************************************************
+//     Assembly:                Ninja
+//     Author:                  Terry D. Eppler
+//     Created:                 09-23-2024
+// 
+//     Last Modified By:        Terry D. Eppler
+//     Last Modified On:        09-23-2024
+// ******************************************************************************************
+// <copyright file="TcpViewModel.cs" company="Terry D. Eppler">
+// 
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
+// 
+//    Permission is hereby granted, free of charge, to any person obtaining a copy
+//    of this software and associated documentation files (the “Software”),
+//    to deal in the Software without restriction,
+//    including without limitation the rights to use,
+//    copy, modify, merge, publish, distribute, sublicense,
+//    and/or sell copies of the Software,
+//    and to permit persons to whom the Software is furnished to do so,
+//    subject to the following conditions:
+// 
+//    The above copyright notice and this permission notice shall be included in all
+//    copies or substantial portions of the Software.
+// 
+//    THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+//    INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//    FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
+//    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+//    DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+//    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+//    DEALINGS IN THE SOFTWARE.
+// 
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
+// </copyright>
+// <summary>
+//   TcpViewModel.cs
+// </summary>
+// ******************************************************************************************
 
 namespace Ninja.ViewModels
 {
@@ -10,6 +50,7 @@ namespace Ninja.ViewModels
     using System.Windows.Input;
     using System.Windows.Threading;
     using System.Collections.ObjectModel;
+    using System.Windows;
 
     /// <inheritdoc />
     /// <summary>
@@ -17,6 +58,14 @@ namespace Ninja.ViewModels
     /// <seealso cref="T:Ninja.ViewModels.MainWindowBase" />
     public class TcpViewModel : MainWindowBase
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TcpViewModel"/> class.
+        /// </summary>
+        public TcpViewModel( )
+        {
+            TcpModel = new TcpModel( );
+        }
+
         /// <summary>
         /// Gets or sets the TCP model.
         /// </summary>
@@ -29,7 +78,7 @@ namespace Ninja.ViewModels
         /// <summary>
         /// The TCP server socket
         /// </summary>
-        private TcpServerSocket _tcpServerSocket = null;
+        private TcpServerSocket _tcpServerSocket;
 
         /// <summary>
         /// Gets or sets the TCP server infos.
@@ -37,7 +86,8 @@ namespace Ninja.ViewModels
         /// <value>
         /// The TCP server infos.
         /// </value>
-        public ObservableCollection<TcpServerInfo> TcpServerInfos { get; set; } = new ObservableCollection<TcpServerInfo> { };
+        public ObservableCollection<TcpServerInfo> TcpServerInfos { get; set; } =
+            new ObservableCollection<TcpServerInfo>( );
 
         /// <summary>
         /// Gets the start listen command.
@@ -49,82 +99,94 @@ namespace Ninja.ViewModels
         {
             get
             {
-                return new RelayCommand(param => StartListen(param));
+                return new RelayCommand( param => StartListen( param ) );
             }
         }
+
         /// <summary>
         /// Starts the listen.
         /// </summary>
         /// <param name="parameter">The parameter.</param>
-        public void StartListen(object parameter)
+        public void StartListen( object parameter )
         {
-            if (TcpModel.ServerListenBtnName == "Start Listen")
+            if( TcpModel.ServerListenBtnName == "Start Listen" )
             {
                 TcpModel.ServerListenBtnName = "Stop Listen";
+                _tcpServerSocket =
+                    new TcpServerSocket( IPAddress.Any.ToString( ), TcpModel.ListenPort );
 
-                _tcpServerSocket = new TcpServerSocket(IPAddress.Any.ToString(), TcpModel.ListenPort);
-                _tcpServerSocket.RecvEvent = new Action<Socket, string>(Recv);
-                _tcpServerSocket.ConnectEvent = new Action<Socket>(ConnectCallback);
-                _tcpServerSocket.DisConnectEvent = new Action<Socket>(DisConnectCallback);
-                _tcpServerSocket.Start();
+                _tcpServerSocket.RecvEvent = Recv;
+                _tcpServerSocket.ConnectEvent = ConnectCallback;
+                _tcpServerSocket.DisConnectEvent = DisConnectCallback;
+                _tcpServerSocket.Start( );
                 TcpModel.ServerStatus += "Tcp Server Started!\n";
             }
             else
             {
                 TcpModel.ServerListenBtnName = "Start Listen";
-                _tcpServerSocket.CloseAllClientSocket();
-                TcpServerInfos.Clear();
+                _tcpServerSocket.CloseAllClientSocket( );
+                TcpServerInfos.Clear( );
                 TcpModel.ServerStatus += "Tcp Server Stopped!\n";
-
             }
         }
+
         /// <summary>
         /// Recvs the specified socket.
         /// </summary>
         /// <param name="socket">The socket.</param>
         /// <param name="message">The message.</param>
-        private void Recv(Socket socket, string message)
+        private void Recv( Socket socket, string message )
         {
-            App.Current.Dispatcher.BeginInvoke(new Action(() =>
+            Application.Current.Dispatcher.BeginInvoke( new Action( ( ) =>
             {
-                TcpModel.ServerRecv += "[" + socket.RemoteEndPoint.ToString() + "] :";
+                TcpModel.ServerRecv += "[" + socket.RemoteEndPoint + "] :";
                 TcpModel.ServerRecv += message;
                 TcpModel.ServerRecv += "\n";
-            }));
-
+            } ) );
         }
+
         /// <summary>
         /// Connects the callback.
         /// </summary>
         /// <param name="socket">The socket.</param>
-        private void ConnectCallback(Socket socket)
+        private void ConnectCallback( Socket socket )
         {
-            App.Current.Dispatcher.BeginInvoke(new Action(() =>
+            Application.Current.Dispatcher.BeginInvoke( new Action( ( ) =>
             {
                 var _time = DateTime.Now;
-                TcpServerInfos.Add(new TcpServerInfo {RemoteIp = socket.RemoteEndPoint.ToString().Split(':')[0], Port = socket.RemoteEndPoint.ToString().Split(':')[1], Time = _time });
-                TcpModel.ServerStatus += "++[" + socket.RemoteEndPoint.ToString() + "] connected at " + _time + "\n";
-            }));
+                TcpServerInfos.Add( new TcpServerInfo
+                {
+                    RemoteIp = socket.RemoteEndPoint.ToString( ).Split( ':' )[ 0 ],
+                    Port = socket.RemoteEndPoint.ToString( ).Split( ':' )[ 1 ],
+                    Time = _time
+                } );
 
+                TcpModel.ServerStatus +=
+                    "++[" + socket.RemoteEndPoint + "] connected at " + _time + "\n";
+            } ) );
         }
+
         /// <summary>
         /// Dises the connect callback.
         /// </summary>
         /// <param name="socket">The socket.</param>
-        private void DisConnectCallback(Socket socket)
+        private void DisConnectCallback( Socket socket )
         {
-            App.Current.Dispatcher.BeginInvoke(new Action(() =>
+            Application.Current.Dispatcher.BeginInvoke( new Action( ( ) =>
             {
-                foreach (var _info in TcpServerInfos)
+                foreach( var _info in TcpServerInfos )
                 {
-                    if (_info.RemoteIp == socket.RemoteEndPoint.ToString().Split(':')[0] && _info.Port == socket.RemoteEndPoint.ToString().Split(':')[1])
+                    if( _info.RemoteIp == socket.RemoteEndPoint.ToString( ).Split( ':' )[ 0 ]
+                        && _info.Port == socket.RemoteEndPoint.ToString( ).Split( ':' )[ 1 ] )
                     {
-                        TcpServerInfos.Remove(_info);
-                        TcpModel.ServerStatus += "--[" + socket.RemoteEndPoint.ToString() + "] disconnected at " + _info.Time + "\n";
+                        TcpServerInfos.Remove( _info );
+                        TcpModel.ServerStatus += "--[" + socket.RemoteEndPoint
+                            + "] disconnected at " + _info.Time + "\n";
+
                         break;
                     }
                 }
-            }));
+            } ) );
         }
 
         /// <summary>
@@ -137,23 +199,25 @@ namespace Ninja.ViewModels
         {
             get
             {
-                return new RelayCommand(param => ServerAutoSend(param));
+                return new RelayCommand( param => ServerAutoSend( param ) );
             }
         }
+
         /// <summary>
         /// The m server automatic send timer
         /// </summary>
-        private System.Windows.Threading.DispatcherTimer _mServerAutoSendTimer;
+        private DispatcherTimer _serverAutoSendTimer;
+
         /// <summary>
         /// Servers the automatic send timer function.
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void ServerAutoSendTimerFunc(object sender, EventArgs e)
+        private void ServerAutoSendTimerFunc( object sender, EventArgs e )
         {
-            if (_tcpServerSocket!=null)
+            if( _tcpServerSocket != null )
             {
-                _tcpServerSocket.SendMessageToAllClientsAsync(TcpModel.ServerSendStr);
+                _tcpServerSocket.SendMessageToAllClientsAsync( TcpModel.ServerSendStr );
             }
         }
 
@@ -161,25 +225,24 @@ namespace Ninja.ViewModels
         /// Servers the automatic send.
         /// </summary>
         /// <param name="parameter">The parameter.</param>
-        public void ServerAutoSend(object parameter)
+        public void ServerAutoSend( object parameter )
         {
-            if (TcpModel.ServerSendBtnName == "Auto Send Start")
+            if( TcpModel.ServerSendBtnName == "Auto Send Start" )
             {
                 TcpModel.ServerSendBtnName = "Auto Send Stop";
-                _mServerAutoSendTimer = new System.Windows.Threading.DispatcherTimer()
+                _serverAutoSendTimer = new DispatcherTimer( )
                 {
-                    Interval = new TimeSpan(0, 0, 0, 0, TcpModel.ServerSendInterval)
+                    Interval = new TimeSpan( 0, 0, 0, 0,
+                        TcpModel.ServerSendInterval )
                 };
 
-                _mServerAutoSendTimer.Tick += ServerAutoSendTimerFunc;
-                _mServerAutoSendTimer.Start();
-
+                _serverAutoSendTimer.Tick += ServerAutoSendTimerFunc;
+                _serverAutoSendTimer.Start( );
             }
             else
             {
-
                 TcpModel.ServerSendBtnName = "Auto Send Start";
-                _mServerAutoSendTimer.Stop();
+                _serverAutoSendTimer.Stop( );
             }
         }
 
@@ -193,14 +256,15 @@ namespace Ninja.ViewModels
         {
             get
             {
-                return new RelayCommand(param => ServerRecvClear(param));
+                return new RelayCommand( param => ServerRecvClear( param ) );
             }
         }
+
         /// <summary>
         /// Servers the recv clear.
         /// </summary>
         /// <param name="parameter">The parameter.</param>
-        public void ServerRecvClear(object parameter)
+        public void ServerRecvClear( object parameter )
         {
             TcpModel.ServerRecv = "";
         }
@@ -215,17 +279,19 @@ namespace Ninja.ViewModels
         {
             get
             {
-                return new RelayCommand(param => ServerSendClear(param));
+                return new RelayCommand( param => ServerSendClear( param ) );
             }
         }
+
         /// <summary>
         /// Servers the send clear.
         /// </summary>
         /// <param name="parameter">The parameter.</param>
-        public void ServerSendClear(object parameter)
+        public void ServerSendClear( object parameter )
         {
             TcpModel.ServerSend = "";
         }
+
         /// <summary>
         /// Gets the server send command.
         /// </summary>
@@ -236,20 +302,20 @@ namespace Ninja.ViewModels
         {
             get
             {
-                return new RelayCommand(param => ServerSend(param));
+                return new RelayCommand( param => ServerSend( param ) );
             }
         }
+
         /// <summary>
         /// Servers the send.
         /// </summary>
         /// <param name="parameter">The parameter.</param>
-        public void ServerSend(object parameter)
+        public void ServerSend( object parameter )
         {
-            if(_tcpServerSocket != null)
+            if( _tcpServerSocket != null )
             {
-                _tcpServerSocket.SendMessageToAllClientsAsync(TcpModel.ServerSend);
+                _tcpServerSocket.SendMessageToAllClientsAsync( TcpModel.ServerSend );
             }
-
         }
         #endregion
 
@@ -257,7 +323,8 @@ namespace Ninja.ViewModels
         /// <summary>
         /// The TCP client socket
         /// </summary>
-        private TcpClientSocket _tcpClientSocket = null;
+        private TcpClientSocket _tcpClientSocket;
+
         /// <summary>
         /// Gets the client connect command.
         /// </summary>
@@ -268,28 +335,29 @@ namespace Ninja.ViewModels
         {
             get
             {
-                return new RelayCommand(param => ClientConnect(param));
+                return new RelayCommand( param => ClientConnect( param ) );
             }
         }
+
         /// <summary>
         /// Clients the connect.
         /// </summary>
         /// <param name="parameter">The parameter.</param>
-        public void ClientConnect(object parameter)
+        public void ClientConnect( object parameter )
         {
-            if (TcpModel.ClientConnectBtnName == "Connect")
+            if( TcpModel.ClientConnectBtnName == "Connect" )
             {
                 TcpModel.ClientConnectBtnName = "Disconnect";
-                _tcpClientSocket = new TcpClientSocket(TcpModel.ServerIp, TcpModel.ServerPort);
-                _tcpClientSocket.RecvEvent = new Action<string>(ClientRecvCb);
-                _tcpClientSocket.ConnectEvent = new Action<Socket>(ClientConnectCb);
-                _tcpClientSocket.DisConnectEvent = new Action<Socket>(ClientDisConnectCb);
-                _tcpClientSocket.Start();
+                _tcpClientSocket = new TcpClientSocket( TcpModel.ServerIp, TcpModel.ServerPort );
+                _tcpClientSocket.RecvEvent = ClientRecvCb;
+                _tcpClientSocket.ConnectEvent = ClientConnectCb;
+                _tcpClientSocket.DisConnectEvent = ClientDisConnectCb;
+                _tcpClientSocket.Start( );
             }
             else
             {
                 TcpModel.ClientConnectBtnName = "Connect";
-                _tcpClientSocket.CloseClientSocket();
+                _tcpClientSocket.CloseClientSocket( );
             }
         }
 
@@ -297,45 +365,50 @@ namespace Ninja.ViewModels
         /// Clients the connect cb.
         /// </summary>
         /// <param name="socket">The socket.</param>
-        private void ClientConnectCb(Socket socket)
+        private void ClientConnectCb( Socket socket )
         {
-            App.Current.Dispatcher.BeginInvoke(new Action(() =>
+            Application.Current.Dispatcher.BeginInvoke( new Action( ( ) =>
             {
                 var _time = DateTime.Now;
-                TcpModel.ClientRecv += "++[" + socket.RemoteEndPoint.ToString() + "] connected at " + _time + "\n";
-                TcpModel.LocalPort = socket.LocalEndPoint.ToString().Split(':')[1];
-            }));
+                TcpModel.ClientRecv +=
+                    "++[" + socket.RemoteEndPoint + "] connected at " + _time + "\n";
+
+                TcpModel.LocalPort = socket.LocalEndPoint.ToString( ).Split( ':' )[ 1 ];
+            } ) );
         }
+
         /// <summary>
         /// Clients the dis connect cb.
         /// </summary>
         /// <param name="socket">The socket.</param>
-        private void ClientDisConnectCb(Socket socket)
+        private void ClientDisConnectCb( Socket socket )
         {
-            App.Current.Dispatcher.BeginInvoke(new Action(() =>
+            Application.Current.Dispatcher.BeginInvoke( new Action( ( ) =>
             {
-                TcpModel.ClientRecv += "--[" + socket.RemoteEndPoint.ToString() + "] disconnected at " + DateTime.Now + "\n";
-                if (TcpModel.ClientConnectBtnName == "Disconnect")
+                TcpModel.ClientRecv += "--[" + socket.RemoteEndPoint + "] disconnected at "
+                    + DateTime.Now + "\n";
+
+                if( TcpModel.ClientConnectBtnName == "Disconnect" )
                 {
                     TcpModel.ClientConnectBtnName = "Connect";
-                    _tcpClientSocket.CloseClientSocket();
+                    _tcpClientSocket.CloseClientSocket( );
                 }
-            }));
-
+            } ) );
         }
+
         /// <summary>
         /// Clients the recv cb.
         /// </summary>
         /// <param name="msg">The MSG.</param>
-        private void ClientRecvCb(string msg)
+        private void ClientRecvCb( string msg )
         {
-            App.Current.Dispatcher.BeginInvoke(new Action(() =>
+            Application.Current.Dispatcher.BeginInvoke( new Action( ( ) =>
             {
                 TcpModel.ClientRecv += msg;
                 TcpModel.ClientRecv += "\n";
-            }));
-
+            } ) );
         }
+
         /// <summary>
         /// Gets the client send clear command.
         /// </summary>
@@ -346,17 +419,19 @@ namespace Ninja.ViewModels
         {
             get
             {
-                return new RelayCommand(param => ClientSendClear(param));
+                return new RelayCommand( param => ClientSendClear( param ) );
             }
         }
+
         /// <summary>
         /// Clients the send clear.
         /// </summary>
         /// <param name="parameter">The parameter.</param>
-        public void ClientSendClear(object parameter)
+        public void ClientSendClear( object parameter )
         {
             TcpModel.ClientSend = "";
         }
+
         /// <summary>
         /// Gets the client send command.
         /// </summary>
@@ -367,21 +442,22 @@ namespace Ninja.ViewModels
         {
             get
             {
-                return new RelayCommand(param => ClientSend(param));
+                return new RelayCommand( param => ClientSend( param ) );
             }
         }
+
         /// <summary>
         /// Clients the send.
         /// </summary>
         /// <param name="parameter">The parameter.</param>
-        public void ClientSend(object parameter)
+        public void ClientSend( object parameter )
         {
-            if(_tcpClientSocket != null)
+            if( _tcpClientSocket != null )
             {
-                _tcpClientSocket.SendAsync(TcpModel.ClientSend);
+                _tcpClientSocket.SendAsync( TcpModel.ClientSend );
             }
-
         }
+
         /// <summary>
         /// Gets the client automatic send command.
         /// </summary>
@@ -392,50 +468,53 @@ namespace Ninja.ViewModels
         {
             get
             {
-                return new RelayCommand(param => ClientAutoSend(param));
+                return new RelayCommand( param => ClientAutoSend( param ) );
             }
         }
 
         /// <summary>
         /// The m client automatic send timer
         /// </summary>
-        private System.Windows.Threading.DispatcherTimer _mClientAutoSendTimer;
+        private DispatcherTimer _mClientAutoSendTimer;
+
         /// <summary>
         /// Clients the automatic send function.
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void ClientAutoSendFunc(object sender, EventArgs e)
+        private void ClientAutoSendFunc( object sender, EventArgs e )
         {
-            if(_tcpClientSocket != null)
+            if( _tcpClientSocket != null )
             {
-                _tcpClientSocket.SendAsync(TcpModel.ClientSendStr);
+                _tcpClientSocket.SendAsync( TcpModel.ClientSendStr );
             }
-
         }
 
         /// <summary>
         /// Clients the automatic send.
         /// </summary>
         /// <param name="parameter">The parameter.</param>
-        public void ClientAutoSend(object parameter)
+        public void ClientAutoSend( object parameter )
         {
-            if (TcpModel.ClientSendBtnName == "Auto Send Start")
+            if( TcpModel.ClientSendBtnName == "Auto Send Start" )
             {
                 TcpModel.ClientSendBtnName = "Auto Send Stop";
-                _mClientAutoSendTimer = new DispatcherTimer()
+                _mClientAutoSendTimer = new DispatcherTimer( )
                 {
-                    Interval = new TimeSpan(0, 0, 0, 0, TcpModel.ClientSendInterval)
+                    Interval = new TimeSpan( 0, 0, 0, 0,
+                        TcpModel.ClientSendInterval )
                 };
+
                 _mClientAutoSendTimer.Tick += ClientAutoSendFunc;
-                _mClientAutoSendTimer.Start();
+                _mClientAutoSendTimer.Start( );
             }
             else
             {
                 TcpModel.ClientSendBtnName = "Auto Send Start";
-                _mClientAutoSendTimer.Stop();
+                _mClientAutoSendTimer.Stop( );
             }
         }
+
         /// <summary>
         /// Gets the client recv clear command.
         /// </summary>
@@ -446,25 +525,18 @@ namespace Ninja.ViewModels
         {
             get
             {
-                return new RelayCommand(param => ClientRecvClear(param));
+                return new RelayCommand( param => ClientRecvClear( param ) );
             }
         }
+
         /// <summary>
         /// Clients the recv clear.
         /// </summary>
         /// <param name="parameter">The parameter.</param>
-        public void ClientRecvClear(object parameter)
+        public void ClientRecvClear( object parameter )
         {
             TcpModel.ClientRecv = "";
         }
-
         #endregion
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TcpViewModel"/> class.
-        /// </summary>
-        public TcpViewModel()
-        {
-            TcpModel = new TcpModel();
-        }
     }
 }

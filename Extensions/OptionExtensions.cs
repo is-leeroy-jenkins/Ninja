@@ -57,7 +57,7 @@ namespace Ninja
         /// <summary>
         /// Firsts or none.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="_"></typeparam>
         /// <param name="enumerable">The enumerable.</param>
         /// <returns></returns>
         public static Option<T> FirstOrNone<T>( this IEnumerable<T> enumerable )
@@ -76,7 +76,7 @@ namespace Ninja
         /// <summary>
         /// First or none.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="_"></typeparam>
         /// <param name="enumerable">The enumerable.</param>
         /// <param name="predicate">The predicate.</param>
         /// <returns></returns>
@@ -98,11 +98,11 @@ namespace Ninja
         /// Selects the optional.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <typeparam name="_result">The type of the result.</typeparam>
         /// <param name="enumerable">The enumerable.</param>
         /// <param name="map">The map.</param>
         /// <returns></returns>
-        public static IEnumerable<TResult> SelectOptional<T, TResult>(
+        public static IEnumerable<TResult> SelectOptional<T,TResult>(
             this IEnumerable<T> enumerable, Func<T, Option<TResult>> map )
         {
             try

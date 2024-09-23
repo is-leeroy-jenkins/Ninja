@@ -46,9 +46,9 @@ namespace Ninja
 
     /// <inheritdoc/>
     /// <summary> </summary>
-    /// <typeparam name="T"> </typeparam>
+    /// <typeparam name="_"> </typeparam>
     /// <seealso cref="T:Ninja.IOption`1"/>
-    public abstract class Option<T> : IOption<T>
+    public abstract class Option<_> : IOption<_>
     {
         /// <summary> Fails the specified ex. </summary>
         /// <param name="ex"> The ex. </param>
@@ -62,7 +62,7 @@ namespace Ninja
         /// <inheritdoc/>
         /// <summary> Gets the value. </summary>
         /// <value> The value. </value>
-        public abstract T Value { get; }
+        public abstract _ Value { get; }
 
         /// <inheritdoc/>
         /// <summary> Gets a value indicating whether this instance is some. </summary>
@@ -86,17 +86,17 @@ namespace Ninja
 
         /// <inheritdoc/>
         /// <summary> Maps the specified function. </summary>
-        /// <typeparam name="TResult"> The type of the result. </typeparam>
+        /// <typeparam name="_result"> The type of the result. </typeparam>
         /// <param name="func"> The function. </param>
         /// <returns> </returns>
-        public abstract Option<TResult> Map<TResult>( Func<T, TResult> func );
+        public abstract Option<_result> Map<_result>( Func<_, _result> func );
 
         /// <inheritdoc/>
         /// <summary> Matches the specified some function. </summary>
-        /// <typeparam name="TResult"> The type of the result. </typeparam>
+        /// <typeparam name="_result"> The type of the result. </typeparam>
         /// <param name="someFunc"> Some function. </param>
         /// <param name="noneFunc"> The none function. </param>
         /// <returns> </returns>
-        public abstract TResult Match<TResult>( Func<T, TResult> someFunc, Func<TResult> noneFunc );
+        public abstract _result Match<_result>( Func<_, _result> someFunc, Func<_result> noneFunc );
     }
 }

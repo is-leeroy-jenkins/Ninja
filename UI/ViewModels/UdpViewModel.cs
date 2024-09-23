@@ -4,14 +4,15 @@ namespace Ninja.ViewModels
 {
     using Interfaces;
     using Models;
-    using Ninja.Models;
+    using Models;
     using System;
     using System.Net;
     using System.Net.Sockets;
     using System.Windows.Input;
-    using Ninja.Interfaces;
+    using Interfaces;
     using System.Windows.Threading;
     using System.Collections.ObjectModel;
+    using System.Windows;
 
     internal class UdpViewModel : MainWindowBase
     {
@@ -57,7 +58,7 @@ namespace Ninja.ViewModels
         }
         private void Recv(EndPoint point, string message, int len)
         {
-            App.Current.Dispatcher.BeginInvoke(new Action(() =>
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
                 UdpModel.ServerRecv += "[" + point.ToString() + "] :";
                 UdpModel.ServerRecv += message;
@@ -76,7 +77,7 @@ namespace Ninja.ViewModels
                 return new RelayCommand(param => ServerAutoSend(param));
             }
         }
-        private System.Windows.Threading.DispatcherTimer _mServerAutoSendTimer;
+        private DispatcherTimer _mServerAutoSendTimer;
         /// <param name="e"></param>
         private void ServerAutoSendTimerFunc(object sender, EventArgs e)
         {
@@ -88,7 +89,7 @@ namespace Ninja.ViewModels
             if (UdpModel.ServerSendBtnName == "Auto Send Start")
             {
                 UdpModel.ServerSendBtnName = "Auto Send Stop";
-                _mServerAutoSendTimer = new System.Windows.Threading.DispatcherTimer()
+                _mServerAutoSendTimer = new DispatcherTimer()
                 {
                     Interval = new TimeSpan(0, 0, 0, 0, UdpModel.ServerSendInterval)
                 };
@@ -167,7 +168,7 @@ namespace Ninja.ViewModels
 
         private void ClientConnectCb(Socket socket)
         {
-            App.Current.Dispatcher.BeginInvoke(new Action(() =>
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
                 var _time = DateTime.Now;
                 UdpModel.ClientRecv += "++[" + socket.RemoteEndPoint.ToString() + "] connected at " + _time + "\n";
@@ -176,7 +177,7 @@ namespace Ninja.ViewModels
         }
         private void ClientDisConnectCb(Socket socket)
         {
-            App.Current.Dispatcher.BeginInvoke(new Action(() =>
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
                 UdpModel.ClientRecv += "--[" + socket.RemoteEndPoint.ToString() + "] disconnected at " + DateTime.Now + "\n";
                 if (UdpModel.ClientConnectBtnName == "Disconnect")
@@ -189,7 +190,7 @@ namespace Ninja.ViewModels
         }
         private void ClientRecvCb(string msg)
         {
-            App.Current.Dispatcher.BeginInvoke(new Action(() =>
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
                 UdpModel.ClientRecv += msg;
                 UdpModel.ClientRecv += "\n";
@@ -226,7 +227,7 @@ namespace Ninja.ViewModels
             }
         }
 
-        private System.Windows.Threading.DispatcherTimer _mClientAutoSendTimer;
+        private DispatcherTimer _mClientAutoSendTimer;
         private void ClientAutoSendFunc(object sender, EventArgs e)
         {
             _udpClientSocket.SendAsync(UdpModel.ClientSendStr);

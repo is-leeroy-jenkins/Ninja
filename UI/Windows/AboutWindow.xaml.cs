@@ -26,7 +26,7 @@ namespace Ninja.Views
             InitializeComponent();
             Height = 300;
             Width = Height / 0.675;
-            this.ResizeMode = ResizeMode.NoResize;
+            ResizeMode = ResizeMode.NoResize;
         }
         private void GithubButton_Click(object sender, RoutedEventArgs e)
         {

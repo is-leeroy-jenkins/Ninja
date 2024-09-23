@@ -47,37 +47,37 @@ namespace Ninja
 
     /// <inheritdoc/>
     /// <summary> </summary>
-    /// <typeparam name="T"> </typeparam>
+    /// <typeparam name="_"> </typeparam>
     /// <seealso cref="T:Ninja.IOption`1"/>
     [ SuppressMessage( "ReSharper", "CompareNonConstrainedGenericWithNull" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
-    public class Some<T> : Option<T>
+    public class Some<_> : Option<_>
     {
         /// <summary>
         /// The value
         /// </summary>
-        private readonly T _value;
+        private readonly _ _value;
 
         /// <inheritdoc/>
         /// <summary>
         /// Maps the specified function.
         /// </summary>
-        /// <typeparam name="TResult"> The type of the result. </typeparam>
+        /// <typeparam name="_result"> The type of the result. </typeparam>
         /// <param name="func"> The function. </param>
         /// <returns>
         /// Option{TResult}
         /// </returns>
-        public override Option<TResult> Map<TResult>( Func<T, TResult> func )
+        public override Option<_result> Map<_result>( Func<_, _result> func )
         {
             try
             {
-                return new Some<TResult>( func( _value ) );
+                return new Some<_result>( func( _value ) );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default( Option<TResult> );
+                return default( Option<_result> );
             }
         }
 
@@ -85,13 +85,13 @@ namespace Ninja
         /// <summary>
         /// Matches the specified some function.
         /// </summary>
-        /// <typeparam name="TResult"> The type of the result. </typeparam>
+        /// <typeparam name="_result"> The type of the result. </typeparam>
         /// <param name="someFunc"> Some function. </param>
         /// <param name="noneFunc"> The none function. </param>
         /// <returns>
         /// TResult
         /// </returns>
-        public override TResult Match<TResult>( Func<T, TResult> someFunc, Func<TResult> noneFunc )
+        public override _result Match<_result>( Func<_, _result> someFunc, Func<_result> noneFunc )
         {
             try
             {
@@ -100,7 +100,7 @@ namespace Ninja
             catch( Exception ex )
             {
                 Fail( ex );
-                return default( TResult );
+                return default( _result );
             }
         }
 
@@ -113,7 +113,7 @@ namespace Ninja
         /// <exception cref="System.ArgumentNullException">
         /// value - Some value was null, use Empty instead
         /// </exception>
-        public Some( T value )
+        public Some( _ value )
         {
             if( value == null )
             {
@@ -129,7 +129,7 @@ namespace Ninja
         /// Gets the value.
         /// </summary>
         /// <value> The value. </value>
-        public override T Value
+        public override _ Value
         {
             get
             {
