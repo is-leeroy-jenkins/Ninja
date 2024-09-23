@@ -22,7 +22,7 @@ Can be used  for network study by WPF MVVM.
 - [ ] ...
 
 
-## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/main/Resources/Assets/GitHubImages/csharp.png) Code
+## ![](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/GitHubImages/csharp.png) Code
 
 - Ninja supports AnyCPU as well as x86/x64 specific builds
 - [Controls](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/Controls) - main UI layer and associated controls and related functionality.
@@ -47,7 +47,7 @@ $ cd Ninja
 Run `Ninja.sln`
 
 
-## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/main/Resources/Assets/GitHubImages/documentation.png) Documentation
+## ![](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Resources/Assets/GitHubImages/documentation.png) Documentation
 
 - [User Guide](Resources/Github/Users.md)
 - [Compilation Guide](Resources/Github/Compilation.md)
