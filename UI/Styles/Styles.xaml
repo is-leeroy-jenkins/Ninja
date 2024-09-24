@@ -4,8 +4,8 @@
 
     <ResourceDictionary.MergedDictionaries>
 
-<!--*****************************************  Ninja  ********************************-->
-        
+        <!--  *****************************************  Ninja  ********************************  -->
+
         <ResourceDictionary Source="/UI/Themes/TextBoxEx.xaml" />
         <ResourceDictionary Source="/UI/Themes/ButtonEx.xaml" />
         <ResourceDictionary Source="/UI/Themes/GroupBox.xaml" />
@@ -15,8 +15,8 @@
         <ResourceDictionary Source="/UI/Themes/Checkbox.xaml" />
         <ResourceDictionary Source="/UI/Themes/TabControlEx.xaml" />
 
-<!--*****************************************  Sync  ********************************-->
-        
+        <!--  *****************************************  Sync  ********************************  -->
+
         <ResourceDictionary Source="/UI/Styles/Accordion/SfAccordion.xaml" />
         <ResourceDictionary Source="/UI/Styles/Button/Button.xaml" />
         <ResourceDictionary Source="/UI/Styles/Button/ButtonAdv.xaml" />

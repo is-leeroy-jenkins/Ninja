@@ -65,7 +65,7 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="3">
                                 <Border
-                                    BorderBrush="White"
+                                    BorderBrush="{StaticResource BlueBorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="2" />
                             </Border>
@@ -118,13 +118,13 @@
                                 RecognizesAccessKey="True"
                                 SnapsToDevicePixels="true"
                                 TextElement.FontWeight="Medium"
-                                TextElement.Foreground="white" />
+                                TextElement.Foreground="{StaticResource WhiteForeground}" />
                         </Border>
                         <ContentPresenter
                             Grid.Row="1"
                             Margin="{TemplateBinding Padding}"
                             SnapsToDevicePixels="true"
-                            TextElement.Foreground="White" />
+                            TextElement.Foreground="{StaticResource WhiteForeground}"  />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

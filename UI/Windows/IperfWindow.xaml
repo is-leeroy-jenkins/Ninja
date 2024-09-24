@@ -411,7 +411,7 @@
                     Background="{StaticResource ControlInterior}"
                     Foreground="{StaticResource WhiteForeground}"
                     BorderBrush="{StaticResource BlueBorderBrush}"
-                    Style="{DynamicResource input-group-addon left}"
+                    Style="{DynamicResource Input-Group-Addon Left}"
                     Tag="{Binding IperfModel.Version}">
                     <ninja:MetroTextBox.Text>
                         <MultiBinding
