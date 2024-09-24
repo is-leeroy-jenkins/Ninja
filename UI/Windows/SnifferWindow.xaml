@@ -1,92 +1,169 @@
-﻿<UserControl x:Class="Ninja.Views.SnifferWindow"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Ninja.Views"
-             xmlns:vm="clr-namespace:Ninja.Interfaces"
-             mc:Ignorable="d" 
-             xmlns:btnex="clr-namespace:ButtonEx"
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl
+    x:Class="Ninja.Views.SnifferWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:btnex="clr-namespace:ButtonEx"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Ninja.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Ninja.Interfaces"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
     <UserControl.Resources>
-        <vm:BytesSuffixConverter x:Key="aBytesSuffixConverter"></vm:BytesSuffixConverter>
+        <vm:BytesSuffixConverter x:Key="aBytesSuffixConverter" />
     </UserControl.Resources>
-    <Grid >
+    <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" Background="#f4f5f6" UseLayoutRounding="True" Grid.ColumnSpan="1" >
+        <Grid
+            Grid.Column="0"
+            Grid.ColumnSpan="1"
+            Background="#f4f5f6"
+            UseLayoutRounding="True">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Margin="10,10,0,0" HorizontalAlignment="Stretch" Text="Sniffer" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-            <Separator Grid.Row="0" Margin="10,50,10,0" VerticalAlignment="Bottom"  HorizontalAlignment="Stretch"></Separator>
+            <TextBlock
+                Grid.Row="0"
+                Margin="10,10,0,0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                FontSize="24"
+                FontWeight="Bold"
+                Text="Sniffer" />
+            <Separator
+                Grid.Row="0"
+                Margin="10,50,10,0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
             <!--<TextBlock Style="{StaticResource MenuItemText}" Text="Network Interfaces" Grid.Row="1"/>-->
-            <StackPanel Grid.Row="1" Margin="10,10,10,0" MinWidth="200" >
-                <GroupBox Header="Capture Control" Style="{StaticResource AccentGroupBox}" DataContext="{Binding SnifferViews[0]}">
-                    <Grid Background="White" >
+            <StackPanel
+                Grid.Row="1"
+                MinWidth="200"
+                Margin="10,10,10,0">
+                <GroupBox
+                    DataContext="{Binding SnifferViews[0]}"
+                    Header="Capture Control"
+                    Style="{StaticResource AccentGroupBox}">
+                    <Grid Background="White">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
 
-                        <ComboBox Grid.Row="0" Width="Auto" HorizontalAlignment="Stretch" 
-                          VerticalContentAlignment="Center" ToolTip="Select network interface" 
-                          SelectedItem="{Binding SelectedInterface, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                          ItemsSource="{Binding NetworkInterfaceList}" DisplayMemberPath="Description"
-                          SelectedIndex="0" >
-                        </ComboBox>
-                        <btnex:ButtonEx Grid.Row="1" Margin="0,5,5,0" Content="{Binding StartCaptureBtnName}" ButtonType="Normal"  HorizontalAlignment="Center" Width="120" Height="30" Command="{Binding StartCaptureCommand}" />
-                        <btnex:ButtonEx Grid.Row="2" Margin="0,5,5,0" Content="Save To File" ButtonType="Normal" IsEnabled="{Binding SaveStatus}" HorizontalAlignment="Center" Width="120" Height="30" Command="{Binding SavePacketsCommand}" />
+                        <ComboBox
+                            Grid.Row="0"
+                            Width="Auto"
+                            HorizontalAlignment="Stretch"
+                            VerticalContentAlignment="Center"
+                            DisplayMemberPath="Description"
+                            ItemsSource="{Binding NetworkInterfaceList}"
+                            SelectedIndex="0"
+                            SelectedItem="{Binding SelectedInterface, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            ToolTip="Select network interface" />
+                        <btnex:ButtonEx
+                            Grid.Row="1"
+                            Width="120"
+                            Height="30"
+                            Margin="0,5,5,0"
+                            HorizontalAlignment="Center"
+                            ButtonType="Normal"
+                            Command="{Binding StartCaptureCommand}"
+                            Content="{Binding StartCaptureButtonName}" />
+                        <btnex:ButtonEx
+                            Grid.Row="2"
+                            Width="120"
+                            Height="30"
+                            Margin="0,5,5,0"
+                            HorizontalAlignment="Center"
+                            ButtonType="Normal"
+                            Command="{Binding SavePacketsCommand}"
+                            Content="Save To File"
+                            IsEnabled="{Binding SaveStatus}" />
 
                     </Grid>
                 </GroupBox>
             </StackPanel>
-            <StackPanel Grid.Row="2" Margin="10,10,10,0" MinWidth="200" >
-                <GroupBox Header="Filter Config" Style="{StaticResource AccentGroupBox}" DataContext="{Binding SnifferViews[0]}" >
+            <StackPanel
+                Grid.Row="2"
+                MinWidth="200"
+                Margin="10,10,10,0">
+                <GroupBox
+                    DataContext="{Binding SnifferViews[0]}"
+                    Header="Filter Config"
+                    Style="{StaticResource AccentGroupBox}">
                     <Grid>
                         <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                         <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Margin="0,5,5,0" VerticalAlignment="Center" Content="Packet filter syntax man page->"/>
-                        <btnex:ButtonEx Grid.Row="0" Margin="0,5,5,0" Content="Go" ButtonType="Normal" HorizontalAlignment="Right" Width="25" Height="30" Command="{Binding FilterHelpCommand}" />
+                        <Label
+                            Grid.Row="0"
+                            Margin="0,5,5,0"
+                            VerticalAlignment="Center"
+                            Content="Packet filter syntax man page-&gt;" />
+                        <btnex:ButtonEx
+                            Grid.Row="0"
+                            Width="25"
+                            Height="30"
+                            Margin="0,5,5,0"
+                            HorizontalAlignment="Right"
+                            ButtonType="Normal"
+                            Command="{Binding FilterHelpCommand}"
+                            Content="Go" />
 
-                        <TextBox  Grid.Row="1" Margin="5,10,5,5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="30" Width="Auto" Padding="3" 
-                         Text="{Binding PacketFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                         ToolTip="Packet filter expression">
-                        <TextBox.Style>
-                            <Style TargetType="{x:Type TextBox}">
-                                <Setter Property="IsEnabled" Value="True" />
-                                <!--<Style.Triggers>
+                        <TextBox
+                            Grid.Row="1"
+                            Width="Auto"
+                            Height="30"
+                            Margin="5,10,5,5"
+                            Padding="3"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            Text="{Binding PacketFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            ToolTip="Packet filter expression">
+                            <TextBox.Style>
+                                <Style TargetType="{x:Type TextBox}">
+                                    <Setter Property="IsEnabled" Value="True" />
+                                    <!--<Style.Triggers>
                                         <DataTrigger Binding="{Binding IsBusy}" Value="True">
                                             <Setter Property="IsEnabled" Value="False" />
                                         </DataTrigger>
                                     </Style.Triggers>-->
-                            </Style>
-                        </TextBox.Style>
-                    </TextBox>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
                     </Grid>
                 </GroupBox>
             </StackPanel>
-            <StackPanel Grid.Row="3" Margin="10,10,10,0" MinWidth="200" >
-                <GroupBox Header="Capture Status" Style="{StaticResource AccentGroupBox}">
-                    <TreeView >
-                        <TreeViewItem Header="Statistics" DataContext="{Binding SnifferViews[1]}"  Visibility="Visible" IsExpanded="True">
+            <StackPanel
+                Grid.Row="3"
+                MinWidth="200"
+                Margin="10,10,10,0">
+                <GroupBox
+                    Header="Capture Status"
+                    Style="{StaticResource AccentGroupBox}">
+                    <TreeView>
+                        <TreeViewItem
+                            DataContext="{Binding SnifferViews[1]}"
+                            Header="Statistics"
+                            IsExpanded="True"
+                            Visibility="Visible">
                             <TreeViewItem.Style>
                                 <Style TargetType="{x:Type TreeViewItem}">
                                     <Setter Property="Visibility" Value="Visible" />
@@ -97,30 +174,42 @@
                                     </Style.Triggers>-->
                                 </Style>
                             </TreeViewItem.Style>
-                                <!--<StackPanel Orientation="Horizontal">-->
+                            <!--<StackPanel Orientation="Horizontal">-->
                             <!--<TextBlock Text="Source: "></TextBlock>-->
-                            <TextBlock Text="{Binding PacketCount, StringFormat=Total Packets: {0}}" ></TextBlock>
+                            <TextBlock Text="{Binding PacketCount, StringFormat=Total Packets: {0}}" />
                             <!--</StackPanel>-->
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Total Bytes: "></TextBlock>
-                                <TextBlock HorizontalAlignment="Left" Text="{Binding ByteCount, Converter={StaticResource aBytesSuffixConverter}}"></TextBlock>
+                                <TextBlock Text="Total Bytes: " />
+                                <TextBlock
+                                    HorizontalAlignment="Left"
+                                    Text="{Binding ByteCount, Converter={StaticResource aBytesSuffixConverter}}" />
                             </StackPanel>
-                            <TextBlock Text="{Binding CaptureTime, StringFormat=Total Time: {0}}" ></TextBlock>
+                            <TextBlock Text="{Binding CaptureTime, StringFormat=Total Time: {0}}" />
                         </TreeViewItem>
 
-                    </TreeView >
+                    </TreeView>
                 </GroupBox>
             </StackPanel>
         </Grid>
-        <Grid Grid.Column="1" HorizontalAlignment="Stretch">
-            <Grid  HorizontalAlignment="Stretch" Width="Auto">
+        <Grid
+            Grid.Column="1"
+            HorizontalAlignment="Stretch">
+            <Grid
+                Width="Auto"
+                HorizontalAlignment="Stretch">
                 <TabControl>
 
-                    <TabItem Header="Capture View" Style="{StaticResource TabControlEx}" DataContext="{Binding SnifferViews[0]}" >
+                    <TabItem
+                        DataContext="{Binding SnifferViews[0]}"
+                        Header="Capture View"
+                        Style="{StaticResource TabControlEx}">
                         <local:SnifferCaptureView />
                     </TabItem>
-                    <TabItem Header="Statistics View" Style="{StaticResource TabControlEx}" DataContext="{Binding SnifferViews[1]}">
-                        <local:SnifferStatsView/>
+                    <TabItem
+                        DataContext="{Binding SnifferViews[1]}"
+                        Header="Statistics View"
+                        Style="{StaticResource TabControlEx}">
+                        <local:SnifferStatsView />
                     </TabItem>
 
                 </TabControl>

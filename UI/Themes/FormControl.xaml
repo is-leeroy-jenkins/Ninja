@@ -4,18 +4,16 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="BaseStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    <!--  form-control 源码行数:2356-2391  -->
-    <!--  TextBox PasswordBox ComboBox CheckBox RadioButton  -->
-    <!--  基样式  -->
+
     <Style
         x:Key="FormControlBaseStyle"
         BasedOn="{StaticResource BaseStyle}"
         TargetType="{x:Type Control}">
         <Setter Property="Height" Value="{DynamicResource DefaultControlHeight}" />
         <Setter Property="Padding" Value="{DynamicResource DefaultControlPadding}" />
-        <Setter Property="Background" Value="{DynamicResource FormControlBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource FormControlBorderBrush}" />
-        <Setter Property="Foreground" Value="{DynamicResource FormControlForeground}" />
+        <Setter Property="Background" Value="{DynamicResource FormBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BlueBorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource FormForeground}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -48,7 +46,7 @@
                                 </Rectangle.Effect>
                             </Rectangle>
                         </Border>
-                        <!--  内容放在外面 因为阴影会对内容产生影响 Margin绑定BorderThickness是为了让padding没有误差  -->
+
                         <ScrollViewer
                             x:Name="PART_ContentHost"
                             Margin="0"
@@ -100,13 +98,13 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <!--  TextBox  -->
+
     <Style
         BasedOn="{StaticResource FormControlBaseStyle}"
         TargetType="{x:Type TextBox}">
         <Style.Triggers>
             <Trigger Property="IsReadOnly" Value="True">
-                <Setter Property="Background" Value="#eee" />
+                <Setter Property="Background" Value="{StaticResource BlackBackground}" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Cursor" Value="IBeam" />
@@ -124,9 +122,9 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <!--  验证 源码行数:2594-2683  -->
+
     <Style
-        x:Key="has-success"
+        x:Key="Has-Success"
         BasedOn="{StaticResource FormControlBaseStyle}"
         TargetType="{x:Type Control}">
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush-Success3}" />
@@ -159,7 +157,7 @@
                                 </Rectangle.Effect>
                             </Rectangle>
                         </Border>
-                        <!--  内容放在外面 因为阴影会对内容产生影响 Margin绑定BorderThickness是为了让padding没有误差  -->
+
                         <ScrollViewer
                             x:Name="PART_ContentHost"
                             Margin="{TemplateBinding BorderThickness}"
@@ -210,7 +208,7 @@
         </Style.Triggers>
     </Style>
     <Style
-        x:Key="has-warning"
+        x:Key="Has-Warning"
         BasedOn="{StaticResource FormControlBaseStyle}"
         TargetType="{x:Type Control}">
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush-Warning3}" />
@@ -237,13 +235,13 @@
                                 Height="1"
                                 VerticalAlignment="Top"
                                 Opacity="0.1"
-                                Stroke="#000000">
+                                Stroke="{StaticResource FormForeground}">
                                 <Rectangle.Effect>
                                     <BlurEffect Radius="1" />
                                 </Rectangle.Effect>
                             </Rectangle>
                         </Border>
-                        <!--  内容放在外面 因为阴影会对内容产生影响 Margin绑定BorderThickness是为了让padding没有误差  -->
+
                         <ScrollViewer
                             x:Name="PART_ContentHost"
                             Margin="{TemplateBinding BorderThickness}"
@@ -294,7 +292,7 @@
         </Style.Triggers>
     </Style>
     <Style
-        x:Key="has-error"
+        x:Key="Has-Error"
         BasedOn="{StaticResource FormControlBaseStyle}"
         TargetType="{x:Type Control}">
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush-Danger3}" />
@@ -327,7 +325,7 @@
                                 </Rectangle.Effect>
                             </Rectangle>
                         </Border>
-                        <!--  内容放在外面 因为阴影会对内容产生影响 Margin绑定BorderThickness是为了让padding没有误差  -->
+
                         <ScrollViewer
                             x:Name="PART_ContentHost"
                             Margin="{TemplateBinding BorderThickness}"
@@ -377,9 +375,9 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <!--  控件尺寸 源码行数:2528-2535 2547-2554  -->
+
     <Style
-        x:Key="input-sm"
+        x:Key="Input-Sm"
         BasedOn="{StaticResource FormControlBaseStyle}"
         TargetType="{x:Type Control}">
         <Setter Property="Height" Value="{DynamicResource SmallControlHeight}" />
@@ -414,7 +412,7 @@
                                 </Rectangle.Effect>
                             </Rectangle>
                         </Border>
-                        <!--  内容放在外面 因为阴影会对内容产生影响 Margin绑定BorderThickness是为了让padding没有误差  -->
+
                         <ScrollViewer
                             x:Name="PART_ContentHost"
                             Margin="{TemplateBinding BorderThickness}"
@@ -504,7 +502,7 @@
                                 </Rectangle.Effect>
                             </Rectangle>
                         </Border>
-                        <!--  内容放在外面 因为阴影会对内容产生影响 Margin绑定BorderThickness是为了让padding没有误差  -->
+
                         <ScrollViewer
                             x:Name="PART_ContentHost"
                             Margin="{TemplateBinding BorderThickness}"
@@ -558,7 +556,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <!--  ComboBox  -->
+
     <Geometry x:Key="DownArrowGeometry">M 0 0 L 2.5 5 L 5 0 Z</Geometry>
     <Style
         x:Key="ComboBoxReadonlyToggleButton"

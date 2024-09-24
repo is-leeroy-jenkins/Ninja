@@ -10,7 +10,7 @@
                 <Setter Property="MouseOverBackground" Value="{StaticResource ControlHoverBrush}" />
                 <Setter Property="MousePressedBackground" Value="{StaticResource SteelBlueBackground}" />
                 <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
-                <Setter Property="MouseOverForeground" Value="{StaticResource WhiteForeground}" />
+                <Setter Property="MouseOverForeground" Value="{StaticResource LightBlueBrush}" />
                 <Setter Property="MousePressedForeground" Value="{StaticResource WhiteForeground}" />
                 <Setter Property="BorderBrush" Value="{StaticResource BlueBorderBrush}" />
                 <Setter Property="BorderThickness" Value="1" />

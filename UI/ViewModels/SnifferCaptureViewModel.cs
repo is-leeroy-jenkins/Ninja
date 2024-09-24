@@ -65,6 +65,7 @@ namespace Ninja.ViewModels
     [ SuppressMessage( "ReSharper", "UnusedParameter.Global" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "AccessToModifiedClosure" ) ]
+    [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
     public class SnifferCaptureViewModel : MainWindowBase
     {
         /// <summary>
@@ -110,7 +111,7 @@ namespace Ninja.ViewModels
         /// <summary>
         /// The start capture BTN name
         /// </summary>
-        private string _startCaptureBtnName;
+        private string _startCaptureButtonName;
 
         /// <summary>
         /// Starts the capture asynchronous.
@@ -167,6 +168,7 @@ namespace Ninja.ViewModels
             }
             catch( Exception ex )
             {
+                // Do Nothing
             }
             finally
             {
@@ -192,16 +194,16 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void StartCapture( object parameter )
         {
-            if( StartCaptureBtnName == "Start Capture" )
+            if( StartCaptureButtonName == "Start Capture" )
             {
-                StartCaptureBtnName = "Stop Capture";
+                StartCaptureButtonName = "Stop Capture";
                 StartCaptureAsync( SelectedInterface );
                 SnifferStatsProcess.Start( );
                 SaveStatus = false;
             }
             else
             {
-                StartCaptureBtnName = "Start Capture";
+                StartCaptureButtonName = "Start Capture";
                 SnifferStatsProcess.Stop( );
                 StopCapture( );
                 SaveStatus = true;
@@ -268,12 +270,13 @@ namespace Ninja.ViewModels
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SnifferCaptureViewModel"/> class.
+        /// Initializes a new instance of the
+        /// <see cref="SnifferCaptureViewModel"/> class.
         /// </summary>
         public SnifferCaptureViewModel( )
         {
-            Packets = new ObservableCollection<Packet>( );
-            StartCaptureBtnName = "Start Capture";
+            _packets = new ObservableCollection<Packet>( );
+            StartCaptureButtonName = "Start Capture";
             GetNetworkInterfaceList( );
         }
 
@@ -289,9 +292,13 @@ namespace Ninja.ViewModels
             {
                 return _packets;
             }
-            private set
+            private protected set
             {
-                _packets = value;
+                if( _packets != value )
+                {
+                    _packets = value;
+                    OnPropertyChanged( nameof( Packets ) );
+                }
             }
         }
 
@@ -301,18 +308,18 @@ namespace Ninja.ViewModels
         /// <value>
         /// The start name of the capture BTN.
         /// </value>
-        public string StartCaptureBtnName
+        public string StartCaptureButtonName
         {
             get
             {
-                return _startCaptureBtnName;
+                return _startCaptureButtonName;
             }
             set
             {
-                if( _startCaptureBtnName != value )
+                if( _startCaptureButtonName != value )
                 {
-                    _startCaptureBtnName = value;
-                    OnPropertyChanged( nameof( StartCaptureBtnName ) );
+                    _startCaptureButtonName = value;
+                    OnPropertyChanged( nameof( StartCaptureButtonName ) );
                 }
             }
         }
@@ -420,7 +427,10 @@ namespace Ninja.ViewModels
         /// </value>
         public ICommand StartCaptureCommand
         {
-            get { return new RelayCommand( param => StartCapture( param ) ); }
+            get
+            {
+                return new RelayCommand( param => StartCapture( param ) );
+            }
         }
 
         /// <summary>
@@ -431,7 +441,10 @@ namespace Ninja.ViewModels
         /// </value>
         public ICommand FilterHelpCommand
         {
-            get { return new RelayCommand( param => FilterHelp( param ) ); }
+            get
+            {
+                return new RelayCommand( param => FilterHelp( param ) );
+            }
         }
 
         /// <summary>
@@ -442,7 +455,10 @@ namespace Ninja.ViewModels
         /// </value>
         public ICommand SavePacketsCommand
         {
-            get { return new RelayCommand( param => SavePackets( param ) ); }
+            get
+            {
+                return new RelayCommand( param => SavePackets( param ) );
+            }
         }
     }
 }
