@@ -1,11 +1,12 @@
-using System;
-using System.Windows;
-using System.Windows.Data;
-using System.Windows.Markup;
-using System.Windows.Media;
 
-namespace Syncfusion.Themes.FluentDark.WPF
+namespace Ninja
 {
+    using System;
+    using System.Windows;
+    using System.Windows.Data;
+    using System.Windows.Markup;
+    using System.Windows.Media;
+
     /// <summary>
     /// Helper markup extension class to apply acrylic background for different containers
     /// </summary>

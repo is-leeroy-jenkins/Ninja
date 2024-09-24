@@ -49,7 +49,7 @@ namespace Ninja
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:Syncfusion.UI.Xaml.Maps.SfMap" />
+    /// <seealso cref="Syncfusion.UI.Xaml.Maps.SfMap" />
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
     [ SuppressMessage( "ReSharper", "InconsistentNaming" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
@@ -63,7 +63,7 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.MetroMap" /> class.
+        /// <see cref="Ninja.MetroMap" /> class.
         /// </summary>
         public MetroMap( )
             : base( )
@@ -71,8 +71,6 @@ namespace Ninja
         {
             // Basic Properties
             SetResourceReference( MetroMap.StyleProperty, typeof( SfMap ) );
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12;
             Width = 800;
             Height = 400;
             Background = _theme.Background;

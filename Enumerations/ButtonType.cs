@@ -1,16 +1,17 @@
 ﻿// ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 08-01-2024
+//     Created:                 09-24-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        08-01-2024
+//     Last Modified On:        09-24-2024
 // ******************************************************************************************
-// <copyright file="MetroColorPicker.cs" company="Terry D. Eppler">
-//    Badger is data analysis and reporting tool for EPA Analysts
-//    based on WPF, NET6.0, and written in C-Sharp.
+// <copyright file="ButtonType.cs" company="Terry D. Eppler">
 // 
-//    Copyright ©  2024  Terry D. Eppler
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -32,58 +33,37 @@
 //    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //    DEALINGS IN THE SOFTWARE.
 // 
-//    You can contact me at: terryeppler@gmail.com or eppler.terry@epa.gov
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
-//   MetroColorPicker.cs
+//   ButtonType.cs
 // </summary>
 // ******************************************************************************************
 
 namespace Ninja
 {
-    using Syncfusion.Windows.Shared;
     using System;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Windows.Media;
 
-    /// <inheritdoc />
     /// <summary>
+    /// The normal
     /// </summary>
-    [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
-    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
-    [ SuppressMessage( "ReSharper", "InconsistentNaming" ) ]
-    [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
-    [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
-    public class MetroColorPicker : ColorEdit
+    public enum ButtonType
     {
-        /// <summary>
-        /// The theme
-        /// </summary>
-        private protected readonly DarkMode _theme = new DarkMode( );
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="Ninja.MetroColorPicker" /> class.
-        /// </summary>
-        public MetroColorPicker( )
-            : base( )
-        {
-            // Control Properties
-            SetResourceReference( MetroColorPicker.StyleProperty, typeof( ColorEdit ) );
-            Width = 250;
-            Height = 200;
-        }
+        Normal,
 
         /// <summary>
-        /// Fails the specified _ex.
+        /// The icon
         /// </summary>
-        /// <param name="_ex">The _ex.</param>
-        private protected void Fail( Exception _ex )
-        {
-            var _error = new ErrorWindow( _ex );
-            _error?.SetText( );
-            _error?.ShowDialog( );
-        }
+        Icon,
+
+        /// <summary>
+        /// The text
+        /// </summary>
+        Text,
+
+        /// <summary>
+        /// The icon text
+        /// </summary>
+        IconText
     }
 }

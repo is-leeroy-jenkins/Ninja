@@ -161,7 +161,7 @@
         </Setter>
     </Style>
 
-    <BooleanToVisibilityConverter x:Key="bool2VisibilityConverter" />
+    <BooleanToVisibilityConverter x:Key="Bool2VisibilityConverter" />
 
     <Style
         x:Key="RowHeaderGripperStyle"
@@ -202,7 +202,7 @@
                             <Control
                                 SnapsToDevicePixels="false"
                                 Template="{Binding ValidationErrorTemplate, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}"
-                                Visibility="{Binding (Validation.HasError), Converter={StaticResource bool2VisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />
+                                Visibility="{Binding (Validation.HasError), Converter={StaticResource Bool2VisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />
                         </StackPanel>
 
                         <Thumb

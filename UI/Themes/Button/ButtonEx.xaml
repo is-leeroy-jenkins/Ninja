@@ -1,9 +1,9 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:btnx="clr-namespace:ButtonEx">
+    xmlns:n="clr-namespace:Ninja">
 
-    <Style TargetType="{x:Type btnx:ButtonEx}">
+    <Style TargetType="{x:Type n:ButtonEx}">
         <Style.Triggers>
             <Trigger Property="ButtonType" Value="Normal">
                 <Setter Property="Background" Value="{StaticResource ControlInterior}" />
@@ -22,7 +22,7 @@
 
                 <Setter Property="Template">
                     <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type btnx:ButtonEx}">
+                        <ControlTemplate TargetType="{x:Type n:ButtonEx}">
                             <Border
                                 x:Name="border"
                                 Width="{TemplateBinding Width}"
@@ -64,7 +64,7 @@
                 <Setter Property="Cursor" Value="Hand" />
                 <Setter Property="Template">
                     <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type btnx:ButtonEx}">
+                        <ControlTemplate TargetType="{x:Type n:ButtonEx}">
                             <Border
                                 Width="{TemplateBinding Width}"
                                 Height="{TemplateBinding Height}">
@@ -94,7 +94,7 @@
                 <Setter Property="MousePressedForeground" Value="{StaticResource WhiteForeground}" />
                 <Setter Property="Template">
                     <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type btnx:ButtonEx}">
+                        <ControlTemplate TargetType="{x:Type n:ButtonEx}">
                             <TextBlock
                                 x:Name="txt"
                                 HorizontalAlignment="Center"
@@ -120,7 +120,7 @@
                 <Setter Property="MousePressedForeground" Value="{StaticResource WhiteForeground}" />
                 <Setter Property="Template">
                     <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type btnx:ButtonEx}">
+                        <ControlTemplate TargetType="{x:Type n:ButtonEx}">
                             <Border>
                                 <StackPanel
                                     HorizontalAlignment="Center"

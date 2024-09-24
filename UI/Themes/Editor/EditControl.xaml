@@ -30,10 +30,10 @@
 
     <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
 
-    <local:TabSelectionToTextConverter x:Key="tabTextConverter" />
+    <local:TabSelectionToTextConverter x:Key="TabTextConverter" />
 
-    <local:TabSelectionConverter x:Key="tabSelectionConverter" />
-    <local:OrBasedVisibilityConverter x:Key="orConverter" />
+    <local:TabSelectionConverter x:Key="TabSelectionConverter" />
+    <local:OrBasedVisibilityConverter x:Key="OrConverter" />
 
     <local:FindResultToTextConverter x:Key="FindResultConverter" />
 
@@ -448,7 +448,7 @@
                                         Label=""
                                         SmallIcon="{x:Null}">
                                         <syncfusion:RibbonButton.IsSelected>
-                                            <MultiBinding Converter="{StaticResource tabSelectionConverter}">
+                                            <MultiBinding Converter="{StaticResource TabSelectionConverter}">
                                                 <Binding Path="IsFindTabActive" />
                                                 <Binding Path="IsFindSymbolTabActive" />
                                             </MultiBinding>
@@ -463,7 +463,7 @@
                                         SizeForm="Small"
                                         SmallIcon="{x:Null}">
                                         <syncfusion:SplitButton.Label>
-                                            <MultiBinding Converter="{StaticResource tabTextConverter}">
+                                            <MultiBinding Converter="{StaticResource TabTextConverter}">
                                                 <Binding Path="IsFindTabActive" />
                                                 <Binding Path="IsFindSymbolTabActive" />
                                                 <Binding
@@ -656,7 +656,7 @@
                                 Content="{Sync_Resources:EditLocalizationResourceExtension ResourceName=MatchwholewordText}"
                                 IsChecked="{Binding Path=IsMatchWholeWord, Mode=TwoWay}">
                                 <CheckBox.Visibility>
-                                    <MultiBinding Converter="{StaticResource orConverter}">
+                                    <MultiBinding Converter="{StaticResource OrConverter}">
                                         <Binding Path="IsFindTabActive" />
                                         <Binding Path="IsReplaceTabActive" />
                                     </MultiBinding>
@@ -671,7 +671,7 @@
                                 Content="{Sync_Resources:EditLocalizationResourceExtension ResourceName=SearchupText}"
                                 IsChecked="{Binding Path=IsSearchUp, Mode=TwoWay}">
                                 <CheckBox.Visibility>
-                                    <MultiBinding Converter="{StaticResource orConverter}">
+                                    <MultiBinding Converter="{StaticResource OrConverter}">
                                         <Binding Path="IsFindTabActive" />
                                         <Binding Path="IsReplaceTabActive" />
                                     </MultiBinding>
@@ -687,7 +687,7 @@
                                 Content="{Sync_Resources:EditLocalizationResourceExtension ResourceName=SearchhiddenText}"
                                 IsChecked="{Binding Path=IsIncludeHiddenText, Mode=TwoWay}">
                                 <CheckBox.Visibility>
-                                    <MultiBinding Converter="{StaticResource orConverter}">
+                                    <MultiBinding Converter="{StaticResource OrConverter}">
                                         <Binding Path="IsFindTabActive" />
                                         <Binding Path="IsReplaceTabActive" />
                                     </MultiBinding>
@@ -715,7 +715,7 @@
                                 Content="{Sync_Resources:EditLocalizationResourceExtension ResourceName=FindnextText}"
                                 IsDefault="True">
                                 <Button.Visibility>
-                                    <MultiBinding Converter="{StaticResource orConverter}">
+                                    <MultiBinding Converter="{StaticResource OrConverter}">
                                         <Binding Path="IsFindTabActive" />
                                         <Binding Path="IsReplaceTabActive" />
                                     </MultiBinding>
@@ -953,7 +953,7 @@
                                                 Background="{StaticResource ContentBackground}"
                                                 SnapsToDevicePixels="True">
                                                 <Grid.Resources>
-                                                    <local:EndLineToLineHeightConverter x:Key="lineHeightConverter" />
+                                                    <local:EndLineToLineHeightConverter x:Key="LineHeightConverter" />
                                                 </Grid.Resources>
 
                                                 <Grid.RowDefinitions>
@@ -968,7 +968,7 @@
                                                     Y1="0">
                                                     <Line.Y2>
                                                         <MultiBinding
-                                                            Converter="{StaticResource lineHeightConverter}"
+                                                            Converter="{StaticResource LineHeightConverter}"
                                                             ConverterParameter="Top">
                                                             <Binding
                                                                 Path="Height"
@@ -995,7 +995,7 @@
                                                     Y1="0">
                                                     <Line.Y2>
                                                         <MultiBinding
-                                                            Converter="{StaticResource lineHeightConverter}"
+                                                            Converter="{StaticResource LineHeightConverter}"
                                                             ConverterParameter="Bottom">
                                                             <Binding
                                                                 Path="Height"

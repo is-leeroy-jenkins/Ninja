@@ -46,7 +46,12 @@ namespace Ninja.Views
     using System;
     using System.Windows;
     using System.Windows.Controls;
+    using ToastNotifications;
+    using ToastNotifications.Lifetime;
+    using ToastNotifications.Messages;
+    using ToastNotifications.Position;
 
+    /// <inheritdoc />
     /// <summary>
     /// PortWindow.xaml
     /// </summary>
@@ -71,6 +76,129 @@ namespace Ninja.Views
         /// The timer
         /// </summary>
         private protected TimerCallback _timerCallback;
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="Ninja.Views.PortWindow" /> class.
+        /// </summary>
+        public PortWindow( )
+        {
+            InitializeComponent( );
+        }
+        
+        /// <summary>
+        /// Creates a notifier.
+        /// </summary>
+        /// <returns>
+        /// Notifier
+        /// </returns>
+        private Notifier CreateNotifier( )
+        {
+            try
+            {
+                var _position = new PrimaryScreenPositionProvider( Corner.BottomRight, 10, 10 );
+                var _lifeTime = new TimeAndCountBasedLifetimeSupervisor( TimeSpan.FromSeconds( 5 ),
+                    MaximumNotificationCount.UnlimitedNotifications( ) );
+
+                return new Notifier( cfg =>
+                {
+                    cfg.LifetimeSupervisor = _lifeTime;
+                    cfg.PositionProvider = _position;
+                    cfg.Dispatcher = Application.Current.Dispatcher;
+                } );
+            }
+            catch( Exception ex )
+            {
+                Fail( ex );
+                return default( Notifier );
+            }
+        }
+
+        /// <summary>
+        /// Sends the notification.
+        /// </summary>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        private void SendNotification( string message )
+        {
+            try
+            {
+                ThrowIf.Null( message, nameof( message ) );
+                var _notification = CreateNotifier( );
+                _notification.ShowInformation( message );
+            }
+            catch( Exception ex )
+            {
+                Fail( ex );
+            }
+        }
+
+        /// <summary>
+        /// Shows the splash message.
+        /// </summary>
+        private void SendMessage( string message )
+        {
+            try
+            {
+                ThrowIf.Null( message, nameof( message ) );
+                var _splash = new SplashMessage( message );
+                _splash.Show( );
+            }
+            catch( Exception ex )
+            {
+                Fail( ex);
+            }
+        }
+
+        /// <summary>
+        /// Invokes if needed.
+        /// </summary>
+        /// <param name="action">The action.</param>
+        private void InvokeIf( Action action )
+        {
+            try
+            {
+                ThrowIf.Null( action, nameof( action ) );
+                if( Dispatcher.CheckAccess( ) )
+                {
+                    action?.Invoke( );
+                }
+                else
+                {
+                    Dispatcher.BeginInvoke( action );
+                }
+            }
+            catch( Exception ex )
+            {
+                Fail( ex );
+            }
+        }
+
+        /// <summary>
+        /// Invokes if.
+        /// </summary>
+        /// <param name="action">The action.</param>
+        private void InvokeIf( Action<object> action )
+        {
+            try
+            {
+                ThrowIf.Null( action, nameof( action ) );
+                if( Dispatcher.CheckAccess( ) )
+                {
+                    action?.Invoke( null );
+                }
+                else
+                {
+                    Dispatcher.BeginInvoke( action );
+                }
+            }
+            catch( Exception ex )
+            {
+                Fail( ex );
+            }
+        }
 
         /// <summary>
         /// Called when [calculator menu option click].
@@ -290,11 +418,6 @@ namespace Ninja.Views
             var _error = new ErrorWindow( ex );
             _error?.SetText( );
             _error?.ShowDialog( );
-        }
-
-        public PortWindow( )
-        {
-            InitializeComponent( );
         }
     }
 }

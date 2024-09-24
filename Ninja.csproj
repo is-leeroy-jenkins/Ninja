@@ -17,7 +17,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
@@ -25,6 +25,7 @@
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
     <Optimize>True</Optimize>
     <WarningLevel>6</WarningLevel>
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>Ninja.App</StartupObject>
@@ -41,9 +42,25 @@
   <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
     <PackageIcon>favicon.png</PackageIcon>
+    <Nullable>disable</Nullable>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <Title>Network Ninja</Title>
+    <Description>Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt, sniffer, pcap, port scan, listen, ip scan .etc. Can be used for network study by WPF MVVM.</Description>
+    <Copyright>2020 Terry Eppler</Copyright>
+    <PackageProjectUrl>https://github.com/is-leeroy-jenkins/Ninja</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/is-leeroy-jenkins/Ninja</RepositoryUrl>
+    <PackageTags>tcp;udp;ip;wifi;packets;paket-sniffer</PackageTags>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <AnalysisLevel>6.0-recommended</AnalysisLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <WarningLevel>6</WarningLevel>
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Fonts\**" />
@@ -58,12 +75,12 @@
     <Resource Include="Resources\Assets\ApplicationImages\n-icon.ico" />
     <Resource Include="Resources\Assets\CalculatorImages\Cancel.png" />
     <Resource Include="Resources\Assets\CalculatorImages\Main.png" />
-    <Resource Include="Resources\Assets\demo\iperf.png" />
-    <Resource Include="Resources\Assets\demo\portlisten.png" />
-    <Resource Include="Resources\Assets\demo\routetable.png" />
-    <Resource Include="Resources\Assets\demo\sniffer.png" />
-    <Resource Include="Resources\Assets\demo\snifferstats.png" />
-    <Resource Include="Resources\Assets\demo\websocket.png" />
+    <Resource Include="Resources\Assets\DemoImages\iperf.png" />
+    <Resource Include="Resources\Assets\DemoImages\portlisten.png" />
+    <Resource Include="Resources\Assets\DemoImages\routetable.png" />
+    <Resource Include="Resources\Assets\DemoImages\sniffer.png" />
+    <Resource Include="Resources\Assets\DemoImages\snifferstats.png" />
+    <Resource Include="Resources\Assets\DemoImages\websocket.png" />
     <Resource Include="Resources\Assets\ApplicationImages\favicon.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -243,6 +260,9 @@
     <Resource Include="Resources\Assets\MenuImages\RefreshItem.png" />
     <Resource Include="Resources\Assets\MenuImages\SaveItem.png" />
     <Resource Include="Resources\Assets\MenuImages\TaskManagerItem.png" />
+    <Resource Include="UI\Fonts\Roboto-Regular.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UI\Themes\down_arrow.png" />
@@ -272,7 +292,6 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
     <PackageReference Include="ToastNotifications.Messages.Net6" Version="1.0.4" />
     <PackageReference Include="ToastNotifications.Net6" Version="1.0.4" />
-    <PackageReference Include="XamlAnimatedGif" Version="2.3.0" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Assets\ApplicationImages\reload.png" />
@@ -313,12 +332,12 @@
     <None Remove="Resources\Assets\ApplicationImages\web.png" />
     <None Remove="Resources\Assets\CalculatorImages\Cancel.png" />
     <None Remove="Resources\Assets\CalculatorImages\Main.png" />
-    <None Remove="Resources\Assets\demo\iperf.png" />
-    <None Remove="Resources\Assets\demo\portlisten.png" />
-    <None Remove="Resources\Assets\demo\routetable.png" />
-    <None Remove="Resources\Assets\demo\sniffer.png" />
-    <None Remove="Resources\Assets\demo\snifferstats.png" />
-    <None Remove="Resources\Assets\demo\websocket.png" />
+    <None Remove="Resources\Assets\DemoImages\iperf.png" />
+    <None Remove="Resources\Assets\DemoImages\portlisten.png" />
+    <None Remove="Resources\Assets\DemoImages\routetable.png" />
+    <None Remove="Resources\Assets\DemoImages\sniffer.png" />
+    <None Remove="Resources\Assets\DemoImages\snifferstats.png" />
+    <None Remove="Resources\Assets\DemoImages\websocket.png" />
     <None Remove="Resources\Assets\DialogImages\AddColumnButton.png" />
     <None Remove="Resources\Assets\DialogImages\AddRecordButton.png" />
     <None Remove="Resources\Assets\DialogImages\AddTableButton.png" />
@@ -482,6 +501,7 @@
     <None Remove="Resources\Assets\MenuImages\RefreshItem.png" />
     <None Remove="Resources\Assets\MenuImages\SaveItem.png" />
     <None Remove="Resources\Assets\MenuImages\TaskManagerItem.png" />
+    <None Remove="UI\Fonts\Roboto-Regular.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="LinqStatistics">
@@ -528,6 +548,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Update="LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Update="Resources\Assets\ApplicationImages\favicon.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>

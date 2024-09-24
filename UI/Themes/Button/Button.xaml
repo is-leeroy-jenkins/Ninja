@@ -21,7 +21,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
-   
+
     <Style
         x:Key="ButtonBaseStyle"
         BasedOn="{StaticResource ButtonBaseBaseStyle}"
@@ -31,14 +31,14 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
                         <Border
-                            x:Name="border"
+                            x:Name="Border"
                             Padding="0"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="4"
                             SnapsToDevicePixels="true">
-                     
+
                             <Grid
                                 x:Name="PressedLayer"
                                 Visibility="Collapsed">
@@ -70,7 +70,7 @@
                                 RecognizesAccessKey="True"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
-               
+
                         <Rectangle
                             x:Name="EnabledLayer"
                             Fill="#4CFFFFFF"
@@ -81,7 +81,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter TargetName="PressedLayer" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="border" Property="BorderBrush" Value="#80cccccc" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="#80cccccc" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter TargetName="EnabledLayer" Property="Visibility" Value="Visible" />
@@ -101,14 +101,14 @@
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Grid>
                         <Border
-                            x:Name="border"
+                            x:Name="Border"
                             Padding="0"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="4"
                             SnapsToDevicePixels="true">
-       
+
                             <Grid
                                 x:Name="CheckedLayer"
                                 Visibility="Collapsed">
@@ -151,7 +151,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="true">
                             <Setter TargetName="CheckedLayer" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="border" Property="BorderBrush" Value="#80cccccc" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="#80cccccc" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter TargetName="EnabledLayer" Property="Visibility" Value="Visible" />
@@ -241,7 +241,7 @@
         </Style.Triggers>
     </Style>
 
-    <!--***********************************************  ToggleButton  *************************************************-->
+    <!--  ***********************************************  ToggleButton  *************************************************  -->
 
     <Style
         BasedOn="{StaticResource ToggleButtonBaseStyle}"
@@ -321,7 +321,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
     <!--  *********************************************** MetroButton *****************************************************  -->
 
     <Style TargetType="{x:Type n:MetroButton}">

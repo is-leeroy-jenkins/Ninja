@@ -13,10 +13,11 @@
     <Application.Resources>
 
         <ResourceDictionary>
+            <FontFamily x:Key="Roboto">pack://application:,,,/Fonts/Roboto-Regular.ttf</FontFamily>
             <ResourceDictionary.MergedDictionaries>
 
-                <ResourceDictionary Source="/UI/Themes/Generic.xaml" />
                 <ResourceDictionary Source="/UI/Themes/Colors/Colors.xaml" />
+                <ResourceDictionary Source="/UI/Themes/generic.xaml" />
                 <ResourceDictionary Source="/UI/Themes/Styles.xaml" />
                 <ResourceDictionary Source="/UI/Windows/ViewWindows.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/ToastNotifications.Messages;component/Themes/Default.xaml" />

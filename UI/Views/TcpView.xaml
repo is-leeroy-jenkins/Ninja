@@ -2,7 +2,7 @@
     x:Class="Ninja.Views.TcpView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:btnex="clr-namespace:ButtonEx"
+    xmlns:n="clr-namespace:Ninja"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Ninja.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -170,7 +170,7 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Text="{Binding TcpModel.ListenPort}" />
-                    <btnex:ButtonEx
+                    <n:ButtonEx
                         Grid.Row="0"
                         Width="100"
                         Height="30"
@@ -211,7 +211,7 @@
                         Text="{Binding TcpModel.ServerRecv}"
                         TextWrapping="NoWrap"
                         VerticalScrollBarVisibility="Visible" />
-                    <btnex:ButtonEx
+                    <n:ButtonEx
                         Grid.Row="2"
                         Margin="0,0,25,20"
                         HorizontalAlignment="Right"
@@ -250,7 +250,7 @@
                         Margin="75,0,10,0"
                         HorizontalAlignment="Left"
                         Text="{Binding TcpModel.ServerSendInterval}" />
-                    <btnex:ButtonEx
+                    <n:ButtonEx
                         Grid.Row="1"
                         Width="100"
                         Height="30"
@@ -293,7 +293,7 @@
                             Text="{Binding TcpModel.ServerSend}"
                             TextWrapping="Wrap"
                             VerticalScrollBarVisibility="Visible" />
-                        <btnex:ButtonEx
+                        <n:ButtonEx
                             Grid.Row="2"
                             Margin="0,0,60,5"
                             HorizontalAlignment="Right"
@@ -301,7 +301,7 @@
                             ButtonType="Normal"
                             Command="{Binding ServerSendCommand}"
                             Content="Send" />
-                        <btnex:ButtonEx
+                        <n:ButtonEx
                             Grid.Row="2"
                             Margin="0,0,25,5"
                             HorizontalAlignment="Right"
@@ -352,7 +352,7 @@
                         Margin="65,5,0,0"
                         HorizontalAlignment="Left"
                         Text="{Binding TcpModel.ServerIp}" />
-                    <btnex:ButtonEx
+                    <n:ButtonEx
                         Grid.Row="0"
                         Width="100"
                         Height="30"
@@ -401,7 +401,7 @@
                         Text="{Binding TcpModel.ClientRecv}"
                         TextWrapping="Wrap"
                         VerticalScrollBarVisibility="Visible" />
-                    <btnex:ButtonEx
+                    <n:ButtonEx
                         Grid.Row="2"
                         Margin="0,0,25,5"
                         HorizontalAlignment="Right"
@@ -442,7 +442,7 @@
                         Margin="75,0,0,0"
                         HorizontalAlignment="Left"
                         Text="{Binding TcpModel.ClientSendInterval}" />
-                    <btnex:ButtonEx
+                    <n:ButtonEx
                         Grid.Row="1"
                         Width="100"
                         Height="30"
@@ -461,7 +461,7 @@
                         Text="{Binding TcpModel.ClientSend}"
                         TextWrapping="Wrap"
                         VerticalScrollBarVisibility="Visible" />
-                    <btnex:ButtonEx
+                    <n:ButtonEx
                         Grid.Row="2"
                         Margin="0,0,60,5"
                         HorizontalAlignment="Right"
@@ -469,7 +469,7 @@
                         ButtonType="Normal"
                         Command="{Binding ClientSendCommand}"
                         Content="Send" />
-                    <btnex:ButtonEx
+                    <n:ButtonEx
                         Grid.Row="2"
                         Margin="0,0,25,5"
                         HorizontalAlignment="Right"

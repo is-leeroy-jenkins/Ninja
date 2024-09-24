@@ -45,6 +45,7 @@ namespace Ninja
     using System;
     using System.Collections.Generic;
     using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
     using System.Windows;
     using System.Windows.Media;
     using OfficeOpenXml;
@@ -52,9 +53,11 @@ namespace Ninja
     using Syncfusion.SfSkinManager;
     using Syncfusion.Themes.FluentDark.WPF;
 
+    /// <inheritdoc />
     /// <summary>
-    /// App.xaml 
+    /// Interaction logic for App.xaml
     /// </summary>
+    [ SuppressMessage( "ReSharper", "InconsistentNaming" ) ]
     public partial class App : Application
     {
         /// <summary>
@@ -102,6 +105,37 @@ namespace Ninja
         };
 
         /// <summary>
+        /// Gets or sets the main window handle.
+        /// </summary>
+        /// <value>
+        /// The main window handle.
+        /// </value>
+        public static IntPtr MainWindowHandle { get; set; }
+
+        /// <summary>
+        /// Gets or sets the windows.
+        /// </summary>
+        /// <value>
+        /// The windows.
+        /// </value>
+        public static IDictionary<string, Window> ActiveWindows { get; private set; }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="App" /> class.
+        /// </summary>
+        public App( )
+        {
+            var _key = ConfigurationManager.AppSettings[ "UI" ];
+            SyncfusionLicenseProvider.RegisterLicense( _key );
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            ActiveWindows = new Dictionary<string, Window>( );
+            RegisterTheme( );
+            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
+        }
+
+        /// <summary>
         /// Registers the theme.
         /// </summary>
         private void RegisterTheme( )
@@ -111,13 +145,13 @@ namespace Ninja
                 PrimaryBackground = new SolidColorBrush( Color.FromRgb( 20, 20, 20 ) ),
                 PrimaryColorForeground = new SolidColorBrush( Color.FromRgb( 0, 120, 212 ) ),
                 PrimaryForeground = new SolidColorBrush( Color.FromRgb( 222, 222, 222 ) ),
-                BodyFontSize = 12,
+                BodyFontSize = 11,
                 HeaderFontSize = 16,
                 SubHeaderFontSize = 14,
                 TitleFontSize = 14,
-                SubTitleFontSize = 126,
+                SubTitleFontSize = 10,
                 BodyAltFontSize = 10,
-                FontFamily = new FontFamily( "Segoe UI" )
+                FontFamily = new FontFamily( "Roboto-Regular" )
             };
 
             SfSkinManager.RegisterThemeSettings( "FluentDark", _theme );
@@ -133,10 +167,21 @@ namespace Ninja
         /// <param name="e">The
         /// <see cref="UnhandledExceptionEventArgs"/>
         /// instance containing the event data.</param>
-        private static void OnUnhandledException( object sender, UnhandledExceptionEventArgs e )
+        public static void OnUnhandledException( object sender, UnhandledExceptionEventArgs e )
         {
             var _ex = e.ExceptionObject as Exception;
             App.Fail( _ex );
+        }
+
+        /// <summary>
+        /// Called when [startup].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="StartupEventArgs"/>
+        /// instance containing the event data.</param>
+        private protected void OnStartup( object sender, StartupEventArgs e )
+        {
+            base.OnStartup( e );
         }
 
         /// <summary>
@@ -147,37 +192,6 @@ namespace Ninja
         {
             var _error = new ErrorWindow( _ex );
             _error?.SetText( );
-            _error?.ShowDialog( );
         }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="T:Badger.App" /> class.
-        /// </summary>
-        public App( )
-        {
-            var _key = ConfigurationManager.AppSettings[ "UI" ];
-            SyncfusionLicenseProvider.RegisterLicense( _key );
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            ActiveWindows = new Dictionary<string, Window>( );
-            RegisterTheme( );
-        }
-
-        /// <summary>
-        /// Gets or sets the main window handle.
-        /// </summary>
-        /// <value>
-        /// The main window handle.
-        /// </value>
-        public static IntPtr MainWindowHandle { get; set; }
-
-        /// <summary>
-        /// Gets or sets the windows.
-        /// </summary>
-        /// <value>
-        /// The windows.
-        /// </value>
-        public static IDictionary<string, Window> ActiveWindows { get; private set; }
     }
 }

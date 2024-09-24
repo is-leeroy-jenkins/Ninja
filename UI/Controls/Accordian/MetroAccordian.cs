@@ -49,7 +49,7 @@ namespace Ninja
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:Syncfusion.Windows.Controls.Layout.SfAccordion" />
+    /// <seealso cref="Syncfusion.Windows.Controls.Layout.SfAccordion" />
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "InconsistentNaming" ) ]
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
@@ -65,7 +65,7 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.MetroAccordian" /> class.
+        /// <see cref="Ninja.MetroAccordian" /> class.
         /// </summary>
         public MetroAccordian( )
             : base( )

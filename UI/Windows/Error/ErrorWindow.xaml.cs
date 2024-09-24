@@ -130,7 +130,7 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.ErrorWindow" />
+        /// <see cref="ErrorWindow" />
         /// class.
         /// </summary>
         /// <param name="exception"> The exception. </param>
@@ -145,7 +145,7 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.ErrorWindow" /> class.
+        /// <see cref="Ninja.ErrorWindow" /> class.
         /// </summary>
         /// <param name="exception">The exception.</param>
         /// <param name="title">The title.</param>
@@ -160,7 +160,7 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.ErrorWindow" />
+        /// <see cref="Ninja.ErrorWindow" />
         /// class.
         /// </summary>
         /// <param name="message"> The message. </param>
@@ -174,7 +174,7 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.ErrorWindow" /> class.
+        /// <see cref="Ninja.ErrorWindow" /> class.
         /// </summary>
         /// <param name="title">The title.</param>
         /// <param name="message">The message.</param>

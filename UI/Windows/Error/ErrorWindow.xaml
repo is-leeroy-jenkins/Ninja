@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Ninja"
+    xmlns:n="clr-namespace:Ninja"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="ErrorView"
     Width="560"
@@ -37,8 +37,8 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Content="Title"
-            Foreground="White" />
-        <local:MetroLabel
+            Foreground="{StaticResource WhiteForeground}" />
+        <n:MetroLabel
             x:Name="StatusLabel"
             Canvas.Left="385"
             Canvas.Top="5"
@@ -50,8 +50,8 @@
             HorizontalContentAlignment="Right"
             Content="MetroLabel"
             FontSize="9"
-            Foreground="White" />
-        <local:MetroLabel
+            Foreground="{StaticResource WhiteForeground}" />
+        <n:MetroLabel
             x:Name="MessageText"
             Canvas.Left="78"
             Canvas.Top="55"

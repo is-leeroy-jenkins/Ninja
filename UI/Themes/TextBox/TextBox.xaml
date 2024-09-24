@@ -19,6 +19,24 @@
         <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="FontSize" Value="12" />
 
+
+        <Style.Triggers>
+
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource SteelBlueBackground}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource LightBlueBrsh}" />
+                <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
+            </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="{DynamicResource ControlInterior}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ControlInterior}" />
+                <Setter Property="Foreground" Value="{DynamicResource LightBlueBrush}" />
+            </Trigger>
+
+
+        </Style.Triggers>
+
     </Style>
 
 </ResourceDictionary>

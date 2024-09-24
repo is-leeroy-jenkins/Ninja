@@ -24,18 +24,18 @@
 
     <grid:BoolToVisiblityConverter x:Key="BoolToVisiblityConverter" />
     <grid:SortDirectionToVisibilityConverter x:Key="SortDirectionToVisibilityConverter" />
-    <grid:SortDirectionToWidthConverter x:Key="sortDirectionToWidthConverter" />
+    <grid:SortDirectionToWidthConverter x:Key="SortDirectionToWidthConverter" />
     <grid:VisiblityConverter x:Key="VisiblityConverter" />
-    <grid:TextVisibilityConverter x:Key="textBlockVisibilityConverter" />
-    <grid:ReverseVisibilityConverter x:Key="reverseVisibilityConverter" />
-    <grid:LoadingVisiblityConverter x:Key="loadingVisiblityConverter" />
-    <grid:ListItemsVisiblityConverter x:Key="listItemsVisiblityConverter" />
-    <grid:HeightToMarginConverter x:Key="heightToMarginConverter" />
-    <grid:ResourceNameConverter x:Key="resourceNameConverter" />
-    <grid:AdvancedFiltersButtonVisibiltyConverter x:Key="advancedFilterButtonVisibilityConverter" />
-    <grid:FilteredFromCheckVisibilityConverter x:Key="filteredFromCheckVisibilityConverter" />
-    <grid:FilterValueComboEnableConverter x:Key="filterValueComboEnableConverter" />
-    <grid:CaseSensitiveConverter x:Key="casesensitiveConverter" />
+    <grid:TextVisibilityConverter x:Key="TextBlockVisibilityConverter" />
+    <grid:ReverseVisibilityConverter x:Key="ReverseVisibilityConverter" />
+    <grid:LoadingVisiblityConverter x:Key="LoadingVisiblityConverter" />
+    <grid:ListItemsVisiblityConverter x:Key="ListItemsVisiblityConverter" />
+    <grid:HeightToMarginConverter x:Key="HeightToMarginConverter" />
+    <grid:ResourceNameConverter x:Key="ResourceNameConverter" />
+    <grid:AdvancedFiltersButtonVisibiltyConverter x:Key="AdvancedFilterButtonVisibilityConverter" />
+    <grid:FilteredFromCheckVisibilityConverter x:Key="FilteredFromCheckVisibilityConverter" />
+    <grid:FilterValueComboEnableConverter x:Key="FilterValueComboEnableConverter" />
+    <grid:CaseSensitiveConverter x:Key="CasesensitiveConverter" />
     <grid:PageCountFormatConverter x:Key="PageCountFormatConverter" />
     <grid:ZoomFactorFormatConverter x:Key="ZoomFactorFormatConverter" />
     <grid:PrintOrientationConverter x:Key="PrintOrientationConverter" />
@@ -360,7 +360,7 @@
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition
                                                     Width="0"
-                                                    MinWidth="{Binding Path=SortDirection, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource sortDirectionToWidthConverter}}" />
+                                                    MinWidth="{Binding Path=SortDirection, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource SortDirectionToWidthConverter}}" />
                                                 <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
 
@@ -4356,7 +4356,7 @@
                                     Width="19"
                                     Height="19"
                                     BorderThickness="0"
-                                    Visibility="{Binding FilteredFrom, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type grid:GridFilterControl}}, Converter={StaticResource filteredFromCheckVisibilityConverter}, ConverterParameter=reverse}" />
+                                    Visibility="{Binding FilteredFrom, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type grid:GridFilterControl}}, Converter={StaticResource FilteredFromCheckVisibilityConverter}, ConverterParameter=reverse}" />
                                 <Path
                                     x:Name="PART_AdvancedFilterToggleIndicator"
                                     Width="12"
@@ -4383,7 +4383,7 @@
                                     Height="9"
                                     Fill="{StaticResource PrimaryBackground}"
                                     Stretch="Uniform"
-                                    Visibility="{Binding FilteredFrom, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type grid:GridFilterControl}}, Converter={StaticResource filteredFromCheckVisibilityConverter}, ConverterParameter=reverse}">
+                                    Visibility="{Binding FilteredFrom, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type grid:GridFilterControl}}, Converter={StaticResource FilteredFromCheckVisibilityConverter}, ConverterParameter=reverse}">
                                     <Path.Margin>
                                         <Thickness>4,5,4,4</Thickness>
                                     </Path.Margin>
@@ -4841,14 +4841,14 @@
                             Margin="4,39,4,4"
                             VerticalAlignment="Top"
                             BorderThickness="0"
-                            Visibility="{Binding FilteredFrom, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type grid:GridFilterControl}}, Converter={StaticResource filteredFromCheckVisibilityConverter}}">
+                            Visibility="{Binding FilteredFrom, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type grid:GridFilterControl}}, Converter={StaticResource FilteredFromCheckVisibilityConverter}}">
                             <Path
                                 x:Name="PART_FilteredFromCheck1"
                                 Width="11.4"
                                 Height="9"
                                 Fill="{StaticResource PrimaryBackground}"
                                 Stretch="Uniform"
-                                Visibility="{Binding FilteredFrom, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type grid:GridFilterControl}}, Converter={StaticResource filteredFromCheckVisibilityConverter}}">
+                                Visibility="{Binding FilteredFrom, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type grid:GridFilterControl}}, Converter={StaticResource FilteredFromCheckVisibilityConverter}}">
                                 <Path.Data>
                                     <PathGeometry>M15.288992,0 L15.997,0.70702884 5.7260096,11.001 0,5.8859662 0.66601519,5.1399969 5.6870082,9.6239904 z</PathGeometry>
                                 </Path.Data>
@@ -4901,7 +4901,7 @@
                                     Width="12"
                                     Height="12"
                                     HorizontalAlignment="Right"
-                                    Visibility="{Binding Text, ElementName=PART_SearchTextBox, ConverterParameter=searchIcon, Converter={StaticResource textBlockVisibilityConverter}}">
+                                    Visibility="{Binding Text, ElementName=PART_SearchTextBox, ConverterParameter=searchIcon, Converter={StaticResource TextBlockVisibilityConverter}}">
                                     <Border.Margin>
                                         <Thickness>0,5,8,0</Thickness>
                                     </Border.Margin>
@@ -4927,7 +4927,7 @@
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Bottom"
                                     Style="{StaticResource SyncfusionDataGridFilterDeleteButtonStyle}"
-                                    Visibility="{Binding Text, ElementName=PART_SearchTextBox, ConverterParameter=deletebtn, Converter={StaticResource textBlockVisibilityConverter}}">
+                                    Visibility="{Binding Text, ElementName=PART_SearchTextBox, ConverterParameter=deletebtn, Converter={StaticResource TextBlockVisibilityConverter}}">
                                     <Button.Margin>
                                         <Thickness>0,0,6,6</Thickness>
                                     </Button.Margin>
@@ -4944,7 +4944,7 @@
                                         VerticalAlignment="Top"
                                         Foreground="{TemplateBinding Foreground}"
                                         Text="{grid:GridLocalizationResourceExtension ResourceName=NoItems}"
-                                        Visibility="{Binding HasItemsSource, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ResourceKey=reverseVisibilityConverter}}" />
+                                        Visibility="{Binding HasItemsSource, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ResourceKey=ReverseVisibilityConverter}}" />
                                     <Grid Visibility="{Binding HasItemsSource, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ResourceKey=BoolToVisiblityConverter}}">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
@@ -4975,7 +4975,7 @@
                                                 Fill="#FFA0B2C9"
                                                 RenderTransformOrigin="0.5,0.5"
                                                 Stretch="Uniform"
-                                                Visibility="{Binding IsItemSourceLoaded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, ConverterParameter={StaticResource LaoadingAnimation}, Converter={StaticResource ResourceKey=loadingVisiblityConverter}}">
+                                                Visibility="{Binding IsItemSourceLoaded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, ConverterParameter={StaticResource LaoadingAnimation}, Converter={StaticResource ResourceKey=LoadingVisiblityConverter}}">
                                                 <Path.RenderTransform>
                                                     <TransformGroup>
                                                         <ScaleTransform />
@@ -5016,7 +5016,7 @@
                                                                     VerticalScrollBarVisibility="Auto">
                                                                     <ItemsPresenter
                                                                         x:Name="PART_ItemsPresenter"
-                                                                        Margin="{Binding FontSize, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource heightToMarginConverter}, ConverterParameter=0}"
+                                                                        Margin="{Binding FontSize, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeightToMarginConverter}, ConverterParameter=0}"
                                                                         ClipToBounds="True"
                                                                         Focusable="False" />
                                                                 </ScrollViewer>
@@ -5029,7 +5029,7 @@
                                                                     FontWeight="{StaticResource FluentDark.FontWeightNormal}"
                                                                     Foreground="{StaticResource ContentForegroundAlt1}"
                                                                     Text="{grid:GridLocalizationResourceExtension ResourceName=NoMatches}"
-                                                                    Visibility="{Binding ItemsSource, RelativeSource={RelativeSource TemplatedParent}, ConverterParameter=NoMatchText, Converter={StaticResource ResourceKey=listItemsVisiblityConverter}}" />
+                                                                    Visibility="{Binding ItemsSource, RelativeSource={RelativeSource TemplatedParent}, ConverterParameter=NoMatchText, Converter={StaticResource ResourceKey=ListItemsVisiblityConverter}}" />
                                                             </Grid>
                                                         </Border>
                                                         <ControlTemplate.Triggers>
@@ -5051,7 +5051,7 @@
                                             Grid.Row="1"
                                             Margin="0,0,20,0"
                                             VerticalAlignment="Top"
-                                            Visibility="{Binding ItemsSource, ElementName=PART_ItemsControl, ConverterParameter=ItemsControl, Converter={StaticResource ResourceKey=listItemsVisiblityConverter}}">
+                                            Visibility="{Binding ItemsSource, ElementName=PART_ItemsControl, ConverterParameter=ItemsControl, Converter={StaticResource ResourceKey=ListItemsVisiblityConverter}}">
                                             <CheckBox
                                                 x:Name="PART_CheckBox"
                                                 Height="24"
@@ -5198,7 +5198,7 @@
                                                 HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Center"
                                                 Text="{Binding FilterColumnType, RelativeSource={RelativeSource TemplatedParent}}"
-                                                Visibility="{Binding FilterMode, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ResourceKey=advancedFilterButtonVisibilityConverter}, ConverterParameter=reverse}">
+                                                Visibility="{Binding FilterMode, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ResourceKey=AdvancedFilterButtonVisibilityConverter}, ConverterParameter=reverse}">
                                                 <TextBlock.Margin>
                                                     <Thickness>30,5,4,2</Thickness>
                                                 </TextBlock.Margin>
@@ -5211,7 +5211,7 @@
                                                 HorizontalContentAlignment="Left"
                                                 Content="{Binding FilterColumnType, RelativeSource={RelativeSource TemplatedParent}}"
                                                 Style="{StaticResource SyncfusionDataGridAdvancedFilterButtonStyle}"
-                                                Visibility="{Binding FilterMode, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ResourceKey=advancedFilterButtonVisibilityConverter}}" />
+                                                Visibility="{Binding FilterMode, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ResourceKey=AdvancedFilterButtonVisibilityConverter}}" />
 
                                         </StackPanel>
                                         <Grid Grid.Row="1">
@@ -5222,7 +5222,7 @@
                                                 FontSize="{TemplateBinding FontSize}"
                                                 FontStyle="{TemplateBinding FontStyle}"
                                                 FontWeight="{TemplateBinding FontWeight}"
-                                                Visibility="{Binding IsAdvancedFilterVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource reverseVisibilityConverter}}" />
+                                                Visibility="{Binding IsAdvancedFilterVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ReverseVisibilityConverter}}" />
 
                                             <grid:AdvancedFilterControl
                                                 x:Name="PART_AdvancedFilterControl"
@@ -5263,7 +5263,7 @@
                                                     x:Name="PART_CancelButton"
                                                     Width="132"
                                                     Height="25"
-                                                    Content="{Binding ImmediateUpdateColumnFilter, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource resourceNameConverter}}">
+                                                    Content="{Binding ImmediateUpdateColumnFilter, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ResourceNameConverter}}">
                                                     <Button.Margin>
                                                         <Thickness>4,4,8,4</Thickness>
                                                     </Button.Margin>
@@ -5677,7 +5677,7 @@
                                     Height="24"
                                     DisplayMemberPath="DisplayText"
                                     IsEditable="True"
-                                    IsEnabled="{Binding FilterType1, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource filterValueComboEnableConverter}}"
+                                    IsEnabled="{Binding FilterType1, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FilterValueComboEnableConverter}}"
                                     IsTextSearchCaseSensitive="True"
                                     ItemsSource="{Binding ComboItemsSource, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedItem="{Binding FilterSelectedItem1, RelativeSource={RelativeSource TemplatedParent}}"
@@ -5689,9 +5689,9 @@
                                     Grid.Column="0"
                                     Height="24"
                                     VerticalContentAlignment="Center"
-                                    IsEnabled="{Binding FilterType1, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource filterValueComboEnableConverter}}"
+                                    IsEnabled="{Binding FilterType1, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FilterValueComboEnableConverter}}"
                                     Text="{Binding FilterValue1, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true, NotifyOnValidationError=true}"
-                                    Visibility="{Binding CanGenerateUniqueItems, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource reverseVisibilityConverter}}" />
+                                    Visibility="{Binding CanGenerateUniqueItems, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ReverseVisibilityConverter}}" />
 
                                 <DatePicker
                                     x:Name="PART_DatePicker1"
@@ -5701,7 +5701,7 @@
                                     Margin="5,0,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    IsEnabled="{Binding FilterType1, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource filterValueComboEnableConverter}}"
+                                    IsEnabled="{Binding FilterType1, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FilterValueComboEnableConverter}}"
                                     SelectedDate="{Binding DateFilterValue1, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     Style="{StaticResource SyncfusionDataGridFilterDatePickerStyle}" />
 
@@ -5713,9 +5713,9 @@
                                     Margin="5,0,0,0"
                                     Foreground="{TemplateBinding Foreground}"
                                     IsChecked="{Binding IsCaseSensitive1, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                    IsEnabled="{Binding FilterType1, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource filterValueComboEnableConverter}}"
+                                    IsEnabled="{Binding FilterType1, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FilterValueComboEnableConverter}}"
                                     Style="{StaticResource SyncfusionDataGridFilterCasingToggleButtonStyle}"
-                                    Visibility="{Binding CasingButtonVisibility, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource reverseVisibilityConverter}}">
+                                    Visibility="{Binding CasingButtonVisibility, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ReverseVisibilityConverter}}">
                                     <ToggleButton.Content>
                                         <Grid Width="20">
                                             <Path
@@ -5775,7 +5775,7 @@
                                     Height="24"
                                     DisplayMemberPath="DisplayText"
                                     IsEditable="True"
-                                    IsEnabled="{Binding FilterType2, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource filterValueComboEnableConverter}}"
+                                    IsEnabled="{Binding FilterType2, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FilterValueComboEnableConverter}}"
                                     IsTextSearchCaseSensitive="True"
                                     ItemsSource="{Binding ComboItemsSource, RelativeSource={RelativeSource TemplatedParent}}"
                                     SelectedItem="{Binding FilterSelectedItem2, RelativeSource={RelativeSource TemplatedParent}}"
@@ -5787,9 +5787,9 @@
                                     Grid.Column="0"
                                     Height="24"
                                     VerticalContentAlignment="Center"
-                                    IsEnabled="{Binding FilterType2, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource filterValueComboEnableConverter}}"
+                                    IsEnabled="{Binding FilterType2, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FilterValueComboEnableConverter}}"
                                     Text="{Binding FilterValue2, RelativeSource={RelativeSource TemplatedParent}, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true, NotifyOnValidationError=true}"
-                                    Visibility="{Binding CanGenerateUniqueItems, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource reverseVisibilityConverter}}" />
+                                    Visibility="{Binding CanGenerateUniqueItems, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ReverseVisibilityConverter}}" />
 
                                 <DatePicker
                                     x:Name="PART_DatePicker2"
@@ -5799,7 +5799,7 @@
                                     Margin="5,0,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    IsEnabled="{Binding FilterType2, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource filterValueComboEnableConverter}}"
+                                    IsEnabled="{Binding FilterType2, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FilterValueComboEnableConverter}}"
                                     SelectedDate="{Binding DateFilterValue2, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     Style="{StaticResource SyncfusionDataGridFilterDatePickerStyle}" />
 
@@ -5811,9 +5811,9 @@
                                     Margin="5,0,0,0"
                                     Foreground="{TemplateBinding Foreground}"
                                     IsChecked="{Binding IsCaseSensitive2, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                    IsEnabled="{Binding FilterType2, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource filterValueComboEnableConverter}}"
+                                    IsEnabled="{Binding FilterType2, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FilterValueComboEnableConverter}}"
                                     Style="{StaticResource SyncfusionDataGridFilterCasingToggleButtonStyle}"
-                                    Visibility="{Binding CasingButtonVisibility, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource reverseVisibilityConverter}}">
+                                    Visibility="{Binding CasingButtonVisibility, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ReverseVisibilityConverter}}">
                                     <ToggleButton.Content>
                                         <Grid Width="20">
                                             <Path
