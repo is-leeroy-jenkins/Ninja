@@ -2,7 +2,9 @@
     x:Class="Ninja.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:Ninja"
+    xmlns:n="clr-namespace:Ninja"
+    xmlns:skin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
+    xmlns:sync="http://schemas.syncfusion.com/wpf"
     xmlns:tbex="clr-namespace:TextBoxEx"
     StartupUri="/UI/Windows/MainWindow.xaml">
     <Application.Resources>
@@ -10,9 +12,11 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
 
-                <ResourceDictionary Source="/UI/Styles/Common/Colors.xaml" />
-                <ResourceDictionary Source="/UI/Styles/Styles.xaml" />
+                <ResourceDictionary Source="/UI/Themes/Colors/Colors.xaml" />
+                <ResourceDictionary Source="/UI/Themes/Styles.xaml" />
                 <ResourceDictionary Source="/UI/Windows/ViewWindows.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/ToastNotifications.Messages;component/Themes/Default.xaml" />
+                <ResourceDictionary Source="/UI/Themes/Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
