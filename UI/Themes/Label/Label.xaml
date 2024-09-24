@@ -2,23 +2,19 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="BaseStyle.xaml" />
+        <ResourceDictionary Source="/UI/Themes/Common/BaseStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    <!--  基样式  -->
     <Style
         x:Key="LabelBaseStyle"
         BasedOn="{StaticResource BaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="Padding" Value="0" />
     </Style>
-    <!--  默认样式  -->
+
     <Style
         BasedOn="{StaticResource LabelBaseStyle}"
         TargetType="{x:Type Label}" />
 
-    <!--  标题 源码行数:990-1104  -->
-    <!--  标题  -->
-    <!--  基样式  -->
     <Style
         x:Key="HBaseStyle"
         BasedOn="{StaticResource LabelBaseStyle}"
@@ -64,8 +60,6 @@
         <Setter Property="FontSize" Value="{DynamicResource H6FontSize}" />
     </Style>
 
-    <!--  副标题  -->
-    <!--  基样式  -->
     <Style
         x:Key="SmallBaseStyle"
         BasedOn="{StaticResource LabelBaseStyle}"
@@ -112,8 +106,7 @@
         <Setter Property="FontSize" Value="{DynamicResource H6SmallFontSize}" />
     </Style>
 
-    <!--  语境 源码行数:1128-1215  -->
-    <!--  前景  -->
+
     <Style
         x:Key="text-muted"
         BasedOn="{StaticResource LabelBaseStyle}"

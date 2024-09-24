@@ -8,8 +8,8 @@
 
         <ResourceDictionary Source="/UI/Themes/TextBox/TextBoxEx.xaml" />
         <ResourceDictionary Source="/UI/Themes/Button/ButtonEx.xaml" />
-        <ResourceDictionary Source="/UI/Themes/GroupBox/GroupBox.xaml" />
         <ResourceDictionary Source="/UI/Themes/Input/InputGroup.xaml" />
+        <ResourceDictionary Source="/UI/Themes/GroupBox/GroupBox.xaml" />
         <ResourceDictionary Source="/UI/Themes/Window/FormControl.xaml" />
         <ResourceDictionary Source="/UI/Themes/DataGrid/DataGrid.xaml" />
         <ResourceDictionary Source="/UI/Themes/CheckBox/CheckBox.xaml" />

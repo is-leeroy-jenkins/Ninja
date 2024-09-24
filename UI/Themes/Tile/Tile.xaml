@@ -1,11 +1,11 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:bdgr="clr-namespace:Ninja">
+    xmlns:n="clr-namespace:Ninja">
 
     <!--  *********************************************** MetroTile *****************************************************  -->
 
-    <Style TargetType="{x:Type bdgr:MetroTile}">
+    <Style TargetType="{x:Type n:MetroTile}">
 
         <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ControlBackground}" />

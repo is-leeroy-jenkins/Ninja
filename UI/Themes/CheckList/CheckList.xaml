@@ -1,12 +1,12 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:bdgr="clr-namespace:Ninja">
+    xmlns:n="clr-namespace:Ninja">
 
 
     <!--  *********************************************** MetroCheckList *****************************************************  -->
 
-    <Style TargetType="{x:Type bdgr:MetroCheckList}">
+    <Style TargetType="{x:Type n:MetroCheckList}">
         <Setter Property="Background" Value="{DynamicResource ControlInterior}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource LightBlueBrush}" />
@@ -22,7 +22,7 @@
 
     <!--  *********************************************** MetroCheckListItem *****************************************************  -->
 
-    <Style TargetType="{x:Type bdgr:MetroCheckListItem}">
+    <Style TargetType="{x:Type n:MetroCheckListItem}">
 
         <Setter Property="Background" Value="{DynamicResource ControlInterior}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />

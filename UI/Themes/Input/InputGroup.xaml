@@ -3,8 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="Button.xaml" />
-        <ResourceDictionary Source="Label.xaml" />
+        <ResourceDictionary Source="/UI/Themes/Button/Button.xaml" />
+        <ResourceDictionary Source="/UI/Themes/Label/Label.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style

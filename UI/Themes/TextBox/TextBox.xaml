@@ -8,7 +8,7 @@
     <Style TargetType="{x:Type n:MetroTextBox}">
 
         <Setter Property="Background" Value="{DynamicResource ControlInterior}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BlueBorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource LightBlueBrush}" />
         <Setter Property="SelectionBrush" Value="{DynamicResource SteelBlueBackground}" />
         <Setter Property="BorderThickness" Value="1" />

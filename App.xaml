@@ -8,18 +8,19 @@
     xmlns:tbex="clr-namespace:TextBoxEx"
     StartupUri="/UI/Windows/Main/MainWindow.xaml">
 
-<!--************************************************* Resources  **************************************************-->
+    <!--  ************************************************* Resources  **************************************************  -->
 
-<Application.Resources>
+    <Application.Resources>
 
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
 
-                <ResourceDictionary Source="/UI/Themes/Colors/Colors.xaml" />
                 <ResourceDictionary Source="/UI/Themes/Generic.xaml" />
+                <ResourceDictionary Source="/UI/Themes/Colors/Colors.xaml" />
                 <ResourceDictionary Source="/UI/Themes/Styles.xaml" />
                 <ResourceDictionary Source="/UI/Windows/ViewWindows.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/ToastNotifications.Messages;component/Themes/Default.xaml" />
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
