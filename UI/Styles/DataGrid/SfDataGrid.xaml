@@ -2,10 +2,10 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:grid="clr-namespace:Syncfusion.UI.Xaml.Grid;assembly=Syncfusion.SfGrid.WPF"
-    xmlns:gridRowFilter="clr-namespace:Syncfusion.UI.Xaml.Grid.RowFilter;assembly=Syncfusion.SfGrid.WPF"
-    xmlns:skinManager="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
-    xmlns:system="clr-namespace:System;assembly=mscorlib"
-    xmlns:themelocal="clr-namespace:Syncfusion.Themes.FluentDark.WPF">
+    xmlns:filter="clr-namespace:Syncfusion.UI.Xaml.Grid.RowFilter;assembly=Syncfusion.SfGrid.WPF"
+    xmlns:skin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:wpf="clr-namespace:Syncfusion.Themes.FluentDark.WPF">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/ChromelessWindow/ChromelessWindow.xaml" />
         <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/MSControl/FlatButton.xaml" />
@@ -14,16 +14,16 @@
         <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/MSControl/GlyphEditableDropdownExpander.xaml" />
         <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/MSControl/ListBox.xaml" />
         <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/MSControl/DatePicker.xaml" />
-        <skinManager:ResourceDictionaryProvider
+        <skin:ResourceDictionaryProvider
             DictionaryName="Common"
             ThemeName="FluentDark" />
-        <skinManager:ResourceDictionaryProvider
+        <skin:ResourceDictionaryProvider
             DictionaryName="Brushes"
             ThemeName="FluentDark" />
     </ResourceDictionary.MergedDictionaries>
 
-    <grid:BoolToVisiblityConverter x:Key="boolToVisiblityConverter" />
-    <grid:SortDirectionToVisibilityConverter x:Key="sortDirectionToVisibilityConverter" />
+    <grid:BoolToVisiblityConverter x:Key="BoolToVisiblityConverter" />
+    <grid:SortDirectionToVisibilityConverter x:Key="SortDirectionToVisibilityConverter" />
     <grid:SortDirectionToWidthConverter x:Key="sortDirectionToWidthConverter" />
     <grid:VisiblityConverter x:Key="VisiblityConverter" />
     <grid:TextVisibilityConverter x:Key="textBlockVisibilityConverter" />
@@ -281,7 +281,7 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <Trigger Property="skinManager:SfSkinManager.SizeMode" Value="Touch">
+            <Trigger Property="skin:SfSkinManager.SizeMode" Value="Touch">
                 <Setter Property="RowHeight" Value="{StaticResource TouchMode.MinHeight}" />
                 <Setter Property="HeaderRowHeight" Value="36" />
             </Trigger>
@@ -373,7 +373,7 @@
                                                 Fill="{StaticResource ContentForegroundAlt1}"
                                                 SnapsToDevicePixels="True"
                                                 Stretch="Fill"
-                                                Visibility="{Binding Path=SortDirection, RelativeSource={RelativeSource TemplatedParent}, ConverterParameter=Ascending, Converter={StaticResource sortDirectionToVisibilityConverter}}">
+                                                Visibility="{Binding Path=SortDirection, RelativeSource={RelativeSource TemplatedParent}, ConverterParameter=Ascending, Converter={StaticResource SortDirectionToVisibilityConverter}}">
                                                 <Path.Data>
                                                     <PathGeometry>M5.9989966,0 L11.999,6.3080139 11.275,7 6.4990009,1.9796008 6.4990009,16.000992 5.4990009,16.000992 5.4990009,1.979692 0.72399958,7 0,6.3080139 z</PathGeometry>
                                                 </Path.Data>
@@ -396,7 +396,7 @@
                                                 Fill="{StaticResource ContentForegroundAlt1}"
                                                 SnapsToDevicePixels="True"
                                                 Stretch="Fill"
-                                                Visibility="{Binding Path=SortDirection, RelativeSource={RelativeSource TemplatedParent}, ConverterParameter=Decending, Converter={StaticResource sortDirectionToVisibilityConverter}}">
+                                                Visibility="{Binding Path=SortDirection, RelativeSource={RelativeSource TemplatedParent}, ConverterParameter=Decending, Converter={StaticResource SortDirectionToVisibilityConverter}}">
                                                 <Path.Data>
                                                     <PathGeometry>M5.499006,0 L6.499006,0 6.499006,14.021328 11.275003,9.0000086 11.999,9.6930017 5.9990117,16.000009 0,9.6930017 0.72399775,9.0000086 5.499006,14.021219 z</PathGeometry>
                                                 </Path.Data>
@@ -1011,7 +1011,7 @@
                                             Storyboard.TargetProperty="Width">
                                             <EasingDoubleKeyFrame KeyTime="0">
                                                 <EasingDoubleKeyFrame.Value>
-                                                    <system:Double>12</system:Double>
+                                                    <sys:Double>12</sys:Double>
                                                 </EasingDoubleKeyFrame.Value>
                                             </EasingDoubleKeyFrame>
                                         </DoubleAnimationUsingKeyFrames>
@@ -1020,7 +1020,7 @@
                                             Storyboard.TargetProperty="Height">
                                             <EasingDoubleKeyFrame KeyTime="0">
                                                 <EasingDoubleKeyFrame.Value>
-                                                    <system:Double>11</system:Double>
+                                                    <sys:Double>11</sys:Double>
                                                 </EasingDoubleKeyFrame.Value>
                                             </EasingDoubleKeyFrame>
                                         </DoubleAnimationUsingKeyFrames>
@@ -1530,7 +1530,7 @@
     <!--  Filter Row Style  -->
     <Style
         x:Key="SyncfusionFilterRowControlStyle"
-        TargetType="gridRowFilter:FilterRowControl">
+        TargetType="filter:FilterRowControl">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{StaticResource ContentForeground}" />
         <Setter Property="BorderBrush" Value="{StaticResource BorderAlt}" />
@@ -1542,7 +1542,7 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="gridRowFilter:FilterRowControl">
+                <ControlTemplate TargetType="filter:FilterRowControl">
                     <Grid>
                         <Border
                             x:Name="PART_RowBorder"
@@ -1636,7 +1636,7 @@
     </Style>
     <Style
         BasedOn="{StaticResource SyncfusionFilterRowControlStyle}"
-        TargetType="{x:Type gridRowFilter:FilterRowControl}" />
+        TargetType="{x:Type filter:FilterRowControl}" />
 
     <!--  TableSummaryRow Control Row Style  -->
     <Style
@@ -1928,7 +1928,7 @@
                         </VisualStateManager.VisualStateGroups>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="skinManager:SkinManagerHelper.FocusVisualKind" Value="HighVisibility">
+                        <Trigger Property="skin:SkinManagerHelper.FocusVisualKind" Value="HighVisibility">
                             <Setter TargetName="PART_CurrentCellInnerBorder" Property="Visibility" Value="Visible" />
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -2899,7 +2899,7 @@
     <!--  Grid FilterRow Cell Style  -->
     <Style
         x:Key="SyncfusionGridFilterRowCellStyle"
-        TargetType="gridRowFilter:GridFilterRowCell">
+        TargetType="filter:GridFilterRowCell">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{StaticResource BorderAlt}" />
         <Setter Property="BorderThickness" Value="0,0,1,1" />
@@ -2913,7 +2913,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="gridRowFilter:GridFilterRowCell">
+                <ControlTemplate TargetType="filter:GridFilterRowCell">
                     <Grid SnapsToDevicePixels="True">
                         <Border
                             Background="{TemplateBinding CellSelectionBrush}"
@@ -3052,7 +3052,7 @@
                         </VisualStateManager.VisualStateGroups>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="skinManager:SkinManagerHelper.FocusVisualKind" Value="HighVisibility">
+                        <Trigger Property="skin:SkinManagerHelper.FocusVisualKind" Value="HighVisibility">
                             <Setter TargetName="PART_FilterRowCellInnerBorder" Property="Visibility" Value="Visible" />
                         </Trigger>
                         <Trigger SourceName="PART_CurrentCellBorder" Property="Visibility" Value="Visible">
@@ -3065,7 +3065,7 @@
     </Style>
     <Style
         BasedOn="{StaticResource SyncfusionGridFilterRowCellStyle}"
-        TargetType="{x:Type gridRowFilter:GridFilterRowCell}" />
+        TargetType="{x:Type filter:GridFilterRowCell}" />
 
     <!--  GroupDropArea style  -->
 
@@ -3576,7 +3576,7 @@
                                         VerticalAlignment="Center"
                                         Fill="{StaticResource ContentForegroundAlt1}"
                                         Stretch="Fill"
-                                        Visibility="{Binding Path=SortDirection, RelativeSource={RelativeSource TemplatedParent}, ConverterParameter=Ascending, Converter={StaticResource sortDirectionToVisibilityConverter}}">
+                                        Visibility="{Binding Path=SortDirection, RelativeSource={RelativeSource TemplatedParent}, ConverterParameter=Ascending, Converter={StaticResource SortDirectionToVisibilityConverter}}">
                                         <Path.Data>
                                             <PathGeometry>M5.9989966,0 L11.999,6.3080139 11.275,7 6.4990009,1.9796008 6.4990009,16.000992 5.4990009,16.000992 5.4990009,1.979692 0.72399958,7 0,6.3080139 z</PathGeometry>
                                         </Path.Data>
@@ -3589,7 +3589,7 @@
                                         VerticalAlignment="Center"
                                         Fill="{StaticResource ContentForegroundAlt1}"
                                         Stretch="Fill"
-                                        Visibility="{Binding Path=SortDirection, RelativeSource={RelativeSource TemplatedParent}, ConverterParameter=Decending, Converter={StaticResource sortDirectionToVisibilityConverter}}">
+                                        Visibility="{Binding Path=SortDirection, RelativeSource={RelativeSource TemplatedParent}, ConverterParameter=Decending, Converter={StaticResource SortDirectionToVisibilityConverter}}">
                                         <Path.Data>
                                             <PathGeometry>M5.499006,0 L6.499006,0 6.499006,14.021328 11.275003,9.0000086 11.999,9.6930017 5.9990117,16.000009 0,9.6930017 0.72399775,9.0000086 5.499006,14.021219 z</PathGeometry>
                                         </Path.Data>
@@ -3892,7 +3892,7 @@
         <Setter Property="CurrentCellBorderBrush" Value="{StaticResource BorderAlt3}" />
         <Setter Property="GridLinesVisibility" Value="Both" />
         <Style.Triggers>
-            <Trigger Property="skinManager:SfSkinManager.SizeMode" Value="Touch">
+            <Trigger Property="skin:SfSkinManager.SizeMode" Value="Touch">
                 <Setter Property="RowHeight" Value="{StaticResource TouchMode.MinHeight}" />
                 <Setter Property="HeaderRowHeight" Value="36" />
             </Trigger>
@@ -4309,7 +4309,7 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <Trigger Property="skinManager:SkinManagerHelper.FocusVisualKind" Value="HighVisibility">
+            <Trigger Property="skin:SkinManagerHelper.FocusVisualKind" Value="HighVisibility">
                 <Setter Property="FocusVisualStyle" Value="{StaticResource KeyboardFocusVisualStyle}" />
             </Trigger>
         </Style.Triggers>
@@ -4600,7 +4600,7 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <Trigger Property="skinManager:SkinManagerHelper.FocusVisualKind" Value="HighVisibility">
+            <Trigger Property="skin:SkinManagerHelper.FocusVisualKind" Value="HighVisibility">
                 <Setter Property="FocusVisualStyle" Value="{StaticResource KeyboardFocusVisualStyle}" />
             </Trigger>
         </Style.Triggers>
@@ -4800,7 +4800,7 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <Trigger Property="skinManager:SkinManagerHelper.FocusVisualKind" Value="HighVisibility">
+            <Trigger Property="skin:SkinManagerHelper.FocusVisualKind" Value="HighVisibility">
                 <Setter Property="FocusVisualStyle" Value="{StaticResource KeyboardFocusVisualStyle}" />
             </Trigger>
         </Style.Triggers>
@@ -4945,7 +4945,7 @@
                                         Foreground="{TemplateBinding Foreground}"
                                         Text="{grid:GridLocalizationResourceExtension ResourceName=NoItems}"
                                         Visibility="{Binding HasItemsSource, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ResourceKey=reverseVisibilityConverter}}" />
-                                    <Grid Visibility="{Binding HasItemsSource, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ResourceKey=boolToVisiblityConverter}}">
+                                    <Grid Visibility="{Binding HasItemsSource, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ResourceKey=BoolToVisiblityConverter}}">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="*" />
@@ -4998,7 +4998,7 @@
                                                 ItemTemplate="{TemplateBinding ItemTemplate}"
                                                 ItemsSource="{TemplateBinding ItemsSource}"
                                                 KeyboardNavigation.TabNavigation="Continue"
-                                                Visibility="{Binding IsItemSourceLoaded, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ResourceKey=boolToVisiblityConverter}}">
+                                                Visibility="{Binding IsItemSourceLoaded, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ResourceKey=BoolToVisiblityConverter}}">
                                                 <ItemsControl.Template>
                                                     <ControlTemplate TargetType="{x:Type ItemsControl}">
                                                         <Border
@@ -5033,7 +5033,7 @@
                                                             </Grid>
                                                         </Border>
                                                         <ControlTemplate.Triggers>
-                                                            <Trigger Property="skinManager:SfSkinManager.SizeMode" Value="Touch">
+                                                            <Trigger Property="skin:SfSkinManager.SizeMode" Value="Touch">
                                                                 <Setter TargetName="PART_ItemsPresenter" Property="Margin" Value="0,34,4,4" />
                                                             </Trigger>
                                                         </ControlTemplate.Triggers>
@@ -5072,7 +5072,7 @@
                         </Grid>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="skinManager:SkinManagerHelper.FocusVisualKind" Value="HighVisibility">
+                        <Trigger Property="skin:SkinManagerHelper.FocusVisualKind" Value="HighVisibility">
                             <Setter TargetName="PART_ItemsControl" Property="FocusVisualStyle" Value="{StaticResource KeyboardFocusVisualStyle}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -5230,7 +5230,7 @@
                                                 FontFamily="{TemplateBinding FontFamily}"
                                                 FontSize="{TemplateBinding FontSize}"
                                                 FontStyle="{TemplateBinding FontStyle}"
-                                                Visibility="{Binding IsAdvancedFilterVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource boolToVisiblityConverter}}" />
+                                                Visibility="{Binding IsAdvancedFilterVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolToVisiblityConverter}}" />
                                             <Grid.Margin>
                                                 <Thickness>4,0,8,0</Thickness>
                                             </Grid.Margin>
@@ -5254,7 +5254,7 @@
                                                     Height="25"
                                                     Content="{grid:GridLocalizationResourceExtension ResourceName=OK}"
                                                     IsEnabled="False"
-                                                    Visibility="{Binding ImmediateUpdateColumnFilter, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ResourceKey=boolToVisiblityConverter}, ConverterParameter=InverseVisiblity}">
+                                                    Visibility="{Binding ImmediateUpdateColumnFilter, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ResourceKey=BoolToVisiblityConverter}, ConverterParameter=InverseVisiblity}">
                                                     <Button.Margin>
                                                         <Thickness>8,4,4,4</Thickness>
                                                     </Button.Margin>
@@ -5682,7 +5682,7 @@
                                     ItemsSource="{Binding ComboItemsSource, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedItem="{Binding FilterSelectedItem1, RelativeSource={RelativeSource TemplatedParent}}"
                                     Text="{Binding FilterValue1, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, ValidatesOnDataErrors=true, NotifyOnValidationError=true}"
-                                    Visibility="{Binding CanGenerateUniqueItems, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource boolToVisiblityConverter}}" />
+                                    Visibility="{Binding CanGenerateUniqueItems, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolToVisiblityConverter}}" />
 
                                 <TextBox
                                     x:Name="PART_TextBox1"
@@ -5780,7 +5780,7 @@
                                     ItemsSource="{Binding ComboItemsSource, RelativeSource={RelativeSource TemplatedParent}}"
                                     SelectedItem="{Binding FilterSelectedItem2, RelativeSource={RelativeSource TemplatedParent}}"
                                     Text="{Binding FilterValue2, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, ValidatesOnDataErrors=true, NotifyOnValidationError=true}"
-                                    Visibility="{Binding CanGenerateUniqueItems, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource boolToVisiblityConverter}}" />
+                                    Visibility="{Binding CanGenerateUniqueItems, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolToVisiblityConverter}}" />
 
                                 <TextBox
                                     x:Name="PART_TextBox2"

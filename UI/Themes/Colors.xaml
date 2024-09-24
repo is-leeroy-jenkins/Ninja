@@ -54,7 +54,7 @@
     <Color x:Key="DangerColor2">#FFAB0202</Color>
     <Color x:Key="DangerColor3">#FF6C0000</Color>
     <Color x:Key="DangerColor4">#FF4A0101</Color>
-    <Color x:Key="DangerColor5">#FF280000</Color>
+    <Color x:Key="DangerColor5">#FF180000</Color>
 
     <!--  ************************************  Background Colors  *****************************  -->
 
@@ -62,7 +62,7 @@
     <Color x:Key="BackColor2">#FF282828</Color>
     <Color x:Key="BackColor3">#FF2D2D2D</Color>
     <Color x:Key="BackColor4">#FF013D11</Color>
-    <Color x:Key="BackColor5">#FF012336</Color>
+    <Color x:Key="BackColor5">#FF002336</Color>
 
 
     <!--  ************************************  Foreground Colors  ****************************  -->
@@ -118,7 +118,7 @@
     <Color x:Key="DefaultBackColor">#FF141414</Color>
     <Color x:Key="ControlBackColor">#FF282828</Color>
     <Color x:Key="ControlInteriorColor">#FF2D2D2D</Color>
-    <Color x:Key="BorderColor">#FF0078D4</Color>
+    <Color x:Key="BlueBorderColor">#FF0078D4</Color>
     <Color x:Key="LightBlueColor">#FFA0BDFC</Color>
     <Color x:Key="ControlHoverColor">#FF0E3C5E</Color>
 
@@ -143,7 +143,7 @@
 
     <SolidColorBrush
         x:Key="FormBorderBrush"
-        Color="{DynamicResource BorderColor}" />
+        Color="{DynamicResource BlueBorderColor}" />
 
     <SolidColorBrush
         x:Key="FormForeground"
@@ -187,7 +187,7 @@
 
     <SolidColorBrush
         x:Key="BlueBorderBrush"
-        Color="{DynamicResource BorderColor}" />
+        Color="{DynamicResource BlueBorderColor}" />
 
     <SolidColorBrush
         x:Key="SteelBlueBackground"
@@ -242,15 +242,23 @@
 
     <SolidColorBrush
         x:Key="ButtonBackground"
-        Color="{DynamicResource BackColor2}" />
+        Color="{DynamicResource BackColor3}" />
 
     <SolidColorBrush
         x:Key="ButtonBorder"
-        Color="{DynamicResource BorderColor}" />
+        Color="{DynamicResource MutedForeColor}" />
 
     <SolidColorBrush
         x:Key="ButtonHoverBackground"
-        Color="{DynamicResource DefaultColor3}" />
+        Color="{DynamicResource HoverColor3}" />
+
+    <SolidColorBrush
+        x:Key="ButtonHoverBorder"
+        Color="{DynamicResource LightBlueColor}" />
+
+    <SolidColorBrush
+        x:Key="ButtonHoverForeground"
+        Color="{DynamicResource WhiteColor}" />
 
     <SolidColorBrush
         x:Key="TileHoverBackground"
@@ -511,7 +519,7 @@
 
     <SolidColorBrush
         x:Key="DataGridHeaderBorder"
-        Color="{DynamicResource DataGridLinesColor}" />
+        Color="{DynamicResource SteelBlueBackground}" />
 
     <SolidColorBrush
         x:Key="DataGridLines"

@@ -176,7 +176,7 @@
         </Style.Triggers>
     </Style>
     <Style
-        x:Key="btn-primary"
+        x:Key="Button-Primary"
         BasedOn="{StaticResource ButtonBaseStyle}"
         TargetType="{x:Type Button}">
         <Setter Property="Background" Value="{DynamicResource Background-Primary1}" />
@@ -189,7 +189,7 @@
         </Style.Triggers>
     </Style>
     <Style
-        x:Key="btn-success"
+        x:Key="Button-Success"
         BasedOn="{StaticResource ButtonBaseStyle}"
         TargetType="{x:Type Button}">
         <Setter Property="Background" Value="{DynamicResource Background-Success1}" />
@@ -202,7 +202,7 @@
         </Style.Triggers>
     </Style>
     <Style
-        x:Key="btn-info"
+        x:Key="Button-Info"
         BasedOn="{StaticResource ButtonBaseStyle}"
         TargetType="{x:Type Button}">
         <Setter Property="Background" Value="{DynamicResource Background-Info1}" />
@@ -215,7 +215,7 @@
         </Style.Triggers>
     </Style>
     <Style
-        x:Key="btn-warning"
+        x:Key="Button-Warning"
         BasedOn="{StaticResource ButtonBaseStyle}"
         TargetType="{x:Type Button}">
         <Setter Property="Background" Value="{DynamicResource Background-Warning1}" />
@@ -228,7 +228,7 @@
         </Style.Triggers>
     </Style>
     <Style
-        x:Key="btn-danger"
+        x:Key="Button-Danger"
         BasedOn="{StaticResource ButtonBaseStyle}"
         TargetType="{x:Type Button}">
         <Setter Property="Background" Value="{DynamicResource Background-Danger1}" />
@@ -240,7 +240,9 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <!--  ToggleButton  -->
+
+    <!--***********************************************  ToggleButton  *************************************************-->
+
     <Style
         BasedOn="{StaticResource ToggleButtonBaseStyle}"
         TargetType="{x:Type ToggleButton}">
@@ -255,7 +257,7 @@
         </Style.Triggers>
     </Style>
     <Style
-        x:Key="tbtn-primary"
+        x:Key="Toggle-Button-Primary"
         BasedOn="{StaticResource ToggleButtonBaseStyle}"
         TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{DynamicResource Background-Primary1}" />
@@ -268,7 +270,7 @@
         </Style.Triggers>
     </Style>
     <Style
-        x:Key="tbtn-success"
+        x:Key="Toggle-Button-Success"
         BasedOn="{StaticResource ToggleButtonBaseStyle}"
         TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{DynamicResource Background-Success1}" />
@@ -281,7 +283,7 @@
         </Style.Triggers>
     </Style>
     <Style
-        x:Key="tbtn-info"
+        x:Key="Toggle-Button-Info"
         BasedOn="{StaticResource ToggleButtonBaseStyle}"
         TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{DynamicResource Background-Info1}" />
@@ -294,7 +296,7 @@
         </Style.Triggers>
     </Style>
     <Style
-        x:Key="tbtn-warning"
+        x:Key="Toggle-Button-Warning"
         BasedOn="{StaticResource ToggleButtonBaseStyle}"
         TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{DynamicResource Background-Warning1}" />
@@ -307,7 +309,7 @@
         </Style.Triggers>
     </Style>
     <Style
-        x:Key="tbtn-danger"
+        x:Key="Toggle-Button-Danger"
         BasedOn="{StaticResource ToggleButtonBaseStyle}"
         TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{DynamicResource Background-Danger1}" />

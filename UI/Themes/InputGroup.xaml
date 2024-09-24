@@ -461,7 +461,7 @@
         x:Key="InputGroupLabelBaseStyle"
         BasedOn="{StaticResource LabelBaseStyle}"
         TargetType="{x:Type Label}">
-        <Setter Property="Background" Value="Transparent"  />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{DynamicResource BlueBorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource FormForeground}" />
         <Setter Property="BorderThickness" Value="1" />

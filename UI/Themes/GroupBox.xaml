@@ -124,7 +124,7 @@
                             Grid.Row="1"
                             Margin="{TemplateBinding Padding}"
                             SnapsToDevicePixels="true"
-                            TextElement.Foreground="{StaticResource WhiteForeground}"  />
+                            TextElement.Foreground="{StaticResource WhiteForeground}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

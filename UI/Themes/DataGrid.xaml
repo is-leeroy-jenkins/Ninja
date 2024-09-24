@@ -21,7 +21,7 @@
                     <Grid>
                         <Border
                             x:Name="Border"
-                            Background="{StaticResource DataGrid.BackgroundBrush}"
+                            Background="{StaticResource DataGridBackground}"
                             BorderBrush="{StaticResource DataGrid.Header.Border}"
                             BorderThickness="0,0,1,1"
                             SnapsToDevicePixels="True" />
