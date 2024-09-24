@@ -4,7 +4,7 @@
     xmlns:n="clr-namespace:Ninja">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="BaseStyle.xaml" />
+        <ResourceDictionary Source="/UI/Themes/Common/BaseStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style

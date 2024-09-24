@@ -11,12 +11,12 @@
     xmlns:src="clr-namespace:Ninja.Themes"
     xmlns:sync="http://schemas.syncfusion.com/wpf"
     xmlns:tbex="clr-namespace:TextBoxEx"
-    xmlns:ninja="clr-namespace:Ninja"
+    xmlns:n="clr-namespace:Ninja"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-    <!--  ******************************************** Resources ******************************************  -->
+    <!--******************************************** Resources ******************************************-->
 
     <UserControl.Resources>
         <cov:IperfCommandConverter x:Key="IperfCommandConverter" />
@@ -28,7 +28,7 @@
         </Style>
     </UserControl.Resources>
 
-    <!--  ******************************************** Context Menu ******************************************  -->
+    <!--  ******************************************** Context Menu ******************************************-->
 
     <UserControl.ContextMenu>
         <ContextMenu Name="DataWindowContextMenu">
@@ -201,7 +201,7 @@
                             Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Version" />
-                        <ninja:MetroComboBox
+                        <n:MetroComboBox
                             Grid.Row="1"
                             Width="130"
                             Margin="0,15,10,0"
@@ -212,15 +212,15 @@
                             BorderBrush="{StaticResource BlueBorderBrush}"
                             SelectedItem="{Binding IperfModel.Version}"
                             Text="{Binding IperfModel.Version, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ninja:MetroComboBoxItem>iperf.exe</ninja:MetroComboBoxItem>
-                            <ninja:MetroComboBoxItem>iperf3.exe</ninja:MetroComboBoxItem>
-                        </ninja:MetroComboBox>
+                            <n:MetroComboBoxItem>iperf.exe</n:MetroComboBoxItem>
+                            <n:MetroComboBoxItem>iperf3.exe</n:MetroComboBoxItem>
+                        </n:MetroComboBox>
                         <TextBlock
                             Grid.Row="2"
                             Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Role" />
-                        <ninja:MetroComboBox
+                        <n:MetroComboBox
                             Grid.Row="2"
                             Width="130"
                             Margin="0,5,10,0"
@@ -231,9 +231,9 @@
                             BorderBrush="{StaticResource BlueBorderBrush}"
                             SelectedItem="{Binding IperfModel.Role}"
                             Text="{Binding IperfModel.Role, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ninja:MetroComboBoxItem>-s</ninja:MetroComboBoxItem>
-                            <ninja:MetroComboBoxItem>-c</ninja:MetroComboBoxItem>
-                        </ninja:MetroComboBox>
+                            <n:MetroComboBoxItem>-s</n:MetroComboBoxItem>
+                            <n:MetroComboBoxItem>-c</n:MetroComboBoxItem>
+                        </n:MetroComboBox>
                         <TextBlock
                             Grid.Row="3"
                             Foreground="{StaticResource WhiteForeground}"
@@ -311,7 +311,7 @@
                             BorderBrush="{StaticResource BlueBorderBrush}"
                             BorderThickness="1"
                             Text="{Binding IperfModel.TcpWindowSize}" />
-                        <ninja:MetroComboBox
+                        <n:MetroComboBox
                             Grid.Row="8"
                             Width="55"
                             Margin="0,5,10,0"
@@ -321,11 +321,11 @@
                             FontSize="10"
                             SelectedItem="{Binding IperfModel.TcpWindowUnit}"
                             Text="{Binding IperfModel.TcpWindowUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ninja:MetroComboBoxItem>M</ninja:MetroComboBoxItem>
-                            <ninja:MetroComboBoxItem>m</ninja:MetroComboBoxItem>
-                            <ninja:MetroComboBoxItem>K</ninja:MetroComboBoxItem>
-                            <ninja:MetroComboBoxItem>k</ninja:MetroComboBoxItem>
-                        </ninja:MetroComboBox>
+                            <n:MetroComboBoxItem>M</n:MetroComboBoxItem>
+                            <n:MetroComboBoxItem>m</n:MetroComboBoxItem>
+                            <n:MetroComboBoxItem>K</n:MetroComboBoxItem>
+                            <n:MetroComboBoxItem>k</n:MetroComboBoxItem>
+                        </n:MetroComboBox>
 
                         <RadioButton
                             Grid.Row="9"
@@ -346,7 +346,7 @@
                             BorderThickness="1"
                             Text="{Binding IperfModel.BandWidth}" />
 
-                        <ninja:MetroComboBox
+                        <n:MetroComboBox
                             Grid.Row="9"
                             Width="55"
                             Margin="0,5,10,0"
@@ -355,11 +355,11 @@
                             FontSize="10"
                             SelectedItem="{Binding IperfModel.BandWidthUnit}"
                             Text="{Binding IperfModel.BandWidthUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ninja:MetroComboBoxItem>M</ninja:MetroComboBoxItem>
-                            <ninja:MetroComboBoxItem>m</ninja:MetroComboBoxItem>
-                            <ninja:MetroComboBoxItem>K</ninja:MetroComboBoxItem>
-                            <ninja:MetroComboBoxItem>k</ninja:MetroComboBoxItem>
-                        </ninja:MetroComboBox>
+                            <n:MetroComboBoxItem>M</n:MetroComboBoxItem>
+                            <n:MetroComboBoxItem>m</n:MetroComboBoxItem>
+                            <n:MetroComboBoxItem>K</n:MetroComboBoxItem>
+                            <n:MetroComboBoxItem>k</n:MetroComboBoxItem>
+                        </n:MetroComboBox>
                         <TextBlock
                             Grid.Row="10"
                             Foreground="{StaticResource WhiteForeground}"
@@ -401,7 +401,7 @@
                     <!--<ColumnDefinition Width="150"/>-->
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                <ninja:MetroTextBox
+                <n:MetroTextBox
                     x:Name="IperfCommand"
                     Grid.Column="0"
                     Width="Auto"
@@ -413,7 +413,7 @@
                     BorderBrush="{StaticResource BlueBorderBrush}"
                     Style="{DynamicResource Input-Group-Addon Left}"
                     Tag="{Binding IperfModel.Version}">
-                    <ninja:MetroTextBox.Text>
+                    <n:MetroTextBox.Text>
                         <MultiBinding
                             Converter="{StaticResource IperfCommandConverter}"
                             Mode="TwoWay">
@@ -433,10 +433,10 @@
                             <Binding Path="IperfModel.Reverse" />
                             <Binding Path="IperfModel.Command" />
                         </MultiBinding>
-                    </ninja:MetroTextBox.Text>
-                </ninja:MetroTextBox>
+                    </n:MetroTextBox.Text>
+                </n:MetroTextBox>
 
-                <ninja:MetroButton
+                <n:MetroButton
                     Grid.Column="1"
                     Margin="10,0,0,0"
                     Command="{Binding RunIperfCommand}"
@@ -446,7 +446,7 @@
                     BorderThickness="1"
                     CommandParameter="{Binding ElementName=IperfCommand, Path=Text}"
                     Content="Run" />
-                <ninja:MetroButton
+                <n:MetroButton
                     Grid.Column="1"
                     Margin="45,0,0,0"
                     Background="{StaticResource ControlInterior}"
@@ -455,7 +455,7 @@
                     BorderThickness="1"
                     Command="{Binding StopIperfCommand}"
                     Content="Stop" />
-                <ninja:MetroButton
+                <n:MetroButton
                     Grid.Column="1"
                     Margin="80,0,0,0"
                 Background="{StaticResource ControlInterior}"
