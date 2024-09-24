@@ -462,6 +462,7 @@
 
     <!--  ******************************************* ScrollViewer  *********************************************  -->
 
+
     <Color x:Key="ScrollBarBackColor">#FF785801</Color>
 
     <Color x:Key="ScrollBarBorderColor">#C3C3C3</Color>
@@ -519,7 +520,7 @@
 
     <SolidColorBrush
         x:Key="DataGridHeaderBorder"
-        Color="{DynamicResource SteelBlueBackground}" />
+        Color="{DynamicResource SteelBlueColor}" />
 
     <SolidColorBrush
         x:Key="DataGridLines"

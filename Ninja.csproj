@@ -533,4 +533,7 @@
       <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UI\Themes\Colors\" />
+  </ItemGroup>
 </Project>

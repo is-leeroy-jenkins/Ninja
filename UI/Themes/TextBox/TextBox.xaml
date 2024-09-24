@@ -1,11 +1,11 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:nj="clr-namespace:Ninja">
+    xmlns:n="clr-namespace:Ninja">
 
     <!--  *********************************************** MetroTextBox*****************************************************  -->
 
-    <Style TargetType="{x:Type nj:MetroTextBox}">
+    <Style TargetType="{x:Type n:MetroTextBox}">
 
         <Setter Property="Background" Value="{DynamicResource ControlInterior}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
