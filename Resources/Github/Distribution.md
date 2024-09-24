@@ -1,4 +1,4 @@
-# How to distribute Badger within your own Department/Agency/Region/Division/Branch/Section
+# How to distribute Ninja within your own Department/Agency/Region/Division/Branch/Section
 
 #### Step 1: Clone the source
 
