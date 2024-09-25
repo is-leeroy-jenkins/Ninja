@@ -4,8 +4,7 @@
     xmlns:filter="clr-namespace:Syncfusion.UI.Xaml.Grid.RowFilter;assembly=Syncfusion.SfGrid.WPF"
     xmlns:grid="clr-namespace:Syncfusion.UI.Xaml.Grid;assembly=Syncfusion.SfGrid.WPF"
     xmlns:skin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:wpf="clr-namespace:Syncfusion.Themes.FluentDark.WPF">
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/ChromelessWindow/ChromelessWindow.xaml" />
         <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/MSControl/FlatButton.xaml" />
@@ -3165,7 +3164,6 @@
                                 Height="12"
                                 Margin="2"
                                 VerticalAlignment="Top"
-                                Background="Transparent"
                                 IsChecked="{Binding Path=IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                 IsTabStop="False"
                                 IsThreeState="False"

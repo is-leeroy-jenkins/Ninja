@@ -1,7 +1,49 @@
+// ******************************************************************************************
+//     Assembly:                Ninja
+//     Author:                  Terry D. Eppler
+//     Created:                 09-25-2024
+// 
+//     Last Modified By:        Terry D. Eppler
+//     Last Modified On:        09-25-2024
+// ******************************************************************************************
+// <copyright file="AcrylicBackgroundExtension.cs" company="Terry D. Eppler">
+// 
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
+// 
+//    Permission is hereby granted, free of charge, to any person obtaining a copy
+//    of this software and associated documentation files (the “Software”),
+//    to deal in the Software without restriction,
+//    including without limitation the rights to use,
+//    copy, modify, merge, publish, distribute, sublicense,
+//    and/or sell copies of the Software,
+//    and to permit persons to whom the Software is furnished to do so,
+//    subject to the following conditions:
+// 
+//    The above copyright notice and this permission notice shall be included in all
+//    copies or substantial portions of the Software.
+// 
+//    THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+//    INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//    FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
+//    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+//    DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+//    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+//    DEALINGS IN THE SOFTWARE.
+// 
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
+// </copyright>
+// <summary>
+//   AcrylicBackgroundExtension.cs
+// </summary>
+// ******************************************************************************************
 
 namespace Ninja
 {
     using System;
+    using System.ComponentModel;
     using System.Windows;
     using System.Windows.Data;
     using System.Windows.Markup;
@@ -22,8 +64,8 @@ namespace Ninja
     /// </code>
     /// </example>
     /// <exclude/>
-    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-    [System.ComponentModel.Browsable(false)]
+    [ EditorBrowsable( EditorBrowsableState.Never ) ]
+    [ Browsable( false ) ]
     internal class AcrylicBackgroundExtension : MarkupExtension
     {
         /// <summary>
@@ -107,17 +149,17 @@ namespace Ninja
         /// <summary>
         /// Default constructor receiving the target name to achieve acrylic background layer in application
         /// </summary>
-        public AcrylicBackgroundExtension()
+        public AcrylicBackgroundExtension( )
         {
-
         }
+
         /// <summary>
         /// Constructor receiving the target name to achieve acrylic background layer in application
         /// </summary>
         /// <param name="target">Target object</param>
-        public AcrylicBackgroundExtension(FrameworkElement target)
+        public AcrylicBackgroundExtension( FrameworkElement target )
         {
-            this.BackgroundLayerElement = target;
+            BackgroundLayerElement = target;
         }
 
         /// <summary>
@@ -126,31 +168,32 @@ namespace Ninja
         /// <param name="serviceProvider">IServiceProvider</param>
         /// <returns>Acrylic Visual Brush</returns>
         /// <inheritdoc/>
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public override object ProvideValue(IServiceProvider serviceProvider)
+        [ EditorBrowsable( EditorBrowsableState.Never ) ]
+        public override object ProvideValue( IServiceProvider serviceProvider )
         {
-            var pvt = serviceProvider.GetService(typeof(IProvideValueTarget)) as IProvideValueTarget;
-            var target = pvt.TargetObject as FrameworkElement;
+            var pvt =
+                serviceProvider.GetService( typeof( IProvideValueTarget ) ) as IProvideValueTarget;
 
-            var acrylicPanel = new SfAcrylicPanel()
+            var target = pvt.TargetObject as FrameworkElement;
+            var acrylicPanel = new SfAcrylicPanel( )
             {
-                TintBrush = this.TintBrush,
-                NoiseBrush = this.NoiseBrush,
-                TintOpacity = this.TintOpacity,
-                NoiseOpacity = this.NoiseOpacity,
-                BlurRadius = this.BlurRadius,
-                BackgroundTarget = this.BackgroundLayerElement,
-                Source= target,
+                TintBrush = TintBrush,
+                NoiseBrush = NoiseBrush,
+                TintOpacity = TintOpacity,
+                NoiseOpacity = NoiseOpacity,
+                BlurRadius = BlurRadius,
+                BackgroundTarget = BackgroundLayerElement,
+                Source = target,
                 Width = target.Width,
                 Height = target.Height
             };
 
-            var brush = new VisualBrush(acrylicPanel)
+            var brush = new VisualBrush( acrylicPanel )
             {
                 Stretch = Stretch.None,
                 AlignmentX = AlignmentX.Left,
                 AlignmentY = AlignmentY.Top,
-                ViewboxUnits = BrushMappingMode.Absolute,
+                ViewboxUnits = BrushMappingMode.Absolute
             };
 
             return brush;

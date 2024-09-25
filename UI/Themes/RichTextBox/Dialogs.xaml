@@ -1,13 +1,8 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:Syncfusion="http://schemas.syncfusion.com/wpf"
     xmlns:resources="clr-namespace:Syncfusion.Windows.Controls.RichTextBoxAdv;assembly=Syncfusion.SfRichTextBoxAdv.WPF"
-    xmlns:richtextboxadv="clr-namespace:Syncfusion.Windows.Controls.RichTextBoxAdv;assembly=Syncfusion.SfRichTextBoxAdv.WPF"
-    xmlns:shared="clr-namespace:Syncfusion.Windows.Shared;assembly=Syncfusion.Shared.WPF"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:themelocal="clr-namespace:Syncfusion.Themes.FluentDark.WPF"
-    xmlns:tools_controls_shared="clr-namespace:Syncfusion.Windows.Tools.Controls;assembly=Syncfusion.shared.WPF">
+    xmlns:richtextboxadv="clr-namespace:Syncfusion.Windows.Controls.RichTextBoxAdv;assembly=Syncfusion.SfRichTextBoxAdv.WPF">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/SfRichTextBoxAdv/SfRichTextBoxCommon.xaml" />
@@ -72,7 +67,6 @@
                             BorderBrush="{StaticResource BorderAlt}"
                             BorderThickness="0,1,0,0">
                             <StackPanel
-                                Grid.Row="2"
                                 HorizontalAlignment="Right"
                                 Orientation="Horizontal">
                                 <Button
@@ -210,7 +204,6 @@
                             BorderBrush="{StaticResource BorderAlt}"
                             BorderThickness="0,1,0,0">
                             <StackPanel
-                                Grid.Row="2"
                                 HorizontalAlignment="Right"
                                 Orientation="Horizontal">
                                 <Button
@@ -457,7 +450,7 @@
                             Background="{StaticResource PopupBackground}"
                             BorderBrush="{StaticResource BorderAlt}"
                             BorderThickness="0,1,0,0">
-                            <Grid Grid.Row="1">
+                            <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="84" />
                                     <ColumnDefinition Width="*" />

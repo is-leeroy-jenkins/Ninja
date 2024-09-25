@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:n="clr-namespace:Ninja"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Ninja.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sync="http://schemas.syncfusion.com/wpf"
     Title="MetaNet - About V1.0.1"
@@ -186,8 +185,7 @@
                 <Hyperlink
                     Name="Gitee"
                     Click="GiteeButton_Click"
-                    NavigateUri="https://github.com/is-leeroy-jenkins/Ninja">
-                </Hyperlink>
+                    NavigateUri="https://github.com/is-leeroy-jenkins/Ninja" />
             </TextBlock>
             <n:ButtonEx
                 Grid.Row="6"

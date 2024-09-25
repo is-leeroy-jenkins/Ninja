@@ -5,10 +5,7 @@
     xmlns:Sync_Resources="clr-namespace:Syncfusion.Windows.Edit.Localization;assembly=Syncfusion.Edit.WPF"
     xmlns:local="clr-namespace:Syncfusion.Windows.Edit;assembly=Syncfusion.Edit.WPF"
     xmlns:sfskin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
-    xmlns:syncfusion="clr-namespace:Syncfusion.Windows.Tools.Controls;assembly=Syncfusion.Tools.WPF"
-    xmlns:syncfusionShared="clr-namespace:Syncfusion.Windows.Tools.Controls;assembly=Syncfusion.Shared.WPF"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:themelocal="clr-namespace:Syncfusion.Themes.FluentDark.WPF">
+    xmlns:syncfusion="clr-namespace:Syncfusion.Windows.Tools.Controls;assembly=Syncfusion.Tools.WPF">
 
     <ResourceDictionary.MergedDictionaries>
         <sfskin:ResourceDictionaryProvider

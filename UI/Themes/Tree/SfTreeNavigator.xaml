@@ -1,12 +1,9 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:bdgr="clr-namespace:Ninja"
     xmlns:local="clr-namespace:Syncfusion.Windows.Controls.Navigation;assembly=Syncfusion.SfTreeNavigator.WPF"
     xmlns:shared="clr-namespace:Syncfusion.Windows.Controls;assembly=Syncfusion.Shared.WPF"
     xmlns:skin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:theme="clr-namespace:Syncfusion.Themes.FluentDark.WPF"
     xmlns:wpf="clr-namespace:Syncfusion.Themes.FluentDark.WPF;assembly=Syncfusion.Themes.FluentDark.WPF">
 
     <ResourceDictionary.MergedDictionaries>
@@ -317,7 +314,7 @@
                             BorderThickness="{TemplateBinding BorderThickness}">
                             <Grid>
                                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                                    <ItemsPresenter Grid.Row="1" />
+                                    <ItemsPresenter />
                                 </ScrollViewer>
                             </Grid>
                         </Border>

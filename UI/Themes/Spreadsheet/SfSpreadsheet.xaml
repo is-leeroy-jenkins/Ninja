@@ -1,15 +1,10 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:aero="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
-    xmlns:bdgr="clr-namespace:Ninja"
     xmlns:converter="clr-namespace:Syncfusion.Windows.Shared;assembly=Syncfusion.Shared.WPF"
-    xmlns:microsoftWindowsThemes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Luna"
     xmlns:shared="clr-namespace:Syncfusion.Windows.Tools.Controls;assembly=Syncfusion.Shared.WPF"
     xmlns:skin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
     xmlns:spreadsheet="clr-namespace:Syncfusion.UI.Xaml.Spreadsheet;assembly=Syncfusion.SfSpreadsheet.WPF"
-    xmlns:system="clr-namespace:System;assembly=mscorlib"
-    xmlns:theme="clr-namespace:Syncfusion.Themes.FluentDark.WPF"
     xmlns:tools="clr-namespace:Syncfusion.Windows.Tools.Controls;assembly=Syncfusion.Tools.WPF">
 
     <ResourceDictionary.MergedDictionaries>
@@ -368,7 +363,6 @@
                                                 Content="{Binding Path=ToolBarTray, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type tools:TabControlExt}}, FallbackValue=''}" />
                                             <Button
                                                 Name="PART_NewTab"
-                                                Background="Transparent"
                                                 BorderThickness="{Binding Path=NewButtonBorderThickness, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type tools:TabControlExt}}}"
                                                 ContentTemplate="{Binding Path=NewTabButtonTemplate, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type tools:TabControlExt}}}"
                                                 DockPanel.Dock="Top"
@@ -819,8 +813,6 @@
                                 Visibility="Collapsed">
                                 <Grid
                                     x:Name="PART_BusyIndicatorPath"
-                                    Grid.Row="1"
-                                    Canvas.Left="76.686"
                                     Width="47.586"
                                     Height="47.866"
                                     RenderTransformOrigin="0.5,0.5">

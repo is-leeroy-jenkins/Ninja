@@ -1,18 +1,17 @@
 // ******************************************************************************************
-//     Assembly:                Baby
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 09-09-2024
+//     Created:                 09-25-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        09-09-2024
+//     Last Modified On:        09-25-2024
 // ******************************************************************************************
 // <copyright file="SfAcrylicPanel.cs" company="Terry D. Eppler">
 // 
-//     Baby is a light-weight, full-featured, web-browser built with .NET 6 and is written
-//     in C#.  The baby browser is designed for budget execution and data analysis.
-//     A tool for EPA analysts and a component that can be used for general browsing.
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
 // 
-//     Copyright ©  2020 Terry D. Eppler
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),

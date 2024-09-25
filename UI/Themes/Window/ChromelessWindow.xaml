@@ -4,9 +4,7 @@
     xmlns:Sync_Resources="clr-namespace:Syncfusion.Windows.Shared;assembly=Syncfusion.Shared.WPF"
     xmlns:local="clr-namespace:Syncfusion.Windows.Shared;assembly=Syncfusion.Shared.WPF"
     xmlns:sfskin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
-    xmlns:shell="clr-namespace:Syncfusion.Windows;assembly=Syncfusion.Shared.WPF"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:themelocal="clr-namespace:Syncfusion.Themes.FluentDark.WPF">
+    xmlns:shell="clr-namespace:Syncfusion.Windows;assembly=Syncfusion.Shared.WPF">
 
     <ResourceDictionary.MergedDictionaries>
         <sfskin:ResourceDictionaryProvider

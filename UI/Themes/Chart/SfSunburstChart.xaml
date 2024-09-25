@@ -1,7 +1,5 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
-                    xmlns:themelocal="clr-namespace:Syncfusion.Themes.FluentDark.WPF"
                     xmlns:sfskin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
                     xmlns:sunburstChart="clr-namespace:Syncfusion.UI.Xaml.SunburstChart;assembly=Syncfusion.SfSunburstChart.WPF">
 
@@ -48,7 +46,7 @@
             </Setter.Value>
         </Setter>
         <Setter Property="Palette"
-                Value="Custom"></Setter>
+                Value="Custom" />
         <Setter Property="ColorModel">
             <Setter.Value>
                 <sunburstChart:SunburstColorModel>
@@ -62,21 +60,21 @@
             </Setter.Value>
         </Setter>
         <Setter Property="Background"
-                Value="Transparent"></Setter>
+                Value="Transparent" />
         <Setter Property="BorderBrush"
-                Value="{StaticResource BorderAlt}"></Setter>
+                Value="{StaticResource BorderAlt}" />
         <Setter Property="BorderThickness"
-                Value="0"></Setter>
+                Value="0" />
         <Setter Property="FontFamily"
-                Value="{StaticResource FluentDark.ThemeFontFamily}"></Setter>
+                Value="{StaticResource FluentDark.ThemeFontFamily}" />
         <Setter Property="FontWeight"
-                Value="{StaticResource FluentDark.FontWeightNormal}"></Setter>
+                Value="{StaticResource FluentDark.FontWeightNormal}" />
         <Setter Property="FontSize"
-                Value="{StaticResource FluentDark.BodyTextStyle}"></Setter>
+                Value="{StaticResource FluentDark.BodyTextStyle}" />
         <Setter Property="Foreground"
-                Value="{StaticResource ContentForeground}"></Setter>
+                Value="{StaticResource ContentForeground}" />
         <Setter Property="Stroke"
-                Value="{StaticResource White}"></Setter>
+                Value="{StaticResource White}" />
     </Style>
 
     <Style x:Key="SyncfusionSunburstLegendStyle"
@@ -89,7 +87,7 @@
         <Setter Property="FontFamily"
                 Value="{StaticResource FluentDark.ThemeFontFamily}" />
         <Setter Property="Foreground"
-                Value="{StaticResource ContentForeground}"></Setter>
+                Value="{StaticResource ContentForeground}" />
         <Setter Property="Background"
                 Value="Transparent" />
         <Setter Property="ItemTemplate">

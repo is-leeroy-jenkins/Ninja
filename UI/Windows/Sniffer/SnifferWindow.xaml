@@ -135,7 +135,6 @@
         </Grid.ColumnDefinitions>
         <Grid
             Grid.Column="0"
-            Grid.ColumnSpan="1"
             Background="{StaticResource FormBackground}"
             UseLayoutRounding="True">
             <Grid.RowDefinitions>

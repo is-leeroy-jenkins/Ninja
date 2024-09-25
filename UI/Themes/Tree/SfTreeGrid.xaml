@@ -3,9 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:grid="clr-namespace:Syncfusion.UI.Xaml.Grid;assembly=Syncfusion.SfGrid.WPF"
     xmlns:skinManager="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:system="clr-namespace:System;assembly=mscorlib"
-    xmlns:themelocal="clr-namespace:Syncfusion.Themes.FluentDark.WPF"
     xmlns:treeGrid="clr-namespace:Syncfusion.UI.Xaml.TreeGrid;assembly=Syncfusion.SfGrid.WPF"
     xmlns:treeGridFiltering="clr-namespace:Syncfusion.UI.Xaml.TreeGrid.Filtering;assembly=Syncfusion.SfGrid.WPF">
     <ResourceDictionary.MergedDictionaries>
@@ -1508,8 +1506,6 @@
                         </Path>
                         <Path
                             x:Name="PART_ExpanderCellPath"
-                            Canvas.Left="15"
-                            Canvas.Top="0"
                             Width="9"
                             Height="5"
                             Fill="{TemplateBinding Foreground}"

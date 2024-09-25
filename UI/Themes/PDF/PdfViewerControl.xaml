@@ -5,8 +5,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pdfviewer="clr-namespace:Syncfusion.Windows.PdfViewer;assembly=Syncfusion.PdfViewer.WPF"
     xmlns:sfskin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:themelocal="clr-namespace:Syncfusion.Themes.FluentDark.WPF"
     mc:Ignorable="d">
 
     <ResourceDictionary.MergedDictionaries>
@@ -977,7 +975,6 @@
                                 Orientation="Horizontal">
                                 <Button
                                     Name="PART_ButtonPrevious"
-                                    Grid.Column="1"
                                     Width="24"
                                     Height="24"
                                     Margin="8,0,0,0"
@@ -995,7 +992,6 @@
                                 </Button>
                                 <Button
                                     Name="PART_ButtonNext"
-                                    Grid.Column="2"
                                     Width="24"
                                     Height="24"
                                     Margin="8,0,0,0"
@@ -1013,7 +1009,6 @@
                                 </Button>
                                 <Button
                                     Name="PART_ButtonClose"
-                                    Grid.Column="3"
                                     Width="24"
                                     Height="24"
                                     Margin="8,0,0,0"

@@ -153,7 +153,6 @@
                             <theme:LayoutTransformer
                                 x:Name="header"
                                 Grid.Row="0"
-                                Grid.RowSpan="1"
                                 Grid.Column="0"
                                 Height="{TemplateBinding Height}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"

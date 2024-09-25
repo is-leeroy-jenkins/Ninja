@@ -1,16 +1,17 @@
 // ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 09-08-2020
+//     Created:                 09-25-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        09-08-2024
+//     Last Modified On:        09-25-2024
 // ******************************************************************************************
 // <copyright file="RevealItem.cs" company="Terry D. Eppler">
-//    Badger is data analysis and reporting tool for EPA Analysts
-//    that is based on WPF, NET6.0, and written in C-Sharp.
 // 
-//     Copyright ©  2020, 2022, 2204 Terry D. Eppler
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -333,8 +334,8 @@ namespace Ninja
 
         /// <inheritdoc/>
         public static readonly new DependencyProperty IsMouseOverProperty =
-            DependencyProperty.Register( nameof( IsMouseOver ), typeof( bool ), typeof( RevealItem ),
-                new FrameworkPropertyMetadata( false ) );
+            DependencyProperty.Register( nameof( IsMouseOver ), typeof( bool ),
+                typeof( RevealItem ), new FrameworkPropertyMetadata( false ) );
 
         /// <summary>
         /// Identifies the <see cref="RevealItem.IsPressed" />
@@ -355,8 +356,8 @@ namespace Ninja
         /// The identifier for the <see cref="RevealItem.HoverBackgroundProperty" /> dependency property.
         /// </remarks>
         public static readonly DependencyProperty HoverBackgroundProperty =
-            DependencyProperty.Register( nameof( HoverBackground ), typeof( Brush ), typeof( RevealItem ),
-                new FrameworkPropertyMetadata( Brushes.Transparent ) );
+            DependencyProperty.Register( nameof( HoverBackground ), typeof( Brush ),
+                typeof( RevealItem ), new FrameworkPropertyMetadata( Brushes.Transparent ) );
 
         /// <summary>
         /// Identifies the <see cref="RevealItem.PressedBackground" />
@@ -366,8 +367,8 @@ namespace Ninja
         /// The identifier for the <see cref="RevealItem.PressedBackgroundProperty" /> dependency property.
         /// </remarks>
         public static readonly DependencyProperty PressedBackgroundProperty =
-            DependencyProperty.Register( nameof( PressedBackground ), typeof( Brush ), typeof( RevealItem ),
-                new FrameworkPropertyMetadata( Brushes.Transparent ) );
+            DependencyProperty.Register( nameof( PressedBackground ), typeof( Brush ),
+                typeof( RevealItem ), new FrameworkPropertyMetadata( Brushes.Transparent ) );
 
         /// <summary>
         /// Identifies the <see cref="RevealItem.HoverBorder" />
@@ -377,8 +378,8 @@ namespace Ninja
         /// The identifier for the <see cref="RevealItem.HoverBorderProperty" /> dependency property.
         /// </remarks>
         public static readonly DependencyProperty HoverBorderProperty =
-            DependencyProperty.Register( nameof( HoverBorder ), typeof( Brush ), typeof( RevealItem ),
-                new FrameworkPropertyMetadata( Brushes.Transparent ) );
+            DependencyProperty.Register( nameof( HoverBorder ), typeof( Brush ),
+                typeof( RevealItem ), new FrameworkPropertyMetadata( Brushes.Transparent ) );
 
         /// <summary>
         /// Identifies the <see cref="RevealItem.CornerRadius" />

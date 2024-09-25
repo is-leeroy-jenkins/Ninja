@@ -1,10 +1,10 @@
 ﻿// ******************************************************************************************
 //     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 09-23-2024
+//     Created:                 09-25-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        09-23-2024
+//     Last Modified On:        09-25-2024
 // ******************************************************************************************
 // <copyright file="PortWindow.xaml.cs" company="Terry D. Eppler">
 // 
@@ -86,7 +86,7 @@ namespace Ninja.Views
         {
             InitializeComponent( );
         }
-        
+
         /// <summary>
         /// Creates a notifier.
         /// </summary>
@@ -148,7 +148,7 @@ namespace Ninja.Views
             }
             catch( Exception ex )
             {
-                Fail( ex);
+                Fail( ex );
             }
         }
 

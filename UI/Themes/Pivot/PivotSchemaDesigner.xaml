@@ -3,9 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:schemaDesigner="clr-namespace:Syncfusion.Windows.Controls.PivotSchemaDesigner;assembly=Syncfusion.PivotAnalysis.WPF"
     xmlns:sfskin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
-    xmlns:syncfusion="clr-namespace:Syncfusion.Windows.Controls.PivotGrid;assembly=Syncfusion.PivotAnalysis.WPF"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:themelocal="clr-namespace:Syncfusion.Themes.FluentDark.WPF">
+    xmlns:syncfusion="clr-namespace:Syncfusion.Windows.Controls.PivotGrid;assembly=Syncfusion.PivotAnalysis.WPF">
 
     <ResourceDictionary.MergedDictionaries>
         <sfskin:ResourceDictionaryProvider

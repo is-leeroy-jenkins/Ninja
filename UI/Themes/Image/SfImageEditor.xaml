@@ -6,7 +6,6 @@
     xmlns:sfskin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
     xmlns:sharedWpf="clr-namespace:Syncfusion.Windows.Tools.Controls;assembly=Syncfusion.Shared.WPF"
     xmlns:system="clr-namespace:System;assembly=mscorlib"
-    xmlns:themelocal="clr-namespace:Syncfusion.Themes.FluentDark.WPF"
     xmlns:toolsWpf="clr-namespace:Syncfusion.Windows.Tools.Controls;assembly=Syncfusion.Tools.WPF">
 
     <ResourceDictionary.MergedDictionaries>
@@ -101,8 +100,6 @@
                                 Grid.Row="0"
                                 Width="Auto"
                                 Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ToolbarSettings.HeaderToolbarHeight}"
-                                Background="{StaticResource ContentBackgroundAlt1}"
-                                BorderBrush="{StaticResource BorderAlt}"
                                 BorderThickness="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ToolbarSettings.BorderThickness}"
                                 Style="{StaticResource ToolbarStyle}">
 
@@ -366,7 +363,6 @@
                                     HorizontalScrollBarVisibility="Auto"
                                     VerticalScrollBarVisibility="Hidden">
                                     <Grid
-                                        Grid.Row="2"
                                         HorizontalAlignment="Center">
 
                                         <StackPanel
@@ -815,8 +811,6 @@
                                 x:Name="PART_FooterToolbarPanel"
                                 Grid.Row="3"
                                 Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ToolbarSettings.FooterToolbarHeight}"
-                                Background="{StaticResource ContentBackgroundAlt1}"
-                                BorderBrush="{StaticResource BorderAlt}"
                                 BorderThickness="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ToolbarSettings.BorderThickness}"
                                 Style="{StaticResource ToolbarStyle}">
 

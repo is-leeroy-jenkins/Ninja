@@ -1,16 +1,17 @@
 ﻿// ******************************************************************************************
-//     Assembly:                Badger
+//     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 08-01-2024
+//     Created:                 09-25-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        08-01-2024
+//     Last Modified On:        09-25-2024
 // ******************************************************************************************
 // <copyright file="MetroButton.cs" company="Terry D. Eppler">
-//    Badger is data analysis and reporting tool for EPA Analysts
-//    based on WPF, NET6.0, and written in C-Sharp.
 // 
-//    Copyright ©  2024  Terry D. Eppler
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -32,7 +33,7 @@
 //    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //    DEALINGS IN THE SOFTWARE.
 // 
-//    You can contact me at: terryeppler@gmail.com or eppler.terry@epa.gov
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
 //   MetroButton.cs
@@ -73,7 +74,7 @@ namespace Ninja
             : base( )
         {
             // Control Properties
-            SetResourceReference( MetroButton.StyleProperty, typeof( ButtonAdv ) );
+            SetResourceReference( StyleProperty, typeof( ButtonAdv ) );
             Width = 140;
             Height = 50;
             IconHeight = 16;
@@ -106,9 +107,9 @@ namespace Ninja
                 BorderBrush = _theme.LightBlueBrush;
                 Foreground = _theme.WhiteForeground;
             }
-            catch(Exception ex)
+            catch( Exception ex )
             {
-                Fail(ex);
+                Fail( ex );
             }
         }
 
@@ -127,9 +128,9 @@ namespace Ninja
                 BorderBrush = _theme.ControlBackground;
                 Foreground = _theme.LightBlueBrush;
             }
-            catch(Exception ex)
+            catch( Exception ex )
             {
-                Fail(ex);
+                Fail( ex );
             }
         }
 

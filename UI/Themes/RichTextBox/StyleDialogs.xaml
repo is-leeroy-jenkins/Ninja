@@ -3,11 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Syncfusion="http://schemas.syncfusion.com/wpf"
     xmlns:resources="clr-namespace:Syncfusion.Windows.Controls.RichTextBoxAdv;assembly=Syncfusion.SfRichTextBoxAdv.WPF"
-    xmlns:richtextboxadv="clr-namespace:Syncfusion.Windows.Controls.RichTextBoxAdv;assembly=Syncfusion.SfRichTextBoxAdv.WPF"
-    xmlns:shared="clr-namespace:Syncfusion.Windows.Shared;assembly=Syncfusion.Shared.WPF"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:themelocal="clr-namespace:Syncfusion.Themes.FluentDark.WPF"
-    xmlns:tools_controls_shared="clr-namespace:Syncfusion.Windows.Tools.Controls;assembly=Syncfusion.shared.WPF">
+    xmlns:richtextboxadv="clr-namespace:Syncfusion.Windows.Controls.RichTextBoxAdv;assembly=Syncfusion.SfRichTextBoxAdv.WPF">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/SfRichTextBoxAdv/SfRichTextBoxCommon.xaml" />
@@ -766,9 +762,6 @@
                                 BorderBrush="{StaticResource BorderAlt}"
                                 BorderThickness="0,1,0,0">
                                 <Grid
-                                    Grid.Row="7"
-                                    Grid.Column="1"
-                                    Grid.ColumnSpan="3"
                                     Height="33">
                                     <StackPanel
                                         Height="26"
@@ -776,8 +769,6 @@
                                         Orientation="Horizontal">
                                         <Syncfusion:DropDownButtonAdv
                                             x:Name="PART_Format"
-                                            Grid.Row="7"
-                                            Grid.Column="1"
                                             Width="88"
                                             Height="24"
                                             Margin="10,-4,6,0"

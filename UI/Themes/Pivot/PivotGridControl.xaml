@@ -1,12 +1,10 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:bdgr="clr-namespace:Ninja"
     xmlns:sfskin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
     xmlns:shared="clr-namespace:Syncfusion.Windows.Shared;assembly=Syncfusion.Shared.WPF"
     xmlns:syncfusion="clr-namespace:Syncfusion.Windows.Controls.PivotGrid;assembly=Syncfusion.PivotAnalysis.Wpf"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:themelocal="clr-namespace:Syncfusion.Themes.FluentDark.WPF"
     xmlns:tools="clr-namespace:Syncfusion.Windows.Tools.Controls;assembly=Syncfusion.Shared.WPF">
 
     <ResourceDictionary.MergedDictionaries>
@@ -1291,7 +1289,6 @@
                                                 Margin="0,0,2,0"
                                                 Command="syncfusion:PivotGridCommands.SortPivotItem"
                                                 CommandParameter="Ascending"
-                                                Foreground="{StaticResource FormForeground}"
                                                 Header="{syncfusion:PivotAnalysisLocalizationResourceExtension ResourceName=Filter_ContextMenu_SortAscending}"
                                                 IsCheckable="False"
                                                 Style="{StaticResource ExcelLikePopupMenuItemStyle}"
@@ -1345,7 +1342,6 @@
                                                 Margin="0,0,2,0"
                                                 Command="syncfusion:PivotGridCommands.SortPivotItem"
                                                 CommandParameter="Descending"
-                                                Foreground="{StaticResource FormForeground}"
                                                 Header="{syncfusion:PivotAnalysisLocalizationResourceExtension ResourceName=Filter_ContextMenu_SortDescending}"
                                                 IsCheckable="False"
                                                 Style="{StaticResource ExcelLikePopupMenuItemStyle}"
@@ -1399,7 +1395,6 @@
                                                 Height="28"
                                                 Margin="0,0,2,0"
                                                 HorizontalContentAlignment="Center"
-                                                Foreground="{StaticResource FormForeground}"
                                                 Header="{syncfusion:PivotAnalysisLocalizationResourceExtension ResourceName=Filter_ContextMenu_MoreSortOptions}"
                                                 IsCheckable="False"
                                                 Style="{StaticResource ExcelLikePopupMenuItemStyle}"
@@ -1453,7 +1448,6 @@
                                                 Width="196"
                                                 Height="28"
                                                 Margin="0,0,2,0"
-                                                Foreground="{StaticResource FormForeground}"
                                                 Header="{syncfusion:PivotAnalysisLocalizationResourceExtension ResourceName=Filter_ContextMenu_LabelFilters}"
                                                 Style="{StaticResource ExcelLikePopupMenuItemStyle}"
                                                 TabIndex="4">
@@ -1589,7 +1583,6 @@
                                                 Width="196"
                                                 Height="28"
                                                 Margin="0,0,2,0"
-                                                Foreground="{StaticResource FormForeground}"
                                                 Header="{syncfusion:PivotAnalysisLocalizationResourceExtension ResourceName=Filter_ContextMenu_ValueFilters}"
                                                 Style="{StaticResource ExcelLikePopupMenuItemStyle}"
                                                 TabIndex="5">

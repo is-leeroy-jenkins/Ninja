@@ -25,9 +25,12 @@
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="BorderBrush" Value="#0078D4" />
             <Setter Property="Background" Value="#FF000000" />
-            <Setter Property="Foreground" Value="#FFA0BDFC"/>
+            <Setter Property="Foreground" Value="#FFA0BDFC" />
         </Style>
     </Window.Resources>
+
+    <!--  ******************************************** Layout *********************************************  -->
+
 
     <Canvas>
         <Image

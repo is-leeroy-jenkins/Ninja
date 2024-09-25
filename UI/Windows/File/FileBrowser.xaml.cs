@@ -1,16 +1,17 @@
 ﻿// ******************************************************************************************
 //     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 08-01-2024
+//     Created:                 09-25-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        08-01-2024
+//     Last Modified On:        09-25-2024
 // ******************************************************************************************
 // <copyright file="FileBrowser.xaml.cs" company="Terry D. Eppler">
-//    Ninja is data analysis and reporting tool for EPA Analysts
-//    based on WPF, NET6.0, and written in C-Sharp.
 // 
-//    Copyright ©  2024  Terry D. Eppler
+//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
+//    sniffer, pcap, port scan, listen, ip scan .etc.
+// 
+//    Copyright ©  2019-2024 Terry D. Eppler
 // 
 //    Permission is hereby granted, free of charge, to any person obtaining a copy
 //    of this software and associated documentation files (the “Software”),
@@ -32,7 +33,7 @@
 //    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //    DEALINGS IN THE SOFTWARE.
 // 
-//    You can contact me at: terryeppler@gmail.com or eppler.terry@epa.gov
+//    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
 //   FileBrowser.xaml.cs
@@ -590,13 +591,11 @@ namespace Ninja
                     var _dirPath = _initialPaths[ _i ];
                     var _parent = Directory.CreateDirectory( _dirPath );
                     var _folders = _parent.GetDirectories( )
-                        ?.Where( s => s.Name.Contains( "My" ) == false )
-                        ?.Select( s => s.FullName )
+                        ?.Where( s => s.Name.Contains( "My" ) == false )?.Select( s => s.FullName )
                         ?.ToList( );
 
                     var _topLevelFiles = _parent.GetFiles( _pattern, SearchOption.TopDirectoryOnly )
-                        ?.Select( f => f.FullName )
-                        ?.ToArray( );
+                        ?.Select( f => f.FullName )?.ToArray( );
 
                     _filePaths.AddRange( _topLevelFiles );
                     for( var _k = 0; _k < _folders.Count; _k++ )
@@ -604,8 +603,7 @@ namespace Ninja
                         var _folder = Directory.CreateDirectory( _folders[ _k ] );
                         var _lowerLevelFiles = _folder
                             .GetFiles( _pattern, SearchOption.AllDirectories )
-                            ?.Select( s => s.FullName )
-                            ?.ToArray( );
+                            ?.Select( s => s.FullName )?.ToArray( );
 
                         _filePaths.AddRange( _lowerLevelFiles );
                     }
@@ -636,12 +634,10 @@ namespace Ninja
                     var _parent = Directory.CreateDirectory( _dirPath );
                     var _folders = _parent.GetDirectories( )
                         ?.Where( s => s.Name.StartsWith( "My" ) == false )
-                        ?.Select( s => s.FullName )
-                        ?.ToList( );
+                        ?.Select( s => s.FullName )?.ToList( );
 
                     var _topLevelFiles = _parent.GetFiles( _pattern, SearchOption.TopDirectoryOnly )
-                        ?.Select( f => f.FullName )
-                        ?.ToArray( );
+                        ?.Select( f => f.FullName )?.ToArray( );
 
                     _list.AddRange( _topLevelFiles );
                     for( var _k = 0; _k < _folders.Count; _k++ )
@@ -649,8 +645,7 @@ namespace Ninja
                         var _folder = Directory.CreateDirectory( _folders[ _k ] );
                         var _lowerLevelFiles = _folder
                             .GetFiles( _pattern, SearchOption.AllDirectories )
-                            ?.Select( s => s.FullName )
-                            ?.ToArray( );
+                            ?.Select( s => s.FullName )?.ToArray( );
 
                         _list.AddRange( _lowerLevelFiles );
                     }
