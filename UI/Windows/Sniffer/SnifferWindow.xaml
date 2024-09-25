@@ -14,7 +14,7 @@
     <!--******************************************** Resources ******************************************-->
 
     <UserControl.Resources>
-        <vm:BytesSuffixConverter x:Key="aBytesSuffixConverter" />
+        <vm:BytesSuffixConverter x:Key="BytesSuffixConverter" />
         <Style TargetType="ToolTip">
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="BorderBrush" Value="{StaticResource BlueBorderBrush}" />
@@ -26,7 +26,7 @@
     <!--  ******************************************** Context Menu ******************************************-->
 
     <UserControl.ContextMenu>
-        <ContextMenu Name="DataWindowContextMenu">
+        <ContextMenu Name="SnifferContextMenu">
             <sync:MenuItemAdv
                 Click="OnFileMenuOptionClick"
                 Header="File"
@@ -165,7 +165,7 @@
                     DataContext="{Binding SnifferViews[0]}"
                     Header="Capture Control"
                     Style="{StaticResource AccentGroupBox}">
-                    <Grid Background="{StaticResource FormBackground}">
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -179,7 +179,7 @@
                         </Grid.RowDefinitions>
 
 
-                        <ComboBox
+                        <n:MetroComboBox
                             Grid.Row="0"
                             Width="Auto"
                             HorizontalAlignment="Stretch"
@@ -240,7 +240,7 @@
                             Command="{Binding FilterHelpCommand}"
                             Content="Go" />
 
-                        <TextBox
+                        <n:TextBoxEx
                             Grid.Row="1"
                             Width="Auto"
                             Height="30"
@@ -249,9 +249,9 @@
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Center"
                             Text="{Binding PacketFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            ToolTip="Packet filter expression">
-                            <TextBox.Style>
-                                <Style TargetType="{x:Type TextBox}">
+                            ToolTip="Packet Filter Expression">
+                            <n:TextBoxEx.Style>
+                                <Style TargetType="{x:Type n:TextBoxEx}">
                                     <Setter Property="IsEnabled" Value="True" />
                                     <!--<Style.Triggers>
                                         <DataTrigger Binding="{Binding IsBusy}" Value="True">
@@ -259,8 +259,8 @@
                                         </DataTrigger>
                                     </Style.Triggers>-->
                                 </Style>
-                            </TextBox.Style>
-                        </TextBox>
+                            </n:TextBoxEx.Style>
+                        </n:TextBoxEx>
                     </Grid>
                 </GroupBox>
             </StackPanel>
@@ -295,7 +295,7 @@
                                 <TextBlock Text="Total Bytes: " />
                                 <TextBlock
                                     HorizontalAlignment="Left"
-                                    Text="{Binding ByteCount, Converter={StaticResource aBytesSuffixConverter}}" />
+                                    Text="{Binding ByteCount, Converter={StaticResource BytesSuffixConverter}}" />
                             </StackPanel>
                             <TextBlock Text="{Binding CaptureTime, StringFormat=Total Time: {0}}" />
                         </TreeViewItem>

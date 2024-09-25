@@ -8,12 +8,15 @@
     xmlns:syncfusion="clr-namespace:Syncfusion.Windows.Tools.Controls;assembly=Syncfusion.Tools.WPF">
 
     <ResourceDictionary.MergedDictionaries>
+
         <sfskin:ResourceDictionaryProvider
             DictionaryName="Common"
             ThemeName="FluentDark" />
+
         <sfskin:ResourceDictionaryProvider
             DictionaryName="Brushes"
             ThemeName="FluentDark" />
+
         <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/MSControl/CheckBox.xaml" />
         <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/MSControl/StatusBar.xaml" />
         <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/MSControl/ComboBox.xaml" />
@@ -23,6 +26,7 @@
         <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/MSControl/GlyphToggleButton.xaml" />
         <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/MSControl/FlatPrimaryButton.xaml" />
         <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/Ribbon/Ribbon.xaml" />
+
     </ResourceDictionary.MergedDictionaries>
 
     <BooleanToVisibilityConverter x:Key="VisibilityConverter" />

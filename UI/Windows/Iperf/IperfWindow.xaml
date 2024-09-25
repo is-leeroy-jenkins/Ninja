@@ -139,7 +139,8 @@
         <Grid
             Grid.Column="0"
             Background="{StaticResource FormBackground}"
-            UseLayoutRounding="True">
+            UseLayoutRounding="True"
+            Grid.ColumnSpan="1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -151,6 +152,7 @@
                 <RowDefinition Height="Auto" />
 
             </Grid.RowDefinitions>
+
             <TextBlock
                 Grid.Row="0"
                 Margin="10,10,0,0"
@@ -160,6 +162,7 @@
                 FontSize="24"
                 FontWeight="Bold"
                 Text="Iperf" />
+
             <Separator
                 Grid.Row="0"
                 Margin="10,50,10,0"
@@ -193,58 +196,55 @@
 
                         <TextBlock
                             Grid.Row="1"
-                            Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Version" />
+
                         <n:MetroComboBox
                             Grid.Row="1"
                             Width="130"
                             Margin="0,15,10,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
-                            Background="{StaticResource ControlInterior}"
-                            Foreground="{StaticResource WhiteForeground}"
-                            BorderBrush="{StaticResource BlueBorderBrush}"
                             SelectedItem="{Binding IperfModel.Version}"
                             Text="{Binding IperfModel.Version, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <n:MetroComboBoxItem>iperf.exe</n:MetroComboBoxItem>
                             <n:MetroComboBoxItem>iperf3.exe</n:MetroComboBoxItem>
                         </n:MetroComboBox>
+
                         <TextBlock
                             Grid.Row="2"
-                            Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Role" />
+
                         <n:MetroComboBox
                             Grid.Row="2"
                             Width="130"
                             Margin="0,5,10,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
-                            Background="{StaticResource ControlInterior}"
-                            Foreground="{StaticResource WhiteForeground}"
-                            BorderBrush="{StaticResource BlueBorderBrush}"
                             SelectedItem="{Binding IperfModel.Role}"
                             Text="{Binding IperfModel.Role, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <n:MetroComboBoxItem>-s</n:MetroComboBoxItem>
                             <n:MetroComboBoxItem>-c</n:MetroComboBoxItem>
                         </n:MetroComboBox>
+
                         <TextBlock
                             Grid.Row="3"
-                            Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Server IP" />
-                        <n:TextBoxEx
+
+                        <TextBox
                             Grid.Row="3"
                             Width="130"
                             Margin="0,5,10,0"
                             HorizontalAlignment="Right"
                             Text="{Binding IperfModel.ServerIp}" />
+
                         <TextBlock
                             Grid.Row="4"
-                            Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Port" />
+
                         <n:TextBoxEx
                             Grid.Row="4"
                             Cursor="Hand"
@@ -252,42 +252,32 @@
 
                         <TextBlock
                             Grid.Row="5"
-                            Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Parallel" />
+
                         <n:TextBoxEx
                             Grid.Row="5"
-                            Minimum="1"
-                            Background="{StaticResource ControlInterior}"
-                            Foreground="{StaticResource WhiteForeground}"
-                            BorderBrush="{StaticResource BlueBorderBrush}"
-                            BorderThickness="1"
+                            Cursor="Hand"
                             Text="{Binding IperfModel.Parallel}" />
 
                         <TextBlock
                             Grid.Row="6"
-                            Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Time(s)" />
+
                         <n:TextBoxEx
                             Grid.Row="6"
-                            Background="{StaticResource ControlInterior}"
-                            Foreground="{StaticResource WhiteForeground}"
-                            BorderBrush="{StaticResource BlueBorderBrush}"
-                            BorderThickness="1"
+                            Cursor="Hand"
                             Text="{Binding IperfModel.Time}" />
 
                         <TextBlock
                             Grid.Row="7"
-                            Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Interval(s)" />
+
                         <n:TextBoxEx
                             Grid.Row="7"
-                            Background="{StaticResource ControlInterior}"
-                            Foreground="{StaticResource WhiteForeground}"
-                            BorderBrush="{StaticResource BlueBorderBrush}"
-                            BorderThickness="1"
+                            Cursor="Hand"
                             Text="{Binding IperfModel.Interval}" />
 
                         <RadioButton
@@ -297,23 +287,19 @@
                             Foreground="{StaticResource WhiteForeground}"
                             IsChecked="{Binding IperfModel.TcpFlag}"
                             Style="{StaticResource MenuItemRadioButton}" />
+
                         <n:TextBoxEx
                             Grid.Row="8"
-                            Width="45"
-                            Margin="0,5,65,0"
-                            Background="{StaticResource ControlInterior}"
-                            Foreground="{StaticResource WhiteForeground}"
-                            BorderBrush="{StaticResource BlueBorderBrush}"
-                            BorderThickness="1"
+                            Cursor="Hand"
                             Text="{Binding IperfModel.TcpWindowSize}" />
+
                         <n:MetroComboBox
                             Grid.Row="8"
                             Width="55"
-                            Margin="0,5,10,0"
+                            Margin="0,5,5,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             HorizontalContentAlignment="Left"
-                            FontSize="10"
                             SelectedItem="{Binding IperfModel.TcpWindowUnit}"
                             Text="{Binding IperfModel.TcpWindowUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <n:MetroComboBoxItem>M</n:MetroComboBoxItem>
@@ -332,22 +318,15 @@
 
                         <n:TextBoxEx
                             Grid.Row="9"
-                            Width="45"
-                            Margin="0,5,65,0"
                             Cursor="Hand"
-                            Background="{StaticResource ControlInterior}"
-                            Foreground="{StaticResource WhiteForeground}"
-                            BorderBrush="{StaticResource BlueBorderBrush}"
-                            BorderThickness="1"
                             Text="{Binding IperfModel.BandWidth}" />
 
                         <n:MetroComboBox
                             Grid.Row="9"
                             Width="55"
-                            Margin="0,5,10,0"
+                            Margin="0,5,5,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
-                            FontSize="10"
                             SelectedItem="{Binding IperfModel.BandWidthUnit}"
                             Text="{Binding IperfModel.BandWidthUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <n:MetroComboBoxItem>M</n:MetroComboBoxItem>
@@ -355,24 +334,25 @@
                             <n:MetroComboBoxItem>K</n:MetroComboBoxItem>
                             <n:MetroComboBoxItem>k</n:MetroComboBoxItem>
                         </n:MetroComboBox>
+
                         <TextBlock
                             Grid.Row="10"
                             Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Packet Length" />
+
                         <n:TextBoxEx
                             Grid.Row="10"
-                            Background="{StaticResource ControlInterior}"
-                            Foreground="{StaticResource WhiteForeground}"
-                            BorderBrush="{StaticResource BlueBorderBrush}"
                             BorderThickness="1"
                             Text="{Binding IperfModel.PacketLen}" />
+
                         <CheckBox
                             Grid.Row="11"
                             Margin="10,10,0,10"
                             Content="Reverse Transmit"
                             IsChecked="{Binding IperfModel.Reverse}"
                             Style="{StaticResource MenuItemCheckBox}" />
+
 
                     </Grid>
                 </GroupBox>
@@ -384,6 +364,7 @@
             Background="{StaticResource FormBackground}"
             ClipToBounds="True"
             SnapsToDevicePixels="True">
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />
                 <RowDefinition Height="1*" />
@@ -404,9 +385,6 @@
                     Height="30"
                     Margin="10,0,0,0"
                     HorizontalAlignment="Stretch"
-                    Background="{StaticResource ControlInterior}"
-                    Foreground="{StaticResource WhiteForeground}"
-                    BorderBrush="{StaticResource BlueBorderBrush}"
                     Style="{DynamicResource Input-Group-Addon Left}"
                     Tag="{Binding IperfModel.Version}">
                     <TextBox.Text>
@@ -432,32 +410,23 @@
                     </TextBox.Text>
                 </TextBox>
 
-                <Button
+                <n:ButtonEx
                     Grid.Column="1"
                     Margin="10,0,0,0"
                     Command="{Binding RunIperfCommand}"
-                    Background="{StaticResource ControlInterior}"
-                    Foreground="{StaticResource WhiteForeground}"
-                    BorderBrush="{StaticResource BlueBorderBrush}"
                     BorderThickness="1"
                     CommandParameter="{Binding ElementName=IperfCommand, Path=Text}"
                     Content="Run" />
-                <Button
+                <n:ButtonEx
                     Grid.Column="1"
                     Margin="45,0,0,0"
-                    Background="{StaticResource ControlInterior}"
-                    Foreground="{StaticResource WhiteForeground}"
-                    BorderBrush="{StaticResource BlueBorderBrush}"
                     BorderThickness="1"
                     Command="{Binding StopIperfCommand}"
                     Content="Stop" />
-                <Button
+                <n:ButtonEx
                     Grid.Column="1"
                     Margin="80,0,0,0"
-                Background="{StaticResource ControlInterior}"
-                Foreground="{StaticResource WhiteForeground}"
-                BorderBrush="{StaticResource BlueBorderBrush}"
-                BorderThickness="1"
+                    BorderThickness="1"
                     Command="{Binding IperfHelpCommand}"
                     Content="Help" />
 

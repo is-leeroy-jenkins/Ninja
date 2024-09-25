@@ -18,7 +18,7 @@
     WindowStyle="SingleBorderWindow"
     mc:Ignorable="d">
 
-    <!--  ******************************************** Resources *********************************************  -->
+    <!--******************************************** Resources *********************************************-->
 
     <Window.Resources>
         <Style TargetType="ToolTip">
@@ -29,10 +29,10 @@
         </Style>
     </Window.Resources>
 
-    <!--  ******************************************** Context Menu ******************************************  -->
+    <!--******************************************** Context Menu ******************************************-->
 
     <Window.ContextMenu>
-        <ContextMenu Name="DataWindowContextMenu">
+        <ContextMenu Name="MainContextMenu">
             <sync:MenuItemAdv
                 Click="OnFileMenuOptionClick"
                 Header="File"
@@ -131,13 +131,9 @@
         </ContextMenu>
     </Window.ContextMenu>
 
-    <!--  ******************************************** Layout  *********************************************  -->
+    <!--******************************************** Layout  *********************************************-->
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="103*" />
-            <ColumnDefinition Width="57*" />
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -147,10 +143,7 @@
         <!--  Menu  -->
         <Grid
             Grid.Row="0"
-            Grid.RowSpan="2"
-            Grid.ColumnSpan="2"
-            Margin="0,0,0,412"
-            Background="{StaticResource ControlBackground}">
+            Background="{StaticResource FormBackground}">
 
             <Menu
                 x:Name="ItemMenu"
@@ -189,20 +182,19 @@
                     <MenuItem
                         Command="{Binding RunMenuCommand}"
                         CommandParameter="About"
-                        Header="About MetaNet" />
+                        Header="About Ninja" />
                 </MenuItem>
             </Menu>
         </Grid>
-        <Grid
-            Grid.Row="1"
-            Grid.ColumnSpan="2">
+        <Grid 
+            Grid.Row="1" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="180" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid
                 Grid.Column="0"
-                Background="{StaticResource FormBackground}">
+                Background="{StaticResource ControlBackground}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
                     <RowDefinition Height="*" />
@@ -211,7 +203,7 @@
                     Grid.Row="0"
                     Margin="10,10,10,5">
 
-                    <n:MetroTextBox
+                    <TextBox
                         x:Name="SearchBox"
                         Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" />
 
@@ -243,7 +235,7 @@
             </Grid>
             <Grid
                 Grid.Column="1"
-                Background="{StaticResource ControlBackground}">
+                Background="Transparent">
                 <ContentControl
                     x:Name="Pages"
                     Content="{Binding SelectedViewModel}" />

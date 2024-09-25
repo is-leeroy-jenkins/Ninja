@@ -132,7 +132,6 @@
         TargetType="{x:Type TextBox}">
 
         <Setter Property="Template">
-
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
                     <Border
@@ -163,8 +162,24 @@
         <Setter Property="Padding" Value="8,7,0,0" />
         <Setter Property="CaretBrush" Value="{StaticResource WhiteForeground}" />
 
-    </Style>
+        <Style.Triggers>
 
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource ControlHoverBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource LightBlueBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
+            </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource BlueBorderBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource LightBlueBrush}" />
+            </Trigger>
+
+
+        </Style.Triggers>
+
+    </Style>
 
     <Style
         x:Key="SearchTextStyle"
@@ -189,11 +204,9 @@
     <Style
         x:Key="MenuButtonStyle"
         TargetType="RadioButton">
-
         <Setter Property="Width" Value="180" />
         <Setter Property="Height" Value="30" />
         <Setter Property="Margin" Value="0,3,0,0" />
-
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
@@ -201,6 +214,7 @@
                     <Grid Margin="0,0,0,0">
 
                         <Grid.ColumnDefinitions>
+
                             <ColumnDefinition Width="180" />
 
                         </Grid.ColumnDefinitions>

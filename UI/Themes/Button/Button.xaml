@@ -225,8 +225,9 @@
         x:Key="Button-Warning"
         BasedOn="{StaticResource ButtonBaseStyle}"
         TargetType="{x:Type Button}">
-        <Setter Property="Background" Value="{DynamicResource Background-Warning1}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush-Warning1}" />
+        <Setter Property="Background" Value="{StaticResource ControlInterior}" />
+        <Setter Property="BorderBrush" Value="{StaticResource MutedForeground}" />
+        <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{StaticResource SteelBlueBackground}" />
@@ -251,44 +252,51 @@
         </Style.Triggers>
     </Style>
 
-    <!--  ***********************************************  ToggleButton  *************************************************  -->
+    <!--***********************************************  ToggleButton  *************************************************-->
 
     <Style
         BasedOn="{StaticResource ToggleButtonBaseStyle}"
         TargetType="{x:Type ToggleButton}">
-        <Setter Property="Background" Value="{DynamicResource Background-Default1}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush-Default1}" />
-        <Setter Property="Foreground" Value="{DynamicResource Foreground-Default}" />
+        <Setter Property="Background" Value="{StaticResource ControlInterior}" />
+        <Setter Property="BorderBrush" Value="{StaticResource MutedForeground}" />
+        <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#e6e6e6" />
-                <Setter Property="BorderBrush" Value="#adadad" />
+                <Setter Property="Background" Value="{StaticResource SteelBlueBackground}" />
+                <Setter Property="BorderBrush" Value="{StaticResource LightBlueBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource WhiteForeground}" />
             </Trigger>
         </Style.Triggers>
     </Style>
+
     <Style
         x:Key="Toggle-Button-Primary"
         BasedOn="{StaticResource ToggleButtonBaseStyle}"
         TargetType="{x:Type ToggleButton}">
-        <Setter Property="Background" Value="{DynamicResource Background-Primary1}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush-Primary1}" />
+        <Setter Property="Background" Value="{StaticResource ControlInterior}" />
+        <Setter Property="BorderBrush" Value="{StaticResource MutedForeground}" />
+        <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#3071a9" />
-                <Setter Property="BorderBrush" Value="#285e8e" />
+                <Setter Property="Background" Value="{StaticResource SteelBlueBackground}" />
+                <Setter Property="BorderBrush" Value="{StaticResource LightBlueBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource WhiteForeground}" />
             </Trigger>
         </Style.Triggers>
     </Style>
+
     <Style
         x:Key="Toggle-Button-Success"
         BasedOn="{StaticResource ToggleButtonBaseStyle}"
         TargetType="{x:Type ToggleButton}">
-        <Setter Property="Background" Value="{DynamicResource Background-Success1}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush-Success1}" />
+        <Setter Property="Background" Value="{StaticResource ControlInterior}" />
+        <Setter Property="BorderBrush" Value="{StaticResource MutedForeground}" />
+        <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#449d44" />
-                <Setter Property="BorderBrush" Value="#398439" />
+                <Setter Property="Background" Value="{StaticResource SteelBlueBackground}" />
+                <Setter Property="BorderBrush" Value="{StaticResource LightBlueBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource WhiteForeground}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -300,35 +308,60 @@
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush-Info1}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#31b0d5" />
-                <Setter Property="BorderBrush" Value="#269abc" />
+                <Setter Property="Background" Value="{StaticResource SteelBlueBackground}" />
+                <Setter Property="BorderBrush" Value="{StaticResource LightBlueBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource WhiteForeground}" />
             </Trigger>
         </Style.Triggers>
     </Style>
+
+
     <Style
         x:Key="Toggle-Button-Warning"
         BasedOn="{StaticResource ToggleButtonBaseStyle}"
         TargetType="{x:Type ToggleButton}">
-        <Setter Property="Background" Value="{DynamicResource Background-Warning1}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush-Warning1}" />
+        <Setter Property="Background" Value="{StaticResource ControlInterior}" />
+        <Setter Property="BorderBrush" Value="{StaticResource MutedForeground}" />
+        <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
         <Style.Triggers>
+
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#ec971f" />
-                <Setter Property="BorderBrush" Value="#d58512" />
+                <Setter Property="Background" Value="{StaticResource SteelBlueBackground}" />
+                <Setter Property="BorderBrush" Value="{StaticResource LightBlueBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource WhiteForeground}" />
             </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="{StaticResource ControlInterior}" />
+                <Setter Property="BorderBrush" Value="{StaticResource MutedForeground}" />
+                <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
+            </Trigger>
+
         </Style.Triggers>
     </Style>
+
+
     <Style
         x:Key="Toggle-Button-Danger"
         BasedOn="{StaticResource ToggleButtonBaseStyle}"
         TargetType="{x:Type ToggleButton}">
-        <Setter Property="Background" Value="{DynamicResource Background-Danger1}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush-Danger1}" />
+        <Setter Property="Background" Value="{StaticResource ControlInterior}" />
+        <Setter Property="BorderBrush" Value="{StaticResource MutedForeground}" />
+        <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
         <Style.Triggers>
+
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#c9302c" />
-                <Setter Property="BorderBrush" Value="#ac2925" />
+                <Setter Property="Background" Value="{StaticResource SteelBlueBackground}" />
+                <Setter Property="BorderBrush" Value="{StaticResource LightBlueBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource WhiteForeground}" />
             </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="{StaticResource ControlInterior}" />
+                <Setter Property="BorderBrush" Value="{StaticResource MutedForeground}" />
+                <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
+            </Trigger>
+
         </Style.Triggers>
     </Style>
 

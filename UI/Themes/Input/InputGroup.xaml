@@ -461,8 +461,8 @@
         BasedOn="{StaticResource LabelBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="{DynamicResource BlueBorderBrush}" />
-        <Setter Property="Foreground" Value="{DynamicResource FormForeground}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource LightBlueBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
@@ -530,7 +530,7 @@
         TargetType="{x:Type Control}">
         <Setter Property="Height" Value="{DynamicResource DefaultControlHeight}" />
         <Setter Property="Padding" Value="{DynamicResource DefaultControlPadding}" />
-        <Setter Property="Background" Value="{DynamicResource FormBackground}" />
+        <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BlueBorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource FormForeground}" />
         <Setter Property="BorderThickness" Value="1" />
@@ -538,7 +538,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="#000" />
+                <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
                 <Setter Property="Cursor" Value="No" />
             </Trigger>
         </Style.Triggers>
@@ -596,7 +596,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="BorderBrush" Value="#66afe9" />
+                            <Setter Property="BorderBrush" Value="{StaticResource LightBlueBrush}" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
@@ -664,7 +664,7 @@
                                     BlurRadius="8"
                                     Opacity="0"
                                     ShadowDepth="0"
-                                    Color="#9966afe9" />
+                                    Color="{StaticResource LightBlueColor}" />
                             </Border.Effect>
                             <Rectangle
                                 Height="0"
@@ -686,7 +686,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="BorderBrush" Value="#66afe9" />
+                            <Setter Property="BorderBrush" Value="{StaticResource LightBlueBrush}" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>

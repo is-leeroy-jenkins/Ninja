@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:Ninja.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sync="http://schemas.syncfusion.com/wpf"
+    xmlns:n="clr-namespace:Ninja"
     d:DesignHeight="800"
     mc:Ignorable="d">
 
@@ -23,7 +24,7 @@
     <!--  ******************************************** Context Menu ******************************************-->
 
     <UserControl.ContextMenu>
-        <ContextMenu Name="DataWindowContextMenu">
+        <ContextMenu Name="ServerContextMenu">
             <sync:MenuItemAdv
                 Click="OnFileMenuOptionClick"
                 Header="File"
@@ -167,7 +168,7 @@
                 <GroupBox
                     Header="Network Interfaces"
                     Style="{StaticResource AccentGroupBox}">
-                    <Grid Background="{StaticResource FormBackground}">
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -176,7 +177,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <ComboBox
+                        <n:MetroComboBox
                             x:Name="NetInfoCombox"
                             Grid.Row="0"
                             Width="Auto"
