@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <FontFamily x:Key="DefaultFontFamily">Roboto</FontFamily>
+    <FontFamily x:Key="DefaultFontFamily">Roboto-Regular</FontFamily>
 
     <sys:Double x:Key="LargeFontSize">16</sys:Double>
     <sys:Double x:Key="TitleFontSize">14</sys:Double>

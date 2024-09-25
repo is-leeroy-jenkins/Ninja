@@ -254,8 +254,6 @@
                         <Trigger Property="IsChecked" Value="True">
 
                             <Setter TargetName="border" Property="Background" Value="{StaticResource SteelBlueBackground}" />
-
-
                             <Setter TargetName="Highlighter" Property="Visibility" Value="Visible" />
 
                         </Trigger>

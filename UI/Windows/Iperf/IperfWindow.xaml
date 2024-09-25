@@ -15,13 +15,16 @@
     <!--******************************************** Resources ******************************************-->
 
     <UserControl.Resources>
+
         <cov:IperfCommandConverter x:Key="IperfCommandConverter" />
+
         <Style TargetType="ToolTip">
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="BorderBrush" Value="{StaticResource BlueBorderBrush}" />
             <Setter Property="Background" Value="{StaticResource BlackBackground}" />
             <Setter Property="Foreground" Value="{StaticResource LightBlueBrush}" />
         </Style>
+
     </UserControl.Resources>
 
     <!--  ******************************************** Context Menu ******************************************-->
@@ -170,7 +173,7 @@
                 <GroupBox
                     Header="Iperf Config"
                     Style="{StaticResource AccentGroupBox}">
-                    <Grid Background="{StaticResource FormBackground}">
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -193,7 +196,7 @@
                             Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Version" />
-                        <ComboBox
+                        <n:MetroComboBox
                             Grid.Row="1"
                             Width="130"
                             Margin="0,15,10,0"
@@ -204,15 +207,15 @@
                             BorderBrush="{StaticResource BlueBorderBrush}"
                             SelectedItem="{Binding IperfModel.Version}"
                             Text="{Binding IperfModel.Version, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem>iperf.exe</ComboBoxItem>
-                            <ComboBoxItem>iperf3.exe</ComboBoxItem>
-                        </ComboBox>
+                            <n:MetroComboBoxItem>iperf.exe</n:MetroComboBoxItem>
+                            <n:MetroComboBoxItem>iperf3.exe</n:MetroComboBoxItem>
+                        </n:MetroComboBox>
                         <TextBlock
                             Grid.Row="2"
                             Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Role" />
-                        <ComboBox
+                        <n:MetroComboBox
                             Grid.Row="2"
                             Width="130"
                             Margin="0,5,10,0"
@@ -223,9 +226,9 @@
                             BorderBrush="{StaticResource BlueBorderBrush}"
                             SelectedItem="{Binding IperfModel.Role}"
                             Text="{Binding IperfModel.Role, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem>-s</ComboBoxItem>
-                            <ComboBoxItem>-c</ComboBoxItem>
-                        </ComboBox>
+                            <n:MetroComboBoxItem>-s</n:MetroComboBoxItem>
+                            <n:MetroComboBoxItem>-c</n:MetroComboBoxItem>
+                        </n:MetroComboBox>
                         <TextBlock
                             Grid.Row="3"
                             Foreground="{StaticResource WhiteForeground}"
@@ -303,7 +306,7 @@
                             BorderBrush="{StaticResource BlueBorderBrush}"
                             BorderThickness="1"
                             Text="{Binding IperfModel.TcpWindowSize}" />
-                        <ComboBox
+                        <n:MetroComboBox
                             Grid.Row="8"
                             Width="55"
                             Margin="0,5,10,0"
@@ -313,11 +316,11 @@
                             FontSize="10"
                             SelectedItem="{Binding IperfModel.TcpWindowUnit}"
                             Text="{Binding IperfModel.TcpWindowUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem>M</ComboBoxItem>
-                            <ComboBoxItem>m</ComboBoxItem>
-                            <ComboBoxItem>K</ComboBoxItem>
-                            <ComboBoxItem>k</ComboBoxItem>
-                        </ComboBox>
+                            <n:MetroComboBoxItem>M</n:MetroComboBoxItem>
+                            <n:MetroComboBoxItem>m</n:MetroComboBoxItem>
+                            <n:MetroComboBoxItem>K</n:MetroComboBoxItem>
+                            <n:MetroComboBoxItem>k</n:MetroComboBoxItem>
+                        </n:MetroComboBox>
 
                         <RadioButton
                             Grid.Row="9"

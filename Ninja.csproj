@@ -260,6 +260,18 @@
     <Resource Include="Resources\Assets\MenuImages\RefreshItem.png" />
     <Resource Include="Resources\Assets\MenuImages\SaveItem.png" />
     <Resource Include="Resources\Assets\MenuImages\TaskManagerItem.png" />
+    <Resource Include="UI\Fonts\Anonymous Pro.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="UI\Fonts\Hack-Regular.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="UI\Fonts\JetBrainsMono-Regular.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="UI\Fonts\Monaco.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="UI\Fonts\Roboto-Regular.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -501,6 +513,10 @@
     <None Remove="Resources\Assets\MenuImages\RefreshItem.png" />
     <None Remove="Resources\Assets\MenuImages\SaveItem.png" />
     <None Remove="Resources\Assets\MenuImages\TaskManagerItem.png" />
+    <None Remove="UI\Fonts\Anonymous Pro.ttf" />
+    <None Remove="UI\Fonts\Hack-Regular.ttf" />
+    <None Remove="UI\Fonts\JetBrainsMono-Regular.ttf" />
+    <None Remove="UI\Fonts\Monaco.ttf" />
     <None Remove="UI\Fonts\Roboto-Regular.ttf" />
   </ItemGroup>
   <ItemGroup>
