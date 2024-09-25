@@ -52,10 +52,10 @@ namespace Ninja.ViewModels
     using Views;
     using Views;
 
+    /// <inheritdoc />
     /// <summary>
-    /// 
     /// </summary>
-    /// <seealso cref="Ninja.ViewModels.MainWindowBase" />
+    /// <seealso cref="T:Ninja.ViewModels.MainWindowBase" />
     [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
     public class MainWindowViewModel : MainWindowBase
     {
@@ -103,7 +103,7 @@ namespace Ninja.ViewModels
             {
                 _filterText = value;
                 _menuItemsCollection.View.Refresh( );
-                OnPropertyChanged( "FilterText" );
+                OnPropertyChanged( nameof( FilterText ) );
             }
         }
 
@@ -180,8 +180,7 @@ namespace Ninja.ViewModels
                     break;
                 case "Pcap":
                     var _pcapInfo =
-                        new ProcessStartInfo(
-                            "https://www.tcpdump.org/manpages/pcap-filter.7.html" )
+                        new ProcessStartInfo( "https://www.tcpdump.org/manpages/pcap-filter.7.html" )
                         {
                             UseShellExecute = true
                         };
@@ -225,7 +224,7 @@ namespace Ninja.ViewModels
             set
             {
                 _selectedViewModel = value;
-                OnPropertyChanged( "SelectedViewModel" );
+                OnPropertyChanged( nameof( SelectedViewModel ) );
             }
         }
 
@@ -368,37 +367,37 @@ namespace Ninja.ViewModels
                 new MenuItems
                 {
                     MenuName = "Iperf",
-                    MenuImage = @"Resources/Speed.png"
+                    MenuImage = @"/Resources/Assets/ApplicationImages/Speed.png"
                 },
                 new MenuItems
                 {
                     MenuName = "NetworkScan",
-                    MenuImage = @"Resources/IP.png"
+                    MenuImage = @"/Resources/Assets/ApplicationImages/IP.png"
                 },
                 new MenuItems
                 {
                     MenuName = "PortScan",
-                    MenuImage = @"Resources/port.png"
+                    MenuImage = @"/Resources/Assets/ApplicationImages/port.png"
                 },
                 new MenuItems
                 {
                     MenuName = "RouteTable",
-                    MenuImage = @"Resources/route.png"
+                    MenuImage = @"/Resources/Assets/ApplicationImages/route.png"
                 },
                 new MenuItems
                 {
                     MenuName = "PortListen",
-                    MenuImage = @"Resources/portlisten.png"
+                    MenuImage = @"/Resources/Assets/ApplicationImages/portlisten.png"
                 },
                 new MenuItems
                 {
                     MenuName = "Server",
-                    MenuImage = @"Resources/servers.png"
+                    MenuImage = @"/Resources/Assets/ApplicationImages/servers.png"
                 },
                 new MenuItems
                 {
                     MenuName = "Sniffer",
-                    MenuImage = @"Resources/sniffer.png"
+                    MenuImage = @"/Resources/Assets/ApplicationImages/sniffer.png"
                 }
             };
 

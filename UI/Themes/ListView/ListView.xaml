@@ -15,8 +15,8 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="1" />
         <Setter Property="Margin" Value="1" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontFamily" Value="Fonts/Roboto-Regular.ttf #Roboto Regular" />
+        <Setter Property="FontSize" Value="11" />
         <Setter Property="FontStyle" Value="Normal" />
     </Style>
 
@@ -33,8 +33,8 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="5,1,1,1" />
         <Setter Property="Margin" Value="1" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontFamily" Value="Fonts/Roboto-Regular.ttf #Roboto Regular" />
+        <Setter Property="FontSize" Value="11" />
         <Setter Property="FontStyle" Value="Normal" />
 
         <Style.Triggers>

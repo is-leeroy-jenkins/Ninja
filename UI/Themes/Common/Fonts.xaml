@@ -3,13 +3,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <FontFamily x:Key="DefaultFontFamily">Roboto-Regular</FontFamily>
+    <FontFamily x:Key="DefaultFontFamily">Roboto</FontFamily>
 
     <sys:Double x:Key="LargeFontSize">16</sys:Double>
     <sys:Double x:Key="TitleFontSize">14</sys:Double>
-    <sys:Double x:Key="DefaultFontSize">12</sys:Double>
-    <sys:Double x:Key="CodeFontSize">11</sys:Double>
-    <sys:Double x:Key="SmallFontSize">10</sys:Double>
+    <sys:Double x:Key="DefaultFontSize">11</sys:Double>
+    <sys:Double x:Key="CodeFontSize">10</sys:Double>
+    <sys:Double x:Key="SmallFontSize">9</sys:Double>
 
 
     <sys:Double x:Key="H1FontSize">36</sys:Double>

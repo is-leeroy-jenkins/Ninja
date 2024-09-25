@@ -15,13 +15,13 @@
     </ResourceDictionary.MergedDictionaries>
 
     <SolidColorBrush
-        x:Key="DropDownMenuItem.Selection.Background"
-        Color="#FFFFFF" />
+        x:Key="DropDownMenuItemSelectionBackground"
+        Color="{StaticResource SteelBlueColor}" />
 
-    <local:SizeToDoubleConverter x:Key="sizeToDoubleConverter" />
+    <local:SizeToDoubleConverter x:Key="SizeToDoubleConverter" />
 
     <wpf:RevealItem
-        x:Key="dropDownButtonAdvRevealItem"
+        x:Key="DropDownButtonAdvRevealItem"
         CornerRadius="{StaticResource FluentDark.CornerRadius2}"
         HoverBackground="{StaticResource SecondaryBackgroundHovered}"
         HoverBorder="{StaticResource RevealBorder}"
@@ -50,7 +50,7 @@
             <Border
                 Name="ItemBorder1"
                 MinHeight="{StaticResource FluentDark.MinHeight}"
-                wpf:FluentHelper.RevealItem="{StaticResource dropDownButtonAdvRevealItem}"
+                wpf:FluentHelper.RevealItem="{StaticResource DropDownButtonAdvRevealItem}"
                 Background="{TemplateBinding Background}"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
@@ -193,7 +193,7 @@
                         <Border
                             Name="ItemBorder"
                             MinHeight="{StaticResource FluentDark.MinHeight}"
-                            wpf:FluentHelper.RevealItem="{StaticResource dropDownButtonAdvRevealItem}"
+                            wpf:FluentHelper.RevealItem="{StaticResource DropDownButtonAdvRevealItem}"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
@@ -572,10 +572,10 @@
                                     <ContentControl
                                         x:Name="Part_Icon"
                                         Width="{TemplateBinding IconSize,
-                                                                Converter={StaticResource sizeToDoubleConverter},
+                                                                Converter={StaticResource SizeToDoubleConverter},
                                                                 ConverterParameter=width}"
                                         Height="{TemplateBinding IconSize,
-                                                                 Converter={StaticResource sizeToDoubleConverter},
+                                                                 Converter={StaticResource SizeToDoubleConverter},
                                                                  ConverterParameter=height}"
                                         Margin="1"
                                         BorderThickness="2"

@@ -42,7 +42,7 @@
                             Grid.Row="1"
                             Grid.RowSpan="3"
                             Grid.ColumnSpan="4"
-                            BorderBrush="{StaticResource BackgroundBrush}"
+                            BorderBrush="{StaticResource BlueBorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="4">
                             <Border.OpacityMask>

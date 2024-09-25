@@ -9,9 +9,9 @@
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Padding" Value="1,1,1,3" />
         <Setter Property="Margin" Value="1" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontFamily" Value="Fonts/Roboto-Regular.ttf #Roboto Regular" />
         <Setter Property="FontWeight" Value="Regular" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="11" />
     </Style>
 
 </ResourceDictionary>

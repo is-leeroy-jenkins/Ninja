@@ -24,37 +24,37 @@
         <Setter Property="Margin" Value="{DynamicResource HMargin}" />
     </Style>
     <Style
-        x:Key="h1"
+        x:Key="H1"
         BasedOn="{StaticResource HBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="FontSize" Value="{DynamicResource H1FontSize}" />
     </Style>
     <Style
-        x:Key="h2"
+        x:Key="H2"
         BasedOn="{StaticResource HBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="FontSize" Value="{DynamicResource H2FontSize}" />
     </Style>
     <Style
-        x:Key="h3"
+        x:Key="H3"
         BasedOn="{StaticResource HBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="FontSize" Value="{DynamicResource H3FontSize}" />
     </Style>
     <Style
-        x:Key="h4"
+        x:Key="H4"
         BasedOn="{StaticResource HBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="FontSize" Value="{DynamicResource H4FontSize}" />
     </Style>
     <Style
-        x:Key="h5"
+        x:Key="H5"
         BasedOn="{StaticResource HBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="FontSize" Value="{DynamicResource H5FontSize}" />
     </Style>
     <Style
-        x:Key="h6"
+        x:Key="H6"
         BasedOn="{StaticResource HBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="FontSize" Value="{DynamicResource H6FontSize}" />
@@ -70,37 +70,37 @@
         <Setter Property="VerticalAlignment" Value="Bottom" />
     </Style>
     <Style
-        x:Key="h1 small"
+        x:Key="H1 Small"
         BasedOn="{StaticResource SmallBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="FontSize" Value="{DynamicResource H1SmallFontSize}" />
     </Style>
     <Style
-        x:Key="h2 small"
+        x:Key="H2 Small"
         BasedOn="{StaticResource SmallBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="FontSize" Value="{DynamicResource H2SmallFontSize}" />
     </Style>
     <Style
-        x:Key="h3 small"
+        x:Key="H3 Small"
         BasedOn="{StaticResource SmallBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="FontSize" Value="{DynamicResource H3SmallFontSize}" />
     </Style>
     <Style
-        x:Key="h4 small"
+        x:Key="H4 Small"
         BasedOn="{StaticResource SmallBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="FontSize" Value="{DynamicResource H4SmallFontSize}" />
     </Style>
     <Style
-        x:Key="h5 small"
+        x:Key="H5 Small"
         BasedOn="{StaticResource SmallBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="FontSize" Value="{DynamicResource H5SmallFontSize}" />
     </Style>
     <Style
-        x:Key="h6 small"
+        x:Key="H6 Small"
         BasedOn="{StaticResource SmallBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="FontSize" Value="{DynamicResource H6SmallFontSize}" />
@@ -108,37 +108,37 @@
 
 
     <Style
-        x:Key="text-muted"
+        x:Key="Text-Muted"
         BasedOn="{StaticResource LabelBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="Foreground" Value="{DynamicResource Foreground-Muted}" />
     </Style>
     <Style
-        x:Key="text-primary"
+        x:Key="Text-Primary"
         BasedOn="{StaticResource LabelBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="Foreground" Value="{DynamicResource Foreground-Primary2}" />
     </Style>
     <Style
-        x:Key="text-success"
+        x:Key="Text-Success"
         BasedOn="{StaticResource LabelBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="Foreground" Value="{DynamicResource Foreground-Success}" />
     </Style>
     <Style
-        x:Key="text-info"
+        x:Key="Text-Info"
         BasedOn="{StaticResource LabelBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="Foreground" Value="{DynamicResource Foreground-Info}" />
     </Style>
     <Style
-        x:Key="text-warning"
+        x:Key="Text-Warning"
         BasedOn="{StaticResource LabelBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="Foreground" Value="{DynamicResource Foreground-Warning}" />
     </Style>
     <Style
-        x:Key="text-danger"
+        x:Key="Text-Danger"
         BasedOn="{StaticResource LabelBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="Foreground" Value="{DynamicResource Foreground-Danger}" />
@@ -146,32 +146,32 @@
 
     <!--  背景  -->
     <Style
-        x:Key="text bg-primary"
+        x:Key="Text Bg-Primary"
         BasedOn="{StaticResource LabelBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="Foreground" Value="{DynamicResource Foreground-Primary1}" />
         <Setter Property="Background" Value="{DynamicResource Background-Primary2}" />
     </Style>
     <Style
-        x:Key="text bg-success"
+        x:Key="Text Bg-Success"
         BasedOn="{StaticResource LabelBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="Background" Value="{DynamicResource Background-Success2}" />
     </Style>
     <Style
-        x:Key="text bg-info"
+        x:Key="Text Bg-Info"
         BasedOn="{StaticResource LabelBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="Background" Value="{DynamicResource Background-Info2}" />
     </Style>
     <Style
-        x:Key="text bg-warning"
+        x:Key="Text Bg-Warning"
         BasedOn="{StaticResource LabelBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="Background" Value="{DynamicResource Background-Warning2}" />
     </Style>
     <Style
-        x:Key="text bg-danger"
+        x:Key="Text Bg-Danger"
         BasedOn="{StaticResource LabelBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="Background" Value="{DynamicResource Background-Danger2}" />
@@ -183,7 +183,7 @@
         x:Key="CodeBaseStyle"
         BasedOn="{x:Null}"
         TargetType="{x:Type Label}">
-        <Setter Property="FontFamily" Value="Menlo, Monaco, Consolas,Courier New, monospace" />
+        <Setter Property="FontFamily" Value="Fonts/Roboto-Regular.ttf #Roboto Regular" />
         <Setter Property="FontSize" Value="{DynamicResource CodeFontSize}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="HorizontalAlignment" Value="Center" />
@@ -193,7 +193,7 @@
     </Style>
     <!--  代码  -->
     <Style
-        x:Key="code"
+        x:Key="Code"
         BasedOn="{StaticResource CodeBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="Foreground" Value="#c7254e" />
@@ -223,7 +223,7 @@
     </Style>
     <!--  键盘  -->
     <Style
-        x:Key="kbd"
+        x:Key="Kbd"
         BasedOn="{StaticResource CodeBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="Foreground" Value="#fff" />
@@ -253,7 +253,7 @@
     </Style>
     <!--  代码块  -->
     <Style
-        x:Key="pre"
+        x:Key="Pre"
         BasedOn="{StaticResource CodeBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="Foreground" Value="#333" />
@@ -288,9 +288,8 @@
         </Setter>
     </Style>
 
-    <!--  辅助文本 源码行数:2690-2695  -->
     <Style
-        x:Key="help-block"
+        x:Key="Help-Block"
         BasedOn="{StaticResource LabelBaseStyle}"
         TargetType="{x:Type Label}">
         <Setter Property="Foreground" Value="#737373" />

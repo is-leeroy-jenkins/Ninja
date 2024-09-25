@@ -150,8 +150,8 @@ namespace Ninja
                 SubHeaderFontSize = 14,
                 TitleFontSize = 14,
                 SubTitleFontSize = 10,
-                BodyAltFontSize = 10,
-                FontFamily = new FontFamily( "Roboto-Regular" )
+                BodyAltFontSize = 11,
+                FontFamily = new FontFamily( "Roboto" )
             };
 
             SfSkinManager.RegisterThemeSettings( "FluentDark", _theme );
