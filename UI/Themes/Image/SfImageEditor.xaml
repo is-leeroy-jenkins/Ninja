@@ -362,8 +362,7 @@
                                 <ScrollViewer
                                     HorizontalScrollBarVisibility="Auto"
                                     VerticalScrollBarVisibility="Hidden">
-                                    <Grid
-                                        HorizontalAlignment="Center">
+                                    <Grid HorizontalAlignment="Center">
 
                                         <StackPanel
                                             x:Name="PART_TextSubItemPanel"

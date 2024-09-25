@@ -46,6 +46,7 @@ namespace Ninja
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Windows;
+    using System.Windows.Media;
 
     /// <inheritdoc />
     /// <summary>
@@ -74,13 +75,15 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.MetroComboBoxItem" /> class.
+        /// <see cref="Ninja.MetroComboBoxItem" /> class.
         /// </summary>
         public MetroComboBoxItem( )
             : base( )
         {
             // Control Properties
             SetResourceReference( StyleProperty, typeof( ComboBoxItemAdv ) );
+            FontFamily = _theme.FontFamily;
+            FontSize = _theme.FontSize;
             Background = _theme.ControlInterior;
             BorderBrush = _theme.ControlInterior;
             Foreground = _theme.LightBlueBrush;

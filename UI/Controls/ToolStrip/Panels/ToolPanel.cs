@@ -65,7 +65,6 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.ToolPanel" /> class.
         /// </summary>
         public ToolPanel( )
             : base( )

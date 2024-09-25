@@ -74,6 +74,7 @@ namespace Ninja
             SetResourceReference( StyleProperty, typeof( SfMap ) );
             Width = 800;
             Height = 400;
+            FontFamily = _theme.FontFamily;
             Background = _theme.Background;
             Foreground = _theme.Foreground;
             BorderBrush = _theme.BorderBrush;

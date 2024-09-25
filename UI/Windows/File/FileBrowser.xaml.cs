@@ -225,7 +225,6 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.FileBrowser" /> class.
         /// </summary>
         public FileBrowser( )
         {

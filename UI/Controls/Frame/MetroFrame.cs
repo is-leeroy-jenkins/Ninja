@@ -51,7 +51,7 @@ namespace Ninja
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:Syncfusion.UI.Xaml.TextInputLayout.SfTextInputLayout" />
+    /// <seealso cref="Syncfusion.UI.Xaml.TextInputLayout.SfTextInputLayout" />
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
     [ SuppressMessage( "ReSharper", "InconsistentNaming" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
@@ -72,7 +72,7 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Badger.MetroInput" /> class.
+        /// <see cref="Badger.MetroInput" /> class.
         /// </summary>
         public MetroFrame( )
             : base( )
@@ -81,8 +81,7 @@ namespace Ninja
             SetResourceReference( StyleProperty, typeof( SfTextInputLayout ) );
             Height = 200;
             Width = 200;
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12;
+            FontFamily = _theme.FontFamily;
             Background = _theme.ControlBackground;
             Foreground = _theme.Foreground;
             BorderBrush = _theme.BorderBrush;

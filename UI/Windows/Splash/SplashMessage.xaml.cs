@@ -204,7 +204,6 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Badger.Windows.Splash.SplashMessage" /> class.
         /// </summary>
         public SplashMessage( )
         {
@@ -213,8 +212,8 @@ namespace Ninja
             RegisterCallbacks( );
 
             // Basic Properties
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12d;
+            FontFamily = new FontFamily( "Roboto" );
+            FontSize = 11d;
             Width = 560;
             Height = 250;
             Margin = new Thickness( 3 );

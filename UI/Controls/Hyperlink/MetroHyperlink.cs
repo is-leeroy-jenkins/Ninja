@@ -52,7 +52,7 @@ namespace Ninja
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:Wpf.Ui.Controls.HyperlinkButton" />
+    /// <seealso cref="Wpf.Ui.Controls.HyperlinkButton" />
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
     public class MetroHyperlink : HyperlinkButton
     {
@@ -71,8 +71,8 @@ namespace Ninja
             // Basic Settings
             Height = 110;
             Width = 22;
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12;
+            FontFamily = _theme.FontFamily;
+            FontSize = _theme.FontSize;
             Background = _theme.TransparentBrush;
             Foreground = _theme.BorderBrush;
             BorderBrush = _theme.TransparentBrush;

@@ -46,11 +46,12 @@ namespace Ninja
     using System.Diagnostics.CodeAnalysis;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Media;
 
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:System.Windows.Controls.Canvas" />
+    /// <seealso cref="System.Windows.Controls.Canvas" />
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "InconsistentNaming" ) ]
@@ -66,7 +67,7 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.MetroCanvas" /> class.
+        /// <see cref="Ninja.MetroCanvas" /> class.
         /// </summary>
         public MetroCanvas( )
             : base( )
@@ -76,7 +77,7 @@ namespace Ninja
             Height = 350;
             HorizontalAlignment = HorizontalAlignment.Center;
             VerticalAlignment = VerticalAlignment.Stretch;
-            Margin = new Thickness( 3 );
+            Margin = new Thickness( 1 );
             Background = _theme.BorderBrush;
         }
 

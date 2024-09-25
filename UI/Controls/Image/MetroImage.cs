@@ -68,7 +68,7 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.MetroImage" /> class.
+        /// <see cref="Ninja.MetroImage" /> class.
         /// </summary>
         public MetroImage( )
             : base( )

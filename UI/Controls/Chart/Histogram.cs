@@ -72,10 +72,10 @@ namespace Ninja
             SetResourceReference( StyleProperty, typeof( SfSurfaceChart ) );
             Width = 800;
             Height = 400;
-            FontSize = 12;
+            FontFamily = new FontFamily("Roboto");
+            FontSize = 11;
             Padding = new Thickness( 1 );
             BorderThickness = new Thickness( 1 );
-            FontFamily = new FontFamily( "Segoe UI" );
             Background = _theme.Background;
             Foreground = _theme.Foreground;
             BorderBrush = _theme.BorderBrush;

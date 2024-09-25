@@ -123,7 +123,6 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.MetroTileView" /> class.
         /// </summary>
         public MetroTileView( )
             : base( )
@@ -132,8 +131,8 @@ namespace Ninja
             SetResourceReference( StyleProperty, typeof( TileViewControl ) );
             Width = 400;
             Height = 400;
-            FontSize = 12;
-            FontFamily = new FontFamily( "Segoe UI" );
+            FontFamily = new FontFamily( "Roboto-Regular" );
+            FontSize = 11;
         }
 
         /// <summary>

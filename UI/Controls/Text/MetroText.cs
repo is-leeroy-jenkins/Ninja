@@ -71,8 +71,8 @@ namespace Ninja
         {
             Background = _theme.TransparentBrush;
             Foreground = _theme.BorderBrush;
-            FontSize = 12;
-            FontFamily = new FontFamily( "Segoe UI" );
+            FontSize = _theme.FontSize;
+            FontFamily = _theme.FontFamily;
         }
 
         /// <summary>

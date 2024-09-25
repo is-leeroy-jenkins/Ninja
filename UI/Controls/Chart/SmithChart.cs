@@ -46,11 +46,11 @@ namespace Ninja
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Windows;
+    using System.Windows.Media;
 
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:Syncfusion.UI.Xaml.SmithChart.SfSmithChart" />
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
     [ SuppressMessage( "ReSharper", "InconsistentNaming" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
@@ -67,7 +67,6 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.SmithChart" /> class.
         /// </summary>
         public SmithChart( )
             : base( )
@@ -76,7 +75,8 @@ namespace Ninja
             SetResourceReference( StyleProperty, typeof( SfSmithChart ) );
             Width = 800;
             Height = 400;
-            FontSize = 12;
+            FontFamily = new FontFamily( "Roboto" );
+            FontSize = 11;
             Padding = new Thickness( 1 );
             BorderThickness = new Thickness( 1 );
             Background = _theme.Background;

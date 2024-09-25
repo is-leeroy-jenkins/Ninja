@@ -57,6 +57,11 @@ namespace Ninja.Views
     public partial class RouteWindow : UserControl
     {
         /// <summary>
+        /// The theme
+        /// </summary>
+        private protected DarkMode _theme = new DarkMode( );
+
+        /// <summary>
         /// The path
         /// </summary>
         private protected object _entry = new object( );
@@ -76,9 +81,15 @@ namespace Ninja.Views
         /// </summary>
         private protected TimerCallback _timerCallback;
 
+        /// <inheritdoc />
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Ninja.Views.RouteWindow" /> class.
+        /// </summary>
         public RouteWindow( )
         {
-            InitializeComponent( );
+            InitializeComponent();
+            FontFamily = _theme.FontFamily;
+            FontSize = _theme.FontSize;
         }
 
         /// <summary>

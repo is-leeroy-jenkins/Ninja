@@ -64,12 +64,14 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.MetroListView" /> class.
+        /// <see cref="Ninja.MetroListView" /> class.
         /// </summary>
         public MetroListView( )
             : base( )
         {
             // Control Properties
+            FontFamily = _theme.FontFamily;
+            FontSize = _theme.FontSize;
             Foreground = _theme.Foreground;
             Background = _theme.ControlBackground;
             BorderBrush = _theme.ControlBackground;

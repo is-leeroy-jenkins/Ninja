@@ -48,7 +48,6 @@ namespace Ninja
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:Ninja.MetroTextBox" />
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
     [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
@@ -64,6 +63,8 @@ namespace Ninja
         {
             Height = 30;
             Width = 200;
+            FontFamily = _theme.FontFamily;
+            FontSize = _theme.FontSize;
         }
     }
 }

@@ -2,11 +2,10 @@
     x:Class="Ninja.Views.PortScanWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:n="clr-namespace:Ninja"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:n="clr-namespace:Ninja"
     xmlns:sync="http://schemas.syncfusion.com/wpf"
-    xmlns:tbex="clr-namespace:TextBoxEx"
     d:DesignHeight="800"
     mc:Ignorable="d">
 
@@ -198,7 +197,7 @@
                             Margin="5,10,0,0"
                             Style="{StaticResource MenuItemText}"
                             Text="Start Port" />
-                        <tbex:TextBoxEx
+                        <n:TextBoxEx
                             Grid.Row="1"
                             Maximum="65535"
                             Minimum="1"
@@ -209,7 +208,7 @@
                             Margin="5,10,0,0"
                             Style="{StaticResource MenuItemText}"
                             Text="End Port" />
-                        <tbex:TextBoxEx
+                        <n:TextBoxEx
                             Grid.Row="2"
                             Maximum="65535"
                             Minimum="2"
@@ -220,7 +219,7 @@
                             Margin="5,10,0,0"
                             Style="{StaticResource MenuItemText}"
                             Text="Socket Timeout(ms)" />
-                        <tbex:TextBoxEx
+                        <n:TextBoxEx
                             Grid.Row="3"
                             Minimum="100"
                             Text="{Binding PortScanModel.SocketTimeout}" />

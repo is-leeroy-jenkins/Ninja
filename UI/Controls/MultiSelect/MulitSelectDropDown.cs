@@ -65,7 +65,6 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Badger.MetroMultiSelect" /> class.
         /// </summary>
         public MulitSelectDropDown( )
         {
@@ -73,8 +72,7 @@ namespace Ninja
             SetResourceReference( StyleProperty, typeof( SfMultiColumnDropDownControl ) );
             Width = 175;
             Height = 30;
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12;
+            FontFamily = _theme.FontFamily;
             Background = _theme.ControlBackground;
             Foreground = _theme.LightBlueBrush;
             BorderBrush = _theme.BorderBrush;

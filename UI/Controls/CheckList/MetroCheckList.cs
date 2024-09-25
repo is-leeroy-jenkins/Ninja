@@ -46,11 +46,11 @@ namespace Ninja
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Windows;
+    using System.Windows.Media;
 
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:Syncfusion.Windows.Tools.Controls.CheckListBox" />
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "InconsistentNaming" ) ]
@@ -66,17 +66,19 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.MetroCheckList" /> class.
+        /// <see cref="Ninja.MetroCheckList" /> class.
         /// </summary>
         /// <remarks>
-        /// The <see cref="T:Syncfusion.Windows.Tools.Controls.CheckListBox" />
+        /// The <see cref="Syncfusion.Windows.Tools.Controls.CheckListBox" />
         /// displays items with a checkbox to enable multiple selection of items.
         /// </remarks>
         public MetroCheckList( )
             : base( )
         {
             // Control Properties
-            SetResourceReference( StyleProperty, typeof( CheckListBox ) );
+            SetResourceReference(StyleProperty, typeof(CheckListBox));
+            FontFamily = _theme.FontFamily;
+            FontSize = _theme.FontSize;
             Width = 225.0;
             Height = 200.0;
             Background = _theme.ControlBackground;

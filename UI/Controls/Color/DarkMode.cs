@@ -185,8 +185,8 @@ namespace Ninja
             LightBlueBrush = new SolidColorBrush( _lightBlue );
             BlackBrush = new SolidColorBrush( _blackColor );
             WhiteForeground = new SolidColorBrush( _whiteColor );
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12;
+            FontFamily = new FontFamily( "Roboto" );
+            FontSize = 11;
             Padding = new Thickness( 1 );
             Margin = new Thickness( 1 );
             BorderThickness = new Thickness( 1 );

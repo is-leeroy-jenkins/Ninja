@@ -70,9 +70,9 @@ namespace Ninja
             : base( )
         {
             // Basic Properties
-            SetResourceReference( StyleProperty, typeof( SfSpreadsheetRibbon ) );
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12;
+            SetResourceReference(StyleProperty, typeof(SfSpreadsheetRibbon));
+            FontSize = _theme.FontSize;
+            FontFamily = _theme.FontFamily;
             Background = _theme.ControlBackground;
             BorderBrush = _theme.ControlBackground;
             Foreground = _theme.Foreground;

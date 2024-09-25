@@ -46,6 +46,7 @@ namespace Ninja
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Windows;
+    using System.Windows.Media;
 
     /// <inheritdoc />
     /// <summary>
@@ -71,12 +72,14 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.MetroCheckListItem" /> class.
+        /// <see cref="Ninja.MetroCheckListItem" /> class.
         /// </summary>
         public MetroCheckListItem( )
         {
             // Control Properties
             SetResourceReference( StyleProperty, typeof( CheckListBoxItem ) );
+            FontFamily = _theme.FontFamily;
+            FontSize = _theme.FontSize;
             Width = 225;
             Height = 24;
             Background = _theme.ControlBackground;

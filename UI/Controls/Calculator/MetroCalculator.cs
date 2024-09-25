@@ -50,7 +50,7 @@ namespace Ninja
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:Syncfusion.Windows.Controls.Input.SfCalculator" />
+    /// <seealso cref="Syncfusion.Windows.Controls.Input.SfCalculator" />
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
     [ SuppressMessage( "ReSharper", "InconsistentNaming" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
@@ -65,16 +65,15 @@ namespace Ninja
 
         /// <inheritdoc />
         /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="T:Badger.Calculator" /> class.
+        /// Initializes a new instance of the Calculator
         /// </summary>
         public MetroCalculator( )
             : base( )
         {
             // Control Properties
             SetResourceReference( StyleProperty, typeof( SfCalculator ) );
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12;
+            FontFamily = _theme.FontFamily;
+            FontSize = _theme.FontSize;
             Background = _theme.Background;
             BorderBrush = _theme.BorderBrush;
             Foreground = _theme.Foreground;

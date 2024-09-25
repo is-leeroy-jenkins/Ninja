@@ -68,14 +68,13 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.MetroLabel" /> class.
         /// </summary>
         public MetroLabel( )
             : base( )
         {
             // Basic Properties
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12;
+            FontFamily = _theme.FontFamily;
+            FontSize = _theme.FontSize;
             Width = 100;
             HorizontalAlignment = HorizontalAlignment.Center;
             VerticalAlignment = VerticalAlignment.Center;

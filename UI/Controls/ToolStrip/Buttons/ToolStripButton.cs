@@ -49,7 +49,6 @@ namespace Ninja
     /// <inheritdoc />
     ///  <summary>
     ///  </summary>
-    ///  <seealso cref="T:Badger.MetroButton" />
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
@@ -69,6 +68,8 @@ namespace Ninja
             // Basic Properties
             Width = 40;
             Height = 30;
+            FontFamily = _theme.FontFamily;
+            FontSize = _theme.FontSize;
             Background = _theme.Background;
             Foreground = _theme.Background;
             BorderBrush = _theme.Background;

@@ -151,15 +151,14 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.MetroComboFrame" /> class.
+        /// <see cref="Ninja.MetroComboFrame" /> class.
         /// </summary>
         public MetroComboFrame( )
         {
             InitializeComponent( );
 
             // Basic Settings
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12;
+            FontFamily = new FontFamily( "Roboto-Regular" );
             Width = 220;
             MinWidth = 180;
             MaxWidth = 270;

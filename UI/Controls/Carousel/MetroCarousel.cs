@@ -64,15 +64,14 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.MetroCarousel" /> class.
+        /// <see cref="Ninja.MetroCarousel" /> class.
         /// </summary>
         public MetroCarousel( )
             : base( )
         {
             // Control Properties
             SetResourceReference( StyleProperty, typeof( Carousel ) );
-            FontSize = 12;
-            FontFamily = new FontFamily( "Segoe UI" );
+            FontFamily = new FontFamily( "Roboto-Regular" );
             Height = 500;
             Width = 350;
             Background = _theme.Background;

@@ -71,7 +71,8 @@ namespace Ninja
             : base( )
         {
             // Control Properties
-            SetResourceReference( StyleProperty, typeof( ColorEdit ) );
+            SetResourceReference(StyleProperty, typeof(ColorEdit));
+            FontFamily = new FontFamily( "Roboto-Regular" );
             Width = 250;
             Height = 200;
         }

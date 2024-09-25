@@ -46,6 +46,7 @@ namespace Ninja
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Windows;
+    using System.Windows.Media;
 
     /// <inheritdoc />
     /// <summary>
@@ -74,7 +75,8 @@ namespace Ninja
 
         {
             // Control Properties
-            SetResourceReference( StyleProperty, typeof( ComboBoxAdv ) );
+            SetResourceReference(StyleProperty, typeof( ComboBoxAdv ) );
+            FontFamily = _theme.FontFamily;
             Width = 150;
             Height = 30;
             AutoCompleteMode = AutoCompleteModes.None;
@@ -82,7 +84,7 @@ namespace Ninja
             IsTextSearchEnabled = false;
             AllowSelectAll = false;
             IsEditable = true;
-            Margin = new Thickness( 1, 1, 1, 1 );
+            Margin = new Thickness( 1 );
             Padding = _theme.Padding;
             Background = _theme.ControlInterior;
             Foreground = _theme.LightBlueBrush;

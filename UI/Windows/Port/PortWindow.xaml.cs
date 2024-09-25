@@ -58,6 +58,11 @@ namespace Ninja.Views
     public partial class PortWindow : UserControl
     {
         /// <summary>
+        /// The theme
+        /// </summary>
+        private protected DarkMode _theme = new DarkMode( );
+
+        /// <summary>
         /// The path
         /// </summary>
         private protected object _entry = new object( );
@@ -84,7 +89,9 @@ namespace Ninja.Views
         /// </summary>
         public PortWindow( )
         {
-            InitializeComponent( );
+            InitializeComponent();
+            FontFamily = _theme.FontFamily;
+            FontSize = _theme.FontSize;
         }
 
         /// <summary>

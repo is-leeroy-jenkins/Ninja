@@ -5,7 +5,6 @@
     xmlns:n="clr-namespace:Ninja"
     xmlns:skin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
     xmlns:sync="http://schemas.syncfusion.com/wpf"
-    xmlns:tbex="clr-namespace:TextBoxEx"
     StartupUri="/UI/Windows/Main/MainWindow.xaml">
 
     <!--  ************************************************* Resources  **************************************************  -->
@@ -13,7 +12,9 @@
     <Application.Resources>
 
         <ResourceDictionary>
+            <!--  Fonts  -->
             <FontFamily x:Key="Roboto">pack://application:,,,/Fonts/Roboto-Regular.ttf</FontFamily>
+
             <ResourceDictionary.MergedDictionaries>
 
                 <ResourceDictionary Source="/UI/Themes/Colors/Colors.xaml" />
@@ -23,6 +24,8 @@
                 <ResourceDictionary Source="pack://application:,,,/ToastNotifications.Messages;component/Themes/Default.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
+
         </ResourceDictionary>
+
     </Application.Resources>
 </Application>

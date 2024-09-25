@@ -73,13 +73,14 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.MetroListViewItem" /> class.
         /// </summary>
         public MetroListViewItem( )
             : base( )
         {
             // Control Properties
             Height = 40;
+            FontFamily = _theme.FontFamily;
+            FontSize = _theme.FontSize;
             Background = _theme.ControlInterior;
             BorderBrush = _theme.ControlInterior;
             Foreground = _theme.LightBlueBrush;

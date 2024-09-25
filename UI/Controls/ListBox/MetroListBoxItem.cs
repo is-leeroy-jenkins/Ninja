@@ -78,6 +78,8 @@ namespace Ninja
             : base( )
         {
             // Control Properties
+            FontFamily = _theme.FontFamily;
+            FontSize = _theme.FontSize;
             Height = 40;
             Background = _theme.ControlInterior;
             Foreground = _theme.LightBlueBrush;

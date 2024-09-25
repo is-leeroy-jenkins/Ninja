@@ -77,6 +77,7 @@ namespace Ninja
             SetResourceReference( StyleProperty, typeof( SfHubTile ) );
             Width = 200;
             Height = 100;
+            FontFamily = _theme.FontFamily;
             Background = _theme.ControlBackground;
             Foreground = _theme.LightBlueBrush;
             BorderBrush = _theme.ControlBackground;

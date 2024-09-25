@@ -210,15 +210,14 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.MetroTextInput" /> class.
+        /// <see cref="Ninja.MetroTextInput" /> class.
         /// </summary>
         public MetroTextInput( )
         {
             InitializeComponent( );
 
             // Control Properties
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12;
+            FontFamily = new FontFamily( "Roboto-Regular" );
             Width = 240;
             MinWidth = 220;
             MaxWidth = 300;
@@ -237,7 +236,7 @@ namespace Ninja
             TextBox.Height = 25;
             TextBox.MinHeight = 18;
             TextBox.MaxHeight = 30;
-            Margin = new Thickness( 3 );
+            Margin = new Thickness( 1 );
             HorizontalAlignment = HorizontalAlignment.Left;
             HorizontalContentAlignment = HorizontalAlignment.Left;
             VerticalAlignment = VerticalAlignment.Top;

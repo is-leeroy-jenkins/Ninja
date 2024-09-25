@@ -66,7 +66,6 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Badger.PivotGrid" /> class.
         /// </summary>
         public MetroPivotGrid( )
             : base( )

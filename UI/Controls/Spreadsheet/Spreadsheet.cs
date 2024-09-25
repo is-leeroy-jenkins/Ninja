@@ -54,15 +54,21 @@ namespace Ninja
     [ SuppressMessage( "ReSharper", "InconsistentNaming" ) ]
     public class Spreadsheet : SfSpreadsheet
     {
+        /// <summary>
+        /// The theme
+        /// </summary>
+        private protected readonly DarkMode _theme = new DarkMode();
+
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Badger.Controls.Datagrid.Spreadsheet" /> class.
         /// </summary>
         public Spreadsheet( )
             : base( )
         {
             SetResourceReference( StyleProperty, typeof( SfSpreadsheet ) );
+            FontSize = _theme.FontSize;
+            FontFamily = _theme.FontFamily;
         }
 
         /// <summary>

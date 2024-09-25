@@ -51,7 +51,7 @@ namespace Ninja
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:Syncfusion.Windows.Tools.Controls.DropDownButtonAdv" />
+    /// <seealso cref="Syncfusion.Windows.Tools.Controls.DropDownButtonAdv" />
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
     [ SuppressMessage( "ReSharper", "InconsistentNaming" ) ]
     [ SuppressMessage( "ReSharper", "FieldCanBeMadeReadOnly.Local" ) ]
@@ -70,7 +70,6 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Badger.ComboBox" /> class.
         /// </summary>
         public MetroDropDown( )
             : base( )
@@ -79,8 +78,7 @@ namespace Ninja
             SetResourceReference( StyleProperty, typeof( DropDownButtonAdv ) );
             Width = 200;
             Height = 35;
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12;
+            FontFamily = new FontFamily( "Roboto-Regular" );
             Padding = new Thickness( 1 );
             BorderThickness = new Thickness( 0 );
             HorizontalAlignment = HorizontalAlignment.Stretch;

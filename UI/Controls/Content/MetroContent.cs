@@ -50,7 +50,6 @@ namespace Ninja
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:System.Windows.Controls.ContentControl" />
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
     public class MetroContent : ContentControl
     {
@@ -62,7 +61,6 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.MetroContent" /> class.
         /// </summary>
         public MetroContent( )
             : base( )
@@ -70,8 +68,8 @@ namespace Ninja
             // Basic Settings
             Height = 200;
             Width = 200;
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12;
+            FontFamily = new FontFamily( "Roboto" );
+            FontSize = 11;
             Background = _theme.Background;
             BorderBrush = _theme.BorderBrush;
             Foreground = _theme.Foreground;

@@ -164,7 +164,7 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.LineChart" /> class.
+        /// <see cref="Ninja.LineChart" /> class.
         /// </summary>
         public LineChart( )
             : base( )
@@ -173,8 +173,8 @@ namespace Ninja
             SetResourceReference( StyleProperty, typeof( SfChart ) );
             Width = 800;
             Height = 500;
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12;
+            FontFamily = new FontFamily( "Roboto" );
+            FontSize = 11;
             Padding = new Thickness( 1 );
             BorderThickness = new Thickness( 1 );
             Background = new SolidColorBrush( _backColor );

@@ -761,8 +761,7 @@
                                 Background="{StaticResource PopupBackground}"
                                 BorderBrush="{StaticResource BorderAlt}"
                                 BorderThickness="0,1,0,0">
-                                <Grid
-                                    Height="33">
+                                <Grid Height="33">
                                     <StackPanel
                                         Height="26"
                                         HorizontalAlignment="Left"

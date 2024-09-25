@@ -15,7 +15,7 @@
     Background="{StaticResource BlackBackground}"
     BorderBrush="{StaticResource BorderBrush}"
     BorderThickness="1"
-    FontSize="12"
+    FontSize="11"
     Foreground="{StaticResource FormForeground}"
     Topmost="True"
     WindowStartupLocation="CenterScreen"

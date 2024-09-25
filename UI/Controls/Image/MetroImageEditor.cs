@@ -49,14 +49,14 @@ namespace Ninja
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:Syncfusion.UI.Xaml.ImageEditor.SfImageEditor" />
+    /// <seealso cref="Syncfusion.UI.Xaml.ImageEditor.SfImageEditor" />
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
     public class MetroImageEditor : SfImageEditor
     {
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.MetroImageEditor" /> class.
+        /// <see cref="Ninja.MetroImageEditor" /> class.
         /// </summary>
         public MetroImageEditor( )
             : base( )

@@ -133,16 +133,15 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Badger.Calendar" /> class.
+        /// <see cref="Ninja.MetroCalendar" /> class.
         /// </summary>
         public MetroCalendar( )
             : base( )
         {
             // Control Properties
             BorderThickness = new Thickness( 0 );
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12;
             SetResourceReference( StyleProperty, typeof( CalendarEdit ) );
+            FontFamily = _theme.FontFamily;
             Background = new SolidColorBrush( _backColor );
             BlackoutDatesBackground = new SolidColorBrush( _backColor );
             BlackoutDatesCrossBrush = new SolidColorBrush( _backColor );

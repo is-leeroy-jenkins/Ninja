@@ -70,9 +70,8 @@ namespace Ninja
             : base( )
         {
             // Control Properties
-            SetResourceReference( StyleProperty, typeof( SfLinearProgressBar ) );
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12;
+            SetResourceReference(StyleProperty, typeof(SfLinearProgressBar));
+            FontFamily = _theme.FontFamily;
             Background = _theme.Background;
             Foreground = _theme.BorderBrush;
             BorderBrush = _theme.BorderBrush;

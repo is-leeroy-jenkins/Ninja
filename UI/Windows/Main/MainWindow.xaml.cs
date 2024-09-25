@@ -62,6 +62,11 @@ namespace Ninja.Views
     public partial class MainWindow : Window
     {
         /// <summary>
+        /// The theme
+        /// </summary>
+        private protected DarkMode _theme = new DarkMode( );
+
+        /// <summary>
         /// The path
         /// </summary>
         private protected object _entry = new object( );
@@ -96,6 +101,8 @@ namespace Ninja.Views
             InitializeComponent( );
             Height = 800;
             Width = 1300;
+            FontFamily = _theme.FontFamily;
+            FontSize = _theme.FontSize;
             MainWindowViewModel = new MainWindowViewModel( );
             DataContext = MainWindowViewModel;
         }

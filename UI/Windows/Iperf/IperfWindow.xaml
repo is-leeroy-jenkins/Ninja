@@ -9,7 +9,6 @@
     xmlns:oxy="http://oxyplot.org/wpf"
     xmlns:src="clr-namespace:Ninja.Themes"
     xmlns:sync="http://schemas.syncfusion.com/wpf"
-    xmlns:tbex="clr-namespace:TextBoxEx"
     d:DesignHeight="800"
     mc:Ignorable="d">
 
@@ -232,7 +231,7 @@
                             Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Server IP" />
-                        <tbex:TextBoxEx
+                        <n:TextBoxEx
                             Grid.Row="3"
                             Width="130"
                             Margin="0,5,10,0"
@@ -243,7 +242,7 @@
                             Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Port" />
-                        <tbex:TextBoxEx
+                        <n:TextBoxEx
                             Grid.Row="4"
                             Cursor="Hand"
                             Text="{Binding IperfModel.Port}" />
@@ -253,7 +252,7 @@
                             Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Parallel" />
-                        <tbex:TextBoxEx
+                        <n:TextBoxEx
                             Grid.Row="5"
                             Minimum="1"
                             Background="{StaticResource ControlInterior}"
@@ -267,7 +266,7 @@
                             Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Time(s)" />
-                        <tbex:TextBoxEx
+                        <n:TextBoxEx
                             Grid.Row="6"
                             Background="{StaticResource ControlInterior}"
                             Foreground="{StaticResource WhiteForeground}"
@@ -280,7 +279,7 @@
                             Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Interval(s)" />
-                        <tbex:TextBoxEx
+                        <n:TextBoxEx
                             Grid.Row="7"
                             Background="{StaticResource ControlInterior}"
                             Foreground="{StaticResource WhiteForeground}"
@@ -295,7 +294,7 @@
                             Foreground="{StaticResource WhiteForeground}"
                             IsChecked="{Binding IperfModel.TcpFlag}"
                             Style="{StaticResource MenuItemRadioButton}" />
-                        <tbex:TextBoxEx
+                        <n:TextBoxEx
                             Grid.Row="8"
                             Width="45"
                             Margin="0,5,65,0"
@@ -328,7 +327,7 @@
                             IsChecked="{Binding IperfModel.UdpFlag}"
                             Style="{StaticResource MenuItemRadioButton}" />
 
-                        <tbex:TextBoxEx
+                        <n:TextBoxEx
                             Grid.Row="9"
                             Width="45"
                             Margin="0,5,65,0"
@@ -358,7 +357,7 @@
                             Foreground="{StaticResource WhiteForeground}"
                             Style="{StaticResource MenuItemText}"
                             Text="Packet Length" />
-                        <tbex:TextBoxEx
+                        <n:TextBoxEx
                             Grid.Row="10"
                             Background="{StaticResource ControlInterior}"
                             Foreground="{StaticResource WhiteForeground}"

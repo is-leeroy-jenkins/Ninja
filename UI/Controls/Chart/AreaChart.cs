@@ -165,7 +165,6 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.AreaChart" /> class.
         /// </summary>
         public AreaChart( )
             : base( )
@@ -174,8 +173,8 @@ namespace Ninja
             SetResourceReference( StyleProperty, typeof( SfChart3D ) );
             Width = 800;
             Height = 500;
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12;
+            FontFamily = new FontFamily( "Roboto" );
+            FontSize = 11;
             EnableRotation = true;
             Depth = 250;
             EnableSegmentSelection = true;

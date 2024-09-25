@@ -75,7 +75,6 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Badger.Chart3D" /> class.
         /// </summary>
         public MetroColumnChart( )
             : base( )

@@ -87,9 +87,7 @@ namespace Ninja.Views
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent( );
-            Height = 300;
-            Width = Height / 0.675;
-            ResizeMode = ResizeMode.NoResize;
+            Height = 800;
         }
 
         /// <summary>
@@ -100,7 +98,7 @@ namespace Ninja.Views
         /// instance containing the event data.</param>
         private void GithubButton_Click( object sender, RoutedEventArgs e )
         {
-            Process.Start( "https://github.com/linkmeta/MetaNet" );
+            Process.Start( "https://github.com/is-leeroy-jenkins/Ninja" );
             Close( );
         }
 

@@ -65,7 +65,7 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.MetroGridControl" /> class.
+        /// <see cref="Ninja.MetroGridControl" /> class.
         /// </summary>
         public MetroGridControl( )
             : base( )

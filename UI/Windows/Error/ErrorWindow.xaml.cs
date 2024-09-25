@@ -100,7 +100,6 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.ErrorWindow" /> class.
         /// </summary>
         public ErrorWindow( )
         {
@@ -111,8 +110,8 @@ namespace Ninja
             // Basic Properties
             Width = 560;
             Height = 250;
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12d;
+            FontFamily = _theme.FontFamily;
+            FontSize = _theme.FontSize;
             WindowStyle = _theme.WindowStyle;
             WindowStartupLocation = WindowStartupLocation.CenterOwner;
             HorizontalAlignment = HorizontalAlignment.Stretch;

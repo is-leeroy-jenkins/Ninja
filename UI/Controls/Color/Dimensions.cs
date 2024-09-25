@@ -133,8 +133,8 @@ namespace Ninja
         /// </summary>
         protected Dimensions( )
         {
-            _fontFamily = new FontFamily( "Segoe UI" );
-            _fontSize = 12;
+            _fontFamily = new FontFamily( "Roboto" );
+            _fontSize = 11;
             _minWidth = 1200;
             _width = 1400;
             _maxWidth = 1500;

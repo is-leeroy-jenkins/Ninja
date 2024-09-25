@@ -71,7 +71,6 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.PieChart" /> class.
         /// </summary>
         public MetroPieChart( )
             : base( )
@@ -80,8 +79,8 @@ namespace Ninja
             SetResourceReference( StyleProperty, typeof( SfChart3D ) );
             Width = 800;
             Height = 454;
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12;
+            FontFamily = new FontFamily( "Roboto" );
+            FontSize = 11;
             SideBySideSeriesPlacement = true;
             EnableRotation = true;
             Depth = 250;

@@ -64,15 +64,14 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.MetroStepProgress" /> class.
+        /// <see cref="Ninja.MetroStepProgress" /> class.
         /// </summary>
         public MetroStepProgress( )
             : base( )
         {
             // Control Properties
             SetResourceReference( StyleProperty, typeof( SfStepProgressBar ) );
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12;
+            FontFamily = _theme.FontFamily;
             Background = _theme.Background;
             Foreground = _theme.BorderBrush;
             BorderBrush = _theme.BorderBrush;

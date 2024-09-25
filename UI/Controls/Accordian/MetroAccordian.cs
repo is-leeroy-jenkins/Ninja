@@ -73,14 +73,14 @@ namespace Ninja
         {
             // Control Properties
             SetResourceReference( StyleProperty, typeof( SfAccordion ) );
-            FontSize = 12;
-            FontFamily = new FontFamily( "Segoe UI" );
             Width = 250;
             Height = 250;
             AccentBrush = _theme.SteelBlueBrush;
             Background = _theme.Background;
             BorderBrush = _theme.BorderBrush;
             Foreground = _theme.Foreground;
+            FontFamily = _theme.FontFamily;
+            FontSize = _theme.FontSize;
         }
 
         /// <summary>

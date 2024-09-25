@@ -51,7 +51,7 @@ namespace Ninja
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:System.Windows.Controls.Expander" />
+    /// <seealso cref="System.Windows.Controls.Expander" />
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
     [ SuppressMessage( "ReSharper", "InconsistentNaming" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
@@ -65,14 +65,14 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.MetroExpander" /> class.
+        /// <see cref="Ninja.MetroExpander" /> class.
         /// </summary>
         public MetroExpander( )
             : base( )
         {
             // Basic Properties
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12;
+            FontFamily = _theme.FontFamily;
+            FontSize = _theme.FontSize;
             Width = 250;
             Height = 250;
             HorizontalAlignment = HorizontalAlignment.Center;

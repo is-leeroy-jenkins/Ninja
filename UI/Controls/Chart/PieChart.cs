@@ -173,8 +173,8 @@ namespace Ninja
             SetResourceReference( StyleProperty, typeof( SfChart ) );
             Width = 800;
             Height = 500;
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12;
+            FontFamily = new FontFamily( "Roboto" );
+            FontSize = 11;
             SideBySideSeriesPlacement = true;
             Padding = new Thickness( 1 );
             BorderThickness = new Thickness( 1 );

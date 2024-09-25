@@ -51,7 +51,7 @@ namespace Ninja
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:Syncfusion.UI.Xaml.Grid.SfDataGrid" />
+    /// <seealso cref="Syncfusion.UI.Xaml.Grid.SfDataGrid" />
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
     [ SuppressMessage( "ReSharper", "InconsistentNaming" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
@@ -67,7 +67,6 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Badger.DataGrid" /> class.
         /// </summary>
         public MetroDataGrid( )
             : base( )
@@ -75,7 +74,6 @@ namespace Ninja
             // Control Properties
             SetResourceReference( StyleProperty, typeof( SfDataGrid ) );
             FontFamily = _theme.FontFamily;
-            FontSize = _theme.FontSize;
             BorderBrush = _theme.BorderBrush;
             CurrentCellBorderBrush = _theme.LightBlueBrush;
             GroupRowSelectionBrush = _theme.SteelBlueBrush;

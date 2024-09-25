@@ -65,12 +65,13 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.MetroListBox" /> class.
         /// </summary>
         public MetroListBox( )
             : base( )
         {
             // Control Properties
+            FontFamily = _theme.FontFamily;
+            FontSize = _theme.FontSize;
             Background = _theme.ControlInterior;
             Foreground = _theme.LightBlueBrush;
             BorderBrush = _theme.BorderBrush;

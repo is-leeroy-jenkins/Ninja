@@ -73,8 +73,8 @@ namespace Ninja
             : base( )
         {
             // Control Properties
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12;
+            FontSize = _theme.FontSize;
+            FontFamily = _theme.FontFamily;
             Width = 460;
             Height = 400;
             HorizontalAlignment = HorizontalAlignment.Center;

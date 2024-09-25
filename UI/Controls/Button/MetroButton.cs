@@ -51,7 +51,7 @@ namespace Ninja
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:System.Windows.Controls.Canvas" />
+    /// <seealso cref="System.Windows.Controls.Canvas" />
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "InconsistentNaming" ) ]
@@ -68,7 +68,6 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Badger.Button" /> class.
         /// </summary>
         public MetroButton( )
             : base( )
@@ -86,6 +85,8 @@ namespace Ninja
             Margin = _theme.Margin;
             Padding = _theme.Padding;
             BorderThickness = _theme.BorderThickness;
+            FontFamily = _theme.FontFamily;
+            FontSize = _theme.FontSize;
 
             // Wire Events
             MouseEnter += OnMouseEnter;

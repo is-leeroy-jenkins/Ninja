@@ -72,8 +72,7 @@ namespace Ninja
         {
             // Control Properties
             SetResourceReference( StyleProperty, typeof( EditControl ) );
-            FontFamily = new FontFamily( "Segoe UI" );
-            FontSize = 12;
+            FontFamily = new FontFamily( "Roboto" );
             Width = 800;
             Height = 400;
             Background = _theme.ControlBackground;
