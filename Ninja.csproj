@@ -69,6 +69,9 @@
     <Page Remove="Fonts\**" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Libraries\iperf\cygwin1.dll" />
+    <Resource Include="Libraries\iperf\iperf.exe" />
+    <Resource Include="Libraries\iperf\iperf3.exe" />
     <Resource Include="Libraries\PcapDotNet\PcapDotNet.Core.dll" />
     <Resource Include="Resources\Assets\ApplicationImages\access.png" />
     <Resource Include="Resources\Assets\ApplicationImages\DataTable.png" />
@@ -320,6 +323,9 @@
     <Compile Remove="UI\Views\NumberTextBox.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Libraries\iperf\cygwin1.dll" />
+    <None Remove="Libraries\iperf\iperf.exe" />
+    <None Remove="Libraries\iperf\iperf3.exe" />
     <None Remove="Libraries\PcapDotNet\PcapDotNet.Core.dll" />
     <None Remove="Resources\Assets\ApplicationImages\access.png" />
     <None Remove="Resources\Assets\ApplicationImages\Analysis.png" />

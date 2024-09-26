@@ -48,7 +48,6 @@ namespace Ninja.ViewModels
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:Ninja.ViewModels.MainWindowBase" />
     [ SuppressMessage( "ReSharper", "FieldCanBeMadeReadOnly.Local" ) ]
     [ SuppressMessage( "ReSharper", "ConvertToAutoPropertyWhenPossible" ) ]
     [ SuppressMessage( "ReSharper", "ConvertToAutoProperty" ) ]
@@ -66,7 +65,13 @@ namespace Ninja.ViewModels
         /// <value>
         /// The sniffer views.
         /// </value>
-        public ObservableCollection<object> SnifferViews { get { return _snifferViews; } }
+        public ObservableCollection<object> SnifferViews
+        {
+            get
+            {
+                return _snifferViews;
+            }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SnifferViewModel"/> class.

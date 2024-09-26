@@ -50,13 +50,19 @@ namespace Ninja.ViewModels
     using System.Windows.Input;
     using System.Windows.Threading;
     using Views;
-    using Views;
 
     /// <inheritdoc />
     /// <summary>
     /// </summary>
     /// <seealso cref="MainWindowBase" />
     [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    [ SuppressMessage( "ReSharper", "FieldCanBeMadeReadOnly.Local" ) ]
     public class MainWindowViewModel : MainWindowBase
     {
         /// <summary>
@@ -95,6 +101,11 @@ namespace Ninja.ViewModels
         private protected SnifferViewModel _snifferViewModel;
 
         /// <summary>
+        /// The filter text
+        /// </summary>
+        private string _filterText;
+
+        /// <summary>
         /// The menu items collection
         /// CollectionViewSource enables XAML code to set the
         /// commonly used CollectionView properties,
@@ -118,11 +129,6 @@ namespace Ninja.ViewModels
                 return _menuItemsCollection.View;
             }
         }
-
-        /// <summary>
-        /// The filter text
-        /// </summary>
-        private string _filterText;
 
         /// <summary>
         /// Gets or sets the filter text.
@@ -255,8 +261,7 @@ namespace Ninja.ViewModels
                 case "Pcap":
                 {
                     var _pcapInfo =
-                        new ProcessStartInfo(
-                            "https://www.tcpdump.org/manpages/pcap-filter.7.html" )
+                        new ProcessStartInfo("https://www.tcpdump.org/manpages/pcap-filter.7.html" )
                         {
                             UseShellExecute = true
                         };
@@ -474,61 +479,75 @@ namespace Ninja.ViewModels
             switch( parameter )
             {
                 case "Iperf":
+                {
                     if( IperfViewModel == null )
                     {
-                        IperfViewModel = new IperfViewModel( );
+                        _iperfViewModel = new IperfViewModel( );
                     }
 
-                    SelectedViewModel = IperfViewModel;// new IperfViewModel();
+                    _selectedViewModel = _iperfViewModel;
                     break;
+                }
                 case "NetworkScan":
-                    if( NetworkScanViewModel == null )
+                {
+                    if( _networkScanViewModel == null )
                     {
-                        NetworkScanViewModel = new NetworkScanViewModel( );
+                        _networkScanViewModel = new NetworkScanViewModel( );
                     }
 
-                    SelectedViewModel = NetworkScanViewModel;// new NetworkScanViewModel();
+                    _selectedViewModel = _networkScanViewModel;
                     break;
+                }
                 case "PortScan":
-                    if( PortScanViewModel == null )
+                {
+                    if( _portScanViewModel == null )
                     {
-                        PortScanViewModel = new PortScanViewModel( );
+                        _portScanViewModel = new PortScanViewModel( );
                     }
 
-                    SelectedViewModel = PortScanViewModel;
+                    _selectedViewModel = _portScanViewModel;
                     break;
+                }
                 case "RouteTable":
-                    if( RouteViewModel == null )
+                {
+                    if( _routeViewModel == null )
                     {
-                        RouteViewModel = new RouteViewModel( );
+                        _routeViewModel = new RouteViewModel( );
                     }
 
-                    SelectedViewModel = RouteViewModel;
+                    _selectedViewModel = _routeViewModel;
                     break;
+                }
                 case "PortListen":
-                    if( PortViewModel == null )
+                {
+                    if( _portViewModel == null )
                     {
-                        PortViewModel = new PortViewModel( );
+                        _portViewModel = new PortViewModel( );
                     }
 
-                    SelectedViewModel = PortViewModel;
+                    _selectedViewModel = _portViewModel;
                     break;
+                }
                 case "Server":
-                    if( ServerViewModel == null )
+                {
+                    if( _serverViewModel == null )
                     {
-                        ServerViewModel = new ServerViewModel( );
+                        _serverViewModel = new ServerViewModel( );
                     }
 
-                    SelectedViewModel = ServerViewModel;
+                    _selectedViewModel = _serverViewModel;
                     break;
+                }
                 case "Sniffer":
-                    if( SnifferViewModel == null )
+                {
+                    if( _snifferViewModel == null )
                     {
-                        SnifferViewModel = new SnifferViewModel( );
+                        _snifferViewModel = new SnifferViewModel( );
                     }
 
-                    SelectedViewModel = SnifferViewModel;
+                    _selectedViewModel = _snifferViewModel;
                     break;
+                }
             }
         }
 
@@ -536,17 +555,20 @@ namespace Ninja.ViewModels
         /// Handles the Filter event of the MenuItems control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="FilterEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="FilterEventArgs"/>
+        /// instance containing the event data.</param>
         private void OnMenuItemsFilter( object sender, FilterEventArgs e )
         {
-            if( string.IsNullOrEmpty( FilterText ) )
+            if( string.IsNullOrEmpty( _filterText ) )
             {
                 e.Accepted = true;
                 return;
             }
 
             var _item = e.Item as MenuItems;
-            if( _item.MenuName.ToUpper( ).Contains( FilterText.ToUpper( ) ) )
+            var _menu = _item.MenuName.ToUpper( );
+            var _filter = _filterText.ToUpper( );
+            if( _menu.Contains( _filter ) )
             {
                 e.Accepted = true;
             }

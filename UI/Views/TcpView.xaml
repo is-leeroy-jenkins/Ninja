@@ -8,8 +8,7 @@
     xmlns:n="clr-namespace:Ninja"
     xmlns:src="clr-namespace:Ninja.Themes"
     xmlns:sync="http://schemas.syncfusion.com/wpf"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DesignHeight="700"
     mc:Ignorable="d">
 
     <!--  ************************************************* Resources  **************************************************  -->
@@ -27,7 +26,7 @@
     <!--  ******************************************** Context Menu ******************************************  -->
 
     <UserControl.ContextMenu>
-        <ContextMenu Name="DataWindowContextMenu">
+        <ContextMenu Name="TcpViewContextMenu">
             <sync:MenuItemAdv
                 Click="OnFileMenuOptionClick"
                 Header="File"
@@ -177,7 +176,7 @@
                         HorizontalAlignment="Right"
                         ButtonType="Normal"
                         Command="{Binding StartListenCommand}"
-                        Content="{Binding TcpModel.ServerListenBtnName}" />
+                        Content="{Binding TcpModel.ServerListenButtonName}" />
                     <!--<btnex:ButtonEx Margin="0,15,0,10" Content="Disconnect" ButtonType="Normal" Grid.Row="1" HorizontalAlignment="Center" Width="100" Height="30" Command="{Binding DisconnectCommand}" />-->
 
                     <Grid
@@ -257,7 +256,7 @@
                         HorizontalAlignment="Right"
                         ButtonType="Normal"
                         Command="{Binding ServerAutoSendCommand}"
-                        Content="{Binding TcpModel.ServerSendBtnName}" />
+                        Content="{Binding TcpModel.ServerSendButtonName}" />
 
                     <Grid Grid.Row="2">
                         <Grid.RowDefinitions>
@@ -359,7 +358,7 @@
                         HorizontalAlignment="Right"
                         ButtonType="Normal"
                         Command="{Binding ClientConnectCommand}"
-                        Content="{Binding TcpModel.ClientConnectBtnName}" />
+                        Content="{Binding TcpModel.ClientConnectButtonName}" />
 
                     <TextBlock
                         Grid.Row="1"
@@ -449,7 +448,7 @@
                         HorizontalAlignment="Right"
                         ButtonType="Normal"
                         Command="{Binding ClientAutoSendCommand}"
-                        Content="{Binding TcpModel.ClientSendBtnName}" />
+                        Content="{Binding TcpModel.ClientSendButtonName}" />
 
                     <TextBox
                         Grid.Row="2"

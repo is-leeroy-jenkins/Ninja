@@ -10,7 +10,7 @@
     xmlns:proto="clr-namespace:PcapDotNet.Packets.Ethernet;assembly=PcapDotNet.Packets"
     xmlns:src="clr-namespace:Ninja.Themes"
     xmlns:sync="http://schemas.syncfusion.com/wpf"
-    d:DesignHeight="800"
+    d:DesignHeight="700"
     mc:Ignorable="d">
 
     <!--  ************************************************* Resources  **************************************************  -->
@@ -34,7 +34,7 @@
     <!--  ******************************************** Context Menu ******************************************  -->
 
     <UserControl.ContextMenu>
-        <ContextMenu Name="DataWindowContextMenu">
+        <ContextMenu Name="SnifferCaptureContextMenu">
             <sync:MenuItemAdv
                 Click="OnFileMenuOptionClick"
                 Header="File"
@@ -467,7 +467,7 @@
                 </TreeViewItem>
                 <TreeViewItem
                     Focusable="False"
-                    Header="Dns Datagram">
+                    Header="DNS Datagram">
                     <TreeViewItem.Style>
                         <Style TargetType="{x:Type TreeViewItem}">
                             <Setter Property="Visibility" Value="Collapsed" />

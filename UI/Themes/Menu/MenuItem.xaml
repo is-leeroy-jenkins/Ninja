@@ -171,8 +171,8 @@
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="templateRoot" Property="Background" Value="{DynamicResource MenuItemHoverBackground}" />
-                <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource MenuItemHoverBorder}" />
+                <Setter TargetName="templateRoot" Property="Background" Value="{DynamicResource BlueBorderBrush}" />
+                <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource LightBlueBrush}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter TargetName="templateRoot" Property="TextElement.Foreground" Value="{DynamicResource FormBackground}" />
@@ -278,8 +278,8 @@
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="templateRoot" Property="Background" Value="{DynamicResource MenuItemHoverBackground}" />
-                <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource MenuItemHoverBorder}" />
+                <Setter TargetName="templateRoot" Property="Background" Value="{DynamicResource BlueBorderBrush}" />
+                <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource LightBlueBrush}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter TargetName="templateRoot" Property="TextElement.Foreground" Value="{DynamicResource FormBackground}" />
@@ -333,8 +333,8 @@
                     Margin="-1,0,0,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Background="{DynamicResource MenuItemSelectedBackground}"
-                    BorderBrush="{DynamicResource MenuItemSelectedBorder}"
+                    Background="{DynamicResource GreenBackground}"
+                    BorderBrush="{DynamicResource BrightGreenForeground}"
                     BorderThickness="1"
                     ClipToBounds="False"
                     CornerRadius="2"
@@ -374,20 +374,20 @@
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="templateRoot" Property="Background" Value="{DynamicResource MenuItemHoverBackground}" />
-                <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource MenuItemHoverBorder}" />
+                <Setter TargetName="templateRoot" Property="Background" Value="{DynamicResource BlueBorderBrush}" />
+                <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource LightBlueBrush}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter TargetName="templateRoot" Property="TextElement.Foreground" Value="{DynamicResource FormBackground}" />
-                <Setter TargetName="Glyph" Property="Fill" Value="{DynamicResource FormBackground}" />
+                <Setter TargetName="templateRoot" Property="TextElement.Foreground" Value="{DynamicResource WhiteForeground}" />
+                <Setter TargetName="Glyph" Property="Fill" Value="{DynamicResource GreenBackground}" />
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="IsHighlighted" Value="True" />
                     <Condition Property="IsEnabled" Value="False" />
                 </MultiTrigger.Conditions>
-                <Setter TargetName="templateRoot" Property="Background" Value="{DynamicResource MenuItemHoverBackground}" />
-                <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource MenuItemHoverBorder}" />
+                <Setter TargetName="templateRoot" Property="Background" Value="{DynamicResource BlueBorderBrush}" />
+                <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource LightBlueBrush}" />
             </MultiTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -431,8 +431,8 @@
                     Height="22"
                     Margin="-1,0,0,0"
                     VerticalAlignment="Center"
-                    Background="{DynamicResource MenuItemHoverBackground}"
-                    BorderBrush="{DynamicResource MenuItemHoverBorder}"
+                    Background="{DynamicResource BlueBorderBrush}"
+                    BorderBrush="{DynamicResource LightBlueBrush}"
                     BorderThickness="1"
                     Visibility="Hidden">
                     <Path
@@ -440,7 +440,7 @@
                         Width="9"
                         Height="11"
                         Data="{DynamicResource Checkmark}"
-                        Fill="{DynamicResource MenuItemForeground}"
+                        Fill="{DynamicResource FormForeground}"
                         FlowDirection="LeftToRight" />
                 </Border>
                 <ContentPresenter
@@ -526,8 +526,8 @@
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="True">
-                <Setter TargetName="templateRoot" Property="Background" Value="Transparent" />
-                <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource MenuItemHoverBorder}" />
+                <Setter TargetName="templateRoot" Property="Background" Value="{DynamicResource BlueBorderBrush}" />
+                <Setter TargetName="templateRoot" Property="BorderBrush" Value="{DynamicResource LightBlueBrush}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter TargetName="templateRoot" Property="TextElement.Foreground" Value="{DynamicResource FormBackground}" />
@@ -543,9 +543,9 @@
     <Style TargetType="{x:Type MenuItem}">
         <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
         <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="Foreground" Value="{StaticResource MenuItemForeground}" />
+        <Setter Property="Background" Value="{StaticResource ControlInteriorBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BlueBorderBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
@@ -559,9 +559,9 @@
                 <Setter Property="Padding" Value="6,0" />
             </Trigger>
             <Trigger Property="Role" Value="TopLevelItem">
-                <Setter Property="Background" Value="{DynamicResource GeneralBackground}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource MenuItemBorder}" />
-                <Setter Property="Foreground" Value="{DynamicResource MenuItemForeground}" />
+                <Setter Property="Background" Value="{StaticResource ControlInteriorBrush}" />
+                <Setter Property="BorderBrush" Value="{StaticResource BlueBorderBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
                 <Setter Property="Template" Value="{DynamicResource {ComponentResourceKey ResourceId=TopLevelItemTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}}" />
                 <Setter Property="Padding" Value="6,0" />
             </Trigger>

@@ -7,8 +7,8 @@
         <Style.Triggers>
             <Trigger Property="ButtonType" Value="Normal">
                 <Setter Property="Background" Value="{StaticResource ControlInteriorBrush}" />
-                <Setter Property="MouseOverBackground" Value="{StaticResource ControlHoverBrush}" />
-                <Setter Property="MousePressedBackground" Value="{StaticResource SteelBlueBackground}" />
+                <Setter Property="MouseOverBackground" Value="{StaticResource SteelBlueBackground}" />
+                <Setter Property="MousePressedBackground" Value="{StaticResource GreenBackground}" />
                 <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
                 <Setter Property="MouseOverForeground" Value="{StaticResource LightBlueBrush}" />
                 <Setter Property="MousePressedForeground" Value="{StaticResource WhiteForeground}" />

@@ -147,21 +147,21 @@ namespace Ninja.Models
         /// </summary>
         public IperfModel( )
         {
-            Version = "iperf.exe";
-            Role = "-c";
-            ServerIp = "10.21.68.29";
-            Port = 5001;
-            Parallel = 4;
-            Time = 60;
-            Interval = 1;
-            TcpFlag = true;
-            TcpWindowSize = 2;
-            TcpWindowUnit = "M";
-            UdpFlag = false;
-            BandWidth = 100;
-            BandWidthUnit = "M";
-            PacketLen = 0;
-            Reverse = false;
+            _version = "iperf.exe";
+            _role = "-c";
+            _serverIp = "10.21.68.29";
+            _port = 5001;
+            _parallel = 4;
+            _time = 60;
+            _interval = 1;
+            _tcpFlag = true;
+            _tcpWindowSize = 2;
+            _tcpWindowUnit = "M";
+            _udpFlag = false;
+            _bandWidth = 100;
+            _bandWidthUnit = "M";
+            _packetLen = 0;
+            _reverse = false;
         }
 
         /// <summary>

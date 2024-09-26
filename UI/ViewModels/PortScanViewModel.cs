@@ -1,10 +1,10 @@
 ﻿// ******************************************************************************************
 //     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 09-22-2024
+//     Created:                 09-26-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        09-22-2024
+//     Last Modified On:        09-26-2024
 // ******************************************************************************************
 // <copyright file="PortScanViewModel.cs" company="Terry D. Eppler">
 // 
@@ -55,7 +55,7 @@ namespace Ninja.ViewModels
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:Ninja.ViewModels.MainWindowBase" />
+    /// <seealso cref="MainWindowBase" />
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
     public class PortScanViewModel : MainWindowBase
@@ -66,22 +66,110 @@ namespace Ninja.ViewModels
         /// <value>
         /// The port scan model.
         /// </value>
-        public PortScanModel PortScanModel { get; set; }
+        private protected PortScanModel _portScanModel;
 
         /// <summary>
         /// The scan token source
         /// </summary>
-        private protected CancellationTokenSource scanTokenSource;
+        private protected CancellationTokenSource _tokenSource;
 
         /// <summary>
         /// The cancel scan token
         /// </summary>
-        private protected CancellationToken cancelScanToken;
+        private protected CancellationToken _cancelToken;
 
         /// <summary>
         /// The port count
         /// </summary>
-        public int PortCnt;
+        private protected int _portCount;
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="PortScanViewModel"/> class.
+        /// </summary>
+        public PortScanViewModel( )
+        {
+            _portScanModel = new PortScanModel( );
+        }
+
+        /// <summary>
+        /// Gets or sets the port scan model.
+        /// </summary>
+        /// <value>
+        /// The port scan model.
+        /// </value>
+        public PortScanModel PortScanModel
+        {
+            get
+            {
+                return _portScanModel;
+            }
+            private protected set
+            {
+                if( _portScanModel != value )
+                {
+                    _portScanModel = value;
+                    OnPropertyChanged( nameof( PortScanModel ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// The scan token source
+        /// </summary>
+        public CancellationTokenSource TokenSource
+        {
+            get
+            {
+                return _tokenSource;
+            }
+            private protected set
+            {
+                if( _tokenSource != value )
+                {
+                    _tokenSource = value;
+                    OnPropertyChanged( nameof( TokenSource ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// The cancel scan token
+        /// </summary>
+        public CancellationToken CancelToken
+        {
+            get
+            {
+                return _cancelToken;
+            }
+            private protected set
+            {
+                if( _cancelToken != value )
+                {
+                    _cancelToken = value;
+                    OnPropertyChanged( nameof( CancelToken ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// The port count
+        /// </summary>
+        public int PortCount
+        {
+            get
+            {
+                return _portCount;
+            }
+            private protected set
+            {
+                if( _portCount != value )
+                {
+                    _portCount = value;
+                    OnPropertyChanged( nameof( PortCount ) );
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the port scan results.
@@ -118,13 +206,13 @@ namespace Ninja.ViewModels
                 }
                 else
                 {
-                    Console.WriteLine( "port {0,5}tClosed.", port );
+                    Console.WriteLine( "port {0,5} Closed.", port );
                     PortScanModel.CloseCnt++;
                 }
             }
 
-            PortCnt--;
-            if( PortCnt == 0 )
+            PortCount--;
+            if( PortCount == 0 )
             {
                 PortScanModel.ScanButtonName = "Start";
             }
@@ -137,13 +225,13 @@ namespace Ninja.ViewModels
         /// </summary>
         public async void StartScanAsync( )
         {
-            scanTokenSource = new CancellationTokenSource( );
-            cancelScanToken = scanTokenSource.Token;
+            _tokenSource = new CancellationTokenSource( );
+            _cancelToken = _tokenSource.Token;
             var _startPortVal = PortScanModel.StartPort;
             var _stopPortVal = PortScanModel.StopPort;
             var _ipStr = PortScanModel.Ip;
-            PortCnt = _stopPortVal - _startPortVal;
-            if( PortCnt <= 0 )
+            PortCount = _stopPortVal - _startPortVal;
+            if( PortCount <= 0 )
             {
                 PortScanModel.ScanButtonName = "Start";
                 MessageBox.Show( "Please make sure (Start Port) < (Stop Port)!" );
@@ -157,7 +245,7 @@ namespace Ninja.ViewModels
                     for( var _i = _startPortVal; _i <= _stopPortVal; _i++ )
                     {
                         Console.WriteLine( _i.ToString( ) );
-                        if( scanTokenSource.IsCancellationRequested )
+                        if( _tokenSource.IsCancellationRequested )
                         {
                             break;
                         }
@@ -166,11 +254,11 @@ namespace Ninja.ViewModels
                         var _task = Task.Run( ( ) =>
                         {
                             ScanPort( _ipStr, _j );
-                        }, cancelScanToken );
+                        }, _cancelToken );
 
                         Thread.Sleep( 5 );
                     }
-                }, cancelScanToken );
+                }, _cancelToken );
             }
             catch( Exception ex )
             {
@@ -182,7 +270,7 @@ namespace Ninja.ViewModels
         /// </summary>
         internal void StopScanTask( )
         {
-            scanTokenSource.Cancel( );
+            _tokenSource.Cancel( );
         }
 
         /// <summary>
@@ -218,14 +306,6 @@ namespace Ninja.ViewModels
             {
                 return new RelayCommand( param => PortScanCmd( param ) );
             }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PortScanViewModel"/> class.
-        /// </summary>
-        public PortScanViewModel( )
-        {
-            PortScanModel = new PortScanModel( );
         }
     }
 }

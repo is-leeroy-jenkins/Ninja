@@ -6,7 +6,7 @@
         x:Key="TabControlEx"
         TargetType="{x:Type TabItem}">
 
-        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="Template">
             <Setter.Value>
@@ -26,16 +26,16 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="#0963c5" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource BlueBorderBrush}" />
                             <Setter TargetName="Border" Property="Height" Value="28" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="False">
-                            <Setter TargetName="Border" Property="Background" Value="Gray" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource BlueBorderBrush}"  />
                             <Setter TargetName="Border" Property="Height" Value="25" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <!--<Setter TargetName="Border" Property="Background" Value="#1e54b6" />-->
-                            <Setter TargetName="Border" Property="Background" Value="#2d6bdc" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource BlueBorderBrush}"  />
                             <Setter TargetName="Border" Property="Opacity" Value="1" />
                         </Trigger>
                     </ControlTemplate.Triggers>
