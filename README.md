@@ -17,7 +17,7 @@ Can be used  for network study by WPF MVVM.
 - [x] TCP Server & Client
 - [x] UDP Server & Client
 - [x] WebSocket Server & Client
-- [ ] MQTT
+- [x] MQTT
 - [x] Sniffer(Using pcap, packets capture, save, filter, statistics, plot. etc.)
 - [ ] ...
 
@@ -28,11 +28,19 @@ Can be used  for network study by WPF MVVM.
 - [Controls](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/Controls) - main UI layer and associated controls and related functionality.
 - [Enumerations](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Enumerations) - various enumerations used for budgetary accounting.
 - [Extensions](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Extensions)- useful extension methods for budget analysis by type.
+- [Sockets](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Network/Sockets) - tcp/udp/websockets classses
+- [Interfaces](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Network/Sockets) - network interface classes
+- [Converters](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Network/Converters) - type converters 
+- [Stats](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Network/Stats) - statistic classes 
 - [Clients](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Clients) - other tools used and available.
 - [Models](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Network/Models) - models used in network analysis
 - [Services](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Services) - networking service classes used in Ninja.
 - [Static](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Static) - static types used by Ninja.
 - [Interfaces](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Network/Interfaces) - abstractions used in network analysis.
+- [Views](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/Views) - Views
+- [ViewModels](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/ViewModels) - models used by the UI
+- [Themes](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/Themes) - ui themes 
+- [Windows](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/Windows) - window classes
 - `bin` - Binaries are included in the `bin` folder due to the complex Baby setup required. Don't empty this folder.
 - `bin/storage` - HTML and JS required for downloads manager and custom error pages
 
