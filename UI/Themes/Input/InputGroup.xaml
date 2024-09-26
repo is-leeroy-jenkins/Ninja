@@ -14,7 +14,7 @@
         <Setter Property="Background">
             <Setter.Value>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Offset="0" Color="{StaticResource WhiteColor}" />
+                    <GradientStop Offset="0" Color="{StaticResource ControlInteriorColor}" />
                     <GradientStop Offset="1" Color="{StaticResource LightBlueColor}" />
                 </LinearGradientBrush>
             </Setter.Value>
@@ -86,13 +86,13 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#e6e6e6" />
-                            <Setter Property="BorderBrush" Value="#adadad" />
+                            <Setter Property="Background" Value="{StaticResource SteelBlueBackground}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource LightBlueBrush}"  />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="Panel.ZIndex" Value="1" />
                             <Setter TargetName="PressedLayer" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="border" Property="BorderBrush" Value="#66afe9" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource LightBlueBrush}" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
@@ -198,13 +198,13 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#e6e6e6" />
-                            <Setter Property="BorderBrush" Value="#adadad" />
+                            <Setter Property="Background" Value="{StaticResource SteelBlueBackground}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource LightBlueBrush}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="Panel.ZIndex" Value="1" />
                             <Setter TargetName="PressedLayer" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="border" Property="BorderBrush" Value="#66afe9" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource LightBlueBrush}" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
@@ -261,15 +261,15 @@
         TargetType="{x:Type Control}">
         <Setter Property="Height" Value="{DynamicResource DefaultControlHeight}" />
         <Setter Property="Padding" Value="{DynamicResource DefaultControlPadding}" />
-        <Setter Property="Background" Value="{DynamicResource FormControlBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource FormControlBorderBrush}" />
-        <Setter Property="Foreground" Value="{DynamicResource FormControlForeground}" />
+        <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BlueBorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource FormForeground}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="#eee" />
+                <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
                 <Setter Property="Cursor" Value="No" />
             </Trigger>
         </Style.Triggers>
@@ -327,7 +327,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="BorderBrush" Value="#66afe9" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource LightBlueBrush}" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
@@ -417,7 +417,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="BorderBrush" Value="#66afe9" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource LightBlueBrush}" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>

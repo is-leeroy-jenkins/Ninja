@@ -2,7 +2,7 @@
     x:Class="Ninja.CalculatorWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:bdgr="clr-namespace:Ninja"
+    xmlns:n="clr-namespace:Ninja"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:skin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
@@ -13,7 +13,7 @@
     Height="460"
     sync:SfSkinManager.Theme="{skin:SkinManagerExtension ThemeName=FluentDark}"
     Background="{StaticResource BlackBackground}"
-    BorderBrush="{StaticResource BorderBrush}"
+    BorderBrush="{StaticResource BlueBorderBrush}"
     BorderThickness="1"
     FontSize="11"
     Foreground="{StaticResource FormForeground}"
@@ -36,7 +36,7 @@
     <!--  ********************************    Calculator   ********************************************  -->
 
     <Canvas>
-        <bdgr:MetroCalculator
+        <n:MetroCalculator
             x:Name="Device"
             Canvas.Left="10"
             Canvas.Top="45"
@@ -60,7 +60,7 @@
             ToolTip="Click for Windows 10 Calculator" />
         <Image
             x:Name="CloseButton"
-            Canvas.Left="380"
+            Canvas.Left="360"
             Canvas.Top="1"
             Width="22"
             Height="24"
