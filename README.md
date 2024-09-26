@@ -58,48 +58,112 @@ Run `Ninja.sln`
 
 ## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/GitHubImages/documentation.png) Documentation
 
-- [User Guide](Resources/Github/Users.md)
-- [Compilation Guide](Resources/Github/Compilation.md)
-- [Configuration Guide](Resources/Github/Configuration.md)
-- [Distribution Guide](Resources/Github/Distribution.md)
+- [User Guide](Resources/Github/Users.md) - how to use Ninja.
+- [Compilation Guide](Resources/Github/Compilation.md) - instructions on how to compile Ninja.
+- [Configuration Guide](Resources/Github/Configuration.md) - information for the Ninja configuration file. 
+- [Distribution Guide](Resources/Github/Distribution.md) -  distributing Ninja.
 
 
-## Packages
-```
-<?xml version="1.0" encoding="utf-8"?>
-<packages>
-  <package id="OxyPlot.Core" version="2.1.0" targetFramework="net48" />
-  <package id="OxyPlot.Wpf" version="2.1.0" targetFramework="net48" />
-  <package id="OxyPlot.Wpf.Shared" version="2.1.0" targetFramework="net48" />
-  <package id="Pcap.Net.x64" version="1.0.4.1" targetFramework="net48" />
-  <package id="Pcap.Net.x86" version="1.0.4.1" targetFramework="net48" />
-  <package id="System.Globalization.Extensions" version="4.3.0" targetFramework="net48" />
-  <package id="WebSocketSharp" version="1.0.3-rc11" targetFramework="net48" />
-</packages>
-```
+
 ## Libraries
 
 * [Iperf](https://github.com/esnet/iperf)
 * [oxyplot](https://github.com/oxyplot/oxyplot)
 
 ## Iperf
-- ![iperf](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/demo/iperf.png)
+- ![iperf](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/DemoImages/iperf.png)
 
 ## Sniffer
-- ![sniffer](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/demo/sniffer.png)
+- ![sniffer](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/DemoImages/sniffer.png)
 
 ## Stats
-- ![stats](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/demo/snifferstats.png)
+- ![stats](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/DemoImages/snifferstats.png)
 
 ## Websocket
-- ![websocket](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/demo/websocket.png)
+- ![websocket](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/DemoImages/websocket.png)
 
 ## Port
-- ![portlisten](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/demo/portlisten.png)
+- ![portlisten](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/DemoImages/portlisten.png)
 
 ## Routing
-- ![routetable](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/demo/routetable.png)
+- ![routetable](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/DemoImages/routetable.png)
 
 ## License
 
 MIT License（[License MIT](./LICENSE)）
+
+
+## Packages
+```
+<?xml version="1.0" encoding="utf-8"?>
+
+<ItemGroup>    
+    <PackageReference Include="EPPlus" Version="7.3.2" />
+    <PackageReference Include="EPPlus.Interfaces" Version="6.1.1" />
+    <PackageReference Include="EPPlus.System.Drawing" Version="6.1.1" />
+    <PackageReference Include="Google.Apis.CustomSearchAPI.v1" Version="1.68.0.3520" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.10" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.Office.Interop.Excel" Version="15.0.4795.1001" />
+    <PackageReference Include="Microsoft.Office.Interop.Outlook" Version="15.0.4797.1004" />
+    <PackageReference Include="Microsoft.Office.Interop.Word" Version="15.0.4797.1004" />
+    <PackageReference Include="ModernWpfUI" Version="0.9.6" />
+    <PackageReference Include="SkiaSharp" Version="2.88.8" />
+    <PackageReference Include="Syncfusion.Licensing" Version="24.1.41" />
+    <PackageReference Include="Syncfusion.SfSkinManager.WPF" Version="24.1.41" />
+    <PackageReference Include="Syncfusion.Shared.Base" Version="24.1.41" />
+    <PackageReference Include="Syncfusion.Shared.WPF" Version="24.1.41" />
+    <PackageReference Include="Syncfusion.Themes.FluentDark.WPF" Version="24.1.41" />
+    <PackageReference Include="Syncfusion.Tools.WPF" Version="24.1.41" />
+    <PackageReference Include="Syncfusion.UI.WPF.NET" Version="27.1.48" />
+    <PackageReference Include="System.Data.Common" Version="4.3.0" />
+    <PackageReference Include="System.Data.OleDb" Version="8.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+    <PackageReference Include="ToastNotifications.Messages.Net6" Version="1.0.4" />
+    <PackageReference Include="ToastNotifications.Net6" Version="1.0.4" />
+</ItemGroup>  
+<ItemGroup>
+    <Reference Include="LinqStatistics">
+      <HintPath>Libraries\LinqStatistics\LinqStatistics.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot">
+      <HintPath>Libraries\OxyPlot\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf">
+      <HintPath>Libraries\OxyPlot\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf.Shared">
+      <HintPath>Libraries\OxyPlot\OxyPlot.Wpf.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="PacketDotNet">
+      <HintPath>Libraries\PacketDotNet\PacketDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="PcapDotNet.Base">
+      <HintPath>Libraries\PcapDotNet\PcapDotNet.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="PcapDotNet.Core">
+      <HintPath>Libraries\PcapDotNet\PcapDotNet.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="PcapDotNet.Core.Extensions">
+      <HintPath>Libraries\PcapDotNet\PcapDotNet.Core.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="PcapDotNet.Packets">
+      <HintPath>Libraries\PcapDotNet\PcapDotNet.Packets.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite">
+      <HintPath>Libraries\System.Data\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6">
+      <HintPath>Libraries\System.Data\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq">
+      <HintPath>Libraries\System.Data\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SqlServerCe">
+      <HintPath>Libraries\System.Data\System.Data.SqlServerCe.dll</HintPath>
+    </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>Libraries\WebSocketSharp\websocket-sharp.dll</HintPath>
+    </Reference>
+ </ItemGroup>
+```
