@@ -5,8 +5,7 @@
     <BorderGapMaskConverter x:Key="BorderGapMaskConverter" />
 
     <Style TargetType="{x:Type GroupBox}">
-        <Setter Property="BorderBrush" Value="{StaticResource BlueBorderBrush}" />
-        <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
+        <Setter Property="Background" Value="{StaticResource BlueBorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Template">
             <Setter.Value>
@@ -31,15 +30,14 @@
                             Grid.RowSpan="3"
                             Grid.Column="0"
                             Grid.ColumnSpan="4"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="Transparent"
+                            Background="{StaticResource BlueBorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="4" />
                         <Border
                             Grid.Row="1"
                             Grid.RowSpan="3"
                             Grid.ColumnSpan="4"
-                            BorderBrush="{StaticResource BlueBorderBrush}"
+                            Background="{StaticResource BlueBorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="4">
                             <Border.OpacityMask>
@@ -58,7 +56,7 @@
                                 </MultiBinding>
                             </Border.OpacityMask>
                             <Border
-                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="{StaticResource BlueBorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="3">
                                 <Border
@@ -131,8 +129,6 @@
         x:Key="GrayGroupBox"
         BasedOn="{StaticResource AccentGroupBox}"
         TargetType="{x:Type GroupBox}">
-        <Setter Property="Background" Value="{StaticResource ControlInteriorBrush}" />
-        <Setter Property="BorderBrush" Value="{StaticResource MutedForeground}" />
-        <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
+        <Setter Property="Background" Value="{StaticResource BlueBorderBrush}" />
     </Style>
 </ResourceDictionary>

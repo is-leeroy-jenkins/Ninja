@@ -3,6 +3,42 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:n="clr-namespace:Ninja">
 
+    <!--  *********************************************** TextBox*****************************************************  -->
+
+    <Style TargetType="{x:Type TextBox}">
+
+        <Setter Property="Background" Value="{DynamicResource ControlInteriorBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BlueBorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource LightBlueBrush}" />
+        <Setter Property="SelectionBrush" Value="{DynamicResource SteelBlueBackground}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="10,1,1,1" />
+        <Setter Property="Margin" Value="1" />
+        <Setter Property="FontFamily" Value="Fonts/Roboto-Regular.ttf #Roboto Regular" />
+        <Setter Property="FontSize" Value="10" />
+
+
+        <Style.Triggers>
+
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource BlueBorderBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource LightBlueBrsh}" />
+                <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
+            </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="{DynamicResource ControlInteriorBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource BlueBorderBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource LightBlueBrush}" />
+            </Trigger>
+
+
+        </Style.Triggers>
+
+    </Style>
+
     <!--  *********************************************** MetroTextBox*****************************************************  -->
 
     <Style TargetType="{x:Type n:MetroTextBox}">
@@ -23,14 +59,14 @@
         <Style.Triggers>
 
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource ControlHoverBackground}" />
+                <Setter Property="Background" Value="{DynamicResource BlueBorderBrush}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource LightBlueBrsh}" />
                 <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
             </Trigger>
 
             <Trigger Property="IsMouseOver" Value="False">
                 <Setter Property="Background" Value="{DynamicResource ControlInteriorBrush}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource ControlInteriorBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource BlueBorderBrush}" />
                 <Setter Property="Foreground" Value="{DynamicResource LightBlueBrush}" />
             </Trigger>
 
