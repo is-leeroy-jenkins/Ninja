@@ -2,10 +2,16 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+
+    <!--  ******************************************** Resources *********************************************  -->
+
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/UI/Themes/Button/Button.xaml" />
         <ResourceDictionary Source="/UI/Themes/Label/Label.xaml" />
     </ResourceDictionary.MergedDictionaries>
+
+
+    <!--  ******************************************** ButtonBaseStyle *********************************************  -->
 
     <Style
         x:Key="InputGroupButtonBaseStyle"
@@ -86,13 +92,15 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource SteelBlueBackground}" />
-                            <Setter Property="BorderBrush" Value="{StaticResource LightBlueBrush}"  />
+                            <Setter Property="Background" Value="{StaticResource BlueBorderBrush}" />
+                            <Setter Property="Foreground" Value="{StaticResource WhiteForeground}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource LightBlueBrush}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="Panel.ZIndex" Value="1" />
                             <Setter TargetName="PressedLayer" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource LightBlueBrush}" />
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource GreenBackground}" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource BrightGreenForeground}" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
@@ -132,6 +140,9 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!--  ********************************************InputGroupButtonRightStyle*********************************************  -->
+
     <Style
         x:Key="InputGroupButtonRightStyle"
         BasedOn="{StaticResource InputGroupButtonBaseStyle}"
@@ -198,13 +209,15 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource SteelBlueBackground}" />
+                            <Setter Property="Background" Value="{StaticResource BlueBorderBrush}" />
                             <Setter Property="BorderBrush" Value="{StaticResource LightBlueBrush}" />
+                            <Setter Property="Foreground" Value="{StaticResource WhiteForeground}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="Panel.ZIndex" Value="1" />
                             <Setter TargetName="PressedLayer" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource LightBlueBrush}" />
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource GreenBackground}" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource BrightGreenForeground}" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
@@ -245,6 +258,9 @@
         </Setter>
     </Style>
 
+    <!--  ********************************************InputGroupPathStyle*********************************************  -->
+
+
     <Style
         x:Key="InputGroupPathStyle"
         BasedOn="{x:Null}"
@@ -255,28 +271,36 @@
         <Setter Property="Stretch" Value="Fill" />
     </Style>
 
+
+    <!--  ********************************************InputGroupBaseButtonStyle*********************************************  -->
+
     <Style
-        x:Key="InputGroupBtnBaseStyle"
+        x:Key="InputGroupBaseButtonStyle"
         BasedOn="{StaticResource BaseStyle}"
         TargetType="{x:Type Control}">
         <Setter Property="Height" Value="{DynamicResource DefaultControlHeight}" />
         <Setter Property="Padding" Value="{DynamicResource DefaultControlPadding}" />
-        <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource BlueBorderBrush}" />
-        <Setter Property="Foreground" Value="{DynamicResource FormForeground}" />
+        <Setter Property="Background" Value="{DynamicResource ControlInteriorBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MutedForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource LightBlueBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
+                <Setter Property="Background" Value="{DynamicResource GreenBackground}" />
+                <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource BrightGreenForeground}" />
                 <Setter Property="Cursor" Value="No" />
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <!--  ********************************************Input-Group-Btn Left*********************************************  -->
+
     <Style
         x:Key="Input-Group-Btn Left"
-        BasedOn="{StaticResource InputGroupBtnBaseStyle}"
+        BasedOn="{StaticResource InputGroupBaseButtonStyle}"
         TargetType="{x:Type Control}">
         <Setter Property="Template">
             <Setter.Value>
@@ -327,7 +351,8 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="BorderBrush" Value="{DynamicResource LightBlueBrush}" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource BrightGreenForeground}" />
+                            <Setter Property="Background" Value="{DynamicResource GreenBackground}" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
@@ -364,9 +389,12 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!--  *******************************************Input-Group-Btn Right*********************************************  -->
+
     <Style
         x:Key="Input-Group-Btn Right"
-        BasedOn="{StaticResource InputGroupBtnBaseStyle}"
+        BasedOn="{StaticResource InputGroupBaseButtonStyle}"
         TargetType="{x:Type Control}">
         <Setter Property="Template">
             <Setter.Value>
@@ -455,6 +483,7 @@
         </Setter>
     </Style>
 
+    <!--  *******************************************InputGroupLabelBaseStyle*********************************************  -->
 
     <Style
         x:Key="InputGroupLabelBaseStyle"
@@ -491,11 +520,13 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!--  ******************************************InputGroupLabelLeftStyle*********************************************  -->
+
     <Style
         x:Key="InputGroupLabelLeftStyle"
         BasedOn="{StaticResource InputGroupLabelBaseStyle}"
-        TargetType="{x:Type Label}">
-    </Style>
+        TargetType="{x:Type Label}" />
     <Style
         x:Key="InputGroupLabelRightStyle"
         BasedOn="{StaticResource InputGroupLabelBaseStyle}"
@@ -524,27 +555,33 @@
         </Setter>
     </Style>
 
+    <!--  ********************************************InputGroupAddonBaseStyle*********************************************  -->
+
+
     <Style
         x:Key="InputGroupAddonBaseStyle"
         BasedOn="{StaticResource BaseStyle}"
         TargetType="{x:Type Control}">
         <Setter Property="Height" Value="{DynamicResource DefaultControlHeight}" />
         <Setter Property="Padding" Value="{DynamicResource DefaultControlPadding}" />
-        <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource BlueBorderBrush}" />
+        <Setter Property="Background" Value="{DynamicResource ControlInteriorBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MutedForeground}" />
         <Setter Property="Foreground" Value="{DynamicResource FormForeground}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
+                <Setter Property="Background" Value="{DynamicResource FormBackground}" />
                 <Setter Property="Cursor" Value="No" />
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <!--  ********************************************InputGroupAddonLeft*********************************************  -->
+
     <Style
-        x:Key="Input-Group-Addon Left"
+        x:Key="InputGroupAddonLeft"
         BasedOn="{StaticResource InputGroupAddonBaseStyle}"
         TargetType="{x:Type Control}">
         <Setter Property="Template">
@@ -596,7 +633,9 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="BorderBrush" Value="{StaticResource LightBlueBrush}" />
+                            <Setter Property="Background" Value="{StaticResource GreenBackground}" />
+                            <Setter Property="Foreground" Value="{StaticResource WhiteForeground}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource BrightGreenForeground}" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
@@ -633,8 +672,11 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!--  ********************************************InputGroupAddonRight*********************************************  -->
+
     <Style
-        x:Key="Input-Group-Addon Right"
+        x:Key="InputGroupAddonRight"
         BasedOn="{StaticResource InputGroupAddonBaseStyle}"
         TargetType="{x:Type Control}">
         <Setter Property="Template">

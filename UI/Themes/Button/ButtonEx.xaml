@@ -6,7 +6,7 @@
     <Style TargetType="{x:Type n:ButtonEx}">
         <Style.Triggers>
             <Trigger Property="ButtonType" Value="Normal">
-                <Setter Property="Background" Value="{StaticResource ControlInterior}" />
+                <Setter Property="Background" Value="{StaticResource ControlInteriorBrush}" />
                 <Setter Property="MouseOverBackground" Value="{StaticResource ControlHoverBrush}" />
                 <Setter Property="MousePressedBackground" Value="{StaticResource SteelBlueBackground}" />
                 <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
@@ -41,7 +41,7 @@
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsEnabled" Value="False">
-                                    <Setter TargetName="border" Property="Background" Value="{StaticResource ControlInterior}" />
+                                    <Setter TargetName="border" Property="Background" Value="{StaticResource ControlInteriorBrush}" />
                                     <Setter TargetName="txt" Property="Foreground" Value="{Binding MouseOverForeground, RelativeSource={RelativeSource TemplatedParent}}" />
                                     <Setter TargetName="border" Property="BorderBrush" Value="{Binding MouseOverBorderbrush, RelativeSource={RelativeSource TemplatedParent}}" />
                                 </Trigger>

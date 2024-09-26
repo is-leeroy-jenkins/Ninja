@@ -102,7 +102,7 @@
         TargetType="ComboBox">
         <Setter Property="Margin" Value="0,5,10,0" />
         <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
-        <Setter Property="Background" Value="{StaticResource ControlInterior}" />
+        <Setter Property="Background" Value="{StaticResource ControlInteriorBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource BlueBorderBrush}" />
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -155,7 +155,7 @@
         <Setter Property="FontFamily" Value="Fonts/Roboto-Regular.ttf #Roboto Regular" />
         <Setter Property="FontSize" Value="11" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Background" Value="{StaticResource ControlBackground}" />
+        <Setter Property="Background" Value="{StaticResource ControlInteriorBrush}" />
         <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
         <Setter Property="BorderBrush" Value="{StaticResource BlueBorderBrush}" />
         <Setter Property="BorderThickness" Value="0" />
@@ -171,7 +171,7 @@
             </Trigger>
 
             <Trigger Property="IsMouseOver" Value="False">
-                <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
+                <Setter Property="Background" Value="{DynamicResource ControlInteriorBrush}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource BlueBorderBrush}" />
                 <Setter Property="Foreground" Value="{DynamicResource LightBlueBrush}" />
             </Trigger>
@@ -187,7 +187,7 @@
         <Setter Property="IsHitTestVisible" Value="False" />
         <Setter Property="Visibility" Value="Collapsed" />
         <Setter Property="FontFamily" Value="Fonts/Roboto-Regular.ttf #Roboto Regular" />
-        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontSize" Value="12" />
         <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />

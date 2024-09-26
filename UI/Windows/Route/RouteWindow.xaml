@@ -23,7 +23,7 @@
     <!--  ******************************************** Context Menu ******************************************-->
 
     <UserControl.ContextMenu>
-        <ContextMenu Name="DataWindowContextMenu">
+        <ContextMenu Name="RouteWindowContextMenu">
             <sync:MenuItemAdv
                 Click="OnFileMenuOptionClick"
                 Header="File"

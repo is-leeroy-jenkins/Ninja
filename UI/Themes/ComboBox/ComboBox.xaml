@@ -7,7 +7,7 @@
 
     <Style TargetType="{x:Type n:MetroComboBox}">
 
-        <Setter Property="Background" Value="{DynamicResource ControlInterior}" />
+        <Setter Property="Background" Value="{DynamicResource ControlInteriorBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BlueBorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource LightBlueBrush}" />
         <Setter Property="BorderThickness" Value="1" />
@@ -27,7 +27,7 @@
 
     <Style TargetType="{x:Type n:MetroComboBoxItem}">
 
-        <Setter Property="Background" Value="{DynamicResource ControlInterior}" />
+        <Setter Property="Background" Value="{DynamicResource ControlInteriorBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BlueBorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource LightBlueBrush}" />
         <Setter Property="BorderThickness" Value="1" />
@@ -49,8 +49,8 @@
             </Trigger>
 
             <Trigger Property="IsMouseOver" Value="False">
-                <Setter Property="Background" Value="{DynamicResource ControlInterior}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource ControlInterior}" />
+                <Setter Property="Background" Value="{DynamicResource ControlInteriorBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ControlInteriorBrush}" />
                 <Setter Property="Foreground" Value="{DynamicResource LightBlueBrush}" />
             </Trigger>
 

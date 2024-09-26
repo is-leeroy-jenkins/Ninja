@@ -14,7 +14,7 @@
     <UserControl.Resources>
         <Style TargetType="ToolTip">
             <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource BlueBorderBrush}" />
             <Setter Property="Background" Value="{StaticResource BlackBackground}" />
             <Setter Property="Foreground" Value="{StaticResource LightBlueBrush}" />
         </Style>
@@ -23,7 +23,7 @@
     <!--  ******************************************** Context Menu ******************************************  -->
 
     <UserControl.ContextMenu>
-        <ContextMenu Name="DataWindowContextMenu">
+        <ContextMenu Name="PortScanContextMenu">
             <sync:MenuItemAdv
                 Click="OnFileMenuOptionClick"
                 Header="File"
@@ -123,8 +123,6 @@
     </UserControl.ContextMenu>
 
     <!--  ******************************************** Layout ******************************************  -->
-
-
 
     <Grid>
 
