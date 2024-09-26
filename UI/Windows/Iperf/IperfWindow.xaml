@@ -233,7 +233,7 @@
                             Style="{StaticResource MenuItemText}"
                             Text="Server IP" />
 
-                        <TextBox
+                        <n:MetroTextBox
                             Grid.Row="3"
                             Width="130"
                             Margin="0,5,10,0"

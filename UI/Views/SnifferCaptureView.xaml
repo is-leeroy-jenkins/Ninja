@@ -13,7 +13,7 @@
     d:DesignHeight="700"
     mc:Ignorable="d">
 
-    <!--  ************************************************* Resources  **************************************************  -->
+    <!--************************************************* Resources  **************************************************-->
 
     <UserControl.Resources>
 
@@ -159,33 +159,39 @@
                             <DataTrigger
                                 Binding="{Binding Ethernet.IpV4.Protocol}"
                                 Value="{x:Static enum:IpV4Protocol.Udp}">
-                                <Setter Property="Background" Value="YellowGreen" />
-                                <Setter Property="BorderBrush" Value="YellowGreen" />
+                                <Setter Property="Background" Value="{StaticResource ControlInteriorBrush}" />
+                                <Setter Property="BorderBrush" Value="{StaticResource ControlInteriorBrush}" />
+                                <Setter Property="Foreground" Value="{StaticResource LightBlueBrush}" />
                                 <Setter Property="Margin" Value="0,0,0,-1" />
                             </DataTrigger>
                             <DataTrigger
                                 Binding="{Binding Ethernet.IpV4.Protocol}"
                                 Value="{x:Static enum:IpV4Protocol.Tcp}">
-                                <Setter Property="Background" Value="PaleGreen" />
-                                <Setter Property="BorderBrush" Value="PaleGreen" />
+                                <Setter Property="Background" Value="{StaticResource ControlInteriorBrush}" />
+                                <Setter Property="BorderBrush" Value="{StaticResource ControlInteriorBrush}" />
+                                <Setter Property="Foreground" Value="{StaticResource LightBlueBrush}" />
                                 <Setter Property="Margin" Value="0,0,0,-1" />
                             </DataTrigger>
                             <DataTrigger
                                 Binding="{Binding Ethernet.IpV4.Protocol}"
                                 Value="{x:Static enum:IpV4Protocol.InternetGroupManagementProtocol}">
-                                <Setter Property="Background" Value="Bisque" />
-                                <Setter Property="BorderBrush" Value="Bisque" />
+                                <Setter Property="Background" Value="{StaticResource ControlInteriorBrush}" />
+                                <Setter Property="BorderBrush" Value="{StaticResource ControlInteriorBrush}" />
+                                <Setter Property="Foreground" Value="{StaticResource LightBlueBrush}" />
                                 <Setter Property="Margin" Value="0,0,0,-1" />
                             </DataTrigger>
                             <DataTrigger
                                 Binding="{Binding Ethernet.IpV4.Protocol}"
                                 Value="{x:Static enum:IpV4Protocol.InternetControlMessageProtocol}">
-                                <Setter Property="Background" Value="BlanchedAlmond" />
-                                <Setter Property="BorderBrush" Value="BlanchedAlmond" />
+                                <Setter Property="Background" Value="{StaticResource ControlInteriorBrush}" />
+                                <Setter Property="BorderBrush" Value="{StaticResource ControlInteriorBrush}" />
+                                <Setter Property="Foreground" Value="{StaticResource LightBlueBrush}" />
                                 <Setter Property="Margin" Value="0,0,0,-1" />
                             </DataTrigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" Value="Blue" />
+                                <Setter Property="Background" Value="{StaticResource SteelBlueBackground}" />
+                                <Setter Property="BorderBrush" Value="{StaticResource LightBlueBrush}" />
+                                <Setter Property="Foreground" Value="{StaticResource WhiteForeground}" />
                                 <Setter Property="Cursor" Value="Hand" />
                             </Trigger>
                             <MultiTrigger>
@@ -193,7 +199,9 @@
                                     <Condition Property="IsSelected" Value="true" />
                                     <Condition Property="Selector.IsSelectionActive" Value="true" />
                                 </MultiTrigger.Conditions>
-                                <Setter Property="Background" Value="CornflowerBlue" />
+                                <Setter Property="Background" Value="{StaticResource GreenBackground}" />
+                                <Setter Property="Foreground" Value="{StaticResource WhiteForeground}" />
+                                <Setter Property="BorderBrush" Value="{StaticResource GreenBackground}" />
                             </MultiTrigger>
                         </Style.Triggers>
                     </Style>

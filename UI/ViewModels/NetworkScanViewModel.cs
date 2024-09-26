@@ -92,12 +92,23 @@ namespace Ninja.ViewModels
         private protected CancellationToken cancelScanToken;
 
         /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="NetworkScanViewModel"/> class.
+        /// </summary>
+        public NetworkScanViewModel()
+        {
+            NetworkScanModel = new NetworkScanModel();
+            IpInterface = new IpInterface();
+            NetworkScanModel.NetInfoItemSource = GetLocalNetworkInterface();
+        }
+        
+        /// <summary>
         /// Gets or sets the ip scan results.
         /// </summary>
         /// <value>
         /// The ip scan results.
         /// </value>
-        public ObservableCollection<IpScanResult> IpScanResults { get; set; } =
+        public ObservableCollection<IpScanResult> IpScanResults { get; set; } = 
             new ObservableCollection<IpScanResult>( );
 
         /// <summary>
@@ -281,16 +292,6 @@ namespace Ninja.ViewModels
             }
 
             return _info;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NetworkScanViewModel"/> class.
-        /// </summary>
-        public NetworkScanViewModel( )
-        {
-            NetworkScanModel = new NetworkScanModel( );
-            IpInterface = new IpInterface( );
-            NetworkScanModel.NetInfoItemSource = GetLocalNetworkInterface( );
         }
     }
 }

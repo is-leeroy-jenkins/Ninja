@@ -9,6 +9,7 @@
     xmlns:sync="http://schemas.syncfusion.com/wpf"
     Title="Ninja"
     Height="700"
+    Width="1300"
     sync:SfSkinManager.Theme="{skin:SkinManagerExtension ThemeName=FluentDark}"
     Background="{StaticResource FormBackground}"
     BorderBrush="{StaticResource BlueBorderBrush}"
@@ -173,15 +174,15 @@
                     Header="Help">
                     <MenuItem
                         Command="{Binding RunMenuCommand}"
-                        CommandParameter="Iperf"
+                        CommandParameter="iperf"
                         Header="Iperf" />
                     <MenuItem
                         Command="{Binding RunMenuCommand}"
-                        CommandParameter="Pcap"
+                        CommandParameter="pcap"
                         Header="Pcap Filter" />
                     <MenuItem
                         Command="{Binding RunMenuCommand}"
-                        CommandParameter="About"
+                        CommandParameter="about"
                         Header="About Ninja" />
                 </MenuItem>
             </Menu>

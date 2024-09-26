@@ -137,7 +137,7 @@ namespace Ninja.ViewModels
             {
                 return _iperfModel;
             }
-            private protected set
+            set
             {
                 if( _iperfModel != value )
                 {
@@ -156,7 +156,7 @@ namespace Ninja.ViewModels
             {
                 return _plotModelData;
             }
-            private protected set
+            set
             {
                 if( _plotModelData != value )
                 {
@@ -175,7 +175,7 @@ namespace Ninja.ViewModels
             {
                 return _tokenSource;
             }
-            private protected set
+            set
             {
                 if( _tokenSource != value )
                 {
@@ -194,7 +194,7 @@ namespace Ninja.ViewModels
             {
                 return _iperfProcess;
             }
-            private protected set
+            set
             {
                 if( _iperfProcess != value )
                 {
@@ -213,7 +213,7 @@ namespace Ninja.ViewModels
             {
                 return _lineSeriesCurrentVal;
             }
-            private protected set
+            set
             {
                 if( _lineSeriesCurrentVal != value )
                 {
@@ -232,7 +232,7 @@ namespace Ninja.ViewModels
             {
                 return _xTimeAxis;
             }
-            private protected set
+            set
             {
                 if( _xTimeAxis != value )
                 {
@@ -251,7 +251,7 @@ namespace Ninja.ViewModels
             {
                 return _yThroughputVal;
             }
-            private protected set
+            set
             {
                 if( _yThroughputVal != value )
                 {
@@ -270,7 +270,7 @@ namespace Ninja.ViewModels
             {
                 return 1;
             }
-            private protected set
+            set
             {
                 if( _yZoomFactor != value )
                 {
@@ -283,7 +283,7 @@ namespace Ninja.ViewModels
         /// <summary>
         /// Initializes the plot.
         /// </summary>
-        public void InitPlot( )
+        private protected void InitPlot( )
         {
             _plotModelData = new PlotModel( );
             _xTimeAxis = new LinearAxis( )
@@ -333,7 +333,7 @@ namespace Ninja.ViewModels
                 Color = OxyColors.Red
             };
 
-            _plotModelData.Series.Add( LineSeriesCurrentVal );
+            _plotModelData.Series.Add( _lineSeriesCurrentVal );
         }
 
         /// <summary>
@@ -413,7 +413,7 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void RunIperf( object parameter )
         {
-            var _iperfPath =  @"C:\Users\terry\source\repos\Ninja\Libraries\iperf\" 
+            var _iperfPath = @"\Libraries\iperf\" 
                 + _iperfModel.Version;
 
             _iperfProcess.StartProcess( _iperfPath, ( string )parameter,
@@ -533,7 +533,7 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void IperfHelp( object parameter )
         {
-            var _iperfPath = @"C:\Users\terry\source\repos\Ninja\Libraries\iperf\" + _iperfModel.Version;
+            var _iperfPath = @"\Libraries\iperf\" + _iperfModel.Version;
             _iperfProcess.StartProcess( _iperfPath, "--help", ProcessOutputDataReceived );
         }
 

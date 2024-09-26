@@ -101,6 +101,11 @@ namespace Ninja.ViewModels
         private protected SnifferViewModel _snifferViewModel;
 
         /// <summary>
+        /// The selected view model
+        /// </summary>
+        private protected object _selectedViewModel;
+
+        /// <summary>
         /// The filter text
         /// </summary>
         private string _filterText;
@@ -113,49 +118,13 @@ namespace Ninja.ViewModels
         /// </summary>
         private CollectionViewSource _menuItemsCollection;
 
-        /// ICollectionView enables collections to have the
-        /// functionalities of current record management,
-        /// custom sorting, filtering, and grouping.
-        /// <summary>
-        /// Gets the source collection.
-        /// </summary>
-        /// <value>
-        /// The source collection.
-        /// </value>
-        public ICollectionView SourceCollection
-        {
-            get
-            {
-                return _menuItemsCollection.View;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the filter text.
-        /// </summary>
-        /// <value>
-        /// The filter text.
-        /// </value>
-        public string FilterText
-        {
-            get
-            {
-                return _filterText;
-            }
-            set
-            {
-                _filterText = value;
-                _menuItemsCollection.View.Refresh( );
-                OnPropertyChanged( nameof( FilterText ) );
-            }
-        }
-
         /// <summary>
         /// Initializes a new instance of the
         /// <see cref="MainWindowViewModel"/> class.
         /// </summary>
         public MainWindowViewModel( )
         {
+            _selectedViewModel = new object( );
             var _menuItems = new ObservableCollection<MenuItems>
             {
                 new MenuItems
@@ -200,9 +169,49 @@ namespace Ninja.ViewModels
                 Source = _menuItems
             };
 
-            _menuItemsCollection.Filter += OnMenuItemsFilter;
             _iperfViewModel = new IperfViewModel( );
             _selectedViewModel = _iperfViewModel;
+            _menuItemsCollection.Filter += OnMenuItemsFilter;
+        }
+
+        /// ICollectionView enables collections to have the
+        /// functionalities of current record management,
+        /// custom sorting, filtering, and grouping.
+        /// <summary>
+        /// Gets the source collection.
+        /// </summary>
+        /// <value>
+        /// The source collection.
+        /// </value>
+        public ICollectionView SourceCollection
+        {
+            get
+            {
+                return _menuItemsCollection.View;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the filter text.
+        /// </summary>
+        /// <value>
+        /// The filter text.
+        /// </value>
+        public string FilterText
+        {
+            get
+            {
+                return _filterText;
+            }
+            set
+            {
+                if( _filterText != value )
+                {
+                    _filterText = value;
+                    _menuItemsCollection.View.Refresh( );
+                    OnPropertyChanged( nameof( FilterText ) );
+                }
+            }
         }
 
         /// <summary>
@@ -236,19 +245,19 @@ namespace Ninja.ViewModels
         {
             switch( parameter )
             {
-                case "Calc":
+                case "calc":
                 {
                     Process.Start( "calc.exe" );
                     break;
                 }
-                case "About":
+                case "about":
                 {
                     var _aboutWindow = new AboutWindow( );
                     _aboutWindow.Show( );
                     Dispatcher.Run( );
                     break;
                 }
-                case "Iperf":
+                case "iperf":
                 {
                     var _iperfInfo = new ProcessStartInfo( "https://iperf.fr/" )
                     {
@@ -258,10 +267,10 @@ namespace Ninja.ViewModels
                     Process.Start( _iperfInfo );
                     break;
                 }
-                case "Pcap":
+                case "pcap":
                 {
                     var _pcapInfo =
-                        new ProcessStartInfo("https://www.tcpdump.org/manpages/pcap-filter.7.html" )
+                        new ProcessStartInfo( "https://www.tcpdump.org/manpages/pcap-filter.7.html" )
                         {
                             UseShellExecute = true
                         };
@@ -287,11 +296,6 @@ namespace Ninja.ViewModels
         }
 
         /// <summary>
-        /// The selected view model
-        /// </summary>
-        private object _selectedViewModel;
-
-        /// <summary>
         /// Gets or sets the selected view model.
         /// </summary>
         /// <value>
@@ -305,8 +309,11 @@ namespace Ninja.ViewModels
             }
             set
             {
-                _selectedViewModel = value;
-                OnPropertyChanged( nameof( SelectedViewModel ) );
+                if( _selectedViewModel != value )
+                {
+                    _selectedViewModel = value;
+                    OnPropertyChanged( nameof( SelectedViewModel ) );
+                }
             }
         }
 
@@ -480,7 +487,7 @@ namespace Ninja.ViewModels
             {
                 case "Iperf":
                 {
-                    if( IperfViewModel == null )
+                    if( _iperfViewModel == null )
                     {
                         _iperfViewModel = new IperfViewModel( );
                     }
@@ -566,9 +573,7 @@ namespace Ninja.ViewModels
             }
 
             var _item = e.Item as MenuItems;
-            var _menu = _item.MenuName.ToUpper( );
-            var _filter = _filterText.ToUpper( );
-            if( _menu.Contains( _filter ) )
+            if( _item.MenuName.ToUpper( ).Contains( _filterText.ToUpper( ) ) )
             {
                 e.Accepted = true;
             }

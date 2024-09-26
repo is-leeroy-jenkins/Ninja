@@ -43,14 +43,37 @@
 namespace Ninja.Models
 {
     using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// 
     /// </summary>
     [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
-    public class NetInterfaceInfo
+    public class NetInterfaceInfo : INotifyPropertyChanged
     {
+        /// <summary>
+        /// The name
+        /// </summary>
+        private protected string _name;
+
+        /// <summary>
+        /// The ip
+        /// </summary>
+        private protected string _ip;
+
+        /// <summary>
+        /// The description
+        /// </summary>
+        private protected string _description;
+
+        /// <summary>
+        /// The mask
+        /// </summary>
+        private protected string _mask;
+
         /// <summary>
         /// Initializes a new instance of the
         /// <see cref="NetInterfaceInfo"/> class.
@@ -65,7 +88,21 @@ namespace Ninja.Models
         /// <value>
         /// The name.
         /// </value>
-        public string Name { get; set; }
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                if( _name != value )
+                {
+                    _name = value;
+                    OnPropertyChanged( nameof( Name ) );
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the ip.
@@ -73,7 +110,21 @@ namespace Ninja.Models
         /// <value>
         /// The ip.
         /// </value>
-        public string Ip { get; set; }
+        public string Ip
+        {
+            get
+            {
+                return _ip;
+            }
+            set
+            {
+                if(_ip != value)
+                {
+                    _ip = value;
+                    OnPropertyChanged(nameof(Ip));
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the description.
@@ -81,7 +132,21 @@ namespace Ninja.Models
         /// <value>
         /// The description.
         /// </value>
-        public string Description { get; set; }
+        public string Description
+        {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                if(_description != value)
+                {
+                    _description = value;
+                    OnPropertyChanged(nameof(Description));
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the mask.
@@ -89,6 +154,57 @@ namespace Ninja.Models
         /// <value>
         /// The mask.
         /// </value>
-        public string Mask { get; set; }
+        public string Mask
+        {
+            get
+            {
+                return _mask;
+            }
+            set
+            {
+                if(_mask != value)
+                {
+                    _mask = value;
+                    OnPropertyChanged(nameof(Mask));
+                }
+            }
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Updates the specified field.
+        /// </summary>
+        /// <typeparam name="_"></typeparam>
+        /// <param name="field">The field.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="propertyName">Name of the property.</param>
+        public void Update<T>(ref T field, T value,
+            [ CallerMemberName ]
+            string propertyName = null)
+
+        {
+            if(EqualityComparer<T>.Default.Equals(field, value))
+            {
+                return;
+            }
+
+            field = value;
+            OnPropertyChanged(propertyName);
+        }
+
+        /// <summary>
+        /// Called when [property changed].
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        public void OnPropertyChanged( [ CallerMemberName ] string propertyName = null )
+        {
+            var _handler = PropertyChanged;
+            _handler?.Invoke( this, new PropertyChangedEventArgs( propertyName ) );
+        }
     }
 }

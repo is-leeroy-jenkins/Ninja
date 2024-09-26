@@ -44,12 +44,14 @@ namespace Ninja.Interfaces
 {
     using System;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.InteropServices;
     using System.Threading;
 
     /// <summary>
     /// 
     /// </summary>
+    [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
     public class ProcessInterface
     {
         /// <summary>
@@ -70,7 +72,7 @@ namespace Ninja.Interfaces
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns></returns>
-        private delegate Boolean _consoleCtrlDelegate( CtrlTypes type );
+        private delegate Boolean ConsoleCtrlDelegate( CtrlTypes type );
 
         /// <summary>
         /// Generates the console control event.
@@ -90,7 +92,7 @@ namespace Ninja.Interfaces
         /// <param name="add">if set to <c>true</c> [add].</param>
         /// <returns></returns>
         [ DllImport( "kernel32.dll" ) ]
-        private static extern bool SetConsoleCtrlHandler( _consoleCtrlDelegate handler, bool add );
+        private static extern bool SetConsoleCtrlHandler( ConsoleCtrlDelegate handler, bool add );
 
         /// <summary>
         /// Frees the console.
@@ -160,6 +162,7 @@ namespace Ninja.Interfaces
             }
             catch( Exception ex )
             {
+                // Ignore
             }
         }
     }

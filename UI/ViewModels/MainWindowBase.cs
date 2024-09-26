@@ -50,7 +50,7 @@ namespace Ninja.ViewModels
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:System.ComponentModel.INotifyPropertyChanged" />
+    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     [ SuppressMessage( "ReSharper", "InconsistentNaming" ) ]
     public class MainWindowBase : INotifyPropertyChanged
     {

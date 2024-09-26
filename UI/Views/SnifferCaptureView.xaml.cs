@@ -7,6 +7,7 @@ namespace Ninja.Views
     using System.Windows;
     using System.Windows.Controls;
 
+    /// <inheritdoc />
     /// <summary>
     /// SnifferCaptureView.xaml
     /// </summary>
@@ -32,6 +33,11 @@ namespace Ninja.Views
         /// </summary>
         private protected TimerCallback _timerCallback;
 
+        /// <inheritdoc />
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="T:Ninja.Views.SnifferCaptureView" /> class.
+        /// </summary>
         public SnifferCaptureView()
         {
             InitializeComponent();

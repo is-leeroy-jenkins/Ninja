@@ -190,7 +190,7 @@
                             HorizontalAlignment="Stretch"
                             Foreground="{StaticResource LightBlueBrush}"
                             VerticalAlignment="Center"
-                            DisplayMemberPath="description"
+                            DisplayMemberPath="Description"
                             ItemsSource="{Binding NetworkScanModel.NetInfoItemSource}"
                             SelectedIndex="0"
                             SelectedItem="{Binding NetworkScanModel.NetInfoItemSource}" />

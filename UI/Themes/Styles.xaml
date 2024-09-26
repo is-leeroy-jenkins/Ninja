@@ -94,7 +94,7 @@
         <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="11" />
     </Style>
 
     <Style
@@ -187,7 +187,8 @@
         <Setter Property="IsHitTestVisible" Value="False" />
         <Setter Property="Visibility" Value="Collapsed" />
         <Setter Property="FontFamily" Value="Fonts/Roboto-Regular.ttf #Roboto Regular" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="Background" Value="{StaticResource ControlInteriorBrush}" />
         <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
