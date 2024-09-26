@@ -99,7 +99,7 @@ namespace Ninja.Views
         public MainWindow( )
         {
             InitializeComponent( );
-            Height = 800;
+            Height = 700;
             Width = 1300;
             FontFamily = _theme.FontFamily;
             FontSize = _theme.FontSize;

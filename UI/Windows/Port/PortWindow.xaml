@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sync="http://schemas.syncfusion.com/wpf"
-    d:DesignHeight="800"
+    d:DesignHeight="700"
     mc:Ignorable="d">
 
     <!--  ******************************************** Resources *********************************************  -->
@@ -23,7 +23,7 @@
     <!--  ******************************************** Context Menu ******************************************  -->
 
     <UserControl.ContextMenu>
-        <ContextMenu Name="DataWindowContextMenu">
+        <ContextMenu Name="PortWindowContextMenu">
             <sync:MenuItemAdv
                 Click="OnFileMenuOptionClick"
                 Header="File"
@@ -146,6 +146,7 @@
                 <RowDefinition Height="Auto" />
 
             </Grid.RowDefinitions>
+
             <TextBlock
                 Grid.Row="0"
                 Margin="10,10,0,0"
@@ -154,6 +155,7 @@
                 FontSize="24"
                 FontWeight="Bold"
                 Text="Port Listen" />
+
             <Separator
                 Grid.Row="0"
                 Margin="10,50,10,0"
@@ -171,6 +173,7 @@
                     Header="Network Interfaces"
                     Style="{StaticResource AccentGroupBox}">
                     <Grid Background="{StaticResource FormBackground}">
+
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -179,41 +182,50 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <ComboBox
+
+                        <n:MetroComboBox
                             x:Name="NetInfoCombox"
                             Grid.Row="0"
                             Width="Auto"
                             Margin="0,10,0,0"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Center"
+                            Foreground="{StaticResource LightBlueBrush}"
                             DisplayMemberPath="description"
                             ItemsSource="{Binding PortModel.NetInfoItemSource}"
                             SelectedIndex="0"
                             SelectedItem="{Binding PortModel.NetInfoItemSource}" />
+
                         <TextBlock
                             Grid.Row="1"
                             Margin="5,10,0,0"
                             Text="Name:" />
+
                         <TextBlock
                             Grid.Row="1"
                             Margin="50,10,0,0"
                             Text="{Binding ElementName=NetInfoCombox, Path=SelectedItem.Name}" />
+
                         <TextBlock
                             Grid.Row="2"
                             Margin="5,10,0,0"
                             Text="IP:" />
+
                         <TextBlock
                             Grid.Row="2"
                             Margin="50,10,0,0"
                             Text="{Binding ElementName=NetInfoCombox, Path=SelectedItem.Ip}" />
+
                         <TextBlock
                             Grid.Row="3"
                             Margin="5,10,0,10"
                             Text="Mask:" />
+
                         <TextBlock
                             Grid.Row="3"
                             Margin="50,10,0,10"
                             Text="{Binding ElementName=NetInfoCombox, Path=SelectedItem.Mask}" />
+
                     </Grid>
 
                 </GroupBox>

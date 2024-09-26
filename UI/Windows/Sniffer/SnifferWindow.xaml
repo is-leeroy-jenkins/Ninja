@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Ninja.Interfaces"
     xmlns:sync="http://schemas.syncfusion.com/wpf"
-    d:DesignHeight="800"
+    d:DesignHeight="700"
     mc:Ignorable="d">
 
     <!--******************************************** Resources ******************************************-->

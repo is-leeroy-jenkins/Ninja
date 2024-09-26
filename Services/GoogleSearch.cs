@@ -97,13 +97,19 @@ namespace Ninja
                 var _initializer = new BaseClientService.Initializer( );
                 _initializer.ApiKey = _key;
                 var _customSearch = new CustomSearchAPIService( _initializer );
-                var _searchRequest = _customSearch?.Cse?.List( );
+                var _searchRequest = _customSearch
+                    ?.Cse
+                    ?.List( );
+
                 if( _searchRequest != null )
                 {
                     _searchRequest.Q = _query;
                     _searchRequest.Cx = _engine;
                     _searchRequest.Start = _count;
-                    var _list = _searchRequest.Execute( )?.Items?.ToList( );
+                    var _list = _searchRequest.Execute( )
+                        ?.Items
+                        ?.ToList( );
+
                     if( _list?.Any( ) == true )
                     {
                         for( var _i = 0; _i < _list.Count; _i++ )
@@ -155,13 +161,19 @@ namespace Ninja
                 var _initializer = new BaseClientService.Initializer( );
                 _initializer.ApiKey = _key;
                 var _customSearch = new CustomSearchAPIService( _initializer );
-                var _searchRequest = _customSearch?.Cse?.List( );
+                var _searchRequest = _customSearch
+                    ?.Cse
+                    ?.List( );
+
                 if( _searchRequest != null )
                 {
                     _searchRequest.Q = _query;
                     _searchRequest.Cx = _engine;
                     _searchRequest.Start = _count;
-                    var _list = _searchRequest.Execute( )?.Items?.ToList( );
+                    var _list = _searchRequest.Execute( )
+                        ?.Items
+                        ?.ToList( );
+
                     if( _list?.Any( ) == true )
                     {
                         for( var _i = 0; _i < _list.Count; _i++ )
@@ -202,7 +214,7 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.GoogleSearch" /> class.
+        /// <see cref="Ninja.GoogleSearch" /> class.
         /// </summary>
         public GoogleSearch( )
             : base( )
@@ -214,7 +226,7 @@ namespace Ninja
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the
-        /// <see cref="T:Ninja.GoogleSearch" /> class.
+        /// <see cref="GoogleSearch" /> class.
         /// </summary>
         /// <param name="keywords">
         /// The keywords.

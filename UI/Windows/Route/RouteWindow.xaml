@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sync="http://schemas.syncfusion.com/wpf"
-    d:DesignHeight="800"
+    d:DesignHeight="700"
     mc:Ignorable="d">
 
     <!--******************************************** Resources ******************************************-->
@@ -181,13 +181,14 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <ComboBox
+                        <n:MetroComboBox
                             x:Name="NetInfoCombox"
                             Grid.Row="0"
                             Width="Auto"
                             Margin="0,10,0,0"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Center"
+                            Foreground="{StaticResource LightBlueBrush}"
                             DisplayMemberPath="description"
                             ItemsSource="{Binding RouteModel.NetInfoItemSource}"
                             SelectedIndex="0"

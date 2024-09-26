@@ -17,6 +17,7 @@
         <Setter Property="Margin" Value="1" />
         <Setter Property="FontFamily" Value="Fonts/Roboto-Regular.ttf #Roboto Regular" />
         <Setter Property="FontSize" Value="10" />
+        <Setter Property="Height" Value="24" />
         <Setter Property="IsEditable" Value="True" />
 
     </Style>

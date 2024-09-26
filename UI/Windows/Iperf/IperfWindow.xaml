@@ -9,7 +9,7 @@
     xmlns:oxy="http://oxyplot.org/wpf"
     xmlns:src="clr-namespace:Ninja.Themes"
     xmlns:sync="http://schemas.syncfusion.com/wpf"
-    d:DesignHeight="800"
+    d:DesignHeight="700"
     mc:Ignorable="d">
 
     <!--******************************************** Resources ******************************************-->

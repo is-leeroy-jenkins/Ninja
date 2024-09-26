@@ -40,33 +40,64 @@
 // </summary>
 // ******************************************************************************************
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ninja.Interfaces
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net.Sockets;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class TcpClientSocket
     {
+        /// <summary>
+        /// The buffer size
+        /// </summary>
         private int _bufferSize = 1024;
 
+        /// <summary>
+        /// The connect socket
+        /// </summary>
         private Socket _connectSocket;
 
+        /// <summary>
+        /// The host ip
+        /// </summary>
         private string _hostIp = "";
 
+        /// <summary>
+        /// The port
+        /// </summary>
         private int _port;
 
+        /// <summary>
+        /// The connect event
+        /// </summary>
         public Action<Socket> ConnectEvent = null;
 
+        /// <summary>
+        /// The dis connect event
+        /// </summary>
         public Action<Socket> DisConnectEvent = null;
 
+        /// <summary>
+        /// The recv event
+        /// </summary>
         public Action<string> RecvEvent = null;
 
+        /// <summary>
+        /// The send result event
+        /// </summary>
         public Action<int> SendResultEvent = null;
 
+        /// <summary>
+        /// Starts this instance.
+        /// </summary>
         public void Start( )
         {
             try
@@ -88,6 +119,9 @@ namespace Ninja.Interfaces
             }
         }
 
+        /// <summary>
+        /// Recvs the asynchronous.
+        /// </summary>
         private async void RecvAsync( )
         {
             await Task.Run( ( ) =>
@@ -117,6 +151,10 @@ namespace Ninja.Interfaces
             } );
         }
 
+        /// <summary>
+        /// Sends the asynchronous.
+        /// </summary>
+        /// <param name="message">The message.</param>
         public async void SendAsync( string message )
         {
             await Task.Run( ( ) =>
@@ -141,6 +179,9 @@ namespace Ninja.Interfaces
             } );
         }
 
+        /// <summary>
+        /// Closes the client socket.
+        /// </summary>
         public void CloseClientSocket( )
         {
             try
@@ -162,12 +203,22 @@ namespace Ninja.Interfaces
             }
         }
 
+        /// <summary>
+        /// Restarts this instance.
+        /// </summary>
         public void Restart( )
         {
             CloseClientSocket( );
             Start( );
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TcpClientSocket"/> class.
+        /// </summary>
+        /// <param name="ip">The ip.</param>
+        /// <param name="port">The port.</param>
+        /// <exception cref="ArgumentNullException">host ip cannot be null</exception>
+        /// <exception cref="ArgumentOutOfRangeException">port is out of range</exception>
         public TcpClientSocket( string ip, int port )
         {
             if( string.IsNullOrEmpty( ip ) )

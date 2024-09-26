@@ -60,7 +60,7 @@
             ToolTip="Click for Windows 10 Calculator" />
         <Image
             x:Name="CloseButton"
-            Canvas.Left="360"
+            Canvas.Left="365"
             Canvas.Top="1"
             Width="22"
             Height="24"

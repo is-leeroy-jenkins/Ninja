@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sync="http://schemas.syncfusion.com/wpf"
     xmlns:n="clr-namespace:Ninja"
-    d:DesignHeight="800"
+    d:DesignHeight="700"
     mc:Ignorable="d">
 
     <!--******************************************** Resources ******************************************-->
@@ -155,12 +155,14 @@
                 FontSize="24"
                 FontWeight="Bold"
                 Text="Server" />
+
             <Separator
                 Grid.Row="0"
                 Margin="10,50,10,0"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Bottom" />
             <!--<TextBlock Style="{StaticResource MenuItemText}" Text="Network Interfaces" Grid.Row="1"/>-->
+
             <StackPanel
                 Grid.Row="1"
                 MinWidth="200"
@@ -177,41 +179,50 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
+
                         <n:MetroComboBox
                             x:Name="NetInfoCombox"
                             Grid.Row="0"
                             Width="Auto"
                             Margin="0,10,0,0"
                             HorizontalAlignment="Stretch"
+                            Foreground="{StaticResource LightBlueBrush}"
                             VerticalAlignment="Center"
                             DisplayMemberPath="Description"
                             ItemsSource="{Binding ServerModel.NetInfoItemSource}"
                             SelectedIndex="0"
                             SelectedItem="{Binding ServerModel.NetInfoItemSource}" />
+
                         <TextBlock
                             Grid.Row="1"
                             Margin="5,10,0,0"
                             Text="Name:" />
+
                         <TextBlock
                             Grid.Row="1"
                             Margin="50,10,0,0"
                             Text="{Binding ElementName=NetInfoCombox, Path=SelectedItem.Name}" />
+
                         <TextBlock
                             Grid.Row="2"
                             Margin="5,10,0,0"
                             Text="IP:" />
+
                         <TextBlock
                             Grid.Row="2"
                             Margin="50,10,0,0"
                             Text="{Binding ElementName=NetInfoCombox, Path=SelectedItem.Ip}" />
+
                         <TextBlock
                             Grid.Row="3"
                             Margin="5,10,0,10"
                             Text="Mask:" />
+
                         <TextBlock
                             Grid.Row="3"
                             Margin="50,10,0,10"
                             Text="{Binding ElementName=NetInfoCombox, Path=SelectedItem.Mask}" />
+
                     </Grid>
                 </GroupBox>
             </StackPanel>

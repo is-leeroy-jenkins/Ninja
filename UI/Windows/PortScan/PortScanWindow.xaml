@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:n="clr-namespace:Ninja"
     xmlns:sync="http://schemas.syncfusion.com/wpf"
-    d:DesignHeight="800"
+    d:DesignHeight="700"
     mc:Ignorable="d">
 
     <!--  ******************************************** Resources *********************************************  -->
@@ -180,6 +180,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
+
                         <TextBlock
                             Grid.Row="0"
                             Margin="5,10,0,0"
@@ -192,11 +193,13 @@
                             Margin="0,10,0,0"
                             HorizontalAlignment="Right"
                             Text="{Binding PortScanModel.Ip}" />
+
                         <TextBlock
                             Grid.Row="1"
                             Margin="5,10,0,0"
                             Style="{StaticResource MenuItemText}"
                             Text="Start Port" />
+
                         <n:TextBoxEx
                             Grid.Row="1"
                             Maximum="65535"
@@ -208,6 +211,7 @@
                             Margin="5,10,0,0"
                             Style="{StaticResource MenuItemText}"
                             Text="End Port" />
+
                         <n:TextBoxEx
                             Grid.Row="2"
                             Maximum="65535"
@@ -219,6 +223,7 @@
                             Margin="5,10,0,0"
                             Style="{StaticResource MenuItemText}"
                             Text="Socket Timeout(ms)" />
+
                         <n:TextBoxEx
                             Grid.Row="3"
                             Minimum="100"
@@ -237,6 +242,7 @@
 
                 </GroupBox>
             </StackPanel>
+
             <StackPanel
                 Grid.Row="3"
                 MinWidth="200"
@@ -245,6 +251,7 @@
                     Header="Status"
                     Style="{StaticResource AccentGroupBox}">
                     <Grid Background="{StaticResource FormBackground}">
+
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -252,11 +259,13 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
+
                         <TextBlock
                             Grid.Row="0"
                             Margin="5,10,0,10"
                             Style="{StaticResource MenuItemText}"
                             Text="Scan" />
+
                         <TextBlock
                             Grid.Row="0"
                             Margin="0,10,0,10"
@@ -268,6 +277,7 @@
                             Margin="5,10,0,10"
                             Style="{StaticResource MenuItemText}"
                             Text="Opened" />
+
                         <TextBlock
                             Grid.Row="1"
                             Margin="0,10,0,10"
@@ -279,6 +289,7 @@
                             Margin="5,10,0,10"
                             Style="{StaticResource MenuItemText}"
                             Text="Closed" />
+
                         <TextBlock
                             Grid.Row="2"
                             Margin="0,10,0,10"
