@@ -63,6 +63,7 @@ namespace Ninja
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    [ SuppressMessage( "ReSharper", "InconsistentNaming" ) ]
     public static class DictionaryExtensions
     {
         /// <summary>
@@ -104,8 +105,7 @@ namespace Ninja
         /// <returns>
         /// NameValueCollection
         /// </returns>
-        public static NameValueCollection ToNameValueCollection(
-            this IDictionary<string, object> dict )
+        public static NameValueCollection ToNameValueCollection( this IDictionary<string, object> dict )
         {
             try
             {

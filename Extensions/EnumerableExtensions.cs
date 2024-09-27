@@ -63,19 +63,20 @@ namespace Ninja
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
     [ SuppressMessage( "ReSharper", "CompareNonConstrainedGenericWithNull" ) ]
+    [ SuppressMessage( "ReSharper", "InconsistentNaming" ) ]
     public static class EnumerableExtensions
     {
         /// <summary>
         /// Converts to bindinglist.
         /// </summary>
-        /// <typeparam name="_"></typeparam>
+        /// <typeparam name="T"></typeparam>
         /// <param name="enumerable">The enumerable.</param>
         /// <returns></returns>
-        public static BindingList<_> ToBindingList<_>( this IEnumerable<_> enumerable )
+        public static BindingList<T> ToBindingList<T>( this IEnumerable<T> enumerable )
         {
             try
             {
-                var _bindingList = new BindingList<_>( );
+                var _bindingList = new BindingList<T>( );
                 foreach( var _item in enumerable )
                 {
                     if( _item != null )
@@ -86,12 +87,12 @@ namespace Ninja
 
                 return _bindingList?.Any( ) == true
                     ? _bindingList
-                    : default( BindingList<_> );
+                    : default( BindingList<T> );
             }
             catch( Exception ex )
             {
                 EnumerableExtensions.Fail( ex );
-                return default( BindingList<_> );
+                return default( BindingList<T> );
             }
         }
 
@@ -134,7 +135,7 @@ namespace Ninja
         /// and returns those values that don't match
         /// the predicate.
         /// </summary>
-        /// <typeparam name="_">The type of the elements of
+        /// <typeparam name="T">The type of the elements of
         /// <paramref name="source" />
         /// .</typeparam>
         /// <param name="source">An
@@ -144,8 +145,8 @@ namespace Ninja
         /// <returns>
         /// Those values that don't match the given predicate.
         /// </returns>
-        public static IEnumerable<_> WhereNot<_>( this IEnumerable<_> source,
-            Func<_, bool> predicate )
+        public static IEnumerable<T> WhereNot<T>( this IEnumerable<T> source,
+            Func<T, bool> predicate )
         {
             try
             {
@@ -154,7 +155,7 @@ namespace Ninja
             catch( Exception ex )
             {
                 EnumerableExtensions.Fail( ex );
-                return default( IEnumerable<_> );
+                return default( IEnumerable<T> );
             }
         }
 
@@ -258,14 +259,14 @@ namespace Ninja
         /// <summary>
         /// Converts to excel.
         /// </summary>
-        /// <typeparam name="_"></typeparam>
+        /// <typeparam name="T"></typeparam>
         /// <param name="type">The dataRow.</param>
         /// <param name="path">The path.</param>
         /// <param name="style">The style.</param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentException">Verify Path</exception>
         /// <exception cref="Exception">Invalid file path. or Invalid file path. or No dataRow to export.</exception>
-        public static ExcelPackage ToExcel<_>( this IEnumerable<_> type, string path,
+        public static ExcelPackage ToExcel<T>( this IEnumerable<T> type, string path,
             TableStyles style = TableStyles.Light1 )
         {
             if( string.IsNullOrEmpty( path )
@@ -294,7 +295,7 @@ namespace Ninja
         /// <summary>
         /// Extracts a contiguous count of elements from a sequence at a particular zero-based starting index.
         /// </summary>
-        /// <typeparam name="_">The type of the elements in the source sequence.</typeparam>
+        /// <typeparam name="T">The type of the elements in the source sequence.</typeparam>
         /// <param name="sequence">The sequence from which to extract elements.</param>
         /// <param name="startIndex">The zero-based index at which to begin slicing.</param>
         /// <param name="count">The number of items to slice out of the index.</param>
@@ -320,19 +321,19 @@ namespace Ninja
         /// is identical to:
         /// <c> sequence.Skip(startIndex).Take(count) </c></para>
         /// </remarks>
-        public static IEnumerable<_> Slice<_>( this IEnumerable<_> sequence, int startIndex,
+        public static IEnumerable<T> Slice<T>( this IEnumerable<T> sequence, int startIndex,
             int count )
         {
             ThrowIf.NegativeOrZero( startIndex, nameof( startIndex ) );
             ThrowIf.NegativeOrZero( count, nameof( count ) );
             return sequence switch
             {
-                IList<_> _list => SliceList( _list.Count, i => _list[ i ] ),
-                IReadOnlyList<_> _list => SliceList( _list.Count, i => _list[ i ] ),
+                IList<T> _list => SliceList( _list.Count, i => _list[ i ] ),
+                IReadOnlyList<T> _list => SliceList( _list.Count, i => _list[ i ] ),
                 var _seq => _seq.Skip( startIndex ).Take( count )
             };
 
-            IEnumerable<_> SliceList( int listCount, Func<int, _> indexer )
+            IEnumerable<T> SliceList( int listCount, Func<int, T> indexer )
             {
                 var _countdown = count;
                 var _index = startIndex;
@@ -347,12 +348,12 @@ namespace Ninja
         /// <summary>
         /// Slices the specified start.
         /// </summary>
-        /// <typeparam name="_"></typeparam>
+        /// <typeparam name="T"></typeparam>
         /// <param name="type">The dataRow.</param>
         /// <param name="start">The start.</param>
         /// <param name="end">The end.</param>
         /// <returns></returns>
-        public static IEnumerable<_> LazySlice<_>( this IEnumerable<_> type, int start, int end )
+        public static IEnumerable<T> LazySlice<T>( this IEnumerable<T> type, int start, int end )
         {
             ThrowIf.NegativeOrZero( start, nameof( start ) );
             ThrowIf.NegativeOrZero( end, nameof( end ) );
@@ -378,7 +379,7 @@ namespace Ninja
         /// or equivalently, repeats the original sequence
         /// indefinitely.
         /// </summary>
-        /// <typeparam name="_">The type of the elements of
+        /// <typeparam name="T">The type of the elements of
         /// <paramref name="source" />
         /// .</typeparam>
         /// <param name="source">A
@@ -387,7 +388,7 @@ namespace Ninja
         /// <returns>
         /// An infinite sequence cycling through the given sequence.
         /// </returns>
-        public static IEnumerable<_> Cycle<_>( this IEnumerable<_> source )
+        public static IEnumerable<T> Cycle<T>( this IEnumerable<T> source )
         {
             try
             {
@@ -396,23 +397,23 @@ namespace Ninja
             catch( Exception ex )
             {
                 EnumerableExtensions.Fail( ex );
-                return default( IEnumerable<_> );
+                return default( IEnumerable<T> );
             }
         }
 
         /// <summary>
         /// Cycles the iterator.
         /// </summary>
-        /// <typeparam name="_"></typeparam>
+        /// <typeparam name="T"></typeparam>
         /// <param name="source">The source.</param>
         /// <returns>
         /// IEnumerable{T}
         /// </returns>
-        private static IEnumerable<_> CycleIterator<_>( IEnumerable<_> source )
+        private static IEnumerable<T> CycleIterator<T>( IEnumerable<T> source )
         {
-            var _elementBuffer = source is not ICollection<_> _collection
-                ? new List<_>( )
-                : new List<_>( _collection.Count );
+            var _elementBuffer = source is not ICollection<T> _collection
+                ? new List<T>( )
+                : new List<T>( _collection.Count );
 
             foreach( var _element in source )
             {
@@ -420,7 +421,7 @@ namespace Ninja
                 _elementBuffer.Add( _element );
             }
 
-            if( _elementBuffer.IsEmpty<_>( ) )
+            if( _elementBuffer.IsEmpty<T>( ) )
             {
                 yield break;
             }
