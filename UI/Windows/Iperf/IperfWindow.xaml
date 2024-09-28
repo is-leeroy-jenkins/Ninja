@@ -10,9 +10,10 @@
     xmlns:src="clr-namespace:Ninja.Themes"
     xmlns:sync="http://schemas.syncfusion.com/wpf"
     d:DesignHeight="700"
+    d:DesignWidth="1300"
     mc:Ignorable="d">
 
-    <!--  ******************************************** Resources ******************************************  -->
+    <!--******************************************** Resources ******************************************-->
 
     <UserControl.Resources>
 
@@ -229,6 +230,7 @@
                         </n:MetroComboBox>
 
                         <TextBlock
+
                             Grid.Row="3"
                             Style="{StaticResource MenuItemText}"
                             Text="Server IP" />

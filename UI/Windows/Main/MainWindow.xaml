@@ -8,8 +8,8 @@
     xmlns:skin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
     xmlns:sync="http://schemas.syncfusion.com/wpf"
     Title="Ninja"
-    Height="700"
-    Width="1300"
+    d:DesignHeight="700"
+    d:DesignWidth="1300"
     sync:SfSkinManager.Theme="{skin:SkinManagerExtension ThemeName=FluentDark}"
     Background="{StaticResource FormBackground}"
     BorderBrush="{StaticResource BlueBorderBrush}"
@@ -152,6 +152,7 @@
                 <Menu.Background>
                     <ImageBrush TileMode="Tile" />
                 </Menu.Background>
+
                 <MenuItem
                     x:Name="FileMenuItem"
                     Header="File">
@@ -160,6 +161,7 @@
                         Header="Exit"
                         InputGestureText="Alt+F4" />
                 </MenuItem>
+
                 <MenuItem
                     x:Name="ToolMenuItem"
                     Header="Tool">
@@ -185,25 +187,30 @@
                         CommandParameter="about"
                         Header="About Ninja" />
                 </MenuItem>
+
             </Menu>
         </Grid>
+
         <Grid 
             Grid.Row="1" >
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="180"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+
             <Grid
                 Grid.Column="0"
                 Background="{StaticResource ControlBackground}">
+                
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
+
                 <Grid
                     Grid.Row="0"
                     Margin="10,10,10,5">
-
                     <TextBox
                         x:Name="SearchBox"
                         Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" />
@@ -211,12 +218,11 @@
                     <TextBlock
                         Style="{StaticResource SearchTextStyle}"
                         Text="Search" />
-
                 </Grid>
+
                 <Grid
                     Grid.Row="1"
                     Margin="10,10,10,0">
-
                     <ItemsControl ItemsSource="{Binding SourceCollection}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -234,6 +240,7 @@
                     </ItemsControl>
                 </Grid>
             </Grid>
+
             <Grid
                 Grid.Column="1"
                 Background="Transparent">
@@ -241,6 +248,7 @@
                     x:Name="Pages"
                     Content="{Binding SelectedViewModel}" />
             </Grid>
+
         </Grid>
     </Grid>
 </Window>

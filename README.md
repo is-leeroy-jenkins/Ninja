@@ -24,8 +24,8 @@ Can be used  for network study by WPF MVVM.
 
 ## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/GitHubImages/csharp.png) Code
 
-- Ninja supports AnyCPU as well as x86/x64 specific builds
-- [Controls](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/Controls) - main UI layer and associated controls and related functionality.
+- Ninja supports 'AnyCPU' as well as x86/x64 specific builds
+- [Controls](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/Controls) - controls associated main ui layer and related functionality.
 - [Enumerations](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Enumerations) - various enumerations used for budgetary accounting.
 - [Extensions](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Extensions)- useful extension methods for budget analysis by type.
 - [Sockets](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Network/Sockets) - tcp/udp/websockets classses
@@ -38,11 +38,9 @@ Can be used  for network study by WPF MVVM.
 - [Static](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Static) - static types used by Ninja.
 - [Interfaces](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Network/Interfaces) - abstractions used in network analysis.
 - [Views](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/Views) - Views
-- [ViewModels](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/ViewModels) - models used by the UI
-- [Themes](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/Themes) - ui themes 
+- [ViewModels](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/ViewModels) - models used by the ui
+- [Themes](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/Themes) - themes used in the ui
 - [Windows](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/Windows) - window classes
-- `bin` - Binaries are included in the `bin` folder due to the complex Baby setup required. Don't empty this folder.
-- `bin/storage` - HTML and JS required for downloads manager and custom error pages
 
 ## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/GitHubImages/tools.png) Build
 
@@ -65,7 +63,7 @@ Run `Ninja.sln`
 
 
 
-## Libraries
+## ![]()  Libraries
 
 * [Iperf](https://github.com/esnet/iperf)
 * [oxyplot](https://github.com/oxyplot/oxyplot)

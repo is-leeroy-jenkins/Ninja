@@ -43,11 +43,8 @@
 namespace Ninja
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+    using System.Diagnostics.CodeAnalysis;
     using System.Windows;
     using WebSocketSharp;
     using WebSocketSharp.Server;
@@ -56,17 +53,23 @@ namespace Ninja
     /// 
     /// </summary>
     /// <seealso cref="WebSocketSharp.Server.WebSocketBehavior" />
+    [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
     public class EchoHandler : WebSocketBehavior
     {
         /// <summary>
         /// The ws server
         /// </summary>
-        private WebSocketServer _wsServer = null;
+        private WebSocketServer _webSocketServer = null;
+
+        /// <summary>
+        /// The web socket client
+        /// </summary>
+        private WebSocketServer _webSocketClient = null;
 
         /// <summary>
         /// The ws client
         /// </summary>
-        public WebSocket WsClient;
+        public WebSocket WebSocketClient;
 
         /// <summary>
         /// Gets or sets the ws recv.
@@ -87,9 +90,12 @@ namespace Ninja
             new ObservableCollection<string>( );
 
         /// <summary>
-        /// Raises the <see cref="E:Message" /> event.
+        /// Raises the event.
         /// </summary>
-        /// <param name="e">The <see cref="MessageEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The
+        /// <see cref="MessageEventArgs"/>
+        /// instance containing the event data.
+        /// </param>
         protected override void OnMessage( MessageEventArgs e )
         {
             Application.Current.Dispatcher.BeginInvoke( new Action( ( ) =>
@@ -117,7 +123,10 @@ namespace Ninja
         /// <summary>
         /// Raises the Close event.
         /// </summary>
-        /// <param name="e">The <see cref="CloseEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The
+        /// <see cref="CloseEventArgs"/>
+        /// instance containing the event data.
+        /// </param>
         protected override void OnClose( CloseEventArgs e )
         {
             var _time = "[" + StartTime + "][";
@@ -127,9 +136,12 @@ namespace Ninja
         }
 
         /// <summary>
-        /// Raises the <see cref="E:Error" /> event.
+        /// Raises the event.
         /// </summary>
-        /// <param name="e">The <see cref="ErrorEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The
+        /// <see cref="ErrorEventArgs"/>
+        /// instance containing the event data.
+        /// </param>
         protected override void OnError( ErrorEventArgs e )
         {
             var _time = "[" + StartTime + "][";

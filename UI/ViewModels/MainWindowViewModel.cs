@@ -63,6 +63,7 @@ namespace Ninja.ViewModels
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "FieldCanBeMadeReadOnly.Local" ) ]
+    [ SuppressMessage( "ReSharper", "UnusedParameter.Global" ) ]
     public class MainWindowViewModel : MainWindowBase
     {
         /// <summary>
@@ -217,7 +218,9 @@ namespace Ninja.ViewModels
         /// <summary>
         /// Runs the calculate.
         /// </summary>
-        /// <param name="parameter">The parameter.</param>
+        /// <param name="parameter">
+        /// The parameter.
+        /// </param>
         public void RunCalc( object parameter )
         {
             Process.Start( "calc.exe" );
@@ -316,8 +319,6 @@ namespace Ninja.ViewModels
                 }
             }
         }
-
-        // Switch Views
 
         // Menu Button Command
         /// <summary>

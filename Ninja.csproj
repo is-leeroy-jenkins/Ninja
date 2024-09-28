@@ -26,6 +26,7 @@
     <Optimize>True</Optimize>
     <WarningLevel>6</WarningLevel>
     <DebugType>embedded</DebugType>
+    <NoWarn>1701;1702;CA1822</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>Ninja.App</StartupObject>
@@ -61,6 +62,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <WarningLevel>6</WarningLevel>
     <DebugType>embedded</DebugType>
+    <NoWarn>1701;1702;CA1822</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Fonts\**" />
@@ -294,6 +296,7 @@
     <PackageReference Include="Microsoft.Office.Interop.Outlook" Version="15.0.4797.1004" />
     <PackageReference Include="Microsoft.Office.Interop.Word" Version="15.0.4797.1004" />
     <PackageReference Include="ModernWpfUI" Version="0.9.6" />
+    <PackageReference Include="SharpPcap" Version="6.3.0" />
     <PackageReference Include="SkiaSharp" Version="2.88.8" />
     <PackageReference Include="Syncfusion.Licensing" Version="24.1.41" />
     <PackageReference Include="Syncfusion.SfSkinManager.WPF" Version="24.1.41" />

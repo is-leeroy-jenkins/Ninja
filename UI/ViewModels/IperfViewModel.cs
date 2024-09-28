@@ -60,10 +60,11 @@ namespace Ninja.ViewModels
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:Ninja.ViewModels.MainWindowBase" />
+    /// <seealso cref="Ninja.ViewModels.MainWindowBase" />
     [ SuppressMessage( "ReSharper", "FieldCanBeMadeReadOnly.Global" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
+    [ SuppressMessage( "ReSharper", "RedundantAssignment" ) ]
     public class IperfViewModel : MainWindowBase
     {
         /// <summary>
@@ -474,9 +475,13 @@ namespace Ninja.ViewModels
         /// <summary>
         /// Processes the output data received.
         /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="DataReceivedEventArgs"/>
-        /// instance containing the event data.</param>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">The
+        /// <see cref="DataReceivedEventArgs"/>
+        /// instance containing the event data.
+        /// </param>
         private void ProcessOutputDataReceived( object sender, DataReceivedEventArgs e )
         {
             _iperfModel.Output += e.Data;
