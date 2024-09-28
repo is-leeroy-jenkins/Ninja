@@ -1,4 +1,4 @@
-# Ninja
+# Network
 
 ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/GitHubImages/ProjectTemplate.png)
 
