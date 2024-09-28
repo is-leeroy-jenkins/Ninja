@@ -224,7 +224,6 @@
     <Resource Include="Resources\Assets\GitHubImages\access.png" />
     <Resource Include="Resources\Assets\GitHubImages\Analysis.png" />
     <Resource Include="Resources\Assets\GitHubImages\baby.png" />
-    <Resource Include="Resources\Assets\GitHubImages\Badger.png" />
     <Resource Include="Resources\Assets\GitHubImages\Calculation.png" />
     <Resource Include="Resources\Assets\GitHubImages\Calculator.PNG" />
     <Resource Include="Resources\Assets\GitHubImages\calendar.png" />
@@ -236,9 +235,9 @@
     <Resource Include="Resources\Assets\GitHubImages\epa.png" />
     <Resource Include="Resources\Assets\GitHubImages\excel.png" />
     <Resource Include="Resources\Assets\GitHubImages\features.png" />
+    <Resource Include="Resources\Assets\GitHubImages\library.png" />
     <Resource Include="Resources\Assets\GitHubImages\Maps.png" />
     <Resource Include="Resources\Assets\GitHubImages\ProjectTemplate.png" />
-    <Resource Include="Resources\Assets\GitHubImages\ProjectTemplates.png" />
     <Resource Include="Resources\Assets\GitHubImages\Providers.png" />
     <Resource Include="Resources\Assets\GitHubImages\sql.png" />
     <Resource Include="Resources\Assets\GitHubImages\system_requirements.png" />
@@ -493,6 +492,7 @@
     <None Remove="Resources\Assets\GitHubImages\epa.png" />
     <None Remove="Resources\Assets\GitHubImages\excel.png" />
     <None Remove="Resources\Assets\GitHubImages\features.png" />
+    <None Remove="Resources\Assets\GitHubImages\library.png" />
     <None Remove="Resources\Assets\GitHubImages\Maps.png" />
     <None Remove="Resources\Assets\GitHubImages\ProjectTemplate.png" />
     <None Remove="Resources\Assets\GitHubImages\ProjectTemplates.png" />
