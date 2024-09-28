@@ -346,7 +346,7 @@
                         <n:TextBoxEx
                             Grid.Row="10"
                             BorderThickness="1"
-                            Text="{Binding IperfModel.PacketLen}" />
+                            Text="{Binding IperfModel.PacketLength}" />
 
                         <CheckBox
                             Grid.Row="11"
@@ -405,7 +405,7 @@
                             <Binding Path="IperfModel.UdpFlag" />
                             <Binding Path="IperfModel.BandWidth" />
                             <Binding Path="IperfModel.BandWidthUnit" />
-                            <Binding Path="IperfModel.PacketLen" />
+                            <Binding Path="IperfModel.PacketLength" />
                             <Binding Path="IperfModel.Reverse" />
                             <Binding Path="IperfModel.Command" />
                         </MultiBinding>

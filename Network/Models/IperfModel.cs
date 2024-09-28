@@ -80,7 +80,7 @@ namespace Ninja.Models
         /// <summary>
         /// The packet length
         /// </summary>
-        private int _packetLen;
+        private int _packetLength;
 
         /// <summary>
         /// The parallel
@@ -160,7 +160,7 @@ namespace Ninja.Models
             _udpFlag = false;
             _bandWidth = 100;
             _bandWidthUnit = "M";
-            _packetLen = 0;
+            _packetLength = 0;
             _reverse = false;
         }
 
@@ -412,18 +412,18 @@ namespace Ninja.Models
         /// <value>
         /// The length of the packet.
         /// </value>
-        public int PacketLen
+        public int PacketLength
         {
             get
             {
-                return _packetLen;
+                return _packetLength;
             }
             set
             {
-                if( _packetLen != value )
+                if( _packetLength != value )
                 {
-                    _packetLen = value;
-                    OnPropertyChanged( nameof( PacketLen ) );
+                    _packetLength = value;
+                    OnPropertyChanged( nameof( PacketLength ) );
                 }
             }
         }
