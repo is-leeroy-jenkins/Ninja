@@ -7,7 +7,7 @@ mqtt, sniffer, pcap, port scan, listen, ip scan .etc.
 Can be used  for network study by WPF MVVM.
 
 
-## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/GitHubImages/features.png)Functionality
+## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/GitHubImages/features.png)  Functionality
 
 - [x] Iperf2/Iperf3 Server and Client(Realtime plot and result save)
 - [x] Network Scan(IP multi-thread scan)
@@ -22,7 +22,7 @@ Can be used  for network study by WPF MVVM.
 - [ ] ...
 
 
-## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/GitHubImages/csharp.png) Code
+## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/GitHubImages/csharp.png)  Code
 
 - Ninja supports 'AnyCPU' as well as x86/x64 specific builds
 - [Controls](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/Controls) - controls associated main ui layer and related functionality.
@@ -42,7 +42,7 @@ Can be used  for network study by WPF MVVM.
 - [Themes](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/Themes) - themes used in the ui
 - [Windows](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/Windows) - window classes
 
-## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/GitHubImages/tools.png) Build
+## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/GitHubImages/tools.png)  Build
 
 - [x] VisualStudio 2022
 - [x] Based on .NET8 and WPF
@@ -54,7 +54,7 @@ $ cd Ninja
 Run `Ninja.sln`
 
 
-## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/GitHubImages/documentation.png) Documentation
+## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/GitHubImages/documentation.png)  Documentation
 
 - [User Guide](Resources/Github/Users.md) - how to use Ninja.
 - [Compilation Guide](Resources/Github/Compilation.md) - instructions on how to compile Ninja.
@@ -63,8 +63,8 @@ Run `Ninja.sln`
 
 
 
-## ![]()  Libraries
-
+## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/GitHubImages/library.png)  Libraries
+Third-party librarirs used y Ninja.
 * [Iperf](https://github.com/esnet/iperf)
 * [oxyplot](https://github.com/oxyplot/oxyplot)
 
