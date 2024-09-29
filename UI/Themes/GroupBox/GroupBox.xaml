@@ -30,7 +30,7 @@
                             Grid.RowSpan="3"
                             Grid.Column="0"
                             Grid.ColumnSpan="4"
-                            Background="{StaticResource BlueBorderBrush}"
+                            Background="{TemplateBinding Background}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="4" />
                         <Border

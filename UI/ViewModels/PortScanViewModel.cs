@@ -188,13 +188,13 @@ namespace Ninja.ViewModels
         private void ScanPort( string ip, int port )
         {
             Console.WriteLine( "Begin Scan..." + port );
-            PortScanModel.Port = port.ToString( );
+            _portScanModel.Port = port.ToString( );
             using( var _client = new TcpClient( ) )
             {
-                if( _client.ConnectAsync( ip, port ).Wait( PortScanModel.SocketTimeout ) )
+                if( _client.ConnectAsync( ip, port ).Wait( _portScanModel.SocketTimeout ) )
                 {
                     Console.WriteLine( "port {0,5}tOpen.", port );
-                    PortScanModel.OpenCnt++;
+                    _portScanModel.OpenCnt++;
                     Application.Current.Dispatcher.Invoke( ( Action )( ( ) =>
                     {
                         PortScanResults.Add( new PortScanResult
@@ -207,14 +207,14 @@ namespace Ninja.ViewModels
                 else
                 {
                     Console.WriteLine( "port {0,5} Closed.", port );
-                    PortScanModel.CloseCnt++;
+                    _portScanModel.CloseCnt++;
                 }
             }
 
             PortCount--;
             if( PortCount == 0 )
             {
-                PortScanModel.ScanButtonName = "Start";
+                _portScanModel.ScanButtonName = "Start";
             }
 
             Console.WriteLine( "Port Scan Completed!" );
@@ -227,13 +227,13 @@ namespace Ninja.ViewModels
         {
             _tokenSource = new CancellationTokenSource( );
             _cancelToken = _tokenSource.Token;
-            var _startPortVal = PortScanModel.StartPort;
-            var _stopPortVal = PortScanModel.StopPort;
-            var _ipStr = PortScanModel.Ip;
+            var _startPortVal = _portScanModel.StartPort;
+            var _stopPortVal = _portScanModel.StopPort;
+            var _ipStr = _portScanModel.Ip;
             PortCount = _stopPortVal - _startPortVal;
             if( PortCount <= 0 )
             {
-                PortScanModel.ScanButtonName = "Start";
+                _portScanModel.ScanButtonName = "Start";
                 MessageBox.Show( "Please make sure (Start Port) < (Stop Port)!" );
                 return;
             }
@@ -279,18 +279,18 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void PortScanCmd( object parameter )
         {
-            if( PortScanModel.ScanButtonName == "Start" )
+            if( _portScanModel.ScanButtonName == "Start" )
             {
-                PortScanModel.ScanButtonName = "Stop";
-                PortScanModel.OpenCnt = 0;
-                PortScanModel.CloseCnt = 0;
+                _portScanModel.ScanButtonName = "Stop";
+                _portScanModel.OpenCnt = 0;
+                _portScanModel.CloseCnt = 0;
                 PortScanResults.Clear( );
                 StartScanAsync( );
             }
             else
             {
                 StopScanTask( );
-                PortScanModel.ScanButtonName = "Start";
+                _portScanModel.ScanButtonName = "Start";
             }
         }
 

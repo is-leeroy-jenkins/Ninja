@@ -50,7 +50,7 @@ namespace Ninja.Interfaces
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:System.Windows.Data.IMultiValueConverter" />
+    /// <seealso cref="System.Windows.Data.IMultiValueConverter" />
     [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
     public class IperfCommandConverter : IMultiValueConverter
     {
@@ -72,6 +72,12 @@ namespace Ninja.Interfaces
         //< Binding Path="IperfModel.Reverse"/>
 
         //Binding sequences end <-----
+        /// <summary>
+        /// Gets or sets the command.
+        /// </summary>
+        /// <value>
+        /// The command.
+        /// </value>
         public string Command { get; set; }
 
         /// <inheritdoc />
@@ -81,29 +87,29 @@ namespace Ninja.Interfaces
         /// the values from source bindings to the binding target.
         /// </summary>
         /// <param name="values">The array of values that the source bindings in the
-        /// <see cref="T:System.Windows.Data.MultiBinding" /> produces. The value
-        /// <see cref="F:System.Windows.DependencyProperty.UnsetValue" />
+        /// <see cref="System.Windows.Data.MultiBinding" /> produces. The value
+        /// <see cref="System.Windows.DependencyProperty.UnsetValue" />
         /// indicates that the source binding has no value to provide for conversion.
         /// </param>
-        /// <param name="targetType">The type of the binding target property.</param>
+        /// <param name="target">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>
         /// A converted value.
         /// If the method returns <see langword="null" />, the valid
         /// <see langword="null" /> value is used.
-        /// A return value of <see cref="T:System.Windows.DependencyProperty" />.
-        /// <see cref="F:System.Windows.DependencyProperty.UnsetValue" />
+        /// A return value of <see cref="System.Windows.DependencyProperty" />.
+        /// <see cref="System.Windows.DependencyProperty.UnsetValue" />
         /// indicates that the converter did not produce a value, and that the binding will use the
-        /// <see cref="P:System.Windows.Data.BindingBase.FallbackValue" />
+        /// <see cref="System.Windows.Data.BindingBase.FallbackValue" />
         /// if it is available, or else will use the default value.
-        /// A return value of <see cref="T:System.Windows.Data.Binding" />.
-        /// <see cref="F:System.Windows.Data.Binding.DoNothing" />
+        /// A return value of <see cref="System.Windows.Data.Binding" />.
+        /// <see cref="System.Windows.Data.Binding.DoNothing" />
         /// indicates that the binding does not transfer the value or use the
-        /// <see cref="P:System.Windows.Data.BindingBase.FallbackValue" />
+        /// <see cref="System.Windows.Data.BindingBase.FallbackValue" />
         /// or the default value.
         /// </returns>
-        public object Convert( object[ ] values, Type targetType, object parameter,
+        public object Convert( object[ ] values, Type target, object parameter,
             CultureInfo culture )
         {
             try
@@ -172,7 +178,7 @@ namespace Ninja.Interfaces
                 }
                 else
                 {
-                    _command = "command not support!";
+                    _command = "command not supported!";
                 }
 
                 return _command;
@@ -188,14 +194,16 @@ namespace Ninja.Interfaces
         /// Converts a binding target value to the source binding values.
         /// </summary>
         /// <param name="value">The value that the binding target produces.</param>
-        /// <param name="targetTypes">The array of types to convert to. The array length indicates the number and types of values that are suggested for the method to return.</param>
+        /// <param name="target">The array of types to convert to.
+        /// The array length indicates the number and types of values that
+        /// are suggested for the method to return.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>
         /// An array of values that have been converted from the target value back to the source values.
         /// </returns>
-        /// <exception cref="T:System.NotImplementedException"></exception>
-        public object[ ] ConvertBack( object value, Type[ ] targetTypes, object parameter,
+        /// <exception cref="System.NotImplementedException"></exception>
+        public object[ ] ConvertBack( object value, Type[ ] target, object parameter,
             CultureInfo culture )
         {
             try

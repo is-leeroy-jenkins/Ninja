@@ -143,7 +143,8 @@ namespace Ninja.Models
         private string _version;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="IperfModel"/> class.
+        /// Initializes a new instance of the
+        /// <see cref="IperfModel"/> class.
         /// </summary>
         public IperfModel( )
         {
@@ -473,7 +474,8 @@ namespace Ninja.Models
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="IperfModel"/> is reverse.
+        /// Gets or sets a value indicating whether this
+        /// <see cref="IperfModel"/> is reverse.
         /// </summary>
         /// <value>
         ///   <c>true</c> if reverse; otherwise, <c>false</c>.

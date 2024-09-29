@@ -299,7 +299,7 @@
     <!--  ********************************************Input-Group-Btn Left*********************************************  -->
 
     <Style
-        x:Key="Input-Group-Btn Left"
+        x:Key="InputGroup-Btn Left"
         BasedOn="{StaticResource InputGroupBaseButtonStyle}"
         TargetType="{x:Type Control}">
         <Setter Property="Template">

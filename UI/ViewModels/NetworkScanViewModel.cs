@@ -64,44 +64,151 @@ namespace Ninja.ViewModels
     public class NetworkScanViewModel : MainWindowBase
     {
         /// <summary>
-        /// Gets or sets the network scan model.
+        /// The network scan model
         /// </summary>
-        /// <value>
-        /// The network scan model.
-        /// </value>
-        public NetworkScanModel NetworkScanModel { get; set; }
+        private protected NetworkScanModel _networkScanModel;
 
         /// <summary>
         /// The ip interface
         /// </summary>
-        private protected IpInterface IpInterface;
+        private protected IpInterface _ipInterface;
 
         /// <summary>
         /// The ip count
         /// </summary>
-        private protected int IpCnt;
+        private protected int _ipCount;
 
         /// <summary>
         /// The scan token source
         /// </summary>
-        private protected CancellationTokenSource scanTokenSource;
+        private protected CancellationTokenSource _tokenSource;
 
         /// <summary>
         /// The cancel scan token
         /// </summary>
-        private protected CancellationToken cancelScanToken;
+        private protected CancellationToken _cancelToken;
 
         /// <summary>
         /// Initializes a new instance of the
         /// <see cref="NetworkScanViewModel"/> class.
         /// </summary>
-        public NetworkScanViewModel()
+        public NetworkScanViewModel( )
         {
-            NetworkScanModel = new NetworkScanModel();
-            IpInterface = new IpInterface();
-            NetworkScanModel.NetInfoItemSource = GetLocalNetworkInterface();
+            _networkScanModel = new NetworkScanModel( );
+            _ipInterface = new IpInterface( );
+            _networkScanModel.NetInfoItemSource = GetLocalNetworkInterface( );
         }
-        
+
+        /// <summary>
+        /// Gets or sets the network scan model.
+        /// </summary>
+        /// <value>
+        /// The network scan model.
+        /// </value>
+        public NetworkScanModel NetworkScanModel
+        {
+            get
+            {
+                return _networkScanModel;
+            }
+            private protected set
+            {
+                if( _networkScanModel != value )
+                {
+                    _networkScanModel = value;
+                    OnPropertyChanged( nameof( NetworkScanModel ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the ip interface.
+        /// </summary>
+        /// <value>
+        /// The ip interface.
+        /// </value>
+        public IpInterface IpInterface
+        {
+            get
+            {
+                return _ipInterface;
+            }
+            set
+            {
+                if(_ipInterface != value)
+                {
+                    _ipInterface = value;
+                    OnPropertyChanged(nameof( IpInterface ));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the ip count.
+        /// </summary>
+        /// <value>
+        /// The ip count.
+        /// </value>
+        public int IpCount
+        {
+            get
+            {
+                return _ipCount;
+            }
+            set
+            {
+                if( _ipCount != value )
+                {
+                    _ipCount = value;
+                    OnPropertyChanged( nameof( IpCount ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the token source.
+        /// </summary>
+        /// <value>
+        /// The token source.
+        /// </value>
+        public CancellationTokenSource TokenSource
+        {
+            get
+            {
+                return _tokenSource;
+            }
+            set
+            {
+                if( _tokenSource != value )
+                {
+                    _tokenSource = value;
+                    OnPropertyChanged( nameof( TokenSource ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the cancel token.
+        /// </summary>
+        /// <value>
+        /// The cancel token.
+        /// </value>
+        public CancellationToken CancelToken
+        {
+            get
+            {
+                return _cancelToken;
+            }
+            set
+            {
+                if(_cancelToken != value)
+                {
+                    _cancelToken = value;
+                    OnPropertyChanged(nameof(CancelToken));
+                }
+            }
+        }
+
         /// <summary>
         /// Gets or sets the ip scan results.
         /// </summary>
@@ -123,14 +230,14 @@ namespace Ninja.ViewModels
             string _time = null;
             string _ttl = null;
             Console.WriteLine( ip );
-            _reply = IpInterface.PingSweep( ip );
-            NetworkScanModel.Ip = ip;
+            _reply = _ipInterface.PingSweep( ip );
+            _networkScanModel.Ip = ip;
             if( _reply != null )
             {
                 if( _reply.Status == IPStatus.Success )
                 {
                     _status = "Online";
-                    _hostname = IpInterface.GetHostName( ip );
+                    _hostname = _ipInterface.GetHostName( ip );
                     _time = _reply.RoundtripTime.ToString( );
                     _ttl = _reply.Options.Ttl.ToString( );
                     Application.Current.Dispatcher.Invoke( ( Action )( ( ) =>
@@ -159,9 +266,9 @@ namespace Ninja.ViewModels
                 NetworkScanModel.OfflineCnt++;
             }
 
-            IpCnt--;
-            Console.WriteLine( IpCnt.ToString( ) );
-            if( IpCnt == 0 )
+            IpCount--;
+            Console.WriteLine( IpCount.ToString( ) );
+            if( IpCount == 0 )
             {
                 NetworkScanModel.ScanButtonName = "Start";
             }
@@ -172,14 +279,14 @@ namespace Ninja.ViewModels
         /// </summary>
         public async void StartScanAsync( )
         {
-            scanTokenSource = new CancellationTokenSource( );
-            cancelScanToken = scanTokenSource.Token;
+            _tokenSource = new CancellationTokenSource( );
+            _cancelToken = _tokenSource.Token;
             var _startIpVal = IpInterface.IpAddressToLongBackwards( NetworkScanModel.StartIp );
             var _startIpStr = IpInterface.LongToIpAddress( _startIpVal );
             var _endIpVal = IpInterface.IpAddressToLongBackwards( NetworkScanModel.StopIp );
             var _endIpStr = IpInterface.LongToIpAddress( _endIpVal );
-            IpCnt = ( int )( _endIpVal - _startIpVal );
-            if( IpCnt <= 0 )
+            IpCount = ( int )( _endIpVal - _startIpVal );
+            if( IpCount <= 0 )
             {
                 MessageBox.Show( "Please make sure (Start Ip) < (Stop Ip)!" );
                 return;
@@ -197,11 +304,11 @@ namespace Ninja.ViewModels
                         var _task = Task.Run( ( ) =>
                         {
                             DoScan( _ipStr );
-                        }, cancelScanToken );
+                        }, _cancelToken );
 
                         Thread.Sleep( 1 );
                     }
-                }, cancelScanToken );
+                }, _cancelToken );
             }
             catch( Exception ex )
             {
@@ -213,7 +320,7 @@ namespace Ninja.ViewModels
         /// </summary>
         public void StopScanTask( )
         {
-            scanTokenSource.Cancel( );
+            _tokenSource.Cancel( );
         }
 
         /// <summary>

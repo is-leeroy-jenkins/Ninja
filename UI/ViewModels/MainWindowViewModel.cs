@@ -64,6 +64,7 @@ namespace Ninja.ViewModels
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "FieldCanBeMadeReadOnly.Local" ) ]
     [ SuppressMessage( "ReSharper", "UnusedParameter.Global" ) ]
+    [ SuppressMessage( "ReSharper", "RedundantEmptySwitchSection" ) ]
     public class MainWindowViewModel : MainWindowBase
     {
         /// <summary>
@@ -170,9 +171,9 @@ namespace Ninja.ViewModels
                 Source = _menuItems
             };
 
+            _menuItemsCollection.Filter += OnMenuItemsFilter;
             _iperfViewModel = new IperfViewModel( );
             _selectedViewModel = _iperfViewModel;
-            _menuItemsCollection.Filter += OnMenuItemsFilter;
         }
 
         /// ICollectionView enables collections to have the
@@ -221,7 +222,7 @@ namespace Ninja.ViewModels
         /// <param name="parameter">
         /// The parameter.
         /// </param>
-        public void RunCalc( object parameter )
+        public void RunCalculator( object parameter )
         {
             Process.Start( "calc.exe" );
         }
@@ -232,11 +233,11 @@ namespace Ninja.ViewModels
         /// <value>
         /// The run calculate command.
         /// </value>
-        public ICommand RunCalcCommand
+        public ICommand RunCalculatorCommand
         {
             get
             {
-                return new RelayCommand( param => RunCalc( param ) );
+                return new RelayCommand( p => RunCalculator( p ) );
             }
         }
 
@@ -244,23 +245,23 @@ namespace Ninja.ViewModels
         /// Runs the menu command.
         /// </summary>
         /// <param name="parameter">The parameter.</param>
-        public void RunMenuCmd( object parameter )
+        public void OpenMenu( object parameter )
         {
             switch( parameter )
             {
-                case "calc":
+                case "Calc":
                 {
                     Process.Start( "calc.exe" );
                     break;
                 }
-                case "about":
+                case "About":
                 {
                     var _aboutWindow = new AboutWindow( );
                     _aboutWindow.Show( );
                     Dispatcher.Run( );
                     break;
                 }
-                case "iperf":
+                case "Iperf":
                 {
                     var _iperfInfo = new ProcessStartInfo( "https://iperf.fr/" )
                     {
@@ -270,7 +271,7 @@ namespace Ninja.ViewModels
                     Process.Start( _iperfInfo );
                     break;
                 }
-                case "pcap":
+                case "Pcap":
                 {
                     var _pcapInfo =
                         new ProcessStartInfo( "https://www.tcpdump.org/manpages/pcap-filter.7.html" )
@@ -294,7 +295,7 @@ namespace Ninja.ViewModels
         {
             get
             {
-                return new RelayCommand( param => RunMenuCmd( param ) );
+                return new RelayCommand( p => OpenMenu( p ) );
             }
         }
 
@@ -324,7 +325,7 @@ namespace Ninja.ViewModels
         /// <summary>
         /// The menucommand
         /// </summary>
-        private ICommand _menucommand;
+        private ICommand _menuCommand;
 
         /// <summary>
         /// Gets the menu command.
@@ -336,12 +337,12 @@ namespace Ninja.ViewModels
         {
             get
             {
-                if( _menucommand == null )
+                if( _menuCommand == null )
                 {
-                    _menucommand = new RelayCommand( param => SwitchViews( param ) );
+                    _menuCommand = new RelayCommand( p => SwitchViews( p ) );
                 }
 
-                return _menucommand;
+                return _menuCommand;
             }
         }
 
@@ -484,76 +485,53 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void SwitchViews( object parameter )
         {
-            switch( parameter )
+            var _view = parameter.ToString( );
+            switch( _view )
             {
                 case "Iperf":
                 {
-                    if( _iperfViewModel == null )
-                    {
-                        _iperfViewModel = new IperfViewModel( );
-                    }
-
+                    _iperfViewModel ??= new IperfViewModel( );
                     _selectedViewModel = _iperfViewModel;
                     break;
                 }
                 case "NetworkScan":
                 {
-                    if( _networkScanViewModel == null )
-                    {
-                        _networkScanViewModel = new NetworkScanViewModel( );
-                    }
-
+                    _networkScanViewModel ??= new NetworkScanViewModel( );
                     _selectedViewModel = _networkScanViewModel;
                     break;
                 }
                 case "PortScan":
                 {
-                    if( _portScanViewModel == null )
-                    {
-                        _portScanViewModel = new PortScanViewModel( );
-                    }
-
+                    _portScanViewModel ??= new PortScanViewModel( );
                     _selectedViewModel = _portScanViewModel;
                     break;
                 }
                 case "RouteTable":
                 {
-                    if( _routeViewModel == null )
-                    {
-                        _routeViewModel = new RouteViewModel( );
-                    }
-
+                    _routeViewModel ??= new RouteViewModel( );
                     _selectedViewModel = _routeViewModel;
                     break;
                 }
                 case "PortListen":
                 {
-                    if( _portViewModel == null )
-                    {
-                        _portViewModel = new PortViewModel( );
-                    }
-
+                    _portViewModel ??= new PortViewModel( );
                     _selectedViewModel = _portViewModel;
                     break;
                 }
                 case "Server":
                 {
-                    if( _serverViewModel == null )
-                    {
-                        _serverViewModel = new ServerViewModel( );
-                    }
-
+                    _serverViewModel ??= new ServerViewModel( );
                     _selectedViewModel = _serverViewModel;
                     break;
                 }
                 case "Sniffer":
                 {
-                    if( _snifferViewModel == null )
-                    {
-                        _snifferViewModel = new SnifferViewModel( );
-                    }
-
+                    _snifferViewModel ??= new SnifferViewModel( );
                     _selectedViewModel = _snifferViewModel;
+                    break;
+                }
+                default:
+                {
                     break;
                 }
             }

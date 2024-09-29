@@ -204,6 +204,7 @@
                             Grid.Row="1"
                             Width="130"
                             Margin="0,15,10,0"
+                            ToolTip="Select Iperf Version"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             SelectedItem="{Binding IperfModel.Version}"
@@ -221,10 +222,10 @@
                             Grid.Row="2"
                             Width="130"
                             Margin="0,5,10,0"
+                            ToolTip="Make Selection"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
-                            SelectedItem="{Binding IperfModel.Role}"
-                            Text="{Binding IperfModel.Role, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            Text="{Binding IperfModel.Role, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding IperfModel.Version}">
                             <n:MetroComboBoxItem>-s</n:MetroComboBoxItem>
                             <n:MetroComboBoxItem>-c</n:MetroComboBoxItem>
                         </n:MetroComboBox>
@@ -238,6 +239,7 @@
                         <n:MetroTextBox
                             Grid.Row="3"
                             Width="130"
+                            ToolTip="Server IP"
                             Margin="0,5,10,0"
                             HorizontalAlignment="Right"
                             Text="{Binding IperfModel.ServerIp}" />
@@ -249,6 +251,7 @@
 
                         <n:TextBoxEx
                             Grid.Row="4"
+                            ToolTip="Port"
                             Cursor="Hand"
                             Text="{Binding IperfModel.Port}" />
 
@@ -259,6 +262,7 @@
 
                         <n:TextBoxEx
                             Grid.Row="5"
+                            ToolTip="Parallel"
                             Cursor="Hand"
                             Text="{Binding IperfModel.Parallel}" />
 
@@ -269,6 +273,7 @@
 
                         <n:TextBoxEx
                             Grid.Row="6"
+                            ToolTip="Time"
                             Cursor="Hand"
                             Text="{Binding IperfModel.Time}" />
 
@@ -280,6 +285,7 @@
                         <n:TextBoxEx
                             Grid.Row="7"
                             Cursor="Hand"
+                            ToolTip="Interal"
                             Text="{Binding IperfModel.Interval}" />
 
                         <RadioButton
@@ -293,17 +299,18 @@
                         <n:TextBoxEx
                             Grid.Row="8"
                             Cursor="Hand"
+                            ToolTip="TCP Window Size"
                             Text="{Binding IperfModel.TcpWindowSize}" />
 
                         <n:MetroComboBox
                             Grid.Row="8"
                             Width="55"
                             Margin="0,5,5,0"
+                            ToolTip="TCP Window Unit"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             HorizontalContentAlignment="Left"
-                            SelectedItem="{Binding IperfModel.TcpWindowUnit}"
-                            Text="{Binding IperfModel.TcpWindowUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            Text="{Binding IperfModel.TcpWindowUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding IperfModel.TcpWindowUnit}">
                             <n:MetroComboBoxItem>M</n:MetroComboBoxItem>
                             <n:MetroComboBoxItem>m</n:MetroComboBoxItem>
                             <n:MetroComboBoxItem>K</n:MetroComboBoxItem>
@@ -329,8 +336,7 @@
                             Margin="0,5,5,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
-                            SelectedItem="{Binding IperfModel.BandWidthUnit}"
-                            Text="{Binding IperfModel.BandWidthUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            Text="{Binding IperfModel.BandWidthUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding IperfModel.BandWidthUnit}">
                             <n:MetroComboBoxItem>M</n:MetroComboBoxItem>
                             <n:MetroComboBoxItem>m</n:MetroComboBoxItem>
                             <n:MetroComboBoxItem>K</n:MetroComboBoxItem>

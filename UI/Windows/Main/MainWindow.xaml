@@ -148,10 +148,8 @@
 
             <Menu
                 x:Name="ItemMenu"
+                Background="{StaticResource ControlInteriorBrush}"
                 Grid.Column="0">
-                <Menu.Background>
-                    <ImageBrush TileMode="Tile" />
-                </Menu.Background>
 
                 <MenuItem
                     x:Name="FileMenuItem"
@@ -200,8 +198,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid
-                Grid.Column="0"
-                Background="{StaticResource ControlBackground}">
+                Grid.Column="0">
                 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
@@ -211,8 +208,12 @@
                 <Grid
                     Grid.Row="0"
                     Margin="10,10,10,5">
+
                     <TextBox
                         x:Name="SearchBox"
+                        Background="{StaticResource ControlInteriorBrush}"
+                        BorderBrush="{StaticResource BlueBorderBrush}"
+                        Foreground="{StaticResource FormForeground}"
                         Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" />
 
                     <TextBlock
