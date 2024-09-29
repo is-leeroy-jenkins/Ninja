@@ -55,90 +55,91 @@ namespace Ninja.Models
         /// <summary>
         /// The client connect BTN name
         /// </summary>
-        private string _clientConnectButtonName;
+        private protected string _clientConnectButtonName;
 
         /// <summary>
         /// The client recv
         /// </summary>
-        private string _clientRecv;
+        private protected string _clientRecv;
 
         /// <summary>
         /// The client send
         /// </summary>
-        private string _clientSend;
+        private protected string _clientSend;
 
         /// <summary>
         /// The client send BTN name
         /// </summary>
-        private string _clientSendButtonName;
+        private protected string _clientSendButtonName;
 
         /// <summary>
         /// The client send interval
         /// </summary>
-        private int _clientSendInterval;
+        private protected int _clientSendInterval;
 
         /// <summary>
         /// The client send string
         /// </summary>
-        private string _clientSendStr;
+        private protected string _clientSendStr;
 
         /// <summary>
         /// The listen port
         /// </summary>
-        private int _listenPort;
+        private protected int _listenPort;
 
         /// <summary>
         /// The local port
         /// </summary>
-        private string _localPort;
+        private protected string _localPort;
 
         /// <summary>
         /// The server ip
         /// </summary>
-        private string _serverAddress;
+        private protected string _serverAddress;
 
         /// <summary>
         /// The server listen BTN name
         /// </summary>
-        private string _serverListenButtonName;
+        private protected string _serverListenButtonName;
 
         /// <summary>
         /// The server port
         /// </summary>
-        private int _serverPort;
+        private protected int _serverPort;
 
         /// <summary>
         /// The server recv
         /// </summary>
-        private string _serverRecv;
+        private protected string _serverRecv;
 
         /// <summary>
         /// The server send
         /// </summary>
-        private string _serverSend;
+        private protected string _serverSend;
 
         /// <summary>
         /// The server send BTN name
         /// </summary>
-        private string _serverSendButtonName;
+        private protected string _serverSendButtonName;
 
         /// <summary>
         /// The server send interval
         /// </summary>
-        private int _serverSendInterval;
+        private protected int _serverSendInterval;
 
         /// <summary>
         /// The server send string
         /// </summary>
-        private string _serverSendStr;
+        private protected string _serverSendStr;
 
         /// <summary>
         /// The server status
         /// </summary>
-        private string _serverStatus;
+        private protected string _serverStatus;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TcpModel"/> class.
+        /// Initializes a new instance of the
+        /// <see cref="TcpModel"/> class.
         /// </summary>
         public TcpModel( )
         {

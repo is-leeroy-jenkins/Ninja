@@ -164,14 +164,14 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Foreground="Black"
-                        Text="Server Address" />
+                        Text="Client Address" />
                     <TextBox
                         Grid.Column="1"
                         Height="30"
                         Margin="0,5,0,5"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
-                        Text="{Binding WebSocketModel.ServerAddress}" />
+                        Text="{Binding WebSocketModel.ClientAddress}" />
                     <n:ButtonEx
                         Grid.Column="2"
                         Width="100"

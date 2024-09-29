@@ -174,15 +174,15 @@
                     Header="Help">
                     <MenuItem
                         Command="{Binding RunMenuCommand}"
-                        CommandParameter="iperf"
+                        CommandParameter="Iperf"
                         Header="Iperf" />
                     <MenuItem
                         Command="{Binding RunMenuCommand}"
-                        CommandParameter="pcap"
+                        CommandParameter="Pcap"
                         Header="Pcap Filter" />
                     <MenuItem
                         Command="{Binding RunMenuCommand}"
-                        CommandParameter="about"
+                        CommandParameter="About"
                         Header="About Ninja" />
                 </MenuItem>
 

@@ -105,7 +105,7 @@ namespace Ninja.Models
         /// <summary>
         /// The server ip
         /// </summary>
-        private string _serverIp;
+        private string _clientAddress;
 
         /// <summary>
         /// The TCP flag
@@ -150,7 +150,7 @@ namespace Ninja.Models
         {
             _version = "iperf.exe";
             _role = "-c";
-            _serverIp = "10.21.68.29";
+            _clientAddress = "10.21.68.29";
             _port = 5001;
             _parallel = 4;
             _time = 60;
@@ -215,18 +215,18 @@ namespace Ninja.Models
         /// <value>
         /// The server ip.
         /// </value>
-        public string ServerIp
+        public string ClientAddress
         {
             get
             {
-                return _serverIp;
+                return _clientAddress;
             }
             set
             {
-                if( _serverIp != value )
+                if( _clientAddress != value )
                 {
-                    _serverIp = value;
-                    OnPropertyChanged( nameof( ServerIp ) );
+                    _clientAddress = value;
+                    OnPropertyChanged( nameof( ClientAddress ) );
                 }
             }
         }
@@ -475,7 +475,6 @@ namespace Ninja.Models
 
         /// <summary>
         /// Gets or sets a value indicating whether this
-        /// <see cref="IperfModel"/> is reverse.
         /// </summary>
         /// <value>
         ///   <c>true</c> if reverse; otherwise, <c>false</c>.

@@ -58,14 +58,17 @@ namespace Ninja.ViewModels
     /// </summary>
     /// <seealso cref="T:Ninja.ViewModels.MainWindowBase" />
     [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public class WebSocketViewModel : MainWindowBase
     {
+        private protected WebSocketModel _webSocketModel;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="WebSocketViewModel"/> class.
         /// </summary>
         public WebSocketViewModel( )
         {
-            WebSocketModel = new WebSocketModel( );
+            _webSocketModel = new WebSocketModel( );
         }
 
         /// <summary>
@@ -74,13 +77,27 @@ namespace Ninja.ViewModels
         /// <value>
         /// The web socket model.
         /// </value>
-        public WebSocketModel WebSocketModel { get; set; }
+        public WebSocketModel WebSocketModel
+        {
+            get
+            {
+                return _webSocketModel;
+            }
+            set
+            {
+                if( _webSocketModel != value )
+                {
+                    _webSocketModel = value;
+                    OnPropertyChanged( nameof( _webSocketModel ) );
+                }
+            }
+        }
 
         #region WebSocket Server
         /// <summary>
         /// The ws server
         /// </summary>
-        private WebSocketServer _wsServer;
+        private WebSocketServer _webSocketServer;
 
         /// <summary>
         /// Gets or sets the ws recv.
@@ -111,18 +128,18 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void StartListen( object parameter )
         {
-            if( WebSocketModel.ServerListenButtonName == "Start Listen" )
+            if( _webSocketModel.ServerListenButtonName == "Start Listen" )
             {
-                WebSocketModel.ServerListenButtonName = "Stop Listen";
-                _wsServer = new WebSocketServer( WebSocketModel.ServerAddress );
-                _wsServer.AddWebSocketService<EchoHandler>( "/echo" );
-                _wsServer.Start( );
+                _webSocketModel.ServerListenButtonName = "Stop Listen";
+                _webSocketServer = new WebSocketServer( WebSocketModel.ServerAddress );
+                _webSocketServer.AddWebSocketService<EchoHandler>( "/echo" );
+                _webSocketServer.Start( );
                 WsRecv.Add( "[" + DateTime.Now + "][" + "WebSocket Server Started]\n" );
             }
             else
             {
-                WebSocketModel.ServerListenButtonName = "Start Listen";
-                _wsServer.Stop( );
+                _webSocketModel.ServerListenButtonName = "Start Listen";
+                _webSocketServer.Stop( );
                 WsRecv.Add( "[" + DateTime.Now + "][" + "WebSocket Server Stopped]\n" );
             }
         }
@@ -144,7 +161,7 @@ namespace Ninja.ViewModels
         /// <summary>
         /// The m server automatic send timer
         /// </summary>
-        private DispatcherTimer _mServerAutoSendTimer;
+        private DispatcherTimer _serverAutoSendTimer;
 
         /// <summary>
         /// Servers the automatic send timer function.
@@ -153,7 +170,7 @@ namespace Ninja.ViewModels
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ServerAutoSendTimerFunc( object sender, EventArgs e )
         {
-            _wsServer.WebSocketServices.Broadcast( WebSocketModel.ServerSendStr );
+            _webSocketServer.WebSocketServices.Broadcast( _webSocketModel.ServerSendStr );
         }
 
         /// <summary>
@@ -162,22 +179,22 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void ServerAutoSend( object parameter )
         {
-            if( WebSocketModel.ServerSendButtonName == "Auto Send Start" )
+            if( _webSocketModel.ServerSendButtonName == "Auto Send Start" )
             {
-                WebSocketModel.ServerSendButtonName = "Auto Send Stop";
-                _mServerAutoSendTimer = new DispatcherTimer( )
+                _webSocketModel.ServerSendButtonName = "Auto Send Stop";
+                _serverAutoSendTimer = new DispatcherTimer( )
                 {
                     Interval = new TimeSpan( 0, 0, 0, 0,
-                        WebSocketModel.ServerSendInterval )
+                        _webSocketModel.ServerSendInterval )
                 };
 
-                _mServerAutoSendTimer.Tick += ServerAutoSendTimerFunc;
-                _mServerAutoSendTimer.Start( );
+                _serverAutoSendTimer.Tick += ServerAutoSendTimerFunc;
+                _serverAutoSendTimer.Start( );
             }
             else
             {
-                WebSocketModel.ServerSendButtonName = "Auto Send Start";
-                _mServerAutoSendTimer.Stop( );
+                _webSocketModel.ServerSendButtonName = "Auto Send Start";
+                _serverAutoSendTimer.Stop( );
             }
         }
 
@@ -201,7 +218,7 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void ServerSendClear( object parameter )
         {
-            WebSocketModel.ServerSend = "";
+            _webSocketModel.ServerSend = "";
             WsRecv.Clear( );
         }
 
@@ -225,7 +242,7 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void ServerSend( object parameter )
         {
-            _wsServer.WebSocketServices.Broadcast( WebSocketModel.ServerSend );
+            _webSocketServer.WebSocketServices.Broadcast( _webSocketModel.ServerSend );
         }
         #endregion
 
@@ -233,7 +250,26 @@ namespace Ninja.ViewModels
         /// <summary>
         /// The ws client
         /// </summary>
-        public WebSocket WsClient;
+        private protected WebSocket _webSocketClient;
+
+        /// <summary>
+        /// The web socket client
+        /// </summary>
+        public WebSocket WebSocketClient
+        {
+            get
+            {
+                return _webSocketClient;
+            }
+            set
+            {
+                if(_webSocketClient != value)
+                {
+                    _webSocketClient = value;
+                    OnPropertyChanged(nameof(WebSocketClient));
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the ws client recv.
@@ -264,9 +300,9 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void ClientConnect( object parameter )
         {
-            if( WebSocketModel.ClientConnectButtonName == "Connect" )
+            if( _webSocketModel.ClientConnectButtonName == "Connect" )
             {
-                using( var _ws = new WebSocket( WebSocketModel.ClientAddress ) )
+                using( var _ws = new WebSocket( _webSocketModel.ClientAddress ) )
                 {
                     _ws.OnOpen += ( sender, e ) =>
                     {
@@ -303,7 +339,7 @@ namespace Ninja.ViewModels
                             var _time = "[" + DateTime.Now + "]";
                             var _str = "[WebSocket Error][" + e.Message + "]\n";
                             WsClientRecv.Add( _time + _str );
-                            WebSocketModel.ClientConnectButtonName = "Connect";
+                            _webSocketModel.ClientConnectButtonName = "Connect";
                         } ) );
                     };
 
@@ -316,20 +352,20 @@ namespace Ninja.ViewModels
                             var _time = "[" + DateTime.Now + "]";
                             var _str = "[WebSocket Close][" + e.Reason + "]\n";
                             WsClientRecv.Add( _time + _str );
-                            WebSocketModel.ClientConnectButtonName = "Connect";
+                            _webSocketModel.ClientConnectButtonName = "Connect";
                         } ) );
                     };
 
                     // Connect to the server.
-                    WsClient = _ws;
+                    _webSocketClient = _ws;
                 }
 
                 try
                 {
                     Task.Run( ( ) =>
                     {
-                        WsClient.Connect( );
-                        WebSocketModel.ClientConnectButtonName = "DisConnect";
+                        _webSocketClient.Connect( );
+                        _webSocketModel.ClientConnectButtonName = "DisConnect";
                     } );
                 }
                 catch( Exception )
@@ -339,8 +375,8 @@ namespace Ninja.ViewModels
             }
             else
             {
-                WebSocketModel.ClientConnectButtonName = "Connect";
-                WsClient.Close( );
+                _webSocketModel.ClientConnectButtonName = "Connect";
+                _webSocketClient.Close( );
             }
         }
 
@@ -364,7 +400,7 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void ClientSendClear( object parameter )
         {
-            WebSocketModel.ClientSend = "";
+            _webSocketModel.ClientSend = "";
             WsClientRecv.Clear( );
         }
 
@@ -388,7 +424,7 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void ClientSend( object parameter )
         {
-            WsClient.Send( WebSocketModel.ClientSend );
+            _webSocketClient.Send( _webSocketModel.ClientSend );
         }
 
         /// <summary>
@@ -408,7 +444,7 @@ namespace Ninja.ViewModels
         /// <summary>
         /// The m client automatic send timer
         /// </summary>
-        private DispatcherTimer _mClientAutoSendTimer;
+        private DispatcherTimer _clientAutoSendTimer;
 
         /// <summary>
         /// Clients the automatic send function.
@@ -417,7 +453,7 @@ namespace Ninja.ViewModels
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ClientAutoSendFunc( object sender, EventArgs e )
         {
-            WsClient.Send( WebSocketModel.ClientSendStr );
+            _webSocketClient.Send( _webSocketModel.ClientSendStr );
         }
 
         /// <summary>
@@ -426,22 +462,22 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void ClientAutoSend( object parameter )
         {
-            if( WebSocketModel.ClientSendBtnName == "Auto Send Start" )
+            if( _webSocketModel.ClientSendBtnName == "Auto Send Start" )
             {
-                WebSocketModel.ClientSendBtnName = "Auto Send Stop";
-                _mClientAutoSendTimer = new DispatcherTimer( )
+                _webSocketModel.ClientSendBtnName = "Auto Send Stop";
+                _clientAutoSendTimer = new DispatcherTimer( )
                 {
                     Interval = new TimeSpan( 0, 0, 0, 0,
-                        WebSocketModel.ClientSendInterval )
+                        _webSocketModel.ClientSendInterval )
                 };
 
-                _mClientAutoSendTimer.Tick += ClientAutoSendFunc;
-                _mClientAutoSendTimer.Start( );
+                _clientAutoSendTimer.Tick += ClientAutoSendFunc;
+                _clientAutoSendTimer.Start( );
             }
             else
             {
-                WebSocketModel.ClientSendBtnName = "Auto Send Start";
-                _mClientAutoSendTimer.Stop( );
+                _webSocketModel.ClientSendBtnName = "Auto Send Start";
+                _clientAutoSendTimer.Stop( );
             }
         }
         #endregion

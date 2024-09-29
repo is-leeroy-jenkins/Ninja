@@ -16,7 +16,7 @@ namespace Ninja.ViewModels
         /// <value>
         /// The remote ip.
         /// </value>
-        public string RemoteIpAddress { get; set; }
+        public string RemoteAddress { get; set; }
 
         /// <summary>
         /// Gets or sets the port.

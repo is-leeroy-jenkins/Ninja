@@ -58,10 +58,14 @@ namespace Ninja.ViewModels
     /// <seealso cref="Ninja.ViewModels.MainWindowBase" />
     public class TcpViewModel : MainWindowBase
     {
+        /// <summary>
+        /// The TCP model
+        /// </summary>
         private protected TcpModel _tcpModel;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TcpViewModel"/> class.
+        /// Initializes a new instance of the
+        /// <see cref="TcpViewModel"/> class.
         /// </summary>
         public TcpViewModel( )
         {
@@ -172,7 +176,7 @@ namespace Ninja.ViewModels
                 var _time = DateTime.Now;
                 TcpServerInfos.Add( new TcpServerInfo
                 {
-                    RemoteIpAddress = socket.RemoteEndPoint.ToString( ).Split( ':' )[ 0 ],
+                    RemoteAddress = socket.RemoteEndPoint.ToString( ).Split( ':' )[ 0 ],
                     Port = socket.RemoteEndPoint.ToString( ).Split( ':' )[ 1 ],
                     Time = _time
                 } );
@@ -192,7 +196,7 @@ namespace Ninja.ViewModels
             {
                 foreach( var _info in TcpServerInfos )
                 {
-                    if( _info.RemoteIpAddress == socket.RemoteEndPoint.ToString( ).Split( ':' )[ 0 ]
+                    if( _info.RemoteAddress == socket.RemoteEndPoint.ToString( ).Split( ':' )[ 0 ]
                         && _info.Port == socket.RemoteEndPoint.ToString( ).Split( ':' )[ 1 ] )
                     {
                         TcpServerInfos.Remove( _info );
