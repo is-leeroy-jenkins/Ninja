@@ -48,7 +48,7 @@ namespace Ninja.Models
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:Ninja.ViewModels.MainWindowBase" />
+    /// <seealso cref="Ninja.ViewModels.MainWindowBase" />
     [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
     public class TcpModel : MainWindowBase
     {

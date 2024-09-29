@@ -9,6 +9,7 @@
     xmlns:src="clr-namespace:Ninja.Themes"
     xmlns:sync="http://schemas.syncfusion.com/wpf"
     d:DesignHeight="700"
+    d:DesignWidth="1350"
     mc:Ignorable="d">
 
     <!--  ************************************************* Resources  **************************************************  -->

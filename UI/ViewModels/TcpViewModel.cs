@@ -1,15 +1,15 @@
 ﻿// ******************************************************************************************
 //     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 09-23-2024
+//     Created:                 09-29-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        09-23-2024
+//     Last Modified On:        09-29-2024
 // ******************************************************************************************
 // <copyright file="TcpViewModel.cs" company="Terry D. Eppler">
 // 
-//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
-//    sniffer, pcap, port scan, listen, ip scan .etc.
+//     Ninja is a network toolkit that supports Iperf, TCP, UDP, Websocket, MQTT,
+//     Sniffer, Pcap, Port Scan, Listen, IP Scan .etc.
 // 
 //    Copyright ©  2019-2024 Terry D. Eppler
 // 
@@ -74,7 +74,21 @@ namespace Ninja.ViewModels
         /// <value>
         /// The TCP model.
         /// </value>
-        public TcpModel TcpModel { get; set; }
+        public TcpModel TcpModel
+        {
+            get
+            {
+                return _tcpModel;
+            }
+            set
+            {
+                if( _tcpModel != value )
+                {
+                    _tcpModel = value;
+                    OnPropertyChanged( nameof( TcpModel ) );
+                }
+            }
+        }
 
         #region TcpServer
         /// <summary>
@@ -111,24 +125,24 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void StartListen( object parameter )
         {
-            if( TcpModel.ServerListenButtonName == "Start Listen" )
+            if( _tcpModel.ServerListenButtonName == "Start Listen" )
             {
-                TcpModel.ServerListenButtonName = "Stop Listen";
+                _tcpModel.ServerListenButtonName = "Stop Listen";
                 _tcpServerSocket =
-                    new TcpServerSocket( IPAddress.Any.ToString( ), TcpModel.ListenPort );
+                    new TcpServerSocket( IPAddress.Any.ToString( ), _tcpModel.ListenPort );
 
                 _tcpServerSocket.RecvEvent = Recv;
                 _tcpServerSocket.ConnectEvent = ConnectCallback;
                 _tcpServerSocket.DisConnectEvent = DisConnectCallback;
                 _tcpServerSocket.Start( );
-                TcpModel.ServerStatus += "Tcp Server Started!\n";
+                _tcpModel.ServerStatus += "Tcp Server Started!\n";
             }
             else
             {
-                TcpModel.ServerListenButtonName = "Start Listen";
+                _tcpModel.ServerListenButtonName = "Start Listen";
                 _tcpServerSocket.CloseAllClientSocket( );
                 TcpServerInfos.Clear( );
-                TcpModel.ServerStatus += "Tcp Server Stopped!\n";
+                _tcpModel.ServerStatus += "Tcp Server Stopped!\n";
             }
         }
 
@@ -141,9 +155,9 @@ namespace Ninja.ViewModels
         {
             Application.Current.Dispatcher.BeginInvoke( new Action( ( ) =>
             {
-                TcpModel.ServerRecv += "[" + socket.RemoteEndPoint + "] :";
-                TcpModel.ServerRecv += message;
-                TcpModel.ServerRecv += "\n";
+                _tcpModel.ServerRecv += "[" + socket.RemoteEndPoint + "] :";
+                _tcpModel.ServerRecv += message;
+                _tcpModel.ServerRecv += "\n";
             } ) );
         }
 
@@ -163,7 +177,7 @@ namespace Ninja.ViewModels
                     Time = _time
                 } );
 
-                TcpModel.ServerStatus +=
+                _tcpModel.ServerStatus +=
                     "++[" + socket.RemoteEndPoint + "] connected at " + _time + "\n";
             } ) );
         }
@@ -182,7 +196,7 @@ namespace Ninja.ViewModels
                         && _info.Port == socket.RemoteEndPoint.ToString( ).Split( ':' )[ 1 ] )
                     {
                         TcpServerInfos.Remove( _info );
-                        TcpModel.ServerStatus += "--[" + socket.RemoteEndPoint
+                        _tcpModel.ServerStatus += "--[" + socket.RemoteEndPoint
                             + "] disconnected at " + _info.Time + "\n";
 
                         break;
@@ -219,7 +233,7 @@ namespace Ninja.ViewModels
         {
             if( _tcpServerSocket != null )
             {
-                _tcpServerSocket.SendMessageToAllClientsAsync( TcpModel.ServerSendStr );
+                _tcpServerSocket.SendMessageToAllClientsAsync( _tcpModel.ServerSendStr );
             }
         }
 
@@ -229,13 +243,13 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void ServerAutoSend( object parameter )
         {
-            if( TcpModel.ServerSendButtonName == "Auto Send Start" )
+            if( _tcpModel.ServerSendButtonName == "Auto Send Start" )
             {
-                TcpModel.ServerSendButtonName = "Auto Send Stop";
+                _tcpModel.ServerSendButtonName = "Auto Send Stop";
                 _serverAutoSendTimer = new DispatcherTimer( )
                 {
                     Interval = new TimeSpan( 0, 0, 0, 0,
-                        TcpModel.ServerSendInterval )
+                        _tcpModel.ServerSendInterval )
                 };
 
                 _serverAutoSendTimer.Tick += ServerAutoSendTimerFunc;
@@ -243,7 +257,7 @@ namespace Ninja.ViewModels
             }
             else
             {
-                TcpModel.ServerSendButtonName = "Auto Send Start";
+                _tcpModel.ServerSendButtonName = "Auto Send Start";
                 _serverAutoSendTimer.Stop( );
             }
         }
@@ -268,7 +282,7 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void ServerRecvClear( object parameter )
         {
-            TcpModel.ServerRecv = "";
+            _tcpModel.ServerRecv = "";
         }
 
         /// <summary>
@@ -291,7 +305,7 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void ServerSendClear( object parameter )
         {
-            TcpModel.ServerSend = "";
+            _tcpModel.ServerSend = "";
         }
 
         /// <summary>
@@ -316,7 +330,7 @@ namespace Ninja.ViewModels
         {
             if( _tcpServerSocket != null )
             {
-                _tcpServerSocket.SendMessageToAllClientsAsync( TcpModel.ServerSend );
+                _tcpServerSocket.SendMessageToAllClientsAsync( _tcpModel.ServerSend );
             }
         }
         #endregion
@@ -347,10 +361,12 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void ClientConnect( object parameter )
         {
-            if( TcpModel.ClientConnectButtonName == "Connect" )
+            if( _tcpModel.ClientConnectButtonName == "Connect" )
             {
-                TcpModel.ClientConnectButtonName = "Disconnect";
-                _tcpClientSocket = new TcpClientSocket( TcpModel.ServerAddress, TcpModel.ServerPort );
+                _tcpModel.ClientConnectButtonName = "Disconnect";
+                _tcpClientSocket =
+                    new TcpClientSocket( _tcpModel.ServerAddress, _tcpModel.ServerPort );
+
                 _tcpClientSocket.RecvEvent = ClientRecvCb;
                 _tcpClientSocket.ConnectEvent = ClientConnectCb;
                 _tcpClientSocket.DisConnectEvent = ClientDisConnectCb;
@@ -358,7 +374,7 @@ namespace Ninja.ViewModels
             }
             else
             {
-                TcpModel.ClientConnectButtonName = "Connect";
+                _tcpModel.ClientConnectButtonName = "Connect";
                 _tcpClientSocket.CloseClientSocket( );
             }
         }
@@ -372,10 +388,10 @@ namespace Ninja.ViewModels
             Application.Current.Dispatcher.BeginInvoke( new Action( ( ) =>
             {
                 var _time = DateTime.Now;
-                TcpModel.ClientRecv +=
+                _tcpModel.ClientRecv +=
                     "++[" + socket.RemoteEndPoint + "] connected at " + _time + "\n";
 
-                TcpModel.LocalPort = socket.LocalEndPoint.ToString( ).Split( ':' )[ 1 ];
+                _tcpModel.LocalPort = socket.LocalEndPoint.ToString( ).Split( ':' )[ 1 ];
             } ) );
         }
 
@@ -387,12 +403,12 @@ namespace Ninja.ViewModels
         {
             Application.Current.Dispatcher.BeginInvoke( new Action( ( ) =>
             {
-                TcpModel.ClientRecv += "--[" + socket.RemoteEndPoint + "] disconnected at "
+                _tcpModel.ClientRecv += "--[" + socket.RemoteEndPoint + "] disconnected at "
                     + DateTime.Now + "\n";
 
-                if( TcpModel.ClientConnectButtonName == "Disconnect" )
+                if( _tcpModel.ClientConnectButtonName == "Disconnect" )
                 {
-                    TcpModel.ClientConnectButtonName = "Connect";
+                    _tcpModel.ClientConnectButtonName = "Connect";
                     _tcpClientSocket.CloseClientSocket( );
                 }
             } ) );
@@ -406,8 +422,8 @@ namespace Ninja.ViewModels
         {
             Application.Current.Dispatcher.BeginInvoke( new Action( ( ) =>
             {
-                TcpModel.ClientRecv += msg;
-                TcpModel.ClientRecv += "\n";
+                _tcpModel.ClientRecv += msg;
+                _tcpModel.ClientRecv += "\n";
             } ) );
         }
 
@@ -431,7 +447,7 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void ClientSendClear( object parameter )
         {
-            TcpModel.ClientSend = "";
+            _tcpModel.ClientSend = "";
         }
 
         /// <summary>
@@ -456,7 +472,7 @@ namespace Ninja.ViewModels
         {
             if( _tcpClientSocket != null )
             {
-                _tcpClientSocket.SendAsync( TcpModel.ClientSend );
+                _tcpClientSocket.SendAsync( _tcpModel.ClientSend );
             }
         }
 
@@ -488,7 +504,7 @@ namespace Ninja.ViewModels
         {
             if( _tcpClientSocket != null )
             {
-                _tcpClientSocket.SendAsync( TcpModel.ClientSendStr );
+                _tcpClientSocket.SendAsync( _tcpModel.ClientSendStr );
             }
         }
 
@@ -498,13 +514,13 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void ClientAutoSend( object parameter )
         {
-            if( TcpModel.ClientSendButtonName == "Auto Send Start" )
+            if( _tcpModel.ClientSendButtonName == "Auto Send Start" )
             {
-                TcpModel.ClientSendButtonName = "Auto Send Stop";
+                _tcpModel.ClientSendButtonName = "Auto Send Stop";
                 _clientAutoSendTimer = new DispatcherTimer( )
                 {
                     Interval = new TimeSpan( 0, 0, 0, 0,
-                        TcpModel.ClientSendInterval )
+                        _tcpModel.ClientSendInterval )
                 };
 
                 _clientAutoSendTimer.Tick += ClientAutoSendFunc;
@@ -512,7 +528,7 @@ namespace Ninja.ViewModels
             }
             else
             {
-                TcpModel.ClientSendButtonName = "Auto Send Start";
+                _tcpModel.ClientSendButtonName = "Auto Send Start";
                 _clientAutoSendTimer.Stop( );
             }
         }
@@ -537,7 +553,7 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void ClientRecvClear( object parameter )
         {
-            TcpModel.ClientRecv = "";
+            _tcpModel.ClientRecv = "";
         }
         #endregion
     }
