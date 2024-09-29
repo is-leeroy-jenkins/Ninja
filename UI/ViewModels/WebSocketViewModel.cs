@@ -1,15 +1,15 @@
 ﻿// ******************************************************************************************
 //     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 09-22-2024
+//     Created:                 09-29-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        09-22-2024
+//     Last Modified On:        09-29-2024
 // ******************************************************************************************
 // <copyright file="WebSocketViewModel.cs" company="Terry D. Eppler">
 // 
-//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
-//    sniffer, pcap, port scan, listen, ip scan .etc.
+//     Ninja is a network toolkit that supports Iperf, TCP, UDP, Websocket, MQTT,
+//     Sniffer, Pcap, Port Scan, Listen, IP Scan .etc.
 // 
 //    Copyright ©  2019-2024 Terry D. Eppler
 // 
@@ -56,15 +56,19 @@ namespace Ninja.ViewModels
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:Ninja.ViewModels.MainWindowBase" />
+    /// <seealso cref="Ninja.ViewModels.MainWindowBase" />
     [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public class WebSocketViewModel : MainWindowBase
     {
+        /// <summary>
+        /// The web socket model
+        /// </summary>
         private protected WebSocketModel _webSocketModel;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebSocketViewModel"/> class.
+        /// Initializes a new instance of the
+        /// <see cref="WebSocketViewModel"/> class.
         /// </summary>
         public WebSocketViewModel( )
         {
@@ -263,10 +267,10 @@ namespace Ninja.ViewModels
             }
             set
             {
-                if(_webSocketClient != value)
+                if( _webSocketClient != value )
                 {
                     _webSocketClient = value;
-                    OnPropertyChanged(nameof(WebSocketClient));
+                    OnPropertyChanged( nameof( WebSocketClient ) );
                 }
             }
         }
