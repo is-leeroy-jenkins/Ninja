@@ -315,7 +315,7 @@
                         Margin="0,5,0,5"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
-                        Text="{Binding WebSocketModel.ServerIp}" />
+                        Text="{Binding WebSocketModel.ClientAddress}" />
                     <n:ButtonEx
                         Grid.Column="2"
                         Width="100"

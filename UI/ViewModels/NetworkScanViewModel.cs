@@ -231,7 +231,7 @@ namespace Ninja.ViewModels
             string _ttl = null;
             Console.WriteLine( ip );
             _reply = _ipInterface.PingSweep( ip );
-            _networkScanModel.Ip = ip;
+            _networkScanModel.IpAddress = ip;
             if( _reply != null )
             {
                 if( _reply.Status == IPStatus.Success )
@@ -252,18 +252,18 @@ namespace Ninja.ViewModels
                         } );
                     } ) );
 
-                    NetworkScanModel.OnlineCnt++;
+                    NetworkScanModel.OnlineCount++;
                 }
                 else
                 {
                     _status = "Timeout";
-                    NetworkScanModel.OfflineCnt++;
+                    NetworkScanModel.OfflineCount++;
                 }
             }
             else
             {
                 _status = "Offline";
-                NetworkScanModel.OfflineCnt++;
+                NetworkScanModel.OfflineCount++;
             }
 
             IpCount--;
@@ -281,9 +281,9 @@ namespace Ninja.ViewModels
         {
             _tokenSource = new CancellationTokenSource( );
             _cancelToken = _tokenSource.Token;
-            var _startIpVal = IpInterface.IpAddressToLongBackwards( NetworkScanModel.StartIp );
+            var _startIpVal = IpInterface.IpAddressToLongBackwards( NetworkScanModel.StartAddress );
             var _startIpStr = IpInterface.LongToIpAddress( _startIpVal );
-            var _endIpVal = IpInterface.IpAddressToLongBackwards( NetworkScanModel.StopIp );
+            var _endIpVal = IpInterface.IpAddressToLongBackwards( NetworkScanModel.StopAddress );
             var _endIpStr = IpInterface.LongToIpAddress( _endIpVal );
             IpCount = ( int )( _endIpVal - _startIpVal );
             if( IpCount <= 0 )
@@ -332,8 +332,8 @@ namespace Ninja.ViewModels
             if( NetworkScanModel.ScanButtonName == "Start" )
             {
                 NetworkScanModel.ScanButtonName = "Stop";
-                NetworkScanModel.OfflineCnt = 0;
-                NetworkScanModel.OnlineCnt = 0;
+                NetworkScanModel.OfflineCount = 0;
+                NetworkScanModel.OnlineCount = 0;
                 IpScanResults.Clear( );
 
                 //Do Scan

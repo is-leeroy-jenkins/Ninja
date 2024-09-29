@@ -53,7 +53,7 @@ namespace Ninja.Models
         /// <summary>
         /// The client connect BTN name
         /// </summary>
-        private string _clientConnectBtnName;
+        private string _clientConnectButtonName;
 
         /// <summary>
         /// The client recv
@@ -68,7 +68,7 @@ namespace Ninja.Models
         /// <summary>
         /// The client send BTN name
         /// </summary>
-        private string _clientSendBtnName;
+        private string _clientSendButtonName;
 
         /// <summary>
         /// The client send interval
@@ -94,12 +94,12 @@ namespace Ninja.Models
         /// <summary>
         /// The server ip
         /// </summary>
-        private string _serverIp;
+        private string _serverAddress;
 
         /// <summary>
         /// The server listen BTN name
         /// </summary>
-        private string _serverListenBtnName;
+        private string _serverListenButtonName;
 
         /// <summary>
         /// The server port
@@ -119,7 +119,7 @@ namespace Ninja.Models
         /// <summary>
         /// The server send BTN name
         /// </summary>
-        private string _serverSendBtnName;
+        private string _serverSendButtonName;
 
         /// <summary>
         /// The server send interval
@@ -142,20 +142,20 @@ namespace Ninja.Models
         /// </summary>
         public UdpModel( )
         {
-            ListenPort = 65432;
-            ServerSendStr = "Hello Client!";
-            ServerSendInterval = 1000;
-            ServerSend = "Hello Client!";
-            ServerSendBtnName = "Auto Send Start";
-            ServerListenBtnName = "Start Listen";
-            ServerIp = "127.0.0.1";
-            ServerPort = 65432;
-            ClientSendStr = "Hello Server!";
-            ClientSendInterval = 1000;
-            ClientSend = "Hello Server!";
-            ClientConnectBtnName = "Connect";
-            ClientSendBtnName = "Auto Send Start";
-            LocalPort = "0";
+            _listenPort = 65432;
+            _serverSendStr = "Hello Client!";
+            _serverSendInterval = 1000;
+            _serverSend = "Hello Client!";
+            _serverSendButtonName = "Auto Send Start";
+            _serverListenButtonName = "Start Listen";
+            _serverAddress = "127.0.0.1";
+            _serverPort = 65432;
+            _clientSendStr = "Hello Server!";
+            _clientSendInterval = 1000;
+            _clientSend = "Hello Server!";
+            _clientConnectButtonName = "Connect";
+            _clientSendButtonName = "Auto Send Start";
+            _localPort = "0";
         }
 
         /// <summary>
@@ -166,7 +166,10 @@ namespace Ninja.Models
         /// </value>
         public int ListenPort
         {
-            get { return _listenPort; }
+            get
+            {
+                return _listenPort;
+            }
             set
             {
                 if( _listenPort != value )
@@ -183,15 +186,18 @@ namespace Ninja.Models
         /// <value>
         /// The name of the server listen BTN.
         /// </value>
-        public string ServerListenBtnName
+        public string ServerListenButtonName
         {
-            get { return _serverListenBtnName; }
+            get
+            {
+                return _serverListenButtonName;
+            }
             set
             {
-                if( _serverListenBtnName != value )
+                if( _serverListenButtonName != value )
                 {
-                    _serverListenBtnName = value;
-                    OnPropertyChanged( nameof( ServerListenBtnName ) );
+                    _serverListenButtonName = value;
+                    OnPropertyChanged( nameof( ServerListenButtonName ) );
                 }
             }
         }
@@ -204,7 +210,10 @@ namespace Ninja.Models
         /// </value>
         public string ServerSendStr
         {
-            get { return _serverSendStr; }
+            get
+            {
+                return _serverSendStr;
+            }
             set
             {
                 if( _serverSendStr != value )
@@ -223,7 +232,10 @@ namespace Ninja.Models
         /// </value>
         public int ServerSendInterval
         {
-            get { return _serverSendInterval; }
+            get
+            {
+                return _serverSendInterval;
+            }
             set
             {
                 if( _serverSendInterval != value )
@@ -240,15 +252,18 @@ namespace Ninja.Models
         /// <value>
         /// The name of the server send BTN.
         /// </value>
-        public string ServerSendBtnName
+        public string ServerSendButtonName
         {
-            get { return _serverSendBtnName; }
+            get
+            {
+                return _serverSendButtonName;
+            }
             set
             {
-                if( _serverSendBtnName != value )
+                if( _serverSendButtonName != value )
                 {
-                    _serverSendBtnName = value;
-                    OnPropertyChanged( nameof( ServerSendBtnName ) );
+                    _serverSendButtonName = value;
+                    OnPropertyChanged( nameof( ServerSendButtonName ) );
                 }
             }
         }
@@ -305,7 +320,10 @@ namespace Ninja.Models
         /// </value>
         public string ServerSend
         {
-            get { return _serverSend; }
+            get
+            {
+                return _serverSend;
+            }
             set
             {
                 if( _serverSend != value )
@@ -324,7 +342,10 @@ namespace Ninja.Models
         /// </value>
         public int ServerPort
         {
-            get { return _serverPort; }
+            get
+            {
+                return _serverPort;
+            }
             set
             {
                 if( _serverPort != value )
@@ -343,7 +364,10 @@ namespace Ninja.Models
         /// </value>
         public string LocalPort
         {
-            get { return _localPort; }
+            get
+            {
+                return _localPort;
+            }
             set
             {
                 if( _localPort != value )
@@ -360,15 +384,18 @@ namespace Ninja.Models
         /// <value>
         /// The server ip.
         /// </value>
-        public string ServerIp
+        public string ServerAddress
         {
-            get { return _serverIp; }
+            get
+            {
+                return _serverAddress;
+            }
             set
             {
-                if( _serverIp != value )
+                if( _serverAddress != value )
                 {
-                    _serverIp = value;
-                    OnPropertyChanged( nameof( ServerIp ) );
+                    _serverAddress = value;
+                    OnPropertyChanged( nameof( ServerAddress ) );
                 }
             }
         }
@@ -379,15 +406,18 @@ namespace Ninja.Models
         /// <value>
         /// The name of the client connect BTN.
         /// </value>
-        public string ClientConnectBtnName
+        public string ClientConnectButtonName
         {
-            get { return _clientConnectBtnName; }
+            get
+            {
+                return _clientConnectButtonName;
+            }
             set
             {
-                if( _clientConnectBtnName != value )
+                if( _clientConnectButtonName != value )
                 {
-                    _clientConnectBtnName = value;
-                    OnPropertyChanged( nameof( ClientConnectBtnName ) );
+                    _clientConnectButtonName = value;
+                    OnPropertyChanged( nameof( ClientConnectButtonName ) );
                 }
             }
         }
@@ -422,7 +452,10 @@ namespace Ninja.Models
         /// </value>
         public int ClientSendInterval
         {
-            get { return _clientSendInterval; }
+            get
+            {
+                return _clientSendInterval;
+            }
             set
             {
                 if( _clientSendInterval != value )
@@ -439,15 +472,18 @@ namespace Ninja.Models
         /// <value>
         /// The name of the client send BTN.
         /// </value>
-        public string ClientSendBtnName
+        public string ClientSendButtonName
         {
-            get { return _clientSendBtnName; }
+            get
+            {
+                return _clientSendButtonName;
+            }
             set
             {
-                if( _clientSendBtnName != value )
+                if( _clientSendButtonName != value )
                 {
-                    _clientSendBtnName = value;
-                    OnPropertyChanged( nameof( ClientSendBtnName ) );
+                    _clientSendButtonName = value;
+                    OnPropertyChanged( nameof( ClientSendButtonName ) );
                 }
             }
         }
@@ -460,7 +496,10 @@ namespace Ninja.Models
         /// </value>
         public string ClientRecv
         {
-            get { return _clientRecv; }
+            get
+            {
+                return _clientRecv;
+            }
             set
             {
                 if( _clientRecv != value )

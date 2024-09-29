@@ -55,9 +55,11 @@ namespace Ninja.ViewModels
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:Ninja.ViewModels.MainWindowBase" />
+    /// <seealso cref="Ninja.ViewModels.MainWindowBase" />
     public class TcpViewModel : MainWindowBase
     {
+        private protected TcpModel _tcpModel;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TcpViewModel"/> class.
         /// </summary>
@@ -109,9 +111,9 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void StartListen( object parameter )
         {
-            if( TcpModel.ServerListenBtnName == "Start Listen" )
+            if( TcpModel.ServerListenButtonName == "Start Listen" )
             {
-                TcpModel.ServerListenBtnName = "Stop Listen";
+                TcpModel.ServerListenButtonName = "Stop Listen";
                 _tcpServerSocket =
                     new TcpServerSocket( IPAddress.Any.ToString( ), TcpModel.ListenPort );
 
@@ -123,7 +125,7 @@ namespace Ninja.ViewModels
             }
             else
             {
-                TcpModel.ServerListenBtnName = "Start Listen";
+                TcpModel.ServerListenButtonName = "Start Listen";
                 _tcpServerSocket.CloseAllClientSocket( );
                 TcpServerInfos.Clear( );
                 TcpModel.ServerStatus += "Tcp Server Stopped!\n";
@@ -156,7 +158,7 @@ namespace Ninja.ViewModels
                 var _time = DateTime.Now;
                 TcpServerInfos.Add( new TcpServerInfo
                 {
-                    RemoteIp = socket.RemoteEndPoint.ToString( ).Split( ':' )[ 0 ],
+                    RemoteIpAddress = socket.RemoteEndPoint.ToString( ).Split( ':' )[ 0 ],
                     Port = socket.RemoteEndPoint.ToString( ).Split( ':' )[ 1 ],
                     Time = _time
                 } );
@@ -176,7 +178,7 @@ namespace Ninja.ViewModels
             {
                 foreach( var _info in TcpServerInfos )
                 {
-                    if( _info.RemoteIp == socket.RemoteEndPoint.ToString( ).Split( ':' )[ 0 ]
+                    if( _info.RemoteIpAddress == socket.RemoteEndPoint.ToString( ).Split( ':' )[ 0 ]
                         && _info.Port == socket.RemoteEndPoint.ToString( ).Split( ':' )[ 1 ] )
                     {
                         TcpServerInfos.Remove( _info );
@@ -227,9 +229,9 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void ServerAutoSend( object parameter )
         {
-            if( TcpModel.ServerSendBtnName == "Auto Send Start" )
+            if( TcpModel.ServerSendButtonName == "Auto Send Start" )
             {
-                TcpModel.ServerSendBtnName = "Auto Send Stop";
+                TcpModel.ServerSendButtonName = "Auto Send Stop";
                 _serverAutoSendTimer = new DispatcherTimer( )
                 {
                     Interval = new TimeSpan( 0, 0, 0, 0,
@@ -241,7 +243,7 @@ namespace Ninja.ViewModels
             }
             else
             {
-                TcpModel.ServerSendBtnName = "Auto Send Start";
+                TcpModel.ServerSendButtonName = "Auto Send Start";
                 _serverAutoSendTimer.Stop( );
             }
         }
@@ -345,10 +347,10 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void ClientConnect( object parameter )
         {
-            if( TcpModel.ClientConnectBtnName == "Connect" )
+            if( TcpModel.ClientConnectButtonName == "Connect" )
             {
-                TcpModel.ClientConnectBtnName = "Disconnect";
-                _tcpClientSocket = new TcpClientSocket( TcpModel.ServerIp, TcpModel.ServerPort );
+                TcpModel.ClientConnectButtonName = "Disconnect";
+                _tcpClientSocket = new TcpClientSocket( TcpModel.ServerAddress, TcpModel.ServerPort );
                 _tcpClientSocket.RecvEvent = ClientRecvCb;
                 _tcpClientSocket.ConnectEvent = ClientConnectCb;
                 _tcpClientSocket.DisConnectEvent = ClientDisConnectCb;
@@ -356,7 +358,7 @@ namespace Ninja.ViewModels
             }
             else
             {
-                TcpModel.ClientConnectBtnName = "Connect";
+                TcpModel.ClientConnectButtonName = "Connect";
                 _tcpClientSocket.CloseClientSocket( );
             }
         }
@@ -388,9 +390,9 @@ namespace Ninja.ViewModels
                 TcpModel.ClientRecv += "--[" + socket.RemoteEndPoint + "] disconnected at "
                     + DateTime.Now + "\n";
 
-                if( TcpModel.ClientConnectBtnName == "Disconnect" )
+                if( TcpModel.ClientConnectButtonName == "Disconnect" )
                 {
-                    TcpModel.ClientConnectBtnName = "Connect";
+                    TcpModel.ClientConnectButtonName = "Connect";
                     _tcpClientSocket.CloseClientSocket( );
                 }
             } ) );
@@ -475,7 +477,7 @@ namespace Ninja.ViewModels
         /// <summary>
         /// The m client automatic send timer
         /// </summary>
-        private DispatcherTimer _mClientAutoSendTimer;
+        private DispatcherTimer _clientAutoSendTimer;
 
         /// <summary>
         /// Clients the automatic send function.
@@ -496,22 +498,22 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void ClientAutoSend( object parameter )
         {
-            if( TcpModel.ClientSendBtnName == "Auto Send Start" )
+            if( TcpModel.ClientSendButtonName == "Auto Send Start" )
             {
-                TcpModel.ClientSendBtnName = "Auto Send Stop";
-                _mClientAutoSendTimer = new DispatcherTimer( )
+                TcpModel.ClientSendButtonName = "Auto Send Stop";
+                _clientAutoSendTimer = new DispatcherTimer( )
                 {
                     Interval = new TimeSpan( 0, 0, 0, 0,
                         TcpModel.ClientSendInterval )
                 };
 
-                _mClientAutoSendTimer.Tick += ClientAutoSendFunc;
-                _mClientAutoSendTimer.Start( );
+                _clientAutoSendTimer.Tick += ClientAutoSendFunc;
+                _clientAutoSendTimer.Start( );
             }
             else
             {
-                TcpModel.ClientSendBtnName = "Auto Send Start";
-                _mClientAutoSendTimer.Stop( );
+                TcpModel.ClientSendButtonName = "Auto Send Start";
+                _clientAutoSendTimer.Stop( );
             }
         }
 

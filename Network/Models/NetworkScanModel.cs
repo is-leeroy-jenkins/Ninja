@@ -1,15 +1,15 @@
 ﻿// ******************************************************************************************
 //     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 09-22-2024
+//     Created:                 09-29-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        09-22-2024
+//     Last Modified On:        09-29-2024
 // ******************************************************************************************
 // <copyright file="NetworkScanModel.cs" company="Terry D. Eppler">
 // 
-//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
-//    sniffer, pcap, port scan, listen, ip scan .etc.
+//     Ninja is a network toolkit that supports Iperf, TCP, UDP, Websocket, MQTT,
+//     Sniffer, Pcap, Port Scan, Listen, IP Scan .etc.
 // 
 //    Copyright ©  2019-2024 Terry D. Eppler
 // 
@@ -44,16 +44,58 @@ namespace Ninja.Models
 {
     using ViewModels;
 
+    /// <inheritdoc />
     /// <summary>
-    /// 
     /// </summary>
     /// <seealso cref="Ninja.ViewModels.MainWindowBase" />
     public class NetworkScanModel : MainWindowBase
     {
         /// <summary>
+        /// The ip
+        /// </summary>
+        private string _ipAddress;
+
+        /// <summary>
         /// The net information item source
         /// </summary>
         private NetInterfaceInfo[ ] _netInfoItemSource;
+
+        /// <summary>
+        /// The offline count
+        /// </summary>
+        private int _offlineCount;
+
+        /// <summary>
+        /// The online count
+        /// </summary>
+        private int _onlineCount;
+
+        /// <summary>
+        /// The scan button name
+        /// </summary>
+        private string _scanButtonName;
+
+        /// <summary>
+        /// The start ip
+        /// </summary>
+        private string _startAddress;
+
+        /// <summary>
+        /// The stop ip
+        /// </summary>
+        private string _stopAddress;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NetworkScanModel"/> class.
+        /// </summary>
+        public NetworkScanModel( )
+        {
+            _startAddress = "192.168.1.1";
+            _stopAddress = "192.168.1.255";
+            _scanButtonName = "Start";
+            _offlineCount = 0;
+            _onlineCount = 0;
+        }
 
         /// <summary>
         /// Gets or sets the net information item source.
@@ -75,33 +117,26 @@ namespace Ninja.Models
         }
 
         /// <summary>
-        /// The start ip
-        /// </summary>
-        private string _startIp;
-
-        /// <summary>
         /// Gets or sets the start ip.
         /// </summary>
         /// <value>
         /// The start ip.
         /// </value>
-        public string StartIp
+        public string StartAddress
         {
-            get { return _startIp; }
+            get
+            {
+                return _startAddress;
+            }
             set
             {
-                if( _startIp != value )
+                if( _startAddress != value )
                 {
-                    _startIp = value;
-                    OnPropertyChanged( nameof( StartIp ) );
+                    _startAddress = value;
+                    OnPropertyChanged( nameof( StartAddress ) );
                 }
             }
         }
-
-        /// <summary>
-        /// The stop ip
-        /// </summary>
-        private string _stopIp;
 
         /// <summary>
         /// Gets or sets the stop ip.
@@ -109,23 +144,21 @@ namespace Ninja.Models
         /// <value>
         /// The stop ip.
         /// </value>
-        public string StopIp
+        public string StopAddress
         {
-            get { return _stopIp; }
+            get
+            {
+                return _stopAddress;
+            }
             set
             {
-                if( _stopIp != value )
+                if( _stopAddress != value )
                 {
-                    _stopIp = value;
-                    OnPropertyChanged( nameof( StopIp ) );
+                    _stopAddress = value;
+                    OnPropertyChanged( nameof( StopAddress ) );
                 }
             }
         }
-
-        /// <summary>
-        /// The ip
-        /// </summary>
-        private string _ip;
 
         /// <summary>
         /// Gets or sets the ip.
@@ -133,23 +166,21 @@ namespace Ninja.Models
         /// <value>
         /// The ip.
         /// </value>
-        public string Ip
+        public string IpAddress
         {
-            get { return _ip; }
+            get
+            {
+                return _ipAddress;
+            }
             set
             {
-                if( _ip != value )
+                if( _ipAddress != value )
                 {
-                    _ip = value;
-                    OnPropertyChanged( nameof( Ip ) );
+                    _ipAddress = value;
+                    OnPropertyChanged( nameof( IpAddress ) );
                 }
             }
         }
-
-        /// <summary>
-        /// The online count
-        /// </summary>
-        private int _onlineCnt;
 
         /// <summary>
         /// Gets or sets the online count.
@@ -157,23 +188,21 @@ namespace Ninja.Models
         /// <value>
         /// The online count.
         /// </value>
-        public int OnlineCnt
+        public int OnlineCount
         {
-            get { return _onlineCnt; }
+            get
+            {
+                return _onlineCount;
+            }
             set
             {
-                if( _onlineCnt != value )
+                if( _onlineCount != value )
                 {
-                    _onlineCnt = value;
-                    OnPropertyChanged( nameof( OnlineCnt ) );
+                    _onlineCount = value;
+                    OnPropertyChanged( nameof( OnlineCount ) );
                 }
             }
         }
-
-        /// <summary>
-        /// The offline count
-        /// </summary>
-        private int _offlineCnt;
 
         /// <summary>
         /// Gets or sets the offline count.
@@ -181,23 +210,21 @@ namespace Ninja.Models
         /// <value>
         /// The offline count.
         /// </value>
-        public int OfflineCnt
+        public int OfflineCount
         {
-            get { return _offlineCnt; }
+            get
+            {
+                return _offlineCount;
+            }
             set
             {
-                if( _offlineCnt != value )
+                if( _offlineCount != value )
                 {
-                    _offlineCnt = value;
-                    OnPropertyChanged( nameof( OfflineCnt ) );
+                    _offlineCount = value;
+                    OnPropertyChanged( nameof( OfflineCount ) );
                 }
             }
         }
-
-        /// <summary>
-        /// The scan button name
-        /// </summary>
-        private string _scanButtonName;
 
         /// <summary>
         /// Gets or sets the name of the scan button.
@@ -216,18 +243,6 @@ namespace Ninja.Models
                     OnPropertyChanged( nameof( ScanButtonName ) );
                 }
             }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NetworkScanModel"/> class.
-        /// </summary>
-        public NetworkScanModel( )
-        {
-            StartIp = "192.168.1.1";
-            StopIp = "192.168.1.255";
-            ScanButtonName = "Start";
-            OfflineCnt = 0;
-            OnlineCnt = 0;
         }
     }
 }

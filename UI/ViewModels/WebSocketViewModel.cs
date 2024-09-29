@@ -111,9 +111,9 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void StartListen( object parameter )
         {
-            if( WebSocketModel.ServerListenBtnName == "Start Listen" )
+            if( WebSocketModel.ServerListenButtonName == "Start Listen" )
             {
-                WebSocketModel.ServerListenBtnName = "Stop Listen";
+                WebSocketModel.ServerListenButtonName = "Stop Listen";
                 _wsServer = new WebSocketServer( WebSocketModel.ServerAddress );
                 _wsServer.AddWebSocketService<EchoHandler>( "/echo" );
                 _wsServer.Start( );
@@ -121,7 +121,7 @@ namespace Ninja.ViewModels
             }
             else
             {
-                WebSocketModel.ServerListenBtnName = "Start Listen";
+                WebSocketModel.ServerListenButtonName = "Start Listen";
                 _wsServer.Stop( );
                 WsRecv.Add( "[" + DateTime.Now + "][" + "WebSocket Server Stopped]\n" );
             }
@@ -162,9 +162,9 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void ServerAutoSend( object parameter )
         {
-            if( WebSocketModel.ServerSendBtnName == "Auto Send Start" )
+            if( WebSocketModel.ServerSendButtonName == "Auto Send Start" )
             {
-                WebSocketModel.ServerSendBtnName = "Auto Send Stop";
+                WebSocketModel.ServerSendButtonName = "Auto Send Stop";
                 _mServerAutoSendTimer = new DispatcherTimer( )
                 {
                     Interval = new TimeSpan( 0, 0, 0, 0,
@@ -176,7 +176,7 @@ namespace Ninja.ViewModels
             }
             else
             {
-                WebSocketModel.ServerSendBtnName = "Auto Send Start";
+                WebSocketModel.ServerSendButtonName = "Auto Send Start";
                 _mServerAutoSendTimer.Stop( );
             }
         }
@@ -264,9 +264,9 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void ClientConnect( object parameter )
         {
-            if( WebSocketModel.ClientConnectBtnName == "Connect" )
+            if( WebSocketModel.ClientConnectButtonName == "Connect" )
             {
-                using( var _ws = new WebSocket( WebSocketModel.ServerIp ) )
+                using( var _ws = new WebSocket( WebSocketModel.ClientAddress ) )
                 {
                     _ws.OnOpen += ( sender, e ) =>
                     {
@@ -303,7 +303,7 @@ namespace Ninja.ViewModels
                             var _time = "[" + DateTime.Now + "]";
                             var _str = "[WebSocket Error][" + e.Message + "]\n";
                             WsClientRecv.Add( _time + _str );
-                            WebSocketModel.ClientConnectBtnName = "Connect";
+                            WebSocketModel.ClientConnectButtonName = "Connect";
                         } ) );
                     };
 
@@ -316,7 +316,7 @@ namespace Ninja.ViewModels
                             var _time = "[" + DateTime.Now + "]";
                             var _str = "[WebSocket Close][" + e.Reason + "]\n";
                             WsClientRecv.Add( _time + _str );
-                            WebSocketModel.ClientConnectBtnName = "Connect";
+                            WebSocketModel.ClientConnectButtonName = "Connect";
                         } ) );
                     };
 
@@ -329,7 +329,7 @@ namespace Ninja.ViewModels
                     Task.Run( ( ) =>
                     {
                         WsClient.Connect( );
-                        WebSocketModel.ClientConnectBtnName = "DisConnect";
+                        WebSocketModel.ClientConnectButtonName = "DisConnect";
                     } );
                 }
                 catch( Exception )
@@ -339,7 +339,7 @@ namespace Ninja.ViewModels
             }
             else
             {
-                WebSocketModel.ClientConnectBtnName = "Connect";
+                WebSocketModel.ClientConnectButtonName = "Connect";
                 WsClient.Close( );
             }
         }

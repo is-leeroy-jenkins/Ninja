@@ -213,7 +213,7 @@
                         <TextBlock
                             Grid.Row="2"
                             Margin="50,10,0,0"
-                            Text="{Binding ElementName=NetInfoCombox, Path=SelectedItem.Ip}" />
+                            Text="{Binding ElementName=NetInfoCombox, Path=SelectedItem.IpAddress}" />
 
                         <TextBlock
                             Grid.Row="3"
@@ -256,7 +256,7 @@
                             Width="130"
                             Margin="0,10,0,0"
                             HorizontalAlignment="Right"
-                            Text="{Binding NetworkScanModel.StartIp}" />
+                            Text="{Binding NetworkScanModel.StartAddress}" />
                         <TextBlock
                             Grid.Row="1"
                             Margin="5,10,0,0"
@@ -267,7 +267,7 @@
                             Width="130"
                             Margin="0,10,0,0"
                             HorizontalAlignment="Right"
-                            Text="{Binding NetworkScanModel.StopIp}" />
+                            Text="{Binding NetworkScanModel.StopAddress}" />
                         <n:ButtonEx
                             Grid.Row="3"
                             Width="100"
@@ -303,7 +303,7 @@
                             Grid.Row="0"
                             Margin="0,10,0,10"
                             HorizontalAlignment="Center"
-                            Text="{Binding NetworkScanModel.Ip}" />
+                            Text="{Binding NetworkScanModel.IpAddress}" />
                         <TextBlock
                             Grid.Row="1"
                             Margin="5,10,0,10"
@@ -313,7 +313,7 @@
                             Grid.Row="1"
                             Margin="0,10,0,10"
                             HorizontalAlignment="Center"
-                            Text="{Binding NetworkScanModel.OfflineCnt}" />
+                            Text="{Binding NetworkScanModel.OfflineCount}" />
                         <TextBlock
                             Grid.Row="2"
                             Margin="5,10,0,10"
@@ -323,7 +323,7 @@
                             Grid.Row="2"
                             Margin="0,10,0,10"
                             HorizontalAlignment="Center"
-                            Text="{Binding NetworkScanModel.OnlineCnt}" />
+                            Text="{Binding NetworkScanModel.OnlineCount}" />
                         <!--<btnex:ButtonEx Margin="0,15,0,10" Content="{Binding NetworkScanModel.ScanButtonName}" ButtonType="Normal" Grid.Row="3" HorizontalAlignment="Center" Width="100" Height="30" Command="{Binding IpScanCommand}" />-->
                     </Grid>
 

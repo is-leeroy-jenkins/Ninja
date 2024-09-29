@@ -355,7 +355,7 @@ namespace Ninja.ViewModels
             {
                 return _iperfViewModel;
             }
-            private protected set
+            set
             {
                 if( _iperfViewModel != value )
                 {
@@ -374,7 +374,7 @@ namespace Ninja.ViewModels
             {
                 return _networkScanViewModel;
             }
-            private protected set
+            set
             {
                 if( _networkScanViewModel != value )
                 {
@@ -393,7 +393,7 @@ namespace Ninja.ViewModels
             {
                 return _portScanViewModel;
             }
-            private protected set
+            set
             {
                 if( _portScanViewModel != value )
                 {
@@ -412,7 +412,7 @@ namespace Ninja.ViewModels
             {
                 return _routeViewModel;
             }
-            private protected set
+            set
             {
                 if( _routeViewModel != value )
                 {
@@ -431,7 +431,7 @@ namespace Ninja.ViewModels
             {
                 return _portViewModel;
             }
-            private protected set
+            set
             {
                 if( _portViewModel != value )
                 {
@@ -450,7 +450,7 @@ namespace Ninja.ViewModels
             {
                 return _serverViewModel;
             }
-            private protected set
+            set
             {
                 if( _serverViewModel != value )
                 {
@@ -469,7 +469,7 @@ namespace Ninja.ViewModels
             {
                 return _snifferViewModel;
             }
-            private protected set
+            set
             {
                 if( _snifferViewModel != value )
                 {

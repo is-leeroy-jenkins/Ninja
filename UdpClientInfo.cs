@@ -1,22 +1,33 @@
 ﻿
-namespace Ninja.ViewModels
+
+namespace Ninja
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// 
     /// </summary>
-    [SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
-    public class TcpServerInfo
+    public class UdpClientInfo
     {
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="UdpClientInfo"/> class.
+        /// </summary>
+        public UdpClientInfo( )
+        {
+        }
+
         /// <summary>
         /// Gets or sets the remote ip.
         /// </summary>
         /// <value>
         /// The remote ip.
         /// </value>
-        public string RemoteIpAddress { get; set; }
+        public string RemoteIp { get; set; }
 
         /// <summary>
         /// Gets or sets the port.
@@ -25,6 +36,14 @@ namespace Ninja.ViewModels
         /// The port.
         /// </value>
         public string Port { get; set; }
+
+        /// <summary>
+        /// Gets or sets the recv bytes.
+        /// </summary>
+        /// <value>
+        /// The recv bytes.
+        /// </value>
+        public int RecvBytes { get; set; }
 
         /// <summary>
         /// Gets or sets the time.

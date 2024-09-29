@@ -55,17 +55,17 @@ namespace Ninja.Models
         /// <summary>
         /// The close count
         /// </summary>
-        private int _closeCnt;
+        private int _closeCount;
 
         /// <summary>
         /// The ip
         /// </summary>
-        private string _ip;
+        private string _ipAddress;
 
         /// <summary>
         /// The open count
         /// </summary>
-        private int _openCnt;
+        private int _openCount;
 
         /// <summary>
         /// The port
@@ -98,13 +98,13 @@ namespace Ninja.Models
         /// </summary>
         public PortScanModel( )
         {
-            Ip = "192.168.1.1";
-            StartPort = 1;
-            StopPort = 65535;
-            SocketTimeout = 1000;
-            ScanButtonName = "Start";
-            CloseCnt = 0;
-            OpenCnt = 0;
+            _ipAddress = "192.168.1.1";
+            _startPort = 1;
+            _stopPort = 65535;
+            _socketTimeout = 1000;
+            _scanButtonName = "Start";
+            _closeCount = 0;
+            _openCount = 0;
         }
 
         /// <summary>
@@ -157,18 +157,18 @@ namespace Ninja.Models
         /// <value>
         /// The ip.
         /// </value>
-        public string Ip
+        public string IpAddress
         {
             get
             {
-                return _ip;
+                return _ipAddress;
             }
             set
             {
-                if( _ip != value )
+                if( _ipAddress != value )
                 {
-                    _ip = value;
-                    OnPropertyChanged( nameof( Ip ) );
+                    _ipAddress = value;
+                    OnPropertyChanged( nameof( IpAddress ) );
                 }
             }
         }
@@ -201,18 +201,18 @@ namespace Ninja.Models
         /// <value>
         /// The open count.
         /// </value>
-        public int OpenCnt
+        public int OpenCount
         {
             get
             {
-                return _openCnt;
+                return _openCount;
             }
             set
             {
-                if( _openCnt != value )
+                if( _openCount != value )
                 {
-                    _openCnt = value;
-                    OnPropertyChanged( nameof( OpenCnt ) );
+                    _openCount = value;
+                    OnPropertyChanged( nameof( OpenCount ) );
                 }
             }
         }
@@ -223,18 +223,18 @@ namespace Ninja.Models
         /// <value>
         /// The close count.
         /// </value>
-        public int CloseCnt
+        public int CloseCount
         {
             get
             {
-                return _closeCnt;
+                return _closeCount;
             }
             set
             {
-                if( _closeCnt != value )
+                if( _closeCount != value )
                 {
-                    _closeCnt = value;
-                    OnPropertyChanged( nameof( CloseCnt ) );
+                    _closeCount = value;
+                    OnPropertyChanged( nameof( CloseCount ) );
                 }
             }
         }

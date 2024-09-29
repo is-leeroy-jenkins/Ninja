@@ -170,7 +170,7 @@
                 HorizontalAlignment="Left">
                 <Hyperlink
                     Name="Github"
-                    Click="GithubButton_Click"
+                    Click="OnGithubButtonClick"
                     NavigateUri="https://github.com/is-leeroy-jenkins/Ninja">\
                 </Hyperlink>
             </TextBlock>
@@ -184,7 +184,7 @@
                 HorizontalAlignment="Left">
                 <Hyperlink
                     Name="Gitee"
-                    Click="GiteeButton_Click"
+                    Click="OnGiteeButtonClick"
                     NavigateUri="https://github.com/is-leeroy-jenkins/Ninja" />
             </TextBlock>
             <n:ButtonEx
@@ -193,7 +193,7 @@
                 Margin="0,20,0,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
-                Click="ButtonEx_Click"
+                Click="OnButtonExClick"
                 Content="OK" />
             <!--</Grid>-->
         </Grid>

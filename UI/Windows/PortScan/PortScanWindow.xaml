@@ -190,7 +190,7 @@
                             Width="130"
                             Margin="0,10,0,0"
                             HorizontalAlignment="Right"
-                            Text="{Binding PortScanModel.Ip}" />
+                            Text="{Binding PortScanModel.IpAddress}" />
 
                         <TextBlock
                             Grid.Row="1"
@@ -280,7 +280,7 @@
                             Grid.Row="1"
                             Margin="0,10,0,10"
                             HorizontalAlignment="Center"
-                            Text="{Binding PortScanModel.OpenCnt}" />
+                            Text="{Binding PortScanModel.OpenCount}" />
 
                         <TextBlock
                             Grid.Row="2"
@@ -292,7 +292,7 @@
                             Grid.Row="2"
                             Margin="0,10,0,10"
                             HorizontalAlignment="Center"
-                            Text="{Binding PortScanModel.CloseCnt}" />
+                            Text="{Binding PortScanModel.CloseCount}" />
 
 
                         <!--<btnex:ButtonEx Margin="0,15,0,10" Content="{Binding PortScanModel.ScanButtonName}" ButtonType="Normal" Grid.Row="4" HorizontalAlignment="Center" Width="100" Height="30" Command="{Binding PortScanCommand}" />-->

@@ -208,7 +208,7 @@
                         <TextBlock
                             Grid.Row="2"
                             Margin="50,10,0,0"
-                            Text="{Binding ElementName=NetInfoCombox, Path=SelectedItem.Ip}" />
+                            Text="{Binding ElementName=NetInfoCombox, Path=SelectedItem.IpAddress}" />
                         <TextBlock
                             Grid.Row="3"
                             Margin="5,10,0,10"

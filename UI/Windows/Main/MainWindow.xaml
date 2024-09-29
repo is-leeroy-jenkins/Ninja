@@ -19,7 +19,7 @@
     WindowStyle="SingleBorderWindow"
     mc:Ignorable="d">
 
-    <!--******************************************** Resources *********************************************-->
+    <!--  ******************************************** Resources *********************************************  -->
 
     <Window.Resources>
         <Style TargetType="ToolTip">
@@ -30,7 +30,7 @@
         </Style>
     </Window.Resources>
 
-    <!--******************************************** Context Menu ******************************************-->
+    <!--  ******************************************** Context Menu ******************************************  -->
 
     <Window.ContextMenu>
         <ContextMenu Name="MainContextMenu">
@@ -132,7 +132,7 @@
         </ContextMenu>
     </Window.ContextMenu>
 
-    <!--******************************************** Layout  *********************************************-->
+    <!--  ******************************************** Layout  *********************************************  -->
 
     <Grid>
         <Grid.RowDefinitions>
@@ -148,8 +148,8 @@
 
             <Menu
                 x:Name="ItemMenu"
-                Background="{StaticResource ControlInteriorBrush}"
-                Grid.Column="0">
+                Grid.Column="0"
+                Background="{StaticResource ControlInteriorBrush}">
 
                 <MenuItem
                     x:Name="FileMenuItem"
@@ -189,17 +189,15 @@
             </Menu>
         </Grid>
 
-        <Grid 
-            Grid.Row="1" >
+        <Grid Grid.Row="1">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="180"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="180" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Grid
-                Grid.Column="0">
-                
+            <Grid Grid.Column="0">
+
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
                     <RowDefinition Height="*" />

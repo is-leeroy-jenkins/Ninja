@@ -2,7 +2,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-<ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/UI/Themes/Colors/Colors.xaml" />
         <ResourceDictionary Source="/UI/Themes/Common/CommonControls.xaml" />
     </ResourceDictionary.MergedDictionaries>
@@ -105,7 +105,7 @@
         x:Key="AccentCheckBox"
         BasedOn="{StaticResource {x:Type CheckBox}}"
         TargetType="{x:Type CheckBox}">
-        <Setter Property="BorderBrush" Value="{StaticResource BrightGreenForeground}"  />
+        <Setter Property="BorderBrush" Value="{StaticResource BrightGreenForeground}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type CheckBox}">
@@ -162,9 +162,9 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter TargetName="checkBoxBorder" Property="Background" Value="{StaticResource FormBackground}" />
-                            <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{StaticResource FormBackground}"  />
+                            <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{StaticResource FormBackground}" />
                             <Setter TargetName="optionMark" Property="Fill" Value="{StaticResource FormBackground}" />
-                            <Setter TargetName="indeterminateMark" Property="Background" Value="{StaticResource FormBackground}"  />
+                            <Setter TargetName="indeterminateMark" Property="Background" Value="{StaticResource FormBackground}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter TargetName="checkBoxBorder" Property="Background" Value="{StaticResource GreenBackground}" />

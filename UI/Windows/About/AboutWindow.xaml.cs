@@ -83,6 +83,9 @@ namespace Ninja.Views
         /// </summary>
         private protected TimerCallback _timerCallback;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AboutWindow"/> class.
+        /// </summary>
         public AboutWindow( )
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -96,7 +99,7 @@ namespace Ninja.Views
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="RoutedEventArgs"/>
         /// instance containing the event data.</param>
-        private void GithubButton_Click( object sender, RoutedEventArgs e )
+        private void OnGithubButtonClick( object sender, RoutedEventArgs e )
         {
             Process.Start( "https://github.com/is-leeroy-jenkins/Ninja" );
             Close( );
@@ -108,7 +111,7 @@ namespace Ninja.Views
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="RoutedEventArgs"/>
         /// instance containing the event data.</param>
-        private void GiteeButton_Click( object sender, RoutedEventArgs e )
+        private void OnGiteeButtonClick( object sender, RoutedEventArgs e )
         {
             Process.Start( "https://gitee.com/linkmeta/MetaNet" );
             Close( );
@@ -120,7 +123,7 @@ namespace Ninja.Views
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="RoutedEventArgs"/>
         /// instance containing the event data.</param>
-        private void ButtonEx_Click( object sender, RoutedEventArgs e )
+        private void OnButtonExClick( object sender, RoutedEventArgs e )
         {
             Close( );
         }

@@ -61,13 +61,13 @@ namespace Ninja.Models
             ServerSendStr = "Hello Client!";
             ServerSendInterval = 1000;
             ServerSend = "Hello Client!";
-            ServerSendBtnName = "Auto Send Start";
-            ServerListenBtnName = "Start Listen";
-            ServerIp = "ws://127.0.0.1:65432/echo";
+            ServerSendButtonName = "Auto Send Start";
+            ServerListenButtonName = "Start Listen";
+            ClientAddress = "ws://127.0.0.1:65432/echo";
             ClientSendStr = "Hello Server!";
             ClientSendInterval = 1000;
             ClientSend = "Hello Server!";
-            ClientConnectBtnName = "Connect";
+            ClientConnectButtonName = "Connect";
             ClientSendBtnName = "Auto Send Start";
         }
 
@@ -102,7 +102,7 @@ namespace Ninja.Models
         /// <summary>
         /// The server listen BTN name
         /// </summary>
-        private string _serverListenBtnName;
+        private string _serverListenButtonName;
 
         /// <summary>
         /// Gets or sets the name of the server listen BTN.
@@ -110,18 +110,18 @@ namespace Ninja.Models
         /// <value>
         /// The name of the server listen BTN.
         /// </value>
-        public string ServerListenBtnName
+        public string ServerListenButtonName
         {
             get
             {
-                return _serverListenBtnName;
+                return _serverListenButtonName;
             }
             set
             {
-                if( _serverListenBtnName != value )
+                if( _serverListenButtonName != value )
                 {
-                    _serverListenBtnName = value;
-                    OnPropertyChanged( nameof( ServerListenBtnName ) );
+                    _serverListenButtonName = value;
+                    OnPropertyChanged( nameof( ServerListenButtonName ) );
                 }
             }
         }
@@ -183,7 +183,7 @@ namespace Ninja.Models
         /// <summary>
         /// The server send BTN name
         /// </summary>
-        private string _serverSendBtnName;
+        private string _serverSendButtonName;
 
         /// <summary>
         /// Gets or sets the name of the server send BTN.
@@ -191,18 +191,18 @@ namespace Ninja.Models
         /// <value>
         /// The name of the server send BTN.
         /// </value>
-        public string ServerSendBtnName
+        public string ServerSendButtonName
         {
             get
             {
-                return _serverSendBtnName;
+                return _serverSendButtonName;
             }
             set
             {
-                if( _serverSendBtnName != value )
+                if( _serverSendButtonName != value )
                 {
-                    _serverSendBtnName = value;
-                    OnPropertyChanged( nameof( ServerSendBtnName ) );
+                    _serverSendButtonName = value;
+                    OnPropertyChanged( nameof( ServerSendButtonName ) );
                 }
             }
         }
@@ -266,7 +266,7 @@ namespace Ninja.Models
         /// <summary>
         /// The server ip
         /// </summary>
-        private string _serverIp;
+        private string _clientAddress;
 
         /// <summary>
         /// Gets or sets the server ip.
@@ -274,18 +274,18 @@ namespace Ninja.Models
         /// <value>
         /// The server ip.
         /// </value>
-        public string ServerIp
+        public string ClientAddress
         {
             get
             {
-                return _serverIp;
+                return _clientAddress;
             }
             set
             {
-                if( _serverIp != value )
+                if( _clientAddress != value )
                 {
-                    _serverIp = value;
-                    OnPropertyChanged( nameof( ServerIp ) );
+                    _clientAddress = value;
+                    OnPropertyChanged( nameof( ClientAddress ) );
                 }
             }
         }
@@ -293,7 +293,7 @@ namespace Ninja.Models
         /// <summary>
         /// The client connect BTN name
         /// </summary>
-        private string _clientConnectBtnName;
+        private string _clientConnectButtonName;
 
         /// <summary>
         /// Gets or sets the name of the client connect BTN.
@@ -301,18 +301,18 @@ namespace Ninja.Models
         /// <value>
         /// The name of the client connect BTN.
         /// </value>
-        public string ClientConnectBtnName
+        public string ClientConnectButtonName
         {
             get
             {
-                return _clientConnectBtnName;
+                return _clientConnectButtonName;
             }
             set
             {
-                if( _clientConnectBtnName != value )
+                if( _clientConnectButtonName != value )
                 {
-                    _clientConnectBtnName = value;
-                    OnPropertyChanged( nameof( ClientConnectBtnName ) );
+                    _clientConnectButtonName = value;
+                    OnPropertyChanged( nameof( ClientConnectButtonName ) );
                 }
             }
         }
