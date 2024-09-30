@@ -1,7 +1,7 @@
-![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/GitHubImages/ProjectTemplate.png)
+![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Ninja/Resources/GitHubImages/ProjectTemplate.png)
 
 <div align="center">
-  <img alt="Ninja Preview" src="https://github.com/is-leeroy-jenkins/Ninja/blob/main/Images/Ninja_128x128.png?raw=true" />
+  <img alt="Ninja Preview" src="https://github.com/is-leeroy-jenkins/Ninja/blob/master/Images/Ninja_128x128.png?raw=true" />
   <h1>Ninja</h1>
   <p>
     <b>A powerful open source tool for managing networks and troubleshooting network problems!</b>
@@ -21,29 +21,23 @@
   </p>
 </div>
 
-<img alt="Ninja Preview" src="https://github.com/is-leeroy-jenkins/Ninja/blob/main/Website/static/img/preview.gif?raw=true" />
 
-## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/GitHubImages/csharp.png)  Code
+## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Ninja/Resources/GitHubImages/csharp.png)  Code
 
 - Ninja supports 'AnyCPU' as well as x86/x64 specific builds
-- [Controls](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/Controls) - controls associated main ui layer and related functionality.
-- [Enumerations](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Enumerations) - various enumerations used for budgetary accounting.
-- [Extensions](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Extensions)- useful extension methods for budget analysis by type.
-- [Sockets](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Network/Sockets) - tcp/udp/websockets classses
-- [Interfaces](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Network/Sockets) - network interface classes
-- [Converters](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Network/Converters) - type converters 
-- [Stats](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Network/Stats) - statistic classes 
-- [Clients](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Clients) - other tools used and available.
-- [Models](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Network/Models) - models used in network analysis
-- [Services](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Services) - networking service classes used in Ninja.
-- [Static](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Static) - static types used by Ninja.
-- [Interfaces](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Network/Interfaces) - abstractions used in network analysis.
-- [Views](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/Views) - Views
-- [ViewModels](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/ViewModels) - models used by the ui
-- [Themes](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/Themes) - themes used in the ui
-- [Windows](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/Windows) - window classes
+- [Controls](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Ninja.Controls) - controls associated main ui layer and related functionality.
+- [Converters](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Ninja.Converters) - various converter classes.
+- [Documentation](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Ninja.Documentation)- app docs.
+- [Localization](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Ninja.Localization) - internationalization
+- [Profiles](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Ninja.Profiles) - profile classes
+- [Models](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Ninja.Models) - models used in network analysis
+- [Settings](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Ninja.Settings) - settings used in Ninja.
+- [Utility](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Ninja.Utilities) - static types used by Ninja.
+- [Utilities.Wpf](https://github.com/is-leeroy-jenkins/Ninja/tree/master/Ninja.Utilities.WPF) - wpf utility classes.
+- [Validators](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/Views) - Views
+- [Ninja](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/ViewModels) - models used by the ui
 
-## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/GitHubImages/tools.png)  Build
+## ![]()  Build
 
 - [x] VisualStudio 2022
 - [x] Based on .NET8 and WPF
@@ -55,12 +49,15 @@ $ cd Ninja
 Run `Ninja.sln`
 
 
-## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Resources/Assets/GitHubImages/documentation.png)  Documentation
+## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Ninja/Resources/GitHubImages/documentation.png)  Documentation
 
 - [User Guide](Resources/Github/Users.md) - how to use Ninja.
 - [Compilation Guide](Resources/Github/Compilation.md) - instructions on how to compile Ninja.
 - [Configuration Guide](Resources/Github/Configuration.md) - information for the Ninja configuration file. 
 - [Distribution Guide](Resources/Github/Distribution.md) -  distributing Ninja.
+
+
+
 
 
 ## 📦 Download
@@ -69,16 +66,8 @@ Pre-built and binaries (setup, portable and archive) are available on the with i
 
 
 
-## 📃 Changelog
 
-You can find the changelog for each version of Ninja [here](https://borntoberoot.net/Ninja/docs/category/changelog).
-
-## 📖 Documentation
-
-The documentation is provided with Docusaurus via GitHub pages and can be found [here](https://borntoberoot.net/Ninja/docs/introduction).
-
-
-## 🔧 Build
+## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Ninja/Resources/GitHubImages/tools.png) Build
 
 You can build the application like any other .NET / WPF application on Windows.
 
