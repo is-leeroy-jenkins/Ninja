@@ -3,9 +3,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:n="clr-namespace:Ninja">
 
+
+    <!--  ********************************************* Resources  **************************************************  -->
+
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/UI/Themes/Common/BaseStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
+
+
+    <!--  *********************************************  ButtonBase  **************************************************  -->
 
     <Style
         x:Key="ButtonBaseBaseStyle"
@@ -20,6 +26,9 @@
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
+
+
+    <!--  *********************************************  style  **************************************************  -->
 
     <Style
         x:Key="ButtonBaseStyle"
@@ -91,6 +100,9 @@
         </Setter>
     </Style>
 
+
+    <!--  *********************************************  style  **************************************************  -->
+
     <Style
         x:Key="ToggleButtonBaseStyle"
         BasedOn="{StaticResource ButtonBaseBaseStyle}"
@@ -160,7 +172,9 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <!--  Button  -->
+
+    <!--  *********************************************  ButtonBaseStyle **************************************************  -->
+
     <Style
         BasedOn="{StaticResource ButtonBaseStyle}"
         TargetType="{x:Type Button}">
@@ -175,8 +189,12 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+
+    <!--  *********************************************  PrimaryButton  **************************************************  -->
+
     <Style
-        x:Key="Button-Primary"
+        x:Key="PrimaryButton"
         BasedOn="{StaticResource ButtonBaseStyle}"
         TargetType="{x:Type Button}">
         <Setter Property="Background" Value="{StaticResource ControlInteriorBrush}" />
@@ -190,8 +208,12 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+
+    <!--  *********************************************  SuccessButton  **************************************************  -->
+
     <Style
-        x:Key="Button-Success"
+        x:Key="SuccessButton"
         BasedOn="{StaticResource ButtonBaseStyle}"
         TargetType="{x:Type Button}">
         <Setter Property="Background" Value="{StaticResource ControlInteriorBrush}" />
@@ -205,8 +227,12 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+
+    <!--  *********************************************  InfoButton  **************************************************  -->
+
     <Style
-        x:Key="Button-Info"
+        x:Key="InfoButton"
         BasedOn="{StaticResource ButtonBaseStyle}"
         TargetType="{x:Type Button}">
         <Setter Property="Background" Value="{StaticResource ControlInteriorBrush}" />
@@ -220,8 +246,12 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+
+    <!--  *********************************************  WarningButton  **************************************************  -->
+
     <Style
-        x:Key="Button-Warning"
+        x:Key="WarningButton"
         BasedOn="{StaticResource ButtonBaseStyle}"
         TargetType="{x:Type Button}">
         <Setter Property="Background" Value="{StaticResource ControlInteriorBrush}" />
@@ -235,8 +265,12 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+
+    <!--  ********************************************* DangerButton  **************************************************  -->
+
     <Style
-        x:Key="Button-Danger"
+        x:Key="DangerButton"
         BasedOn="{StaticResource ButtonBaseStyle}"
         TargetType="{x:Type Button}">
         <Setter Property="Background" Value="{StaticResource ControlInteriorBrush}" />
@@ -251,7 +285,7 @@
         </Style.Triggers>
     </Style>
 
-    <!--***********************************************  ToggleButton  *************************************************-->
+    <!--  ***********************************************  ToggleButton  *************************************************  -->
 
     <Style
         BasedOn="{StaticResource ToggleButtonBaseStyle}"
@@ -267,6 +301,9 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+
+    <!--  *********************************************  style  **************************************************  -->
 
     <Style
         x:Key="ToggleButtonPrimary"
@@ -293,6 +330,9 @@
 
     </Style>
 
+
+    <!--  *********************************************  style  **************************************************  -->
+
     <Style
         x:Key="ToggleButtonSuccess"
         BasedOn="{StaticResource ToggleButtonBaseStyle}"
@@ -316,6 +356,10 @@
 
         </Style.Triggers>
     </Style>
+
+
+    <!--  *********************************************  style  **************************************************  -->
+
     <Style
         x:Key="ToggleButtonInfo"
         BasedOn="{StaticResource ToggleButtonBaseStyle}"
@@ -338,6 +382,7 @@
         </Style.Triggers>
     </Style>
 
+    <!--  *********************************************  style  **************************************************  -->
 
     <Style
         x:Key="ToggleButtonWarning"
@@ -363,6 +408,8 @@
     </Style>
 
 
+    <!--  *********************************************  style  **************************************************  -->
+
     <Style
         x:Key="ToggleButtonDanger"
         BasedOn="{StaticResource ToggleButtonBaseStyle}"
@@ -387,7 +434,7 @@
         </Style.Triggers>
     </Style>
 
-    <!--*********************************************** MetroButton *****************************************************-->
+    <!--  *********************************************** MetroButton *****************************************************  -->
 
     <Style TargetType="{x:Type n:MetroButton}">
         <Setter Property="Background" Value="{DynamicResource ControlInteriorBrush}" />

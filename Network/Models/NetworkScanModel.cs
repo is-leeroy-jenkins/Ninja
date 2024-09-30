@@ -105,7 +105,10 @@ namespace Ninja.Models
         /// </value>
         public NetInterfaceInfo[ ] NetInfoItemSource
         {
-            get { return _netInfoItemSource; }
+            get
+            {
+                return _netInfoItemSource;
+            }
             set
             {
                 if( _netInfoItemSource != value )
@@ -234,7 +237,10 @@ namespace Ninja.Models
         /// </value>
         public string ScanButtonName
         {
-            get { return _scanButtonName; }
+            get
+            {
+                return _scanButtonName;
+            }
             set
             {
                 if( _scanButtonName != value )

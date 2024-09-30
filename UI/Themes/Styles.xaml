@@ -87,6 +87,10 @@
         <ResourceDictionary Source="/UI/Themes/Window/ChromelessWindow.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+
+    <!--  *********************************************  MenuItemText  **************************************************  -->
+
+
     <Style
         x:Key="MenuItemText"
         TargetType="TextBlock">
@@ -96,6 +100,10 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontSize" Value="11" />
     </Style>
+
+
+    <!--  ********************************************* MenoItemComboBox **************************************************  -->
+
 
     <Style
         x:Key="MenuItemComboBox"
@@ -108,6 +116,10 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
+
+    <!--  *********************************************  MenuItemCheckBox **************************************************  -->
+
+
     <Style
         x:Key="MenuItemCheckBox"
         TargetType="CheckBox">
@@ -117,6 +129,10 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
+
+    <!--  *********************************************  MenuItemRadioButton  **************************************************  -->
+
+
     <Style
         x:Key="MenuItemRadioButton"
         TargetType="RadioButton">
@@ -125,6 +141,10 @@
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
+
+
+
+    <!--  *********************************************  SearchBoxStyle  **************************************************  -->
 
 
     <Style
@@ -181,6 +201,10 @@
 
     </Style>
 
+
+    <!--  *********************************************  SearchTextStyle  **************************************************  -->
+
+
     <Style
         x:Key="SearchTextStyle"
         TargetType="{x:Type TextBlock}">
@@ -200,6 +224,10 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
+
+
+    <!--  *********************************************  MenuButtonStyle  **************************************************  -->
+
 
     <Style
         x:Key="MenuButtonStyle"

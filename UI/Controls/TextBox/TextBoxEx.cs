@@ -147,7 +147,8 @@ namespace Ninja
         /// Called when [text changed].
         /// </summary>
         /// <param name="d">The d.</param>
-        /// <param name="e">The <see cref="DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="DependencyPropertyChangedEventArgs"/>
+        /// instance containing the event data.</param>
         private static void OnTextChanged( DependencyObject d,
             DependencyPropertyChangedEventArgs e )
         {

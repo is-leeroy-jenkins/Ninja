@@ -3,6 +3,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:n="clr-namespace:Ninja">
 
+
+    <!--  *********************************************  TextBox  **************************************************  -->
+
     <n:TextBoxExConverter x:Key="TextBoxExConverter" />
 
     <Style TargetType="{x:Type n:TextBoxEx}">

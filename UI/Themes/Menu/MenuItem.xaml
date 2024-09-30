@@ -31,6 +31,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+
     <Style
         x:Key="{ComponentResourceKey ResourceId=MenuScrollViewer,
                                      TypeInTargetAssembly={x:Type FrameworkElement}}"

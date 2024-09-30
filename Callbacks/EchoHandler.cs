@@ -59,17 +59,12 @@ namespace Ninja
         /// <summary>
         /// The ws server
         /// </summary>
-        private WebSocketServer _webSocketServer = null;
+        private protected WebSocketServer _webSocketServer;
 
         /// <summary>
         /// The web socket client
         /// </summary>
-        private WebSocketServer _webSocketClient = null;
-
-        /// <summary>
-        /// The ws client
-        /// </summary>
-        public WebSocket WebSocketClient;
+        private protected WebSocketServer _webSocketClient;
 
         /// <summary>
         /// Gets or sets the ws recv.
@@ -78,7 +73,7 @@ namespace Ninja
         /// The ws recv.
         /// </value>
         public static ObservableCollection<string> WsRecv { get; set; } =
-            new ObservableCollection<string>( );
+            new ObservableCollection<string>();
 
         /// <summary>
         /// Gets or sets the ws client recv.
@@ -87,7 +82,45 @@ namespace Ninja
         /// The ws client recv.
         /// </value>
         public static ObservableCollection<string> WsClientRecv { get; set; } =
-            new ObservableCollection<string>( );
+            new ObservableCollection<string>();
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="EchoHandler"/> class.
+        /// </summary>
+        public EchoHandler( )
+        {
+        }
+
+        /// <summary>
+        /// The ws client
+        /// </summary>
+        public WebSocketServer WebSocketClient
+        {
+            get
+            {
+                return _webSocketClient;
+            }
+            set
+            {
+                _webSocketClient = value;
+            }
+        }
+
+        /// <summary>
+        /// The ws client
+        /// </summary>
+        public WebSocketServer WebSocketServer
+        {
+            get
+            {
+                return _webSocketServer;
+            }
+            set
+            {
+                _webSocketServer = value;
+            }
+        }
 
         /// <summary>
         /// Raises the event.

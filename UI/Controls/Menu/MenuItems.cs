@@ -1,15 +1,15 @@
 ﻿// ******************************************************************************************
 //     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 09-25-2024
+//     Created:                 09-30-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        09-25-2024
+//     Last Modified On:        09-30-2024
 // ******************************************************************************************
 // <copyright file="MenuItems.cs" company="Terry D. Eppler">
 // 
-//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
-//    sniffer, pcap, port scan, listen, ip scan .etc.
+//     Ninja is a network toolkit that supports Iperf, TCP, UDP, Websocket, MQTT,
+//     Sniffer, Pcap, Port Scan, Listen, IP Scan .etc.
 // 
 //    Copyright ©  2019-2024 Terry D. Eppler
 // 
@@ -44,22 +44,84 @@ namespace Ninja.ViewModels
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
 
+    /// <inheritdoc />
     /// <summary>
-    /// 
     /// </summary>
-    public class MenuItems
+    public class MenuItems : INotifyPropertyChanged
     {
+        /// <summary>
+        /// The menu image
+        /// </summary>
+        private protected string _menuImage;
+
+        /// <summary>
+        /// The menu name
+        /// </summary>
+        private protected string _menuName;
+
+        /// <summary>
+        /// Updates the specified field.
+        /// </summary>
+        /// <typeparam name="_"></typeparam>
+        /// <param name="field">The field.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="propertyName">Name of the property.</param>
+        public void Update<T>( ref T field, T value,
+            [ CallerMemberName ] 
+            string propertyName = null )
+
+        {
+            if( EqualityComparer<T>.Default.Equals( field, value ) )
+            {
+                return;
+            }
+
+            field = value;
+            OnPropertyChanged( propertyName );
+        }
+
+        /// <summary>
+        /// Called when [property changed].
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        public void OnPropertyChanged( [ CallerMemberName ] string propertyName = null )
+        {
+            var _handler = PropertyChanged;
+            _handler?.Invoke( this, new PropertyChangedEventArgs( propertyName ) );
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="MenuItems"/> class.
+        /// </summary>
+        public MenuItems( )
+        {
+        }
+
         /// <summary>
         /// Gets or sets the name of the menu.
         /// </summary>
         /// <value>
         /// The name of the menu.
         /// </value>
-        public string MenuName { get; set; }
+        public string MenuName
+        {
+            get
+            {
+                return _menuName;
+            }
+            set
+            {
+                if( _menuName != value )
+                {
+                    _menuName = value;
+                    OnPropertyChanged( nameof( MenuName ) );
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the menu image.
@@ -67,13 +129,26 @@ namespace Ninja.ViewModels
         /// <value>
         /// The menu image.
         /// </value>
-        public string MenuImage { get; set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MenuItems"/> class.
-        /// </summary>
-        public MenuItems( )
+        public string MenuImage
         {
+            get
+            {
+                return _menuImage;
+            }
+            set
+            {
+                if( _menuImage != value )
+                {
+                    _menuImage = value;
+                    OnPropertyChanged( nameof( MenuImage ) );
+                }
+            }
         }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

@@ -27,6 +27,10 @@
         </Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource BlueBorderBrush}" />
     </Style>
+
+
+    <!--  *********************************************  style  **************************************************  -->
+
     <Style
         x:Key="InputGroupButtonLeftStyle"
         BasedOn="{StaticResource InputGroupButtonBaseStyle}"
@@ -389,10 +393,10 @@
         </Setter>
     </Style>
 
-    <!--  *******************************************Input-Group-Btn Right*********************************************  -->
+    <!--  *******************************************InputGroupButtonRight*********************************************  -->
 
     <Style
-        x:Key="Input-Group-Btn Right"
+        x:Key="InputGroupButtonRight"
         BasedOn="{StaticResource InputGroupBaseButtonStyle}"
         TargetType="{x:Type Control}">
         <Setter Property="Template">
@@ -565,7 +569,6 @@
         <Setter Property="Padding" Value="{DynamicResource DefaultControlPadding}" />
         <Setter Property="Background" Value="{DynamicResource ControlInteriorBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource MutedForeground}" />
-        <Setter Property="Foreground" Value="{DynamicResource FormForeground}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
