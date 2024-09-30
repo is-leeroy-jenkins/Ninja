@@ -16,7 +16,7 @@
     </a>     
   </p>
   <p>
-    <a href="#-download">Download</a> • <a href="#-changelog">Changelog</a> • <a href="#-documentation">Documentation</a> • <a href="#-contributing">Contributing</a> • <a href="#-build">Build</a> • <a href="#-license">License</a>
+    <a href="#-download">Download</a> •  <a href="#--documentation">Documentation</a> •<a href="#-build">Build</a> • <a href="#-license">License</a>
   </p>
 </div>
 
