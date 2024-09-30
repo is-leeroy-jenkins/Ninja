@@ -7,8 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sync="http://schemas.syncfusion.com/wpf"
     Title="MetaNet - About V1.0.1"
-    Width="800"
-    Height="450"
+    Width="1350"
+    Height="800"
     mc:Ignorable="d">
 
     <!--  ******************************************** Resources *********************************************  -->
@@ -124,7 +124,7 @@
         </ContextMenu>
     </Window.ContextMenu>
 
-    <!--  ******************************************** Layout ******************************************  -->
+    <!--******************************************** Layout ******************************************-->
 
 
     <Grid>

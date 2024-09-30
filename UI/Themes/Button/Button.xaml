@@ -244,14 +244,14 @@
         <Setter Property="Foreground" Value="{StaticResource FormForeground}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource SteelBlueBackground}" />
+                <Setter Property="Background" Value="{StaticResource BlueBorderBrush}" />
                 <Setter Property="BorderBrush" Value="{StaticResource LightBlueBrush}" />
                 <Setter Property="Foreground" Value="{StaticResource WhiteForeground}" />
             </Trigger>
         </Style.Triggers>
     </Style>
 
-    <!--  ***********************************************  ToggleButton  *************************************************  -->
+    <!--***********************************************  ToggleButton  *************************************************-->
 
     <Style
         BasedOn="{StaticResource ToggleButtonBaseStyle}"
@@ -373,7 +373,7 @@
         <Style.Triggers>
 
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource SteelBlueBackground}" />
+                <Setter Property="Background" Value="{StaticResource BlueBorderBrush}" />
                 <Setter Property="BorderBrush" Value="{StaticResource LightBlueBrush}" />
                 <Setter Property="Foreground" Value="{StaticResource WhiteForeground}" />
             </Trigger>
@@ -387,7 +387,7 @@
         </Style.Triggers>
     </Style>
 
-    <!--  *********************************************** MetroButton *****************************************************  -->
+    <!--*********************************************** MetroButton *****************************************************-->
 
     <Style TargetType="{x:Type n:MetroButton}">
         <Setter Property="Background" Value="{DynamicResource ControlInteriorBrush}" />
@@ -403,7 +403,7 @@
         <Style.Triggers>
 
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource SteelBlueBackground}" />
+                <Setter Property="Background" Value="{StaticResource BlueBorderBrush}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource LightBlueBrush}" />
                 <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
             </Trigger>

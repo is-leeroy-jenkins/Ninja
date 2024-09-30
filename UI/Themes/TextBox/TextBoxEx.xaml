@@ -11,14 +11,15 @@
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Foreground" Value="{DynamicResource FormForeground}" />
         <Setter Property="Background" Value="{DynamicResource ControlInteriorBrush}" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontFamily" Value="Fonts/Roboto-Regular.ttf #Roboto Regular" />
+        <Setter Property="FontSize" Value="10" />
         <Setter Property="Height" Value="30" />
         <Setter Property="Width" Value="100" />
         <Setter Property="Margin" Value="0,5,10,0" />
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="IsAddBtnVisible" Value="True" />
-        <Setter Property="IsRemoveBtnVisible" Value="True" />
+        <Setter Property="IsAddButtonVisible" Value="True" />
+        <Setter Property="IsRemoveButtonVisible" Value="True" />
         <Setter Property="Cursor" Value="Hand" />
 
         <Setter Property="Template">
@@ -58,7 +59,7 @@
                                         VerticalAlignment="Center"
                                         Background="{DynamicResource ControlInteriorBrush}"
                                         BorderBrush="{DynamicResource BlueBorderBrush}"
-                                        Visibility="{Binding Path=(n:TextBoxEx.IsAddBtnVisible), RelativeSource={RelativeSource AncestorType=TextBox}, Converter={StaticResource TextBoxExConverter}}">
+                                        Visibility="{Binding Path=(n:TextBoxEx.IsAddButtonVisible), RelativeSource={RelativeSource AncestorType=TextBox}, Converter={StaticResource TextBoxExConverter}}">
                                         <RepeatButton.Content>
                                             <Image Source="/UI/Themes/up_arrow.png" />
                                         </RepeatButton.Content>
@@ -72,7 +73,7 @@
                                         VerticalAlignment="Center"
                                         Background="{DynamicResource ControlInteriorBrush}"
                                         BorderBrush="{DynamicResource BlueBorderBrush}"
-                                        Visibility="{Binding Path=(n:TextBoxEx.IsRemoveBtnVisible), RelativeSource={RelativeSource AncestorType=TextBox}, Converter={StaticResource TextBoxExConverter}}">
+                                        Visibility="{Binding Path=(n:TextBoxEx.IsRemoveButtonVisible), RelativeSource={RelativeSource AncestorType=TextBox}, Converter={StaticResource TextBoxExConverter}}">
                                         <RepeatButton.Content>
                                             <Image Source="/UI/Themes/down_arrow.png" />
                                         </RepeatButton.Content>

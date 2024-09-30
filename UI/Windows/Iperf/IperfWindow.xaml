@@ -256,7 +256,7 @@
                             Grid.Row="4"
                             Cursor="Hand"
                             Text="{Binding IperfModel.Port}"
-                            ToolTip="Port No." />
+                            ToolTip="Set Port Count" />
 
                         <TextBlock
                             Grid.Row="5"
