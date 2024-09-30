@@ -5,15 +5,9 @@
   <p>
     <b>A powerful open source tool for managing networks and troubleshooting network problems!</b>
   </p>
-  <p>
+  <p align="left">
     Connect and manage remote systems with Remote Desktop, PowerShell, PuTTY, TigerVNC or AWS (Systems Manager) Session Manager. Analyze and troubleshoot your network and systems with features such as the WiFi Analyzer,IP Scanner, Port Scanner, Ping Monitor, Traceroute, DNS lookup or LLDP/CDP capture in a unfied interface. Hosts (or networks) can be saved in (encrypted) profiles and used across all features.  
   <p>
-  </p>
-  <p>
-  <p> 
-    <a href="https://transifex.com/is-leeroy-jenkins/Ninja/">
-      <img alt="Transifex" src="https://img.shields.io/badge/transifex-translate-green.svg?style=for-the-badge" />
-    </a>     
   </p>
   <p>
     <a href="#-download">Download</a> •  <a href="#--documentation">Documentation</a> •<a href="#-build">Build</a> • <a href="#-license">License</a>
@@ -39,13 +33,10 @@
 
 ## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Ninja/Resources/GitHubImages/documentation.png)  Documentation
 
-- [User Guide](Resources/Github/Users.md) - how to use Ninja.
-- [Compilation Guide](Resources/Github/Compilation.md) - instructions on how to compile Ninja.
-- [Configuration Guide](Resources/Github/Configuration.md) - information for the Ninja configuration file. 
-- [Distribution Guide](Resources/Github/Distribution.md) -  distributing Ninja.
-
-
-
+- [User Guide](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Ninja/Resources/Github/Users.md) - how to use Ninja.
+- [Compilation Guide](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Ninja/Resources/Github/Compilation.md) - instructions on how to compile Ninja.
+- [Configuration Guide](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Ninja/Resources/Github/Configuration.md) - information for the Ninja configuration file. 
+- [Distribution Guide](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Ninja/Resources/Github/Distribution.md) -  distributing Ninja.
 
 
 ## 📦 Download
