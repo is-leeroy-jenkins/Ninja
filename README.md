@@ -36,17 +36,6 @@
 - [Validators](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/Views) - Views
 - [Ninja](https://github.com/is-leeroy-jenkins/Ninja/tree/master/UI/ViewModels) - models used by the ui
 
-## ![]()  Build
-
-- [x] VisualStudio 2022
-- [x] Based on .NET8 and WPF
-
-```bash
-$ git clone https://github.com/is-leeroy-jenkins/Ninja.git
-$ cd Ninja
-```
-Run `Ninja.sln`
-
 
 ## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Ninja/Resources/GitHubImages/documentation.png)  Documentation
 
@@ -67,6 +56,17 @@ Pre-built and binaries (setup, portable and archive) are available on the with i
 
 
 ## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Ninja/Resources/GitHubImages/tools.png) Build
+
+- [x] VisualStudio 2022
+- [x] Based on .NET8 and WPF
+
+
+```bash
+$ git clone https://github.com/is-leeroy-jenkins/Ninja.git
+$ cd Ninja
+```
+Run `Ninja.sln`
+
 
 You can build the application like any other .NET / WPF application on Windows.
 
