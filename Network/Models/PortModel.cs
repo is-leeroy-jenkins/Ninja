@@ -88,7 +88,8 @@ namespace Ninja.Models
         private string _stopAddress;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PortModel"/> class.
+        /// Initializes a new instance of the
+        /// <see cref="PortModel"/> class.
         /// </summary>
         public PortModel( )
         {
