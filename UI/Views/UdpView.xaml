@@ -347,7 +347,7 @@
                         Width="130"
                         Margin="65,5,0,0"
                         HorizontalAlignment="Left"
-                        Text="{Binding UdpModel.ClientAddress}" />
+                        Text="{Binding UdpModel.ServerAddress}" />
                     <n:ButtonEx
                         Grid.Row="0"
                         Width="100"

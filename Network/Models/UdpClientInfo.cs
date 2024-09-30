@@ -1,15 +1,15 @@
 ﻿// ******************************************************************************************
 //     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 09-22-2024
+//     Created:                 09-29-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        09-22-2024
+//     Last Modified On:        09-29-2024
 // ******************************************************************************************
-// <copyright file="PortScanResult.cs" company="Terry D. Eppler">
+// <copyright file="UdpClientInfo.cs" company="Terry D. Eppler">
 // 
-//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
-//    sniffer, pcap, port scan, listen, ip scan .etc.
+//     Ninja is a network toolkit that supports Iperf, TCP, UDP, Websocket, MQTT,
+//     Sniffer, Pcap, Port Scan, Listen, IP Scan .etc.
 // 
 //    Copyright ©  2019-2024 Terry D. Eppler
 // 
@@ -36,34 +36,79 @@
 //    You can contact me at:  terryeppler@gmail.com or eppler.terry@epa.gov
 // </copyright>
 // <summary>
-//   PortScanResult.cs
+//   UdpClientInfo.cs
 // </summary>
 // ******************************************************************************************
 
-namespace Ninja.ViewModels
+namespace Ninja
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Text;
-    using System.Threading.Tasks;
 
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
-    public class PortScanResult : INotifyPropertyChanged
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    public class UdpClientInfo : INotifyPropertyChanged
     {
         /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="PortScanResult"/> class.
+        /// The port
         /// </summary>
-        public PortScanResult()
+        private protected int _port;
+
+        /// <summary>
+        /// The recv bytes
+        /// </summary>
+        private protected int _recvBytes;
+
+        /// <summary>
+        /// The remote address
+        /// </summary>
+        private protected string _remoteAddress;
+
+        /// <summary>
+        /// The time
+        /// </summary>
+        private protected DateTime _time;
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="UdpClientInfo"/> class.
+        /// </summary>
+        public UdpClientInfo( )
         {
+        }
+
+        /// <summary>
+        /// Gets or sets the remote ip.
+        /// </summary>
+        /// <value>
+        /// The remote ip.
+        /// </value>
+        public string RemoteAddress
+        {
+            get
+            {
+                return _remoteAddress;
+            }
+            set
+            {
+                if( _remoteAddress != value )
+                {
+                    _remoteAddress = value;
+                    OnPropertyChanged( nameof( RemoteAddress ) );
+                }
+            }
         }
 
         /// <summary>
@@ -72,15 +117,65 @@ namespace Ninja.ViewModels
         /// <value>
         /// The port.
         /// </value>
-        public int Port { get; set; }
+        public int Port
+        {
+            get
+            {
+                return _port;
+            }
+            set
+            {
+                if( _port != value )
+                {
+                    _port = value;
+                    OnPropertyChanged( nameof( Port ) );
+                }
+            }
+        }
 
         /// <summary>
-        /// Gets or sets the status.
+        /// Gets or sets the recv bytes.
         /// </summary>
         /// <value>
-        /// The status.
+        /// The recv bytes.
         /// </value>
-        public string Status { get; set; }
+        public int RecvBytes
+        {
+            get
+            {
+                return _recvBytes;
+            }
+            set
+            {
+                if( _recvBytes != value )
+                {
+                    _recvBytes = value;
+                    OnPropertyChanged( nameof( RecvBytes ) );
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the time.
+        /// </summary>
+        /// <value>
+        /// The time.
+        /// </value>
+        public DateTime Time
+        {
+            get
+            {
+                return _time;
+            }
+            set
+            {
+                if( _time != value )
+                {
+                    _time = value;
+                    OnPropertyChanged( nameof( Time ) );
+                }
+            }
+        }
 
         /// <summary>
         /// Updates the specified field.
@@ -110,10 +205,7 @@ namespace Ninja.ViewModels
         public void OnPropertyChanged( [ CallerMemberName ] string propertyName = null )
         {
             var _handler = PropertyChanged;
-            _handler?.Invoke( this, new PropertyChangedEventArgs( propertyName ) );
+            _handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        /// <summary>Occurs when a property value changes.</summary>
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

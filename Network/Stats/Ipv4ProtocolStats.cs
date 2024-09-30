@@ -43,23 +43,30 @@
 namespace Ninja
 {
     using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime.CompilerServices;
     using PcapDotNet.Packets.IpV4;
     using ViewModels;
 
+    /// <inheritdoc />
     [ SuppressMessage( "ReSharper", "ClassNeverInstantiated.Global" ) ]
     [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
-    public class Ipv4ProtocolStats : MainWindowBase
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    public class Ipv4ProtocolStats : INotifyPropertyChanged
     {
+        private protected IpV4Protocol _protocol;
+
         /// <summary>
         /// The byte count
         /// </summary>
-        private long _byteCount;
+        private protected long _byteCount;
 
         /// <summary>
         /// The packet count
         /// </summary>
-        private long _packetCount;
+        private protected long _packetCount;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Ipv4ProtocolStats"/> class.
@@ -74,9 +81,9 @@ namespace Ninja
         /// <param name="protocol">The protocol.</param>
         public Ipv4ProtocolStats( IpV4Protocol protocol )
         {
-            Protocol = protocol;
-            PacketCount = 0;
-            ByteCount = 0;
+            _protocol = protocol;
+            _packetCount = 0;
+            _byteCount = 0;
         }
 
         /// <summary>
@@ -85,7 +92,21 @@ namespace Ninja
         /// <value>
         /// The protocol.
         /// </value>
-        public IpV4Protocol Protocol { get; set; }
+        public IpV4Protocol Protocol
+        {
+            get
+            {
+                return _protocol;
+            }
+            set
+            {
+                if(_protocol != value)
+                {
+                    _protocol = value;
+                    OnPropertyChanged(nameof(Protocol));
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the packet count.
@@ -95,7 +116,10 @@ namespace Ninja
         /// </value>
         public long PacketCount
         {
-            get { return _packetCount; }
+            get
+            {
+                return _packetCount;
+            }
             set
             {
                 if( _packetCount != value )
@@ -114,7 +138,10 @@ namespace Ninja
         /// </value>
         public long ByteCount
         {
-            get { return _byteCount; }
+            get
+            {
+                return _byteCount;
+            }
             set
             {
                 if( _byteCount != value )
@@ -124,5 +151,42 @@ namespace Ninja
                 }
             }
         }
+
+        /// <summary>
+        /// Updates the specified field.
+        /// </summary>
+        /// <typeparam name="_"></typeparam>
+        /// <param name="field">The field.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="propertyName">Name of the property.</param>
+        public void Update<T>( ref T field, T value,
+            [CallerMemberName] 
+            string propertyName = null )
+
+        {
+            if(EqualityComparer<T>.Default.Equals( field, value ) )
+            {
+                return;
+            }
+
+            field = value;
+            OnPropertyChanged( propertyName );
+        }
+
+        /// <summary>
+        /// Called when [property changed].
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        public void OnPropertyChanged( [ CallerMemberName ] string propertyName = null )
+        {
+            var _handler = PropertyChanged;
+            _handler?.Invoke( this, new PropertyChangedEventArgs( propertyName ) );
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

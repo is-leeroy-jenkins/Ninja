@@ -8,6 +8,7 @@
     xmlns:sync="http://schemas.syncfusion.com/wpf"
     xmlns:n="clr-namespace:Ninja"
     d:DesignHeight="700"
+    d:DesignWidth="1350"
     mc:Ignorable="d">
 
     <!--******************************************** Resources ******************************************-->

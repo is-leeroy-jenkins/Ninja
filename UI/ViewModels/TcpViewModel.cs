@@ -176,7 +176,7 @@ namespace Ninja.ViewModels
                 var _time = DateTime.Now;
                 TcpServerInfos.Add( new TcpServerInfo
                 {
-                    RemoteAddress = socket.RemoteEndPoint.ToString( ).Split( ':' )[ 0 ],
+                    IpAddress = socket.RemoteEndPoint.ToString( ).Split( ':' )[ 0 ],
                     Port = socket.RemoteEndPoint.ToString( ).Split( ':' )[ 1 ],
                     Time = _time
                 } );
@@ -196,8 +196,8 @@ namespace Ninja.ViewModels
             {
                 foreach( var _info in TcpServerInfos )
                 {
-                    if( _info.RemoteAddress == socket.RemoteEndPoint.ToString( ).Split( ':' )[ 0 ]
-                        && _info.Port == socket.RemoteEndPoint.ToString( ).Split( ':' )[ 1 ] )
+                    if( _info.IpAddress == socket.RemoteEndPoint.ToString( ).Split( ':' )[ 0 ]
+                        && _info.Port ==  socket.RemoteEndPoint.ToString( ).Split( ':' )[ 1 ] ) 
                     {
                         TcpServerInfos.Remove( _info );
                         _tcpModel.ServerStatus += "--[" + socket.RemoteEndPoint
@@ -395,7 +395,7 @@ namespace Ninja.ViewModels
                 _tcpModel.ClientRecv +=
                     "++[" + socket.RemoteEndPoint + "] connected at " + _time + "\n";
 
-                _tcpModel.LocalPort = socket.LocalEndPoint.ToString( ).Split( ':' )[ 1 ];
+                _tcpModel.LocalPort = int.Parse( socket.LocalEndPoint.ToString( ).Split( ':' )[ 1 ] );
             } ) );
         }
 

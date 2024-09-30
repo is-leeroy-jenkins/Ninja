@@ -206,6 +206,7 @@
                             Margin="0,15,10,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
+                            HorizontalContentAlignment="Center"
                             SelectedItem="{Binding IperfModel.Version}"
                             Text="{Binding IperfModel.Version, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             ToolTip="Select Iperf Version">
@@ -224,6 +225,7 @@
                             Margin="0,5,10,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
+                            HorizontalContentAlignment="Center"
                             SelectedItem="{Binding IperfModel.Role}"
                             Text="{Binding IperfModel.Role, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             ToolTip="Select Role Client/Server">
@@ -241,7 +243,8 @@
                             Width="130"
                             Margin="0,5,10,0"
                             HorizontalAlignment="Right"
-                            Text="{Binding IperfModel.ClientAddress}"
+                            HorizontalContentAlignment="Center"
+                            Text="{Binding IperfModel.ServerAddress}"
                             ToolTip="Server IP Address" />
 
                         <TextBlock
@@ -294,8 +297,8 @@
                             Foreground="{StaticResource WhiteForeground}"
                             GroupName="TcpUdp"
                             IsChecked="{Binding IperfModel.TcpFlag}"
-                            ToolTip="Set TCP Flag"
-                            Style="{StaticResource MenuItemRadioButton}" />
+                            Style="{StaticResource MenuItemRadioButton}"
+                            ToolTip="Set TCP Flag" />
 
                         <n:TextBoxEx
                             Grid.Row="8"
@@ -309,7 +312,7 @@
                             Margin="0,5,5,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
-                            HorizontalContentAlignment="Left"
+                            HorizontalContentAlignment="Center"
                             SelectedItem="{Binding IperfModel.TcpWindowUnit}"
                             Text="{Binding IperfModel.TcpWindowUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             ToolTip="TCP Window Unit">
@@ -338,6 +341,7 @@
                             Margin="0,5,5,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
+                            HorizontalContentAlignment="Center"
                             SelectedItem="{Binding IperfModel.BandWidthUnit}"
                             Text="{Binding IperfModel.BandWidthUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <n:MetroComboBoxItem>M</n:MetroComboBoxItem>
@@ -395,19 +399,19 @@
                     Width="Auto"
                     Height="30"
                     Margin="10,0,0,0"
-                    BorderBrush="{StaticResource BlueBorderBrush}"
-                    Background="{StaticResource ControlInteriorBrush}"
                     HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Center"
-                    ToolTip="Iperf Command Arguments"
+                    Background="{StaticResource ControlInteriorBrush}"
+                    BorderBrush="{StaticResource BlueBorderBrush}"
                     Style="{DynamicResource InputGroupAddonLeft}"
-                    Tag="{Binding IperfModel.Version}">
+                    Tag="{Binding IperfModel.Version}"
+                    ToolTip="Iperf Command Arguments">
                     <TextBox.Text>
                         <MultiBinding
                             Converter="{StaticResource IperfCommandConverter}"
                             Mode="TwoWay">
                             <Binding Path="IperfModel.Role" />
-                            <Binding Path="IperfModel.ClientAddress" />
+                            <Binding Path="IperfModel.ServerAddress" />
                             <Binding Path="IperfModel.Port" />
                             <Binding Path="IperfModel.Parallel" />
                             <Binding Path="IperfModel.Time" />

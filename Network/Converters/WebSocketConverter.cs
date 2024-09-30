@@ -51,7 +51,7 @@ namespace Ninja.Interfaces
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:System.Windows.Data.IMultiValueConverter" />
+    /// <seealso cref="System.Windows.Data.IMultiValueConverter" />
     [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
     public class WebSocketConverter : IMultiValueConverter
     {
@@ -61,8 +61,8 @@ namespace Ninja.Interfaces
         /// engine calls this method when it propagates the values from source bindings to the binding target.
         /// </summary>
         /// <param name="values">The array of values that the source
-        /// bindings in the <see cref="T:System.Windows.Data.MultiBinding" /> produces.
-        /// The value <see cref="F:System.Windows.DependencyProperty.UnsetValue" /> indicates
+        /// bindings in the <see cref="System.Windows.Data.MultiBinding" /> produces.
+        /// The value <see cref="System.Windows.DependencyProperty.UnsetValue" /> indicates
         /// that the source binding has no value to provide for conversion.</param>
         /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
@@ -70,15 +70,15 @@ namespace Ninja.Interfaces
         /// <returns>
         /// A converted value.
         /// If the method returns <see langword="null" />, the valid <see langword="null" /> value is used.
-        /// A return value of <see cref="T:System.Windows.DependencyProperty" />.
-        /// <see cref="F:System.Windows.DependencyProperty.UnsetValue" />
+        /// A return value of <see cref="System.Windows.DependencyProperty" />.
+        /// <see cref="System.Windows.DependencyProperty.UnsetValue" />
         /// indicates that the converter did not produce a value, and that the binding
-        /// will use the <see cref="P:System.Windows.Data.BindingBase.FallbackValue" />
+        /// will use the <see cref="System.Windows.Data.BindingBase.FallbackValue" />
         /// if it is available, or else will use the default value.
-        /// A return value of <see cref="T:System.Windows.Data.Binding" />.
-        /// <see cref="F:System.Windows.Data.Binding.DoNothing" /> indicates that the
+        /// A return value of <see cref="System.Windows.Data.Binding" />.
+        /// <see cref="System.Windows.Data.Binding.DoNothing" /> indicates that the
         /// binding does not transfer the value or use the
-        /// <see cref="P:System.Windows.Data.BindingBase.FallbackValue" />
+        /// <see cref="System.Windows.Data.BindingBase.FallbackValue" />
         /// or the default value.
         /// </returns>
         public object Convert( object[ ] values, Type targetType, object parameter,

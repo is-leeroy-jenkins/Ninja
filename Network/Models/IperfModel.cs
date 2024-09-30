@@ -105,7 +105,7 @@ namespace Ninja.Models
         /// <summary>
         /// The server ip
         /// </summary>
-        private string _clientAddress;
+        private string _serverAddress;
 
         /// <summary>
         /// The TCP flag
@@ -150,7 +150,7 @@ namespace Ninja.Models
         {
             _version = "iperf.exe";
             _role = "-c";
-            _clientAddress = "10.21.68.29";
+            _serverAddress = "10.21.68.29";
             _port = 5001;
             _parallel = 4;
             _time = 60;
@@ -215,18 +215,18 @@ namespace Ninja.Models
         /// <value>
         /// The server ip.
         /// </value>
-        public string ClientAddress
+        public string ServerAddress
         {
             get
             {
-                return _clientAddress;
+                return _serverAddress;
             }
             set
             {
-                if( _clientAddress != value )
+                if( _serverAddress != value )
                 {
-                    _clientAddress = value;
-                    OnPropertyChanged( nameof( ClientAddress ) );
+                    _serverAddress = value;
+                    OnPropertyChanged( nameof( ServerAddress ) );
                 }
             }
         }

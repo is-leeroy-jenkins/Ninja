@@ -4,14 +4,27 @@ namespace Ninja.ViewModels
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using System.Runtime.CompilerServices;
     using System.Text;
     using System.Threading.Tasks;
 
-    [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
-    public class Ipv6Result
+    /// <inheritdoc />
+    /// <summary>
+    /// </summary>
+    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
+    [SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
+    public class Ipv6Result : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Ipv6Result"/> class.
+        /// </summary>
+        public Ipv6Result()
+        {
+        }
+
         /// <summary>
         /// Gets or sets the interface.
         /// </summary>
@@ -45,10 +58,39 @@ namespace Ninja.ViewModels
         public string Gateway { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Ipv6Result"/> class.
+        /// Updates the specified field.
         /// </summary>
-        public Ipv6Result( )
+        /// <typeparam name="T"></typeparam>
+        /// <param name="field">The field.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="propertyName">Name of the property.</param>
+        public void Update<T>(ref T field, T value,
+            [ CallerMemberName ]
+            string propertyName = null )
+
         {
+            if(EqualityComparer<T>.Default.Equals( field, value ) )
+            {
+                return;
+            }
+
+            field = value;
+            OnPropertyChanged( propertyName );
         }
+
+        /// <summary>
+        /// Called when [property changed].
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var _handler = PropertyChanged;
+            _handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /// <summary>
+        /// Occurs when a property value changes
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

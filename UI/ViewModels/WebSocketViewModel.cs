@@ -466,9 +466,9 @@ namespace Ninja.ViewModels
         /// <param name="parameter">The parameter.</param>
         public void ClientAutoSend( object parameter )
         {
-            if( _webSocketModel.ClientSendBtnName == "Auto Send Start" )
+            if( _webSocketModel.ClientSendButtonName == "Auto Send Start" )
             {
-                _webSocketModel.ClientSendBtnName = "Auto Send Stop";
+                _webSocketModel.ClientSendButtonName = "Auto Send Stop";
                 _clientAutoSendTimer = new DispatcherTimer( )
                 {
                     Interval = new TimeSpan( 0, 0, 0, 0,
@@ -480,7 +480,7 @@ namespace Ninja.ViewModels
             }
             else
             {
-                _webSocketModel.ClientSendBtnName = "Auto Send Start";
+                _webSocketModel.ClientSendButtonName = "Auto Send Start";
                 _clientAutoSendTimer.Stop( );
             }
         }

@@ -50,6 +50,7 @@ namespace Ninja.Models
     /// </summary>
     /// <seealso cref="Ninja.ViewModels.MainWindowBase" />
     [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public class TcpModel : MainWindowBase
     {
         /// <summary>
@@ -90,7 +91,7 @@ namespace Ninja.Models
         /// <summary>
         /// The local port
         /// </summary>
-        private protected string _localPort;
+        private protected int _localPort;
 
         /// <summary>
         /// The server ip
@@ -151,12 +152,12 @@ namespace Ninja.Models
             _serverListenButtonName = "Start Listen";
             _serverAddress = "127.0.0.1";
             _serverPort = 65432;
+            _localPort = 0;
             _clientSendStr = "Hello Server!";
             _clientSendInterval = 1000;
             _clientSend = "Hello Server!";
             _clientConnectButtonName = "Connect";
             _clientSendButtonName = "Auto Send Start";
-            _localPort = "0";
         }
 
         /// <summary>
@@ -363,7 +364,7 @@ namespace Ninja.Models
         /// <value>
         /// The local port.
         /// </value>
-        public string LocalPort
+        public int LocalPort
         {
             get
             {

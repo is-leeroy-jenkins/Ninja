@@ -52,12 +52,15 @@ namespace Ninja.ViewModels
     using Interfaces;
     using System.Windows.Threading;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Windows;
 
     /// <inheritdoc />
     /// <summary>
     /// </summary>
     /// <seealso cref="Ninja.ViewModels.MainWindowBase" />
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
     public class UdpViewModel : MainWindowBase
     {
         /// <summary>
@@ -121,7 +124,7 @@ namespace Ninja.ViewModels
         {
             get
             {
-                return new RelayCommand( param => StartListen( param ) );
+                return new RelayCommand( p => StartListen( p ) );
             }
         }
 
@@ -165,8 +168,8 @@ namespace Ninja.ViewModels
                 var _time = DateTime.Now;
                 UdpClientInfos.Add( new UdpClientInfo
                 {
-                    RemoteIp = point.ToString( ).Split( ':' )[ 0 ],
-                    Port = point.ToString( ).Split( ':' )[ 1 ],
+                    RemoteAddress = point.ToString( ).Split( ':' )[ 0 ],
+                    Port = int.Parse( point.ToString( ).Split( ':' )[ 1 ] ),
                     RecvBytes = len,
                     Time = _time
                 } );
@@ -185,7 +188,7 @@ namespace Ninja.ViewModels
         {
             get
             {
-                return new RelayCommand( param => ServerAutoSend( param ) );
+                return new RelayCommand( p => ServerAutoSend( p ) );
             }
         }
 

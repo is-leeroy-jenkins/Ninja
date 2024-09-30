@@ -103,17 +103,17 @@ namespace Ninja.ViewModels
         /// <summary>
         /// The x time axis
         /// </summary>
-        private protected LinearAxis _xTimeAxis;
+        private protected LinearAxis _xAxis;
 
         /// <summary>
         /// The y throughput value
         /// </summary>
-        private protected LinearAxis _yThroughputVal;
+        private protected LinearAxis _yAxis;
 
         /// <summary>
         /// The y zoom factor
         /// </summary>
-        private protected int _yZoomFactor = 1;
+        private protected int _zoomFactor = 1;
 
         /// <summary>
         /// Initializes a new instance of the
@@ -227,18 +227,18 @@ namespace Ninja.ViewModels
         /// <summary>
         /// The x time axis
         /// </summary>
-        public LinearAxis XTimeAxis
+        public LinearAxis XAxis
         {
             get
             {
-                return _xTimeAxis;
+                return _xAxis;
             }
             set
             {
-                if( _xTimeAxis != value )
+                if( _xAxis != value )
                 {
-                    _xTimeAxis = value;
-                    OnPropertyChanged( nameof( XTimeAxis ) );
+                    _xAxis = value;
+                    OnPropertyChanged( nameof( XAxis ) );
                 }
             }
         }
@@ -246,18 +246,18 @@ namespace Ninja.ViewModels
         /// <summary>
         /// The y throughput value
         /// </summary>
-        public LinearAxis YThroughputVal
+        public LinearAxis YAxis
         {
             get
             {
-                return _yThroughputVal;
+                return _yAxis;
             }
             set
             {
-                if( _yThroughputVal != value )
+                if( _yAxis != value )
                 {
-                    _yThroughputVal = value;
-                    OnPropertyChanged( nameof( YThroughputVal ) );
+                    _yAxis = value;
+                    OnPropertyChanged( nameof( YAxis ) );
                 }
             }
         }
@@ -265,7 +265,7 @@ namespace Ninja.ViewModels
         /// <summary>
         /// The y zoom factor
         /// </summary>
-        public int YZoomFactor
+        public int ZoomFactor
         {
             get
             {
@@ -273,10 +273,10 @@ namespace Ninja.ViewModels
             }
             set
             {
-                if( _yZoomFactor != value )
+                if( _zoomFactor != value )
                 {
-                    _yZoomFactor = value;
-                    OnPropertyChanged( nameof( YZoomFactor ) );
+                    _zoomFactor = value;
+                    OnPropertyChanged( nameof( ZoomFactor ) );
                 }
             }
         }
@@ -287,7 +287,7 @@ namespace Ninja.ViewModels
         private protected void InitPlot( )
         {
             _plotModelData = new PlotModel( );
-            _xTimeAxis = new LinearAxis( )
+            _xAxis = new LinearAxis( )
             {
                 Title = "Time(s)",
                 Position = AxisPosition.Bottom,
@@ -306,7 +306,8 @@ namespace Ninja.ViewModels
                 IsZoomEnabled = true
             };
 
-            _yThroughputVal = new LinearAxis( )
+            _plotModelData.Axes.Add( _xAxis );
+            _yAxis = new LinearAxis( )
             {
                 Title = "Throughput(Mbps)",
                 Position = AxisPosition.Left,
@@ -323,8 +324,7 @@ namespace Ninja.ViewModels
                 IsZoomEnabled = true
             };
 
-            _plotModelData.Axes.Add( _xTimeAxis );
-            _plotModelData.Axes.Add( _yThroughputVal );
+            _plotModelData.Axes.Add( _yAxis );
             _lineSeriesCurrentVal = new LineSeries( )
             {
                 MarkerType = MarkerType.Circle,
@@ -342,9 +342,9 @@ namespace Ninja.ViewModels
         /// </summary>
         public void YZoomOut( )
         {
-            _yThroughputVal.Maximum *= 2;
-            _yThroughputVal.MajorStep =
-                ( _yThroughputVal.ActualMaximum - _yThroughputVal.ActualMinimum ) / 10;
+            _yAxis.Maximum *= 2;
+            _yAxis.MajorStep =
+                ( _yAxis.ActualMaximum - _yAxis.ActualMinimum ) / 10;
         }
 
         /// <summary>
@@ -352,9 +352,9 @@ namespace Ninja.ViewModels
         /// </summary>
         public void YZoomIn( )
         {
-            _yThroughputVal.Maximum /= 2;
-            _yThroughputVal.MajorStep =
-                ( _yThroughputVal.ActualMaximum - _yThroughputVal.ActualMinimum ) / 10;
+            _yAxis.Maximum /= 2;
+            _yAxis.MajorStep =
+                ( _yAxis.ActualMaximum - _yAxis.ActualMinimum ) / 10;
         }
 
         /// <summary>
@@ -395,12 +395,12 @@ namespace Ninja.ViewModels
                     var _date = DateTime.Now;
                     _lineSeriesCurrentVal.Points.Add( DateTimeAxis.CreateDataPoint( _date, _val ) );
                     _plotModelData.InvalidatePlot( true );
-                    if( _date.ToOADate( ) > _xTimeAxis.ActualMaximum )
+                    if( _date.ToOADate( ) > _xAxis.ActualMaximum )
                     {
-                        var _xPan = ( _xTimeAxis.ActualMaximum - _xTimeAxis.DataMaximum )
-                            * _xTimeAxis.Scale;
+                        var _xPan = ( _xAxis.ActualMaximum - _xAxis.DataMaximum )
+                            * _xAxis.Scale;
 
-                        _xTimeAxis.Pan( _xPan );
+                        _xAxis.Pan( _xPan );
                     }
 
                     Thread.Sleep( 1000 );
@@ -454,17 +454,17 @@ namespace Ninja.ViewModels
                 _iperfModel.Throughput = Convert.ToDouble( _bandwidth );
                 var _val = Convert.ToDouble( _iperfModel.Throughput );
                 var _time = Convert.ToDouble( _timeB );
-                _yThroughputVal.MajorStep =
-                    ( _yThroughputVal.ActualMaximum - _yThroughputVal.ActualMinimum ) / 10;
+                _yAxis.MajorStep =
+                    ( _yAxis.ActualMaximum - _yAxis.ActualMinimum ) / 10;
 
                 _lineSeriesCurrentVal.Points.Add( new DataPoint( _time, _val ) );
                 _plotModelData.InvalidatePlot( true );
-                if( _val > _yThroughputVal.ActualMaximum )
+                if( _val > _yAxis.ActualMaximum )
                 {
-                    var _xPan = ( _yThroughputVal.ActualMaximum - _yThroughputVal.DataMaximum - 50 )
-                        * _yThroughputVal.Scale;
+                    var _xPan = ( _yAxis.ActualMaximum - _yAxis.DataMaximum - 50 )
+                        * _yAxis.Scale;
 
-                    _yThroughputVal.Pan( _xPan );
+                    _yAxis.Pan( _xPan );
                 }
             }
             else
@@ -552,7 +552,7 @@ namespace Ninja.ViewModels
         {
             get
             {
-                return new RelayCommand( param => RunIperf( param ) );
+                return new RelayCommand( p => RunIperf( p ) );
             }
         }
 
@@ -566,7 +566,7 @@ namespace Ninja.ViewModels
         {
             get
             {
-                return new RelayCommand( param => StopIperf( param ) );
+                return new RelayCommand( p => StopIperf( p ) );
             }
         }
 
@@ -580,7 +580,7 @@ namespace Ninja.ViewModels
         {
             get
             {
-                return new RelayCommand( param => ClearOutput( param ) );
+                return new RelayCommand( p => ClearOutput( p ) );
             }
         }
 
@@ -594,7 +594,7 @@ namespace Ninja.ViewModels
         {
             get
             {
-                return new RelayCommand( param => SaveOutput( param ) );
+                return new RelayCommand( p => SaveOutput( p ) );
             }
         }
 
@@ -608,7 +608,7 @@ namespace Ninja.ViewModels
         {
             get
             {
-                return new RelayCommand( param => IperfHelp( param ) );
+                return new RelayCommand( p => IperfHelp( p ) );
             }
         }
     }

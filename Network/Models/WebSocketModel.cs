@@ -1,15 +1,15 @@
 ﻿// ******************************************************************************************
 //     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 09-22-2024
+//     Created:                 09-29-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        09-22-2024
+//     Last Modified On:        09-29-2024
 // ******************************************************************************************
 // <copyright file="WebSocketModel.cs" company="Terry D. Eppler">
 // 
-//    Ninja is a network toolkit, support iperf, tcp, udp, websocket, mqtt,
-//    sniffer, pcap, port scan, listen, ip scan .etc.
+//     Ninja is a network toolkit that supports Iperf, TCP, UDP, Websocket, MQTT,
+//     Sniffer, Pcap, Port Scan, Listen, IP Scan .etc.
 // 
 //    Copyright ©  2019-2024 Terry D. Eppler
 // 
@@ -48,7 +48,7 @@ namespace Ninja.Models
     /// <inheritdoc />
     /// <summary>
     /// </summary>
-    /// <seealso cref="T:Ninja.ViewModels.MainWindowBase" />
+    /// <seealso cref="Ninja.ViewModels.MainWindowBase" />
     [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
     public class WebSocketModel : MainWindowBase
     {
@@ -57,18 +57,18 @@ namespace Ninja.Models
         /// </summary>
         public WebSocketModel( )
         {
-            ServerAddress = "ws://127.0.0.1:65432";
-            ServerSendStr = "Hello Client!";
-            ServerSendInterval = 1000;
-            ServerSend = "Hello Client!";
-            ServerSendButtonName = "Auto Send Start";
-            ServerListenButtonName = "Start Listen";
-            ClientAddress = "ws://127.0.0.1:65432/echo";
-            ClientSendStr = "Hello Server!";
-            ClientSendInterval = 1000;
-            ClientSend = "Hello Server!";
-            ClientConnectButtonName = "Connect";
-            ClientSendBtnName = "Auto Send Start";
+            _serverAddress = "ws://127.0.0.1:65432";
+            _serverSendStr = "Hello Client!";
+            _serverSendInterval = 1000;
+            _serverSend = "Hello Client!";
+            _serverSendButtonName = "Auto Send Start";
+            _serverListenButtonName = "Start Listen";
+            _clientAddress = "ws://127.0.0.1:65432/echo";
+            _clientSendStr = "Hello Server!";
+            _clientSendInterval = 1000;
+            _clientSend = "Hello Server!";
+            _clientConnectButtonName = "Connect";
+            _clientSendButtonName = "Auto Send Start";
         }
 
         #region WebSocket Server
@@ -374,7 +374,7 @@ namespace Ninja.Models
         /// <summary>
         /// The client send BTN name
         /// </summary>
-        private string _clientSendBtnName;
+        private string _clientSendButtonName;
 
         /// <summary>
         /// Gets or sets the name of the client send BTN.
@@ -382,18 +382,18 @@ namespace Ninja.Models
         /// <value>
         /// The name of the client send BTN.
         /// </value>
-        public string ClientSendBtnName
+        public string ClientSendButtonName
         {
             get
             {
-                return _clientSendBtnName;
+                return _clientSendButtonName;
             }
             set
             {
-                if( _clientSendBtnName != value )
+                if( _clientSendButtonName != value )
                 {
-                    _clientSendBtnName = value;
-                    OnPropertyChanged( nameof( ClientSendBtnName ) );
+                    _clientSendButtonName = value;
+                    OnPropertyChanged( nameof( ClientSendButtonName ) );
                 }
             }
         }

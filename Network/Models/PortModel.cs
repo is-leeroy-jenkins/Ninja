@@ -42,12 +42,14 @@
 
 namespace Ninja.Models
 {
+    using System.Diagnostics.CodeAnalysis;
     using ViewModels;
 
     /// <inheritdoc />
     /// <summary>
     /// </summary>
     /// <seealso cref="Ninja.ViewModels.MainWindowBase" />
+    [ SuppressMessage( "ReSharper", "ClassCanBeSealed.Global" ) ]
     public class PortModel : MainWindowBase
     {
         /// <summary>
