@@ -43,7 +43,9 @@
 
 Pre-built and binaries (setup, portable and archive) are available on the with install instructions (e.g. silent install). 
 
-
+<p>
+  
+</p>
 
 
 ## ![](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Ninja/Resources/GitHubImages/tools.png) Build
@@ -91,7 +93,9 @@ You can build the application like any other .NET / WPF application on Windows.
    >
    > dotnet build .\Source\Ninja.sln --configuration Release --no-restore
    > ```
-
+<p>
+  
+</p>
 ## 🙏 Thanks
 
 Thanks to everyone helping to improve Ninja by contributing code, translations, bug reports, feature requests, documentation, and more.
@@ -126,7 +130,7 @@ Ninja uses the following projects and libraries. Please consider supporting them
 | [NetBeauty2](https://github.com/nulastudio/NetBeauty2)                        | Move .NET app runtime components and dependencies into a sub-directory |
 | [PSDiscoveryProtocol](https://github.com/lahell/PSDiscoveryProtocol)          | PowerShell module for LLDP/CDP discovery                               |
 
-## Code Signing Policy
+## Code Signing 
 
 Ninja uses free code signing provided by [SignPath.io](https://signpath.io/) and a free code signing certificate
 from [SignPath Foundation](https://signpath.org/).
@@ -134,7 +138,9 @@ from [SignPath Foundation](https://signpath.org/).
 The binaries and installer are built on [AppVeyor](https://ci.appveyor.com/project/is-leeroy-jenkins/networkmanager) directly from the [GitHub repository](https://github.com/is-leeroy-jenkins/Ninja/blob/main/appveyor.yml).
 Build artifacts are automatically sent to [SignPath.io](https://signpath.io/) via webhook, where they are signed after manual approval by the maintainer.
 The signed binaries are then uploaded to the [GitHub releases](https://github.com/is-leeroy-jenkins/Ninja/releases) page.
-
+<p>
+  
+</p>
 ## Privacy Policy
 
 This program will not transfer any information to other networked systems unless specifically requested by the user or the person installing or operating it.
@@ -144,7 +150,9 @@ Ninja has integrated the following services for additional functions, which can 
 - [api.github.com](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement) (Check for program updates)
 - [ipify.org](https://www.ipify.org/) (Retrieve the public IP address used by the client)
 - [ip-api.com](https://ip-api.com/docs/legal) (Retrieve network information such as geo location, ISP, DNS resolver used, etc. used by the client)
-
+<p>
+  
+</p>
 ## 📝 License
 
 Ninja is published under the [GNU General Public License v3](https://github.com/is-leeroy-jenkins/Ninja/blob/main/LICENSE).
