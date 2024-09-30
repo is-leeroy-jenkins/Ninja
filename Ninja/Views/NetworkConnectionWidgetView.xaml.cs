@@ -1,0 +1,27 @@
+﻿using System.Windows;
+using Ninja.ViewModels;
+
+namespace Ninja.Views;
+
+using ViewModels;
+
+public partial class NetworkConnectionWidgetView
+{
+    private readonly NetworkConnectionWidgetViewModel _viewModel = new();
+
+    public NetworkConnectionWidgetView()
+    {
+        InitializeComponent();
+        DataContext = _viewModel;
+    }
+
+    public void Reload()
+    {
+        _viewModel.CheckConnection();
+    }
+
+    private void UserControl_Loaded(object sender, RoutedEventArgs e)
+    {
+        _viewModel.CheckConnection();
+    }
+}

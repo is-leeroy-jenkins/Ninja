@@ -1,0 +1,17 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls">
+    <Style
+        x:Key="DefaultCheckBox"
+        BasedOn="{StaticResource MahApps.Styles.CheckBox}"
+        TargetType="{x:Type CheckBox}">
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray8}" />
+        <Setter Property="mah:ControlsHelper.FocusBorderBrush" Value="{DynamicResource MahApps.Brushes.Gray8}" />
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource DefaultCheckBox}"
+        TargetType="{x:Type CheckBox}" />
+</ResourceDictionary>

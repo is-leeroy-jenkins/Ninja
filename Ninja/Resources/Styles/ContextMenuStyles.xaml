@@ -1,0 +1,23 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style
+        x:Key="DefaultContextMenu"
+        BasedOn="{StaticResource MahApps.Styles.ContextMenu}"
+        TargetType="{x:Type ContextMenu}">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray8}" />
+        <Style.Resources>
+            <SolidColorBrush
+                x:Key="MahApps.Brushes.SubMenu.Border"
+                Color="{DynamicResource MahApps.Colors.Gray8}" />
+            <SolidColorBrush
+                x:Key="MahApps.Brushes.RightArrowFill"
+                Color="{DynamicResource MahApps.Colors.Gray3}" />
+        </Style.Resources>
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource DefaultContextMenu}"
+        TargetType="{x:Type ContextMenu}" />
+</ResourceDictionary>

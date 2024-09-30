@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <ProjectGuid>{D3B37F13-E8E6-4218-9E8E-96D52432A9CF}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <RootNamespace>Ninja.Profiles</RootNamespace>
+        <AssemblyName>Ninja.Profiles</AssemblyName>
+        <TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+        <PlatformTarget>x64</PlatformTarget>
+        <SelfContained>false</SelfContained>
+        <UseWPF>true</UseWPF>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <Optimize>True</Optimize>
+      <DebugType>embedded</DebugType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+      <DebugType>embedded</DebugType>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="..\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="MahApps.Metro" Version="2.4.10" />
+        <PackageReference Include="MahApps.Metro.IconPacks.FontAwesome" Version="5.0.0" />
+        <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="5.0.0" />
+        <PackageReference Include="MahApps.Metro.IconPacks.MaterialLight" Version="5.0.0" />
+        <PackageReference Include="MahApps.Metro.IconPacks.Modern" Version="5.0.0" />
+        <PackageReference Include="MahApps.Metro.IconPacks.Octicons" Version="5.0.0" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Ninja.Models\Ninja.Models.csproj" />
+        <ProjectReference Include="..\Ninja.Settings\Ninja.Settings.csproj" />
+    </ItemGroup>
+</Project>

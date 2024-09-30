@@ -1,0 +1,175 @@
+﻿<UserControl
+    x:Class="Ninja.Views.AWSSessionManagerConnectDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:localization="clr-namespace:Ninja.Localization.Resources;assembly=Ninja.Localization"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:validators="clr-namespace:Ninja.Validators;assembly=Ninja.Validators"
+    xmlns:viewModels="clr-namespace:Ninja.ViewModels"
+    d:DataContext="{d:DesignInstance viewModels:AWSSessionManagerConnectViewModel}"
+    Loaded="UserControl_Loaded"
+    mc:Ignorable="d">
+    <Grid Margin="0,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.Resources>
+                <Style
+                    BasedOn="{StaticResource CenterTextBlock}"
+                    TargetType="{x:Type TextBlock}" />
+                <Style
+                    BasedOn="{StaticResource DefaultTextBox}"
+                    TargetType="{x:Type TextBox}" />
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="34" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="{x:Static localization:Strings.InstanceId}" />
+            <ComboBox
+                x:Name="ComboBoxInstanceID"
+                Grid.Row="0"
+                Grid.Column="2"
+                mah:TextBoxHelper.Watermark="{x:Static localization:StaticStrings.ExampleAWSInstanceId}"
+                ItemsSource="{Binding InstanceIDHistoryView}"
+                Style="{StaticResource EditableComboBox}">
+                <ComboBox.Text>
+                    <Binding
+                        Mode="TwoWay"
+                        Path="InstanceID"
+                        UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validators:EmptyValidator ValidatesOnTargetUpdated="True" />
+                            <validators:NoSpacesValidator ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.Text>
+            </ComboBox>
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                Text="{x:Static localization:Strings.Profile}" />
+            <ComboBox
+                x:Name="ComboBoxProfile"
+                Grid.Row="2"
+                Grid.Column="2"
+                mah:TextBoxHelper.Watermark="{x:Static localization:StaticStrings.ExampleAWSProfile}"
+                ItemsSource="{Binding ProfileHistoryView}"
+                Style="{StaticResource EditableComboBox}">
+                <ComboBox.Text>
+                    <Binding
+                        Mode="TwoWay"
+                        Path="Profile"
+                        UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validators:NoSpacesValidator ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.Text>
+            </ComboBox>
+            <Rectangle
+                Grid.Row="2"
+                Grid.Column="3"
+                Width="24"
+                Height="24"
+                Margin="10,0,0,0"
+                Style="{StaticResource HelpImageRectangle}"
+                ToolTip="{x:Static localization:Strings.HelpMessage_AWSCLIDefaultsAreUsedIfNotSet}">
+                <Rectangle.Resources>
+                    <Style
+                        BasedOn="{StaticResource HelpToolTip}"
+                        TargetType="{x:Type ToolTip}" />
+                </Rectangle.Resources>
+            </Rectangle>
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="0"
+                Text="{x:Static localization:Strings.Region}" />
+            <ComboBox
+                x:Name="ComboBoxRegion"
+                Grid.Row="4"
+                Grid.Column="2"
+                mah:TextBoxHelper.Watermark="{x:Static localization:StaticStrings.ExampleAWSRegion}"
+                ItemsSource="{Binding RegionHistoryView}"
+                Style="{StaticResource EditableComboBox}">
+                <ComboBox.Text>
+                    <Binding
+                        Mode="TwoWay"
+                        Path="Region"
+                        UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validators:EmptyOrAWSRegionExistsValidator ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.Text>
+            </ComboBox>
+            <Rectangle
+                Grid.Row="4"
+                Grid.Column="3"
+                Width="24"
+                Height="24"
+                Margin="10,0,0,0"
+                Style="{StaticResource HelpImageRectangle}"
+                ToolTip="{x:Static localization:Strings.HelpMessage_AWSCLIDefaultsAreUsedIfNotSet}">
+                <Rectangle.Resources>
+                    <Style
+                        BasedOn="{StaticResource HelpToolTip}"
+                        TargetType="{x:Type ToolTip}" />
+                </Rectangle.Resources>
+            </Rectangle>
+        </Grid>
+        <StackPanel
+            Grid.Row="3"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal">
+            <Button
+                Margin="0,0,10,0"
+                Command="{Binding ConnectCommand}"
+                Content="{x:Static localization:Strings.Connect}"
+                IsDefault="True">
+                <Button.Style>
+                    <Style
+                        BasedOn="{StaticResource HighlightedButton}"
+                        TargetType="{x:Type Button}">
+                        <Setter Property="IsEnabled" Value="False" />
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ComboBoxInstanceID}" Value="False" />
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ComboBoxProfile}" Value="False" />
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ComboBoxRegion}" Value="False" />
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.Setters>
+                                    <Setter Property="IsEnabled" Value="True" />
+                                </MultiDataTrigger.Setters>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button
+                Command="{Binding CancelCommand}"
+                Content="{x:Static localization:Strings.Cancel}"
+                IsCancel="True"
+                Style="{StaticResource DefaultButton}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,40 @@
+﻿<UserControl
+    x:Class="Ninja.Views.ConfirmDeleteDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:localization="clr-namespace:Ninja.Localization.Resources;assembly=Ninja.Localization"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:Ninja.ViewModels"
+    d:DataContext="{d:DesignInstance viewModels:ConfirmDeleteViewModel}"
+    mc:Ignorable="d">
+    <Grid Margin="0,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <TextBlock
+                Style="{StaticResource WrapTextBlock}"
+                Text="{Binding Message}" />
+        </StackPanel>
+        <StackPanel
+            Grid.Row="2"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal">
+            <Button
+                Margin="0,0,10,0"
+                Command="{Binding DeleteCommand}"
+                Content="{x:Static localization:Strings.Delete}"
+                IsDefault="True"
+                Style="{StaticResource HighlightedButton}" />
+            <Button
+                Command="{Binding CancelCommand}"
+                Content="{x:Static localization:Strings.Cancel}"
+                IsCancel="True"
+                Style="{StaticResource DefaultButton}" />
+
+        </StackPanel>
+    </Grid>
+</UserControl>

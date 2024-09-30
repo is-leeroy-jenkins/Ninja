@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <ProjectGuid>{29172E71-52AF-4E64-9683-30C5F4D0C746}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <RootNamespace>Ninja.Validators</RootNamespace>
+        <AssemblyName>Ninja.Validators</AssemblyName>
+        <TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+        <PlatformTarget>x64</PlatformTarget>
+        <SelfContained>false</SelfContained>
+        <UseWPF>true</UseWPF>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
+        <Nullable>disable</Nullable>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <Optimize>True</Optimize>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="..\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Lextm.SharpSnmpLib" Version="12.5.3" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Ninja.Localization\Ninja.Localization.csproj" />
+        <ProjectReference Include="..\Ninja.Utilities\Ninja.Utilities.csproj" />
+    </ItemGroup>
+</Project>

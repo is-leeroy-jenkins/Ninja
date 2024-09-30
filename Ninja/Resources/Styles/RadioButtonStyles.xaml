@@ -1,0 +1,15 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style
+        x:Key="DefaultRadioButton"
+        BasedOn="{StaticResource MahApps.Styles.RadioButton}"
+        TargetType="{x:Type RadioButton}">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Gray8}" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource DefaultRadioButton}"
+        TargetType="{x:Type RadioButton}" />
+</ResourceDictionary>

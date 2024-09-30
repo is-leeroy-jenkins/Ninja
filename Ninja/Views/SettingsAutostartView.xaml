@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="Ninja.Views.SettingsAutostartView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mahAppsControls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:converters="clr-namespace:Ninja.Converters;assembly=Ninja.Converters"
+             xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+             xmlns:viewModels="clr-namespace:Ninja.ViewModels"
+             xmlns:localization="clr-namespace:Ninja.Localization.Resources;assembly=Ninja.Localization"
+             dialogs:DialogParticipation.Register="{Binding}"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:SettingsAutostartViewModel}">
+    <UserControl.Resources>
+        <!-- Converter -->
+        <converters:BooleanReverseConverter x:Key="BooleanReverseConverter" />
+        <converters:BooleanToVisibilityCollapsedConverter x:Key="BooleanToVisibilityCollapsedConverter" />
+    </UserControl.Resources>
+    <StackPanel>
+        <TextBlock Style="{StaticResource HeaderTextBlock}" Text="{x:Static localization:Strings.Autostart}" />
+        <StackPanel>
+            <mahAppsControls:ToggleSwitch Header="{x:Static localization:Strings.StartWithWindows}"
+                                          IsOn="{Binding StartWithWindows}"
+                                          IsEnabled="{Binding ConfiguringAutostart, Converter={StaticResource BooleanReverseConverter}}"
+                                          Margin="0,0,0,10" />
+            <mahAppsControls:MetroProgressBar IsIndeterminate="True"
+                                              Foreground="{DynamicResource MahApps.Brushes.Accent}"
+                                              Visibility="{Binding ConfiguringAutostart, Converter={StaticResource BooleanToVisibilityCollapsedConverter}}"
+                                              Margin="0,0,0,10" />
+            <mahAppsControls:ToggleSwitch Header="{x:Static localization:Strings.StartMinimizedInTray}"
+                                          IsOn="{Binding StartMinimizedInTray}" IsEnabled="{Binding StartWithWindows}" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>

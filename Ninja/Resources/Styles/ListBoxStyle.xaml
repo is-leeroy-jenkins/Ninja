@@ -1,0 +1,23 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style
+        x:Key="DefaultListBox"
+        BasedOn="{StaticResource MahApps.Styles.ListBox}"
+        TargetType="{x:Type ListBox}">
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource DefaultListBox}"
+        TargetType="{x:Type ListBox}" />
+
+    <Style
+        x:Key="ProfileListBox"
+        BasedOn="{StaticResource DefaultListBox}"
+        TargetType="{x:Type ListBox}">
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+    </Style>
+
+</ResourceDictionary>
