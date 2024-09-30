@@ -20,8 +20,8 @@
         <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
         <Authors>Terry Eppler</Authors>
         <PackageProjectUrl></PackageProjectUrl>
-        <RepositoryUrl></RepositoryUrl>
-        <PackageLicenseFile>Ninja.txt</PackageLicenseFile>
+        <RepositoryUrl>https://github.com/is-leeroy-jenkins/Ninja</RepositoryUrl>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageIcon>Ninja.ico</PackageIcon>
         <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
         <Description>A powerful tool for managing networks and troubleshoot network problems!</Description>
@@ -46,6 +46,8 @@
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <Nullable>disable</Nullable>
         <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+        <AnalysisLevel>6.0-recommended</AnalysisLevel>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
       <Optimize>True</Optimize>
@@ -53,6 +55,10 @@
     <ItemGroup>
         <None Remove="log4net.config" />
         <None Remove="SplashScreen.png" />
+        <None Include="..\..\LICENSE">
+          <Pack>True</Pack>
+          <PackagePath>\</PackagePath>
+        </None>
         <None Include="..\..\README.md">
           <Pack>True</Pack>
           <PackagePath>\</PackagePath>
