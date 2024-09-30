@@ -126,7 +126,6 @@ namespace Ninja.ViewModels
         /// </summary>
         public MainWindowViewModel( )
         {
-            _selectedViewModel = new object( );
             var _menuItems = new ObservableCollection<MenuItems>
             {
                 new MenuItems
@@ -313,11 +312,8 @@ namespace Ninja.ViewModels
             }
             set
             {
-                if( _selectedViewModel != value )
-                {
-                    _selectedViewModel = value;
-                    OnPropertyChanged( nameof( SelectedViewModel ) );
-                }
+                _selectedViewModel = value;
+                OnPropertyChanged( nameof( SelectedViewModel ) );
             }
         }
 
@@ -482,51 +478,80 @@ namespace Ninja.ViewModels
         /// <summary>
         /// Switches the views.
         /// </summary>
-        /// <param name="parameter">The parameter.</param>
+        /// <param name="parameter">
+        /// The parameter.
+        /// </param>
         public void SwitchViews( object parameter )
-        {
-            var _view = parameter.ToString( );
-            switch( _view )
+        {;
+            switch( parameter )
             {
                 case "Iperf":
                 {
-                    _iperfViewModel ??= new IperfViewModel( );
+                    if( _iperfViewModel == null )
+                    {
+                        _iperfViewModel = new IperfViewModel();
+                    }
+
                     _selectedViewModel = _iperfViewModel;
                     break;
                 }
                 case "NetworkScan":
                 {
-                    _networkScanViewModel ??= new NetworkScanViewModel( );
+                    if(_networkScanViewModel == null)
+                    {
+                        _networkScanViewModel = new NetworkScanViewModel( );
+                    }
+
                     _selectedViewModel = _networkScanViewModel;
                     break;
                 }
                 case "PortScan":
                 {
-                    _portScanViewModel ??= new PortScanViewModel( );
+                    if(_portScanViewModel == null)
+                    {
+                        _portScanViewModel = new PortScanViewModel( );
+                    }
+
                     _selectedViewModel = _portScanViewModel;
                     break;
                 }
                 case "RouteTable":
                 {
-                    _routeViewModel ??= new RouteViewModel( );
+                    if( _routeViewModel == null )
+                    {
+                        _routeViewModel = new RouteViewModel( );
+                    }
+
                     _selectedViewModel = _routeViewModel;
                     break;
                 }
                 case "PortListen":
                 {
-                    _portViewModel ??= new PortViewModel( );
-                    _selectedViewModel = _portViewModel;
+                    if( _portScanViewModel == null )
+                    {
+                        _portScanViewModel = new PortScanViewModel( );
+                    }
+
+                    _selectedViewModel = _portScanViewModel;
                     break;
                 }
                 case "Server":
                 {
-                    _serverViewModel ??= new ServerViewModel( );
+                    if( _serverViewModel == null )
+                    {
+                        _serverViewModel = new ServerViewModel( );
+                    }
+
                     _selectedViewModel = _serverViewModel;
                     break;
                 }
                 case "Sniffer":
                 {
-                    _snifferViewModel ??= new SnifferViewModel( );
+                    if(_snifferViewModel == null )
+                    {
+                        _snifferViewModel = new SnifferViewModel( );
+                    }
+
                     _selectedViewModel = _snifferViewModel;
                     break;
                 }

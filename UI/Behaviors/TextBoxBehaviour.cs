@@ -55,8 +55,8 @@ namespace Ninja.Themes
         /// <summary>
         /// The associations
         /// </summary>
-        private static readonly Dictionary<TextBox, _capture> _associations =
-            new Dictionary<TextBox, _capture>( );
+        private static readonly Dictionary<TextBox, Capture> _associations =
+            new Dictionary<TextBox, Capture>( );
 
         /// <summary>
         /// Gets the scroll on text changed.
@@ -90,7 +90,8 @@ namespace Ninja.Themes
         /// Called when [scroll on text changed].
         /// </summary>
         /// <param name="dependencyObject">The dependency object.</param>
-        /// <param name="e">The <see cref="DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="DependencyPropertyChangedEventArgs"/>
+        /// instance containing the event data.</param>
         private static void OnScrollOnTextChanged( DependencyObject dependencyObject,
             DependencyPropertyChangedEventArgs e )
         {
@@ -108,13 +109,13 @@ namespace Ninja.Themes
 
             if( _newValue )
             {
-                _textBox.Loaded += TextBoxBehaviour.TextBoxLoaded;
-                _textBox.Unloaded += TextBoxBehaviour.TextBoxUnloaded;
+                _textBox.Loaded += TextBoxBehaviour.OnTextBoxLoaded;
+                _textBox.Unloaded += TextBoxBehaviour.OnTextBoxUnloaded;
             }
             else
             {
-                _textBox.Loaded -= TextBoxBehaviour.TextBoxLoaded;
-                _textBox.Unloaded -= TextBoxBehaviour.TextBoxUnloaded;
+                _textBox.Loaded -= TextBoxBehaviour.OnTextBoxLoaded;
+                _textBox.Unloaded -= TextBoxBehaviour.OnTextBoxUnloaded;
                 if( _associations.ContainsKey( _textBox ) )
                 {
                     _associations[ _textBox ].Dispose( );
@@ -126,67 +127,26 @@ namespace Ninja.Themes
         /// Texts the box unloaded.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="routedEventArgs">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        private static void TextBoxUnloaded( object sender, RoutedEventArgs routedEventArgs )
+        /// <param name="routedEventArgs">The <see cref="RoutedEventArgs"/>
+        /// instance containing the event data.</param>
+        private static void OnTextBoxUnloaded( object sender, RoutedEventArgs routedEventArgs )
         {
             var _textBox = ( TextBox )sender;
             _associations[ _textBox ].Dispose( );
-            _textBox.Unloaded -= TextBoxBehaviour.TextBoxUnloaded;
+            _textBox.Unloaded -= TextBoxBehaviour.OnTextBoxUnloaded;
         }
 
         /// <summary>
         /// Texts the box loaded.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="routedEventArgs">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        private static void TextBoxLoaded( object sender, RoutedEventArgs routedEventArgs )
+        /// <param name="routedEventArgs">The <see cref="RoutedEventArgs"/>
+        /// instance containing the event data.</param>
+        private static void OnTextBoxLoaded( object sender, RoutedEventArgs routedEventArgs )
         {
             var _textBox = ( TextBox )sender;
-            _textBox.Loaded -= TextBoxBehaviour.TextBoxLoaded;
-            _associations[ _textBox ] = new _capture( _textBox );
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <seealso cref="System.IDisposable" />
-        private class _capture : IDisposable
-        {
-            /// <summary>
-            /// Gets or sets the text box.
-            /// </summary>
-            /// <value>
-            /// The text box.
-            /// </value>
-            private TextBox TextBox { get; set; }
-
-            /// <summary>
-            /// Initializes a new instance of the <see cref="_capture"/> class.
-            /// </summary>
-            /// <param name="textBox">The text box.</param>
-            public _capture( TextBox textBox )
-            {
-                TextBox = textBox;
-                TextBox.TextChanged += OnTextBoxOnTextChanged;
-            }
-
-            /// <summary>
-            /// Called when [text box on text changed].
-            /// </summary>
-            /// <param name="sender">The sender.</param>
-            /// <param name="args">The <see cref="TextChangedEventArgs"/> instance containing the event data.</param>
-            private void OnTextBoxOnTextChanged( object sender, TextChangedEventArgs args )
-            {
-                TextBox.ScrollToEnd( );
-            }
-
-            /// <summary>
-            /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-            /// </summary>
-            public void Dispose( )
-            {
-                TextBox.TextChanged -= OnTextBoxOnTextChanged;
-            }
+            _textBox.Loaded -= TextBoxBehaviour.OnTextBoxLoaded;
+            _associations[ _textBox ] = new Capture( _textBox );
         }
     }
 }

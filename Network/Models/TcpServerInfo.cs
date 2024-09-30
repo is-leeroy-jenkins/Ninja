@@ -1,10 +1,10 @@
 ﻿// ******************************************************************************************
 //     Assembly:                Ninja
 //     Author:                  Terry D. Eppler
-//     Created:                 09-29-2024
+//     Created:                 09-30-2024
 // 
 //     Last Modified By:        Terry D. Eppler
-//     Last Modified On:        09-29-2024
+//     Last Modified On:        09-30-2024
 // ******************************************************************************************
 // <copyright file="TcpServerInfo.cs" company="Terry D. Eppler">
 // 
@@ -56,16 +56,6 @@ namespace Ninja.ViewModels
     public class TcpServerInfo : INotifyPropertyChanged
     {
         /// <summary>
-        /// The listen port
-        /// </summary>
-        private protected string _listenPort;
-
-        /// <summary>
-        /// The local port
-        /// </summary>
-        private protected string _localPort;
-
-        /// <summary>
         /// The server ip
         /// </summary>
         private protected string _ipAddress;
@@ -74,6 +64,16 @@ namespace Ninja.ViewModels
         /// The server listen BTN name
         /// </summary>
         private protected string _listenButtonName;
+
+        /// <summary>
+        /// The listen port
+        /// </summary>
+        private protected string _listenPort;
+
+        /// <summary>
+        /// The local port
+        /// </summary>
+        private protected string _localPort;
 
         /// <summary>
         /// The server port
@@ -147,10 +147,10 @@ namespace Ninja.ViewModels
             }
             set
             {
-                if(_sendInterval != value)
+                if( _sendInterval != value )
                 {
                     _sendInterval = value;
-                    OnPropertyChanged(nameof(SendInterval));
+                    OnPropertyChanged( nameof( SendInterval ) );
                 }
             }
         }
@@ -169,10 +169,10 @@ namespace Ninja.ViewModels
             }
             set
             {
-                if(_send != value)
+                if( _send != value )
                 {
                     _send = value;
-                    OnPropertyChanged(nameof(Send));
+                    OnPropertyChanged( nameof( Send ) );
                 }
             }
         }
@@ -191,10 +191,10 @@ namespace Ninja.ViewModels
             }
             set
             {
-                if(_recv != value)
+                if( _recv != value )
                 {
                     _recv = value;
-                    OnPropertyChanged(nameof(Recv));
+                    OnPropertyChanged( nameof( Recv ) );
                 }
             }
         }

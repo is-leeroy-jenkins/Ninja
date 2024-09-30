@@ -73,18 +73,16 @@ namespace Ninja
         private Action _commandTasks;
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="RelayCommand"/> class.
+        /// Initializes a new instance of the <see cref="RelayCommand"/> class.
         /// </summary>
-        /// <param name="work">The work todo.</param>
-        public RelayCommand( Action work )
+        /// <param name="workTodo">The work todo.</param>
+        public RelayCommand( Action workTodo )
         {
-            _commandTasks = work;
+            _commandTasks = workTodo;
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="RelayCommand"/> class.
+        /// Initializes a new instance of the <see cref="RelayCommand"/> class.
         /// </summary>
         /// <param name="execute">The execute.</param>
         public RelayCommand( Action<object> execute )
@@ -94,23 +92,21 @@ namespace Ninja
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="RelayCommand"/> class.
+        /// Initializes a new instance of the <see cref="RelayCommand"/> class.
         /// </summary>
         /// <param name="execute">The execute.</param>
         /// <param name="canExecute">The can execute.</param>
-        public RelayCommand( Action<object> execute, Func<object, bool> canExecute )
+        public RelayCommand(Action<object> execute, Func<object, bool> canExecute)
         {
             _execute = execute;
             _canExecute = canExecute;
         }
 
-        /// <inheritdoc />
         /// <summary>
-        /// CanExecuteChanged delegates the event subscription to the
-        /// CommandManager.RequerySuggested event.
-        /// This ensures that the WPF commanding infrastructure asks all
-        /// RelayCommand objects if they can execute whenever
+        /// CanExecuteChanged delegates the event subscription
+        /// to the CommandManager.RequerySuggested event.
+        /// This ensures that the WPF commanding infrastructure
+        /// asks all RelayCommand objects if they can execute whenever
         /// it asks the built-in commands.
         /// </summary>
         public event EventHandler CanExecuteChanged
@@ -119,34 +115,30 @@ namespace Ninja
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        /// <inheritdoc />
         /// <summary>
-        /// Defines the method that determines whether the
-        /// command can execute in its current state.
+        /// Defines the method that determines whether the command can execute in its current state.
         /// </summary>
         /// <param name="parameter">Data used by the command.
-        /// If the command does not require data to be passed, this object
-        /// can be set to <see langword="null" />.</param>
+        /// If the command does not require data to be passed,
+        /// his object can be set to <see langword="null" />.</param>
         /// <returns>
         ///   <see langword="true" /> if this command can be executed;
         /// otherwise, <see langword="false" />.
         /// </returns>
-        public bool CanExecute( object parameter )
+        public bool CanExecute(object parameter)
         {
-            return _canExecute == null || CanExecute( parameter );
+            return _canExecute == null || CanExecute(parameter);
         }
 
-        /// <inheritdoc />
         /// <summary>
         /// Defines the method to be called when the command is invoked.
         /// </summary>
         /// <param name="parameter">Data used by the command.
         /// If the command does not require data to be passed,
-        /// this object can be set to <see langword="null" />.
-        /// </param>
-        public void Execute( object parameter )
+        /// this object can be set to <see langword="null" />.</param>
+        public void Execute(object parameter)
         {
-            _execute( parameter );
+            _execute(parameter);
         }
     }
 }

@@ -340,7 +340,7 @@ namespace Ninja.ViewModels
         /// <summary>
         /// ies the zoom out.
         /// </summary>
-        public void YZoomOut( )
+        public void ZoomOut( )
         {
             _yAxis.Maximum *= 2;
             _yAxis.MajorStep =
@@ -350,7 +350,7 @@ namespace Ninja.ViewModels
         /// <summary>
         /// ies the zoom in.
         /// </summary>
-        public void YZoomIn( )
+        public void ZoomIn( )
         {
             _yAxis.Maximum /= 2;
             _yAxis.MajorStep =
