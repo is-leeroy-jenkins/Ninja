@@ -6,15 +6,15 @@ Fork the Ninja repository on GitHub.
 
 #### Step 2: Install Visual Studio
 
-Download Visual Studio Community with the "Desktop development with .NET" component
+Download Visual Studio 2022 Community Edition with the "Desktop development with .NET" component
 
-![image](https://user-images.githubusercontent.com/104514709/183603285-8d1a52cf-4cb8-4464-b55e-34d1a17a2c31.png)
+![image](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Ninja/Resources/GitHubImages/InstallVSCode.PNG)
 
 #### Step 2: Setup this project in VS
 
 Open VS Community and select "Clone a repository"
 
-![image](https://user-images.githubusercontent.com/104514709/183603374-2b2d4c84-c58e-474c-a335-fded1838e9ed.png)
+![image](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Ninja/Resources/GitHubImages/CloneRepository.PNG)
 
 #### Step 3: Clone this project
 
