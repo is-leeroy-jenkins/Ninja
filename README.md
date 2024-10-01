@@ -94,7 +94,6 @@ You can build the application like any other .NET / WPF application on Windows.
 
 ## 🙏 Acknoledgements
 
-Thanks to everyone helping to improve Ninja by contributing code, translations, bug reports, feature requests, documentation, and more.
 Ninja uses the following projects and libraries. Please consider supporting them as well (e.g., by starring their repositories):
 
 |                                                                               |                                                                        |
