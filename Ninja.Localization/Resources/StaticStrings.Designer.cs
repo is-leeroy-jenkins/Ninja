@@ -529,7 +529,7 @@ namespace Ninja.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to NETworkManager.
+        ///   Looks up a localized string similar to Ninja.
         /// </summary>
         public static string ExamplePuTTYProfile {
             get {
@@ -736,7 +736,7 @@ namespace Ninja.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to NETworkManager.
+        ///   Looks up a localized string similar to Ninja.
         /// </summary>
         public static string ProductName {
             get {

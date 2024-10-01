@@ -19,7 +19,7 @@ namespace Ninja.Localization
         ///     Constant with the path to the flag images.
         /// </summary>
         private const string BaseFlagImageUri =
-            @"pack://application:,,,/NETworkManager.Localization;component/Resources/Flags/";
+            @"pack://application:,,,/Ninja.Localization;component/Resources/Flags/";
 
         /// <summary>
         ///     Variable for the instance of the class.

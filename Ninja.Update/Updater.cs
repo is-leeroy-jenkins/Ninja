@@ -18,7 +18,7 @@ namespace Ninja.Update
         ///     Checks on GitHub whether a new version of the program is available
         /// </summary>
         /// <param name="userName">GitHub username like "BornToBeRoot".</param>
-        /// <param name="projectName">GitHub repository like "NETworkManager".</param>
+        /// <param name="projectName">GitHub repository like "Ninja".</param>
         /// <param name="currentVersion">Version like 1.2.0.0.</param>
         /// <param name="includePreRelease">Include pre-release versions</param>
         public void CheckOnGitHub(string userName, string projectName, Version currentVersion, bool includePreRelease)

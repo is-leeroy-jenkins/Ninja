@@ -23,7 +23,7 @@ namespace Ninja.Models.Network
         public DiscoveryProtocolCapture()
         {
             using var stream = Assembly.GetExecutingAssembly()
-                .GetManifestResourceStream("NETworkManager.Models.Resources.PSDiscoveryProtocol.psm1");
+                .GetManifestResourceStream("Ninja.Models.Resources.PSDiscoveryProtocol.psm1");
 
             using StreamReader reader =
                 new(stream ?? throw new InvalidOperationException("Could not load PSDiscoveryProtocol.psm1"));

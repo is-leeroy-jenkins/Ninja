@@ -7,6 +7,13 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+
+
+                <!--  Fonts  -->
+                <ResourceDictionary>
+                    <FontFamily x:Key="Roboto">pack://application:,,,/Fonts/Roboto-Regular.ttf</FontFamily>
+                </ResourceDictionary>
+
                 <!--  MahApps.Metro  -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Clean/MetroWindow.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Clean/Controls.xaml" />

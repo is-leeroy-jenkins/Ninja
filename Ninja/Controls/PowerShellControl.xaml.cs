@@ -97,7 +97,7 @@ namespace Ninja.Controls
                 return;
 
             // Fix 1: The control is not visible by default, thus height and width is not set. If the values are not set, the size does not scale properly
-            // Fix 2: Somehow the initial size need to be 20px smaller than the actual size after using Dragablz (https://github.com/is-leeroy-jenkins/NETworkManager/pull/2678)
+            // Fix 2: Somehow the initial size need to be 20px smaller than the actual size after using Dragablz (https://github.com/is-leeroy-jenkins/Ninja/pull/2678)
             WindowHost.Height = (int)ActualHeight - 20;
             WindowHost.Width = (int)ActualWidth - 20;
 

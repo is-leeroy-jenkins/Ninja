@@ -1,23 +1,26 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Windows;
-using System.Windows.Threading;
-using log4net;
-using Ninja.Localization;
-using Ninja.Localization.Resources;
-using Ninja.Profiles;
-using Ninja.Settings;
-using Ninja.Utilities;
+﻿
 
 namespace Ninja
 {
+    using System.Collections.Generic;
+    using System.Windows.Media;
     using Localization;
+    using OfficeOpenXml;
     using Profiles;
     using Settings;
+    using Syncfusion.Licensing;
+    using Syncfusion.SfSkinManager;
+    using Syncfusion.Themes.FluentDark.WPF;
     using Utilities;
+    using System;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Threading;
+    using System.Windows;
+    using System.Windows.Threading;
+    using log4net;
+    using Ninja.Localization.Resources;
 
     /*
      * Class: App
@@ -42,9 +45,70 @@ namespace Ninja
 
         private bool _singleInstanceClose;
 
+        /// <summary>
+        /// The controls
+        /// </summary>
+        public static string[] Controls =
+        {
+            "ComboBoxAdv",
+            "MetroComboBox",
+            "MetroDatagrid",
+            "SfDataGrid",
+            "ToolBarAdv",
+            "ToolStrip",
+            "MetroCalendar",
+            "CalendarEdit",
+            "PivotGridControl",
+            "MetroPivotGrid",
+            "SfChart",
+            "SfChart3D",
+            "SfHeatMap",
+            "SfMap",
+            "MetroMap",
+            "EditControl",
+            "CheckListBox",
+            "MetroEditor",
+            "DropDownButtonAdv",
+            "MetroDropDown",
+            "TextBoxExt",
+            "SfCircularProgressBar",
+            "SfLinearProgressBar",
+            "GridControl",
+            "MetroGridControl",
+            "TabControlExt",
+            "MetroTabControl",
+            "SfTextInputLayout",
+            "MetroTextInput",
+            "SfSpreadsheet",
+            "SfSpreadsheetRibbon",
+            "MenuItemAdv",
+            "ButtonAdv",
+            "Carousel",
+            "ColorEdit",
+            "SfCalculator",
+            "SfMultiColumnDropDownControl"
+        };
+
+        /// <summary>
+        /// Gets or sets the windows.
+        /// </summary>
+        /// <value>
+        /// The windows.
+        /// </value>
+        public static IDictionary<string, Window> ActiveWindows { get; private set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="App"/> class.
+        /// </summary>
         public App()
         {
             ShutdownMode = ShutdownMode.OnMainWindowClose;
+            AppDomain.CurrentDomain.UnhandledException += App.OnUnhandledException;
+            var _key = System.Configuration.ConfigurationManager.AppSettings["UI"];
+            SyncfusionLicenseProvider.RegisterLicense(_key);
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            App.ActiveWindows = new Dictionary<string, Window>();
+            RegisterTheme( );
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
@@ -57,8 +121,8 @@ namespace Ninja
  |_| \_|_____| |_|   \_/\_/ \___/|_|  |_|\_\_|  |_|\__,_|_| |_|\__,_|\__, |\___|_|   
                                                                      |___/        
             
-                                               by BornToBeRoot
-                                               GitHub.com/is-leeroy-jenkins/NETworkManager
+                                               by Terry Eppler
+                                               GitHub.com/is-leeroy-jenkins/ Ninja
 
                                                Version: {AssemblyManager.Current.Version}
 ";
@@ -76,13 +140,13 @@ namespace Ninja
             if (CommandLineManager.Current.RestartPid != -1)
             {
                 Log.Info(
-                    $"Waiting for another NETworkManager process with Pid {CommandLineManager.Current.RestartPid} to exit...");
+                    $"Waiting for another Ninjaprocess with Pid {CommandLineManager.Current.RestartPid} to exit...");
 
                 var processList = Process.GetProcesses();
                 var process = processList.FirstOrDefault(x => x.Id == CommandLineManager.Current.RestartPid);
                 process?.WaitForExit();
 
-                Log.Info($"NETworkManager process with Pid {CommandLineManager.Current.RestartPid} has been exited.");
+                Log.Info($"Ninja process with Pid {CommandLineManager.Current.RestartPid} has been exited.");
             }
 
             // Load (or initialize) settings
@@ -215,7 +279,7 @@ namespace Ninja
             {
                 // Bring the already running application into the foreground
                 Log.Info(
-                    "Another NETworkManager process is already running. Trying to bring the window to the foreground...");
+                    "Another Ninja process is already running. Trying to bring the window to the foreground...");
                 SingleInstance.PostMessage(SingleInstance.HWND_BROADCAST, SingleInstance.WM_SHOWME, IntPtr.Zero,
                     IntPtr.Zero);
 
@@ -243,7 +307,7 @@ namespace Ninja
 
         private void Application_Exit(object sender, ExitEventArgs e)
         {
-            Log.Info("Exiting NETworkManager...");
+            Log.Info("Exiting Ninja...");
 
             // Save settings, when the application is normally closed
             if (_singleInstanceClose || CommandLineManager.Current.Help)
@@ -270,6 +334,55 @@ namespace Ninja
                 Log.Info("Save current profiles...");
                 ProfileManager.Save();
             }
+        }
+
+        /// <summary>
+        /// Registers the theme.
+        /// </summary>
+        private void RegisterTheme( )
+        {
+            var _theme = new FluentDarkThemeSettings
+            {
+                PrimaryBackground = new SolidColorBrush(Color.FromRgb(20, 20, 20)),
+                PrimaryColorForeground = new SolidColorBrush(Color.FromRgb(0, 120, 212)),
+                PrimaryForeground = new SolidColorBrush(Color.FromRgb(222, 222, 222)),
+                BodyFontSize = 12,
+                HeaderFontSize = 16,
+                SubHeaderFontSize = 14,
+                TitleFontSize = 14,
+                SubTitleFontSize = 126,
+                BodyAltFontSize = 10,
+                FontFamily = new FontFamily("Segoe UI")
+            };
+
+            SfSkinManager.RegisterThemeSettings("FluentDark", _theme);
+            SfSkinManager.ApplyStylesOnApplication = true;
+        }
+
+        /// <summary>
+        /// Handles the UnhandledException event of the CurrentDomain control.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event.
+        /// </param>
+        /// <param name="e">The
+        /// <see cref="UnhandledExceptionEventArgs"/>
+        /// instance containing the event data.</param>
+        private static void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            var _ex = e.ExceptionObject as Exception;
+            Fail(_ex);
+        }
+
+        /// <summary>
+        /// Fails the specified _ex.
+        /// </summary>
+        /// <param name="_ex">The _ex.</param>
+        private static void Fail(Exception _ex)
+        {
+            var _error = new ErrorWindow(_ex);
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

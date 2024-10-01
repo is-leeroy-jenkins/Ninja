@@ -40,7 +40,7 @@ namespace Ninja.Controls
             InterTabPartition = applicationName.ToString();
 
             Title =
-                $"NETworkManager {AssemblyManager.Current.Version} - {ResourceTranslator.Translate(ResourceIdentifier.ApplicationName, applicationName)}";
+                $"Ninja {AssemblyManager.Current.Version} - {ResourceTranslator.Translate(ResourceIdentifier.ApplicationName, applicationName)}";
         }
 
         #endregion

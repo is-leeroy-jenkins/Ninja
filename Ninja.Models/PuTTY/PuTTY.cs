@@ -24,7 +24,7 @@ namespace Ninja.Models.PuTTY
         };
 
         /// <summary>
-        ///     Default SZ registry keys for PuTTY profile NETworkManager.
+        ///     Default SZ registry keys for PuTTY profile Ninja.
         /// </summary>
         private static readonly List<Tuple<string, string>> DefaultProfileRegkeysSZBase = new()
         {
@@ -53,7 +53,7 @@ namespace Ninja.Models.PuTTY
         };
 
         /// <summary>
-        ///     Default DWORD registry keys for PuTTY profile NETworkManager.
+        ///     Default DWORD registry keys for PuTTY profile Ninja.
         /// </summary>
         private static readonly List<Tuple<string, int>> DefaultProfileRegkeysDwordBase = new()
         {
@@ -74,7 +74,7 @@ namespace Ninja.Models.PuTTY
         private static string _puttyFile => "putty.exe";
 
         /// <summary>
-        ///     SZ registry keys for PuTTY profile NETworkManager if app theme is dark.
+        ///     SZ registry keys for PuTTY profile Ninja if app theme is dark.
         /// </summary>
         /// <returns>List with SZ registry keys.</returns>
         private static List<Tuple<string, string>> GetProfileRegkeysSZDark()
@@ -89,7 +89,7 @@ namespace Ninja.Models.PuTTY
         }
 
         /// <summary>
-        ///     SZ registry keys for PuTTY profile NETworkManager if app theme is white.
+        ///     SZ registry keys for PuTTY profile Ninja if app theme is white.
         /// </summary>
         /// <returns>List with DWORD registry keys.</returns>
         private static List<Tuple<string, string>> GetProfileRegkeysSZWhite()
@@ -104,13 +104,13 @@ namespace Ninja.Models.PuTTY
         }
 
         /// <summary>
-        ///     Write the default PuTTY profile NETworkManager to the registry.
-        ///     HKCU\Software\SimonTatham\PuTTY\Sessions\NETworkManager
+        ///     Write the default PuTTY profile Ninja to the registry.
+        ///     HKCU\Software\SimonTatham\PuTTY\Sessions\Ninja
         /// </summary>
         /// <param name="theme">Current application theme to adjust the PuTTY colors</param>
         public static void WriteDefaultProfileToRegistry(string theme)
         {
-            var profilePath = @"Software\SimonTatham\PuTTY\Sessions\NETworkManager";
+            var profilePath = @"Software\SimonTatham\PuTTY\Sessions\Ninja";
 
             var registryKey = Registry.CurrentUser.OpenSubKey(profilePath, true);
 

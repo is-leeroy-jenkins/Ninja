@@ -150,7 +150,7 @@ namespace Ninja.Models.IPApi
             _rateLimitRemainingRequests = remainingRequests;
 
             // Only allow 40 requests... to prevent a 429 error if other
-            // devices or tools on the network (e.g. another NETworkManager
+            // devices or tools on the network (e.g. another Ninja
             // instance) doing requests against ip-api.com.
             if (_rateLimitRemainingRequests >= 5)
                 return true;

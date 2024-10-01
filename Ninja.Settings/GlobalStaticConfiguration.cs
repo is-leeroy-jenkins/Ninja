@@ -183,7 +183,7 @@ namespace Ninja.Settings
 
         // Application: PuTTY
         public static ConnectionMode PuTTY_DefaultConnectionMode => ConnectionMode.SSH;
-        public static string PuTTY_DefaultProfile => "NETworkManager";
+        public static string PuTTY_DefaultProfile => "Ninja";
         public static LogMode PuTTY_LogMode => LogMode.SessionLog;
 
         public static string PuTTY_LogPath =>

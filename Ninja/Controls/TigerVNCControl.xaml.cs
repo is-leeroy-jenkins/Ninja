@@ -193,7 +193,7 @@ namespace Ninja.Controls
                             long style = (int)NativeMethods.GetWindowLong(_appWin, NativeMethods.GWL_STYLE);
                             style &= ~(NativeMethods.WS_CAPTION | NativeMethods.WS_POPUP |
                                 NativeMethods
-                                    .WS_THICKFRAME); // NativeMethods.WS_POPUP --> Overflow? (https://github.com/is-leeroy-jenkins/NETworkManager/issues/167)
+                                    .WS_THICKFRAME); // NativeMethods.WS_POPUP --> Overflow? (https://github.com/is-leeroy-jenkins/Ninja/issues/167)
                             NativeMethods.SetWindowLongPtr(_appWin, NativeMethods.GWL_STYLE, new IntPtr(style));
 
                             IsConnected = true;

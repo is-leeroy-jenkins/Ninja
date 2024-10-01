@@ -461,7 +461,7 @@ namespace Ninja.ViewModels
             IsConfigured = !string.IsNullOrEmpty(SettingsManager.Current.PuTTY_ApplicationFilePath) &&
                 File.Exists(SettingsManager.Current.PuTTY_ApplicationFilePath);
 
-            // Create default PuTTY profile for NETworkManager
+            // Create default PuTTY profile for Ninja
             WriteDefaultProfileToRegistry();
         }
 
@@ -780,7 +780,7 @@ namespace Ninja.ViewModels
             if (e.PropertyName == nameof(SettingsInfo.PuTTY_ApplicationFilePath))
                 CheckSettings();
 
-            // Update PuTTY profile "NETworkManager" if application theme has changed
+            // Update PuTTY profile "Ninja" if application theme has changed
             if (e.PropertyName == nameof(SettingsInfo.Appearance_Theme))
                 WriteDefaultProfileToRegistry();
         }

@@ -46,7 +46,7 @@
                     Width="128"
                     Height="128"
                     VerticalAlignment="Center"
-                    Source="/NETworkManager.ico" />
+                    Source="/Ninja.ico" />
                 <StackPanel
                     Grid.Column="1"
                     Margin="20,0,0,0">

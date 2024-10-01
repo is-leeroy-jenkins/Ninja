@@ -85,7 +85,7 @@ namespace Ninja.Utilities
                 if (result.HasError)
                     return new DNSClientResultIPAddress(result.HasError, result.ErrorMessage, $"{result.NameServer}");
 
-                // Validate result because of https://github.com/is-leeroy-jenkins/NETworkManager/issues/1934
+                // Validate result because of https://github.com/is-leeroy-jenkins/Ninja/issues/1934
                 var record = result.Answers.ARecords().FirstOrDefault();
 
                 return record != null
@@ -118,7 +118,7 @@ namespace Ninja.Utilities
                 if (result.HasError)
                     return new DNSClientResultIPAddress(result.HasError, result.ErrorMessage, $"{result.NameServer}");
 
-                // Validate result because of https://github.com/is-leeroy-jenkins/NETworkManager/issues/1934
+                // Validate result because of https://github.com/is-leeroy-jenkins/Ninja/issues/1934
                 var record = result.Answers.AaaaRecords().FirstOrDefault();
 
                 return record != null
@@ -151,7 +151,7 @@ namespace Ninja.Utilities
                 if (result.HasError)
                     return new DNSClientResultString(result.HasError, result.ErrorMessage, $"{result.NameServer}");
 
-                // Validate result because of https://github.com/is-leeroy-jenkins/NETworkManager/issues/1934
+                // Validate result because of https://github.com/is-leeroy-jenkins/Ninja/issues/1934
                 var record = result.Answers.CnameRecords().FirstOrDefault();
 
                 return record != null
@@ -184,7 +184,7 @@ namespace Ninja.Utilities
                 if (result.HasError)
                     return new DNSClientResultString(result.HasError, result.ErrorMessage, $"{result.NameServer}");
 
-                // Validate result because of https://github.com/is-leeroy-jenkins/NETworkManager/issues/1934
+                // Validate result because of https://github.com/is-leeroy-jenkins/Ninja/issues/1934
                 var record = result.Answers.PtrRecords().FirstOrDefault();
 
                 return record != null

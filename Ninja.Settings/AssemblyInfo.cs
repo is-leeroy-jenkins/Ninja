@@ -22,13 +22,13 @@ namespace Ninja.Settings
 
         /// <summary>
         ///     Location of the current executing assembly.
-        ///     Like "C:\Program Files\NETworkManager\NETworkManager.exe".
+        ///     Like "C:\Program Files\Ninja\Ninja.exe".
         /// </summary>
         public string Location { get; set; }
 
         /// <summary>
         ///     Name of the current executing assembly.
-        ///     Like "NETworkManager".
+        ///     Like "Ninja".
         /// </summary>
         public string Name { get; set; }
     }

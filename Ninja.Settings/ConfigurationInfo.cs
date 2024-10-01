@@ -37,17 +37,17 @@ namespace Ninja.Settings
         public bool IsAdmin { get; set; }
 
         /// <summary>
-        ///     Execution path of the application like "C:\Program Files\NETworkManager".
+        ///     Execution path of the application like "C:\Program Files\Ninja".
         /// </summary>
         public string ExecutionPath { get; }
 
         /// <summary>
-        ///     Full path of the application like "C:\Program Files\NETworkManager\NETworkManager.exe"
+        ///     Full path of the application like "C:\Program Files\Ninja\Ninja.exe"
         /// </summary>
         public string ApplicationFullName { get; }
 
         /// <summary>
-        ///     Application name like "NETworkManager".
+        ///     Application name like "Ninja".
         /// </summary>
         public string ApplicationName { get; }
 

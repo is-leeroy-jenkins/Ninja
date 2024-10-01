@@ -12,14 +12,14 @@ namespace Ninja.Documentation
     using Utilities;
 
     /// <summary>
-    ///     This class is designed to interact with the documentation at https://borntoberoot.net/NETworkManager/.
+    ///     This class is designed to interact with the documentation at https://borntoberoot.net/Ninja/.
     /// </summary>
     public static class DocumentationManager
     {
         /// <summary>
         ///     Base path of the documentation.
         /// </summary>
-        private const string DocumentationBaseUrl = @"https://borntoberoot.net/NETworkManager/";
+        private const string DocumentationBaseUrl = @"https://borntoberoot.net/Ninja/";
 
         /// <summary>
         ///     List with all known documentation entries.

@@ -22,7 +22,7 @@
         <PackageProjectUrl>https://github.com/is-leeroy-jenkins/Ninja</PackageProjectUrl>
         <RepositoryUrl>https://github.com/is-leeroy-jenkins/Ninja</RepositoryUrl>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <PackageIcon>NETworkManager_128x128.png</PackageIcon>
+        <PackageIcon>Ninja_128x128.png</PackageIcon>
         <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
         <Description>A powerful tool for managing networks and troubleshoot network problems!</Description>
     </PropertyGroup>
@@ -62,6 +62,122 @@
     </PropertyGroup>
     <ItemGroup>
         <None Remove="log4net.config" />
+        <None Remove="Resources\Assets\ApplicationImages\access.png" />
+        <None Remove="Resources\Assets\ApplicationImages\DataTable.png" />
+        <None Remove="Resources\Assets\ApplicationImages\Download.png" />
+        <None Remove="Resources\Assets\ApplicationImages\favicon.ico" />
+        <None Remove="Resources\Assets\ApplicationImages\favicon.png" />
+        <None Remove="Resources\Assets\ApplicationImages\IP.png" />
+        <None Remove="Resources\Assets\ApplicationImages\n-icon.ico" />
+        <None Remove="Resources\Assets\ApplicationImages\port.png" />
+        <None Remove="Resources\Assets\ApplicationImages\portlisten.png" />
+        <None Remove="Resources\Assets\ApplicationImages\reload.png" />
+        <None Remove="Resources\Assets\ApplicationImages\route.png" />
+        <None Remove="Resources\Assets\ApplicationImages\servers.png" />
+        <None Remove="Resources\Assets\ApplicationImages\sniffer.png" />
+        <None Remove="Resources\Assets\ApplicationImages\Speed.png" />
+        <None Remove="Resources\Assets\CalculatorImages\Cancel.png" />
+        <None Remove="Resources\Assets\CalculatorImages\Main.png" />
+        <None Remove="Resources\Assets\DialogImages\AddColumnButton.png" />
+        <None Remove="Resources\Assets\DialogImages\AddRecordButton.png" />
+        <None Remove="Resources\Assets\DialogImages\AddTableButton.png" />
+        <None Remove="Resources\Assets\DialogImages\ApplicationError.ico" />
+        <None Remove="Resources\Assets\DialogImages\Calendar.png" />
+        <None Remove="Resources\Assets\DialogImages\ColumnConfiguration.png" />
+        <None Remove="Resources\Assets\DialogImages\CopyRecordButton.png" />
+        <None Remove="Resources\Assets\DialogImages\DataSettings.png" />
+        <None Remove="Resources\Assets\DialogImages\DeleteColumnButton.png" />
+        <None Remove="Resources\Assets\DialogImages\DeleteRecordButton.png" />
+        <None Remove="Resources\Assets\DialogImages\DeleteTableButton.png" />
+        <None Remove="Resources\Assets\DialogImages\EditColumnButton.png" />
+        <None Remove="Resources\Assets\DialogImages\EditRecordButton.png" />
+        <None Remove="Resources\Assets\DialogImages\EditSqlButton.png" />
+        <None Remove="Resources\Assets\DialogImages\Error.ico" />
+        <None Remove="Resources\Assets\DialogImages\Error.png" />
+        <None Remove="Resources\Assets\DialogImages\ErrorDialog.png" />
+        <None Remove="Resources\Assets\DialogImages\Error_16.png" />
+        <None Remove="Resources\Assets\DialogImages\Error_64.png" />
+        <None Remove="Resources\Assets\DialogImages\FileBrowse.png" />
+        <None Remove="Resources\Assets\DialogImages\FolderBrowse.png" />
+        <None Remove="Resources\Assets\DialogImages\InputDialog.png" />
+        <None Remove="Resources\Assets\DialogImages\MenuDialog.png" />
+        <None Remove="Resources\Assets\DialogImages\Message.ico" />
+        <None Remove="Resources\Assets\DialogImages\Message.png" />
+        <None Remove="Resources\Assets\DialogImages\SplashNotification.png" />
+        <None Remove="Resources\Assets\DialogImages\TextDialog.png" />
+        <None Remove="Resources\Assets\ExtensionImages\ACCDB.png" />
+        <None Remove="Resources\Assets\ExtensionImages\CSV.png" />
+        <None Remove="Resources\Assets\ExtensionImages\DB.png" />
+        <None Remove="Resources\Assets\ExtensionImages\DLL.png" />
+        <None Remove="Resources\Assets\ExtensionImages\DOC.png" />
+        <None Remove="Resources\Assets\ExtensionImages\DOCX.png" />
+        <None Remove="Resources\Assets\ExtensionImages\EXE.png" />
+        <None Remove="Resources\Assets\ExtensionImages\HTML.png" />
+        <None Remove="Resources\Assets\ExtensionImages\MDB.png" />
+        <None Remove="Resources\Assets\ExtensionImages\MDF.png" />
+        <None Remove="Resources\Assets\ExtensionImages\PDF.png" />
+        <None Remove="Resources\Assets\ExtensionImages\PNG.png" />
+        <None Remove="Resources\Assets\ExtensionImages\PPTX.png" />
+        <None Remove="Resources\Assets\ExtensionImages\PY.png" />
+        <None Remove="Resources\Assets\ExtensionImages\SDF.png" />
+        <None Remove="Resources\Assets\ExtensionImages\SQL.png" />
+        <None Remove="Resources\Assets\ExtensionImages\TXT.png" />
+        <None Remove="Resources\Assets\ExtensionImages\XLS.png" />
+        <None Remove="Resources\Assets\ExtensionImages\XLSX.png" />
+        <None Remove="Resources\Assets\ExtensionImages\XML.png" />
+        <None Remove="Resources\Assets\FileImages\Add.png" />
+        <None Remove="Resources\Assets\FileImages\Bin.png" />
+        <None Remove="Resources\Assets\FileImages\Copy.png" />
+        <None Remove="Resources\Assets\FileImages\CSV.png" />
+        <None Remove="Resources\Assets\FileImages\Delete.png" />
+        <None Remove="Resources\Assets\FileImages\DLL.png" />
+        <None Remove="Resources\Assets\FileImages\DOC.png" />
+        <None Remove="Resources\Assets\FileImages\Download.png" />
+        <None Remove="Resources\Assets\FileImages\Edit.png" />
+        <None Remove="Resources\Assets\FileImages\EditFile.png" />
+        <None Remove="Resources\Assets\FileImages\EditTable.png" />
+        <None Remove="Resources\Assets\FileImages\Excel.png" />
+        <None Remove="Resources\Assets\FileImages\EXE.png" />
+        <None Remove="Resources\Assets\FileImages\Export.png" />
+        <None Remove="Resources\Assets\FileImages\HTML.png" />
+        <None Remove="Resources\Assets\FileImages\Import.png" />
+        <None Remove="Resources\Assets\FileImages\Lock.png" />
+        <None Remove="Resources\Assets\FileImages\Log.png" />
+        <None Remove="Resources\Assets\FileImages\PDF.png" />
+        <None Remove="Resources\Assets\FileImages\PNG.png" />
+        <None Remove="Resources\Assets\FileImages\Py.png" />
+        <None Remove="Resources\Assets\FileImages\Save.png" />
+        <None Remove="Resources\Assets\FileImages\Search.png" />
+        <None Remove="Resources\Assets\FileImages\SQL.png" />
+        <None Remove="Resources\Assets\FileImages\TXT.png" />
+        <None Remove="Resources\Assets\FileImages\VerifyData1.png" />
+        <None Remove="Resources\Assets\FileImages\Word.png" />
+        <None Remove="Resources\Assets\FileImages\XLS.png" />
+        <None Remove="Resources\Assets\FileImages\XML.png" />
+        <None Remove="Resources\Assets\FileImages\ZIP.png" />
+        <None Remove="Resources\Assets\FolderImages\Browse.png" />
+        <None Remove="Resources\Assets\FolderImages\Delete.png" />
+        <None Remove="Resources\Assets\FolderImages\Directories.png" />
+        <None Remove="Resources\Assets\FolderImages\Directory.png" />
+        <None Remove="Resources\Assets\FolderImages\Download.png" />
+        <None Remove="Resources\Assets\FolderImages\GoogleDrive.png" />
+        <None Remove="Resources\Assets\FolderImages\icons8_add_folder_18px.png" />
+        <None Remove="Resources\Assets\FolderImages\icons8_delete_folder_18px.png" />
+        <None Remove="Resources\Assets\FolderImages\icons8_downloads_folder_18px.png" />
+        <None Remove="Resources\Assets\FolderImages\icons8_edit_folder_18px.png" />
+        <None Remove="Resources\Assets\FolderImages\icons8_save_archive_18px.png" />
+        <None Remove="Resources\Assets\FolderImages\icons8_search_folder_18px.png" />
+        <None Remove="Resources\Assets\FolderImages\Import.png" />
+        <None Remove="Resources\Assets\FolderImages\NetworkShared.png" />
+        <None Remove="Resources\Assets\FolderImages\Open.png" />
+        <None Remove="Resources\Assets\FolderImages\Search.png" />
+        <None Remove="Resources\Assets\FolderImages\Tree.png" />
+        <None Remove="Resources\Assets\FolderImages\ZIP.png" />
+        <None Remove="Resources\Fonts\Anonymous Pro.ttf" />
+        <None Remove="Resources\Fonts\Hack-Regular.ttf" />
+        <None Remove="Resources\Fonts\JetBrainsMono-Regular.ttf" />
+        <None Remove="Resources\Fonts\Monaco.ttf" />
+        <None Remove="Resources\Fonts\Roboto-Regular.ttf" />
         <None Remove="Resources\GitHubImages\abc.png" />
         <None Remove="Resources\GitHubImages\access.png" />
         <None Remove="Resources\GitHubImages\administrative-tools.png" />
@@ -83,6 +199,7 @@
         <None Remove="Resources\GitHubImages\chatgpt.png" />
         <None Remove="Resources\GitHubImages\chemicals.png" />
         <None Remove="Resources\GitHubImages\chrome.png" />
+        <None Remove="Resources\GitHubImages\CloneRepository.PNG" />
         <None Remove="Resources\GitHubImages\cms.png" />
         <None Remove="Resources\GitHubImages\computer.png" />
         <None Remove="Resources\GitHubImages\controlpanel.png" />
@@ -100,6 +217,7 @@
         <None Remove="Resources\GitHubImages\epa.png" />
         <None Remove="Resources\GitHubImages\excel.png" />
         <None Remove="Resources\GitHubImages\features.png" />
+        <None Remove="Resources\GitHubImages\ForkingIt.PNG" />
         <None Remove="Resources\GitHubImages\function.png" />
         <None Remove="Resources\GitHubImages\graph.png" />
         <None Remove="Resources\GitHubImages\graphanalysis.png" />
@@ -108,6 +226,7 @@
         <None Remove="Resources\GitHubImages\help.png" />
         <None Remove="Resources\GitHubImages\icons8-hdd-30.png" />
         <None Remove="Resources\GitHubImages\install.png" />
+        <None Remove="Resources\GitHubImages\InstallVSCode.PNG" />
         <None Remove="Resources\GitHubImages\instruction.png" />
         <None Remove="Resources\GitHubImages\javascript.png" />
         <None Remove="Resources\GitHubImages\layers.png" />
@@ -125,6 +244,7 @@
         <None Remove="Resources\GitHubImages\ProjectTemplate.png" />
         <None Remove="Resources\GitHubImages\properties.png" />
         <None Remove="Resources\GitHubImages\Providers.png" />
+        <None Remove="Resources\GitHubImages\RepoDestination.PNG" />
         <None Remove="Resources\GitHubImages\school.png" />
         <None Remove="Resources\GitHubImages\services.png" />
         <None Remove="Resources\GitHubImages\signature.png" />
@@ -141,16 +261,18 @@
         <None Remove="Resources\GitHubImages\www.png" />
         <None Remove="Resources\GitHubImages\xlsx.png" />
         <None Remove="Resources\Images\Create-ImagesFromSVG.ps1" />
-        <None Remove="Resources\Images\NETworkManager.ico" />
-        <None Remove="Resources\Images\NETworkManager.svg" />
-        <None Remove="Resources\Images\NETworkManager_16x16.png" />
-        <None Remove="Resources\Images\NETworkManager_24x24.png" />
-        <None Remove="Resources\Images\NETworkManager_256x256.png" />
-        <None Remove="Resources\Images\NETworkManager_32x32.png" />
-        <None Remove="Resources\Images\NETworkManager_48x48.png" />
-        <None Remove="Resources\Images\NETworkManager_512x512.png" />
-        <None Remove="Resources\Images\NETworkManager_96x96.png" />
-        <None Remove="Resources\Images\NETworkManager_InnoSetup.bmp" />
+        <None Remove="Resources\Images\Ninja.ico" />
+        <None Remove="Resources\Images\Ninja.svg" />
+        <None Remove="Resources\Images\Ninja_128x128.png" />
+        <None Remove="Resources\Images\Ninja_16x16.png" />
+        <None Remove="Resources\Images\Ninja_24x24.png" />
+        <None Remove="Resources\Images\Ninja_256x256.png" />
+        <None Remove="Resources\Images\Ninja_32x32.png" />
+        <None Remove="Resources\Images\Ninja_48x48.png" />
+        <None Remove="Resources\Images\Ninja_512x512.png" />
+        <None Remove="Resources\Images\Ninja_64x64.png" />
+        <None Remove="Resources\Images\Ninja_96x96.png" />
+        <None Remove="Resources\Images\Ninja_InnoSetup.bmp" />
         <None Remove="SplashScreen.png" />
         <None Include="..\..\LICENSE">
           <Pack>True</Pack>
@@ -248,6 +370,122 @@
         <ProjectReference Include="..\Ninja.Validators\Ninja.Validators.csproj" />
     </ItemGroup>
     <ItemGroup>
+        <Resource Include="Resources\Assets\ApplicationImages\access.png" />
+        <Resource Include="Resources\Assets\ApplicationImages\DataTable.png" />
+        <Resource Include="Resources\Assets\ApplicationImages\Download.png" />
+        <Resource Include="Resources\Assets\ApplicationImages\favicon.ico" />
+        <Resource Include="Resources\Assets\ApplicationImages\favicon.png" />
+        <Resource Include="Resources\Assets\ApplicationImages\IP.png" />
+        <Resource Include="Resources\Assets\ApplicationImages\n-icon.ico" />
+        <Resource Include="Resources\Assets\ApplicationImages\port.png" />
+        <Resource Include="Resources\Assets\ApplicationImages\portlisten.png" />
+        <Resource Include="Resources\Assets\ApplicationImages\reload.png" />
+        <Resource Include="Resources\Assets\ApplicationImages\route.png" />
+        <Resource Include="Resources\Assets\ApplicationImages\servers.png" />
+        <Resource Include="Resources\Assets\ApplicationImages\sniffer.png" />
+        <Resource Include="Resources\Assets\ApplicationImages\Speed.png" />
+        <Resource Include="Resources\Assets\CalculatorImages\Cancel.png" />
+        <Resource Include="Resources\Assets\CalculatorImages\Main.png" />
+        <Resource Include="Resources\Assets\DialogImages\AddColumnButton.png" />
+        <Resource Include="Resources\Assets\DialogImages\AddRecordButton.png" />
+        <Resource Include="Resources\Assets\DialogImages\AddTableButton.png" />
+        <Resource Include="Resources\Assets\DialogImages\ApplicationError.ico" />
+        <Resource Include="Resources\Assets\DialogImages\Calendar.png" />
+        <Resource Include="Resources\Assets\DialogImages\ColumnConfiguration.png" />
+        <Resource Include="Resources\Assets\DialogImages\CopyRecordButton.png" />
+        <Resource Include="Resources\Assets\DialogImages\DataSettings.png" />
+        <Resource Include="Resources\Assets\DialogImages\DeleteColumnButton.png" />
+        <Resource Include="Resources\Assets\DialogImages\DeleteRecordButton.png" />
+        <Resource Include="Resources\Assets\DialogImages\DeleteTableButton.png" />
+        <Resource Include="Resources\Assets\DialogImages\EditColumnButton.png" />
+        <Resource Include="Resources\Assets\DialogImages\EditRecordButton.png" />
+        <Resource Include="Resources\Assets\DialogImages\EditSqlButton.png" />
+        <Resource Include="Resources\Assets\DialogImages\Error.ico" />
+        <Resource Include="Resources\Assets\DialogImages\Error.png" />
+        <Resource Include="Resources\Assets\DialogImages\ErrorDialog.png" />
+        <Resource Include="Resources\Assets\DialogImages\Error_16.png" />
+        <Resource Include="Resources\Assets\DialogImages\Error_64.png" />
+        <Resource Include="Resources\Assets\DialogImages\FileBrowse.png" />
+        <Resource Include="Resources\Assets\DialogImages\FolderBrowse.png" />
+        <Resource Include="Resources\Assets\DialogImages\InputDialog.png" />
+        <Resource Include="Resources\Assets\DialogImages\MenuDialog.png" />
+        <Resource Include="Resources\Assets\DialogImages\Message.ico" />
+        <Resource Include="Resources\Assets\DialogImages\Message.png" />
+        <Resource Include="Resources\Assets\DialogImages\SplashNotification.png" />
+        <Resource Include="Resources\Assets\DialogImages\TextDialog.png" />
+        <Resource Include="Resources\Assets\ExtensionImages\ACCDB.png" />
+        <Resource Include="Resources\Assets\ExtensionImages\CSV.png" />
+        <Resource Include="Resources\Assets\ExtensionImages\DB.png" />
+        <Resource Include="Resources\Assets\ExtensionImages\DLL.png" />
+        <Resource Include="Resources\Assets\ExtensionImages\DOC.png" />
+        <Resource Include="Resources\Assets\ExtensionImages\DOCX.png" />
+        <Resource Include="Resources\Assets\ExtensionImages\EXE.png" />
+        <Resource Include="Resources\Assets\ExtensionImages\HTML.png" />
+        <Resource Include="Resources\Assets\ExtensionImages\MDB.png" />
+        <Resource Include="Resources\Assets\ExtensionImages\MDF.png" />
+        <Resource Include="Resources\Assets\ExtensionImages\PDF.png" />
+        <Resource Include="Resources\Assets\ExtensionImages\PNG.png" />
+        <Resource Include="Resources\Assets\ExtensionImages\PPTX.png" />
+        <Resource Include="Resources\Assets\ExtensionImages\PY.png" />
+        <Resource Include="Resources\Assets\ExtensionImages\SDF.png" />
+        <Resource Include="Resources\Assets\ExtensionImages\SQL.png" />
+        <Resource Include="Resources\Assets\ExtensionImages\TXT.png" />
+        <Resource Include="Resources\Assets\ExtensionImages\XLS.png" />
+        <Resource Include="Resources\Assets\ExtensionImages\XLSX.png" />
+        <Resource Include="Resources\Assets\ExtensionImages\XML.png" />
+        <Resource Include="Resources\Assets\FileImages\Add.png" />
+        <Resource Include="Resources\Assets\FileImages\Bin.png" />
+        <Resource Include="Resources\Assets\FileImages\Copy.png" />
+        <Resource Include="Resources\Assets\FileImages\CSV.png" />
+        <Resource Include="Resources\Assets\FileImages\Delete.png" />
+        <Resource Include="Resources\Assets\FileImages\DLL.png" />
+        <Resource Include="Resources\Assets\FileImages\DOC.png" />
+        <Resource Include="Resources\Assets\FileImages\Download.png" />
+        <Resource Include="Resources\Assets\FileImages\Edit.png" />
+        <Resource Include="Resources\Assets\FileImages\EditFile.png" />
+        <Resource Include="Resources\Assets\FileImages\EditTable.png" />
+        <Resource Include="Resources\Assets\FileImages\Excel.png" />
+        <Resource Include="Resources\Assets\FileImages\EXE.png" />
+        <Resource Include="Resources\Assets\FileImages\Export.png" />
+        <Resource Include="Resources\Assets\FileImages\HTML.png" />
+        <Resource Include="Resources\Assets\FileImages\Import.png" />
+        <Resource Include="Resources\Assets\FileImages\Lock.png" />
+        <Resource Include="Resources\Assets\FileImages\Log.png" />
+        <Resource Include="Resources\Assets\FileImages\PDF.png" />
+        <Resource Include="Resources\Assets\FileImages\PNG.png" />
+        <Resource Include="Resources\Assets\FileImages\Py.png" />
+        <Resource Include="Resources\Assets\FileImages\Save.png" />
+        <Resource Include="Resources\Assets\FileImages\Search.png" />
+        <Resource Include="Resources\Assets\FileImages\SQL.png" />
+        <Resource Include="Resources\Assets\FileImages\TXT.png" />
+        <Resource Include="Resources\Assets\FileImages\VerifyData1.png" />
+        <Resource Include="Resources\Assets\FileImages\Word.png" />
+        <Resource Include="Resources\Assets\FileImages\XLS.png" />
+        <Resource Include="Resources\Assets\FileImages\XML.png" />
+        <Resource Include="Resources\Assets\FileImages\ZIP.png" />
+        <Resource Include="Resources\Assets\FolderImages\Browse.png" />
+        <Resource Include="Resources\Assets\FolderImages\Delete.png" />
+        <Resource Include="Resources\Assets\FolderImages\Directories.png" />
+        <Resource Include="Resources\Assets\FolderImages\Directory.png" />
+        <Resource Include="Resources\Assets\FolderImages\Download.png" />
+        <Resource Include="Resources\Assets\FolderImages\GoogleDrive.png" />
+        <Resource Include="Resources\Assets\FolderImages\icons8_add_folder_18px.png" />
+        <Resource Include="Resources\Assets\FolderImages\icons8_delete_folder_18px.png" />
+        <Resource Include="Resources\Assets\FolderImages\icons8_downloads_folder_18px.png" />
+        <Resource Include="Resources\Assets\FolderImages\icons8_edit_folder_18px.png" />
+        <Resource Include="Resources\Assets\FolderImages\icons8_save_archive_18px.png" />
+        <Resource Include="Resources\Assets\FolderImages\icons8_search_folder_18px.png" />
+        <Resource Include="Resources\Assets\FolderImages\Import.png" />
+        <Resource Include="Resources\Assets\FolderImages\NetworkShared.png" />
+        <Resource Include="Resources\Assets\FolderImages\Open.png" />
+        <Resource Include="Resources\Assets\FolderImages\Search.png" />
+        <Resource Include="Resources\Assets\FolderImages\Tree.png" />
+        <Resource Include="Resources\Assets\FolderImages\ZIP.png" />
+        <Resource Include="Resources\Fonts\Anonymous Pro.ttf" />
+        <Resource Include="Resources\Fonts\Hack-Regular.ttf" />
+        <Resource Include="Resources\Fonts\JetBrainsMono-Regular.ttf" />
+        <Resource Include="Resources\Fonts\Monaco.ttf" />
+        <Resource Include="Resources\Fonts\Roboto-Regular.ttf" />
         <Resource Include="Resources\GitHubImages\abc.png" />
         <Resource Include="Resources\GitHubImages\access.png" />
         <Resource Include="Resources\GitHubImages\administrative-tools.png" />
@@ -269,6 +507,7 @@
         <Resource Include="Resources\GitHubImages\chatgpt.png" />
         <Resource Include="Resources\GitHubImages\chemicals.png" />
         <Resource Include="Resources\GitHubImages\chrome.png" />
+        <Resource Include="Resources\GitHubImages\CloneRepository.PNG" />
         <Resource Include="Resources\GitHubImages\cms.png" />
         <Resource Include="Resources\GitHubImages\computer.png" />
         <Resource Include="Resources\GitHubImages\controlpanel.png" />
@@ -286,6 +525,7 @@
         <Resource Include="Resources\GitHubImages\epa.png" />
         <Resource Include="Resources\GitHubImages\excel.png" />
         <Resource Include="Resources\GitHubImages\features.png" />
+        <Resource Include="Resources\GitHubImages\ForkingIt.PNG" />
         <Resource Include="Resources\GitHubImages\function.png" />
         <Resource Include="Resources\GitHubImages\graph.png" />
         <Resource Include="Resources\GitHubImages\graphanalysis.png" />
@@ -294,6 +534,7 @@
         <Resource Include="Resources\GitHubImages\help.png" />
         <Resource Include="Resources\GitHubImages\icons8-hdd-30.png" />
         <Resource Include="Resources\GitHubImages\install.png" />
+        <Resource Include="Resources\GitHubImages\InstallVSCode.PNG" />
         <Resource Include="Resources\GitHubImages\instruction.png" />
         <Resource Include="Resources\GitHubImages\javascript.png" />
         <Resource Include="Resources\GitHubImages\layers.png" />
@@ -311,6 +552,7 @@
         <Resource Include="Resources\GitHubImages\ProjectTemplate.png" />
         <Resource Include="Resources\GitHubImages\properties.png" />
         <Resource Include="Resources\GitHubImages\Providers.png" />
+        <Resource Include="Resources\GitHubImages\RepoDestination.PNG" />
         <Resource Include="Resources\GitHubImages\school.png" />
         <Resource Include="Resources\GitHubImages\services.png" />
         <Resource Include="Resources\GitHubImages\signature.png" />
@@ -327,18 +569,24 @@
         <Resource Include="Resources\GitHubImages\www.png" />
         <Resource Include="Resources\GitHubImages\xlsx.png" />
         <Resource Include="Resources\Images\Create-ImagesFromSVG.ps1" />
-        <Resource Include="Resources\Images\NETworkManager.ico" />
-        <Resource Include="Resources\Images\NETworkManager.svg" />
-        <Resource Include="Resources\Images\NETworkManager_128x128.png" />
-        <Resource Include="Resources\Images\NETworkManager_16x16.png" />
-        <Resource Include="Resources\Images\NETworkManager_24x24.png" />
-        <Resource Include="Resources\Images\NETworkManager_256x256.png" />
-        <Resource Include="Resources\Images\NETworkManager_32x32.png" />
-        <Resource Include="Resources\Images\NETworkManager_48x48.png" />
-        <Resource Include="Resources\Images\NETworkManager_512x512.png" />
-        <Resource Include="Resources\Images\NETworkManager_64x64.png" />
-        <Resource Include="Resources\Images\NETworkManager_96x96.png" />
-        <Resource Include="Resources\Images\NETworkManager_InnoSetup.bmp" />
+        <Resource Include="Resources\Images\Ninja.ico" />
+        <Resource Include="Resources\Images\Ninja.svg" />
+        <Resource Include="Resources\Images\Ninja_128x128.png">
+          <Pack>True</Pack>
+          <PackagePath>\</PackagePath>
+        </Resource>
+        <Resource Include="Resources\Images\Ninja_16x16.png" />
+        <Resource Include="Resources\Images\Ninja_24x24.png" />
+        <Resource Include="Resources\Images\Ninja_256x256.png" />
+        <Resource Include="Resources\Images\Ninja_32x32.png" />
+        <Resource Include="Resources\Images\Ninja_48x48.png" />
+        <Resource Include="Resources\Images\Ninja_512x512.png" />
+        <Resource Include="Resources\Images\Ninja_64x64.png">
+          <Pack>True</Pack>
+          <PackagePath>\</PackagePath>
+        </Resource>
+        <Resource Include="Resources\Images\Ninja_96x96.png" />
+        <Resource Include="Resources\Images\Ninja_InnoSetup.bmp" />
         <Resource Include="SplashScreen.png" />
     </ItemGroup>
     <ItemGroup>
@@ -353,16 +601,6 @@
             <Generator>PublicResXFileCodeGenerator</Generator>
             <LastGenOutput>Resources.Designer.cs</LastGenOutput>
         </EmbeddedResource>
-    </ItemGroup>
-    <ItemGroup>
-      <None Update="Resources\Images\NETworkManager_128x128.png">
-        <Pack>True</Pack>
-        <PackagePath>\</PackagePath>
-      </None>
-      <None Update="Resources\Images\NETworkManager_64x64.png">
-        <Pack>True</Pack>
-        <PackagePath>\</PackagePath>
-      </None>
     </ItemGroup>
     <ItemGroup>
         <Page Update="Resources\Styles\MenuItemStyles.xaml">

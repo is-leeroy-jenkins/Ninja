@@ -805,7 +805,7 @@ namespace Ninja
 
             AppearanceManager.Load( );
             ConfigureDNS( );
-            Title = $"NETworkManager {AssemblyManager.Current.Version}";
+            Title = $"Ninja {AssemblyManager.Current.Version}";
             SettingsManager.Current.PropertyChanged += SettingsManager_PropertyChanged;
             EventSystem.OnRedirectDataToApplicationEvent +=
                 EventSystem_RedirectDataToApplicationEvent;
