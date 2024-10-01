@@ -4,120 +4,121 @@ using MahApps.Metro.Controls.Dialogs;
 using Ninja.Localization.Resources;
 using Ninja.Settings;
 
-namespace Ninja.ViewModels;
-
-using Settings;
-
-public class SettingsAutostartViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    #region Constructor
+    using Settings;
 
-    public SettingsAutostartViewModel(IDialogCoordinator instance)
+    public class SettingsAutostartViewModel : ViewModelBase
     {
-        _isLoading = true;
+        #region Constructor
 
-        _dialogCoordinator = instance;
-
-        LoadSettings();
-
-        _isLoading = false;
-    }
-
-    #endregion
-
-    #region Load settings
-
-    private void LoadSettings()
-    {
-        StartWithWindows = AutostartManager.IsEnabled;
-        StartMinimizedInTray = SettingsManager.Current.Autostart_StartMinimizedInTray;
-    }
-
-    #endregion
-
-    #region Methods
-
-    private async Task EnableDisableAutostart(bool enable)
-    {
-        ConfiguringAutostart = true;
-
-        try
+        public SettingsAutostartViewModel(IDialogCoordinator instance)
         {
-            if (enable)
-                await AutostartManager.EnableAsync();
-            else
-                await AutostartManager.DisableAsync();
+            _isLoading = true;
 
-            // Make the user happy, let him see a reload animation (and he cannot spam the reload command)
-            await Task.Delay(2000);
-        }
-        catch (Exception ex)
-        {
-            await _dialogCoordinator.ShowMessageAsync(this, Strings.Error, ex.Message,
-                MessageDialogStyle.Affirmative, AppearanceManager.MetroDialog);
+            _dialogCoordinator = instance;
+
+            LoadSettings();
+
+            _isLoading = false;
         }
 
-        ConfiguringAutostart = false;
-    }
+        #endregion
 
-    #endregion
+        #region Load settings
 
-    #region Variables
-
-    private readonly IDialogCoordinator _dialogCoordinator;
-
-    private readonly bool _isLoading;
-
-    private bool _startWithWindows;
-
-    public bool StartWithWindows
-    {
-        get => _startWithWindows;
-        set
+        private void LoadSettings()
         {
-            if (value == _startWithWindows)
-                return;
-
-            if (!_isLoading)
-                EnableDisableAutostart(value).ConfigureAwait(true);
-
-            _startWithWindows = value;
-            OnPropertyChanged();
+            StartWithWindows = AutostartManager.IsEnabled;
+            StartMinimizedInTray = SettingsManager.Current.Autostart_StartMinimizedInTray;
         }
-    }
 
-    private bool _configuringAutostart;
+        #endregion
 
-    public bool ConfiguringAutostart
-    {
-        get => _configuringAutostart;
-        set
+        #region Methods
+
+        private async Task EnableDisableAutostart(bool enable)
         {
-            if (value == _configuringAutostart)
-                return;
+            ConfiguringAutostart = true;
 
-            _configuringAutostart = value;
-            OnPropertyChanged();
+            try
+            {
+                if (enable)
+                    await AutostartManager.EnableAsync();
+                else
+                    await AutostartManager.DisableAsync();
+
+                // Make the user happy, let him see a reload animation (and he cannot spam the reload command)
+                await Task.Delay(2000);
+            }
+            catch (Exception ex)
+            {
+                await _dialogCoordinator.ShowMessageAsync(this, Strings.Error, ex.Message,
+                    MessageDialogStyle.Affirmative, AppearanceManager.MetroDialog);
+            }
+
+            ConfiguringAutostart = false;
         }
-    }
 
-    private bool _startMinimizedInTray;
+        #endregion
 
-    public bool StartMinimizedInTray
-    {
-        get => _startMinimizedInTray;
-        set
+        #region Variables
+
+        private readonly IDialogCoordinator _dialogCoordinator;
+
+        private readonly bool _isLoading;
+
+        private bool _startWithWindows;
+
+        public bool StartWithWindows
         {
-            if (value == _startMinimizedInTray)
-                return;
+            get => _startWithWindows;
+            set
+            {
+                if (value == _startWithWindows)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.Autostart_StartMinimizedInTray = value;
+                if (!_isLoading)
+                    EnableDisableAutostart(value).ConfigureAwait(true);
 
-            _startMinimizedInTray = value;
-            OnPropertyChanged();
+                _startWithWindows = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        private bool _configuringAutostart;
+
+        public bool ConfiguringAutostart
+        {
+            get => _configuringAutostart;
+            set
+            {
+                if (value == _configuringAutostart)
+                    return;
+
+                _configuringAutostart = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _startMinimizedInTray;
+
+        public bool StartMinimizedInTray
+        {
+            get => _startMinimizedInTray;
+            set
+            {
+                if (value == _startMinimizedInTray)
+                    return;
+
+                if (!_isLoading)
+                    SettingsManager.Current.Autostart_StartMinimizedInTray = value;
+
+                _startMinimizedInTray = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+    }
 }

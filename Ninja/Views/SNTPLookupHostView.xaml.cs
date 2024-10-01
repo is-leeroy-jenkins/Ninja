@@ -1,26 +1,27 @@
 ﻿using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class SNTPLookupHostView
+namespace Ninja.Views
 {
-    private readonly SNTPLookupHostViewModel _viewModel = new();
+    using ViewModels;
 
-    public SNTPLookupHostView()
+    public partial class SNTPLookupHostView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly SNTPLookupHostViewModel _viewModel = new();
 
-    public void OnViewHide()
-    {
-        _viewModel.OnViewHide();
-    }
+        public SNTPLookupHostView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
 
-    public void OnViewVisible()
-    {
-        _viewModel.OnViewVisible();
+        public void OnViewHide()
+        {
+            _viewModel.OnViewHide();
+        }
+
+        public void OnViewVisible()
+        {
+            _viewModel.OnViewVisible();
+        }
     }
 }

@@ -1,16 +1,17 @@
 ﻿using System.Windows;
 
-namespace Ninja.Views;
-
-public partial class ProfileFileDialog
+namespace Ninja.Views
 {
-    public ProfileFileDialog()
+    public partial class ProfileFileDialog
     {
-        InitializeComponent();
-    }
+        public ProfileFileDialog()
+        {
+            InitializeComponent();
+        }
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        TextBoxName.Focus();
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextBoxName.Focus();
+        }
     }
 }

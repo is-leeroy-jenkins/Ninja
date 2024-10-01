@@ -1,16 +1,17 @@
 ﻿using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class WakeOnLANSettingsView
+namespace Ninja.Views
 {
-    private readonly WakeOnLANSettingsViewModel _viewModel = new();
+    using ViewModels;
 
-    public WakeOnLANSettingsView()
+    public partial class WakeOnLANSettingsView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
+        private readonly WakeOnLANSettingsViewModel _viewModel = new();
+
+        public WakeOnLANSettingsView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
     }
 }

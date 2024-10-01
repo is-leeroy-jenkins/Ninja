@@ -3,21 +3,22 @@ using System.Globalization;
 using System.Windows.Data;
 using Ninja.Models.Network;
 
-namespace Ninja.Converters;
-
-using Models.Network;
-
-public sealed class WiFiChannelCenterFrequencyToChannelStringConverter : IValueConverter
+namespace Ninja.Converters
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return value is not int channelCenterFrequencyInKilohertz
-            ? "-/-"
-            : $"{WiFi.GetChannelFromChannelFrequency(channelCenterFrequencyInKilohertz)}";
-    }
+    using Models.Network;
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public sealed class WiFiChannelCenterFrequencyToChannelStringConverter : IValueConverter
     {
-        throw new NotImplementedException();
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value is not int channelCenterFrequencyInKilohertz
+                ? "-/-"
+                : $"{WiFi.GetChannelFromChannelFrequency(channelCenterFrequencyInKilohertz)}";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

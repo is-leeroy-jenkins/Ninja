@@ -1,9 +1,10 @@
-﻿namespace Ninja.Models.TigerVNC;
-
-public static class TigerVNC
+﻿namespace Ninja.Models.TigerVNC
 {
-    public static string BuildCommandLine(TigerVNCSessionInfo sessionInfo)
+    public static class TigerVNC
     {
-        return $"{sessionInfo.Host}::{sessionInfo.Port}";
+        public static string BuildCommandLine(TigerVNCSessionInfo sessionInfo)
+        {
+            return $"{sessionInfo.Host}::{sessionInfo.Port}";
+        }
     }
 }

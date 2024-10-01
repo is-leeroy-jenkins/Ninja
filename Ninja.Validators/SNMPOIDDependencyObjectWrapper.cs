@@ -1,19 +1,20 @@
 ﻿using System.Windows;
 using Ninja.Models.Network;
 
-namespace Ninja.Validators;
-
-using Models.Network;
-
-public class SNMPOIDDependencyObjectWrapper : DependencyObject
+namespace Ninja.Validators
 {
-    public static readonly DependencyProperty ModeProperty = DependencyProperty.Register("Mode",
-        typeof(SNMPMode),
-        typeof(SNMPOIDDependencyObjectWrapper));
+    using Models.Network;
 
-    public SNMPMode Mode
+    public class SNMPOIDDependencyObjectWrapper : DependencyObject
     {
-        get => (SNMPMode)GetValue(ModeProperty);
-        set => SetValue(ModeProperty, value);
+        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register("Mode",
+            typeof(SNMPMode),
+            typeof(SNMPOIDDependencyObjectWrapper));
+
+        public SNMPMode Mode
+        {
+            get => (SNMPMode)GetValue(ModeProperty);
+            set => SetValue(ModeProperty, value);
+        }
     }
 }

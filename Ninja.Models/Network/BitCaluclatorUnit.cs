@@ -1,67 +1,68 @@
-﻿namespace Ninja.Models.Network;
-
-/// <summary>
-///     Represents the notation which is used to calculate.
-/// </summary>
-public enum BitCaluclatorUnit
+﻿namespace Ninja.Models.Network
 {
     /// <summary>
-    ///     Unit bits.
+    ///     Represents the notation which is used to calculate.
     /// </summary>
-    Bits,
+    public enum BitCaluclatorUnit
+    {
+        /// <summary>
+        ///     Unit bits.
+        /// </summary>
+        Bits,
 
-    /// <summary>
-    ///     Unit bytes.
-    /// </summary>
-    Bytes,
+        /// <summary>
+        ///     Unit bytes.
+        /// </summary>
+        Bytes,
 
-    /// <summary>
-    ///     Unit kilobits
-    /// </summary>
-    Kilobits,
+        /// <summary>
+        ///     Unit kilobits
+        /// </summary>
+        Kilobits,
 
-    /// <summary>
-    ///     Unit kilobytes
-    /// </summary>
-    Kilobytes,
+        /// <summary>
+        ///     Unit kilobytes
+        /// </summary>
+        Kilobytes,
 
-    /// <summary>
-    ///     Unit megabits
-    /// </summary>
-    Megabits,
+        /// <summary>
+        ///     Unit megabits
+        /// </summary>
+        Megabits,
 
-    /// <summary>
-    ///     Unit megabytes
-    /// </summary>
-    Megabytes,
+        /// <summary>
+        ///     Unit megabytes
+        /// </summary>
+        Megabytes,
 
-    /// <summary>
-    ///     Unit gigabits
-    /// </summary>
-    Gigabits,
+        /// <summary>
+        ///     Unit gigabits
+        /// </summary>
+        Gigabits,
 
-    /// <summary>
-    ///     Unit gigabytes
-    /// </summary>
-    Gigabytes,
+        /// <summary>
+        ///     Unit gigabytes
+        /// </summary>
+        Gigabytes,
 
-    /// <summary>
-    ///     Unit terabits
-    /// </summary>
-    Terabits,
+        /// <summary>
+        ///     Unit terabits
+        /// </summary>
+        Terabits,
 
-    /// <summary>
-    ///     Unit terabytes
-    /// </summary>
-    Terabytes,
+        /// <summary>
+        ///     Unit terabytes
+        /// </summary>
+        Terabytes,
 
-    /// <summary>
-    ///     Unit petabits
-    /// </summary>
-    Petabits,
+        /// <summary>
+        ///     Unit petabits
+        /// </summary>
+        Petabits,
 
-    /// <summary>
-    ///     Unit petabytes
-    /// </summary>
-    Petabytes
+        /// <summary>
+        ///     Unit petabytes
+        /// </summary>
+        Petabytes
+    }
 }

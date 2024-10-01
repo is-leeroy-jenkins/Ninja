@@ -3,134 +3,135 @@ using System.Security;
 using System.Windows.Input;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Utilities;
-
-public class CredentialsSetPasswordViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    /// <summary>
-    ///     Private variable for <see cref="IsPasswordEmpty" />.
-    /// </summary>
-    private bool _isPasswordEmpty = true;
+    using Utilities;
 
-    /// <summary>
-    ///     Private variable for <see cref="IsRepeatedPasswordEqual" />.
-    /// </summary>
-    private bool _isRepeatedPasswordEqual;
-
-    /// <summary>
-    ///     Private variable for <see cref="Password" />.
-    /// </summary>
-    private SecureString _password = new();
-
-    /// <summary>
-    ///     Private variable for <see cref="PasswordRepeat" />.
-    /// </summary>
-    private SecureString _passwordRepeat = new();
-
-    /// <summary>
-    ///     Initialize a new class <see cref="CredentialsSetPasswordViewModel" /> with <see cref="OKCommand" /> and
-    ///     <see cref="CancelCommand" />.
-    /// </summary>
-    /// <param name="okCommand"><see cref="OKCommand" /> which is executed on OK click.</param>
-    /// <param name="cancelHandler"><see cref="CancelCommand" /> which is executed on cancel click.</param>
-    public CredentialsSetPasswordViewModel(Action<CredentialsSetPasswordViewModel> okCommand,
-        Action<CredentialsSetPasswordViewModel> cancelHandler)
+    public class CredentialsSetPasswordViewModel : ViewModelBase
     {
-        OKCommand = new RelayCommand(_ => okCommand(this));
-        CancelCommand = new RelayCommand(_ => cancelHandler(this));
-    }
+        /// <summary>
+        ///     Private variable for <see cref="IsPasswordEmpty" />.
+        /// </summary>
+        private bool _isPasswordEmpty = true;
 
-    /// <summary>
-    ///     Command which is called when the OK button is clicked.
-    /// </summary>
-    public ICommand OKCommand { get; }
+        /// <summary>
+        ///     Private variable for <see cref="IsRepeatedPasswordEqual" />.
+        /// </summary>
+        private bool _isRepeatedPasswordEqual;
 
-    /// <summary>
-    ///     Command which is called when the cancel button is clicked.
-    /// </summary>
-    public ICommand CancelCommand { get; }
+        /// <summary>
+        ///     Private variable for <see cref="Password" />.
+        /// </summary>
+        private SecureString _password = new();
 
-    /// <summary>
-    ///     Password as <see cref="SecureString" />.
-    /// </summary>
-    public SecureString Password
-    {
-        get => _password;
-        set
+        /// <summary>
+        ///     Private variable for <see cref="PasswordRepeat" />.
+        /// </summary>
+        private SecureString _passwordRepeat = new();
+
+        /// <summary>
+        ///     Initialize a new class <see cref="CredentialsSetPasswordViewModel" /> with <see cref="OKCommand" /> and
+        ///     <see cref="CancelCommand" />.
+        /// </summary>
+        /// <param name="okCommand"><see cref="OKCommand" /> which is executed on OK click.</param>
+        /// <param name="cancelHandler"><see cref="CancelCommand" /> which is executed on cancel click.</param>
+        public CredentialsSetPasswordViewModel(Action<CredentialsSetPasswordViewModel> okCommand,
+            Action<CredentialsSetPasswordViewModel> cancelHandler)
         {
-            if (value == _password)
-                return;
-
-            _password = value;
-
-            ValidatePassword();
-
-            OnPropertyChanged();
+            OKCommand = new RelayCommand(_ => okCommand(this));
+            CancelCommand = new RelayCommand(_ => cancelHandler(this));
         }
-    }
 
-    /// <summary>
-    ///     Repeated password as <see cref="SecureString" />.
-    /// </summary>
-    public SecureString PasswordRepeat
-    {
-        get => _passwordRepeat;
-        set
+        /// <summary>
+        ///     Command which is called when the OK button is clicked.
+        /// </summary>
+        public ICommand OKCommand { get; }
+
+        /// <summary>
+        ///     Command which is called when the cancel button is clicked.
+        /// </summary>
+        public ICommand CancelCommand { get; }
+
+        /// <summary>
+        ///     Password as <see cref="SecureString" />.
+        /// </summary>
+        public SecureString Password
         {
-            if (value == _passwordRepeat)
-                return;
+            get => _password;
+            set
+            {
+                if (value == _password)
+                    return;
 
-            _passwordRepeat = value;
+                _password = value;
 
-            ValidatePassword();
+                ValidatePassword();
 
-            OnPropertyChanged();
+                OnPropertyChanged();
+            }
         }
-    }
 
-    /// <summary>
-    ///     Indicate if one of the password fields are empty.
-    /// </summary>
-    public bool IsPasswordEmpty
-    {
-        get => _isPasswordEmpty;
-        set
+        /// <summary>
+        ///     Repeated password as <see cref="SecureString" />.
+        /// </summary>
+        public SecureString PasswordRepeat
         {
-            if (value == _isPasswordEmpty)
-                return;
+            get => _passwordRepeat;
+            set
+            {
+                if (value == _passwordRepeat)
+                    return;
 
-            _isPasswordEmpty = value;
-            OnPropertyChanged();
+                _passwordRepeat = value;
+
+                ValidatePassword();
+
+                OnPropertyChanged();
+            }
         }
-    }
 
-    /// <summary>
-    ///     Indicate if the <see cref="PasswordRepeat" /> is equal to the <see cref="Password" />.
-    /// </summary>
-    public bool IsRepeatedPasswordEqual
-    {
-        get => _isRepeatedPasswordEqual;
-        set
+        /// <summary>
+        ///     Indicate if one of the password fields are empty.
+        /// </summary>
+        public bool IsPasswordEmpty
         {
-            if (value == _isRepeatedPasswordEqual)
-                return;
+            get => _isPasswordEmpty;
+            set
+            {
+                if (value == _isPasswordEmpty)
+                    return;
 
-            _isRepeatedPasswordEqual = value;
-            OnPropertyChanged();
+                _isPasswordEmpty = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    /// <summary>
-    ///     Check if the passwords are valid and equal.
-    /// </summary>
-    private void ValidatePassword()
-    {
-        IsPasswordEmpty = Password == null || Password.Length == 0 || PasswordRepeat == null ||
-                          PasswordRepeat.Length == 0;
+        /// <summary>
+        ///     Indicate if the <see cref="PasswordRepeat" /> is equal to the <see cref="Password" />.
+        /// </summary>
+        public bool IsRepeatedPasswordEqual
+        {
+            get => _isRepeatedPasswordEqual;
+            set
+            {
+                if (value == _isRepeatedPasswordEqual)
+                    return;
 
-        IsRepeatedPasswordEqual = !IsPasswordEmpty && SecureStringHelper.ConvertToString(Password)
-            .Equals(SecureStringHelper.ConvertToString(PasswordRepeat));
+                _isRepeatedPasswordEqual = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        ///     Check if the passwords are valid and equal.
+        /// </summary>
+        private void ValidatePassword()
+        {
+            IsPasswordEmpty = Password == null || Password.Length == 0 || PasswordRepeat == null ||
+                PasswordRepeat.Length == 0;
+
+            IsRepeatedPasswordEqual = !IsPasswordEmpty && SecureStringHelper.ConvertToString(Password)
+                .Equals(SecureStringHelper.ConvertToString(PasswordRepeat));
+        }
     }
 }

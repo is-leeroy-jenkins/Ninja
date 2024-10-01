@@ -1,16 +1,17 @@
 ﻿using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class SettingsWindowView
+namespace Ninja.Views
 {
-    private readonly SettingsWindowViewModel _viewModel = new();
+    using ViewModels;
 
-    public SettingsWindowView()
+    public partial class SettingsWindowView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
+        private readonly SettingsWindowViewModel _viewModel = new();
+
+        public SettingsWindowView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
     }
 }

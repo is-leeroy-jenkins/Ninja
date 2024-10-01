@@ -1,16 +1,17 @@
 ﻿using System.Windows;
 
-namespace Ninja.Views;
-
-public partial class PortProfileDialog
+namespace Ninja.Views
 {
-    public PortProfileDialog()
+    public partial class PortProfileDialog
     {
-        InitializeComponent();
-    }
+        public PortProfileDialog()
+        {
+            InitializeComponent();
+        }
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        TextBoxName.Focus();
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextBoxName.Focus();
+        }
     }
 }

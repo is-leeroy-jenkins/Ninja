@@ -4,46 +4,47 @@ using System.Windows.Input;
 
 // Source: https://msdn.microsoft.com/en-us/magazine/dd419663.aspx?f=255&MSPPError=-2147217396#id0090030
 
-namespace Ninja.Utilities;
-
-public class RelayCommand : ICommand
+namespace Ninja.Utilities
 {
-    #region Constructors
-
-    public RelayCommand(Action<object> execute, Predicate<object> canExecute = null)
+    public class RelayCommand : ICommand
     {
-        _execute = execute ?? throw new ArgumentNullException(nameof(execute));
-        _canExecute = canExecute;
+        #region Constructors
+
+        public RelayCommand(Action<object> execute, Predicate<object> canExecute = null)
+        {
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute;
+        }
+
+        #endregion
+
+        #region Fields
+
+        private readonly Action<object> _execute;
+
+        private readonly Predicate<object> _canExecute;
+
+        #endregion
+
+        #region ICommand Members
+
+        [DebuggerStepThrough]
+        public bool CanExecute(object parameter)
+        {
+            return _canExecute?.Invoke(parameter) ?? true;
+        }
+
+        public event EventHandler CanExecuteChanged
+        {
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
+        }
+
+        public void Execute(object parameter)
+        {
+            _execute(parameter);
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region Fields
-
-    private readonly Action<object> _execute;
-
-    private readonly Predicate<object> _canExecute;
-
-    #endregion
-
-    #region ICommand Members
-
-    [DebuggerStepThrough]
-    public bool CanExecute(object parameter)
-    {
-        return _canExecute?.Invoke(parameter) ?? true;
-    }
-
-    public event EventHandler CanExecuteChanged
-    {
-        add => CommandManager.RequerySuggested += value;
-        remove => CommandManager.RequerySuggested -= value;
-    }
-
-    public void Execute(object parameter)
-    {
-        _execute(parameter);
-    }
-
-    #endregion
 }

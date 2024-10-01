@@ -6,168 +6,169 @@ using System.Windows.Input;
 using Ninja.Settings;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Settings;
-using Utilities;
-
-public class RemoteDesktopConnectViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    private bool _connectAs;
+    using Settings;
+    using Utilities;
 
-    private string _domain;
-
-    private string _host;
-
-    private bool _isPasswordEmpty = true;
-
-    private string _name;
-
-    private SecureString _password = new();
-
-    private bool _useCredentials;
-
-    private string _username;
-
-    public RemoteDesktopConnectViewModel(Action<RemoteDesktopConnectViewModel> connectCommand,
-        Action<RemoteDesktopConnectViewModel> cancelHandler, (string Name, string Host)? connectAsOptions = null)
+    public class RemoteDesktopConnectViewModel : ViewModelBase
     {
-        ConnectCommand = new RelayCommand(_ => connectCommand(this));
-        CancelCommand = new RelayCommand(_ => cancelHandler(this));
+        private bool _connectAs;
 
-        if (connectAsOptions == null)
+        private string _domain;
+
+        private string _host;
+
+        private bool _isPasswordEmpty = true;
+
+        private string _name;
+
+        private SecureString _password = new();
+
+        private bool _useCredentials;
+
+        private string _username;
+
+        public RemoteDesktopConnectViewModel(Action<RemoteDesktopConnectViewModel> connectCommand,
+            Action<RemoteDesktopConnectViewModel> cancelHandler, (string Name, string Host)? connectAsOptions = null)
         {
-            HostHistoryView = CollectionViewSource.GetDefaultView(SettingsManager.Current.RemoteDesktop_HostHistory);
+            ConnectCommand = new RelayCommand(_ => connectCommand(this));
+            CancelCommand = new RelayCommand(_ => cancelHandler(this));
+
+            if (connectAsOptions == null)
+            {
+                HostHistoryView = CollectionViewSource.GetDefaultView(SettingsManager.Current.RemoteDesktop_HostHistory);
+            }
+            else
+            {
+                ConnectAs = true;
+
+                UseCredentials = true;
+
+                Name = connectAsOptions.Value.Name;
+                Host = connectAsOptions.Value.Host;
+            }
         }
-        else
+
+        public ICommand ConnectCommand { get; }
+
+        public ICommand CancelCommand { get; }
+
+        public bool ConnectAs
         {
-            ConnectAs = true;
+            get => _connectAs;
+            set
+            {
+                if (value == _connectAs)
+                    return;
 
-            UseCredentials = true;
-
-            Name = connectAsOptions.Value.Name;
-            Host = connectAsOptions.Value.Host;
+                _connectAs = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public ICommand ConnectCommand { get; }
-
-    public ICommand CancelCommand { get; }
-
-    public bool ConnectAs
-    {
-        get => _connectAs;
-        set
+        public string Name
         {
-            if (value == _connectAs)
-                return;
+            get => _name;
+            set
+            {
+                if (value == _name)
+                    return;
 
-            _connectAs = value;
-            OnPropertyChanged();
+                _name = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public string Name
-    {
-        get => _name;
-        set
+        public string Host
         {
-            if (value == _name)
-                return;
+            get => _host;
+            set
+            {
+                if (value == _host)
+                    return;
 
-            _name = value;
-            OnPropertyChanged();
+                _host = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public string Host
-    {
-        get => _host;
-        set
+        public ICollectionView HostHistoryView { get; }
+
+        public bool UseCredentials
         {
-            if (value == _host)
-                return;
+            get => _useCredentials;
+            set
+            {
+                if (value == _useCredentials)
+                    return;
 
-            _host = value;
-            OnPropertyChanged();
+                _useCredentials = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public ICollectionView HostHistoryView { get; }
-
-    public bool UseCredentials
-    {
-        get => _useCredentials;
-        set
+        public string Username
         {
-            if (value == _useCredentials)
-                return;
+            get => _username;
+            set
+            {
+                if (value == _username)
+                    return;
 
-            _useCredentials = value;
-            OnPropertyChanged();
+                _username = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public string Username
-    {
-        get => _username;
-        set
+        public string Domain
         {
-            if (value == _username)
-                return;
+            get => _domain;
+            set
+            {
+                if (value == _domain)
+                    return;
 
-            _username = value;
-            OnPropertyChanged();
+                _domain = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public string Domain
-    {
-        get => _domain;
-        set
+        public SecureString Password
         {
-            if (value == _domain)
-                return;
+            get => _password;
+            set
+            {
+                if (value == _password)
+                    return;
 
-            _domain = value;
-            OnPropertyChanged();
+                _password = value;
+
+                ValidatePassword();
+
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public SecureString Password
-    {
-        get => _password;
-        set
+        public bool IsPasswordEmpty
         {
-            if (value == _password)
-                return;
+            get => _isPasswordEmpty;
+            set
+            {
+                if (value == _isPasswordEmpty)
+                    return;
 
-            _password = value;
-
-            ValidatePassword();
-
-            OnPropertyChanged();
+                _isPasswordEmpty = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public bool IsPasswordEmpty
-    {
-        get => _isPasswordEmpty;
-        set
+        /// <summary>
+        ///     Check if the passwords are valid.
+        /// </summary>
+        private void ValidatePassword()
         {
-            if (value == _isPasswordEmpty)
-                return;
-
-            _isPasswordEmpty = value;
-            OnPropertyChanged();
+            IsPasswordEmpty = Password == null || Password.Length == 0;
         }
-    }
-
-    /// <summary>
-    ///     Check if the passwords are valid.
-    /// </summary>
-    private void ValidatePassword()
-    {
-        IsPasswordEmpty = Password == null || Password.Length == 0;
     }
 }

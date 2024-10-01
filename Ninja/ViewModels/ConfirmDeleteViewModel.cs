@@ -2,37 +2,38 @@
 using System.Windows.Input;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Utilities;
-
-public class ConfirmDeleteViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    private readonly string _message;
+    using Utilities;
 
-    public ConfirmDeleteViewModel(Action<ConfirmDeleteViewModel> deleteCommand,
-        Action<ConfirmDeleteViewModel> cancelHandler, string message)
+    public class ConfirmDeleteViewModel : ViewModelBase
     {
-        DeleteCommand = new RelayCommand(_ => deleteCommand(this));
-        CancelCommand = new RelayCommand(_ => cancelHandler(this));
+        private readonly string _message;
 
-        Message = message;
-    }
-
-    public ICommand DeleteCommand { get; }
-
-    public ICommand CancelCommand { get; }
-
-    public string Message
-    {
-        get => _message;
-        private init
+        public ConfirmDeleteViewModel(Action<ConfirmDeleteViewModel> deleteCommand,
+            Action<ConfirmDeleteViewModel> cancelHandler, string message)
         {
-            if (value == _message)
-                return;
+            DeleteCommand = new RelayCommand(_ => deleteCommand(this));
+            CancelCommand = new RelayCommand(_ => cancelHandler(this));
 
-            _message = value;
-            OnPropertyChanged();
+            Message = message;
+        }
+
+        public ICommand DeleteCommand { get; }
+
+        public ICommand CancelCommand { get; }
+
+        public string Message
+        {
+            get => _message;
+            private init
+            {
+                if (value == _message)
+                    return;
+
+                _message = value;
+                OnPropertyChanged();
+            }
         }
     }
 }

@@ -3,128 +3,129 @@ using System.Windows.Input;
 using Ninja.Models.AWS;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Models.AWS;
-using Utilities;
-
-public class AWSProfileViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    private readonly AWSProfileInfo _info;
-    private readonly bool _isLoading;
+    using Models.AWS;
+    using Utilities;
 
-    private bool _infoChanged;
-
-    private bool _isEdited;
-
-    private bool _isEnabled;
-
-    private string _profile;
-
-    private string _region;
-
-    public AWSProfileViewModel(Action<AWSProfileViewModel> saveCommand, Action<AWSProfileViewModel> cancelHandler,
-        bool isEdited = false, AWSProfileInfo info = null)
+    public class AWSProfileViewModel : ViewModelBase
     {
-        _isLoading = true;
+        private readonly AWSProfileInfo _info;
+        private readonly bool _isLoading;
 
-        SaveCommand = new RelayCommand(_ => saveCommand(this));
-        CancelCommand = new RelayCommand(_ => cancelHandler(this));
+        private bool _infoChanged;
 
-        IsEdited = isEdited;
+        private bool _isEdited;
 
-        _info = info ?? new AWSProfileInfo();
+        private bool _isEnabled;
 
-        IsEnabled = _info.IsEnabled;
-        Profile = _info.Profile;
-        Region = _info.Region;
+        private string _profile;
 
-        _isLoading = false;
-    }
+        private string _region;
 
-    public ICommand SaveCommand { get; }
-
-    public ICommand CancelCommand { get; }
-
-    public bool IsEnabled
-    {
-        get => _isEnabled;
-        set
+        public AWSProfileViewModel(Action<AWSProfileViewModel> saveCommand, Action<AWSProfileViewModel> cancelHandler,
+            bool isEdited = false, AWSProfileInfo info = null)
         {
-            if (_isEnabled == value)
-                return;
+            _isLoading = true;
 
-            _isEnabled = value;
+            SaveCommand = new RelayCommand(_ => saveCommand(this));
+            CancelCommand = new RelayCommand(_ => cancelHandler(this));
 
-            if (!_isLoading)
-                Validate();
+            IsEdited = isEdited;
 
-            OnPropertyChanged();
+            _info = info ?? new AWSProfileInfo();
+
+            IsEnabled = _info.IsEnabled;
+            Profile = _info.Profile;
+            Region = _info.Region;
+
+            _isLoading = false;
         }
-    }
 
-    public string Profile
-    {
-        get => _profile;
-        set
+        public ICommand SaveCommand { get; }
+
+        public ICommand CancelCommand { get; }
+
+        public bool IsEnabled
         {
-            if (_profile == value)
-                return;
+            get => _isEnabled;
+            set
+            {
+                if (_isEnabled == value)
+                    return;
 
-            _profile = value;
+                _isEnabled = value;
 
-            if (!_isLoading)
-                Validate();
+                if (!_isLoading)
+                    Validate();
 
-            OnPropertyChanged();
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public string Region
-    {
-        get => _region;
-        set
+        public string Profile
         {
-            if (_region == value)
-                return;
+            get => _profile;
+            set
+            {
+                if (_profile == value)
+                    return;
 
-            _region = value;
+                _profile = value;
 
-            if (!_isLoading)
-                Validate();
+                if (!_isLoading)
+                    Validate();
 
-            OnPropertyChanged();
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public bool InfoChanged
-    {
-        get => _infoChanged;
-        set
+        public string Region
         {
-            if (value == _infoChanged)
-                return;
+            get => _region;
+            set
+            {
+                if (_region == value)
+                    return;
 
-            _infoChanged = value;
-            OnPropertyChanged();
+                _region = value;
+
+                if (!_isLoading)
+                    Validate();
+
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public bool IsEdited
-    {
-        get => _isEdited;
-        set
+        public bool InfoChanged
         {
-            if (value == _isEdited)
-                return;
+            get => _infoChanged;
+            set
+            {
+                if (value == _infoChanged)
+                    return;
 
-            _isEdited = value;
-            OnPropertyChanged();
+                _infoChanged = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private void Validate()
-    {
-        InfoChanged = _info.IsEnabled != IsEnabled || _info.Profile != Profile || _info.Region != Region;
+        public bool IsEdited
+        {
+            get => _isEdited;
+            set
+            {
+                if (value == _isEdited)
+                    return;
+
+                _isEdited = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private void Validate()
+        {
+            InfoChanged = _info.IsEnabled != IsEnabled || _info.Profile != Profile || _info.Region != Region;
+        }
     }
 }

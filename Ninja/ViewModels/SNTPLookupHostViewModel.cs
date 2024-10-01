@@ -8,112 +8,113 @@ using Ninja.Models;
 using Ninja.Utilities;
 using Ninja.Views;
 
-namespace Ninja.ViewModels;
-
-using Controls;
-using Models;
-using Utilities;
-using Views;
-
-public class SNTPLookupHostViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    #region Variables
+    using Controls;
+    using Models;
+    using Utilities;
+    using Views;
 
-    public IInterTabClient InterTabClient { get; }
-
-    private string _interTabPartition;
-
-    public string InterTabPartition
+    public class SNTPLookupHostViewModel : ViewModelBase
     {
-        get => _interTabPartition;
-        set
+        #region Variables
+
+        public IInterTabClient InterTabClient { get; }
+
+        private string _interTabPartition;
+
+        public string InterTabPartition
         {
-            if (value == _interTabPartition)
-                return;
+            get => _interTabPartition;
+            set
+            {
+                if (value == _interTabPartition)
+                    return;
 
-            _interTabPartition = value;
-            OnPropertyChanged();
+                _interTabPartition = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public ObservableCollection<DragablzTabItem> TabItems { get; }
+        public ObservableCollection<DragablzTabItem> TabItems { get; }
 
-    private int _selectedTabIndex;
+        private int _selectedTabIndex;
 
-    public int SelectedTabIndex
-    {
-        get => _selectedTabIndex;
-        set
+        public int SelectedTabIndex
         {
-            if (value == _selectedTabIndex)
-                return;
+            get => _selectedTabIndex;
+            set
+            {
+                if (value == _selectedTabIndex)
+                    return;
 
-            _selectedTabIndex = value;
-            OnPropertyChanged();
+                _selectedTabIndex = value;
+                OnPropertyChanged();
+            }
         }
+
+        #endregion
+
+        #region Constructor, load settings
+
+        public SNTPLookupHostViewModel()
+        {
+            InterTabClient = new DragablzInterTabClient(ApplicationName.SNTPLookup);
+            InterTabPartition = ApplicationName.SNTPLookup.ToString();
+
+            var tabId = Guid.NewGuid();
+
+            TabItems =
+            [
+                new DragablzTabItem(Strings.NewTab, new SNTPLookupView(tabId), tabId)
+            ];
+
+            LoadSettings();
+        }
+
+        private void LoadSettings()
+        {
+        }
+
+        #endregion
+
+        #region ICommand & Actions
+
+        public ICommand AddTabCommand => new RelayCommand(_ => AddTabAction());
+
+        private void AddTabAction()
+        {
+            AddTab();
+        }
+
+        public ItemActionCallback CloseItemCommand => CloseItemAction;
+
+        private static void CloseItemAction(ItemActionCallbackArgs<TabablzControl> args)
+        {
+            ((args.DragablzItem.Content as DragablzTabItem)?.View as DNSLookupView)?.CloseTab();
+        }
+
+        #endregion
+
+        #region Methods
+
+        private void AddTab()
+        {
+            var tabId = Guid.NewGuid();
+
+            TabItems.Add(new DragablzTabItem(Strings.NewTab, new SNTPLookupView(tabId), tabId));
+
+            SelectedTabIndex = TabItems.Count - 1;
+        }
+
+        public void OnViewVisible()
+        {
+        }
+
+        public void OnViewHide()
+        {
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region Constructor, load settings
-
-    public SNTPLookupHostViewModel()
-    {
-        InterTabClient = new DragablzInterTabClient(ApplicationName.SNTPLookup);
-        InterTabPartition = ApplicationName.SNTPLookup.ToString();
-
-        var tabId = Guid.NewGuid();
-
-        TabItems =
-        [
-            new DragablzTabItem(Strings.NewTab, new SNTPLookupView(tabId), tabId)
-        ];
-
-        LoadSettings();
-    }
-
-    private void LoadSettings()
-    {
-    }
-
-    #endregion
-
-    #region ICommand & Actions
-
-    public ICommand AddTabCommand => new RelayCommand(_ => AddTabAction());
-
-    private void AddTabAction()
-    {
-        AddTab();
-    }
-
-    public ItemActionCallback CloseItemCommand => CloseItemAction;
-
-    private static void CloseItemAction(ItemActionCallbackArgs<TabablzControl> args)
-    {
-        ((args.DragablzItem.Content as DragablzTabItem)?.View as DNSLookupView)?.CloseTab();
-    }
-
-    #endregion
-
-    #region Methods
-
-    private void AddTab()
-    {
-        var tabId = Guid.NewGuid();
-
-        TabItems.Add(new DragablzTabItem(Strings.NewTab, new SNTPLookupView(tabId), tabId));
-
-        SelectedTabIndex = TabItems.Count - 1;
-    }
-
-    public void OnViewVisible()
-    {
-    }
-
-    public void OnViewHide()
-    {
-    }
-
-    #endregion
 }

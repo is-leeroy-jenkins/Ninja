@@ -3,20 +3,21 @@ using System.Globalization;
 using System.Windows.Data;
 using Ninja.Localization.Resources;
 
-namespace Ninja.Converters;
-
-public sealed class BooleanToStringConverter : IValueConverter
+namespace Ninja.Converters
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public sealed class BooleanToStringConverter : IValueConverter
     {
-        if (value != null && (bool)value)
-            return Strings.Yes;
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value != null && (bool)value)
+                return Strings.Yes;
 
-        return Strings.No;
-    }
+            return Strings.No;
+        }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

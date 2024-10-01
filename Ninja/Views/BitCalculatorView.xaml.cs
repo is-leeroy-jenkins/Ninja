@@ -1,27 +1,28 @@
 ﻿using MahApps.Metro.Controls.Dialogs;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class BitCalculatorView
+namespace Ninja.Views
 {
-    private readonly BitCalculatorViewModel _viewModel = new(DialogCoordinator.Instance);
+    using ViewModels;
 
-    public BitCalculatorView()
+    public partial class BitCalculatorView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly BitCalculatorViewModel _viewModel = new(DialogCoordinator.Instance);
 
-    public void OnViewHide()
-    {
-        _viewModel.OnViewHide();
-    }
+        public BitCalculatorView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
 
-    public void OnViewVisible()
-    {
-        _viewModel.OnViewVisible();
+        public void OnViewHide()
+        {
+            _viewModel.OnViewHide();
+        }
+
+        public void OnViewVisible()
+        {
+            _viewModel.OnViewVisible();
+        }
     }
 }

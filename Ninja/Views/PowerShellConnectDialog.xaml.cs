@@ -1,16 +1,17 @@
 ﻿using System.Windows;
 
-namespace Ninja.Views;
-
-public partial class PowerShellConnectDialog
+namespace Ninja.Views
 {
-    public PowerShellConnectDialog()
+    public partial class PowerShellConnectDialog
     {
-        InitializeComponent();
-    }
+        public PowerShellConnectDialog()
+        {
+            InitializeComponent();
+        }
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        ComboBoxHost.Focus();
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            ComboBoxHost.Focus();
+        }
     }
 }

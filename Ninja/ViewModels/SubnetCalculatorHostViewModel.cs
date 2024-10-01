@@ -1,12 +1,13 @@
-﻿namespace Ninja.ViewModels;
-
-public class SubnetCalculatorHostViewModel : ViewModelBase
+﻿namespace Ninja.ViewModels
 {
-    public void OnViewVisible()
+    public class SubnetCalculatorHostViewModel : ViewModelBase
     {
-    }
+        public void OnViewVisible()
+        {
+        }
 
-    public void OnViewHide()
-    {
+        public void OnViewHide()
+        {
+        }
     }
 }

@@ -1,9 +1,10 @@
-﻿namespace Ninja.Views;
-
-public partial class ConfirmDeleteDialog
+﻿namespace Ninja.Views
 {
-    public ConfirmDeleteDialog()
+    public partial class ConfirmDeleteDialog
     {
-        InitializeComponent();
+        public ConfirmDeleteDialog()
+        {
+            InitializeComponent();
+        }
     }
 }

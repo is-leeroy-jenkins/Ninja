@@ -1,18 +1,19 @@
 ﻿using Ninja.Models.WebConsole;
 
-namespace Ninja.Profiles.Application;
-
-using Models.WebConsole;
-
-public class WebConsole
+namespace Ninja.Profiles.Application
 {
-    public static WebConsoleSessionInfo CreateSessionInfo(ProfileInfo profileInfo)
-    {
-        var info = new WebConsoleSessionInfo
-        {
-            Url = profileInfo.WebConsole_Url
-        };
+    using Models.WebConsole;
 
-        return info;
+    public class WebConsole
+    {
+        public static WebConsoleSessionInfo CreateSessionInfo(ProfileInfo profileInfo)
+        {
+            var info = new WebConsoleSessionInfo
+            {
+                Url = profileInfo.WebConsole_Url
+            };
+
+            return info;
+        }
     }
 }

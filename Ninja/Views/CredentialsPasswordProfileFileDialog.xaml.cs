@@ -1,16 +1,17 @@
 ﻿using System.Windows;
 
-namespace Ninja.Views;
-
-public partial class CredentialsPasswordProfileFileDialog
+namespace Ninja.Views
 {
-    public CredentialsPasswordProfileFileDialog()
+    public partial class CredentialsPasswordProfileFileDialog
     {
-        InitializeComponent();
-    }
+        public CredentialsPasswordProfileFileDialog()
+        {
+            InitializeComponent();
+        }
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        PasswordBoxPassword.Focus();
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            PasswordBoxPassword.Focus();
+        }
     }
 }

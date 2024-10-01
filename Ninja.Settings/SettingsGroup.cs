@@ -1,7 +1,8 @@
-﻿namespace Ninja.Settings;
-
-public enum SettingsGroup
+﻿namespace Ninja.Settings
 {
-    General,
-    Application
+    public enum SettingsGroup
+    {
+        General,
+        Application
+    }
 }

@@ -1,22 +1,23 @@
 ﻿using System.Windows;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class IPApiDNSResolverWidgetView
+namespace Ninja.Views
 {
-    private readonly IPApiDNSResolverWidgetViewModel _viewModel = new();
+    using ViewModels;
 
-    public IPApiDNSResolverWidgetView()
+    public partial class IPApiDNSResolverWidgetView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly IPApiDNSResolverWidgetViewModel _viewModel = new();
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        _viewModel.Check();
+        public IPApiDNSResolverWidgetView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            _viewModel.Check();
+        }
     }
 }

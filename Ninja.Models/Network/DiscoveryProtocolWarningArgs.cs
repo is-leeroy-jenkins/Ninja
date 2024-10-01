@@ -1,23 +1,24 @@
 ﻿using System;
 
-namespace Ninja.Models.Network;
-
-/// <summary>
-///     Contains the warning message of a <see cref="DiscoveryProtocol" /> warning.
-/// </summary>
-public class DiscoveryProtocolWarningArgs : EventArgs
+namespace Ninja.Models.Network
 {
     /// <summary>
-    ///     Creates a new instance of <see cref="DiscoveryProtocolWarningArgs" /> with the given warning message.
+    ///     Contains the warning message of a <see cref="DiscoveryProtocol" /> warning.
     /// </summary>
-    /// <param name="message">Warning message of the <see cref="DiscoveryProtocol" /> warning.</param>
-    public DiscoveryProtocolWarningArgs(string message)
+    public class DiscoveryProtocolWarningArgs : EventArgs
     {
-        Message = message;
-    }
+        /// <summary>
+        ///     Creates a new instance of <see cref="DiscoveryProtocolWarningArgs" /> with the given warning message.
+        /// </summary>
+        /// <param name="message">Warning message of the <see cref="DiscoveryProtocol" /> warning.</param>
+        public DiscoveryProtocolWarningArgs(string message)
+        {
+            Message = message;
+        }
 
-    /// <summary>
-    ///     Warning message of the <see cref="DiscoveryProtocol" /> warning.
-    /// </summary>
-    public string Message { get; private set; }
+        /// <summary>
+        ///     Warning message of the <see cref="DiscoveryProtocol" /> warning.
+        /// </summary>
+        public string Message { get; private set; }
+    }
 }

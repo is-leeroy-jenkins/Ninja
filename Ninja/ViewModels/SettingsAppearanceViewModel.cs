@@ -4,157 +4,158 @@ using System.Windows.Data;
 using Ninja.Models.Appearance;
 using Ninja.Settings;
 
-namespace Ninja.ViewModels;
-
-using Models.Appearance;
-using Settings;
-
-public class SettingsAppearanceViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    #region Variables
+    using Models.Appearance;
+    using Settings;
 
-    private readonly bool _isLoading;
-
-    public ICollectionView Themes { get; }
-
-    private ThemeColorInfo _selectedTheme;
-
-    public ThemeColorInfo SelectedTheme
+    public class SettingsAppearanceViewModel : ViewModelBase
     {
-        get => _selectedTheme;
-        set
-        {
-            if (value == _selectedTheme)
-                return;
+        #region Variables
 
-            if (!_isLoading && !UseCustomTheme)
+        private readonly bool _isLoading;
+
+        public ICollectionView Themes { get; }
+
+        private ThemeColorInfo _selectedTheme;
+
+        public ThemeColorInfo SelectedTheme
+        {
+            get => _selectedTheme;
+            set
             {
-                AppearanceManager.ChangeTheme(value.Name);
-                SettingsManager.Current.Appearance_Theme = value.Name;
+                if (value == _selectedTheme)
+                    return;
+
+                if (!_isLoading && !UseCustomTheme)
+                {
+                    AppearanceManager.ChangeTheme(value.Name);
+                    SettingsManager.Current.Appearance_Theme = value.Name;
+                }
+
+                _selectedTheme = value;
+                OnPropertyChanged();
             }
-
-            _selectedTheme = value;
-            OnPropertyChanged();
         }
-    }
 
 
-    public ICollectionView Accents { get; }
+        public ICollectionView Accents { get; }
 
-    private AccentColorInfo _selectedAccent;
+        private AccentColorInfo _selectedAccent;
 
-    public AccentColorInfo SelectedAccent
-    {
-        get => _selectedAccent;
-        set
+        public AccentColorInfo SelectedAccent
         {
-            if (value == _selectedAccent)
-                return;
-
-            if (!_isLoading && !UseCustomTheme)
+            get => _selectedAccent;
+            set
             {
-                AppearanceManager.ChangeAccent(value.Name);
-                SettingsManager.Current.Appearance_Accent = value.Name;
+                if (value == _selectedAccent)
+                    return;
+
+                if (!_isLoading && !UseCustomTheme)
+                {
+                    AppearanceManager.ChangeAccent(value.Name);
+                    SettingsManager.Current.Appearance_Accent = value.Name;
+                }
+
+                _selectedAccent = value;
+                OnPropertyChanged();
             }
-
-            _selectedAccent = value;
-            OnPropertyChanged();
         }
-    }
 
-    private bool _useCustomTheme;
+        private bool _useCustomTheme;
 
-    public bool UseCustomTheme
-    {
-        get => _useCustomTheme;
-        set
+        public bool UseCustomTheme
         {
-            if (value == _useCustomTheme)
-                return;
-
-            if (!_isLoading)
+            get => _useCustomTheme;
+            set
             {
-                SettingsManager.Current.Appearance_UseCustomTheme = value;
-                AppearanceManager.Load();
+                if (value == _useCustomTheme)
+                    return;
+
+                if (!_isLoading)
+                {
+                    SettingsManager.Current.Appearance_UseCustomTheme = value;
+                    AppearanceManager.Load();
+                }
+
+                _useCustomTheme = value;
+                OnPropertyChanged();
             }
-
-            _useCustomTheme = value;
-            OnPropertyChanged();
         }
-    }
 
-    public ICollectionView CustomThemes { get; }
+        public ICollectionView CustomThemes { get; }
 
 
-    private ThemeInfo _selectedCustomTheme;
+        private ThemeInfo _selectedCustomTheme;
 
-    public ThemeInfo SelectedCustomTheme
-    {
-        get => _selectedCustomTheme;
-        set
+        public ThemeInfo SelectedCustomTheme
         {
-            if (value == _selectedCustomTheme)
-                return;
-
-            if (!_isLoading && UseCustomTheme)
+            get => _selectedCustomTheme;
+            set
             {
-                AppearanceManager.ChangeTheme(value);
-                SettingsManager.Current.Appearance_CustomThemeName = value.Name;
+                if (value == _selectedCustomTheme)
+                    return;
+
+                if (!_isLoading && UseCustomTheme)
+                {
+                    AppearanceManager.ChangeTheme(value);
+                    SettingsManager.Current.Appearance_CustomThemeName = value.Name;
+                }
+
+                _selectedCustomTheme = value;
+                OnPropertyChanged();
             }
-
-            _selectedCustomTheme = value;
-            OnPropertyChanged();
         }
-    }
 
-    private bool _powerShellModifyGlobalProfile;
+        private bool _powerShellModifyGlobalProfile;
 
-    public bool PowerShellModifyGlobalProfile
-    {
-        get => _powerShellModifyGlobalProfile;
-        set
+        public bool PowerShellModifyGlobalProfile
         {
-            if (value == _powerShellModifyGlobalProfile)
-                return;
+            get => _powerShellModifyGlobalProfile;
+            set
+            {
+                if (value == _powerShellModifyGlobalProfile)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.Appearance_PowerShellModifyGlobalProfile = value;
+                if (!_isLoading)
+                    SettingsManager.Current.Appearance_PowerShellModifyGlobalProfile = value;
 
-            _powerShellModifyGlobalProfile = value;
-            OnPropertyChanged();
+                _powerShellModifyGlobalProfile = value;
+                OnPropertyChanged();
+            }
         }
+
+        #endregion
+
+        #region Constructor, LoadSettings
+
+        public SettingsAppearanceViewModel()
+        {
+            _isLoading = true;
+
+            Themes = new CollectionViewSource { Source = AppearanceManager.Themes }.View;
+            Accents = new CollectionViewSource { Source = AppearanceManager.Accents }.View;
+            CustomThemes = new CollectionViewSource { Source = AppearanceManager.CustomThemes }.View;
+
+            LoadSettings();
+
+            _isLoading = false;
+        }
+
+        private void LoadSettings()
+        {
+            SelectedTheme = Themes.Cast<ThemeColorInfo>()
+                .FirstOrDefault(x => x.Name == SettingsManager.Current.Appearance_Theme);
+            SelectedAccent = Accents.Cast<AccentColorInfo>()
+                .FirstOrDefault(x => x.Name == SettingsManager.Current.Appearance_Accent);
+            UseCustomTheme = SettingsManager.Current.Appearance_UseCustomTheme;
+            SelectedCustomTheme =
+                CustomThemes.Cast<ThemeInfo>()
+                    .FirstOrDefault(x => x.Name == SettingsManager.Current.Appearance_CustomThemeName) ??
+                CustomThemes.Cast<ThemeInfo>().FirstOrDefault();
+            PowerShellModifyGlobalProfile = SettingsManager.Current.Appearance_PowerShellModifyGlobalProfile;
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region Constructor, LoadSettings
-
-    public SettingsAppearanceViewModel()
-    {
-        _isLoading = true;
-
-        Themes = new CollectionViewSource { Source = AppearanceManager.Themes }.View;
-        Accents = new CollectionViewSource { Source = AppearanceManager.Accents }.View;
-        CustomThemes = new CollectionViewSource { Source = AppearanceManager.CustomThemes }.View;
-
-        LoadSettings();
-
-        _isLoading = false;
-    }
-
-    private void LoadSettings()
-    {
-        SelectedTheme = Themes.Cast<ThemeColorInfo>()
-            .FirstOrDefault(x => x.Name == SettingsManager.Current.Appearance_Theme);
-        SelectedAccent = Accents.Cast<AccentColorInfo>()
-            .FirstOrDefault(x => x.Name == SettingsManager.Current.Appearance_Accent);
-        UseCustomTheme = SettingsManager.Current.Appearance_UseCustomTheme;
-        SelectedCustomTheme =
-            CustomThemes.Cast<ThemeInfo>()
-                .FirstOrDefault(x => x.Name == SettingsManager.Current.Appearance_CustomThemeName) ??
-            CustomThemes.Cast<ThemeInfo>().FirstOrDefault();
-        PowerShellModifyGlobalProfile = SettingsManager.Current.Appearance_PowerShellModifyGlobalProfile;
-    }
-
-    #endregion
 }

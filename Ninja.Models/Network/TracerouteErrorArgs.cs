@@ -1,23 +1,24 @@
 ﻿using System;
 
-namespace Ninja.Models.Network;
-
-/// <summary>
-///     Contains the error message of a <see cref="Traceroute" /> error.
-/// </summary>
-public class TracerouteErrorArgs : EventArgs
+namespace Ninja.Models.Network
 {
     /// <summary>
-    ///     Creates a new instance of <see cref="TracerouteErrorArgs" /> with the given error message.
+    ///     Contains the error message of a <see cref="Traceroute" /> error.
     /// </summary>
-    /// <param name="errorMessage">Error message of the <see cref="Traceroute" /> error.</param>
-    public TracerouteErrorArgs(string errorMessage)
+    public class TracerouteErrorArgs : EventArgs
     {
-        ErrorMessage = errorMessage;
-    }
+        /// <summary>
+        ///     Creates a new instance of <see cref="TracerouteErrorArgs" /> with the given error message.
+        /// </summary>
+        /// <param name="errorMessage">Error message of the <see cref="Traceroute" /> error.</param>
+        public TracerouteErrorArgs(string errorMessage)
+        {
+            ErrorMessage = errorMessage;
+        }
 
-    /// <summary>
-    ///     Error message of the <see cref="Traceroute" /> error.
-    /// </summary>
-    public string ErrorMessage { get; set; }
+        /// <summary>
+        ///     Error message of the <see cref="Traceroute" /> error.
+        /// </summary>
+        public string ErrorMessage { get; set; }
+    }
 }

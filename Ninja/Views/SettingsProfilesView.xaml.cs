@@ -4,39 +4,40 @@ using System.Windows.Input;
 using MahApps.Metro.Controls.Dialogs;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class SettingsProfilesView
+namespace Ninja.Views
 {
-    private readonly SettingsProfilesViewModel _viewModel = new(DialogCoordinator.Instance);
+    using ViewModels;
 
-    public SettingsProfilesView()
+    public partial class SettingsProfilesView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly SettingsProfilesViewModel _viewModel = new(DialogCoordinator.Instance);
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        if (_viewModel.CloseAction != null)
-            return;
+        public SettingsProfilesView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
 
-        var window = Window.GetWindow(this);
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (_viewModel.CloseAction != null)
+                return;
 
-        if (window != null)
-            _viewModel.CloseAction = window.Close;
-    }
+            var window = Window.GetWindow(this);
 
-    private void ContextMenu_Opened(object sender, RoutedEventArgs e)
-    {
-        if (sender is ContextMenu menu)
-            menu.DataContext = _viewModel;
-    }
+            if (window != null)
+                _viewModel.CloseAction = window.Close;
+        }
 
-    private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-    {
-        _viewModel.EditProfileFileCommand.Execute(null);
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            if (sender is ContextMenu menu)
+                menu.DataContext = _viewModel;
+        }
+
+        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            _viewModel.EditProfileFileCommand.Execute(null);
+        }
     }
 }

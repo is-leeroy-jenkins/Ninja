@@ -3,14 +3,15 @@ using System.IO;
 using System.Windows.Controls;
 using Ninja.Localization.Resources;
 
-namespace Ninja.Validators;
-
-public class FileExistsValidator : ValidationRule
+namespace Ninja.Validators
 {
-    public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+    public class FileExistsValidator : ValidationRule
     {
-        return File.Exists((string)value)
-            ? ValidationResult.ValidResult
-            : new ValidationResult(false, Strings.FileDoesNotExist);
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            return File.Exists((string)value)
+                ? ValidationResult.ValidResult
+                : new ValidationResult(false, Strings.FileDoesNotExist);
+        }
     }
 }

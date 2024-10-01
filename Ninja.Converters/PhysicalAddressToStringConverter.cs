@@ -4,24 +4,25 @@ using System.Net.NetworkInformation;
 using System.Windows.Data;
 using Ninja.Utilities;
 
-namespace Ninja.Converters;
-
-using Utilities;
-
-public sealed class PhysicalAddressToStringConverter : IValueConverter
+namespace Ninja.Converters
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    using Utilities;
+
+    public sealed class PhysicalAddressToStringConverter : IValueConverter
     {
-        if (value is not PhysicalAddress physicalAddress)
-            return "-/-";
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is not PhysicalAddress physicalAddress)
+                return "-/-";
 
-        var macAddress = physicalAddress.ToString();
+            var macAddress = physicalAddress.ToString();
 
-        return string.IsNullOrEmpty(macAddress) ? "-/-" : MACAddressHelper.GetDefaultFormat(macAddress);
-    }
+            return string.IsNullOrEmpty(macAddress) ? "-/-" : MACAddressHelper.GetDefaultFormat(macAddress);
+        }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

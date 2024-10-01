@@ -1,24 +1,25 @@
 ﻿using System;
 using Octokit;
 
-namespace Ninja.Update;
-
-/// <summary>
-///     Contains informations about a program update.
-/// </summary>
-public class UpdateAvailableArgs : EventArgs
+namespace Ninja.Update
 {
     /// <summary>
-    ///     Initializes a new instance of the <see cref="UpdateAvailableArgs" /> class with parameters.
+    ///     Contains informations about a program update.
     /// </summary>
-    /// <param name="release">Release of the program update.</param>
-    public UpdateAvailableArgs(Release release)
+    public class UpdateAvailableArgs : EventArgs
     {
-        Release = release;
-    }
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="UpdateAvailableArgs" /> class with parameters.
+        /// </summary>
+        /// <param name="release">Release of the program update.</param>
+        public UpdateAvailableArgs(Release release)
+        {
+            Release = release;
+        }
 
-    /// <summary>
-    ///     Release of the program update.
-    /// </summary>
-    public Release Release { get; private set; }
+        /// <summary>
+        ///     Release of the program update.
+        /// </summary>
+        public Release Release { get; private set; }
+    }
 }

@@ -7,407 +7,408 @@ using Ninja.Settings;
 using Ninja.Utilities;
 using Ninja.Views;
 
-namespace Ninja.ViewModels;
-
-using Settings;
-using Utilities;
-using Views;
-
-public class IPScannerSettingsViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    #region Variables
+    using Settings;
+    using Utilities;
+    using Views;
 
-    private readonly bool _isLoading;
-
-    private readonly IDialogCoordinator _dialogCoordinator;
-
-    private bool _showAllResults;
-
-    public bool ShowAllResults
+    public class IPScannerSettingsViewModel : ViewModelBase
     {
-        get => _showAllResults;
-        set
+        #region Variables
+
+        private readonly bool _isLoading;
+
+        private readonly IDialogCoordinator _dialogCoordinator;
+
+        private bool _showAllResults;
+
+        public bool ShowAllResults
         {
-            if (value == _showAllResults)
-                return;
+            get => _showAllResults;
+            set
+            {
+                if (value == _showAllResults)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.IPScanner_ShowAllResults = value;
+                if (!_isLoading)
+                    SettingsManager.Current.IPScanner_ShowAllResults = value;
 
-            _showAllResults = value;
-            OnPropertyChanged();
+                _showAllResults = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _icmpAttempts;
+        private int _icmpAttempts;
 
-    public int ICMPAttempts
-    {
-        get => _icmpAttempts;
-        set
+        public int ICMPAttempts
         {
-            if (value == _icmpAttempts)
-                return;
+            get => _icmpAttempts;
+            set
+            {
+                if (value == _icmpAttempts)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.IPScanner_ICMPAttempts = value;
+                if (!_isLoading)
+                    SettingsManager.Current.IPScanner_ICMPAttempts = value;
 
-            _icmpAttempts = value;
-            OnPropertyChanged();
+                _icmpAttempts = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _icmpTimeout;
+        private int _icmpTimeout;
 
-    public int ICMPTimeout
-    {
-        get => _icmpTimeout;
-        set
+        public int ICMPTimeout
         {
-            if (value == _icmpTimeout)
-                return;
+            get => _icmpTimeout;
+            set
+            {
+                if (value == _icmpTimeout)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.IPScanner_ICMPTimeout = value;
+                if (!_isLoading)
+                    SettingsManager.Current.IPScanner_ICMPTimeout = value;
 
-            _icmpTimeout = value;
-            OnPropertyChanged();
+                _icmpTimeout = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _icmpBuffer;
+        private int _icmpBuffer;
 
-    public int ICMPBuffer
-    {
-        get => _icmpBuffer;
-        set
+        public int ICMPBuffer
         {
-            if (value == _icmpBuffer)
-                return;
+            get => _icmpBuffer;
+            set
+            {
+                if (value == _icmpBuffer)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.IPScanner_ICMPBuffer = value;
+                if (!_isLoading)
+                    SettingsManager.Current.IPScanner_ICMPBuffer = value;
 
-            _icmpBuffer = value;
-            OnPropertyChanged();
+                _icmpBuffer = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _resolveHostname;
+        private bool _resolveHostname;
 
-    public bool ResolveHostname
-    {
-        get => _resolveHostname;
-        set
+        public bool ResolveHostname
         {
-            if (value == _resolveHostname)
-                return;
+            get => _resolveHostname;
+            set
+            {
+                if (value == _resolveHostname)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.IPScanner_ResolveHostname = value;
+                if (!_isLoading)
+                    SettingsManager.Current.IPScanner_ResolveHostname = value;
 
-            _resolveHostname = value;
-            OnPropertyChanged();
+                _resolveHostname = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _portScanEnabled;
+        private bool _portScanEnabled;
 
-    public bool PortScanEnabled
-    {
-        get => _portScanEnabled;
-        set
+        public bool PortScanEnabled
         {
-            if (value == _portScanEnabled)
-                return;
+            get => _portScanEnabled;
+            set
+            {
+                if (value == _portScanEnabled)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.IPScanner_PortScanEnabled = value;
+                if (!_isLoading)
+                    SettingsManager.Current.IPScanner_PortScanEnabled = value;
 
-            _portScanEnabled = value;
-            OnPropertyChanged();
+                _portScanEnabled = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _portScanPorts;
+        private string _portScanPorts;
 
-    public string PortScanPorts
-    {
-        get => _portScanPorts;
-        set
+        public string PortScanPorts
         {
-            if (value == _portScanPorts)
-                return;
+            get => _portScanPorts;
+            set
+            {
+                if (value == _portScanPorts)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.IPScanner_PortScanPorts = value;
+                if (!_isLoading)
+                    SettingsManager.Current.IPScanner_PortScanPorts = value;
 
-            _portScanPorts = value;
-            OnPropertyChanged();
+                _portScanPorts = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _portScanTimeout;
+        private int _portScanTimeout;
 
-    public int PortScanTimeout
+        public int PortScanTimeout
 
-    {
-        get => _portScanTimeout;
-
-        set
         {
-            if (value == _portScanTimeout)
-                return;
+            get => _portScanTimeout;
 
-            if (!_isLoading)
-                SettingsManager.Current.IPScanner_PortScanTimeout = value;
+            set
+            {
+                if (value == _portScanTimeout)
+                    return;
 
-            _portScanTimeout = value;
-            OnPropertyChanged();
+                if (!_isLoading)
+                    SettingsManager.Current.IPScanner_PortScanTimeout = value;
+
+                _portScanTimeout = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _netBIOSEnabled;
+        private bool _netBIOSEnabled;
 
-    public bool NetBIOSEnabled
-    {
-        get => _netBIOSEnabled;
-        set
+        public bool NetBIOSEnabled
         {
-            if (value == _netBIOSEnabled)
-                return;
+            get => _netBIOSEnabled;
+            set
+            {
+                if (value == _netBIOSEnabled)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.IPScanner_NetBIOSEnabled = value;
+                if (!_isLoading)
+                    SettingsManager.Current.IPScanner_NetBIOSEnabled = value;
 
-            _netBIOSEnabled = value;
-            OnPropertyChanged();
+                _netBIOSEnabled = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _netBIOSTimeout;
+        private int _netBIOSTimeout;
 
-    public int NetBIOSTimeout
-    {
-        get => _netBIOSTimeout;
-        set
+        public int NetBIOSTimeout
         {
-            if (value == _netBIOSTimeout)
-                return;
+            get => _netBIOSTimeout;
+            set
+            {
+                if (value == _netBIOSTimeout)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.IPScanner_NetBIOSTimeout = value;
+                if (!_isLoading)
+                    SettingsManager.Current.IPScanner_NetBIOSTimeout = value;
 
-            _netBIOSTimeout = value;
-            OnPropertyChanged();
+                _netBIOSTimeout = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _resolveMACAddress;
+        private bool _resolveMACAddress;
 
-    public bool ResolveMACAddress
-    {
-        get => _resolveMACAddress;
-        set
+        public bool ResolveMACAddress
         {
-            if (value == _resolveMACAddress)
-                return;
+            get => _resolveMACAddress;
+            set
+            {
+                if (value == _resolveMACAddress)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.IPScanner_ResolveMACAddress = value;
+                if (!_isLoading)
+                    SettingsManager.Current.IPScanner_ResolveMACAddress = value;
 
-            _resolveMACAddress = value;
-            OnPropertyChanged();
+                _resolveMACAddress = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public ICollectionView CustomCommands { get; }
+        public ICollectionView CustomCommands { get; }
 
-    private CustomCommandInfo _selectedCustomCommand = new();
+        private CustomCommandInfo _selectedCustomCommand = new();
 
-    public CustomCommandInfo SelectedCustomCommand
-    {
-        get => _selectedCustomCommand;
-        set
+        public CustomCommandInfo SelectedCustomCommand
         {
-            if (value == _selectedCustomCommand)
-                return;
+            get => _selectedCustomCommand;
+            set
+            {
+                if (value == _selectedCustomCommand)
+                    return;
 
-            _selectedCustomCommand = value;
-            OnPropertyChanged();
+                _selectedCustomCommand = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _maxHostThreads;
+        private int _maxHostThreads;
 
-    public int MaxHostThreads
-    {
-        get => _maxHostThreads;
-        set
+        public int MaxHostThreads
         {
-            if (value == _maxHostThreads)
-                return;
+            get => _maxHostThreads;
+            set
+            {
+                if (value == _maxHostThreads)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.IPScanner_MaxHostThreads = value;
+                if (!_isLoading)
+                    SettingsManager.Current.IPScanner_MaxHostThreads = value;
 
-            _maxHostThreads = value;
-            OnPropertyChanged();
+                _maxHostThreads = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _maxPortThreads;
+        private int _maxPortThreads;
 
-    public int MaxPortThreads
-    {
-        get => _maxPortThreads;
-        set
+        public int MaxPortThreads
         {
-            if (value == _maxPortThreads)
-                return;
+            get => _maxPortThreads;
+            set
+            {
+                if (value == _maxPortThreads)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.IPScanner_MaxPortThreads = value;
+                if (!_isLoading)
+                    SettingsManager.Current.IPScanner_MaxPortThreads = value;
 
-            _maxPortThreads = value;
-            OnPropertyChanged();
+                _maxPortThreads = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region Constructor, load settings
+        #region Constructor, load settings
 
-    public IPScannerSettingsViewModel(IDialogCoordinator instance)
-    {
-        _isLoading = true;
-
-        _dialogCoordinator = instance;
-
-        CustomCommands = CollectionViewSource.GetDefaultView(SettingsManager.Current.IPScanner_CustomCommands);
-        CustomCommands.SortDescriptions.Add(new SortDescription(nameof(CustomCommandInfo.Name),
-            ListSortDirection.Ascending));
-
-        LoadSettings();
-
-        _isLoading = false;
-    }
-
-    private void LoadSettings()
-    {
-        ShowAllResults = SettingsManager.Current.IPScanner_ShowAllResults;
-        ICMPAttempts = SettingsManager.Current.IPScanner_ICMPAttempts;
-        ICMPTimeout = SettingsManager.Current.IPScanner_ICMPTimeout;
-        ICMPBuffer = SettingsManager.Current.IPScanner_ICMPBuffer;
-        ResolveHostname = SettingsManager.Current.IPScanner_ResolveHostname;
-        PortScanEnabled = SettingsManager.Current.IPScanner_PortScanEnabled;
-        PortScanPorts = SettingsManager.Current.IPScanner_PortScanPorts;
-        PortScanTimeout = SettingsManager.Current.IPScanner_PortScanTimeout;
-        NetBIOSEnabled = SettingsManager.Current.IPScanner_NetBIOSEnabled;
-        NetBIOSTimeout = SettingsManager.Current.IPScanner_NetBIOSTimeout;
-        ResolveMACAddress = SettingsManager.Current.IPScanner_ResolveMACAddress;
-        MaxHostThreads = SettingsManager.Current.IPScanner_MaxHostThreads;
-        MaxPortThreads = SettingsManager.Current.IPScanner_MaxPortThreads;
-    }
-
-    #endregion
-
-    #region ICommand & Actions
-
-    public ICommand AddCustomCommandCommand => new RelayCommand(_ => AddCustomCommandAction());
-
-    private void AddCustomCommandAction()
-    {
-        AddCustomCommand();
-    }
-
-    public ICommand EditCustomCommandCommand => new RelayCommand(_ => EditCustomCommandAction());
-
-    private void EditCustomCommandAction()
-    {
-        EditCustomCommand();
-    }
-
-    public ICommand DeleteCustomCommandCommand => new RelayCommand(_ => DeleteCustomCommandAction());
-
-    private void DeleteCustomCommandAction()
-    {
-        DeleteCustomCommand();
-    }
-
-    #endregion
-
-    #region Methods
-
-    private async void AddCustomCommand()
-    {
-        var customDialog = new CustomDialog
+        public IPScannerSettingsViewModel(IDialogCoordinator instance)
         {
-            Title = Strings.AddCustomCommand
-        };
+            _isLoading = true;
 
-        var customCommandViewModel = new CustomCommandViewModel(instance =>
+            _dialogCoordinator = instance;
+
+            CustomCommands = CollectionViewSource.GetDefaultView(SettingsManager.Current.IPScanner_CustomCommands);
+            CustomCommands.SortDescriptions.Add(new SortDescription(nameof(CustomCommandInfo.Name),
+                ListSortDirection.Ascending));
+
+            LoadSettings();
+
+            _isLoading = false;
+        }
+
+        private void LoadSettings()
         {
-            _dialogCoordinator.HideMetroDialogAsync(this, customDialog);
+            ShowAllResults = SettingsManager.Current.IPScanner_ShowAllResults;
+            ICMPAttempts = SettingsManager.Current.IPScanner_ICMPAttempts;
+            ICMPTimeout = SettingsManager.Current.IPScanner_ICMPTimeout;
+            ICMPBuffer = SettingsManager.Current.IPScanner_ICMPBuffer;
+            ResolveHostname = SettingsManager.Current.IPScanner_ResolveHostname;
+            PortScanEnabled = SettingsManager.Current.IPScanner_PortScanEnabled;
+            PortScanPorts = SettingsManager.Current.IPScanner_PortScanPorts;
+            PortScanTimeout = SettingsManager.Current.IPScanner_PortScanTimeout;
+            NetBIOSEnabled = SettingsManager.Current.IPScanner_NetBIOSEnabled;
+            NetBIOSTimeout = SettingsManager.Current.IPScanner_NetBIOSTimeout;
+            ResolveMACAddress = SettingsManager.Current.IPScanner_ResolveMACAddress;
+            MaxHostThreads = SettingsManager.Current.IPScanner_MaxHostThreads;
+            MaxPortThreads = SettingsManager.Current.IPScanner_MaxPortThreads;
+        }
 
-            SettingsManager.Current.IPScanner_CustomCommands.Add(new CustomCommandInfo(instance.ID, instance.Name,
-                instance.FilePath, instance.Arguments));
-        }, _ => { _dialogCoordinator.HideMetroDialogAsync(this, customDialog); });
+        #endregion
 
-        customDialog.Content = new CustomCommandDialog
+        #region ICommand & Actions
+
+        public ICommand AddCustomCommandCommand => new RelayCommand(_ => AddCustomCommandAction());
+
+        private void AddCustomCommandAction()
         {
-            DataContext = customCommandViewModel
-        };
+            AddCustomCommand();
+        }
 
-        await _dialogCoordinator.ShowMetroDialogAsync(this, customDialog);
-    }
+        public ICommand EditCustomCommandCommand => new RelayCommand(_ => EditCustomCommandAction());
 
-    public async void EditCustomCommand()
-    {
-        var customDialog = new CustomDialog
+        private void EditCustomCommandAction()
         {
-            Title = Strings.EditCustomCommand
-        };
+            EditCustomCommand();
+        }
 
-        var customCommandViewModel = new CustomCommandViewModel(instance =>
+        public ICommand DeleteCustomCommandCommand => new RelayCommand(_ => DeleteCustomCommandAction());
+
+        private void DeleteCustomCommandAction()
         {
-            _dialogCoordinator.HideMetroDialogAsync(this, customDialog);
+            DeleteCustomCommand();
+        }
 
-            SettingsManager.Current.IPScanner_CustomCommands.Remove(SelectedCustomCommand);
-            SettingsManager.Current.IPScanner_CustomCommands.Add(new CustomCommandInfo(instance.ID, instance.Name,
-                instance.FilePath, instance.Arguments));
-        }, _ => { _dialogCoordinator.HideMetroDialogAsync(this, customDialog); }, true, SelectedCustomCommand);
+        #endregion
 
-        customDialog.Content = new CustomCommandDialog
+        #region Methods
+
+        private async void AddCustomCommand()
         {
-            DataContext = customCommandViewModel
-        };
+            var customDialog = new CustomDialog
+            {
+                Title = Strings.AddCustomCommand
+            };
 
-        await _dialogCoordinator.ShowMetroDialogAsync(this, customDialog);
-    }
+            var customCommandViewModel = new CustomCommandViewModel(instance =>
+            {
+                _dialogCoordinator.HideMetroDialogAsync(this, customDialog);
 
-    private async void DeleteCustomCommand()
-    {
-        var customDialog = new CustomDialog
+                SettingsManager.Current.IPScanner_CustomCommands.Add(new CustomCommandInfo(instance.ID, instance.Name,
+                    instance.FilePath, instance.Arguments));
+            }, _ => { _dialogCoordinator.HideMetroDialogAsync(this, customDialog); });
+
+            customDialog.Content = new CustomCommandDialog
+            {
+                DataContext = customCommandViewModel
+            };
+
+            await _dialogCoordinator.ShowMetroDialogAsync(this, customDialog);
+        }
+
+        public async void EditCustomCommand()
         {
-            Title = Strings.DeleteCustomCommand
-        };
+            var customDialog = new CustomDialog
+            {
+                Title = Strings.EditCustomCommand
+            };
 
-        var confirmDeleteViewModel = new ConfirmDeleteViewModel(_ =>
+            var customCommandViewModel = new CustomCommandViewModel(instance =>
             {
                 _dialogCoordinator.HideMetroDialogAsync(this, customDialog);
 
                 SettingsManager.Current.IPScanner_CustomCommands.Remove(SelectedCustomCommand);
-            }, _ => { _dialogCoordinator.HideMetroDialogAsync(this, customDialog); },
-            Strings.DeleteCustomCommandMessage);
+                SettingsManager.Current.IPScanner_CustomCommands.Add(new CustomCommandInfo(instance.ID, instance.Name,
+                    instance.FilePath, instance.Arguments));
+            }, _ => { _dialogCoordinator.HideMetroDialogAsync(this, customDialog); }, true, SelectedCustomCommand);
 
-        customDialog.Content = new ConfirmDeleteDialog
+            customDialog.Content = new CustomCommandDialog
+            {
+                DataContext = customCommandViewModel
+            };
+
+            await _dialogCoordinator.ShowMetroDialogAsync(this, customDialog);
+        }
+
+        private async void DeleteCustomCommand()
         {
-            DataContext = confirmDeleteViewModel
-        };
+            var customDialog = new CustomDialog
+            {
+                Title = Strings.DeleteCustomCommand
+            };
 
-        await _dialogCoordinator.ShowMetroDialogAsync(this, customDialog);
+            var confirmDeleteViewModel = new ConfirmDeleteViewModel(_ =>
+                {
+                    _dialogCoordinator.HideMetroDialogAsync(this, customDialog);
+
+                    SettingsManager.Current.IPScanner_CustomCommands.Remove(SelectedCustomCommand);
+                }, _ => { _dialogCoordinator.HideMetroDialogAsync(this, customDialog); },
+                Strings.DeleteCustomCommandMessage);
+
+            customDialog.Content = new ConfirmDeleteDialog
+            {
+                DataContext = confirmDeleteViewModel
+            };
+
+            await _dialogCoordinator.ShowMetroDialogAsync(this, customDialog);
+        }
+
+        #endregion
     }
-
-    #endregion
 }

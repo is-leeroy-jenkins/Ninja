@@ -7,305 +7,306 @@ using Ninja.Localization.Resources;
 using Ninja.Models.Export;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Models.Export;
-using Utilities;
-
-/// <summary>
-/// </summary>
-public class ExportViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    /// <summary>
-    /// </summary>
-    private bool _exportAll = true;
-
-    private bool _exportSelected;
-
-    private string _filePath;
-
-    private bool _showCsv;
+    using Models.Export;
+    using Utilities;
 
     /// <summary>
     /// </summary>
-    private bool _showExportSelected;
-
-
-    private bool _showJson;
-
-    private bool _showTxt;
-
-    private bool _showXml;
-
-    private bool _useCsv;
-
-    private bool _useJson;
-
-    private bool _useTxt;
-
-    private bool _useXml;
-
-    private ExportViewModel(Action<ExportViewModel> deleteCommand, Action<ExportViewModel> cancelHandler,
-        ExportFileType[] showFilesTypes, bool showExportSelected)
+    public class ExportViewModel : ViewModelBase
     {
-        ExportCommand = new RelayCommand(_ => deleteCommand(this));
-        CancelCommand = new RelayCommand(_ => cancelHandler(this));
+        /// <summary>
+        /// </summary>
+        private bool _exportAll = true;
 
-        ShowCsv = showFilesTypes.Contains(ExportFileType.Csv);
-        ShowXml = showFilesTypes.Contains(ExportFileType.Xml);
-        ShowJson = showFilesTypes.Contains(ExportFileType.Json);
-        ShowTxt = showFilesTypes.Contains(ExportFileType.Txt);
+        private bool _exportSelected;
 
-        ShowExportSelected = showExportSelected;
-    }
+        private string _filePath;
 
-    public ExportViewModel(Action<ExportViewModel> deleteCommand, Action<ExportViewModel> cancelHandler,
-        ExportFileType[] showFilesTypes, bool showExportSelected, ExportFileType fileType, string filePath) :
-        this(deleteCommand, cancelHandler, showFilesTypes, showExportSelected)
-    {
-        FilePath = filePath;
+        private bool _showCsv;
 
-        switch (fileType)
+        /// <summary>
+        /// </summary>
+        private bool _showExportSelected;
+
+
+        private bool _showJson;
+
+        private bool _showTxt;
+
+        private bool _showXml;
+
+        private bool _useCsv;
+
+        private bool _useJson;
+
+        private bool _useTxt;
+
+        private bool _useXml;
+
+        private ExportViewModel(Action<ExportViewModel> deleteCommand, Action<ExportViewModel> cancelHandler,
+            ExportFileType[] showFilesTypes, bool showExportSelected)
         {
-            case ExportFileType.Csv:
-                UseCsv = true;
-                break;
-            case ExportFileType.Xml:
-                UseXml = true;
-                break;
-            case ExportFileType.Json:
-                UseJson = true;
-                break;
-            case ExportFileType.Txt:
-                UseTxt = true;
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(fileType), fileType, null);
+            ExportCommand = new RelayCommand(_ => deleteCommand(this));
+            CancelCommand = new RelayCommand(_ => cancelHandler(this));
+
+            ShowCsv = showFilesTypes.Contains(ExportFileType.Csv);
+            ShowXml = showFilesTypes.Contains(ExportFileType.Xml);
+            ShowJson = showFilesTypes.Contains(ExportFileType.Json);
+            ShowTxt = showFilesTypes.Contains(ExportFileType.Txt);
+
+            ShowExportSelected = showExportSelected;
         }
-    }
 
-    /// <summary>
-    /// </summary>
-    public ICommand ExportCommand { get; }
-
-    /// <summary>
-    /// </summary>
-    public ICommand CancelCommand { get; }
-
-    /// <summary>
-    /// </summary>
-    public bool ExportAll
-    {
-        get => _exportAll;
-        set
+        public ExportViewModel(Action<ExportViewModel> deleteCommand, Action<ExportViewModel> cancelHandler,
+            ExportFileType[] showFilesTypes, bool showExportSelected, ExportFileType fileType, string filePath) :
+            this(deleteCommand, cancelHandler, showFilesTypes, showExportSelected)
         {
-            if (value == _exportAll)
-                return;
+            FilePath = filePath;
 
-            _exportAll = value;
-            OnPropertyChanged();
-        }
-    }
-
-    /// <summary>
-    /// </summary>
-    public bool ShowExportSelected
-    {
-        get => _showExportSelected;
-        set
-        {
-            if (value == _showExportSelected)
-                return;
-
-            _showExportSelected = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public bool ExportSelected
-    {
-        get => _exportSelected;
-        set
-        {
-            if (value == _exportSelected)
-                return;
-
-            _exportSelected = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public ExportFileType FileType { get; private set; }
-
-    public bool ShowCsv
-    {
-        get => _showCsv;
-        set
-        {
-            if (value == _showCsv)
-                return;
-
-            _showCsv = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public bool UseCsv
-    {
-        get => _useCsv;
-        set
-        {
-            if (value == _useCsv)
-                return;
-
-            if (value)
+            switch (fileType)
             {
-                FileType = ExportFileType.Csv;
-                ChangeFilePathExtension(FileType);
+                case ExportFileType.Csv:
+                    UseCsv = true;
+                    break;
+                case ExportFileType.Xml:
+                    UseXml = true;
+                    break;
+                case ExportFileType.Json:
+                    UseJson = true;
+                    break;
+                case ExportFileType.Txt:
+                    UseTxt = true;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(fileType), fileType, null);
             }
-
-            _useCsv = value;
-            OnPropertyChanged();
         }
-    }
 
-    public bool ShowXml
-    {
-        get => _showXml;
-        set
+        /// <summary>
+        /// </summary>
+        public ICommand ExportCommand { get; }
+
+        /// <summary>
+        /// </summary>
+        public ICommand CancelCommand { get; }
+
+        /// <summary>
+        /// </summary>
+        public bool ExportAll
         {
-            if (value == _showXml)
-                return;
-
-            _showXml = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public bool UseXml
-    {
-        get => _useXml;
-        set
-        {
-            if (value == _useXml)
-                return;
-
-            if (value)
+            get => _exportAll;
+            set
             {
-                FileType = ExportFileType.Xml;
-                ChangeFilePathExtension(FileType);
+                if (value == _exportAll)
+                    return;
+
+                _exportAll = value;
+                OnPropertyChanged();
             }
-
-            _useXml = value;
-            OnPropertyChanged();
         }
-    }
 
-    public bool ShowJson
-    {
-        get => _showJson;
-        set
+        /// <summary>
+        /// </summary>
+        public bool ShowExportSelected
         {
-            if (value == _showJson)
-                return;
-
-            _showJson = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public bool UseJson
-    {
-        get => _useJson;
-        set
-        {
-            if (value == _useJson)
-                return;
-
-            if (value)
+            get => _showExportSelected;
+            set
             {
-                FileType = ExportFileType.Json;
-                ChangeFilePathExtension(FileType);
+                if (value == _showExportSelected)
+                    return;
+
+                _showExportSelected = value;
+                OnPropertyChanged();
             }
-
-            _useJson = value;
-            OnPropertyChanged();
         }
-    }
 
-    public bool ShowTxt
-    {
-        get => _showTxt;
-        set
+        public bool ExportSelected
         {
-            if (value == _showTxt)
-                return;
-
-            _showTxt = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public bool UseTxt
-    {
-        get => _useTxt;
-        set
-        {
-            if (value == _useTxt)
-                return;
-
-            if (value)
+            get => _exportSelected;
+            set
             {
-                FileType = ExportFileType.Txt;
-                ChangeFilePathExtension(FileType);
+                if (value == _exportSelected)
+                    return;
+
+                _exportSelected = value;
+                OnPropertyChanged();
             }
-
-            _useTxt = value;
-            OnPropertyChanged();
         }
-    }
 
-    public string FilePath
-    {
-        get => _filePath;
-        set
+        public ExportFileType FileType { get; private set; }
+
+        public bool ShowCsv
         {
-            if (value == _filePath)
+            get => _showCsv;
+            set
+            {
+                if (value == _showCsv)
+                    return;
+
+                _showCsv = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool UseCsv
+        {
+            get => _useCsv;
+            set
+            {
+                if (value == _useCsv)
+                    return;
+
+                if (value)
+                {
+                    FileType = ExportFileType.Csv;
+                    ChangeFilePathExtension(FileType);
+                }
+
+                _useCsv = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool ShowXml
+        {
+            get => _showXml;
+            set
+            {
+                if (value == _showXml)
+                    return;
+
+                _showXml = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool UseXml
+        {
+            get => _useXml;
+            set
+            {
+                if (value == _useXml)
+                    return;
+
+                if (value)
+                {
+                    FileType = ExportFileType.Xml;
+                    ChangeFilePathExtension(FileType);
+                }
+
+                _useXml = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool ShowJson
+        {
+            get => _showJson;
+            set
+            {
+                if (value == _showJson)
+                    return;
+
+                _showJson = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool UseJson
+        {
+            get => _useJson;
+            set
+            {
+                if (value == _useJson)
+                    return;
+
+                if (value)
+                {
+                    FileType = ExportFileType.Json;
+                    ChangeFilePathExtension(FileType);
+                }
+
+                _useJson = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool ShowTxt
+        {
+            get => _showTxt;
+            set
+            {
+                if (value == _showTxt)
+                    return;
+
+                _showTxt = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool UseTxt
+        {
+            get => _useTxt;
+            set
+            {
+                if (value == _useTxt)
+                    return;
+
+                if (value)
+                {
+                    FileType = ExportFileType.Txt;
+                    ChangeFilePathExtension(FileType);
+                }
+
+                _useTxt = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string FilePath
+        {
+            get => _filePath;
+            set
+            {
+                if (value == _filePath)
+                    return;
+
+                _filePath = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand BrowseFileCommand => new RelayCommand(_ => BrowseFileAction());
+
+        private void BrowseFileAction()
+        {
+            var saveFileDialog = new SaveFileDialog();
+
+            var fileExtension = ExportManager.GetFileExtensionAsString(FileType);
+
+            saveFileDialog.Filter = $@"{fileExtension}-{Strings.File} | *.{fileExtension.ToLower()}";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK) FilePath = saveFileDialog.FileName;
+        }
+
+        private void ChangeFilePathExtension(ExportFileType fileType)
+        {
+            if (string.IsNullOrEmpty(FilePath))
                 return;
 
-            _filePath = value;
-            OnPropertyChanged();
+            var extension = Path.GetExtension(FilePath).Replace(".", "");
+
+            var newExtension = ExportManager.GetFileExtensionAsString(fileType);
+
+            if (newExtension == null)
+                return;
+
+            if (extension.Equals(newExtension, StringComparison.OrdinalIgnoreCase))
+                return;
+
+            FilePath = FilePath[..^extension.Length] + newExtension.ToLower();
         }
-    }
-
-    public ICommand BrowseFileCommand => new RelayCommand(_ => BrowseFileAction());
-
-    private void BrowseFileAction()
-    {
-        var saveFileDialog = new SaveFileDialog();
-
-        var fileExtension = ExportManager.GetFileExtensionAsString(FileType);
-
-        saveFileDialog.Filter = $@"{fileExtension}-{Strings.File} | *.{fileExtension.ToLower()}";
-
-        if (saveFileDialog.ShowDialog() == DialogResult.OK) FilePath = saveFileDialog.FileName;
-    }
-
-    private void ChangeFilePathExtension(ExportFileType fileType)
-    {
-        if (string.IsNullOrEmpty(FilePath))
-            return;
-
-        var extension = Path.GetExtension(FilePath).Replace(".", "");
-
-        var newExtension = ExportManager.GetFileExtensionAsString(fileType);
-
-        if (newExtension == null)
-            return;
-
-        if (extension.Equals(newExtension, StringComparison.OrdinalIgnoreCase))
-            return;
-
-        FilePath = FilePath[..^extension.Length] + newExtension.ToLower();
     }
 }

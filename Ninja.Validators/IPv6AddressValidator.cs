@@ -4,21 +4,22 @@ using System.Windows.Controls;
 using Ninja.Localization.Resources;
 using Ninja.Utilities;
 
-namespace Ninja.Validators;
-
-using Utilities;
-
-public class IPv6AddressValidator : ValidationRule
+namespace Ninja.Validators
 {
-    public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+    using Utilities;
+
+    public class IPv6AddressValidator : ValidationRule
     {
-        var ipAddress = (value as string)?.Trim();
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            var ipAddress = (value as string)?.Trim();
 
-        if (string.IsNullOrEmpty(ipAddress))
-            return new ValidationResult(false, Strings.EnterValidIPv6Address);
+            if (string.IsNullOrEmpty(ipAddress))
+                return new ValidationResult(false, Strings.EnterValidIPv6Address);
 
-        return Regex.IsMatch(ipAddress, RegexHelper.IPv6AddressRegex)
-            ? ValidationResult.ValidResult
-            : new ValidationResult(false, Strings.EnterValidIPv6Address);
+            return Regex.IsMatch(ipAddress, RegexHelper.IPv6AddressRegex)
+                ? ValidationResult.ValidResult
+                : new ValidationResult(false, Strings.EnterValidIPv6Address);
+        }
     }
 }

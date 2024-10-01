@@ -1,145 +1,146 @@
 ﻿using Ninja.Settings;
 
-namespace Ninja.ViewModels;
-
-using Settings;
-
-public class PingMonitorSettingsViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    #region Variables
+    using Settings;
 
-    private readonly bool _isLoading;
-
-    private int _timeout;
-
-    public int Timeout
+    public class PingMonitorSettingsViewModel : ViewModelBase
     {
-        get => _timeout;
-        set
+        #region Variables
+
+        private readonly bool _isLoading;
+
+        private int _timeout;
+
+        public int Timeout
         {
-            if (value == _timeout)
-                return;
+            get => _timeout;
+            set
+            {
+                if (value == _timeout)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.PingMonitor_Timeout = value;
+                if (!_isLoading)
+                    SettingsManager.Current.PingMonitor_Timeout = value;
 
-            _timeout = value;
-            OnPropertyChanged();
+                _timeout = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _buffer;
+        private int _buffer;
 
-    public int Buffer
-    {
-        get => _buffer;
-        set
+        public int Buffer
         {
-            if (value == _buffer)
-                return;
+            get => _buffer;
+            set
+            {
+                if (value == _buffer)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.PingMonitor_Buffer = value;
+                if (!_isLoading)
+                    SettingsManager.Current.PingMonitor_Buffer = value;
 
-            _buffer = value;
-            OnPropertyChanged();
+                _buffer = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _ttl;
+        private int _ttl;
 
-    public int TTL
-    {
-        get => _ttl;
-        set
+        public int TTL
         {
-            if (value == _ttl)
-                return;
+            get => _ttl;
+            set
+            {
+                if (value == _ttl)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.PingMonitor_TTL = value;
+                if (!_isLoading)
+                    SettingsManager.Current.PingMonitor_TTL = value;
 
-            _ttl = value;
-            OnPropertyChanged();
+                _ttl = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _dontFragment;
+        private bool _dontFragment;
 
-    public bool DontFragment
-    {
-        get => _dontFragment;
-        set
+        public bool DontFragment
         {
-            if (value == _dontFragment)
-                return;
+            get => _dontFragment;
+            set
+            {
+                if (value == _dontFragment)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.PingMonitor_DontFragment = value;
+                if (!_isLoading)
+                    SettingsManager.Current.PingMonitor_DontFragment = value;
 
-            _dontFragment = value;
-            OnPropertyChanged();
+                _dontFragment = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _waitTime;
+        private int _waitTime;
 
-    public int WaitTime
-    {
-        get => _waitTime;
-        set
+        public int WaitTime
         {
-            if (value == _waitTime)
-                return;
+            get => _waitTime;
+            set
+            {
+                if (value == _waitTime)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.PingMonitor_WaitTime = value;
+                if (!_isLoading)
+                    SettingsManager.Current.PingMonitor_WaitTime = value;
 
-            _waitTime = value;
-            OnPropertyChanged();
+                _waitTime = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _expandHostView;
+        private bool _expandHostView;
 
-    public bool ExpandHostView
-    {
-        get => _expandHostView;
-        set
+        public bool ExpandHostView
         {
-            if (value == _expandHostView)
-                return;
+            get => _expandHostView;
+            set
+            {
+                if (value == _expandHostView)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.PingMonitor_ExpandHostView = value;
+                if (!_isLoading)
+                    SettingsManager.Current.PingMonitor_ExpandHostView = value;
 
-            _expandHostView = value;
-            OnPropertyChanged();
+                _expandHostView = value;
+                OnPropertyChanged();
+            }
         }
+
+        #endregion
+
+        #region Contructor, load settings
+
+        public PingMonitorSettingsViewModel()
+        {
+            _isLoading = true;
+
+            LoadSettings();
+
+            _isLoading = false;
+        }
+
+        private void LoadSettings()
+        {
+            Timeout = SettingsManager.Current.PingMonitor_Timeout;
+            Buffer = SettingsManager.Current.PingMonitor_Buffer;
+            TTL = SettingsManager.Current.PingMonitor_TTL;
+            DontFragment = SettingsManager.Current.PingMonitor_DontFragment;
+            WaitTime = SettingsManager.Current.PingMonitor_WaitTime;
+            ExpandHostView = SettingsManager.Current.PingMonitor_ExpandHostView;
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region Contructor, load settings
-
-    public PingMonitorSettingsViewModel()
-    {
-        _isLoading = true;
-
-        LoadSettings();
-
-        _isLoading = false;
-    }
-
-    private void LoadSettings()
-    {
-        Timeout = SettingsManager.Current.PingMonitor_Timeout;
-        Buffer = SettingsManager.Current.PingMonitor_Buffer;
-        TTL = SettingsManager.Current.PingMonitor_TTL;
-        DontFragment = SettingsManager.Current.PingMonitor_DontFragment;
-        WaitTime = SettingsManager.Current.PingMonitor_WaitTime;
-        ExpandHostView = SettingsManager.Current.PingMonitor_ExpandHostView;
-    }
-
-    #endregion
 }

@@ -1,16 +1,17 @@
 ﻿using System.Windows;
 
-namespace Ninja.Views;
-
-public partial class CredentialsPasswordDialog
+namespace Ninja.Views
 {
-    public CredentialsPasswordDialog()
+    public partial class CredentialsPasswordDialog
     {
-        InitializeComponent();
-    }
+        public CredentialsPasswordDialog()
+        {
+            InitializeComponent();
+        }
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        PasswordBoxPassword.Focus();
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            PasswordBoxPassword.Focus();
+        }
     }
 }

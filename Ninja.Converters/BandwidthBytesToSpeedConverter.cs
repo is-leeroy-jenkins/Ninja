@@ -3,21 +3,22 @@ using System.Globalization;
 using System.Windows.Data;
 using Ninja.Utilities;
 
-namespace Ninja.Converters;
-
-using Utilities;
-
-public sealed class BandwidthBytesToSpeedConverter : IValueConverter
+namespace Ninja.Converters
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return value != null
-            ? $"{FileSizeConverter.GetBytesReadable((long)value * 8)}it/s ({FileSizeConverter.GetBytesReadable((long)value)}/s)"
-            : "-/-";
-    }
+    using Utilities;
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public sealed class BandwidthBytesToSpeedConverter : IValueConverter
     {
-        throw new NotImplementedException();
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value != null
+                ? $"{FileSizeConverter.GetBytesReadable((long)value * 8)}it/s ({FileSizeConverter.GetBytesReadable((long)value)}/s)"
+                : "-/-";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,16 +1,17 @@
 ﻿using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class DashboardSettingsView
+namespace Ninja.Views
 {
-    private readonly DashboardSettingsViewModel _viewModel = new();
+    using ViewModels;
 
-    public DashboardSettingsView()
+    public partial class DashboardSettingsView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
+        private readonly DashboardSettingsViewModel _viewModel = new();
+
+        public DashboardSettingsView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
     }
 }

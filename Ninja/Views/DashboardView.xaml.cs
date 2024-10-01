@@ -1,31 +1,32 @@
 ﻿using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class DashboardView
+namespace Ninja.Views
 {
-    private readonly DashboardViewModel _viewModel = new();
+    using ViewModels;
 
-    public DashboardView()
+    public partial class DashboardView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
+        private readonly DashboardViewModel _viewModel = new();
 
-        // Load views
-        ContentControlNetworkConnection.Content = new NetworkConnectionWidgetView();
-        ContentControlIPApiIPGeolocation.Content = new IPApiIPGeolocationWidgetView();
-        ContentControlIPApiDNSResolver.Content = new IPApiDNSResolverWidgetView();
-    }
+        public DashboardView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
 
-    public void OnViewHide()
-    {
-        _viewModel.OnViewHide();
-    }
+            // Load views
+            ContentControlNetworkConnection.Content = new NetworkConnectionWidgetView();
+            ContentControlIPApiIPGeolocation.Content = new IPApiIPGeolocationWidgetView();
+            ContentControlIPApiDNSResolver.Content = new IPApiDNSResolverWidgetView();
+        }
 
-    public void OnViewVisible()
-    {
-        _viewModel.OnViewVisible();
+        public void OnViewHide()
+        {
+            _viewModel.OnViewHide();
+        }
+
+        public void OnViewVisible()
+        {
+            _viewModel.OnViewVisible();
+        }
     }
 }

@@ -6,26 +6,27 @@ using Ninja.Localization.Resources;
 using Ninja.Models.Network;
 using Ninja.Utilities;
 
-namespace Ninja.Validators;
-
-using Models.Network;
-using Utilities;
-
-public class SNMPOIDValidator : ValidationRule
+namespace Ninja.Validators
 {
-    public SNMPOIDDependencyObjectWrapper Wrapper { get; set; }
+    using Models.Network;
+    using Utilities;
 
-    public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+    public class SNMPOIDValidator : ValidationRule
     {
-        var oidValue = (value as string)!.Replace(" ", "");
+        public SNMPOIDDependencyObjectWrapper Wrapper { get; set; }
 
-        if (Wrapper.Mode != SNMPMode.Get || !oidValue.Contains(';'))
-            return Regex.IsMatch(oidValue, RegexHelper.SnmpOidRegex)
-                ? ValidationResult.ValidResult
-                : new ValidationResult(false, Strings.EnterValidOID);
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            var oidValue = (value as string)!.Replace(" ", "");
 
-        return oidValue.Split(';').Any(oid => !Regex.IsMatch(oid, RegexHelper.SnmpOidRegex))
-            ? new ValidationResult(false, Strings.EnterValidOID)
-            : ValidationResult.ValidResult;
+            if (Wrapper.Mode != SNMPMode.Get || !oidValue.Contains(';'))
+                return Regex.IsMatch(oidValue, RegexHelper.SnmpOidRegex)
+                    ? ValidationResult.ValidResult
+                    : new ValidationResult(false, Strings.EnterValidOID);
+
+            return oidValue.Split(';').Any(oid => !Regex.IsMatch(oid, RegexHelper.SnmpOidRegex))
+                ? new ValidationResult(false, Strings.EnterValidOID)
+                : ValidationResult.ValidResult;
+        }
     }
 }

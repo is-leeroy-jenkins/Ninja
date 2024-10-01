@@ -1,15 +1,16 @@
 ﻿using System;
 
-namespace Ninja.Models.EventSystem;
-
-public class EventSystemRedirectArgs : EventArgs
+namespace Ninja.Models.EventSystem
 {
-    public EventSystemRedirectArgs(ApplicationName application, string args)
+    public class EventSystemRedirectArgs : EventArgs
     {
-        Application = application;
-        Args = args;
-    }
+        public EventSystemRedirectArgs(ApplicationName application, string args)
+        {
+            Application = application;
+            Args = args;
+        }
 
-    public ApplicationName Application { get; set; }
-    public string Args { get; set; }
+        public ApplicationName Application { get; set; }
+        public string Args { get; set; }
+    }
 }

@@ -1,50 +1,51 @@
 ﻿using Ninja.Settings;
 
-namespace Ninja.ViewModels;
-
-using Settings;
-
-public class WakeOnLANSettingsViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    #region Variables
+    using Settings;
 
-    private readonly bool _isLoading;
-
-    private int _defaultPort;
-
-    public int DefaultPort
+    public class WakeOnLANSettingsViewModel : ViewModelBase
     {
-        get => _defaultPort;
-        set
+        #region Variables
+
+        private readonly bool _isLoading;
+
+        private int _defaultPort;
+
+        public int DefaultPort
         {
-            if (value == _defaultPort)
-                return;
+            get => _defaultPort;
+            set
+            {
+                if (value == _defaultPort)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.WakeOnLAN_Port = value;
+                if (!_isLoading)
+                    SettingsManager.Current.WakeOnLAN_Port = value;
 
-            _defaultPort = value;
-            OnPropertyChanged();
+                _defaultPort = value;
+                OnPropertyChanged();
+            }
         }
+
+        #endregion
+
+        #region Constructor, load settings
+
+        public WakeOnLANSettingsViewModel()
+        {
+            _isLoading = true;
+
+            LoadSettings();
+
+            _isLoading = false;
+        }
+
+        private void LoadSettings()
+        {
+            DefaultPort = SettingsManager.Current.WakeOnLAN_Port;
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region Constructor, load settings
-
-    public WakeOnLANSettingsViewModel()
-    {
-        _isLoading = true;
-
-        LoadSettings();
-
-        _isLoading = false;
-    }
-
-    private void LoadSettings()
-    {
-        DefaultPort = SettingsManager.Current.WakeOnLAN_Port;
-    }
-
-    #endregion
 }

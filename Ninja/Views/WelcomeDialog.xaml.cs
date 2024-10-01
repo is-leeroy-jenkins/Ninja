@@ -1,9 +1,10 @@
-﻿namespace Ninja.Views;
-
-public partial class WelcomeDialog
+﻿namespace Ninja.Views
 {
-    public WelcomeDialog()
+    public partial class WelcomeDialog
     {
-        InitializeComponent();
+        public WelcomeDialog()
+        {
+            InitializeComponent();
+        }
     }
 }

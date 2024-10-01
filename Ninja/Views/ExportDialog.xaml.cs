@@ -1,9 +1,10 @@
-﻿namespace Ninja.Views;
-
-public partial class ExportDialog
+﻿namespace Ninja.Views
 {
-    public ExportDialog()
+    public partial class ExportDialog
     {
-        InitializeComponent();
+        public ExportDialog()
+        {
+            InitializeComponent();
+        }
     }
 }

@@ -1,15 +1,16 @@
 ﻿using System;
 
-namespace Ninja.Utilities;
-
-public class LvlChartsDefaultInfo
+namespace Ninja.Utilities
 {
-    public LvlChartsDefaultInfo(DateTime dateTime, double value)
+    public class LvlChartsDefaultInfo
     {
-        DateTime = dateTime;
-        Value = value;
-    }
+        public LvlChartsDefaultInfo(DateTime dateTime, double value)
+        {
+            DateTime = dateTime;
+            Value = value;
+        }
 
-    public DateTime DateTime { get; }
-    public double Value { get; set; }
+        public DateTime DateTime { get; }
+        public double Value { get; set; }
+    }
 }

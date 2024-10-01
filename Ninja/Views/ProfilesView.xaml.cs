@@ -4,47 +4,48 @@ using System.Windows.Input;
 using MahApps.Metro.Controls.Dialogs;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class ProfilesView
+namespace Ninja.Views
 {
-    private readonly ProfilesViewModel _viewModel = new(DialogCoordinator.Instance);
+    using ViewModels;
 
-    public ProfilesView()
+    public partial class ProfilesView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly ProfilesViewModel _viewModel = new(DialogCoordinator.Instance);
 
-    private void ContextMenu_Opened(object sender, RoutedEventArgs e)
-    {
-        if (sender is ContextMenu menu)
-            menu.DataContext = _viewModel;
-    }
+        public ProfilesView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
 
-    private void DataGridGroupsRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-    {
-        if (e.ChangedButton == MouseButton.Left)
-            if (_viewModel.EditGroupCommand.CanExecute(null))
-                _viewModel.EditGroupCommand.Execute(null);
-    }
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            if (sender is ContextMenu menu)
+                menu.DataContext = _viewModel;
+        }
 
-    private void DataGridProfilesRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-    {
-        if (e.ChangedButton == MouseButton.Left)
-            if (_viewModel.EditProfileCommand.CanExecute(null))
-                _viewModel.EditProfileCommand.Execute(null);
-    }
+        private void DataGridGroupsRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                if (_viewModel.EditGroupCommand.CanExecute(null))
+                    _viewModel.EditGroupCommand.Execute(null);
+        }
 
-    public void OnViewVisible()
-    {
-        _viewModel.OnViewVisible();
-    }
+        private void DataGridProfilesRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                if (_viewModel.EditProfileCommand.CanExecute(null))
+                    _viewModel.EditProfileCommand.Execute(null);
+        }
 
-    public void OnViewHide()
-    {
-        _viewModel.OnViewHide();
+        public void OnViewVisible()
+        {
+            _viewModel.OnViewVisible();
+        }
+
+        public void OnViewHide()
+        {
+            _viewModel.OnViewHide();
+        }
     }
 }

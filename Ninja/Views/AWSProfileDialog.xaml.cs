@@ -1,16 +1,17 @@
 ﻿using System.Windows;
 
-namespace Ninja.Views;
-
-public partial class AWSProfileDialog
+namespace Ninja.Views
 {
-    public AWSProfileDialog()
+    public partial class AWSProfileDialog
     {
-        InitializeComponent();
-    }
+        public AWSProfileDialog()
+        {
+            InitializeComponent();
+        }
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        TextBoxProfile.Focus();
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextBoxProfile.Focus();
+        }
     }
 }

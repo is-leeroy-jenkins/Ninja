@@ -1,41 +1,42 @@
 ﻿using Ninja.Models;
 
-namespace Ninja.Settings;
-
-using Models;
-
-/// <summary>
-///     Class to store the command line parameters
-/// </summary>
-public class CommandLineInfo
+namespace Ninja.Settings
 {
-    /// <summary>
-    ///     Indicates if the application should show the help dialog
-    /// </summary>
-    public bool Help { get; set; }
+    using Models;
 
     /// <summary>
-    ///     Indicates if the application was started automatically
+    ///     Class to store the command line parameters
     /// </summary>
-    public bool Autostart { get; set; }
+    public class CommandLineInfo
+    {
+        /// <summary>
+        ///     Indicates if the application should show the help dialog
+        /// </summary>
+        public bool Help { get; set; }
 
-    /// <summary>
-    ///     Indicates if the application should reset the settings
-    /// </summary>
-    public bool ResetSettings { get; set; }
+        /// <summary>
+        ///     Indicates if the application was started automatically
+        /// </summary>
+        public bool Autostart { get; set; }
 
-    /// <summary>
-    ///     Process ID of the previous instance of the application to wait for it to close
-    /// </summary>
-    public int RestartPid { get; set; } = -1;
+        /// <summary>
+        ///     Indicates if the application should reset the settings
+        /// </summary>
+        public bool ResetSettings { get; set; }
 
-    /// <summary>
-    ///     Name of the application to start
-    /// </summary>
-    public ApplicationName Application { get; set; } = ApplicationName.None;
+        /// <summary>
+        ///     Process ID of the previous instance of the application to wait for it to close
+        /// </summary>
+        public int RestartPid { get; set; } = -1;
 
-    /// <summary>
-    ///     Wrong parameter(s) detected in the command line to display in the help dialog
-    /// </summary>
-    public string WrongParameter { get; set; }
+        /// <summary>
+        ///     Name of the application to start
+        /// </summary>
+        public ApplicationName Application { get; set; } = ApplicationName.None;
+
+        /// <summary>
+        ///     Wrong parameter(s) detected in the command line to display in the help dialog
+        /// </summary>
+        public string WrongParameter { get; set; }
+    }
 }

@@ -4,45 +4,46 @@ using System.Windows.Input;
 using MahApps.Metro.Controls.Dialogs;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class AWSSessionManagerSettingsView
+namespace Ninja.Views
 {
-    private readonly AWSSessionManagerSettingsViewModel _viewModel = new(DialogCoordinator.Instance);
+    using ViewModels;
 
-    public AWSSessionManagerSettingsView()
+    public partial class AWSSessionManagerSettingsView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly AWSSessionManagerSettingsViewModel _viewModel = new(DialogCoordinator.Instance);
 
-    private void TextBoxApplicationFilePath_Drop(object sender, DragEventArgs e)
-    {
-        if (!e.Data.GetDataPresent(DataFormats.FileDrop))
-            return;
+        public AWSSessionManagerSettingsView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
 
-        var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+        private void TextBoxApplicationFilePath_Drop(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop))
+                return;
 
-        if (files != null)
-            _viewModel.SetFilePathFromDragDrop(files[0]);
-    }
+            var files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
-    private void TextBoxApplicationFilePath_PreviewDragOver(object sender, DragEventArgs e)
-    {
-        e.Effects = DragDropEffects.Copy;
-        e.Handled = true;
-    }
+            if (files != null)
+                _viewModel.SetFilePathFromDragDrop(files[0]);
+        }
 
-    private void ContextMenu_Opened(object sender, RoutedEventArgs e)
-    {
-        if (sender is ContextMenu menu)
-            menu.DataContext = _viewModel;
-    }
+        private void TextBoxApplicationFilePath_PreviewDragOver(object sender, DragEventArgs e)
+        {
+            e.Effects = DragDropEffects.Copy;
+            e.Handled = true;
+        }
 
-    private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-    {
-        _viewModel.EditAWSProfile().ConfigureAwait(false);
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            if (sender is ContextMenu menu)
+                menu.DataContext = _viewModel;
+        }
+
+        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            _viewModel.EditAWSProfile().ConfigureAwait(false);
+        }
     }
 }

@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 
-namespace Ninja.Models.AWS;
-
-public static class AWSProfile
+namespace Ninja.Models.AWS
 {
-    public static List<AWSProfileInfo> GetDefaultList()
+    public static class AWSProfile
     {
-        return new List<AWSProfileInfo>
+        public static List<AWSProfileInfo> GetDefaultList()
         {
-            new(false, "default", "eu-central-1"),
-            new(false, "default", "us-east-1")
-        };
+            return new List<AWSProfileInfo>
+            {
+                new(false, "default", "eu-central-1"),
+                new(false, "default", "us-east-1")
+            };
+        }
     }
 }

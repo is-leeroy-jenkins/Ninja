@@ -7,83 +7,84 @@ using Ninja.Localization.Resources;
 using Ninja.Settings;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Settings;
-using Utilities;
-
-public class SettingsSettingsViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    #region Variables
+    using Settings;
+    using Utilities;
 
-    private readonly IDialogCoordinator _dialogCoordinator;
-
-    public Action CloseAction { get; set; }
-
-    private string _location;
-
-    public string Location
+    public class SettingsSettingsViewModel : ViewModelBase
     {
-        get => _location;
-        set
+        #region Variables
+
+        private readonly IDialogCoordinator _dialogCoordinator;
+
+        public Action CloseAction { get; set; }
+
+        private string _location;
+
+        public string Location
         {
-            if (value == _location)
-                return;
+            get => _location;
+            set
+            {
+                if (value == _location)
+                    return;
 
-            _location = value;
-            OnPropertyChanged();
+                _location = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region Constructor, LoadSettings
+        #region Constructor, LoadSettings
 
-    public SettingsSettingsViewModel(IDialogCoordinator instance)
-    {
-        _dialogCoordinator = instance;
+        public SettingsSettingsViewModel(IDialogCoordinator instance)
+        {
+            _dialogCoordinator = instance;
 
-        LoadSettings();
-    }
+            LoadSettings();
+        }
 
-    private void LoadSettings()
-    {
-        Location = SettingsManager.GetSettingsFolderLocation();
-    }
+        private void LoadSettings()
+        {
+            Location = SettingsManager.GetSettingsFolderLocation();
+        }
 
-    #endregion
+        #endregion
 
-    #region ICommands & Actions
+        #region ICommands & Actions
 
-    public ICommand OpenLocationCommand => new RelayCommand(_ => OpenLocationAction());
+        public ICommand OpenLocationCommand => new RelayCommand(_ => OpenLocationAction());
 
-    private static void OpenLocationAction()
-    {
-        Process.Start("explorer.exe", SettingsManager.GetSettingsFolderLocation());
-    }
+        private static void OpenLocationAction()
+        {
+            Process.Start("explorer.exe", SettingsManager.GetSettingsFolderLocation());
+        }
 
-    public ICommand ResetSettingsCommand => new RelayCommand(_ => ResetSettingsAction());
+        public ICommand ResetSettingsCommand => new RelayCommand(_ => ResetSettingsAction());
 
-    private async void ResetSettingsAction()
-    {
-        var settings = AppearanceManager.MetroDialog;
+        private async void ResetSettingsAction()
+        {
+            var settings = AppearanceManager.MetroDialog;
 
-        settings.AffirmativeButtonText = Strings.Reset;
-        settings.NegativeButtonText = Strings.Cancel;
+            settings.AffirmativeButtonText = Strings.Reset;
+            settings.NegativeButtonText = Strings.Cancel;
 
-        settings.DefaultButtonFocus = MessageDialogResult.Affirmative;
+            settings.DefaultButtonFocus = MessageDialogResult.Affirmative;
 
-        if (await _dialogCoordinator.ShowMessageAsync(this, Strings.ResetSettingsQuestion,
+            if (await _dialogCoordinator.ShowMessageAsync(this, Strings.ResetSettingsQuestion,
                 Strings.SettingsAreResetAndApplicationWillBeRestartedMessage,
                 MessageDialogStyle.AffirmativeAndNegative, settings) != MessageDialogResult.Affirmative)
-            return;
+                return;
 
-        // Init default settings
-        SettingsManager.Initialize();
+            // Init default settings
+            SettingsManager.Initialize();
 
-        // Restart the application
-        (Application.Current.MainWindow as MainWindow)?.RestartApplication();
+            // Restart the application
+            (Application.Current.MainWindow as MainWindow)?.RestartApplication();
+        }
+
+        #endregion
     }
-
-    #endregion
 }

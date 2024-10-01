@@ -5,86 +5,87 @@ using System.Windows.Input;
 using Ninja.Settings;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Settings;
-using Utilities;
-
-public class AWSSessionManagerConnectViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    private string _instanceID;
+    using Settings;
+    using Utilities;
 
-    private string _profile;
-
-    private string _region;
-
-    public AWSSessionManagerConnectViewModel(Action<AWSSessionManagerConnectViewModel> connectCommand,
-        Action<AWSSessionManagerConnectViewModel> cancelHandler)
+    public class AWSSessionManagerConnectViewModel : ViewModelBase
     {
-        ConnectCommand = new RelayCommand(_ => connectCommand(this));
-        CancelCommand = new RelayCommand(_ => cancelHandler(this));
+        private string _instanceID;
 
-        InstanceIDHistoryView =
-            CollectionViewSource.GetDefaultView(SettingsManager.Current.AWSSessionManager_InstanceIDHistory);
-        ProfileHistoryView =
-            CollectionViewSource.GetDefaultView(SettingsManager.Current.AWSSessionManager_ProfileHistory);
-        RegionHistoryView =
-            CollectionViewSource.GetDefaultView(SettingsManager.Current.AWSSessionManager_RegionHistory);
+        private string _profile;
 
-        LoadSettings();
-    }
+        private string _region;
 
-    public ICommand ConnectCommand { get; }
-    public ICommand CancelCommand { get; }
-
-    public string InstanceID
-    {
-        get => _instanceID;
-        set
+        public AWSSessionManagerConnectViewModel(Action<AWSSessionManagerConnectViewModel> connectCommand,
+            Action<AWSSessionManagerConnectViewModel> cancelHandler)
         {
-            if (value == _instanceID)
-                return;
+            ConnectCommand = new RelayCommand(_ => connectCommand(this));
+            CancelCommand = new RelayCommand(_ => cancelHandler(this));
 
-            _instanceID = value;
-            OnPropertyChanged();
+            InstanceIDHistoryView =
+                CollectionViewSource.GetDefaultView(SettingsManager.Current.AWSSessionManager_InstanceIDHistory);
+            ProfileHistoryView =
+                CollectionViewSource.GetDefaultView(SettingsManager.Current.AWSSessionManager_ProfileHistory);
+            RegionHistoryView =
+                CollectionViewSource.GetDefaultView(SettingsManager.Current.AWSSessionManager_RegionHistory);
+
+            LoadSettings();
         }
-    }
 
-    public ICollectionView InstanceIDHistoryView { get; }
+        public ICommand ConnectCommand { get; }
+        public ICommand CancelCommand { get; }
 
-    public string Profile
-    {
-        get => _profile;
-        set
+        public string InstanceID
         {
-            if (value == _profile)
-                return;
+            get => _instanceID;
+            set
+            {
+                if (value == _instanceID)
+                    return;
 
-            _profile = value;
-            OnPropertyChanged();
+                _instanceID = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public ICollectionView ProfileHistoryView { get; }
+        public ICollectionView InstanceIDHistoryView { get; }
 
-    public string Region
-    {
-        get => _region;
-        set
+        public string Profile
         {
-            if (value == _region)
-                return;
+            get => _profile;
+            set
+            {
+                if (value == _profile)
+                    return;
 
-            _region = value;
-            OnPropertyChanged();
+                _profile = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public ICollectionView RegionHistoryView { get; }
+        public ICollectionView ProfileHistoryView { get; }
 
-    private void LoadSettings()
-    {
-        Profile = SettingsManager.Current.AWSSessionManager_Profile;
-        Region = SettingsManager.Current.AWSSessionManager_Region;
+        public string Region
+        {
+            get => _region;
+            set
+            {
+                if (value == _region)
+                    return;
+
+                _region = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICollectionView RegionHistoryView { get; }
+
+        private void LoadSettings()
+        {
+            Profile = SettingsManager.Current.AWSSessionManager_Profile;
+            Region = SettingsManager.Current.AWSSessionManager_Region;
+        }
     }
 }

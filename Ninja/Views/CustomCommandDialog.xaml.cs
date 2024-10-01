@@ -1,16 +1,17 @@
 ﻿using System.Windows;
 
-namespace Ninja.Views;
-
-public partial class CustomCommandDialog
+namespace Ninja.Views
 {
-    public CustomCommandDialog()
+    public partial class CustomCommandDialog
     {
-        InitializeComponent();
-    }
+        public CustomCommandDialog()
+        {
+            InitializeComponent();
+        }
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        TextBoxName.Focus();
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextBoxName.Focus();
+        }
     }
 }

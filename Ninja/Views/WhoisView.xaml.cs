@@ -4,38 +4,39 @@ using MahApps.Metro.Controls.Dialogs;
 using Ninja.Controls;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using Controls;
-using ViewModels;
-
-public partial class WhoisView : IDragablzTabItem
+namespace Ninja.Views
 {
-    private readonly WhoisViewModel _viewModel;
+    using Controls;
+    using ViewModels;
 
-    public WhoisView(Guid tabId, string domain = null)
+    public partial class WhoisView : IDragablzTabItem
     {
-        InitializeComponent();
+        private readonly WhoisViewModel _viewModel;
 
-        _viewModel = new WhoisViewModel(DialogCoordinator.Instance, tabId, domain);
+        public WhoisView(Guid tabId, string domain = null)
+        {
+            InitializeComponent();
 
-        DataContext = _viewModel;
+            _viewModel = new WhoisViewModel(DialogCoordinator.Instance, tabId, domain);
 
-        Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
-    }
+            DataContext = _viewModel;
 
-    public void CloseTab()
-    {
-        _viewModel.OnClose();
-    }
+            Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
+        }
 
-    private void UserControl_OnLoaded(object sender, RoutedEventArgs e)
-    {
-        _viewModel.OnLoaded();
-    }
+        public void CloseTab()
+        {
+            _viewModel.OnClose();
+        }
 
-    private void Dispatcher_ShutdownStarted(object sender, EventArgs e)
-    {
-        _viewModel.OnClose();
+        private void UserControl_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            _viewModel.OnLoaded();
+        }
+
+        private void Dispatcher_ShutdownStarted(object sender, EventArgs e)
+        {
+            _viewModel.OnClose();
+        }
     }
 }

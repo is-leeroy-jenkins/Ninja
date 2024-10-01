@@ -1,16 +1,17 @@
 ﻿using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class WebConsoleSettingsView
+namespace Ninja.Views
 {
-    private readonly WebConsoleSettingsViewModel _viewModel = new();
+    using ViewModels;
 
-    public WebConsoleSettingsView()
+    public partial class WebConsoleSettingsView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
+        private readonly WebConsoleSettingsViewModel _viewModel = new();
+
+        public WebConsoleSettingsView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
     }
 }

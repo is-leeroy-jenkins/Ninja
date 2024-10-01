@@ -3,33 +3,34 @@ using System.Windows.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class NetworkInterfaceView
+namespace Ninja.Views
 {
-    private readonly NetworkInterfaceViewModel _viewModel = new(DialogCoordinator.Instance);
+    using ViewModels;
 
-    public NetworkInterfaceView()
+    public partial class NetworkInterfaceView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly NetworkInterfaceViewModel _viewModel = new(DialogCoordinator.Instance);
 
-    private void ContextMenu_Opened(object sender, RoutedEventArgs e)
-    {
-        if (sender is ContextMenu menu)
-            menu.DataContext = _viewModel;
-    }
+        public NetworkInterfaceView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
 
-    public void OnViewHide()
-    {
-        _viewModel.OnViewHide();
-    }
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            if (sender is ContextMenu menu)
+                menu.DataContext = _viewModel;
+        }
 
-    public void OnViewVisible()
-    {
-        _viewModel.OnViewVisible();
+        public void OnViewHide()
+        {
+            _viewModel.OnViewHide();
+        }
+
+        public void OnViewVisible()
+        {
+            _viewModel.OnViewVisible();
+        }
     }
 }

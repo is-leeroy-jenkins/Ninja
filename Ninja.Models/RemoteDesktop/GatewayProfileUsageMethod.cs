@@ -1,17 +1,18 @@
-﻿namespace Ninja.Models.RemoteDesktop;
-
-/// <summary>
-///     The RD Gateway profile usage method.
-/// </summary>
-public enum GatewayProfileUsageMethod : uint
+﻿namespace Ninja.Models.RemoteDesktop
 {
     /// <summary>
-    ///     Use the default profile mode, as specified by the administrator.
+    ///     The RD Gateway profile usage method.
     /// </summary>
-    Default = 0,
+    public enum GatewayProfileUsageMethod : uint
+    {
+        /// <summary>
+        ///     Use the default profile mode, as specified by the administrator.
+        /// </summary>
+        Default = 0,
 
-    /// <summary>
-    ///     Use explicit settings, as specified by the user.
-    /// </summary>
-    Explicit = 1
+        /// <summary>
+        ///     Use explicit settings, as specified by the user.
+        /// </summary>
+        Explicit = 1
+    }
 }

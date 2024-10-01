@@ -1,27 +1,28 @@
 ﻿using MahApps.Metro.Controls.Dialogs;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class DiscoveryProtocolView
+namespace Ninja.Views
 {
-    private readonly DiscoveryProtocolViewModel _viewModel = new(DialogCoordinator.Instance);
+    using ViewModels;
 
-    public DiscoveryProtocolView()
+    public partial class DiscoveryProtocolView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly DiscoveryProtocolViewModel _viewModel = new(DialogCoordinator.Instance);
 
-    public void OnViewHide()
-    {
-        _viewModel.OnViewHide();
-    }
+        public DiscoveryProtocolView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
 
-    public void OnViewVisible()
-    {
-        _viewModel.OnViewVisible();
+        public void OnViewHide()
+        {
+            _viewModel.OnViewHide();
+        }
+
+        public void OnViewVisible()
+        {
+            _viewModel.OnViewVisible();
+        }
     }
 }

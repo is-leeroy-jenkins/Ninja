@@ -2,17 +2,18 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Ninja.Converters;
-
-public sealed class StringIsNotNullOrEmptyToBooleanConverter : IValueConverter
+namespace Ninja.Converters
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public sealed class StringIsNotNullOrEmptyToBooleanConverter : IValueConverter
     {
-        return !string.IsNullOrEmpty(value as string);
-    }
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return !string.IsNullOrEmpty(value as string);
+        }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

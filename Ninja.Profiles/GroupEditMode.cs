@@ -1,7 +1,8 @@
-﻿namespace Ninja.Profiles;
-
-public enum GroupEditMode
+﻿namespace Ninja.Profiles
 {
-    Add,
-    Edit
+    public enum GroupEditMode
+    {
+        Add,
+        Edit
+    }
 }

@@ -2,34 +2,35 @@
 using MahApps.Metro.Controls.Dialogs;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class PowerShellSettingsView
+namespace Ninja.Views
 {
-    private readonly PowerShellSettingsViewModel _viewModel = new(DialogCoordinator.Instance);
+    using ViewModels;
 
-    public PowerShellSettingsView()
+    public partial class PowerShellSettingsView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly PowerShellSettingsViewModel _viewModel = new(DialogCoordinator.Instance);
 
-    private void TextBoxApplicationFilePath_Drop(object sender, DragEventArgs e)
-    {
-        if (!e.Data.GetDataPresent(DataFormats.FileDrop))
-            return;
+        public PowerShellSettingsView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
 
-        var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+        private void TextBoxApplicationFilePath_Drop(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop))
+                return;
 
-        if (files != null)
-            _viewModel.SetFilePathFromDragDrop(files[0]);
-    }
+            var files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
-    private void TextBoxApplicationFilePath_PreviewDragOver(object sender, DragEventArgs e)
-    {
-        e.Effects = DragDropEffects.Copy;
-        e.Handled = true;
+            if (files != null)
+                _viewModel.SetFilePathFromDragDrop(files[0]);
+        }
+
+        private void TextBoxApplicationFilePath_PreviewDragOver(object sender, DragEventArgs e)
+        {
+            e.Effects = DragDropEffects.Copy;
+            e.Handled = true;
+        }
     }
 }

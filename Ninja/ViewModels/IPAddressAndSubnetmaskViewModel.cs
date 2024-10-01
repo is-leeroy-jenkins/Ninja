@@ -2,50 +2,51 @@
 using System.Windows.Input;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Utilities;
-
-public class IPAddressAndSubnetmaskViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    private string _ipAddress;
+    using Utilities;
 
-    private string _subnetmask;
-
-    public IPAddressAndSubnetmaskViewModel(Action<IPAddressAndSubnetmaskViewModel> okCommand,
-        Action<IPAddressAndSubnetmaskViewModel> cancelHandler)
+    public class IPAddressAndSubnetmaskViewModel : ViewModelBase
     {
-        OKCommand = new RelayCommand(_ => okCommand(this));
-        CancelCommand = new RelayCommand(_ => cancelHandler(this));
-    }
+        private string _ipAddress;
 
-    public ICommand OKCommand { get; }
+        private string _subnetmask;
 
-    public ICommand CancelCommand { get; }
-
-    public string IPAddress
-    {
-        get => _ipAddress;
-        set
+        public IPAddressAndSubnetmaskViewModel(Action<IPAddressAndSubnetmaskViewModel> okCommand,
+            Action<IPAddressAndSubnetmaskViewModel> cancelHandler)
         {
-            if (value == _ipAddress)
-                return;
-
-            _ipAddress = value;
-            OnPropertyChanged();
+            OKCommand = new RelayCommand(_ => okCommand(this));
+            CancelCommand = new RelayCommand(_ => cancelHandler(this));
         }
-    }
 
-    public string Subnetmask
-    {
-        get => _subnetmask;
-        set
+        public ICommand OKCommand { get; }
+
+        public ICommand CancelCommand { get; }
+
+        public string IPAddress
         {
-            if (value == _subnetmask)
-                return;
+            get => _ipAddress;
+            set
+            {
+                if (value == _ipAddress)
+                    return;
 
-            _subnetmask = value;
-            OnPropertyChanged();
+                _ipAddress = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Subnetmask
+        {
+            get => _subnetmask;
+            set
+            {
+                if (value == _subnetmask)
+                    return;
+
+                _subnetmask = value;
+                OnPropertyChanged();
+            }
         }
     }
 }

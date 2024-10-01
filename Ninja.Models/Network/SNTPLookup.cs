@@ -6,143 +6,144 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Ninja.Utilities;
 
-namespace Ninja.Models.Network;
-
-using Utilities;
-
-public sealed class SNTPLookup
+namespace Ninja.Models.Network
 {
-    #region Variables
+    using Utilities;
 
-    private readonly SNTPLookupSettings _settings;
-
-    #endregion
-
-    #region Constructor
-
-    public SNTPLookup(SNTPLookupSettings settings)
+    public sealed class SNTPLookup
     {
-        _settings = settings;
-    }
+        #region Variables
 
-    #endregion
+        private readonly SNTPLookupSettings _settings;
 
-    #region Events
+        #endregion
 
-    public event EventHandler<SNTPLookupResultArgs> ResultReceived;
+        #region Constructor
 
-    private void OnResultReceived(SNTPLookupResultArgs e)
-    {
-        ResultReceived?.Invoke(this, e);
-    }
-
-    public event EventHandler<SNTPLookupErrorArgs> LookupError;
-
-    private void OnLookupError(SNTPLookupErrorArgs e)
-    {
-        LookupError?.Invoke(this, e);
-    }
-
-    public event EventHandler LookupComplete;
-
-    private void OnLookupComplete()
-    {
-        LookupComplete?.Invoke(this, EventArgs.Empty);
-    }
-
-    #endregion
-
-    #region Methods
-
-    private static SNTPDateTime GetNetworkTimeRfc2030(IPEndPoint server, int timeout = 4000)
-    {
-        var ntpData = new byte[48]; // RFC 2030
-        ntpData[0] = 0x1B; // LI = 0 (no warning), VN = 3 (IPv4 only), Mode = 3 (Client Mode)
-
-        var udpClient = new UdpClient(server.AddressFamily);
-        udpClient.Client.SendTimeout = timeout;
-        udpClient.Client.ReceiveTimeout = timeout;
-        udpClient.Connect(server);
-
-        var localStartTime = DateTime.Now.ToUniversalTime();
-
-        udpClient.Send(ntpData, ntpData.Length);
-        ntpData = udpClient.Receive(ref server);
-
-        var localEndTime = DateTime.Now.ToUniversalTime();
-
-        udpClient.Close();
-
-        var intPart = ((ulong)ntpData[40] << 24) | ((ulong)ntpData[41] << 16) | ((ulong)ntpData[42] << 8) | ntpData[43];
-        var fractionPart = ((ulong)ntpData[44] << 24) | ((ulong)ntpData[45] << 16) | ((ulong)ntpData[46] << 8) |
-                           ntpData[47];
-
-        var milliseconds = intPart * 1000 + fractionPart * 1000 / 0x100000000L;
-        var networkTime = new DateTime(1900, 1, 1).AddMilliseconds((long)milliseconds);
-
-        // Calculate local offset with local start/end time and network time in seconds            
-        var roundTripDelayTicks = localEndTime.Ticks - localStartTime.Ticks;
-        var offsetInSeconds = (localStartTime.Ticks + roundTripDelayTicks / 2 - networkTime.Ticks) /
-                              TimeSpan.TicksPerSecond;
-
-        return new SNTPDateTime
+        public SNTPLookup(SNTPLookupSettings settings)
         {
-            LocalStartTime = localStartTime,
-            LocalEndTime = localEndTime,
-            NetworkTime = networkTime,
-            RoundTripDelay = roundTripDelayTicks / TimeSpan.TicksPerMillisecond,
-            Offset = offsetInSeconds
-        };
-    }
+            _settings = settings;
+        }
 
-    public void QueryAsync(IEnumerable<ServerConnectionInfo> servers, bool dnsResolveHostnamePreferIPv4)
-    {
-        Task.Run(() =>
+        #endregion
+
+        #region Events
+
+        public event EventHandler<SNTPLookupResultArgs> ResultReceived;
+
+        private void OnResultReceived(SNTPLookupResultArgs e)
         {
-            Parallel.ForEach(servers, server =>
+            ResultReceived?.Invoke(this, e);
+        }
+
+        public event EventHandler<SNTPLookupErrorArgs> LookupError;
+
+        private void OnLookupError(SNTPLookupErrorArgs e)
+        {
+            LookupError?.Invoke(this, e);
+        }
+
+        public event EventHandler LookupComplete;
+
+        private void OnLookupComplete()
+        {
+            LookupComplete?.Invoke(this, EventArgs.Empty);
+        }
+
+        #endregion
+
+        #region Methods
+
+        private static SNTPDateTime GetNetworkTimeRfc2030(IPEndPoint server, int timeout = 4000)
+        {
+            var ntpData = new byte[48]; // RFC 2030
+            ntpData[0] = 0x1B; // LI = 0 (no warning), VN = 3 (IPv4 only), Mode = 3 (Client Mode)
+
+            var udpClient = new UdpClient(server.AddressFamily);
+            udpClient.Client.SendTimeout = timeout;
+            udpClient.Client.ReceiveTimeout = timeout;
+            udpClient.Connect(server);
+
+            var localStartTime = DateTime.Now.ToUniversalTime();
+
+            udpClient.Send(ntpData, ntpData.Length);
+            ntpData = udpClient.Receive(ref server);
+
+            var localEndTime = DateTime.Now.ToUniversalTime();
+
+            udpClient.Close();
+
+            var intPart = ((ulong)ntpData[40] << 24) | ((ulong)ntpData[41] << 16) | ((ulong)ntpData[42] << 8) | ntpData[43];
+            var fractionPart = ((ulong)ntpData[44] << 24) | ((ulong)ntpData[45] << 16) | ((ulong)ntpData[46] << 8) |
+                ntpData[47];
+
+            var milliseconds = intPart * 1000 + fractionPart * 1000 / 0x100000000L;
+            var networkTime = new DateTime(1900, 1, 1).AddMilliseconds((long)milliseconds);
+
+            // Calculate local offset with local start/end time and network time in seconds            
+            var roundTripDelayTicks = localEndTime.Ticks - localStartTime.Ticks;
+            var offsetInSeconds = (localStartTime.Ticks + roundTripDelayTicks / 2 - networkTime.Ticks) /
+                TimeSpan.TicksPerSecond;
+
+            return new SNTPDateTime
             {
-                // NTP requires an IP address to connect to
-                IPAddress serverIP = null;
+                LocalStartTime = localStartTime,
+                LocalEndTime = localEndTime,
+                NetworkTime = networkTime,
+                RoundTripDelay = roundTripDelayTicks / TimeSpan.TicksPerMillisecond,
+                Offset = offsetInSeconds
+            };
+        }
 
-                if (Regex.IsMatch(server.Server, RegexHelper.IPv4AddressRegex) ||
-                    Regex.IsMatch(server.Server, RegexHelper.IPv6AddressRegex))
+        public void QueryAsync(IEnumerable<ServerConnectionInfo> servers, bool dnsResolveHostnamePreferIPv4)
+        {
+            Task.Run(() =>
+            {
+                Parallel.ForEach(servers, server =>
                 {
-                    serverIP = IPAddress.Parse(server.Server);
-                }
-                else
-                {
-                    using var dnsResolverTask =
-                        DNSClientHelper.ResolveAorAaaaAsync(server.Server, dnsResolveHostnamePreferIPv4);
+                    // NTP requires an IP address to connect to
+                    IPAddress serverIP = null;
 
-                    // Wait for task inside a Parallel.Foreach
-                    dnsResolverTask.Wait();
-
-                    if (dnsResolverTask.Result.HasError)
+                    if (Regex.IsMatch(server.Server, RegexHelper.IPv4AddressRegex) ||
+                        Regex.IsMatch(server.Server, RegexHelper.IPv6AddressRegex))
                     {
-                        OnLookupError(new SNTPLookupErrorArgs(
-                            DNSClientHelper.FormatDNSClientResultError(server.Server, dnsResolverTask.Result), true));
-                        return;
+                        serverIP = IPAddress.Parse(server.Server);
+                    }
+                    else
+                    {
+                        using var dnsResolverTask =
+                            DNSClientHelper.ResolveAorAaaaAsync(server.Server, dnsResolveHostnamePreferIPv4);
+
+                        // Wait for task inside a Parallel.Foreach
+                        dnsResolverTask.Wait();
+
+                        if (dnsResolverTask.Result.HasError)
+                        {
+                            OnLookupError(new SNTPLookupErrorArgs(
+                                DNSClientHelper.FormatDNSClientResultError(server.Server, dnsResolverTask.Result), true));
+                            return;
+                        }
+
+                        serverIP = dnsResolverTask.Result.Value;
                     }
 
-                    serverIP = dnsResolverTask.Result.Value;
-                }
+                    try
+                    {
+                        var dateTime = GetNetworkTimeRfc2030(new IPEndPoint(serverIP, server.Port), _settings.Timeout);
 
-                try
-                {
-                    var dateTime = GetNetworkTimeRfc2030(new IPEndPoint(serverIP, server.Port), _settings.Timeout);
+                        OnResultReceived(new SNTPLookupResultArgs(
+                            new SNTPLookupInfo(server.Server, $"{serverIP}:{server.Port}", dateTime)));
+                    }
+                    catch (Exception ex)
+                    {
+                        OnLookupError(new SNTPLookupErrorArgs(server.Server, $"{serverIP}:{server.Port}", ex.Message));
+                    }
+                });
 
-                    OnResultReceived(new SNTPLookupResultArgs(
-                        new SNTPLookupInfo(server.Server, $"{serverIP}:{server.Port}", dateTime)));
-                }
-                catch (Exception ex)
-                {
-                    OnLookupError(new SNTPLookupErrorArgs(server.Server, $"{serverIP}:{server.Port}", ex.Message));
-                }
+                OnLookupComplete();
             });
+        }
 
-            OnLookupComplete();
-        });
+        #endregion
     }
-
-    #endregion
 }

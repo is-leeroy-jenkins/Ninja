@@ -2,18 +2,19 @@
 using System.Windows.Controls;
 using Ninja.Localization.Resources;
 
-namespace Ninja.Validators;
-
-public class PortValidator : ValidationRule
+namespace Ninja.Validators
 {
-    public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+    public class PortValidator : ValidationRule
     {
-        if (!int.TryParse(value as string, out var portNumber))
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            if (!int.TryParse(value as string, out var portNumber))
+                return new ValidationResult(false, Strings.EnterValidPort);
+
+            if (portNumber > 0 && portNumber < 65536)
+                return ValidationResult.ValidResult;
+
             return new ValidationResult(false, Strings.EnterValidPort);
-
-        if (portNumber > 0 && portNumber < 65536)
-            return ValidationResult.ValidResult;
-
-        return new ValidationResult(false, Strings.EnterValidPort);
+        }
     }
 }

@@ -5,62 +5,63 @@ using System.Windows.Input;
 using MahApps.Metro.Controls.Dialogs;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class PuTTYHostView
+namespace Ninja.Views
 {
-    private readonly PuTTYHostViewModel _viewModel = new(DialogCoordinator.Instance);
+    using ViewModels;
 
-    private bool _loaded;
-
-    public PuTTYHostView()
+    public partial class PuTTYHostView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly PuTTYHostViewModel _viewModel = new(DialogCoordinator.Instance);
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        _loaded = true;
-    }
+        private bool _loaded;
 
-    private void ContextMenu_Opened(object sender, RoutedEventArgs e)
-    {
-        if (sender is ContextMenu menu)
-            menu.DataContext = _viewModel;
-    }
+        public PuTTYHostView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
 
-    private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-    {
-        if (e.ChangedButton == MouseButton.Left)
-            _viewModel.ConnectProfileCommand.Execute(null);
-    }
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            _loaded = true;
+        }
 
-    public async void AddTab(string host)
-    {
-        // Wait for the interface to load, before displaying the dialog to connect a new profile... 
-        // MahApps will throw an exception... 
-        while (!_loaded)
-            await Task.Delay(250);
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            if (sender is ContextMenu menu)
+                menu.DataContext = _viewModel;
+        }
 
-        if (_viewModel.IsConfigured)
-            _viewModel.AddTab(host);
-    }
+        private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                _viewModel.ConnectProfileCommand.Execute(null);
+        }
 
-    public void OnViewHide()
-    {
-        _viewModel.OnViewHide();
-    }
+        public async void AddTab(string host)
+        {
+            // Wait for the interface to load, before displaying the dialog to connect a new profile... 
+            // MahApps will throw an exception... 
+            while (!_loaded)
+                await Task.Delay(250);
 
-    public void OnViewVisible()
-    {
-        _viewModel.OnViewVisible();
-    }
+            if (_viewModel.IsConfigured)
+                _viewModel.AddTab(host);
+        }
 
-    public void FocusEmbeddedWindow()
-    {
-        _viewModel.FocusEmbeddedWindow();
+        public void OnViewHide()
+        {
+            _viewModel.OnViewHide();
+        }
+
+        public void OnViewVisible()
+        {
+            _viewModel.OnViewVisible();
+        }
+
+        public void FocusEmbeddedWindow()
+        {
+            _viewModel.FocusEmbeddedWindow();
+        }
     }
 }

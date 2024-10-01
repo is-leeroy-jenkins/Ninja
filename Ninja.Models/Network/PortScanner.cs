@@ -7,155 +7,156 @@ using System.Threading.Tasks;
 using Ninja.Models.Lookup;
 using Ninja.Utilities;
 
-namespace Ninja.Models.Network;
-
-using Lookup;
-using Utilities;
-
-public sealed class PortScanner
+namespace Ninja.Models.Network
 {
-    #region Constructor
+    using Lookup;
+    using Utilities;
 
-    public PortScanner(PortScannerOptions options)
+    public sealed class PortScanner
     {
-        _options = options;
-    }
+        #region Constructor
 
-    #endregion
-
-    #region Variables
-
-    private int _progressValue;
-
-    private readonly PortScannerOptions _options;
-
-    #endregion
-
-    #region Events
-
-    public event EventHandler<PortScannerPortScannedArgs> PortScanned;
-
-    private void OnPortScanned(PortScannerPortScannedArgs e)
-    {
-        PortScanned?.Invoke(this, e);
-    }
-
-    public event EventHandler ScanComplete;
-
-    private void OnScanComplete()
-    {
-        ScanComplete?.Invoke(this, EventArgs.Empty);
-    }
-
-    public event EventHandler<ProgressChangedArgs> ProgressChanged;
-
-    private void OnProgressChanged()
-    {
-        ProgressChanged?.Invoke(this, new ProgressChangedArgs(_progressValue));
-    }
-
-    public event EventHandler UserHasCanceled;
-
-    private void OnUserHasCanceled()
-    {
-        UserHasCanceled?.Invoke(this, EventArgs.Empty);
-    }
-
-    #endregion
-
-    #region Methods
-
-    public void ScanAsync(IEnumerable<(IPAddress ipAddress, string hostname)> hosts, IEnumerable<int> ports,
-        CancellationToken cancellationToken)
-    {
-        _progressValue = 0;
-
-        Task.Run(() =>
+        public PortScanner(PortScannerOptions options)
         {
-            try
+            _options = options;
+        }
+
+        #endregion
+
+        #region Variables
+
+        private int _progressValue;
+
+        private readonly PortScannerOptions _options;
+
+        #endregion
+
+        #region Events
+
+        public event EventHandler<PortScannerPortScannedArgs> PortScanned;
+
+        private void OnPortScanned(PortScannerPortScannedArgs e)
+        {
+            PortScanned?.Invoke(this, e);
+        }
+
+        public event EventHandler ScanComplete;
+
+        private void OnScanComplete()
+        {
+            ScanComplete?.Invoke(this, EventArgs.Empty);
+        }
+
+        public event EventHandler<ProgressChangedArgs> ProgressChanged;
+
+        private void OnProgressChanged()
+        {
+            ProgressChanged?.Invoke(this, new ProgressChangedArgs(_progressValue));
+        }
+
+        public event EventHandler UserHasCanceled;
+
+        private void OnUserHasCanceled()
+        {
+            UserHasCanceled?.Invoke(this, EventArgs.Empty);
+        }
+
+        #endregion
+
+        #region Methods
+
+        public void ScanAsync(IEnumerable<(IPAddress ipAddress, string hostname)> hosts, IEnumerable<int> ports,
+            CancellationToken cancellationToken)
+        {
+            _progressValue = 0;
+
+            Task.Run(() =>
             {
-                var hostParallelOptions = new ParallelOptions
+                try
                 {
-                    CancellationToken = cancellationToken,
-                    MaxDegreeOfParallelism = _options.MaxHostThreads
-                };
-
-                var portParallelOptions = new ParallelOptions
-                {
-                    CancellationToken = cancellationToken,
-                    MaxDegreeOfParallelism = _options.MaxPortThreads
-                };
-
-                Parallel.ForEach(hosts, hostParallelOptions, host =>
-                {
-                    // Resolve Hostname (PTR)
-                    var hostname = string.Empty;
-
-                    if (_options.ResolveHostname)
+                    var hostParallelOptions = new ParallelOptions
                     {
-                        // Don't use await in Parallel.ForEach, this will break
-                        var dnsResolverTask = DNSClient.GetInstance().ResolvePtrAsync(host.ipAddress);
+                        CancellationToken = cancellationToken,
+                        MaxDegreeOfParallelism = _options.MaxHostThreads
+                    };
 
-                        // Wait for task inside a Parallel.Foreach
-                        dnsResolverTask.Wait(cancellationToken);
-
-                        if (!dnsResolverTask.Result.HasError)
-                            hostname = dnsResolverTask.Result.Value;
-                    }
-
-                    // Check each port
-                    Parallel.ForEach(ports, portParallelOptions, port =>
+                    var portParallelOptions = new ParallelOptions
                     {
-                        // Test if port is open
-                        using (var tcpClient = new TcpClient(host.ipAddress.AddressFamily))
+                        CancellationToken = cancellationToken,
+                        MaxDegreeOfParallelism = _options.MaxPortThreads
+                    };
+
+                    Parallel.ForEach(hosts, hostParallelOptions, host =>
+                    {
+                        // Resolve Hostname (PTR)
+                        var hostname = string.Empty;
+
+                        if (_options.ResolveHostname)
                         {
-                            var portState = PortState.None;
+                            // Don't use await in Parallel.ForEach, this will break
+                            var dnsResolverTask = DNSClient.GetInstance().ResolvePtrAsync(host.ipAddress);
 
-                            try
-                            {
-                                var task = tcpClient.ConnectAsync(host.ipAddress, port);
+                            // Wait for task inside a Parallel.Foreach
+                            dnsResolverTask.Wait(cancellationToken);
 
-                                if (task.Wait(_options.Timeout))
-                                    portState = tcpClient.Connected ? PortState.Open : PortState.Closed;
-                                else
-                                    portState = PortState.TimedOut;
-                            }
-                            catch
-                            {
-                                portState = PortState.Closed;
-                            }
-                            finally
-                            {
-                                tcpClient.Close();
-
-                                if (_options.ShowAllResults || portState == PortState.Open)
-                                    OnPortScanned(new PortScannerPortScannedArgs(
-                                        new PortScannerPortInfo(host.ipAddress, hostname, port,
-                                            PortLookup.LookupByPortAndProtocol(port), portState)));
-                            }
+                            if (!dnsResolverTask.Result.HasError)
+                                hostname = dnsResolverTask.Result.Value;
                         }
 
-                        IncreaseProgress();
+                        // Check each port
+                        Parallel.ForEach(ports, portParallelOptions, port =>
+                        {
+                            // Test if port is open
+                            using (var tcpClient = new TcpClient(host.ipAddress.AddressFamily))
+                            {
+                                var portState = PortState.None;
+
+                                try
+                                {
+                                    var task = tcpClient.ConnectAsync(host.ipAddress, port);
+
+                                    if (task.Wait(_options.Timeout))
+                                        portState = tcpClient.Connected ? PortState.Open : PortState.Closed;
+                                    else
+                                        portState = PortState.TimedOut;
+                                }
+                                catch
+                                {
+                                    portState = PortState.Closed;
+                                }
+                                finally
+                                {
+                                    tcpClient.Close();
+
+                                    if (_options.ShowAllResults || portState == PortState.Open)
+                                        OnPortScanned(new PortScannerPortScannedArgs(
+                                            new PortScannerPortInfo(host.ipAddress, hostname, port,
+                                                PortLookup.LookupByPortAndProtocol(port), portState)));
+                                }
+                            }
+
+                            IncreaseProgress();
+                        });
                     });
-                });
-            }
-            catch (OperationCanceledException)
-            {
-                OnUserHasCanceled();
-            }
-            finally
-            {
-                OnScanComplete();
-            }
-        }, cancellationToken);
-    }
+                }
+                catch (OperationCanceledException)
+                {
+                    OnUserHasCanceled();
+                }
+                finally
+                {
+                    OnScanComplete();
+                }
+            }, cancellationToken);
+        }
 
-    private void IncreaseProgress()
-    {
-        // Increase the progress                        
-        Interlocked.Increment(ref _progressValue);
-        OnProgressChanged();
-    }
+        private void IncreaseProgress()
+        {
+            // Increase the progress                        
+            Interlocked.Increment(ref _progressValue);
+            OnProgressChanged();
+        }
 
-    #endregion
+        #endregion
+    }
 }

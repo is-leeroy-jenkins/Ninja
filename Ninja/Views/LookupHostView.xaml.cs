@@ -1,26 +1,27 @@
 ﻿using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class LookupHostView
+namespace Ninja.Views
 {
-    private readonly LookupHostViewModel _viewModel = new();
+    using ViewModels;
 
-    public LookupHostView()
+    public partial class LookupHostView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly LookupHostViewModel _viewModel = new();
 
-    public void OnViewHide()
-    {
-        _viewModel.OnViewHide();
-    }
+        public LookupHostView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
 
-    public void OnViewVisible()
-    {
-        _viewModel.OnViewVisible();
+        public void OnViewHide()
+        {
+            _viewModel.OnViewHide();
+        }
+
+        public void OnViewVisible()
+        {
+            _viewModel.OnViewVisible();
+        }
     }
 }

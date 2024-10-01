@@ -1,27 +1,28 @@
-﻿namespace Ninja.Models.Network;
-
-/// <summary>
-///     Represents the state of a port.
-/// </summary>
-public enum PortState
+﻿namespace Ninja.Models.Network
 {
     /// <summary>
-    ///     Port is not defined.
+    ///     Represents the state of a port.
     /// </summary>
-    None,
+    public enum PortState
+    {
+        /// <summary>
+        ///     Port is not defined.
+        /// </summary>
+        None,
 
-    /// <summary>
-    ///     Port is open.
-    /// </summary>
-    Open,
+        /// <summary>
+        ///     Port is open.
+        /// </summary>
+        Open,
 
-    /// <summary>
-    ///     Port is closed.
-    /// </summary>
-    Closed,
+        /// <summary>
+        ///     Port is closed.
+        /// </summary>
+        Closed,
 
-    /// <summary>
-    ///     Port has timed out.
-    /// </summary>
-    TimedOut
+        /// <summary>
+        ///     Port has timed out.
+        /// </summary>
+        TimedOut
+    }
 }

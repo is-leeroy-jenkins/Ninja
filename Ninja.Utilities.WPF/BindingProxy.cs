@@ -1,20 +1,21 @@
 ﻿using System.Windows;
 
-namespace Ninja.Utilities.WPF;
-
-public class BindingProxy : Freezable
+namespace Ninja.Utilities.WPF
 {
-    public static readonly DependencyProperty DataProperty =
-        DependencyProperty.Register("Data", typeof(object), typeof(BindingProxy));
-
-    public object Data
+    public class BindingProxy : Freezable
     {
-        get => GetValue(DataProperty);
-        set => SetValue(DataProperty, value);
-    }
+        public static readonly DependencyProperty DataProperty =
+            DependencyProperty.Register("Data", typeof(object), typeof(BindingProxy));
 
-    protected override Freezable CreateInstanceCore()
-    {
-        return new BindingProxy();
+        public object Data
+        {
+            get => GetValue(DataProperty);
+            set => SetValue(DataProperty, value);
+        }
+
+        protected override Freezable CreateInstanceCore()
+        {
+            return new BindingProxy();
+        }
     }
 }

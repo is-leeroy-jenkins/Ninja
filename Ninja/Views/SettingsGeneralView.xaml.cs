@@ -2,23 +2,24 @@
 using System.Windows.Controls;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class SettingsGeneralView
+namespace Ninja.Views
 {
-    private readonly SettingsGeneralViewModel _viewModel = new();
+    using ViewModels;
 
-    public SettingsGeneralView()
+    public partial class SettingsGeneralView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly SettingsGeneralViewModel _viewModel = new();
 
-    private void ContextMenu_Opened(object sender, RoutedEventArgs e)
-    {
-        if (sender is ContextMenu menu)
-            menu.DataContext = _viewModel;
+        public SettingsGeneralView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
+
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            if (sender is ContextMenu menu)
+                menu.DataContext = _viewModel;
+        }
     }
 }

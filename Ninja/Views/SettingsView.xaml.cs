@@ -3,50 +3,51 @@ using Ninja.Documentation;
 using Ninja.Models;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using Documentation;
-using Models;
-using ViewModels;
-
-public partial class SettingsView
+namespace Ninja.Views
 {
-    private readonly SettingsViewModel _viewModel;
+    using Documentation;
+    using Models;
+    using ViewModels;
 
-    public SettingsView()
+    public partial class SettingsView
     {
-        InitializeComponent();
-        _viewModel = new SettingsViewModel();
+        private readonly SettingsViewModel _viewModel;
 
-        DataContext = _viewModel;
-    }
+        public SettingsView()
+        {
+            InitializeComponent();
+            _viewModel = new SettingsViewModel();
 
-    private void ScrollViewer_ManipulationBoundaryFeedback(object sender,
-        ManipulationBoundaryFeedbackEventArgs e)
-    {
-        e.Handled = true;
-    }
+            DataContext = _viewModel;
+        }
 
-    public void ChangeSettingsView(ApplicationName name)
-    {
-        _viewModel.ChangeSettingsView(name);
+        private void ScrollViewer_ManipulationBoundaryFeedback(object sender,
+            ManipulationBoundaryFeedbackEventArgs e)
+        {
+            e.Handled = true;
+        }
 
-        // Scroll into view
-        ListBoxSettings.ScrollIntoView(_viewModel.SelectedSettingsView);
-    }
+        public void ChangeSettingsView(ApplicationName name)
+        {
+            _viewModel.ChangeSettingsView(name);
 
-    public void OnViewVisible()
-    {
-        ProfilesView.OnViewVisible();
-    }
+            // Scroll into view
+            ListBoxSettings.ScrollIntoView(_viewModel.SelectedSettingsView);
+        }
 
-    public void OnViewHide()
-    {
-        ProfilesView.OnViewHide();
-    }
+        public void OnViewVisible()
+        {
+            ProfilesView.OnViewVisible();
+        }
 
-    public DocumentationIdentifier GetDocumentationIdentifier()
-    {
-        return _viewModel.GetDocumentationIdentifier();
+        public void OnViewHide()
+        {
+            ProfilesView.OnViewHide();
+        }
+
+        public DocumentationIdentifier GetDocumentationIdentifier()
+        {
+            return _viewModel.GetDocumentationIdentifier();
+        }
     }
 }

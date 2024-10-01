@@ -4,44 +4,45 @@ using System.Windows.Input;
 using MahApps.Metro.Controls.Dialogs;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class DNSLookupHostView
+namespace Ninja.Views
 {
-    private readonly DNSLookupHostViewModel _viewModel = new(DialogCoordinator.Instance);
+    using ViewModels;
 
-    public DNSLookupHostView()
+    public partial class DNSLookupHostView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly DNSLookupHostViewModel _viewModel = new(DialogCoordinator.Instance);
 
-    private void ContextMenu_Opened(object sender, RoutedEventArgs e)
-    {
-        if (sender is ContextMenu menu)
-            menu.DataContext = _viewModel;
-    }
+        public DNSLookupHostView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
 
-    private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-    {
-        if (e.ChangedButton == MouseButton.Left)
-            _viewModel.LookupProfileCommand.Execute(null);
-    }
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            if (sender is ContextMenu menu)
+                menu.DataContext = _viewModel;
+        }
 
-    public void AddTab(string host)
-    {
-        _viewModel.AddTab(host);
-    }
+        private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                _viewModel.LookupProfileCommand.Execute(null);
+        }
 
-    public void OnViewHide()
-    {
-        _viewModel.OnViewHide();
-    }
+        public void AddTab(string host)
+        {
+            _viewModel.AddTab(host);
+        }
 
-    public void OnViewVisible()
-    {
-        _viewModel.OnViewVisible();
+        public void OnViewHide()
+        {
+            _viewModel.OnViewHide();
+        }
+
+        public void OnViewVisible()
+        {
+            _viewModel.OnViewVisible();
+        }
     }
 }

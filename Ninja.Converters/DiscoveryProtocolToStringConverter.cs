@@ -4,42 +4,43 @@ using System.Windows.Data;
 using Ninja.Localization;
 using Ninja.Models.Network;
 
-namespace Ninja.Converters;
-
-using Localization;
-using Models.Network;
-
-/// <summary>
-///     Convert <see cref="DiscoveryProtocol" /> to translated <see cref="string" /> or wise versa.
-/// </summary>
-public sealed class DiscoveryProtocolToStringConverter : IValueConverter
+namespace Ninja.Converters
 {
-    /// <summary>
-    ///     Convert <see cref="DiscoveryProtocol" /> to translated <see cref="string" />.
-    /// </summary>
-    /// <param name="value">Object from type <see cref="DiscoveryProtocol" />.</param>
-    /// <param name="targetType"></param>
-    /// <param name="parameter"></param>
-    /// <param name="culture"></param>
-    /// <returns>Translated <see cref="DiscoveryProtocol" />.</returns>
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return value is not DiscoveryProtocol discoveryProtocol
-            ? "-/-"
-            : ResourceTranslator.Translate(ResourceIdentifier.DiscoveryProtocol,
-                discoveryProtocol);
-    }
+    using Localization;
+    using Models.Network;
 
     /// <summary>
-    ///     !!! Method not implemented !!!
+    ///     Convert <see cref="DiscoveryProtocol" /> to translated <see cref="string" /> or wise versa.
     /// </summary>
-    /// <param name="value"></param>
-    /// <param name="targetType"></param>
-    /// <param name="parameter"></param>
-    /// <param name="culture"></param>
-    /// <returns></returns>
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public sealed class DiscoveryProtocolToStringConverter : IValueConverter
     {
-        throw new NotImplementedException();
+        /// <summary>
+        ///     Convert <see cref="DiscoveryProtocol" /> to translated <see cref="string" />.
+        /// </summary>
+        /// <param name="value">Object from type <see cref="DiscoveryProtocol" />.</param>
+        /// <param name="targetType"></param>
+        /// <param name="parameter"></param>
+        /// <param name="culture"></param>
+        /// <returns>Translated <see cref="DiscoveryProtocol" />.</returns>
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value is not DiscoveryProtocol discoveryProtocol
+                ? "-/-"
+                : ResourceTranslator.Translate(ResourceIdentifier.DiscoveryProtocol,
+                    discoveryProtocol);
+        }
+
+        /// <summary>
+        ///     !!! Method not implemented !!!
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="targetType"></param>
+        /// <param name="parameter"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

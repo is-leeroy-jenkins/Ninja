@@ -2,20 +2,21 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Ninja.Converters;
-
-public sealed class IsDynamicProfileToBooleanConverter : IValueConverter
+namespace Ninja.Converters
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public sealed class IsDynamicProfileToBooleanConverter : IValueConverter
     {
-        if (value is string name)
-            return name.StartsWith("~");
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is string name)
+                return name.StartsWith("~");
 
-        return false;
-    }
+            return false;
+        }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

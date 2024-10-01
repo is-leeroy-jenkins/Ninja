@@ -4,22 +4,23 @@ using System.Windows.Data;
 using Windows.Networking.Connectivity;
 using Ninja.Models.Network;
 
-namespace Ninja.Converters;
-
-using Models.Network;
-
-public sealed class WiFiAuthenticationTypeToHumanReadableStringConverter : IValueConverter
+namespace Ninja.Converters
 {
-    /* Translate the name of the accent */
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return value is not NetworkAuthenticationType type
-            ? "-/-"
-            : $"{WiFi.GetHumanReadableNetworkAuthenticationType(type)}";
-    }
+    using Models.Network;
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public sealed class WiFiAuthenticationTypeToHumanReadableStringConverter : IValueConverter
     {
-        throw new NotImplementedException();
+        /* Translate the name of the accent */
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value is not NetworkAuthenticationType type
+                ? "-/-"
+                : $"{WiFi.GetHumanReadableNetworkAuthenticationType(type)}";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

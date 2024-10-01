@@ -9,254 +9,255 @@ using Ninja.Settings;
 using Ninja.Utilities;
 using Ninja.Views;
 
-namespace Ninja.ViewModels;
-
-using Models.Network;
-using Settings;
-using Utilities;
-using Views;
-
-public class PortScannerSettingsViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    #region Variables
+    using Models.Network;
+    using Settings;
+    using Utilities;
+    using Views;
 
-    private readonly bool _isLoading;
-
-    private readonly IDialogCoordinator _dialogCoordinator;
-
-    public ICollectionView PortProfiles { get; }
-
-    private PortProfileInfo _selectedPortProfile = new();
-
-    public PortProfileInfo SelectedPortProfile
+    public class PortScannerSettingsViewModel : ViewModelBase
     {
-        get => _selectedPortProfile;
-        set
-        {
-            if (value == _selectedPortProfile)
-                return;
+        #region Variables
 
-            _selectedPortProfile = value;
-            OnPropertyChanged();
+        private readonly bool _isLoading;
+
+        private readonly IDialogCoordinator _dialogCoordinator;
+
+        public ICollectionView PortProfiles { get; }
+
+        private PortProfileInfo _selectedPortProfile = new();
+
+        public PortProfileInfo SelectedPortProfile
+        {
+            get => _selectedPortProfile;
+            set
+            {
+                if (value == _selectedPortProfile)
+                    return;
+
+                _selectedPortProfile = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _showAllResults;
+        private bool _showAllResults;
 
-    public bool ShowAllResults
-    {
-        get => _showAllResults;
-        set
+        public bool ShowAllResults
         {
-            if (value == _showAllResults)
-                return;
+            get => _showAllResults;
+            set
+            {
+                if (value == _showAllResults)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.PortScanner_ShowAllResults = value;
+                if (!_isLoading)
+                    SettingsManager.Current.PortScanner_ShowAllResults = value;
 
-            _showAllResults = value;
-            OnPropertyChanged();
+                _showAllResults = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _timeout;
+        private int _timeout;
 
-    public int Timeout
-    {
-        get => _timeout;
-        set
+        public int Timeout
         {
-            if (value == _timeout)
-                return;
+            get => _timeout;
+            set
+            {
+                if (value == _timeout)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.PortScanner_Timeout = value;
+                if (!_isLoading)
+                    SettingsManager.Current.PortScanner_Timeout = value;
 
-            _timeout = value;
-            OnPropertyChanged();
+                _timeout = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _resolveHostname;
+        private bool _resolveHostname;
 
-    public bool ResolveHostname
-    {
-        get => _resolveHostname;
-        set
+        public bool ResolveHostname
         {
-            if (value == _resolveHostname)
-                return;
+            get => _resolveHostname;
+            set
+            {
+                if (value == _resolveHostname)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.PortScanner_ResolveHostname = value;
+                if (!_isLoading)
+                    SettingsManager.Current.PortScanner_ResolveHostname = value;
 
-            _resolveHostname = value;
-            OnPropertyChanged();
+                _resolveHostname = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _maxHostThreads;
+        private int _maxHostThreads;
 
-    public int MaxHostThreads
-    {
-        get => _maxHostThreads;
-        set
+        public int MaxHostThreads
         {
-            if (value == _maxHostThreads)
-                return;
+            get => _maxHostThreads;
+            set
+            {
+                if (value == _maxHostThreads)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.PortScanner_MaxHostThreads = value;
+                if (!_isLoading)
+                    SettingsManager.Current.PortScanner_MaxHostThreads = value;
 
-            _maxHostThreads = value;
-            OnPropertyChanged();
+                _maxHostThreads = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _maxPortThreads;
+        private int _maxPortThreads;
 
-    public int MaxPortThreads
-    {
-        get => _maxPortThreads;
-        set
+        public int MaxPortThreads
         {
-            if (value == _maxPortThreads)
-                return;
+            get => _maxPortThreads;
+            set
+            {
+                if (value == _maxPortThreads)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.PortScanner_MaxPortThreads = value;
+                if (!_isLoading)
+                    SettingsManager.Current.PortScanner_MaxPortThreads = value;
 
-            _maxPortThreads = value;
-            OnPropertyChanged();
+                _maxPortThreads = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region Constructor, load settings
+        #region Constructor, load settings
 
-    public PortScannerSettingsViewModel(IDialogCoordinator instance)
-    {
-        _isLoading = true;
-
-        _dialogCoordinator = instance;
-
-        PortProfiles = CollectionViewSource.GetDefaultView(SettingsManager.Current.PortScanner_PortProfiles);
-        PortProfiles.SortDescriptions.Add(
-            new SortDescription(nameof(PortProfileInfo.Name), ListSortDirection.Ascending));
-
-        LoadSettings();
-
-        _isLoading = false;
-    }
-
-    private void LoadSettings()
-    {
-        ShowAllResults = SettingsManager.Current.PortScanner_ShowAllResults;
-        Timeout = SettingsManager.Current.PortScanner_Timeout;
-        ResolveHostname = SettingsManager.Current.PortScanner_ResolveHostname;
-        MaxHostThreads = SettingsManager.Current.PortScanner_MaxHostThreads;
-        MaxPortThreads = SettingsManager.Current.PortScanner_MaxPortThreads;
-    }
-
-    #endregion
-
-    #region ICommand & Actions
-
-    public ICommand AddPortProfileCommand => new RelayCommand(_ => AddPortProfileAction());
-
-    private void AddPortProfileAction()
-    {
-        AddPortProfile().ConfigureAwait(false);
-    }
-
-    public ICommand EditPortProfileCommand => new RelayCommand(_ => EditPortProfileAction());
-
-    private void EditPortProfileAction()
-    {
-        EditPortProfile().ConfigureAwait(false);
-    }
-
-    public ICommand DeletePortProfileCommand => new RelayCommand(_ => DeletePortProfileAction());
-
-    private void DeletePortProfileAction()
-    {
-        DeletePortProfile().ConfigureAwait(false);
-    }
-
-    #endregion
-
-    #region Methods
-
-    private async Task AddPortProfile()
-    {
-        var customDialog = new CustomDialog
+        public PortScannerSettingsViewModel(IDialogCoordinator instance)
         {
-            Title = Strings.AddPortProfile
-        };
+            _isLoading = true;
 
-        var viewModel = new PortProfileViewModel(async instance =>
+            _dialogCoordinator = instance;
+
+            PortProfiles = CollectionViewSource.GetDefaultView(SettingsManager.Current.PortScanner_PortProfiles);
+            PortProfiles.SortDescriptions.Add(
+                new SortDescription(nameof(PortProfileInfo.Name), ListSortDirection.Ascending));
+
+            LoadSettings();
+
+            _isLoading = false;
+        }
+
+        private void LoadSettings()
         {
-            await _dialogCoordinator.HideMetroDialogAsync(this, customDialog);
+            ShowAllResults = SettingsManager.Current.PortScanner_ShowAllResults;
+            Timeout = SettingsManager.Current.PortScanner_Timeout;
+            ResolveHostname = SettingsManager.Current.PortScanner_ResolveHostname;
+            MaxHostThreads = SettingsManager.Current.PortScanner_MaxHostThreads;
+            MaxPortThreads = SettingsManager.Current.PortScanner_MaxPortThreads;
+        }
 
-            SettingsManager.Current.PortScanner_PortProfiles.Add(new PortProfileInfo(instance.Name, instance.Ports));
-        }, async _ => { await _dialogCoordinator.HideMetroDialogAsync(this, customDialog); });
+        #endregion
 
-        customDialog.Content = new PortProfileDialog
+        #region ICommand & Actions
+
+        public ICommand AddPortProfileCommand => new RelayCommand(_ => AddPortProfileAction());
+
+        private void AddPortProfileAction()
         {
-            DataContext = viewModel
-        };
+            AddPortProfile().ConfigureAwait(false);
+        }
 
-        await _dialogCoordinator.ShowMetroDialogAsync(this, customDialog);
-    }
+        public ICommand EditPortProfileCommand => new RelayCommand(_ => EditPortProfileAction());
 
-    public async Task EditPortProfile()
-    {
-        var customDialog = new CustomDialog
+        private void EditPortProfileAction()
         {
-            Title = Strings.EditPortProfile
-        };
+            EditPortProfile().ConfigureAwait(false);
+        }
 
-        var viewModel = new PortProfileViewModel(async instance =>
+        public ICommand DeletePortProfileCommand => new RelayCommand(_ => DeletePortProfileAction());
+
+        private void DeletePortProfileAction()
+        {
+            DeletePortProfile().ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Methods
+
+        private async Task AddPortProfile()
+        {
+            var customDialog = new CustomDialog
+            {
+                Title = Strings.AddPortProfile
+            };
+
+            var viewModel = new PortProfileViewModel(async instance =>
             {
                 await _dialogCoordinator.HideMetroDialogAsync(this, customDialog);
 
-                SettingsManager.Current.PortScanner_PortProfiles.Remove(SelectedPortProfile);
-                SettingsManager.Current.PortScanner_PortProfiles.Add(new PortProfileInfo(instance.Name,
-                    instance.Ports));
-            }, async _ => { await _dialogCoordinator.HideMetroDialogAsync(this, customDialog); }, true,
-            SelectedPortProfile);
+                SettingsManager.Current.PortScanner_PortProfiles.Add(new PortProfileInfo(instance.Name, instance.Ports));
+            }, async _ => { await _dialogCoordinator.HideMetroDialogAsync(this, customDialog); });
 
-        customDialog.Content = new PortProfileDialog
-        {
-            DataContext = viewModel
-        };
-
-        await _dialogCoordinator.ShowMetroDialogAsync(this, customDialog);
-    }
-
-    private async Task DeletePortProfile()
-    {
-        var customDialog = new CustomDialog
-        {
-            Title = Strings.DeletePortProfile
-        };
-
-        var confirmDeleteViewModel = new ConfirmDeleteViewModel(async _ =>
+            customDialog.Content = new PortProfileDialog
             {
-                await _dialogCoordinator.HideMetroDialogAsync(this, customDialog);
+                DataContext = viewModel
+            };
 
-                SettingsManager.Current.PortScanner_PortProfiles.Remove(SelectedPortProfile);
-            }, async _ => { await _dialogCoordinator.HideMetroDialogAsync(this, customDialog); },
-            Strings.DeletePortProfileMessage);
+            await _dialogCoordinator.ShowMetroDialogAsync(this, customDialog);
+        }
 
-        customDialog.Content = new ConfirmDeleteDialog
+        public async Task EditPortProfile()
         {
-            DataContext = confirmDeleteViewModel
-        };
+            var customDialog = new CustomDialog
+            {
+                Title = Strings.EditPortProfile
+            };
 
-        await _dialogCoordinator.ShowMetroDialogAsync(this, customDialog);
+            var viewModel = new PortProfileViewModel(async instance =>
+                {
+                    await _dialogCoordinator.HideMetroDialogAsync(this, customDialog);
+
+                    SettingsManager.Current.PortScanner_PortProfiles.Remove(SelectedPortProfile);
+                    SettingsManager.Current.PortScanner_PortProfiles.Add(new PortProfileInfo(instance.Name,
+                        instance.Ports));
+                }, async _ => { await _dialogCoordinator.HideMetroDialogAsync(this, customDialog); }, true,
+                SelectedPortProfile);
+
+            customDialog.Content = new PortProfileDialog
+            {
+                DataContext = viewModel
+            };
+
+            await _dialogCoordinator.ShowMetroDialogAsync(this, customDialog);
+        }
+
+        private async Task DeletePortProfile()
+        {
+            var customDialog = new CustomDialog
+            {
+                Title = Strings.DeletePortProfile
+            };
+
+            var confirmDeleteViewModel = new ConfirmDeleteViewModel(async _ =>
+                {
+                    await _dialogCoordinator.HideMetroDialogAsync(this, customDialog);
+
+                    SettingsManager.Current.PortScanner_PortProfiles.Remove(SelectedPortProfile);
+                }, async _ => { await _dialogCoordinator.HideMetroDialogAsync(this, customDialog); },
+                Strings.DeletePortProfileMessage);
+
+            customDialog.Content = new ConfirmDeleteDialog
+            {
+                DataContext = confirmDeleteViewModel
+            };
+
+            await _dialogCoordinator.ShowMetroDialogAsync(this, customDialog);
+        }
+
+        #endregion
     }
-
-    #endregion
 }

@@ -1,63 +1,64 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace Ninja.Utilities;
-
-public static class CryptoHelper
+namespace Ninja.Utilities
 {
-    private static readonly int blockSize = 128;
-
-    /// <summary>
-    /// </summary>
-    /// <param name="decryptedBytes"></param>
-    /// <param name="password"></param>
-    /// <param name="keySize"></param>
-    /// <param name="iterations"></param>
-    /// <returns></returns>
-    public static byte[] Encrypt(byte[] decryptedBytes, string password, int keySize, int iterations)
+    public static class CryptoHelper
     {
-        ReadOnlySpan<byte> salt = RandomNumberGenerator.GetBytes(keySize / 8); // Generate salt based
-        ReadOnlySpan<byte>
-            iv = RandomNumberGenerator.GetBytes(blockSize / 8); // Generate iv, has to be the same as the block size
+        private static readonly int blockSize = 128;
 
-        var key = Rfc2898DeriveBytes.Pbkdf2(password, salt, iterations, HashAlgorithmName.SHA512, keySize / 8);
+        /// <summary>
+        /// </summary>
+        /// <param name="decryptedBytes"></param>
+        /// <param name="password"></param>
+        /// <param name="keySize"></param>
+        /// <param name="iterations"></param>
+        /// <returns></returns>
+        public static byte[] Encrypt(byte[] decryptedBytes, string password, int keySize, int iterations)
+        {
+            ReadOnlySpan<byte> salt = RandomNumberGenerator.GetBytes(keySize / 8); // Generate salt based
+            ReadOnlySpan<byte>
+                iv = RandomNumberGenerator.GetBytes(blockSize / 8); // Generate iv, has to be the same as the block size
 
-        using var aes = Aes.Create();
-        aes.Key = key;
+            var key = Rfc2898DeriveBytes.Pbkdf2(password, salt, iterations, HashAlgorithmName.SHA512, keySize / 8);
 
-        var encryptedSize = aes.GetCiphertextLengthCbc(decryptedBytes.Length);
+            using var aes = Aes.Create();
+            aes.Key = key;
 
-        var cipher = new byte[salt.Length + iv.Length + encryptedSize];
+            var encryptedSize = aes.GetCiphertextLengthCbc(decryptedBytes.Length);
 
-        Span<byte> cipherSpan = cipher;
+            var cipher = new byte[salt.Length + iv.Length + encryptedSize];
 
-        salt.CopyTo(cipherSpan);
-        iv.CopyTo(cipherSpan[salt.Length..]);
+            Span<byte> cipherSpan = cipher;
 
-        var encrypted = aes.EncryptCbc(decryptedBytes, iv, cipherSpan[(salt.Length + iv.Length)..]);
+            salt.CopyTo(cipherSpan);
+            iv.CopyTo(cipherSpan[salt.Length..]);
 
-        return cipher;
-    }
+            var encrypted = aes.EncryptCbc(decryptedBytes, iv, cipherSpan[(salt.Length + iv.Length)..]);
 
-    /// <summary>
-    /// </summary>
-    /// <param name="encryptedBytesWithSaltAndIV"></param>
-    /// <param name="password"></param>
-    /// <param name="keySize"></param>
-    /// <param name="iterations"></param>
-    /// <returns></returns>
-    public static byte[] Decrypt(byte[] encryptedBytesWithSaltAndIV, string password, int keySize, int iterations)
-    {
-        ReadOnlySpan<byte> salt = encryptedBytesWithSaltAndIV.AsSpan(0, keySize / 8); // Take salt bytes
-        ReadOnlySpan<byte>
-            iv = encryptedBytesWithSaltAndIV.AsSpan(keySize / 8, blockSize / 8); // Skip salt bytes, take iv bytes
-        ReadOnlySpan<byte> cipher = encryptedBytesWithSaltAndIV.AsSpan(keySize / 8 + blockSize / 8);
+            return cipher;
+        }
 
-        var key = Rfc2898DeriveBytes.Pbkdf2(password, salt, iterations, HashAlgorithmName.SHA512, keySize / 8);
+        /// <summary>
+        /// </summary>
+        /// <param name="encryptedBytesWithSaltAndIV"></param>
+        /// <param name="password"></param>
+        /// <param name="keySize"></param>
+        /// <param name="iterations"></param>
+        /// <returns></returns>
+        public static byte[] Decrypt(byte[] encryptedBytesWithSaltAndIV, string password, int keySize, int iterations)
+        {
+            ReadOnlySpan<byte> salt = encryptedBytesWithSaltAndIV.AsSpan(0, keySize / 8); // Take salt bytes
+            ReadOnlySpan<byte>
+                iv = encryptedBytesWithSaltAndIV.AsSpan(keySize / 8, blockSize / 8); // Skip salt bytes, take iv bytes
+            ReadOnlySpan<byte> cipher = encryptedBytesWithSaltAndIV.AsSpan(keySize / 8 + blockSize / 8);
 
-        using var aes = Aes.Create();
-        aes.Key = key;
+            var key = Rfc2898DeriveBytes.Pbkdf2(password, salt, iterations, HashAlgorithmName.SHA512, keySize / 8);
 
-        return aes.DecryptCbc(cipher, iv);
+            using var aes = Aes.Create();
+            aes.Key = key;
+
+            return aes.DecryptCbc(cipher, iv);
+        }
     }
 }

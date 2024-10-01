@@ -1,15 +1,16 @@
 ﻿using System;
 
-namespace Ninja.Models.Network;
-
-public class PingExceptionArgs : EventArgs
+namespace Ninja.Models.Network
 {
-    public PingExceptionArgs(string message, Exception innerException)
+    public class PingExceptionArgs : EventArgs
     {
-        Message = message;
-        InnerException = innerException;
-    }
+        public PingExceptionArgs(string message, Exception innerException)
+        {
+            Message = message;
+            InnerException = innerException;
+        }
 
-    public string Message { get; set; }
-    public Exception InnerException { get; set; }
+        public string Message { get; set; }
+        public Exception InnerException { get; set; }
+    }
 }

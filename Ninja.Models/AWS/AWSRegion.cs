@@ -2,22 +2,23 @@
 using Amazon;
 using Ninja.Utilities;
 
-namespace Ninja.Models.AWS;
-
-using Utilities;
-
-public class AWSRegion : SingletonBase<AWSRegion>
+namespace Ninja.Models.AWS
 {
-    private readonly HashSet<string> _regions = new();
+    using Utilities;
 
-    public AWSRegion()
+    public class AWSRegion : SingletonBase<AWSRegion>
     {
-        foreach (var region in RegionEndpoint.EnumerableAllRegions)
-            _regions.Add(region.SystemName);
-    }
+        private readonly HashSet<string> _regions = new();
 
-    public bool RegionExists(string region)
-    {
-        return _regions.Contains(region);
+        public AWSRegion()
+        {
+            foreach (var region in RegionEndpoint.EnumerableAllRegions)
+                _regions.Add(region.SystemName);
+        }
+
+        public bool RegionExists(string region)
+        {
+            return _regions.Contains(region);
+        }
     }
 }

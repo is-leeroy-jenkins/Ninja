@@ -9,139 +9,140 @@ using Ninja.Models.Network;
 using Ninja.Settings;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Models.Network;
-using Settings;
-using Utilities;
-
-public class SubnetCalculatorCalculatorViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    #region Constructor, load settings
+    using Models.Network;
+    using Settings;
+    using Utilities;
 
-    public SubnetCalculatorCalculatorViewModel()
+    public class SubnetCalculatorCalculatorViewModel : ViewModelBase
     {
-        SubnetHistoryView =
-            CollectionViewSource.GetDefaultView(SettingsManager.Current.SubnetCalculator_Calculator_SubnetHistory);
-    }
+        #region Constructor, load settings
 
-    #endregion
-
-    #region Variables
-
-    private string _subnet;
-
-    public string Subnet
-    {
-        get => _subnet;
-        set
+        public SubnetCalculatorCalculatorViewModel()
         {
-            if (value == _subnet)
-                return;
-
-            _subnet = value;
-            OnPropertyChanged();
+            SubnetHistoryView =
+                CollectionViewSource.GetDefaultView(SettingsManager.Current.SubnetCalculator_Calculator_SubnetHistory);
         }
-    }
 
-    public ICollectionView SubnetHistoryView { get; }
+        #endregion
 
-    private bool _isRunning;
+        #region Variables
 
-    public bool IsRunning
-    {
-        get => _isRunning;
-        set
+        private string _subnet;
+
+        public string Subnet
         {
-            if (value == _isRunning)
-                return;
+            get => _subnet;
+            set
+            {
+                if (value == _subnet)
+                    return;
 
-            _isRunning = value;
-            OnPropertyChanged();
+                _subnet = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _isResultVisible;
+        public ICollectionView SubnetHistoryView { get; }
 
-    public bool IsResultVisible
-    {
-        get => _isResultVisible;
-        set
+        private bool _isRunning;
+
+        public bool IsRunning
         {
-            if (value == _isResultVisible)
-                return;
+            get => _isRunning;
+            set
+            {
+                if (value == _isRunning)
+                    return;
 
-
-            _isResultVisible = value;
-            OnPropertyChanged();
+                _isRunning = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private IPNetworkInfo _result;
+        private bool _isResultVisible;
 
-    public IPNetworkInfo Result
-    {
-        get => _result;
-        private set
+        public bool IsResultVisible
         {
-            if (value == _result)
-                return;
+            get => _isResultVisible;
+            set
+            {
+                if (value == _isResultVisible)
+                    return;
 
-            _result = value;
-            OnPropertyChanged();
+
+                _isResultVisible = value;
+                OnPropertyChanged();
+            }
         }
+
+        private IPNetworkInfo _result;
+
+        public IPNetworkInfo Result
+        {
+            get => _result;
+            private set
+            {
+                if (value == _result)
+                    return;
+
+                _result = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region ICommands
+
+        public ICommand CalculateCommand => new RelayCommand(_ => CalculateAction(), Calculate_CanExecute);
+
+        private bool Calculate_CanExecute(object parameter)
+        {
+            return Application.Current.MainWindow != null &&
+                !((MetroWindow)Application.Current.MainWindow)
+                    .IsAnyDialogOpen;
+        }
+
+        private void CalculateAction()
+        {
+            Calculate();
+        }
+
+        #endregion
+
+        #region Methods
+
+        private void Calculate()
+        {
+            IsRunning = true;
+
+            var subnet = Subnet.Trim();
+
+            Result = new IPNetworkInfo(IPNetwork2.Parse(subnet));
+
+            IsResultVisible = true;
+
+            AddSubnetToHistory(subnet);
+
+            IsRunning = false;
+        }
+
+        private void AddSubnetToHistory(string subnet)
+        {
+            // Create the new list
+            var list = ListHelper.Modify(SettingsManager.Current.SubnetCalculator_Calculator_SubnetHistory.ToList(), subnet,
+                SettingsManager.Current.General_HistoryListEntries);
+
+            // Clear the old items
+            SettingsManager.Current.SubnetCalculator_Calculator_SubnetHistory.Clear();
+            OnPropertyChanged(nameof(Subnet)); // Raise property changed again, after the collection has been cleared
+
+            // Fill with the new items
+            list.ForEach(x => SettingsManager.Current.SubnetCalculator_Calculator_SubnetHistory.Add(x));
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region ICommands
-
-    public ICommand CalculateCommand => new RelayCommand(_ => CalculateAction(), Calculate_CanExecute);
-
-    private bool Calculate_CanExecute(object parameter)
-    {
-        return Application.Current.MainWindow != null &&
-               !((MetroWindow)Application.Current.MainWindow)
-                   .IsAnyDialogOpen;
-    }
-
-    private void CalculateAction()
-    {
-        Calculate();
-    }
-
-    #endregion
-
-    #region Methods
-
-    private void Calculate()
-    {
-        IsRunning = true;
-
-        var subnet = Subnet.Trim();
-
-        Result = new IPNetworkInfo(IPNetwork2.Parse(subnet));
-
-        IsResultVisible = true;
-
-        AddSubnetToHistory(subnet);
-
-        IsRunning = false;
-    }
-
-    private void AddSubnetToHistory(string subnet)
-    {
-        // Create the new list
-        var list = ListHelper.Modify(SettingsManager.Current.SubnetCalculator_Calculator_SubnetHistory.ToList(), subnet,
-            SettingsManager.Current.General_HistoryListEntries);
-
-        // Clear the old items
-        SettingsManager.Current.SubnetCalculator_Calculator_SubnetHistory.Clear();
-        OnPropertyChanged(nameof(Subnet)); // Raise property changed again, after the collection has been cleared
-
-        // Fill with the new items
-        list.ForEach(x => SettingsManager.Current.SubnetCalculator_Calculator_SubnetHistory.Add(x));
-    }
-
-    #endregion
 }

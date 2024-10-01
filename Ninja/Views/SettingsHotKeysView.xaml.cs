@@ -1,16 +1,17 @@
 ﻿using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class SettingsHotkeysView
+namespace Ninja.Views
 {
-    private readonly SettingsHotKeysViewModel _viewModel = new();
+    using ViewModels;
 
-    public SettingsHotkeysView()
+    public partial class SettingsHotkeysView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
+        private readonly SettingsHotKeysViewModel _viewModel = new();
+
+        public SettingsHotkeysView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
     }
 }

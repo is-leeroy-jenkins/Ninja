@@ -1,16 +1,17 @@
 ﻿using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class TracerouteSettingsView
+namespace Ninja.Views
 {
-    private readonly TracerouteSettingsViewModel _viewModel = new();
+    using ViewModels;
 
-    public TracerouteSettingsView()
+    public partial class TracerouteSettingsView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
+        private readonly TracerouteSettingsViewModel _viewModel = new();
+
+        public TracerouteSettingsView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
     }
 }

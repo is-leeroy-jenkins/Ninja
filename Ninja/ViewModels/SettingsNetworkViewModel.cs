@@ -1,110 +1,111 @@
 ﻿using Ninja.Settings;
 
-namespace Ninja.ViewModels;
-
-using Settings;
-
-public class SettingsNetworkViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    #region Variables
+    using Settings;
 
-    private readonly bool _isLoading;
-
-    private bool _useCustomDNSServer;
-
-    public bool UseCustomDNSServer
+    public class SettingsNetworkViewModel : ViewModelBase
     {
-        get => _useCustomDNSServer;
-        set
+        #region Variables
+
+        private readonly bool _isLoading;
+
+        private bool _useCustomDNSServer;
+
+        public bool UseCustomDNSServer
         {
-            if (value == _useCustomDNSServer)
-                return;
+            get => _useCustomDNSServer;
+            set
+            {
+                if (value == _useCustomDNSServer)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.Network_UseCustomDNSServer = value;
+                if (!_isLoading)
+                    SettingsManager.Current.Network_UseCustomDNSServer = value;
 
-            _useCustomDNSServer = value;
-            OnPropertyChanged();
+                _useCustomDNSServer = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
 
-    private string _customDNSServer;
+        private string _customDNSServer;
 
-    public string CustomDNSServer
-    {
-        get => _customDNSServer;
-        set
+        public string CustomDNSServer
         {
-            if (value == _customDNSServer)
-                return;
+            get => _customDNSServer;
+            set
+            {
+                if (value == _customDNSServer)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.Network_CustomDNSServer = value.Replace(" ", "");
+                if (!_isLoading)
+                    SettingsManager.Current.Network_CustomDNSServer = value.Replace(" ", "");
 
-            _customDNSServer = value;
-            OnPropertyChanged();
+                _customDNSServer = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _resolveHostnamePreferIPv4;
+        private bool _resolveHostnamePreferIPv4;
 
-    public bool ResolveHostnamePreferIPv4
-    {
-        get => _resolveHostnamePreferIPv4;
-        set
+        public bool ResolveHostnamePreferIPv4
         {
-            if (value == _resolveHostnamePreferIPv4)
-                return;
+            get => _resolveHostnamePreferIPv4;
+            set
+            {
+                if (value == _resolveHostnamePreferIPv4)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.Network_ResolveHostnamePreferIPv4 = value;
+                if (!_isLoading)
+                    SettingsManager.Current.Network_ResolveHostnamePreferIPv4 = value;
 
-            _resolveHostnamePreferIPv4 = value;
-            OnPropertyChanged();
+                _resolveHostnamePreferIPv4 = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _resolveHostnamePreferIPv6;
+        private bool _resolveHostnamePreferIPv6;
 
-    public bool ResolveHostnamePreferIPv6
-    {
-        get => _resolveHostnamePreferIPv6;
-        set
+        public bool ResolveHostnamePreferIPv6
         {
-            if (value == _resolveHostnamePreferIPv6)
-                return;
+            get => _resolveHostnamePreferIPv6;
+            set
+            {
+                if (value == _resolveHostnamePreferIPv6)
+                    return;
 
-            _resolveHostnamePreferIPv6 = value;
-            OnPropertyChanged();
+                _resolveHostnamePreferIPv6 = value;
+                OnPropertyChanged();
+            }
         }
+
+        #endregion
+
+        #region Constructor, LoadSettings
+
+        public SettingsNetworkViewModel()
+        {
+            _isLoading = true;
+
+            LoadSettings();
+
+            _isLoading = false;
+        }
+
+        private void LoadSettings()
+        {
+            UseCustomDNSServer = SettingsManager.Current.Network_UseCustomDNSServer;
+
+            if (SettingsManager.Current.Network_CustomDNSServer != null)
+                CustomDNSServer = string.Join("; ", SettingsManager.Current.Network_CustomDNSServer);
+
+            if (SettingsManager.Current.Network_ResolveHostnamePreferIPv4)
+                ResolveHostnamePreferIPv4 = true;
+            else
+                ResolveHostnamePreferIPv6 = true;
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region Constructor, LoadSettings
-
-    public SettingsNetworkViewModel()
-    {
-        _isLoading = true;
-
-        LoadSettings();
-
-        _isLoading = false;
-    }
-
-    private void LoadSettings()
-    {
-        UseCustomDNSServer = SettingsManager.Current.Network_UseCustomDNSServer;
-
-        if (SettingsManager.Current.Network_CustomDNSServer != null)
-            CustomDNSServer = string.Join("; ", SettingsManager.Current.Network_CustomDNSServer);
-
-        if (SettingsManager.Current.Network_ResolveHostnamePreferIPv4)
-            ResolveHostnamePreferIPv4 = true;
-        else
-            ResolveHostnamePreferIPv6 = true;
-    }
-
-    #endregion
 }

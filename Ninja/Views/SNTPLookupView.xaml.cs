@@ -5,39 +5,40 @@ using MahApps.Metro.Controls.Dialogs;
 using Ninja.Controls;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using Controls;
-using ViewModels;
-
-public partial class SNTPLookupView : IDragablzTabItem
+namespace Ninja.Views
 {
-    private readonly SNTPLookupViewModel _viewModel;
+    using Controls;
+    using ViewModels;
 
-    public SNTPLookupView(Guid tabId)
+    public partial class SNTPLookupView : IDragablzTabItem
     {
-        InitializeComponent();
+        private readonly SNTPLookupViewModel _viewModel;
 
-        _viewModel = new SNTPLookupViewModel(DialogCoordinator.Instance, tabId);
+        public SNTPLookupView(Guid tabId)
+        {
+            InitializeComponent();
 
-        DataContext = _viewModel;
+            _viewModel = new SNTPLookupViewModel(DialogCoordinator.Instance, tabId);
 
-        Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
-    }
+            DataContext = _viewModel;
 
-    public void CloseTab()
-    {
-        _viewModel.OnClose();
-    }
+            Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
+        }
 
-    private void Dispatcher_ShutdownStarted(object sender, EventArgs e)
-    {
-        _viewModel.OnClose();
-    }
+        public void CloseTab()
+        {
+            _viewModel.OnClose();
+        }
 
-    private void ContextMenu_Opened(object sender, RoutedEventArgs e)
-    {
-        if (sender is ContextMenu menu)
-            menu.DataContext = _viewModel;
+        private void Dispatcher_ShutdownStarted(object sender, EventArgs e)
+        {
+            _viewModel.OnClose();
+        }
+
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            if (sender is ContextMenu menu)
+                menu.DataContext = _viewModel;
+        }
     }
 }

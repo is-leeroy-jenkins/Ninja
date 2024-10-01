@@ -2,50 +2,51 @@
 using System.Windows.Input;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Utilities;
-
-public class ArpTableAddEntryViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    private string _ipAddress;
+    using Utilities;
 
-    private string _macAddress;
-
-    public ArpTableAddEntryViewModel(Action<ArpTableAddEntryViewModel> addCommand,
-        Action<ArpTableAddEntryViewModel> cancelHandler)
+    public class ArpTableAddEntryViewModel : ViewModelBase
     {
-        AddCommand = new RelayCommand(_ => addCommand(this));
-        CancelCommand = new RelayCommand(_ => cancelHandler(this));
-    }
+        private string _ipAddress;
 
-    public ICommand AddCommand { get; }
+        private string _macAddress;
 
-    public ICommand CancelCommand { get; }
-
-    public string IPAddress
-    {
-        get => _ipAddress;
-        set
+        public ArpTableAddEntryViewModel(Action<ArpTableAddEntryViewModel> addCommand,
+            Action<ArpTableAddEntryViewModel> cancelHandler)
         {
-            if (value == _ipAddress)
-                return;
-
-            _ipAddress = value;
-            OnPropertyChanged();
+            AddCommand = new RelayCommand(_ => addCommand(this));
+            CancelCommand = new RelayCommand(_ => cancelHandler(this));
         }
-    }
 
-    public string MACAddress
-    {
-        get => _macAddress;
-        set
+        public ICommand AddCommand { get; }
+
+        public ICommand CancelCommand { get; }
+
+        public string IPAddress
         {
-            if (value == _macAddress)
-                return;
+            get => _ipAddress;
+            set
+            {
+                if (value == _ipAddress)
+                    return;
 
-            _macAddress = value;
-            OnPropertyChanged();
+                _ipAddress = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string MACAddress
+        {
+            get => _macAddress;
+            set
+            {
+                if (value == _macAddress)
+                    return;
+
+                _macAddress = value;
+                OnPropertyChanged();
+            }
         }
     }
 }

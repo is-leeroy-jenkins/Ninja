@@ -1,23 +1,24 @@
 ﻿using System.Windows;
 using Ninja.ViewModels;
 
-namespace Ninja;
-
-using ViewModels;
-
-// ReSharper disable once UnusedMember.Global, called from App.xaml.cs
-public partial class CommandLineWindow
+namespace Ninja
 {
-    private readonly CommandLineViewModel _viewModel = new();
+    using ViewModels;
 
-    public CommandLineWindow()
+    // ReSharper disable once UnusedMember.Global, called from App.xaml.cs
+    public partial class CommandLineWindow
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly CommandLineViewModel _viewModel = new();
 
-    private void Click(object sender, RoutedEventArgs e)
-    {
-        Close();
+        public CommandLineWindow()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
+
+        private void Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

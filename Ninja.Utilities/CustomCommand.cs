@@ -1,16 +1,17 @@
-﻿namespace Ninja.Utilities;
-
-/// <summary>
-///     Class provides static methods to manage custom commands.
-/// </summary>
-public static class CustomCommand
+﻿namespace Ninja.Utilities
 {
     /// <summary>
-    ///     Method to execute a <see cref="CustomCommandInfo" />.
+    ///     Class provides static methods to manage custom commands.
     /// </summary>
-    /// <param name="info"><see cref="CustomCommandInfo" /> which is executed.</param>
-    public static void Run(CustomCommandInfo info)
+    public static class CustomCommand
     {
-        ExternalProcessStarter.RunProcess(info.FilePath, info.Arguments);
+        /// <summary>
+        ///     Method to execute a <see cref="CustomCommandInfo" />.
+        /// </summary>
+        /// <param name="info"><see cref="CustomCommandInfo" /> which is executed.</param>
+        public static void Run(CustomCommandInfo info)
+        {
+            ExternalProcessStarter.RunProcess(info.FilePath, info.Arguments);
+        }
     }
 }

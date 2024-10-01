@@ -2,28 +2,29 @@
 using System.Windows;
 using log4net;
 
-namespace Ninja.Utilities;
-
-/// <summary>
-///     Class provides static methods to interact with the clipboard.
-/// </summary>
-public static class ClipboardHelper
+namespace Ninja.Utilities
 {
-    private static readonly ILog Log = LogManager.GetLogger(typeof(ClipboardHelper));
-
     /// <summary>
-    ///     Methods to set a text to the clipboard.
+    ///     Class provides static methods to interact with the clipboard.
     /// </summary>
-    /// <param name="text">Some text...</param>
-    public static void SetClipboard(string text)
+    public static class ClipboardHelper
     {
-        try
+        private static readonly ILog Log = LogManager.GetLogger(typeof(ClipboardHelper));
+
+        /// <summary>
+        ///     Methods to set a text to the clipboard.
+        /// </summary>
+        /// <param name="text">Some text...</param>
+        public static void SetClipboard(string text)
         {
-            Clipboard.SetDataObject(text, true);
-        }
-        catch (Exception e)
-        {
-            Log.Error($"Failed to set clipboard: {e.Message}");
+            try
+            {
+                Clipboard.SetDataObject(text, true);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Failed to set clipboard: {e.Message}");
+            }
         }
     }
 }

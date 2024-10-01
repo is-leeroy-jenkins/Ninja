@@ -1,37 +1,38 @@
 ﻿using System.Diagnostics;
 
-namespace Ninja.Utilities;
-
-public static class PowerShellHelper
+namespace Ninja.Utilities
 {
-    /// <summary>
-    ///     Execute a PowerShell command.
-    /// </summary>
-    /// <param name="command">Command to execute.</param>
-    /// <param name="asAdmin">
-    ///     Start PowerShell as administrator. Error code 1223 is returned when UAC dialog is canceled by
-    ///     user.
-    /// </param>
-    /// <param name="windowStyle">Window style of the PowerShell console (Default: Hidden)</param>
-    public static void ExecuteCommand(string command, bool asAdmin = false,
-        ProcessWindowStyle windowStyle = ProcessWindowStyle.Hidden)
+    public static class PowerShellHelper
     {
-        var info = new ProcessStartInfo
+        /// <summary>
+        ///     Execute a PowerShell command.
+        /// </summary>
+        /// <param name="command">Command to execute.</param>
+        /// <param name="asAdmin">
+        ///     Start PowerShell as administrator. Error code 1223 is returned when UAC dialog is canceled by
+        ///     user.
+        /// </param>
+        /// <param name="windowStyle">Window style of the PowerShell console (Default: Hidden)</param>
+        public static void ExecuteCommand(string command, bool asAdmin = false,
+            ProcessWindowStyle windowStyle = ProcessWindowStyle.Hidden)
         {
-            FileName = "powershell.exe",
-            Arguments = $"-NoProfile -NoLogo -Command {command}",
-            UseShellExecute = true,
-            WindowStyle = windowStyle
-        };
+            var info = new ProcessStartInfo
+            {
+                FileName = "powershell.exe",
+                Arguments = $"-NoProfile -NoLogo -Command {command}",
+                UseShellExecute = true,
+                WindowStyle = windowStyle
+            };
 
-        if (asAdmin)
-            info.Verb = "runas";
+            if (asAdmin)
+                info.Verb = "runas";
 
-        using var process = new Process();
+            using var process = new Process();
 
-        process.StartInfo = info;
+            process.StartInfo = info;
 
-        process.Start();
-        process.WaitForExit();
+            process.Start();
+            process.WaitForExit();
+        }
     }
 }

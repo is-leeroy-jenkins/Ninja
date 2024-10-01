@@ -4,21 +4,22 @@ using System.Linq;
 using System.Windows.Data;
 using Ninja.Models.Lookup;
 
-namespace Ninja.Converters;
-
-using Models.Lookup;
-
-public sealed class MACAddressToVendorConverter : IValueConverter
+namespace Ninja.Converters
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return value is not string macAddress
-            ? "-/-"
-            : OUILookup.LookupByMacAddress(macAddress).FirstOrDefault()?.Vendor;
-    }
+    using Models.Lookup;
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public sealed class MACAddressToVendorConverter : IValueConverter
     {
-        throw new NotImplementedException();
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value is not string macAddress
+                ? "-/-"
+                : OUILookup.LookupByMacAddress(macAddress).FirstOrDefault()?.Vendor;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

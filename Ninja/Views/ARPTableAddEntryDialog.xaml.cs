@@ -1,16 +1,17 @@
 ﻿using System.Windows;
 
-namespace Ninja.Views;
-
-public partial class ARPTableAddEntryDialog
+namespace Ninja.Views
 {
-    public ARPTableAddEntryDialog()
+    public partial class ARPTableAddEntryDialog
     {
-        InitializeComponent();
-    }
+        public ARPTableAddEntryDialog()
+        {
+            InitializeComponent();
+        }
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        TextBoxIPAddress.Focus();
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextBoxIPAddress.Focus();
+        }
     }
 }

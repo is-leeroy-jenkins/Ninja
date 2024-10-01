@@ -5,45 +5,46 @@ using System.Windows.Input;
 using Ninja.Settings;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Settings;
-using Utilities;
-
-public class WebConsoleConnectViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    private string _url;
+    using Settings;
+    using Utilities;
 
-    public WebConsoleConnectViewModel(Action<WebConsoleConnectViewModel> connectCommand,
-        Action<WebConsoleConnectViewModel> cancelHandler)
+    public class WebConsoleConnectViewModel : ViewModelBase
     {
-        ConnectCommand = new RelayCommand(_ => connectCommand(this));
-        CancelCommand = new RelayCommand(_ => cancelHandler(this));
+        private string _url;
 
-        UrlHistoryView = CollectionViewSource.GetDefaultView(SettingsManager.Current.WebConsole_UrlHistory);
-
-        LoadSettings();
-    }
-
-    public ICommand ConnectCommand { get; }
-    public ICommand CancelCommand { get; }
-
-    public string Url
-    {
-        get => _url;
-        set
+        public WebConsoleConnectViewModel(Action<WebConsoleConnectViewModel> connectCommand,
+            Action<WebConsoleConnectViewModel> cancelHandler)
         {
-            if (value == _url)
-                return;
+            ConnectCommand = new RelayCommand(_ => connectCommand(this));
+            CancelCommand = new RelayCommand(_ => cancelHandler(this));
 
-            _url = value;
-            OnPropertyChanged();
+            UrlHistoryView = CollectionViewSource.GetDefaultView(SettingsManager.Current.WebConsole_UrlHistory);
+
+            LoadSettings();
         }
-    }
 
-    public ICollectionView UrlHistoryView { get; }
+        public ICommand ConnectCommand { get; }
+        public ICommand CancelCommand { get; }
 
-    private void LoadSettings()
-    {
+        public string Url
+        {
+            get => _url;
+            set
+            {
+                if (value == _url)
+                    return;
+
+                _url = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICollectionView UrlHistoryView { get; }
+
+        private void LoadSettings()
+        {
+        }
     }
 }

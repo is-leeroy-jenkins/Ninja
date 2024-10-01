@@ -4,38 +4,39 @@ using MahApps.Metro.Controls.Dialogs;
 using Ninja.Controls;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using Controls;
-using ViewModels;
-
-public partial class IPGeolocationView : IDragablzTabItem
+namespace Ninja.Views
 {
-    private readonly IPGeolocationViewModel _viewModel;
+    using Controls;
+    using ViewModels;
 
-    public IPGeolocationView(Guid tabId, string domain = null)
+    public partial class IPGeolocationView : IDragablzTabItem
     {
-        InitializeComponent();
+        private readonly IPGeolocationViewModel _viewModel;
 
-        _viewModel = new IPGeolocationViewModel(DialogCoordinator.Instance, tabId, domain);
+        public IPGeolocationView(Guid tabId, string domain = null)
+        {
+            InitializeComponent();
 
-        DataContext = _viewModel;
+            _viewModel = new IPGeolocationViewModel(DialogCoordinator.Instance, tabId, domain);
 
-        Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
-    }
+            DataContext = _viewModel;
 
-    public void CloseTab()
-    {
-        _viewModel.OnClose();
-    }
+            Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
+        }
 
-    private void UserControl_OnLoaded(object sender, RoutedEventArgs e)
-    {
-        _viewModel.OnLoaded();
-    }
+        public void CloseTab()
+        {
+            _viewModel.OnClose();
+        }
 
-    private void Dispatcher_ShutdownStarted(object sender, EventArgs e)
-    {
-        _viewModel.OnClose();
+        private void UserControl_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            _viewModel.OnLoaded();
+        }
+
+        private void Dispatcher_ShutdownStarted(object sender, EventArgs e)
+        {
+            _viewModel.OnClose();
+        }
     }
 }

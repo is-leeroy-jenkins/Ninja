@@ -5,44 +5,45 @@ using MahApps.Metro.Controls.Dialogs;
 using Ninja.Controls;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using Controls;
-using ViewModels;
-
-public partial class PortScannerView : IDragablzTabItem
+namespace Ninja.Views
 {
-    private readonly PortScannerViewModel _viewModel;
+    using Controls;
+    using ViewModels;
 
-    public PortScannerView(Guid tabId, string host = null, string ports = null)
+    public partial class PortScannerView : IDragablzTabItem
     {
-        InitializeComponent();
+        private readonly PortScannerViewModel _viewModel;
 
-        _viewModel = new PortScannerViewModel(DialogCoordinator.Instance, tabId, host, ports);
+        public PortScannerView(Guid tabId, string host = null, string ports = null)
+        {
+            InitializeComponent();
 
-        DataContext = _viewModel;
+            _viewModel = new PortScannerViewModel(DialogCoordinator.Instance, tabId, host, ports);
 
-        Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
-    }
+            DataContext = _viewModel;
 
-    public void CloseTab()
-    {
-        _viewModel.OnClose();
-    }
+            Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
+        }
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        _viewModel.OnLoaded();
-    }
+        public void CloseTab()
+        {
+            _viewModel.OnClose();
+        }
 
-    private void Dispatcher_ShutdownStarted(object sender, EventArgs e)
-    {
-        _viewModel.OnClose();
-    }
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            _viewModel.OnLoaded();
+        }
 
-    private void ContextMenu_Opened(object sender, RoutedEventArgs e)
-    {
-        if (sender is ContextMenu menu)
-            menu.DataContext = _viewModel;
+        private void Dispatcher_ShutdownStarted(object sender, EventArgs e)
+        {
+            _viewModel.OnClose();
+        }
+
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            if (sender is ContextMenu menu)
+                menu.DataContext = _viewModel;
+        }
     }
 }

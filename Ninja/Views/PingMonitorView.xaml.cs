@@ -3,47 +3,48 @@ using System.Net;
 using MahApps.Metro.Controls.Dialogs;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class PingMonitorView
+namespace Ninja.Views
 {
-    private readonly PingMonitorViewModel _viewModel;
+    using ViewModels;
 
-    public PingMonitorView(Guid hostId, Action<Guid> removeHostByGuid, (IPAddress ipAddress, string hostname) host,
-        string group)
+    public partial class PingMonitorView
     {
-        InitializeComponent();
+        private readonly PingMonitorViewModel _viewModel;
 
-        _viewModel = new PingMonitorViewModel(DialogCoordinator.Instance, hostId, removeHostByGuid, host, group);
+        public PingMonitorView(Guid hostId, Action<Guid> removeHostByGuid, (IPAddress ipAddress, string hostname) host,
+            string group)
+        {
+            InitializeComponent();
 
-        DataContext = _viewModel;
+            _viewModel = new PingMonitorViewModel(DialogCoordinator.Instance, hostId, removeHostByGuid, host, group);
 
-        Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
-    }
+            DataContext = _viewModel;
 
-    public Guid HostId => _viewModel.HostId;
+            Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
+        }
 
-    public string Group => _viewModel.Group;
+        public Guid HostId => _viewModel.HostId;
 
-    public void Start()
-    {
-        _viewModel.Start();
-    }
+        public string Group => _viewModel.Group;
 
-    public void Stop()
-    {
-        _viewModel.Stop();
-    }
+        public void Start()
+        {
+            _viewModel.Start();
+        }
 
-    public void Export()
-    {
-        _viewModel.Export().ConfigureAwait(false);
-    }
+        public void Stop()
+        {
+            _viewModel.Stop();
+        }
 
-    private void Dispatcher_ShutdownStarted(object sender, EventArgs e)
-    {
-        Stop();
+        public void Export()
+        {
+            _viewModel.Export().ConfigureAwait(false);
+        }
+
+        private void Dispatcher_ShutdownStarted(object sender, EventArgs e)
+        {
+            Stop();
+        }
     }
 }

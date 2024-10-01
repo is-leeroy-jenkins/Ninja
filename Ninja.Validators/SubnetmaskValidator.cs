@@ -4,16 +4,17 @@ using System.Windows.Controls;
 using Ninja.Localization.Resources;
 using Ninja.Utilities;
 
-namespace Ninja.Validators;
-
-using Utilities;
-
-public class SubnetmaskValidator : ValidationRule
+namespace Ninja.Validators
 {
-    public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+    using Utilities;
+
+    public class SubnetmaskValidator : ValidationRule
     {
-        return value != null && Regex.IsMatch((string)value, RegexHelper.SubnetmaskRegex)
-            ? ValidationResult.ValidResult
-            : new ValidationResult(false, Strings.EnterValidSubnetmask);
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            return value != null && Regex.IsMatch((string)value, RegexHelper.SubnetmaskRegex)
+                ? ValidationResult.ValidResult
+                : new ValidationResult(false, Strings.EnterValidSubnetmask);
+        }
     }
 }

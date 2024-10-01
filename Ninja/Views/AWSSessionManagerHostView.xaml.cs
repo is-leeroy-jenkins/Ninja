@@ -4,56 +4,57 @@ using System.Windows.Input;
 using MahApps.Metro.Controls.Dialogs;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class AWSSessionManagerHostView
+namespace Ninja.Views
 {
-    private readonly AWSSessionManagerHostViewModel _viewModel = new(DialogCoordinator.Instance);
+    using ViewModels;
 
-    private bool _loaded;
-
-    public AWSSessionManagerHostView()
+    public partial class AWSSessionManagerHostView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly AWSSessionManagerHostViewModel _viewModel = new(DialogCoordinator.Instance);
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        _loaded = true;
-    }
+        private bool _loaded;
 
-    private void ContextMenu_Opened(object sender, RoutedEventArgs e)
-    {
-        if (sender is ContextMenu menu)
-            menu.DataContext = _viewModel;
-    }
+        public AWSSessionManagerHostView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
 
-    private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-    {
-        if (e.ChangedButton == MouseButton.Left)
-            _viewModel.ConnectProfileCommand.Execute(null);
-    }
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            _loaded = true;
+        }
 
-    public void OnViewHide()
-    {
-        _viewModel.OnViewHide();
-    }
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            if (sender is ContextMenu menu)
+                menu.DataContext = _viewModel;
+        }
 
-    public void OnViewVisible(bool fromSettings)
-    {
-        _viewModel.OnViewVisible(fromSettings);
-    }
+        private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                _viewModel.ConnectProfileCommand.Execute(null);
+        }
 
-    public void OnProfileLoaded()
-    {
-        _viewModel.OnProfileLoaded();
-    }
+        public void OnViewHide()
+        {
+            _viewModel.OnViewHide();
+        }
 
-    public void FocusEmbeddedWindow()
-    {
-        _viewModel.FocusEmbeddedWindow();
+        public void OnViewVisible(bool fromSettings)
+        {
+            _viewModel.OnViewVisible(fromSettings);
+        }
+
+        public void OnProfileLoaded()
+        {
+            _viewModel.OnProfileLoaded();
+        }
+
+        public void FocusEmbeddedWindow()
+        {
+            _viewModel.FocusEmbeddedWindow();
+        }
     }
 }

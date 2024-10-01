@@ -1,22 +1,23 @@
-﻿namespace Ninja.Models.Network;
-
-/// <summary>
-///     Represents all discovery protocols.
-/// </summary>
-public enum DiscoveryProtocol
+﻿namespace Ninja.Models.Network
 {
     /// <summary>
-    ///     Link layer and Cisco discovery protocol.
+    ///     Represents all discovery protocols.
     /// </summary>
-    LldpCdp,
+    public enum DiscoveryProtocol
+    {
+        /// <summary>
+        ///     Link layer and Cisco discovery protocol.
+        /// </summary>
+        LldpCdp,
 
-    /// <summary>
-    ///     Link layer discovery protocol.
-    /// </summary>
-    Lldp,
+        /// <summary>
+        ///     Link layer discovery protocol.
+        /// </summary>
+        Lldp,
 
-    /// <summary>
-    ///     Cisco discovery protocol.
-    /// </summary>
-    Cdp
+        /// <summary>
+        ///     Cisco discovery protocol.
+        /// </summary>
+        Cdp
+    }
 }

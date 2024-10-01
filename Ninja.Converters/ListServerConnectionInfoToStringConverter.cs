@@ -5,32 +5,33 @@ using System.Text;
 using System.Windows.Data;
 using Ninja.Models.Network;
 
-namespace Ninja.Converters;
-
-using Models.Network;
-
-public sealed class ListServerConnectionInfoToStringConverter : IValueConverter
+namespace Ninja.Converters
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    using Models.Network;
+
+    public sealed class ListServerConnectionInfoToStringConverter : IValueConverter
     {
-        if (value == null)
-            return string.Empty;
-
-        StringBuilder stringBuilder = new();
-
-        foreach (var server in (List<ServerConnectionInfo>)value)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (stringBuilder.Length > 0)
-                stringBuilder.Append("; ");
+            if (value == null)
+                return string.Empty;
 
-            stringBuilder.Append(server);
+            StringBuilder stringBuilder = new();
+
+            foreach (var server in (List<ServerConnectionInfo>)value)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder.Append("; ");
+
+                stringBuilder.Append(server);
+            }
+
+            return stringBuilder.ToString();
         }
 
-        return stringBuilder.ToString();
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -2,28 +2,29 @@
 using MahApps.Metro.Controls.Dialogs;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class SettingsSettingsView
+namespace Ninja.Views
 {
-    private readonly SettingsSettingsViewModel _viewModel = new(DialogCoordinator.Instance);
+    using ViewModels;
 
-    public SettingsSettingsView()
+    public partial class SettingsSettingsView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly SettingsSettingsViewModel _viewModel = new(DialogCoordinator.Instance);
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        if (_viewModel.CloseAction != null)
-            return;
+        public SettingsSettingsView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
 
-        var window = Window.GetWindow(this);
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (_viewModel.CloseAction != null)
+                return;
 
-        if (window != null)
-            _viewModel.CloseAction = window.Close;
+            var window = Window.GetWindow(this);
+
+            if (window != null)
+                _viewModel.CloseAction = window.Close;
+        }
     }
 }

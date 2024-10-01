@@ -4,27 +4,28 @@ using System.Windows.Input;
 using MahApps.Metro.Controls.Dialogs;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class IPScannerSettingsView
+namespace Ninja.Views
 {
-    private readonly IPScannerSettingsViewModel _viewModel = new(DialogCoordinator.Instance);
+    using ViewModels;
 
-    public IPScannerSettingsView()
+    public partial class IPScannerSettingsView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly IPScannerSettingsViewModel _viewModel = new(DialogCoordinator.Instance);
 
-    private void RowContextMenu_OnOpened(object sender, RoutedEventArgs e)
-    {
-        if (sender is ContextMenu menu) menu.DataContext = _viewModel;
-    }
+        public IPScannerSettingsView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
 
-    private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-    {
-        _viewModel.EditCustomCommand();
+        private void RowContextMenu_OnOpened(object sender, RoutedEventArgs e)
+        {
+            if (sender is ContextMenu menu) menu.DataContext = _viewModel;
+        }
+
+        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            _viewModel.EditCustomCommand();
+        }
     }
 }

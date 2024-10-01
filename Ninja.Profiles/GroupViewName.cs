@@ -1,12 +1,13 @@
-﻿namespace Ninja.Profiles;
-
-public enum GroupViewName
+﻿namespace Ninja.Profiles
 {
-    General,
-    RemoteDesktop,
-    PowerShell,
-    PuTTY,
-    AWSSessionManager,
-    TigerVNC,
-    SNMP
+    public enum GroupViewName
+    {
+        General,
+        RemoteDesktop,
+        PowerShell,
+        PuTTY,
+        AWSSessionManager,
+        TigerVNC,
+        SNMP
+    }
 }

@@ -7,52 +7,53 @@ using System.Windows.Data;
 using Ninja.Models.Network;
 using Ninja.Utilities;
 
-namespace Ninja.Converters;
-
-using Models.Network;
-using Utilities;
-
-public sealed class ValidateSubnetCalculatorSubnettingConverter : IMultiValueConverter
+namespace Ninja.Converters
 {
-    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+    using Models.Network;
+    using Utilities;
+
+    public sealed class ValidateSubnetCalculatorSubnettingConverter : IMultiValueConverter
     {
-        // if Validation.HasError is true...
-        if ((bool)values[0] || (bool)values[1])
-            return false;
-
-        var subnet = (values[2] as string)?.Trim();
-        var newSubnetmaskOrCidr = (values[3] as string)?.Trim();
-
-        // Catch null exceptions...
-        if (string.IsNullOrEmpty(subnet) || string.IsNullOrEmpty(newSubnetmaskOrCidr))
-            return false;
-
-        // Get the cidr to compare...
-        var subnetData = subnet.Split('/');
-
-        var ipAddress = IPAddress.Parse(subnetData[0]);
-        var subnetmaskOrCidr = subnetData[1];
-
-        var cidr = ipAddress.AddressFamily switch
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            AddressFamily.InterNetwork when subnetmaskOrCidr.Length < 3 => int.Parse(
-                subnetmaskOrCidr),
-            AddressFamily.InterNetwork => Subnetmask.ConvertSubnetmaskToCidr(
-                IPAddress.Parse(subnetmaskOrCidr)),
-            _ => int.Parse(subnetmaskOrCidr)
-        };
+            // if Validation.HasError is true...
+            if ((bool)values[0] || (bool)values[1])
+                return false;
 
-        // Support subnetmask like 255.255.255.0
-        int newCidr = Regex.IsMatch(newSubnetmaskOrCidr, RegexHelper.SubnetmaskRegex)
-            ? System.Convert.ToByte(Subnetmask.ConvertSubnetmaskToCidr(IPAddress.Parse(newSubnetmaskOrCidr)))
-            : System.Convert.ToByte(newSubnetmaskOrCidr.TrimStart('/'));
+            var subnet = (values[2] as string)?.Trim();
+            var newSubnetmaskOrCidr = (values[3] as string)?.Trim();
 
-        // Compare
-        return newCidr > cidr;
-    }
+            // Catch null exceptions...
+            if (string.IsNullOrEmpty(subnet) || string.IsNullOrEmpty(newSubnetmaskOrCidr))
+                return false;
 
-    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
+            // Get the cidr to compare...
+            var subnetData = subnet.Split('/');
+
+            var ipAddress = IPAddress.Parse(subnetData[0]);
+            var subnetmaskOrCidr = subnetData[1];
+
+            var cidr = ipAddress.AddressFamily switch
+            {
+                AddressFamily.InterNetwork when subnetmaskOrCidr.Length < 3 => int.Parse(
+                    subnetmaskOrCidr),
+                AddressFamily.InterNetwork => Subnetmask.ConvertSubnetmaskToCidr(
+                    IPAddress.Parse(subnetmaskOrCidr)),
+                _ => int.Parse(subnetmaskOrCidr)
+            };
+
+            // Support subnetmask like 255.255.255.0
+            int newCidr = Regex.IsMatch(newSubnetmaskOrCidr, RegexHelper.SubnetmaskRegex)
+                ? System.Convert.ToByte(Subnetmask.ConvertSubnetmaskToCidr(IPAddress.Parse(newSubnetmaskOrCidr)))
+                : System.Convert.ToByte(newSubnetmaskOrCidr.TrimStart('/'));
+
+            // Compare
+            return newCidr > cidr;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

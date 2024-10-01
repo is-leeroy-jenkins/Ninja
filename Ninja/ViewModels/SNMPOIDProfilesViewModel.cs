@@ -6,74 +6,75 @@ using Ninja.Models.Network;
 using Ninja.Settings;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Models.Network;
-using Settings;
-using Utilities;
-
-public class SNMPOIDProfilesViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    private string _search;
+    using Models.Network;
+    using Settings;
+    using Utilities;
 
-    private SNMPOIDProfileInfo _selectedOIDProfile;
-
-    public SNMPOIDProfilesViewModel(Action<SNMPOIDProfilesViewModel> okCommand,
-        Action<SNMPOIDProfilesViewModel> cancelHandler)
+    public class SNMPOIDProfilesViewModel : ViewModelBase
     {
-        OKCommand = new RelayCommand(_ => okCommand(this));
-        CancelCommand = new RelayCommand(_ => cancelHandler(this));
+        private string _search;
 
-        OIDProfiles = CollectionViewSource.GetDefaultView(SettingsManager.Current.SNMP_OidProfiles);
-        OIDProfiles.SortDescriptions.Add(new SortDescription(nameof(SNMPOIDProfileInfo.Name),
-            ListSortDirection.Ascending));
-        OIDProfiles.Filter = o =>
+        private SNMPOIDProfileInfo _selectedOIDProfile;
+
+        public SNMPOIDProfilesViewModel(Action<SNMPOIDProfilesViewModel> okCommand,
+            Action<SNMPOIDProfilesViewModel> cancelHandler)
         {
-            if (string.IsNullOrEmpty(Search))
-                return true;
+            OKCommand = new RelayCommand(_ => okCommand(this));
+            CancelCommand = new RelayCommand(_ => cancelHandler(this));
 
-            if (o is not SNMPOIDProfileInfo info)
-                return false;
+            OIDProfiles = CollectionViewSource.GetDefaultView(SettingsManager.Current.SNMP_OidProfiles);
+            OIDProfiles.SortDescriptions.Add(new SortDescription(nameof(SNMPOIDProfileInfo.Name),
+                ListSortDirection.Ascending));
+            OIDProfiles.Filter = o =>
+            {
+                if (string.IsNullOrEmpty(Search))
+                    return true;
 
-            var search = Search.Trim();
+                if (o is not SNMPOIDProfileInfo info)
+                    return false;
 
-            // Search: Name, OID
-            return info.Name.IndexOf(search, StringComparison.OrdinalIgnoreCase) > -1 ||
-                   info.OID.IndexOf(search, StringComparison.OrdinalIgnoreCase) > -1;
-        };
-    }
+                var search = Search.Trim();
 
-    public ICommand OKCommand { get; }
-    public ICommand CancelCommand { get; }
-
-    public string Search
-    {
-        get => _search;
-        set
-        {
-            if (value == _search)
-                return;
-
-            _search = value;
-
-            OIDProfiles.Refresh();
-
-            OnPropertyChanged();
+                // Search: Name, OID
+                return info.Name.IndexOf(search, StringComparison.OrdinalIgnoreCase) > -1 ||
+                    info.OID.IndexOf(search, StringComparison.OrdinalIgnoreCase) > -1;
+            };
         }
-    }
 
-    public ICollectionView OIDProfiles { get; }
+        public ICommand OKCommand { get; }
+        public ICommand CancelCommand { get; }
 
-    public SNMPOIDProfileInfo SelectedOIDProfile
-    {
-        get => _selectedOIDProfile;
-        set
+        public string Search
         {
-            if (Equals(value, _selectedOIDProfile))
-                return;
+            get => _search;
+            set
+            {
+                if (value == _search)
+                    return;
 
-            _selectedOIDProfile = value;
-            OnPropertyChanged();
+                _search = value;
+
+                OIDProfiles.Refresh();
+
+                OnPropertyChanged();
+            }
+        }
+
+        public ICollectionView OIDProfiles { get; }
+
+        public SNMPOIDProfileInfo SelectedOIDProfile
+        {
+            get => _selectedOIDProfile;
+            set
+            {
+                if (Equals(value, _selectedOIDProfile))
+                    return;
+
+                _selectedOIDProfile = value;
+                OnPropertyChanged();
+            }
         }
     }
 }

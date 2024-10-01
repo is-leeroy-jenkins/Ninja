@@ -3,17 +3,18 @@ using System.Collections;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Ninja.Converters;
-
-public sealed class SelectedItemsToBooleanConverter : IValueConverter
+namespace Ninja.Converters
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public sealed class SelectedItemsToBooleanConverter : IValueConverter
     {
-        return value != null && ((IList)value).Count > 0;
-    }
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value != null && ((IList)value).Count > 0;
+        }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

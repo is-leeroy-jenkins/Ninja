@@ -1,22 +1,23 @@
 ﻿using System.Windows;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class IPApiIPGeolocationWidgetView
+namespace Ninja.Views
 {
-    private readonly IPApiIPGeolocationWidgetViewModel _viewModel = new();
+    using ViewModels;
 
-    public IPApiIPGeolocationWidgetView()
+    public partial class IPApiIPGeolocationWidgetView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly IPApiIPGeolocationWidgetViewModel _viewModel = new();
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        _viewModel.Check();
+        public IPApiIPGeolocationWidgetView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            _viewModel.Check();
+        }
     }
 }

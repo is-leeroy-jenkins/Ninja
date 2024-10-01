@@ -1,15 +1,16 @@
 ﻿using System.Windows;
 
-namespace Ninja.Views;
-
-public partial class DropdownDialog
+namespace Ninja.Views
 {
-    public DropdownDialog()
+    public partial class DropdownDialog
     {
-        InitializeComponent();
-    }
+        public DropdownDialog()
+        {
+            InitializeComponent();
+        }
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

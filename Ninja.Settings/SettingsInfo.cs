@@ -18,4533 +18,4534 @@ using Ninja.Utilities;
 
 // ReSharper disable InconsistentNaming
 
-namespace Ninja.Settings;
-
-using Controls;
-using Models;
-using Models.AWS;
-using Models.Export;
-using Models.Network;
-using Models.PowerShell;
-using Models.PuTTY;
-using Models.RemoteDesktop;
-using Utilities;
-
-public class SettingsInfo : INotifyPropertyChanged
+namespace Ninja.Settings
 {
-    public event PropertyChangedEventHandler PropertyChanged;
+    using Controls;
+    using Models;
+    using Models.AWS;
+    using Models.Export;
+    using Models.Network;
+    using Models.PowerShell;
+    using Models.PuTTY;
+    using Models.RemoteDesktop;
+    using Utilities;
 
-    private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    public class SettingsInfo : INotifyPropertyChanged
     {
-        SettingsChanged = true;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            SettingsChanged = true;
 
-    #region Variables
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
-    [XmlIgnore] public bool SettingsChanged { get; set; }
+        #region Variables
 
-    private bool _welcomeDialog_Show = true;
+        [XmlIgnore] public bool SettingsChanged { get; set; }
 
-    public bool WelcomeDialog_Show
-    {
-        get => _welcomeDialog_Show;
-        set
+        private bool _welcomeDialog_Show = true;
+
+        public bool WelcomeDialog_Show
         {
-            if (value == _welcomeDialog_Show)
-                return;
+            get => _welcomeDialog_Show;
+            set
+            {
+                if (value == _welcomeDialog_Show)
+                    return;
 
-            _welcomeDialog_Show = value;
-            OnPropertyChanged();
+                _welcomeDialog_Show = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _version;
+        private string _version;
 
-    public string Version
-    {
-        get => _version;
-        set
+        public string Version
         {
-            if (value == _version)
-                return;
+            get => _version;
+            set
+            {
+                if (value == _version)
+                    return;
 
-            _version = value;
-            OnPropertyChanged();
+                _version = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #region General
+        #region General
 
-    // General   
-    private ObservableSetCollection<ApplicationInfo> _general_ApplicationList = new();
+        // General   
+        private ObservableSetCollection<ApplicationInfo> _general_ApplicationList = new();
 
-    public ObservableSetCollection<ApplicationInfo> General_ApplicationList
-    {
-        get => _general_ApplicationList;
-        set
+        public ObservableSetCollection<ApplicationInfo> General_ApplicationList
         {
-            if (value == _general_ApplicationList)
-                return;
+            get => _general_ApplicationList;
+            set
+            {
+                if (value == _general_ApplicationList)
+                    return;
 
-            _general_ApplicationList = value;
-            OnPropertyChanged();
+                _general_ApplicationList = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _general_BackgroundJobInterval = GlobalStaticConfiguration.General_BackgroundJobInterval;
+        private int _general_BackgroundJobInterval = GlobalStaticConfiguration.General_BackgroundJobInterval;
 
-    public int General_BackgroundJobInterval
-    {
-        get => _general_BackgroundJobInterval;
-        set
+        public int General_BackgroundJobInterval
         {
-            if (value == _general_BackgroundJobInterval)
-                return;
+            get => _general_BackgroundJobInterval;
+            set
+            {
+                if (value == _general_BackgroundJobInterval)
+                    return;
 
-            _general_BackgroundJobInterval = value;
-            OnPropertyChanged();
+                _general_BackgroundJobInterval = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
 
-    private int _general_ThreadPoolAdditionalMinThreads =
-        GlobalStaticConfiguration.General_ThreadPoolAdditionalMinThreads;
+        private int _general_ThreadPoolAdditionalMinThreads =
+            GlobalStaticConfiguration.General_ThreadPoolAdditionalMinThreads;
 
-    public int General_ThreadPoolAdditionalMinThreads
-    {
-        get => _general_ThreadPoolAdditionalMinThreads;
-        set
+        public int General_ThreadPoolAdditionalMinThreads
         {
-            if (value == _general_ThreadPoolAdditionalMinThreads)
-                return;
+            get => _general_ThreadPoolAdditionalMinThreads;
+            set
+            {
+                if (value == _general_ThreadPoolAdditionalMinThreads)
+                    return;
 
-            _general_ThreadPoolAdditionalMinThreads = value;
-            OnPropertyChanged();
+                _general_ThreadPoolAdditionalMinThreads = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _general_HistoryListEntries = GlobalStaticConfiguration.General_HistoryListEntries;
+        private int _general_HistoryListEntries = GlobalStaticConfiguration.General_HistoryListEntries;
 
-    public int General_HistoryListEntries
-    {
-        get => _general_HistoryListEntries;
-        set
+        public int General_HistoryListEntries
         {
-            if (value == _general_HistoryListEntries)
-                return;
+            get => _general_HistoryListEntries;
+            set
+            {
+                if (value == _general_HistoryListEntries)
+                    return;
 
-            _general_HistoryListEntries = value;
-            OnPropertyChanged();
+                _general_HistoryListEntries = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    // Window
-    private bool _window_ConfirmClose;
+        // Window
+        private bool _window_ConfirmClose;
 
-    public bool Window_ConfirmClose
-    {
-        get => _window_ConfirmClose;
-        set
+        public bool Window_ConfirmClose
         {
-            if (value == _window_ConfirmClose)
-                return;
+            get => _window_ConfirmClose;
+            set
+            {
+                if (value == _window_ConfirmClose)
+                    return;
 
-            _window_ConfirmClose = value;
-            OnPropertyChanged();
+                _window_ConfirmClose = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _window_MinimizeInsteadOfTerminating;
+        private bool _window_MinimizeInsteadOfTerminating;
 
-    public bool Window_MinimizeInsteadOfTerminating
-    {
-        get => _window_MinimizeInsteadOfTerminating;
-        set
+        public bool Window_MinimizeInsteadOfTerminating
         {
-            if (value == _window_MinimizeInsteadOfTerminating)
-                return;
+            get => _window_MinimizeInsteadOfTerminating;
+            set
+            {
+                if (value == _window_MinimizeInsteadOfTerminating)
+                    return;
 
-            _window_MinimizeInsteadOfTerminating = value;
-            OnPropertyChanged();
+                _window_MinimizeInsteadOfTerminating = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _window_MultipleInstances;
+        private bool _window_MultipleInstances;
 
-    public bool Window_MultipleInstances
-    {
-        get => _window_MultipleInstances;
-        set
+        public bool Window_MultipleInstances
         {
-            if (value == _window_MultipleInstances)
-                return;
+            get => _window_MultipleInstances;
+            set
+            {
+                if (value == _window_MultipleInstances)
+                    return;
 
-            _window_MultipleInstances = value;
-            OnPropertyChanged();
+                _window_MultipleInstances = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _window_MinimizeToTrayInsteadOfTaskbar;
+        private bool _window_MinimizeToTrayInsteadOfTaskbar;
 
-    public bool Window_MinimizeToTrayInsteadOfTaskbar
-    {
-        get => _window_MinimizeToTrayInsteadOfTaskbar;
-        set
+        public bool Window_MinimizeToTrayInsteadOfTaskbar
         {
-            if (value == _window_MinimizeToTrayInsteadOfTaskbar)
-                return;
+            get => _window_MinimizeToTrayInsteadOfTaskbar;
+            set
+            {
+                if (value == _window_MinimizeToTrayInsteadOfTaskbar)
+                    return;
 
-            _window_MinimizeToTrayInsteadOfTaskbar = value;
-            OnPropertyChanged();
+                _window_MinimizeToTrayInsteadOfTaskbar = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    // TrayIcon
-    private bool _trayIcon_AlwaysShowIcon;
+        // TrayIcon
+        private bool _trayIcon_AlwaysShowIcon;
 
-    public bool TrayIcon_AlwaysShowIcon
-    {
-        get => _trayIcon_AlwaysShowIcon;
-        set
+        public bool TrayIcon_AlwaysShowIcon
         {
-            if (value == _trayIcon_AlwaysShowIcon)
-                return;
+            get => _trayIcon_AlwaysShowIcon;
+            set
+            {
+                if (value == _trayIcon_AlwaysShowIcon)
+                    return;
 
-            _trayIcon_AlwaysShowIcon = value;
-            OnPropertyChanged();
+                _trayIcon_AlwaysShowIcon = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    // SplashScreen
-    private bool _splashScreen_Enabled = GlobalStaticConfiguration.SplashScreen_Enabled;
+        // SplashScreen
+        private bool _splashScreen_Enabled = GlobalStaticConfiguration.SplashScreen_Enabled;
 
-    public bool SplashScreen_Enabled
-    {
-        get => _splashScreen_Enabled;
-        set
+        public bool SplashScreen_Enabled
         {
-            if (value == _splashScreen_Enabled)
-                return;
+            get => _splashScreen_Enabled;
+            set
+            {
+                if (value == _splashScreen_Enabled)
+                    return;
 
-            _splashScreen_Enabled = value;
-            OnPropertyChanged();
+                _splashScreen_Enabled = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    // Appearance
-    private string _appearance_Theme = GlobalStaticConfiguration.Appearance_Theme;
+        // Appearance
+        private string _appearance_Theme = GlobalStaticConfiguration.Appearance_Theme;
 
-    public string Appearance_Theme
-    {
-        get => _appearance_Theme;
-        set
+        public string Appearance_Theme
         {
-            if (value == _appearance_Theme)
-                return;
+            get => _appearance_Theme;
+            set
+            {
+                if (value == _appearance_Theme)
+                    return;
 
-            _appearance_Theme = value;
-            OnPropertyChanged();
+                _appearance_Theme = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _appearance_Accent = GlobalStaticConfiguration.Appearance_Accent;
+        private string _appearance_Accent = GlobalStaticConfiguration.Appearance_Accent;
 
-    public string Appearance_Accent
-    {
-        get => _appearance_Accent;
-        set
+        public string Appearance_Accent
         {
-            if (value == _appearance_Accent)
-                return;
+            get => _appearance_Accent;
+            set
+            {
+                if (value == _appearance_Accent)
+                    return;
 
-            _appearance_Accent = value;
-            OnPropertyChanged();
+                _appearance_Accent = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _appearance_UseCustomTheme = GlobalStaticConfiguration.Appearance_UseCustomTheme;
+        private bool _appearance_UseCustomTheme = GlobalStaticConfiguration.Appearance_UseCustomTheme;
 
-    public bool Appearance_UseCustomTheme
-    {
-        get => _appearance_UseCustomTheme;
-        set
+        public bool Appearance_UseCustomTheme
         {
-            if (value == _appearance_UseCustomTheme)
-                return;
+            get => _appearance_UseCustomTheme;
+            set
+            {
+                if (value == _appearance_UseCustomTheme)
+                    return;
 
-            _appearance_UseCustomTheme = value;
-            OnPropertyChanged();
+                _appearance_UseCustomTheme = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _appearance_CustomThemeName;
+        private string _appearance_CustomThemeName;
 
-    public string Appearance_CustomThemeName
-    {
-        get => _appearance_CustomThemeName;
-        set
+        public string Appearance_CustomThemeName
         {
-            if (value == _appearance_CustomThemeName)
-                return;
+            get => _appearance_CustomThemeName;
+            set
+            {
+                if (value == _appearance_CustomThemeName)
+                    return;
 
-            _appearance_CustomThemeName = value;
-            OnPropertyChanged();
+                _appearance_CustomThemeName = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _appearance_PowerShellModifyGlobalProfile;
+        private bool _appearance_PowerShellModifyGlobalProfile;
 
-    public bool Appearance_PowerShellModifyGlobalProfile
-    {
-        get => _appearance_PowerShellModifyGlobalProfile;
-        set
+        public bool Appearance_PowerShellModifyGlobalProfile
         {
-            if (value == _appearance_PowerShellModifyGlobalProfile)
-                return;
+            get => _appearance_PowerShellModifyGlobalProfile;
+            set
+            {
+                if (value == _appearance_PowerShellModifyGlobalProfile)
+                    return;
 
-            _appearance_PowerShellModifyGlobalProfile = value;
-            OnPropertyChanged();
+                _appearance_PowerShellModifyGlobalProfile = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    // Localization
-    private string _localization_CultureCode;
+        // Localization
+        private string _localization_CultureCode;
 
-    public string Localization_CultureCode
-    {
-        get => _localization_CultureCode;
-        set
+        public string Localization_CultureCode
         {
-            if (value == _localization_CultureCode)
-                return;
+            get => _localization_CultureCode;
+            set
+            {
+                if (value == _localization_CultureCode)
+                    return;
 
-            _localization_CultureCode = value;
-            OnPropertyChanged();
+                _localization_CultureCode = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    // Network
-    private bool _network_UseCustomDNSServer;
+        // Network
+        private bool _network_UseCustomDNSServer;
 
-    public bool Network_UseCustomDNSServer
-    {
-        get => _network_UseCustomDNSServer;
-        set
+        public bool Network_UseCustomDNSServer
         {
-            if (value == _network_UseCustomDNSServer)
-                return;
+            get => _network_UseCustomDNSServer;
+            set
+            {
+                if (value == _network_UseCustomDNSServer)
+                    return;
 
-            _network_UseCustomDNSServer = value;
-            OnPropertyChanged();
+                _network_UseCustomDNSServer = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _network_CustomDNSServer;
+        private string _network_CustomDNSServer;
 
-    public string Network_CustomDNSServer
-    {
-        get => _network_CustomDNSServer;
-        set
+        public string Network_CustomDNSServer
         {
-            if (value == _network_CustomDNSServer)
-                return;
+            get => _network_CustomDNSServer;
+            set
+            {
+                if (value == _network_CustomDNSServer)
+                    return;
 
-            _network_CustomDNSServer = value;
-            OnPropertyChanged();
+                _network_CustomDNSServer = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _network_ResolveHostnamePreferIPv4 = GlobalStaticConfiguration.Network_ResolveHostnamePreferIPv4;
+        private bool _network_ResolveHostnamePreferIPv4 = GlobalStaticConfiguration.Network_ResolveHostnamePreferIPv4;
 
-    public bool Network_ResolveHostnamePreferIPv4
-    {
-        get => _network_ResolveHostnamePreferIPv4;
-        set
+        public bool Network_ResolveHostnamePreferIPv4
         {
-            if (value == _network_ResolveHostnamePreferIPv4)
-                return;
+            get => _network_ResolveHostnamePreferIPv4;
+            set
+            {
+                if (value == _network_ResolveHostnamePreferIPv4)
+                    return;
 
-            _network_ResolveHostnamePreferIPv4 = value;
-            OnPropertyChanged();
+                _network_ResolveHostnamePreferIPv4 = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    // Status
-    private bool _status_ShowWindowOnNetworkChange = GlobalStaticConfiguration.Status_ShowWindowOnNetworkChange;
+        // Status
+        private bool _status_ShowWindowOnNetworkChange = GlobalStaticConfiguration.Status_ShowWindowOnNetworkChange;
 
-    public bool Status_ShowWindowOnNetworkChange
-    {
-        get => _status_ShowWindowOnNetworkChange;
-        set
+        public bool Status_ShowWindowOnNetworkChange
         {
-            if (value == _status_ShowWindowOnNetworkChange)
-                return;
+            get => _status_ShowWindowOnNetworkChange;
+            set
+            {
+                if (value == _status_ShowWindowOnNetworkChange)
+                    return;
 
-            _status_ShowWindowOnNetworkChange = value;
-            OnPropertyChanged();
+                _status_ShowWindowOnNetworkChange = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _status_WindowCloseTime = GlobalStaticConfiguration.Status_WindowCloseTime;
+        private int _status_WindowCloseTime = GlobalStaticConfiguration.Status_WindowCloseTime;
 
-    public int Status_WindowCloseTime
-    {
-        get => _status_WindowCloseTime;
-        set
+        public int Status_WindowCloseTime
         {
-            if (value == _status_WindowCloseTime)
-                return;
+            get => _status_WindowCloseTime;
+            set
+            {
+                if (value == _status_WindowCloseTime)
+                    return;
 
-            _status_WindowCloseTime = value;
-            OnPropertyChanged();
+                _status_WindowCloseTime = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    // Autostart
-    private bool _autostart_StartMinimizedInTray;
+        // Autostart
+        private bool _autostart_StartMinimizedInTray;
 
-    public bool Autostart_StartMinimizedInTray
-    {
-        get => _autostart_StartMinimizedInTray;
-        set
+        public bool Autostart_StartMinimizedInTray
         {
-            if (value == _autostart_StartMinimizedInTray)
-                return;
+            get => _autostart_StartMinimizedInTray;
+            set
+            {
+                if (value == _autostart_StartMinimizedInTray)
+                    return;
 
-            _autostart_StartMinimizedInTray = value;
-            OnPropertyChanged();
+                _autostart_StartMinimizedInTray = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    // HotKey
-    private bool _hotKey_ShowWindowEnabled;
+        // HotKey
+        private bool _hotKey_ShowWindowEnabled;
 
-    public bool HotKey_ShowWindowEnabled
-    {
-        get => _hotKey_ShowWindowEnabled;
-        set
+        public bool HotKey_ShowWindowEnabled
         {
-            if (value == _hotKey_ShowWindowEnabled)
-                return;
+            get => _hotKey_ShowWindowEnabled;
+            set
+            {
+                if (value == _hotKey_ShowWindowEnabled)
+                    return;
 
-            _hotKey_ShowWindowEnabled = value;
-            OnPropertyChanged();
+                _hotKey_ShowWindowEnabled = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _hotKey_ShowWindowKey = GlobalStaticConfiguration.HotKey_ShowWindowKey;
+        private int _hotKey_ShowWindowKey = GlobalStaticConfiguration.HotKey_ShowWindowKey;
 
-    public int HotKey_ShowWindowKey
-    {
-        get => _hotKey_ShowWindowKey;
-        set
+        public int HotKey_ShowWindowKey
         {
-            if (value == _hotKey_ShowWindowKey)
-                return;
+            get => _hotKey_ShowWindowKey;
+            set
+            {
+                if (value == _hotKey_ShowWindowKey)
+                    return;
 
-            _hotKey_ShowWindowKey = value;
-            OnPropertyChanged();
+                _hotKey_ShowWindowKey = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _hotKey_ShowWindowModifier = GlobalStaticConfiguration.HotKey_ShowWindowModifier;
+        private int _hotKey_ShowWindowModifier = GlobalStaticConfiguration.HotKey_ShowWindowModifier;
 
-    public int HotKey_ShowWindowModifier
-    {
-        get => _hotKey_ShowWindowModifier;
-        set
+        public int HotKey_ShowWindowModifier
         {
-            if (value == _hotKey_ShowWindowModifier)
-                return;
+            get => _hotKey_ShowWindowModifier;
+            set
+            {
+                if (value == _hotKey_ShowWindowModifier)
+                    return;
 
-            _hotKey_ShowWindowModifier = value;
-            OnPropertyChanged();
+                _hotKey_ShowWindowModifier = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    // Update
-    private bool _update_CheckForUpdatesAtStartup = GlobalStaticConfiguration.Update_CheckForUpdatesAtStartup;
+        // Update
+        private bool _update_CheckForUpdatesAtStartup = GlobalStaticConfiguration.Update_CheckForUpdatesAtStartup;
 
-    public bool Update_CheckForUpdatesAtStartup
-    {
-        get => _update_CheckForUpdatesAtStartup;
-        set
+        public bool Update_CheckForUpdatesAtStartup
         {
-            if (value == _update_CheckForUpdatesAtStartup)
-                return;
+            get => _update_CheckForUpdatesAtStartup;
+            set
+            {
+                if (value == _update_CheckForUpdatesAtStartup)
+                    return;
 
-            _update_CheckForUpdatesAtStartup = value;
-            OnPropertyChanged();
+                _update_CheckForUpdatesAtStartup = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _update_CheckForPreReleases = GlobalStaticConfiguration.Update_CheckForPreReleases;
+        private bool _update_CheckForPreReleases = GlobalStaticConfiguration.Update_CheckForPreReleases;
 
-    public bool Update_CheckForPreReleases
-    {
-        get => _update_CheckForPreReleases;
-        set
+        public bool Update_CheckForPreReleases
         {
-            if (value == _update_CheckForPreReleases)
-                return;
+            get => _update_CheckForPreReleases;
+            set
+            {
+                if (value == _update_CheckForPreReleases)
+                    return;
 
-            _update_CheckForPreReleases = value;
-            OnPropertyChanged();
+                _update_CheckForPreReleases = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _experimental_EnableExperimentalFeatures =
-        GlobalStaticConfiguration.Experimental_EnableExperimentalFeatures;
+        private bool _experimental_EnableExperimentalFeatures =
+            GlobalStaticConfiguration.Experimental_EnableExperimentalFeatures;
 
-    public bool Experimental_EnableExperimentalFeatures
-    {
-        get => _experimental_EnableExperimentalFeatures;
-        set
+        public bool Experimental_EnableExperimentalFeatures
         {
-            if (value == _experimental_EnableExperimentalFeatures)
-                return;
+            get => _experimental_EnableExperimentalFeatures;
+            set
+            {
+                if (value == _experimental_EnableExperimentalFeatures)
+                    return;
 
-            _experimental_EnableExperimentalFeatures = value;
-            OnPropertyChanged();
+                _experimental_EnableExperimentalFeatures = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    // Profiles    
-    private string _profiles_LastSelected;
+        // Profiles    
+        private string _profiles_LastSelected;
 
-    public string Profiles_LastSelected
-    {
-        get => _profiles_LastSelected;
-        set
+        public string Profiles_LastSelected
         {
-            if (value == _profiles_LastSelected)
-                return;
+            get => _profiles_LastSelected;
+            set
+            {
+                if (value == _profiles_LastSelected)
+                    return;
 
-            _profiles_LastSelected = value;
-            OnPropertyChanged();
+                _profiles_LastSelected = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region Others
+        #region Others
 
-    // Application view       
-    private bool _expandApplicationView;
+        // Application view       
+        private bool _expandApplicationView;
 
-    public bool ExpandApplicationView
-    {
-        get => _expandApplicationView;
-        set
+        public bool ExpandApplicationView
         {
-            if (value == _expandApplicationView)
-                return;
+            get => _expandApplicationView;
+            set
+            {
+                if (value == _expandApplicationView)
+                    return;
 
-            _expandApplicationView = value;
-            OnPropertyChanged();
+                _expandApplicationView = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region Dashboard
+        #region Dashboard
 
-    private string _dashboard_PublicIPv4Address = GlobalStaticConfiguration.Dashboard_PublicIPv4Address;
+        private string _dashboard_PublicIPv4Address = GlobalStaticConfiguration.Dashboard_PublicIPv4Address;
 
-    public string Dashboard_PublicIPv4Address
-    {
-        get => _dashboard_PublicIPv4Address;
-        set
+        public string Dashboard_PublicIPv4Address
         {
-            if (value == _dashboard_PublicIPv4Address)
-                return;
+            get => _dashboard_PublicIPv4Address;
+            set
+            {
+                if (value == _dashboard_PublicIPv4Address)
+                    return;
 
-            _dashboard_PublicIPv4Address = value;
-            OnPropertyChanged();
+                _dashboard_PublicIPv4Address = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _dashboard_PublicIPv6Address = GlobalStaticConfiguration.Dashboard_PublicIPv6Address;
+        private string _dashboard_PublicIPv6Address = GlobalStaticConfiguration.Dashboard_PublicIPv6Address;
 
-    public string Dashboard_PublicIPv6Address
-    {
-        get => _dashboard_PublicIPv6Address;
-        set
+        public string Dashboard_PublicIPv6Address
         {
-            if (value == _dashboard_PublicIPv6Address)
-                return;
+            get => _dashboard_PublicIPv6Address;
+            set
+            {
+                if (value == _dashboard_PublicIPv6Address)
+                    return;
 
-            _dashboard_PublicIPv6Address = value;
-            OnPropertyChanged();
+                _dashboard_PublicIPv6Address = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _dashboard_CheckPublicIPAddress = GlobalStaticConfiguration.Dashboard_CheckPublicIPAddress;
+        private bool _dashboard_CheckPublicIPAddress = GlobalStaticConfiguration.Dashboard_CheckPublicIPAddress;
 
-    public bool Dashboard_CheckPublicIPAddress
-    {
-        get => _dashboard_CheckPublicIPAddress;
-        set
+        public bool Dashboard_CheckPublicIPAddress
         {
-            if (value == _dashboard_CheckPublicIPAddress)
-                return;
+            get => _dashboard_CheckPublicIPAddress;
+            set
+            {
+                if (value == _dashboard_CheckPublicIPAddress)
+                    return;
 
-            _dashboard_CheckPublicIPAddress = value;
-            OnPropertyChanged();
+                _dashboard_CheckPublicIPAddress = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _dashboard_UseCustomPublicIPv4AddressAPI;
+        private bool _dashboard_UseCustomPublicIPv4AddressAPI;
 
-    public bool Dashboard_UseCustomPublicIPv4AddressAPI
-    {
-        get => _dashboard_UseCustomPublicIPv4AddressAPI;
-        set
+        public bool Dashboard_UseCustomPublicIPv4AddressAPI
         {
-            if (value == _dashboard_UseCustomPublicIPv4AddressAPI)
-                return;
+            get => _dashboard_UseCustomPublicIPv4AddressAPI;
+            set
+            {
+                if (value == _dashboard_UseCustomPublicIPv4AddressAPI)
+                    return;
 
-            _dashboard_UseCustomPublicIPv4AddressAPI = value;
-            OnPropertyChanged();
+                _dashboard_UseCustomPublicIPv4AddressAPI = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _dashboard_CustomPublicIPv4AddressAPI;
+        private string _dashboard_CustomPublicIPv4AddressAPI;
 
-    public string Dashboard_CustomPublicIPv4AddressAPI
-    {
-        get => _dashboard_CustomPublicIPv4AddressAPI;
-        set
+        public string Dashboard_CustomPublicIPv4AddressAPI
         {
-            if (value == _dashboard_CustomPublicIPv4AddressAPI)
-                return;
+            get => _dashboard_CustomPublicIPv4AddressAPI;
+            set
+            {
+                if (value == _dashboard_CustomPublicIPv4AddressAPI)
+                    return;
 
-            _dashboard_CustomPublicIPv4AddressAPI = value;
-            OnPropertyChanged();
+                _dashboard_CustomPublicIPv4AddressAPI = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _dashboard_UseCustomPublicIPv6AddressAPI;
+        private bool _dashboard_UseCustomPublicIPv6AddressAPI;
 
-    public bool Dashboard_UseCustomPublicIPv6AddressAPI
-    {
-        get => _dashboard_UseCustomPublicIPv6AddressAPI;
-        set
+        public bool Dashboard_UseCustomPublicIPv6AddressAPI
         {
-            if (value == _dashboard_UseCustomPublicIPv6AddressAPI)
-                return;
+            get => _dashboard_UseCustomPublicIPv6AddressAPI;
+            set
+            {
+                if (value == _dashboard_UseCustomPublicIPv6AddressAPI)
+                    return;
 
-            _dashboard_UseCustomPublicIPv6AddressAPI = value;
-            OnPropertyChanged();
+                _dashboard_UseCustomPublicIPv6AddressAPI = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _dashboard_CustomPublicIPv6AddressAPI;
+        private string _dashboard_CustomPublicIPv6AddressAPI;
 
-    public string Dashboard_CustomPublicIPv6AddressAPI
-    {
-        get => _dashboard_CustomPublicIPv6AddressAPI;
-        set
+        public string Dashboard_CustomPublicIPv6AddressAPI
         {
-            if (value == _dashboard_CustomPublicIPv6AddressAPI)
-                return;
+            get => _dashboard_CustomPublicIPv6AddressAPI;
+            set
+            {
+                if (value == _dashboard_CustomPublicIPv6AddressAPI)
+                    return;
 
-            _dashboard_CustomPublicIPv6AddressAPI = value;
-            OnPropertyChanged();
+                _dashboard_CustomPublicIPv6AddressAPI = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _dashboard_CheckIPApiIPGeolocation = GlobalStaticConfiguration.Dashboard_CheckIPApiIPGeolocation;
+        private bool _dashboard_CheckIPApiIPGeolocation = GlobalStaticConfiguration.Dashboard_CheckIPApiIPGeolocation;
 
-    public bool Dashboard_CheckIPApiIPGeolocation
-    {
-        get => _dashboard_CheckIPApiIPGeolocation;
-        set
+        public bool Dashboard_CheckIPApiIPGeolocation
         {
-            if (value == _dashboard_CheckIPApiIPGeolocation)
-                return;
+            get => _dashboard_CheckIPApiIPGeolocation;
+            set
+            {
+                if (value == _dashboard_CheckIPApiIPGeolocation)
+                    return;
 
-            _dashboard_CheckIPApiIPGeolocation = value;
-            OnPropertyChanged();
+                _dashboard_CheckIPApiIPGeolocation = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _dashboard_CheckIPApiDNSResolver = GlobalStaticConfiguration.Dashboard_CheckIPApiDNSResolver;
+        private bool _dashboard_CheckIPApiDNSResolver = GlobalStaticConfiguration.Dashboard_CheckIPApiDNSResolver;
 
-    public bool Dashboard_CheckIPApiDNSResolver
-    {
-        get => _dashboard_CheckIPApiDNSResolver;
-        set
+        public bool Dashboard_CheckIPApiDNSResolver
         {
-            if (value == _dashboard_CheckIPApiDNSResolver)
-                return;
+            get => _dashboard_CheckIPApiDNSResolver;
+            set
+            {
+                if (value == _dashboard_CheckIPApiDNSResolver)
+                    return;
 
-            _dashboard_CheckIPApiDNSResolver = value;
-            OnPropertyChanged();
+                _dashboard_CheckIPApiDNSResolver = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region Network Interface
+        #region Network Interface
 
-    private string _networkInterface_InterfaceId;
+        private string _networkInterface_InterfaceId;
 
-    public string NetworkInterface_InterfaceId
-    {
-        get => _networkInterface_InterfaceId;
-        set
+        public string NetworkInterface_InterfaceId
         {
-            if (value == _networkInterface_InterfaceId)
-                return;
+            get => _networkInterface_InterfaceId;
+            set
+            {
+                if (value == _networkInterface_InterfaceId)
+                    return;
 
-            _networkInterface_InterfaceId = value;
-            OnPropertyChanged();
+                _networkInterface_InterfaceId = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _networkInterface_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
+        private bool _networkInterface_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
 
-    public bool NetworkInterface_ExpandProfileView
-    {
-        get => _networkInterface_ExpandProfileView;
-        set
+        public bool NetworkInterface_ExpandProfileView
         {
-            if (value == _networkInterface_ExpandProfileView)
-                return;
+            get => _networkInterface_ExpandProfileView;
+            set
+            {
+                if (value == _networkInterface_ExpandProfileView)
+                    return;
 
-            _networkInterface_ExpandProfileView = value;
-            OnPropertyChanged();
+                _networkInterface_ExpandProfileView = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private double _networkInterface_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
+        private double _networkInterface_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
 
-    public double NetworkInterface_ProfileWidth
-    {
-        get => _networkInterface_ProfileWidth;
-        set
+        public double NetworkInterface_ProfileWidth
         {
-            if (Math.Abs(value - _networkInterface_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
-                return;
+            get => _networkInterface_ProfileWidth;
+            set
+            {
+                if (Math.Abs(value - _networkInterface_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
+                    return;
 
-            _networkInterface_ProfileWidth = value;
-            OnPropertyChanged();
+                _networkInterface_ProfileWidth = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _networkInterface_ExportFilePath;
+        private string _networkInterface_ExportFilePath;
 
-    public string NetworkInterface_ExportFilePath
-    {
-        get => _networkInterface_ExportFilePath;
-        set
+        public string NetworkInterface_ExportFilePath
         {
-            if (value == _networkInterface_ExportFilePath)
-                return;
+            get => _networkInterface_ExportFilePath;
+            set
+            {
+                if (value == _networkInterface_ExportFilePath)
+                    return;
 
-            _networkInterface_ExportFilePath = value;
-            OnPropertyChanged();
+                _networkInterface_ExportFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ExportFileType _networkInterface_ExportFileType = GlobalStaticConfiguration.NetworkInterface_ExportFileType;
+        private ExportFileType _networkInterface_ExportFileType = GlobalStaticConfiguration.NetworkInterface_ExportFileType;
 
-    public ExportFileType NetworkInterface_ExportFileType
-    {
-        get => _networkInterface_ExportFileType;
-        set
+        public ExportFileType NetworkInterface_ExportFileType
         {
-            if (value == _networkInterface_ExportFileType)
-                return;
+            get => _networkInterface_ExportFileType;
+            set
+            {
+                if (value == _networkInterface_ExportFileType)
+                    return;
 
-            _networkInterface_ExportFileType = value;
-            OnPropertyChanged();
+                _networkInterface_ExportFileType = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region WiFi
+        #region WiFi
 
-    private string _wiFi_InterfaceId;
+        private string _wiFi_InterfaceId;
 
-    public string WiFi_InterfaceId
-    {
-        get => _wiFi_InterfaceId;
-        set
+        public string WiFi_InterfaceId
         {
-            if (value == _wiFi_InterfaceId)
-                return;
+            get => _wiFi_InterfaceId;
+            set
+            {
+                if (value == _wiFi_InterfaceId)
+                    return;
 
-            _wiFi_InterfaceId = value;
-            OnPropertyChanged();
+                _wiFi_InterfaceId = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _wiFi_Show2dot4GHzNetworks = GlobalStaticConfiguration.WiFi_Show2dot4GHzNetworks;
+        private bool _wiFi_Show2dot4GHzNetworks = GlobalStaticConfiguration.WiFi_Show2dot4GHzNetworks;
 
-    public bool WiFi_Show2dot4GHzNetworks
-    {
-        get => _wiFi_Show2dot4GHzNetworks;
-        set
+        public bool WiFi_Show2dot4GHzNetworks
         {
-            if (value == _wiFi_Show2dot4GHzNetworks)
-                return;
+            get => _wiFi_Show2dot4GHzNetworks;
+            set
+            {
+                if (value == _wiFi_Show2dot4GHzNetworks)
+                    return;
 
-            _wiFi_Show2dot4GHzNetworks = value;
-            OnPropertyChanged();
+                _wiFi_Show2dot4GHzNetworks = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _wiFi_Show5GHzNetworks = GlobalStaticConfiguration.WiFi_Show5GHzNetworks;
+        private bool _wiFi_Show5GHzNetworks = GlobalStaticConfiguration.WiFi_Show5GHzNetworks;
 
-    public bool WiFi_Show5GHzNetworks
-    {
-        get => _wiFi_Show5GHzNetworks;
-        set
+        public bool WiFi_Show5GHzNetworks
         {
-            if (value == _wiFi_Show5GHzNetworks)
-                return;
+            get => _wiFi_Show5GHzNetworks;
+            set
+            {
+                if (value == _wiFi_Show5GHzNetworks)
+                    return;
 
-            _wiFi_Show5GHzNetworks = value;
-            OnPropertyChanged();
+                _wiFi_Show5GHzNetworks = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _wiFi_AutoRefreshEnabled;
+        private bool _wiFi_AutoRefreshEnabled;
 
-    public bool WiFi_AutoRefreshEnabled
-    {
-        get => _wiFi_AutoRefreshEnabled;
-        set
+        public bool WiFi_AutoRefreshEnabled
         {
-            if (value == _wiFi_AutoRefreshEnabled)
-                return;
+            get => _wiFi_AutoRefreshEnabled;
+            set
+            {
+                if (value == _wiFi_AutoRefreshEnabled)
+                    return;
 
-            _wiFi_AutoRefreshEnabled = value;
-            OnPropertyChanged();
+                _wiFi_AutoRefreshEnabled = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private AutoRefreshTimeInfo _wiFi_AutoRefreshTime = GlobalStaticConfiguration.WiFi_AutoRefreshTime;
+        private AutoRefreshTimeInfo _wiFi_AutoRefreshTime = GlobalStaticConfiguration.WiFi_AutoRefreshTime;
 
-    public AutoRefreshTimeInfo WiFi_AutoRefreshTime
-    {
-        get => _wiFi_AutoRefreshTime;
-        set
+        public AutoRefreshTimeInfo WiFi_AutoRefreshTime
         {
-            if (value == _wiFi_AutoRefreshTime)
-                return;
+            get => _wiFi_AutoRefreshTime;
+            set
+            {
+                if (value == _wiFi_AutoRefreshTime)
+                    return;
 
-            _wiFi_AutoRefreshTime = value;
-            OnPropertyChanged();
+                _wiFi_AutoRefreshTime = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _wiFi_ExportFilePath;
+        private string _wiFi_ExportFilePath;
 
-    public string WiFi_ExportFilePath
-    {
-        get => _wiFi_ExportFilePath;
-        set
+        public string WiFi_ExportFilePath
         {
-            if (value == _wiFi_ExportFilePath)
-                return;
+            get => _wiFi_ExportFilePath;
+            set
+            {
+                if (value == _wiFi_ExportFilePath)
+                    return;
 
-            _wiFi_ExportFilePath = value;
-            OnPropertyChanged();
+                _wiFi_ExportFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ExportFileType _wiFi_ExportFileType = GlobalStaticConfiguration.WiFi_ExportFileType;
+        private ExportFileType _wiFi_ExportFileType = GlobalStaticConfiguration.WiFi_ExportFileType;
 
-    public ExportFileType WiFi_ExportFileType
-    {
-        get => _wiFi_ExportFileType;
-        set
+        public ExportFileType WiFi_ExportFileType
         {
-            if (value == _wiFi_ExportFileType)
-                return;
+            get => _wiFi_ExportFileType;
+            set
+            {
+                if (value == _wiFi_ExportFileType)
+                    return;
 
-            _wiFi_ExportFileType = value;
-            OnPropertyChanged();
+                _wiFi_ExportFileType = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region IPScanner
+        #region IPScanner
 
-    private bool _ipScanner_ShowAllResults;
+        private bool _ipScanner_ShowAllResults;
 
-    public bool IPScanner_ShowAllResults
-    {
-        get => _ipScanner_ShowAllResults;
-        set
+        public bool IPScanner_ShowAllResults
         {
-            if (value == _ipScanner_ShowAllResults)
-                return;
+            get => _ipScanner_ShowAllResults;
+            set
+            {
+                if (value == _ipScanner_ShowAllResults)
+                    return;
 
-            _ipScanner_ShowAllResults = value;
-            OnPropertyChanged();
+                _ipScanner_ShowAllResults = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _ipScanner_ICMPTimeout = GlobalStaticConfiguration.IPScanner_ICMPTimeout;
+        private int _ipScanner_ICMPTimeout = GlobalStaticConfiguration.IPScanner_ICMPTimeout;
 
-    public int IPScanner_ICMPTimeout
-    {
-        get => _ipScanner_ICMPTimeout;
-        set
+        public int IPScanner_ICMPTimeout
         {
-            if (value == _ipScanner_ICMPTimeout)
-                return;
+            get => _ipScanner_ICMPTimeout;
+            set
+            {
+                if (value == _ipScanner_ICMPTimeout)
+                    return;
 
-            _ipScanner_ICMPTimeout = value;
-            OnPropertyChanged();
+                _ipScanner_ICMPTimeout = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _ipScanner_ICMPAttempts = GlobalStaticConfiguration.IPScanner_ICMPAttempts;
+        private int _ipScanner_ICMPAttempts = GlobalStaticConfiguration.IPScanner_ICMPAttempts;
 
-    public int IPScanner_ICMPAttempts
-    {
-        get => _ipScanner_ICMPAttempts;
-        set
+        public int IPScanner_ICMPAttempts
         {
-            if (value == _ipScanner_ICMPAttempts)
-                return;
+            get => _ipScanner_ICMPAttempts;
+            set
+            {
+                if (value == _ipScanner_ICMPAttempts)
+                    return;
 
-            _ipScanner_ICMPAttempts = value;
-            OnPropertyChanged();
+                _ipScanner_ICMPAttempts = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _ipScanner_ICMPBuffer = GlobalStaticConfiguration.IPScanner_ICMPBuffer;
+        private int _ipScanner_ICMPBuffer = GlobalStaticConfiguration.IPScanner_ICMPBuffer;
 
-    public int IPScanner_ICMPBuffer
-    {
-        get => _ipScanner_ICMPBuffer;
-        set
+        public int IPScanner_ICMPBuffer
         {
-            if (value == _ipScanner_ICMPBuffer)
-                return;
+            get => _ipScanner_ICMPBuffer;
+            set
+            {
+                if (value == _ipScanner_ICMPBuffer)
+                    return;
 
-            _ipScanner_ICMPBuffer = value;
-            OnPropertyChanged();
+                _ipScanner_ICMPBuffer = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<string> _ipScanner_HostHistory = [];
+        private ObservableCollection<string> _ipScanner_HostHistory = [];
 
-    public ObservableCollection<string> IPScanner_HostHistory
-    {
-        get => _ipScanner_HostHistory;
-        set
+        public ObservableCollection<string> IPScanner_HostHistory
         {
-            if (value == _ipScanner_HostHistory)
-                return;
+            get => _ipScanner_HostHistory;
+            set
+            {
+                if (value == _ipScanner_HostHistory)
+                    return;
 
-            _ipScanner_HostHistory = value;
-            OnPropertyChanged();
+                _ipScanner_HostHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _ipScanner_ResolveHostname = GlobalStaticConfiguration.IPScanner_ResolveHostname;
+        private bool _ipScanner_ResolveHostname = GlobalStaticConfiguration.IPScanner_ResolveHostname;
 
-    public bool IPScanner_ResolveHostname
-    {
-        get => _ipScanner_ResolveHostname;
-        set
+        public bool IPScanner_ResolveHostname
         {
-            if (value == _ipScanner_ResolveHostname)
-                return;
+            get => _ipScanner_ResolveHostname;
+            set
+            {
+                if (value == _ipScanner_ResolveHostname)
+                    return;
 
-            _ipScanner_ResolveHostname = value;
-            OnPropertyChanged();
+                _ipScanner_ResolveHostname = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _ipScanner_PortScanEnabled = GlobalStaticConfiguration.IPScanner_PortScanEnabled;
+        private bool _ipScanner_PortScanEnabled = GlobalStaticConfiguration.IPScanner_PortScanEnabled;
 
-    public bool IPScanner_PortScanEnabled
-    {
-        get => _ipScanner_PortScanEnabled;
-        set
+        public bool IPScanner_PortScanEnabled
         {
-            if (value == IPScanner_PortScanEnabled)
-                return;
+            get => _ipScanner_PortScanEnabled;
+            set
+            {
+                if (value == IPScanner_PortScanEnabled)
+                    return;
 
-            _ipScanner_PortScanEnabled = value;
-            OnPropertyChanged();
+                _ipScanner_PortScanEnabled = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _ipScanner_PortScanPorts = GlobalStaticConfiguration.IPScanner_PortScanPorts;
+        private string _ipScanner_PortScanPorts = GlobalStaticConfiguration.IPScanner_PortScanPorts;
 
-    public string IPScanner_PortScanPorts
-    {
-        get => _ipScanner_PortScanPorts;
-        set
+        public string IPScanner_PortScanPorts
         {
-            if (value == _ipScanner_PortScanPorts)
-                return;
+            get => _ipScanner_PortScanPorts;
+            set
+            {
+                if (value == _ipScanner_PortScanPorts)
+                    return;
 
-            _ipScanner_PortScanPorts = value;
-            OnPropertyChanged();
+                _ipScanner_PortScanPorts = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _ipScanner_PortScanTimeout = GlobalStaticConfiguration.IPScanner_PortScanTimeout;
+        private int _ipScanner_PortScanTimeout = GlobalStaticConfiguration.IPScanner_PortScanTimeout;
 
-    public int IPScanner_PortScanTimeout
-    {
-        get => _ipScanner_PortScanTimeout;
-        set
+        public int IPScanner_PortScanTimeout
         {
-            if (value == _ipScanner_PortScanTimeout)
-                return;
+            get => _ipScanner_PortScanTimeout;
+            set
+            {
+                if (value == _ipScanner_PortScanTimeout)
+                    return;
 
-            _ipScanner_PortScanTimeout = value;
-            OnPropertyChanged();
+                _ipScanner_PortScanTimeout = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _ipScanner_NetBIOSEnabled = GlobalStaticConfiguration.IPScanner_NetBIOSEnabled;
+        private bool _ipScanner_NetBIOSEnabled = GlobalStaticConfiguration.IPScanner_NetBIOSEnabled;
 
-    public bool IPScanner_NetBIOSEnabled
-    {
-        get => _ipScanner_NetBIOSEnabled;
-        set
+        public bool IPScanner_NetBIOSEnabled
         {
-            if (value == _ipScanner_NetBIOSEnabled)
-                return;
+            get => _ipScanner_NetBIOSEnabled;
+            set
+            {
+                if (value == _ipScanner_NetBIOSEnabled)
+                    return;
 
-            _ipScanner_NetBIOSEnabled = value;
-            OnPropertyChanged();
+                _ipScanner_NetBIOSEnabled = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _ipScanner_NetBIOSTimeout = GlobalStaticConfiguration.IPScanner_NetBIOSTimeout;
+        private int _ipScanner_NetBIOSTimeout = GlobalStaticConfiguration.IPScanner_NetBIOSTimeout;
 
-    public int IPScanner_NetBIOSTimeout
-    {
-        get => _ipScanner_NetBIOSTimeout;
-        set
+        public int IPScanner_NetBIOSTimeout
         {
-            if (value == _ipScanner_NetBIOSTimeout)
-                return;
+            get => _ipScanner_NetBIOSTimeout;
+            set
+            {
+                if (value == _ipScanner_NetBIOSTimeout)
+                    return;
 
-            _ipScanner_NetBIOSTimeout = value;
-            OnPropertyChanged();
+                _ipScanner_NetBIOSTimeout = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _ipScanner_ResolveMACAddress;
+        private bool _ipScanner_ResolveMACAddress;
 
-    public bool IPScanner_ResolveMACAddress
-    {
-        get => _ipScanner_ResolveMACAddress;
-        set
+        public bool IPScanner_ResolveMACAddress
         {
-            if (value == _ipScanner_ResolveMACAddress)
-                return;
+            get => _ipScanner_ResolveMACAddress;
+            set
+            {
+                if (value == _ipScanner_ResolveMACAddress)
+                    return;
 
-            _ipScanner_ResolveMACAddress = value;
-            OnPropertyChanged();
+                _ipScanner_ResolveMACAddress = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<CustomCommandInfo> _ipScanner_CustomCommands = [];
+        private ObservableCollection<CustomCommandInfo> _ipScanner_CustomCommands = [];
 
-    public ObservableCollection<CustomCommandInfo> IPScanner_CustomCommands
-    {
-        get => _ipScanner_CustomCommands;
-        set
+        public ObservableCollection<CustomCommandInfo> IPScanner_CustomCommands
         {
-            if (value == _ipScanner_CustomCommands)
-                return;
+            get => _ipScanner_CustomCommands;
+            set
+            {
+                if (value == _ipScanner_CustomCommands)
+                    return;
 
-            _ipScanner_CustomCommands = value;
-            OnPropertyChanged();
+                _ipScanner_CustomCommands = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _ipScanner_MaxHostThreads = GlobalStaticConfiguration.IPScanner_MaxHostThreads;
+        private int _ipScanner_MaxHostThreads = GlobalStaticConfiguration.IPScanner_MaxHostThreads;
 
-    public int IPScanner_MaxHostThreads
-    {
-        get => _ipScanner_MaxHostThreads;
-        set
+        public int IPScanner_MaxHostThreads
         {
-            if (value == _ipScanner_MaxHostThreads)
-                return;
+            get => _ipScanner_MaxHostThreads;
+            set
+            {
+                if (value == _ipScanner_MaxHostThreads)
+                    return;
 
-            _ipScanner_MaxHostThreads = value;
-            OnPropertyChanged();
+                _ipScanner_MaxHostThreads = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _ipScanner_MaxPortThreads = GlobalStaticConfiguration.IPScanner_MaxPortThreads;
+        private int _ipScanner_MaxPortThreads = GlobalStaticConfiguration.IPScanner_MaxPortThreads;
 
-    public int IPScanner_MaxPortThreads
-    {
-        get => _ipScanner_MaxPortThreads;
-        set
+        public int IPScanner_MaxPortThreads
         {
-            if (value == _ipScanner_MaxPortThreads)
-                return;
+            get => _ipScanner_MaxPortThreads;
+            set
+            {
+                if (value == _ipScanner_MaxPortThreads)
+                    return;
 
-            _ipScanner_MaxPortThreads = value;
-            OnPropertyChanged();
+                _ipScanner_MaxPortThreads = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _ipScanner_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
+        private bool _ipScanner_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
 
-    public bool IPScanner_ExpandProfileView
-    {
-        get => _ipScanner_ExpandProfileView;
-        set
+        public bool IPScanner_ExpandProfileView
         {
-            if (value == _ipScanner_ExpandProfileView)
-                return;
+            get => _ipScanner_ExpandProfileView;
+            set
+            {
+                if (value == _ipScanner_ExpandProfileView)
+                    return;
 
-            _ipScanner_ExpandProfileView = value;
-            OnPropertyChanged();
+                _ipScanner_ExpandProfileView = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private double _ipScanner_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
+        private double _ipScanner_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
 
-    public double IPScanner_ProfileWidth
-    {
-        get => _ipScanner_ProfileWidth;
-        set
+        public double IPScanner_ProfileWidth
         {
-            if (Math.Abs(value - _ipScanner_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
-                return;
+            get => _ipScanner_ProfileWidth;
+            set
+            {
+                if (Math.Abs(value - _ipScanner_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
+                    return;
 
-            _ipScanner_ProfileWidth = value;
-            OnPropertyChanged();
+                _ipScanner_ProfileWidth = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _ipScanner_ExportFilePath;
+        private string _ipScanner_ExportFilePath;
 
-    public string IPScanner_ExportFilePath
-    {
-        get => _ipScanner_ExportFilePath;
-        set
+        public string IPScanner_ExportFilePath
         {
-            if (value == _ipScanner_ExportFilePath)
-                return;
+            get => _ipScanner_ExportFilePath;
+            set
+            {
+                if (value == _ipScanner_ExportFilePath)
+                    return;
 
-            _ipScanner_ExportFilePath = value;
-            OnPropertyChanged();
+                _ipScanner_ExportFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ExportFileType _ipScanner_ExportFileType = GlobalStaticConfiguration.IPScanner_ExportFileType;
+        private ExportFileType _ipScanner_ExportFileType = GlobalStaticConfiguration.IPScanner_ExportFileType;
 
-    public ExportFileType IPScanner_ExportFileType
-    {
-        get => _ipScanner_ExportFileType;
-        set
+        public ExportFileType IPScanner_ExportFileType
         {
-            if (value == _ipScanner_ExportFileType)
-                return;
+            get => _ipScanner_ExportFileType;
+            set
+            {
+                if (value == _ipScanner_ExportFileType)
+                    return;
 
-            _ipScanner_ExportFileType = value;
-            OnPropertyChanged();
+                _ipScanner_ExportFileType = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region Port Scanner
+        #region Port Scanner
 
-    private ObservableCollection<string> _portScanner_HostHistory = new();
+        private ObservableCollection<string> _portScanner_HostHistory = new();
 
-    public ObservableCollection<string> PortScanner_HostHistory
-    {
-        get => _portScanner_HostHistory;
-        set
+        public ObservableCollection<string> PortScanner_HostHistory
         {
-            if (value == _portScanner_HostHistory)
-                return;
+            get => _portScanner_HostHistory;
+            set
+            {
+                if (value == _portScanner_HostHistory)
+                    return;
 
-            _portScanner_HostHistory = value;
-            OnPropertyChanged();
+                _portScanner_HostHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<string> _portScanner_PortHistory = new();
+        private ObservableCollection<string> _portScanner_PortHistory = new();
 
-    public ObservableCollection<string> PortScanner_PortHistory
-    {
-        get => _portScanner_PortHistory;
-        set
+        public ObservableCollection<string> PortScanner_PortHistory
         {
-            if (value == _portScanner_PortHistory)
-                return;
+            get => _portScanner_PortHistory;
+            set
+            {
+                if (value == _portScanner_PortHistory)
+                    return;
 
-            _portScanner_PortHistory = value;
-            OnPropertyChanged();
+                _portScanner_PortHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<PortProfileInfo> _portScanner_PortProfiles = new();
+        private ObservableCollection<PortProfileInfo> _portScanner_PortProfiles = new();
 
-    public ObservableCollection<PortProfileInfo> PortScanner_PortProfiles
-    {
-        get => _portScanner_PortProfiles;
-        set
+        public ObservableCollection<PortProfileInfo> PortScanner_PortProfiles
         {
-            if (value == _portScanner_PortProfiles)
-                return;
+            get => _portScanner_PortProfiles;
+            set
+            {
+                if (value == _portScanner_PortProfiles)
+                    return;
 
-            _portScanner_PortProfiles = value;
-            OnPropertyChanged();
+                _portScanner_PortProfiles = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _portScanner_ResolveHostname = true;
+        private bool _portScanner_ResolveHostname = true;
 
-    public bool PortScanner_ResolveHostname
-    {
-        get => _portScanner_ResolveHostname;
-        set
+        public bool PortScanner_ResolveHostname
         {
-            if (value == _portScanner_ResolveHostname)
-                return;
+            get => _portScanner_ResolveHostname;
+            set
+            {
+                if (value == _portScanner_ResolveHostname)
+                    return;
 
-            _portScanner_ResolveHostname = value;
-            OnPropertyChanged();
+                _portScanner_ResolveHostname = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _portScanner_ShowAllResults;
+        private bool _portScanner_ShowAllResults;
 
-    public bool PortScanner_ShowAllResults
-    {
-        get => _portScanner_ShowAllResults;
-        set
+        public bool PortScanner_ShowAllResults
         {
-            if (value == _portScanner_ShowAllResults)
-                return;
+            get => _portScanner_ShowAllResults;
+            set
+            {
+                if (value == _portScanner_ShowAllResults)
+                    return;
 
-            _portScanner_ShowAllResults = value;
-            OnPropertyChanged();
+                _portScanner_ShowAllResults = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _portScanner_Timeout = GlobalStaticConfiguration.PortScanner_Timeout;
+        private int _portScanner_Timeout = GlobalStaticConfiguration.PortScanner_Timeout;
 
-    public int PortScanner_Timeout
-    {
-        get => _portScanner_Timeout;
-        set
+        public int PortScanner_Timeout
         {
-            if (value == _portScanner_Timeout)
-                return;
+            get => _portScanner_Timeout;
+            set
+            {
+                if (value == _portScanner_Timeout)
+                    return;
 
-            _portScanner_Timeout = value;
-            OnPropertyChanged();
+                _portScanner_Timeout = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _portScanner_MaxHostThreads = GlobalStaticConfiguration.PortScanner_MaxHostThreads;
+        private int _portScanner_MaxHostThreads = GlobalStaticConfiguration.PortScanner_MaxHostThreads;
 
-    public int PortScanner_MaxHostThreads
-    {
-        get => _portScanner_MaxHostThreads;
-        set
+        public int PortScanner_MaxHostThreads
         {
-            if (value == _portScanner_MaxHostThreads)
-                return;
+            get => _portScanner_MaxHostThreads;
+            set
+            {
+                if (value == _portScanner_MaxHostThreads)
+                    return;
 
-            _portScanner_MaxHostThreads = value;
-            OnPropertyChanged();
+                _portScanner_MaxHostThreads = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _portScanner_MaxPortThreads = GlobalStaticConfiguration.PortScanner_MaxPortThreads;
+        private int _portScanner_MaxPortThreads = GlobalStaticConfiguration.PortScanner_MaxPortThreads;
 
-    public int PortScanner_MaxPortThreads
-    {
-        get => _portScanner_MaxPortThreads;
-        set
+        public int PortScanner_MaxPortThreads
         {
-            if (value == _portScanner_MaxPortThreads)
-                return;
+            get => _portScanner_MaxPortThreads;
+            set
+            {
+                if (value == _portScanner_MaxPortThreads)
+                    return;
 
-            _portScanner_MaxPortThreads = value;
-            OnPropertyChanged();
+                _portScanner_MaxPortThreads = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _portScanner_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
+        private bool _portScanner_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
 
-    public bool PortScanner_ExpandProfileView
-    {
-        get => _portScanner_ExpandProfileView;
-        set
+        public bool PortScanner_ExpandProfileView
         {
-            if (value == _portScanner_ExpandProfileView)
-                return;
+            get => _portScanner_ExpandProfileView;
+            set
+            {
+                if (value == _portScanner_ExpandProfileView)
+                    return;
 
-            _portScanner_ExpandProfileView = value;
-            OnPropertyChanged();
+                _portScanner_ExpandProfileView = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private double _portScanner_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
+        private double _portScanner_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
 
-    public double PortScanner_ProfileWidth
-    {
-        get => _portScanner_ProfileWidth;
-        set
+        public double PortScanner_ProfileWidth
         {
-            if (Math.Abs(value - _portScanner_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
-                return;
+            get => _portScanner_ProfileWidth;
+            set
+            {
+                if (Math.Abs(value - _portScanner_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
+                    return;
 
-            _portScanner_ProfileWidth = value;
-            OnPropertyChanged();
+                _portScanner_ProfileWidth = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _portScanner_ExportFilePath;
+        private string _portScanner_ExportFilePath;
 
-    public string PortScanner_ExportFilePath
-    {
-        get => _portScanner_ExportFilePath;
-        set
+        public string PortScanner_ExportFilePath
         {
-            if (value == _portScanner_ExportFilePath)
-                return;
+            get => _portScanner_ExportFilePath;
+            set
+            {
+                if (value == _portScanner_ExportFilePath)
+                    return;
 
-            _portScanner_ExportFilePath = value;
-            OnPropertyChanged();
+                _portScanner_ExportFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ExportFileType _portScanner_ExportFileType = GlobalStaticConfiguration.PortScanner_ExportFileType;
+        private ExportFileType _portScanner_ExportFileType = GlobalStaticConfiguration.PortScanner_ExportFileType;
 
-    public ExportFileType PortScanner_ExportFileType
-    {
-        get => _portScanner_ExportFileType;
-        set
+        public ExportFileType PortScanner_ExportFileType
         {
-            if (value == _portScanner_ExportFileType)
-                return;
+            get => _portScanner_ExportFileType;
+            set
+            {
+                if (value == _portScanner_ExportFileType)
+                    return;
 
-            _portScanner_ExportFileType = value;
-            OnPropertyChanged();
+                _portScanner_ExportFileType = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region Ping Monitor
+        #region Ping Monitor
 
-    private ObservableCollection<string> _pingMonitor_HostHistory = new();
+        private ObservableCollection<string> _pingMonitor_HostHistory = new();
 
-    public ObservableCollection<string> PingMonitor_HostHistory
-    {
-        get => _pingMonitor_HostHistory;
-        set
+        public ObservableCollection<string> PingMonitor_HostHistory
         {
-            if (value == _pingMonitor_HostHistory)
-                return;
+            get => _pingMonitor_HostHistory;
+            set
+            {
+                if (value == _pingMonitor_HostHistory)
+                    return;
 
-            _pingMonitor_HostHistory = value;
-            OnPropertyChanged();
+                _pingMonitor_HostHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _pingMonitor_Buffer = GlobalStaticConfiguration.PingMonitor_Buffer;
+        private int _pingMonitor_Buffer = GlobalStaticConfiguration.PingMonitor_Buffer;
 
-    public int PingMonitor_Buffer
-    {
-        get => _pingMonitor_Buffer;
-        set
+        public int PingMonitor_Buffer
         {
-            if (value == _pingMonitor_Buffer)
-                return;
+            get => _pingMonitor_Buffer;
+            set
+            {
+                if (value == _pingMonitor_Buffer)
+                    return;
 
-            _pingMonitor_Buffer = value;
-            OnPropertyChanged();
+                _pingMonitor_Buffer = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _pingMonitor_DontFragment = GlobalStaticConfiguration.PingMonitor_DontFragment;
+        private bool _pingMonitor_DontFragment = GlobalStaticConfiguration.PingMonitor_DontFragment;
 
-    public bool PingMonitor_DontFragment
-    {
-        get => _pingMonitor_DontFragment;
-        set
+        public bool PingMonitor_DontFragment
         {
-            if (value == _pingMonitor_DontFragment)
-                return;
+            get => _pingMonitor_DontFragment;
+            set
+            {
+                if (value == _pingMonitor_DontFragment)
+                    return;
 
-            _pingMonitor_DontFragment = value;
-            OnPropertyChanged();
+                _pingMonitor_DontFragment = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _pingMonitor_Timeout = GlobalStaticConfiguration.PingMonitor_Timeout;
+        private int _pingMonitor_Timeout = GlobalStaticConfiguration.PingMonitor_Timeout;
 
-    public int PingMonitor_Timeout
-    {
-        get => _pingMonitor_Timeout;
-        set
+        public int PingMonitor_Timeout
         {
-            if (value == _pingMonitor_Timeout)
-                return;
+            get => _pingMonitor_Timeout;
+            set
+            {
+                if (value == _pingMonitor_Timeout)
+                    return;
 
-            _pingMonitor_Timeout = value;
-            OnPropertyChanged();
+                _pingMonitor_Timeout = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _pingMonitor_TTL = GlobalStaticConfiguration.PingMonitor_TTL;
+        private int _pingMonitor_TTL = GlobalStaticConfiguration.PingMonitor_TTL;
 
-    public int PingMonitor_TTL
-    {
-        get => _pingMonitor_TTL;
-        set
+        public int PingMonitor_TTL
         {
-            if (value == _pingMonitor_TTL)
-                return;
+            get => _pingMonitor_TTL;
+            set
+            {
+                if (value == _pingMonitor_TTL)
+                    return;
 
-            _pingMonitor_TTL = value;
-            OnPropertyChanged();
+                _pingMonitor_TTL = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _pingMonitor_WaitTime = GlobalStaticConfiguration.PingMonitor_WaitTime;
+        private int _pingMonitor_WaitTime = GlobalStaticConfiguration.PingMonitor_WaitTime;
 
-    public int PingMonitor_WaitTime
-    {
-        get => _pingMonitor_WaitTime;
-        set
+        public int PingMonitor_WaitTime
         {
-            if (value == _pingMonitor_WaitTime)
-                return;
+            get => _pingMonitor_WaitTime;
+            set
+            {
+                if (value == _pingMonitor_WaitTime)
+                    return;
 
-            _pingMonitor_WaitTime = value;
-            OnPropertyChanged();
+                _pingMonitor_WaitTime = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _pingMonitor_ExpandHostView = GlobalStaticConfiguration.PingMonitor_ExpandHostView;
+        private bool _pingMonitor_ExpandHostView = GlobalStaticConfiguration.PingMonitor_ExpandHostView;
 
-    public bool PingMonitor_ExpandHostView
-    {
-        get => _pingMonitor_ExpandHostView;
-        set
+        public bool PingMonitor_ExpandHostView
         {
-            if (value == _pingMonitor_ExpandHostView)
-                return;
+            get => _pingMonitor_ExpandHostView;
+            set
+            {
+                if (value == _pingMonitor_ExpandHostView)
+                    return;
 
-            _pingMonitor_ExpandHostView = value;
-            OnPropertyChanged();
+                _pingMonitor_ExpandHostView = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _pingMonitor_ExportFilePath;
+        private string _pingMonitor_ExportFilePath;
 
-    public string PingMonitor_ExportFilePath
-    {
-        get => _pingMonitor_ExportFilePath;
-        set
+        public string PingMonitor_ExportFilePath
         {
-            if (value == _pingMonitor_ExportFilePath)
-                return;
+            get => _pingMonitor_ExportFilePath;
+            set
+            {
+                if (value == _pingMonitor_ExportFilePath)
+                    return;
 
-            _pingMonitor_ExportFilePath = value;
-            OnPropertyChanged();
+                _pingMonitor_ExportFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ExportFileType _pingMonitor_ExportFileType = GlobalStaticConfiguration.PingMonitor_ExportFileType;
+        private ExportFileType _pingMonitor_ExportFileType = GlobalStaticConfiguration.PingMonitor_ExportFileType;
 
-    public ExportFileType PingMonitor_ExportFileType
-    {
-        get => _pingMonitor_ExportFileType;
-        set
+        public ExportFileType PingMonitor_ExportFileType
         {
-            if (value == _pingMonitor_ExportFileType)
-                return;
+            get => _pingMonitor_ExportFileType;
+            set
+            {
+                if (value == _pingMonitor_ExportFileType)
+                    return;
 
-            _pingMonitor_ExportFileType = value;
-            OnPropertyChanged();
+                _pingMonitor_ExportFileType = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _pingMonitor_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
+        private bool _pingMonitor_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
 
-    public bool PingMonitor_ExpandProfileView
-    {
-        get => _pingMonitor_ExpandProfileView;
-        set
+        public bool PingMonitor_ExpandProfileView
         {
-            if (value == _pingMonitor_ExpandProfileView)
-                return;
+            get => _pingMonitor_ExpandProfileView;
+            set
+            {
+                if (value == _pingMonitor_ExpandProfileView)
+                    return;
 
-            _pingMonitor_ExpandProfileView = value;
-            OnPropertyChanged();
+                _pingMonitor_ExpandProfileView = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private double _pingMonitor_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
+        private double _pingMonitor_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
 
-    public double PingMonitor_ProfileWidth
-    {
-        get => _pingMonitor_ProfileWidth;
-        set
+        public double PingMonitor_ProfileWidth
         {
-            if (Math.Abs(value - _pingMonitor_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
-                return;
+            get => _pingMonitor_ProfileWidth;
+            set
+            {
+                if (Math.Abs(value - _pingMonitor_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
+                    return;
 
-            _pingMonitor_ProfileWidth = value;
-            OnPropertyChanged();
+                _pingMonitor_ProfileWidth = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region Traceroute
+        #region Traceroute
 
-    private ObservableCollection<string> _traceroute_HostHistory = new();
+        private ObservableCollection<string> _traceroute_HostHistory = new();
 
-    public ObservableCollection<string> Traceroute_HostHistory
-    {
-        get => _traceroute_HostHistory;
-        set
+        public ObservableCollection<string> Traceroute_HostHistory
         {
-            if (value == _traceroute_HostHistory)
-                return;
+            get => _traceroute_HostHistory;
+            set
+            {
+                if (value == _traceroute_HostHistory)
+                    return;
 
-            _traceroute_HostHistory = value;
-            OnPropertyChanged();
+                _traceroute_HostHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _traceroute_MaximumHops = GlobalStaticConfiguration.Traceroute_MaximumHops;
+        private int _traceroute_MaximumHops = GlobalStaticConfiguration.Traceroute_MaximumHops;
 
-    public int Traceroute_MaximumHops
-    {
-        get => _traceroute_MaximumHops;
-        set
+        public int Traceroute_MaximumHops
         {
-            if (value == _traceroute_MaximumHops)
-                return;
+            get => _traceroute_MaximumHops;
+            set
+            {
+                if (value == _traceroute_MaximumHops)
+                    return;
 
-            _traceroute_MaximumHops = value;
-            OnPropertyChanged();
+                _traceroute_MaximumHops = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _traceroute_Timeout = GlobalStaticConfiguration.Traceroute_Timeout;
+        private int _traceroute_Timeout = GlobalStaticConfiguration.Traceroute_Timeout;
 
-    public int Traceroute_Timeout
-    {
-        get => _traceroute_Timeout;
-        set
+        public int Traceroute_Timeout
         {
-            if (value == _traceroute_Timeout)
-                return;
+            get => _traceroute_Timeout;
+            set
+            {
+                if (value == _traceroute_Timeout)
+                    return;
 
-            _traceroute_Timeout = value;
-            OnPropertyChanged();
+                _traceroute_Timeout = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _traceroute_Buffer = GlobalStaticConfiguration.Traceroute_Buffer;
+        private int _traceroute_Buffer = GlobalStaticConfiguration.Traceroute_Buffer;
 
-    public int Traceroute_Buffer
-    {
-        get => _traceroute_Buffer;
-        set
+        public int Traceroute_Buffer
         {
-            if (value == _traceroute_Buffer)
-                return;
+            get => _traceroute_Buffer;
+            set
+            {
+                if (value == _traceroute_Buffer)
+                    return;
 
-            _traceroute_Buffer = value;
-            OnPropertyChanged();
+                _traceroute_Buffer = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _traceroute_ResolveHostname = GlobalStaticConfiguration.Traceroute_ResolveHostname;
+        private bool _traceroute_ResolveHostname = GlobalStaticConfiguration.Traceroute_ResolveHostname;
 
-    public bool Traceroute_ResolveHostname
-    {
-        get => _traceroute_ResolveHostname;
-        set
+        public bool Traceroute_ResolveHostname
         {
-            if (value == _traceroute_ResolveHostname)
-                return;
+            get => _traceroute_ResolveHostname;
+            set
+            {
+                if (value == _traceroute_ResolveHostname)
+                    return;
 
-            _traceroute_ResolveHostname = value;
-            OnPropertyChanged();
+                _traceroute_ResolveHostname = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _traceroute_CheckIPApiIPGeolocation = GlobalStaticConfiguration.Traceroute_CheckIPApiIPGeolocation;
+        private bool _traceroute_CheckIPApiIPGeolocation = GlobalStaticConfiguration.Traceroute_CheckIPApiIPGeolocation;
 
-    public bool Traceroute_CheckIPApiIPGeolocation
-    {
-        get => _traceroute_CheckIPApiIPGeolocation;
-        set
+        public bool Traceroute_CheckIPApiIPGeolocation
         {
-            if (value == _traceroute_CheckIPApiIPGeolocation)
-                return;
+            get => _traceroute_CheckIPApiIPGeolocation;
+            set
+            {
+                if (value == _traceroute_CheckIPApiIPGeolocation)
+                    return;
 
-            _traceroute_CheckIPApiIPGeolocation = value;
-            OnPropertyChanged();
+                _traceroute_CheckIPApiIPGeolocation = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _traceroute_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
+        private bool _traceroute_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
 
-    public bool Traceroute_ExpandProfileView
-    {
-        get => _traceroute_ExpandProfileView;
-        set
+        public bool Traceroute_ExpandProfileView
         {
-            if (value == _traceroute_ExpandProfileView)
-                return;
+            get => _traceroute_ExpandProfileView;
+            set
+            {
+                if (value == _traceroute_ExpandProfileView)
+                    return;
 
-            _traceroute_ExpandProfileView = value;
-            OnPropertyChanged();
+                _traceroute_ExpandProfileView = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private double _traceroute_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
+        private double _traceroute_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
 
-    public double Traceroute_ProfileWidth
-    {
-        get => _traceroute_ProfileWidth;
-        set
+        public double Traceroute_ProfileWidth
         {
-            if (Math.Abs(value - _traceroute_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
-                return;
+            get => _traceroute_ProfileWidth;
+            set
+            {
+                if (Math.Abs(value - _traceroute_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
+                    return;
 
-            _traceroute_ProfileWidth = value;
-            OnPropertyChanged();
+                _traceroute_ProfileWidth = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _traceroute_ExportFilePath;
+        private string _traceroute_ExportFilePath;
 
-    public string Traceroute_ExportFilePath
-    {
-        get => _traceroute_ExportFilePath;
-        set
+        public string Traceroute_ExportFilePath
         {
-            if (value == _traceroute_ExportFilePath)
-                return;
+            get => _traceroute_ExportFilePath;
+            set
+            {
+                if (value == _traceroute_ExportFilePath)
+                    return;
 
-            _traceroute_ExportFilePath = value;
-            OnPropertyChanged();
+                _traceroute_ExportFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ExportFileType _traceroute_ExportFileType = GlobalStaticConfiguration.Traceroute_ExportFileType;
+        private ExportFileType _traceroute_ExportFileType = GlobalStaticConfiguration.Traceroute_ExportFileType;
 
-    public ExportFileType Traceroute_ExportFileType
-    {
-        get => _traceroute_ExportFileType;
-        set
+        public ExportFileType Traceroute_ExportFileType
         {
-            if (value == _traceroute_ExportFileType)
-                return;
+            get => _traceroute_ExportFileType;
+            set
+            {
+                if (value == _traceroute_ExportFileType)
+                    return;
 
-            _traceroute_ExportFileType = value;
-            OnPropertyChanged();
+                _traceroute_ExportFileType = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region DNS Lookup
+        #region DNS Lookup
 
-    private ObservableCollection<string> _dnsLookup_HostHistory = new();
+        private ObservableCollection<string> _dnsLookup_HostHistory = new();
 
-    public ObservableCollection<string> DNSLookup_HostHistory
-    {
-        get => _dnsLookup_HostHistory;
-        set
+        public ObservableCollection<string> DNSLookup_HostHistory
         {
-            if (value == _dnsLookup_HostHistory)
-                return;
+            get => _dnsLookup_HostHistory;
+            set
+            {
+                if (value == _dnsLookup_HostHistory)
+                    return;
 
-            _dnsLookup_HostHistory = value;
-            OnPropertyChanged();
+                _dnsLookup_HostHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<DNSServerConnectionInfoProfile> _dnsLookup_DNSServers = new();
+        private ObservableCollection<DNSServerConnectionInfoProfile> _dnsLookup_DNSServers = new();
 
-    public ObservableCollection<DNSServerConnectionInfoProfile> DNSLookup_DNSServers
-    {
-        get => _dnsLookup_DNSServers;
-        set
+        public ObservableCollection<DNSServerConnectionInfoProfile> DNSLookup_DNSServers
         {
-            if (value == _dnsLookup_DNSServers)
-                return;
+            get => _dnsLookup_DNSServers;
+            set
+            {
+                if (value == _dnsLookup_DNSServers)
+                    return;
 
-            _dnsLookup_DNSServers = value;
-            OnPropertyChanged();
+                _dnsLookup_DNSServers = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private DNSServerConnectionInfoProfile _dnsLookup_SelectedDNSServer = new();
+        private DNSServerConnectionInfoProfile _dnsLookup_SelectedDNSServer = new();
 
-    public DNSServerConnectionInfoProfile DNSLookup_SelectedDNSServer
-    {
-        get => _dnsLookup_SelectedDNSServer;
-        set
+        public DNSServerConnectionInfoProfile DNSLookup_SelectedDNSServer
         {
-            if (value == _dnsLookup_SelectedDNSServer)
-                return;
+            get => _dnsLookup_SelectedDNSServer;
+            set
+            {
+                if (value == _dnsLookup_SelectedDNSServer)
+                    return;
 
-            _dnsLookup_SelectedDNSServer = value;
-            OnPropertyChanged();
+                _dnsLookup_SelectedDNSServer = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private QueryClass _dnsLookup_QueryClass = GlobalStaticConfiguration.DNSLookup_QueryClass;
+        private QueryClass _dnsLookup_QueryClass = GlobalStaticConfiguration.DNSLookup_QueryClass;
 
-    public QueryClass DNSLookup_QueryClass
-    {
-        get => _dnsLookup_QueryClass;
-        set
+        public QueryClass DNSLookup_QueryClass
         {
-            if (value == _dnsLookup_QueryClass)
-                return;
+            get => _dnsLookup_QueryClass;
+            set
+            {
+                if (value == _dnsLookup_QueryClass)
+                    return;
 
-            _dnsLookup_QueryClass = value;
-            OnPropertyChanged();
+                _dnsLookup_QueryClass = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _dnsLookup_ShowOnlyMostCommonQueryTypes = true;
+        private bool _dnsLookup_ShowOnlyMostCommonQueryTypes = true;
 
-    public bool DNSLookup_ShowOnlyMostCommonQueryTypes
-    {
-        get => _dnsLookup_ShowOnlyMostCommonQueryTypes;
-        set
+        public bool DNSLookup_ShowOnlyMostCommonQueryTypes
         {
-            if (value == _dnsLookup_ShowOnlyMostCommonQueryTypes)
-                return;
+            get => _dnsLookup_ShowOnlyMostCommonQueryTypes;
+            set
+            {
+                if (value == _dnsLookup_ShowOnlyMostCommonQueryTypes)
+                    return;
 
-            _dnsLookup_ShowOnlyMostCommonQueryTypes = value;
-            OnPropertyChanged();
+                _dnsLookup_ShowOnlyMostCommonQueryTypes = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private QueryType _dnsLookup_QueryType = GlobalStaticConfiguration.DNSLookup_QueryType;
+        private QueryType _dnsLookup_QueryType = GlobalStaticConfiguration.DNSLookup_QueryType;
 
-    public QueryType DNSLookup_QueryType
-    {
-        get => _dnsLookup_QueryType;
-        set
+        public QueryType DNSLookup_QueryType
         {
-            if (value == _dnsLookup_QueryType)
-                return;
+            get => _dnsLookup_QueryType;
+            set
+            {
+                if (value == _dnsLookup_QueryType)
+                    return;
 
-            _dnsLookup_QueryType = value;
-            OnPropertyChanged();
+                _dnsLookup_QueryType = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _dnsLookup_AddDNSSuffix = true;
+        private bool _dnsLookup_AddDNSSuffix = true;
 
-    public bool DNSLookup_AddDNSSuffix
-    {
-        get => _dnsLookup_AddDNSSuffix;
-        set
+        public bool DNSLookup_AddDNSSuffix
         {
-            if (value == _dnsLookup_AddDNSSuffix)
-                return;
+            get => _dnsLookup_AddDNSSuffix;
+            set
+            {
+                if (value == _dnsLookup_AddDNSSuffix)
+                    return;
 
-            _dnsLookup_AddDNSSuffix = value;
-            OnPropertyChanged();
+                _dnsLookup_AddDNSSuffix = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _dnsLookup_UseCustomDNSSuffix;
+        private bool _dnsLookup_UseCustomDNSSuffix;
 
-    public bool DNSLookup_UseCustomDNSSuffix
-    {
-        get => _dnsLookup_UseCustomDNSSuffix;
-        set
+        public bool DNSLookup_UseCustomDNSSuffix
         {
-            if (value == _dnsLookup_UseCustomDNSSuffix)
-                return;
+            get => _dnsLookup_UseCustomDNSSuffix;
+            set
+            {
+                if (value == _dnsLookup_UseCustomDNSSuffix)
+                    return;
 
-            _dnsLookup_UseCustomDNSSuffix = value;
-            OnPropertyChanged();
+                _dnsLookup_UseCustomDNSSuffix = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _dnsLookup_CustomDNSSuffix;
+        private string _dnsLookup_CustomDNSSuffix;
 
-    public string DNSLookup_CustomDNSSuffix
-    {
-        get => _dnsLookup_CustomDNSSuffix;
-        set
+        public string DNSLookup_CustomDNSSuffix
         {
-            if (value == _dnsLookup_CustomDNSSuffix)
-                return;
+            get => _dnsLookup_CustomDNSSuffix;
+            set
+            {
+                if (value == _dnsLookup_CustomDNSSuffix)
+                    return;
 
-            _dnsLookup_CustomDNSSuffix = value;
-            OnPropertyChanged();
+                _dnsLookup_CustomDNSSuffix = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _dnsLookup_Recursion = true;
+        private bool _dnsLookup_Recursion = true;
 
-    public bool DNSLookup_Recursion
-    {
-        get => _dnsLookup_Recursion;
-        set
+        public bool DNSLookup_Recursion
         {
-            if (value == _dnsLookup_Recursion)
-                return;
+            get => _dnsLookup_Recursion;
+            set
+            {
+                if (value == _dnsLookup_Recursion)
+                    return;
 
-            _dnsLookup_Recursion = value;
-            OnPropertyChanged();
+                _dnsLookup_Recursion = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _dnsLookup_UseCache;
+        private bool _dnsLookup_UseCache;
 
-    public bool DNSLookup_UseCache
-    {
-        get => _dnsLookup_UseCache;
-        set
+        public bool DNSLookup_UseCache
         {
-            if (value == _dnsLookup_UseCache)
-                return;
+            get => _dnsLookup_UseCache;
+            set
+            {
+                if (value == _dnsLookup_UseCache)
+                    return;
 
-            _dnsLookup_UseCache = value;
-            OnPropertyChanged();
+                _dnsLookup_UseCache = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _dnsLookup_UseTCPOnly = GlobalStaticConfiguration.DNSLookup_UseTCPOnly;
+        private bool _dnsLookup_UseTCPOnly = GlobalStaticConfiguration.DNSLookup_UseTCPOnly;
 
-    public bool DNSLookup_UseTCPOnly
-    {
-        get => _dnsLookup_UseTCPOnly;
-        set
+        public bool DNSLookup_UseTCPOnly
         {
-            if (value == _dnsLookup_UseTCPOnly)
-                return;
+            get => _dnsLookup_UseTCPOnly;
+            set
+            {
+                if (value == _dnsLookup_UseTCPOnly)
+                    return;
 
-            _dnsLookup_UseTCPOnly = value;
-            OnPropertyChanged();
+                _dnsLookup_UseTCPOnly = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _dnsLookup_Retries = GlobalStaticConfiguration.DNSLookup_Retries;
+        private int _dnsLookup_Retries = GlobalStaticConfiguration.DNSLookup_Retries;
 
-    public int DNSLookup_Retries
-    {
-        get => _dnsLookup_Retries;
-        set
+        public int DNSLookup_Retries
         {
-            if (value == _dnsLookup_Retries)
-                return;
+            get => _dnsLookup_Retries;
+            set
+            {
+                if (value == _dnsLookup_Retries)
+                    return;
 
-            _dnsLookup_Retries = value;
-            OnPropertyChanged();
+                _dnsLookup_Retries = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _dnsLookup_Timeout = GlobalStaticConfiguration.DNSLookup_Timeout;
+        private int _dnsLookup_Timeout = GlobalStaticConfiguration.DNSLookup_Timeout;
 
-    public int DNSLookup_Timeout
-    {
-        get => _dnsLookup_Timeout;
-        set
+        public int DNSLookup_Timeout
         {
-            if (value == _dnsLookup_Timeout)
-                return;
+            get => _dnsLookup_Timeout;
+            set
+            {
+                if (value == _dnsLookup_Timeout)
+                    return;
 
-            _dnsLookup_Timeout = value;
-            OnPropertyChanged();
+                _dnsLookup_Timeout = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _dnsLookup_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
+        private bool _dnsLookup_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
 
-    public bool DNSLookup_ExpandProfileView
-    {
-        get => _dnsLookup_ExpandProfileView;
-        set
+        public bool DNSLookup_ExpandProfileView
         {
-            if (value == _dnsLookup_ExpandProfileView)
-                return;
+            get => _dnsLookup_ExpandProfileView;
+            set
+            {
+                if (value == _dnsLookup_ExpandProfileView)
+                    return;
 
-            _dnsLookup_ExpandProfileView = value;
-            OnPropertyChanged();
+                _dnsLookup_ExpandProfileView = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private double _dnsLookup_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
+        private double _dnsLookup_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
 
-    public double DNSLookup_ProfileWidth
-    {
-        get => _dnsLookup_ProfileWidth;
-        set
+        public double DNSLookup_ProfileWidth
         {
-            if (Math.Abs(value - _dnsLookup_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
-                return;
+            get => _dnsLookup_ProfileWidth;
+            set
+            {
+                if (Math.Abs(value - _dnsLookup_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
+                    return;
 
-            _dnsLookup_ProfileWidth = value;
-            OnPropertyChanged();
+                _dnsLookup_ProfileWidth = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _dnsLookup_ExportFilePath;
+        private string _dnsLookup_ExportFilePath;
 
-    public string DNSLookup_ExportFilePath
-    {
-        get => _dnsLookup_ExportFilePath;
-        set
+        public string DNSLookup_ExportFilePath
         {
-            if (value == _dnsLookup_ExportFilePath)
-                return;
+            get => _dnsLookup_ExportFilePath;
+            set
+            {
+                if (value == _dnsLookup_ExportFilePath)
+                    return;
 
-            _dnsLookup_ExportFilePath = value;
-            OnPropertyChanged();
+                _dnsLookup_ExportFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ExportFileType _dnsLookup_ExportFileType = GlobalStaticConfiguration.DNSLookup_ExportFileType;
+        private ExportFileType _dnsLookup_ExportFileType = GlobalStaticConfiguration.DNSLookup_ExportFileType;
 
-    public ExportFileType DNSLookup_ExportFileType
-    {
-        get => _dnsLookup_ExportFileType;
-        set
+        public ExportFileType DNSLookup_ExportFileType
         {
-            if (value == _dnsLookup_ExportFileType)
-                return;
+            get => _dnsLookup_ExportFileType;
+            set
+            {
+                if (value == _dnsLookup_ExportFileType)
+                    return;
 
-            _dnsLookup_ExportFileType = value;
-            OnPropertyChanged();
+                _dnsLookup_ExportFileType = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region Remote Desktop
+        #region Remote Desktop
 
-    private ObservableCollection<string> _remoteDesktop_HostHistory = new();
+        private ObservableCollection<string> _remoteDesktop_HostHistory = new();
 
-    public ObservableCollection<string> RemoteDesktop_HostHistory
-    {
-        get => _remoteDesktop_HostHistory;
-        set
+        public ObservableCollection<string> RemoteDesktop_HostHistory
         {
-            if (value == _remoteDesktop_HostHistory)
-                return;
+            get => _remoteDesktop_HostHistory;
+            set
+            {
+                if (value == _remoteDesktop_HostHistory)
+                    return;
 
-            _remoteDesktop_HostHistory = value;
-            OnPropertyChanged();
+                _remoteDesktop_HostHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_AdjustScreenAutomatically;
+        private bool _remoteDesktop_AdjustScreenAutomatically;
 
-    public bool RemoteDesktop_AdjustScreenAutomatically
-    {
-        get => _remoteDesktop_AdjustScreenAutomatically;
-        set
+        public bool RemoteDesktop_AdjustScreenAutomatically
         {
-            if (value == _remoteDesktop_AdjustScreenAutomatically)
-                return;
+            get => _remoteDesktop_AdjustScreenAutomatically;
+            set
+            {
+                if (value == _remoteDesktop_AdjustScreenAutomatically)
+                    return;
 
-            _remoteDesktop_AdjustScreenAutomatically = value;
-            OnPropertyChanged();
+                _remoteDesktop_AdjustScreenAutomatically = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_UseCurrentViewSize = GlobalStaticConfiguration.RemoteDesktop_UseCurrentViewSize;
+        private bool _remoteDesktop_UseCurrentViewSize = GlobalStaticConfiguration.RemoteDesktop_UseCurrentViewSize;
 
-    public bool RemoteDesktop_UseCurrentViewSize
-    {
-        get => _remoteDesktop_UseCurrentViewSize;
-        set
+        public bool RemoteDesktop_UseCurrentViewSize
         {
-            if (value == _remoteDesktop_UseCurrentViewSize)
-                return;
+            get => _remoteDesktop_UseCurrentViewSize;
+            set
+            {
+                if (value == _remoteDesktop_UseCurrentViewSize)
+                    return;
 
-            _remoteDesktop_UseCurrentViewSize = value;
-            OnPropertyChanged();
+                _remoteDesktop_UseCurrentViewSize = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_UseFixedScreenSize;
+        private bool _remoteDesktop_UseFixedScreenSize;
 
-    public bool RemoteDesktop_UseFixedScreenSize
-    {
-        get => _remoteDesktop_UseFixedScreenSize;
-        set
+        public bool RemoteDesktop_UseFixedScreenSize
         {
-            if (value == _remoteDesktop_UseFixedScreenSize)
-                return;
+            get => _remoteDesktop_UseFixedScreenSize;
+            set
+            {
+                if (value == _remoteDesktop_UseFixedScreenSize)
+                    return;
 
-            _remoteDesktop_UseFixedScreenSize = value;
-            OnPropertyChanged();
+                _remoteDesktop_UseFixedScreenSize = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _remoteDesktop_ScreenWidth = GlobalStaticConfiguration.RemoteDesktop_ScreenWidth;
+        private int _remoteDesktop_ScreenWidth = GlobalStaticConfiguration.RemoteDesktop_ScreenWidth;
 
-    public int RemoteDesktop_ScreenWidth
-    {
-        get => _remoteDesktop_ScreenWidth;
-        set
+        public int RemoteDesktop_ScreenWidth
         {
-            if (value == _remoteDesktop_ScreenWidth)
-                return;
+            get => _remoteDesktop_ScreenWidth;
+            set
+            {
+                if (value == _remoteDesktop_ScreenWidth)
+                    return;
 
-            _remoteDesktop_ScreenWidth = value;
-            OnPropertyChanged();
+                _remoteDesktop_ScreenWidth = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _remoteDesktop_ScreenHeight = GlobalStaticConfiguration.RemoteDesktop_ScreenHeight;
+        private int _remoteDesktop_ScreenHeight = GlobalStaticConfiguration.RemoteDesktop_ScreenHeight;
 
-    public int RemoteDesktop_ScreenHeight
-    {
-        get => _remoteDesktop_ScreenHeight;
-        set
+        public int RemoteDesktop_ScreenHeight
         {
-            if (value == _remoteDesktop_ScreenHeight)
-                return;
+            get => _remoteDesktop_ScreenHeight;
+            set
+            {
+                if (value == _remoteDesktop_ScreenHeight)
+                    return;
 
-            _remoteDesktop_ScreenHeight = value;
-            OnPropertyChanged();
+                _remoteDesktop_ScreenHeight = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_UseCustomScreenSize;
+        private bool _remoteDesktop_UseCustomScreenSize;
 
-    public bool RemoteDesktop_UseCustomScreenSize
-    {
-        get => _remoteDesktop_UseCustomScreenSize;
-        set
+        public bool RemoteDesktop_UseCustomScreenSize
         {
-            if (value == _remoteDesktop_UseCustomScreenSize)
-                return;
+            get => _remoteDesktop_UseCustomScreenSize;
+            set
+            {
+                if (value == _remoteDesktop_UseCustomScreenSize)
+                    return;
 
-            _remoteDesktop_UseCustomScreenSize = value;
-            OnPropertyChanged();
+                _remoteDesktop_UseCustomScreenSize = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _remoteDesktop_CustomScreenWidth;
+        private int _remoteDesktop_CustomScreenWidth;
 
-    public int RemoteDesktop_CustomScreenWidth
-    {
-        get => _remoteDesktop_CustomScreenWidth;
-        set
+        public int RemoteDesktop_CustomScreenWidth
         {
-            if (value == _remoteDesktop_CustomScreenWidth)
-                return;
+            get => _remoteDesktop_CustomScreenWidth;
+            set
+            {
+                if (value == _remoteDesktop_CustomScreenWidth)
+                    return;
 
-            _remoteDesktop_CustomScreenWidth = value;
-            OnPropertyChanged();
+                _remoteDesktop_CustomScreenWidth = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _remoteDesktop_CustomScreenHeight;
+        private int _remoteDesktop_CustomScreenHeight;
 
-    public int RemoteDesktop_CustomScreenHeight
-    {
-        get => _remoteDesktop_CustomScreenHeight;
-        set
+        public int RemoteDesktop_CustomScreenHeight
         {
-            if (value == _remoteDesktop_CustomScreenHeight)
-                return;
+            get => _remoteDesktop_CustomScreenHeight;
+            set
+            {
+                if (value == _remoteDesktop_CustomScreenHeight)
+                    return;
 
-            _remoteDesktop_CustomScreenHeight = value;
-            OnPropertyChanged();
+                _remoteDesktop_CustomScreenHeight = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _remoteDesktop_ColorDepth = GlobalStaticConfiguration.RemoteDesktop_ColorDepth;
+        private int _remoteDesktop_ColorDepth = GlobalStaticConfiguration.RemoteDesktop_ColorDepth;
 
-    public int RemoteDesktop_ColorDepth
-    {
-        get => _remoteDesktop_ColorDepth;
-        set
+        public int RemoteDesktop_ColorDepth
         {
-            if (value == _remoteDesktop_ColorDepth)
-                return;
+            get => _remoteDesktop_ColorDepth;
+            set
+            {
+                if (value == _remoteDesktop_ColorDepth)
+                    return;
 
-            _remoteDesktop_ColorDepth = value;
-            OnPropertyChanged();
+                _remoteDesktop_ColorDepth = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _remoteDesktop_Port = GlobalStaticConfiguration.RemoteDesktop_Port;
+        private int _remoteDesktop_Port = GlobalStaticConfiguration.RemoteDesktop_Port;
 
-    public int RemoteDesktop_Port
-    {
-        get => _remoteDesktop_Port;
-        set
+        public int RemoteDesktop_Port
         {
-            if (value == _remoteDesktop_Port)
-                return;
+            get => _remoteDesktop_Port;
+            set
+            {
+                if (value == _remoteDesktop_Port)
+                    return;
 
-            _remoteDesktop_Port = value;
-            OnPropertyChanged();
+                _remoteDesktop_Port = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_EnableCredSspSupport = GlobalStaticConfiguration.RemoteDesktop_EnableCredSspSupport;
+        private bool _remoteDesktop_EnableCredSspSupport = GlobalStaticConfiguration.RemoteDesktop_EnableCredSspSupport;
 
-    public bool RemoteDesktop_EnableCredSspSupport
-    {
-        get => _remoteDesktop_EnableCredSspSupport;
-        set
+        public bool RemoteDesktop_EnableCredSspSupport
         {
-            if (value == _remoteDesktop_EnableCredSspSupport)
-                return;
+            get => _remoteDesktop_EnableCredSspSupport;
+            set
+            {
+                if (value == _remoteDesktop_EnableCredSspSupport)
+                    return;
 
-            _remoteDesktop_EnableCredSspSupport = value;
-            OnPropertyChanged();
+                _remoteDesktop_EnableCredSspSupport = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private uint _remoteDesktop_AuthenticationLevel = GlobalStaticConfiguration.RemoteDesktop_AuthenticationLevel;
+        private uint _remoteDesktop_AuthenticationLevel = GlobalStaticConfiguration.RemoteDesktop_AuthenticationLevel;
 
-    public uint RemoteDesktop_AuthenticationLevel
-    {
-        get => _remoteDesktop_AuthenticationLevel;
-        set
+        public uint RemoteDesktop_AuthenticationLevel
         {
-            if (value == _remoteDesktop_AuthenticationLevel)
-                return;
+            get => _remoteDesktop_AuthenticationLevel;
+            set
+            {
+                if (value == _remoteDesktop_AuthenticationLevel)
+                    return;
 
-            _remoteDesktop_AuthenticationLevel = value;
-            OnPropertyChanged();
+                _remoteDesktop_AuthenticationLevel = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_EnableGatewayServer;
+        private bool _remoteDesktop_EnableGatewayServer;
 
-    public bool RemoteDesktop_EnableGatewayServer
-    {
-        get => _remoteDesktop_EnableGatewayServer;
-        set
+        public bool RemoteDesktop_EnableGatewayServer
         {
-            if (value == _remoteDesktop_EnableGatewayServer)
-                return;
+            get => _remoteDesktop_EnableGatewayServer;
+            set
+            {
+                if (value == _remoteDesktop_EnableGatewayServer)
+                    return;
 
-            _remoteDesktop_EnableGatewayServer = value;
-            OnPropertyChanged();
+                _remoteDesktop_EnableGatewayServer = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _remoteDesktop_GatewayServerHostname;
+        private string _remoteDesktop_GatewayServerHostname;
 
-    public string RemoteDesktop_GatewayServerHostname
-    {
-        get => _remoteDesktop_GatewayServerHostname;
-        set
+        public string RemoteDesktop_GatewayServerHostname
         {
-            if (value == _remoteDesktop_GatewayServerHostname)
-                return;
+            get => _remoteDesktop_GatewayServerHostname;
+            set
+            {
+                if (value == _remoteDesktop_GatewayServerHostname)
+                    return;
 
-            _remoteDesktop_GatewayServerHostname = value;
-            OnPropertyChanged();
+                _remoteDesktop_GatewayServerHostname = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_GatewayServerBypassLocalAddresses =
-        GlobalStaticConfiguration.RemoteDesktop_GatewayServerBypassLocalAddresses;
+        private bool _remoteDesktop_GatewayServerBypassLocalAddresses =
+            GlobalStaticConfiguration.RemoteDesktop_GatewayServerBypassLocalAddresses;
 
-    public bool RemoteDesktop_GatewayServerBypassLocalAddresses
-    {
-        get => _remoteDesktop_GatewayServerBypassLocalAddresses;
-        set
+        public bool RemoteDesktop_GatewayServerBypassLocalAddresses
         {
-            if (value == _remoteDesktop_GatewayServerBypassLocalAddresses)
-                return;
+            get => _remoteDesktop_GatewayServerBypassLocalAddresses;
+            set
+            {
+                if (value == _remoteDesktop_GatewayServerBypassLocalAddresses)
+                    return;
 
-            _remoteDesktop_GatewayServerBypassLocalAddresses = value;
-            OnPropertyChanged();
+                _remoteDesktop_GatewayServerBypassLocalAddresses = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private GatewayUserSelectedCredsSource _remoteDesktop_GatewayServerLogonMethod =
-        GlobalStaticConfiguration.RemoteDesktop_GatewayServerLogonMethod;
+        private GatewayUserSelectedCredsSource _remoteDesktop_GatewayServerLogonMethod =
+            GlobalStaticConfiguration.RemoteDesktop_GatewayServerLogonMethod;
 
-    public GatewayUserSelectedCredsSource RemoteDesktop_GatewayServerLogonMethod
-    {
-        get => _remoteDesktop_GatewayServerLogonMethod;
-        set
+        public GatewayUserSelectedCredsSource RemoteDesktop_GatewayServerLogonMethod
         {
-            if (value == _remoteDesktop_GatewayServerLogonMethod)
-                return;
+            get => _remoteDesktop_GatewayServerLogonMethod;
+            set
+            {
+                if (value == _remoteDesktop_GatewayServerLogonMethod)
+                    return;
 
-            _remoteDesktop_GatewayServerLogonMethod = value;
-            OnPropertyChanged();
+                _remoteDesktop_GatewayServerLogonMethod = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_GatewayServerShareCredentialsWithRemoteComputer =
-        GlobalStaticConfiguration.RemoteDesktop_GatewayServerShareCredentialsWithRemoteComputer;
+        private bool _remoteDesktop_GatewayServerShareCredentialsWithRemoteComputer =
+            GlobalStaticConfiguration.RemoteDesktop_GatewayServerShareCredentialsWithRemoteComputer;
 
-    public bool RemoteDesktop_GatewayServerShareCredentialsWithRemoteComputer
-    {
-        get => _remoteDesktop_GatewayServerShareCredentialsWithRemoteComputer;
-        set
+        public bool RemoteDesktop_GatewayServerShareCredentialsWithRemoteComputer
         {
-            if (value == _remoteDesktop_GatewayServerShareCredentialsWithRemoteComputer)
-                return;
+            get => _remoteDesktop_GatewayServerShareCredentialsWithRemoteComputer;
+            set
+            {
+                if (value == _remoteDesktop_GatewayServerShareCredentialsWithRemoteComputer)
+                    return;
 
-            _remoteDesktop_GatewayServerShareCredentialsWithRemoteComputer = value;
-            OnPropertyChanged();
+                _remoteDesktop_GatewayServerShareCredentialsWithRemoteComputer = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private AudioRedirectionMode _remoteDesktop_AudioRedirectionMode =
-        GlobalStaticConfiguration.RemoteDesktop_AudioRedirectionMode;
+        private AudioRedirectionMode _remoteDesktop_AudioRedirectionMode =
+            GlobalStaticConfiguration.RemoteDesktop_AudioRedirectionMode;
 
-    public AudioRedirectionMode RemoteDesktop_AudioRedirectionMode
-    {
-        get => _remoteDesktop_AudioRedirectionMode;
-        set
+        public AudioRedirectionMode RemoteDesktop_AudioRedirectionMode
         {
-            if (value == _remoteDesktop_AudioRedirectionMode)
-                return;
+            get => _remoteDesktop_AudioRedirectionMode;
+            set
+            {
+                if (value == _remoteDesktop_AudioRedirectionMode)
+                    return;
 
-            _remoteDesktop_AudioRedirectionMode = value;
-            OnPropertyChanged();
+                _remoteDesktop_AudioRedirectionMode = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private AudioCaptureRedirectionMode _remoteDesktop_AudioCaptureRedirectionMode =
-        GlobalStaticConfiguration.RemoteDesktop_AudioCaptureRedirectionMode;
+        private AudioCaptureRedirectionMode _remoteDesktop_AudioCaptureRedirectionMode =
+            GlobalStaticConfiguration.RemoteDesktop_AudioCaptureRedirectionMode;
 
-    public AudioCaptureRedirectionMode RemoteDesktop_AudioCaptureRedirectionMode
-    {
-        get => _remoteDesktop_AudioCaptureRedirectionMode;
-        set
+        public AudioCaptureRedirectionMode RemoteDesktop_AudioCaptureRedirectionMode
         {
-            if (value == _remoteDesktop_AudioCaptureRedirectionMode)
-                return;
+            get => _remoteDesktop_AudioCaptureRedirectionMode;
+            set
+            {
+                if (value == _remoteDesktop_AudioCaptureRedirectionMode)
+                    return;
 
-            _remoteDesktop_AudioCaptureRedirectionMode = value;
-            OnPropertyChanged();
+                _remoteDesktop_AudioCaptureRedirectionMode = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private KeyboardHookMode _remoteDesktop_KeyboardHookMode = GlobalStaticConfiguration.RemoteDesktop_KeyboardHookMode;
+        private KeyboardHookMode _remoteDesktop_KeyboardHookMode = GlobalStaticConfiguration.RemoteDesktop_KeyboardHookMode;
 
-    public KeyboardHookMode RemoteDesktop_KeyboardHookMode
-    {
-        get => _remoteDesktop_KeyboardHookMode;
-        set
+        public KeyboardHookMode RemoteDesktop_KeyboardHookMode
         {
-            if (value == _remoteDesktop_KeyboardHookMode)
-                return;
+            get => _remoteDesktop_KeyboardHookMode;
+            set
+            {
+                if (value == _remoteDesktop_KeyboardHookMode)
+                    return;
 
-            _remoteDesktop_KeyboardHookMode = value;
-            OnPropertyChanged();
+                _remoteDesktop_KeyboardHookMode = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_RedirectClipboard = GlobalStaticConfiguration.RemoteDesktop_RedirectClipboard;
+        private bool _remoteDesktop_RedirectClipboard = GlobalStaticConfiguration.RemoteDesktop_RedirectClipboard;
 
-    public bool RemoteDesktop_RedirectClipboard
-    {
-        get => _remoteDesktop_RedirectClipboard;
-        set
+        public bool RemoteDesktop_RedirectClipboard
         {
-            if (value == _remoteDesktop_RedirectClipboard)
-                return;
+            get => _remoteDesktop_RedirectClipboard;
+            set
+            {
+                if (value == _remoteDesktop_RedirectClipboard)
+                    return;
 
-            _remoteDesktop_RedirectClipboard = value;
-            OnPropertyChanged();
+                _remoteDesktop_RedirectClipboard = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_RedirectDevices;
+        private bool _remoteDesktop_RedirectDevices;
 
-    public bool RemoteDesktop_RedirectDevices
-    {
-        get => _remoteDesktop_RedirectDevices;
-        set
+        public bool RemoteDesktop_RedirectDevices
         {
-            if (value == _remoteDesktop_RedirectDevices)
-                return;
+            get => _remoteDesktop_RedirectDevices;
+            set
+            {
+                if (value == _remoteDesktop_RedirectDevices)
+                    return;
 
-            _remoteDesktop_RedirectDevices = value;
-            OnPropertyChanged();
+                _remoteDesktop_RedirectDevices = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_RedirectDrives;
+        private bool _remoteDesktop_RedirectDrives;
 
-    public bool RemoteDesktop_RedirectDrives
-    {
-        get => _remoteDesktop_RedirectDrives;
-        set
+        public bool RemoteDesktop_RedirectDrives
         {
-            if (value == _remoteDesktop_RedirectDrives)
-                return;
+            get => _remoteDesktop_RedirectDrives;
+            set
+            {
+                if (value == _remoteDesktop_RedirectDrives)
+                    return;
 
-            _remoteDesktop_RedirectDrives = value;
-            OnPropertyChanged();
+                _remoteDesktop_RedirectDrives = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_RedirectPorts;
+        private bool _remoteDesktop_RedirectPorts;
 
-    public bool RemoteDesktop_RedirectPorts
-    {
-        get => _remoteDesktop_RedirectPorts;
-        set
+        public bool RemoteDesktop_RedirectPorts
         {
-            if (value == _remoteDesktop_RedirectPorts)
-                return;
+            get => _remoteDesktop_RedirectPorts;
+            set
+            {
+                if (value == _remoteDesktop_RedirectPorts)
+                    return;
 
-            _remoteDesktop_RedirectPorts = value;
-            OnPropertyChanged();
+                _remoteDesktop_RedirectPorts = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_RedirectSmartCards;
+        private bool _remoteDesktop_RedirectSmartCards;
 
-    public bool RemoteDesktop_RedirectSmartCards
-    {
-        get => _remoteDesktop_RedirectSmartCards;
-        set
+        public bool RemoteDesktop_RedirectSmartCards
         {
-            if (value == _remoteDesktop_RedirectSmartCards)
-                return;
+            get => _remoteDesktop_RedirectSmartCards;
+            set
+            {
+                if (value == _remoteDesktop_RedirectSmartCards)
+                    return;
 
-            _remoteDesktop_RedirectSmartCards = value;
-            OnPropertyChanged();
+                _remoteDesktop_RedirectSmartCards = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_RedirectPrinters;
+        private bool _remoteDesktop_RedirectPrinters;
 
-    public bool RemoteDesktop_RedirectPrinters
-    {
-        get => _remoteDesktop_RedirectPrinters;
-        set
+        public bool RemoteDesktop_RedirectPrinters
         {
-            if (value == _remoteDesktop_RedirectPrinters)
-                return;
+            get => _remoteDesktop_RedirectPrinters;
+            set
+            {
+                if (value == _remoteDesktop_RedirectPrinters)
+                    return;
 
-            _remoteDesktop_RedirectPrinters = value;
-            OnPropertyChanged();
+                _remoteDesktop_RedirectPrinters = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_PersistentBitmapCaching;
+        private bool _remoteDesktop_PersistentBitmapCaching;
 
-    public bool RemoteDesktop_PersistentBitmapCaching
-    {
-        get => _remoteDesktop_PersistentBitmapCaching;
-        set
+        public bool RemoteDesktop_PersistentBitmapCaching
         {
-            if (value == _remoteDesktop_PersistentBitmapCaching)
-                return;
+            get => _remoteDesktop_PersistentBitmapCaching;
+            set
+            {
+                if (value == _remoteDesktop_PersistentBitmapCaching)
+                    return;
 
-            _remoteDesktop_PersistentBitmapCaching = value;
-            OnPropertyChanged();
+                _remoteDesktop_PersistentBitmapCaching = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_ReconnectIfTheConnectionIsDropped;
+        private bool _remoteDesktop_ReconnectIfTheConnectionIsDropped;
 
-    public bool RemoteDesktop_ReconnectIfTheConnectionIsDropped
-    {
-        get => _remoteDesktop_ReconnectIfTheConnectionIsDropped;
-        set
+        public bool RemoteDesktop_ReconnectIfTheConnectionIsDropped
         {
-            if (value == _remoteDesktop_ReconnectIfTheConnectionIsDropped)
-                return;
+            get => _remoteDesktop_ReconnectIfTheConnectionIsDropped;
+            set
+            {
+                if (value == _remoteDesktop_ReconnectIfTheConnectionIsDropped)
+                    return;
 
-            _remoteDesktop_ReconnectIfTheConnectionIsDropped = value;
-            OnPropertyChanged();
+                _remoteDesktop_ReconnectIfTheConnectionIsDropped = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private NetworkConnectionType _remoteDesktop_NetworkConnectionType =
-        GlobalStaticConfiguration.RemoteDesktop_NetworkConnectionType;
+        private NetworkConnectionType _remoteDesktop_NetworkConnectionType =
+            GlobalStaticConfiguration.RemoteDesktop_NetworkConnectionType;
 
-    public NetworkConnectionType RemoteDesktop_NetworkConnectionType
-    {
-        get => _remoteDesktop_NetworkConnectionType;
-        set
+        public NetworkConnectionType RemoteDesktop_NetworkConnectionType
         {
-            if (value == _remoteDesktop_NetworkConnectionType)
-                return;
+            get => _remoteDesktop_NetworkConnectionType;
+            set
+            {
+                if (value == _remoteDesktop_NetworkConnectionType)
+                    return;
 
-            _remoteDesktop_NetworkConnectionType = value;
-            OnPropertyChanged();
+                _remoteDesktop_NetworkConnectionType = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_DesktopBackground;
+        private bool _remoteDesktop_DesktopBackground;
 
-    public bool RemoteDesktop_DesktopBackground
-    {
-        get => _remoteDesktop_DesktopBackground;
-        set
+        public bool RemoteDesktop_DesktopBackground
         {
-            if (value == _remoteDesktop_DesktopBackground)
-                return;
+            get => _remoteDesktop_DesktopBackground;
+            set
+            {
+                if (value == _remoteDesktop_DesktopBackground)
+                    return;
 
-            _remoteDesktop_DesktopBackground = value;
-            OnPropertyChanged();
+                _remoteDesktop_DesktopBackground = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_FontSmoothing;
+        private bool _remoteDesktop_FontSmoothing;
 
-    public bool RemoteDesktop_FontSmoothing
-    {
-        get => _remoteDesktop_FontSmoothing;
-        set
+        public bool RemoteDesktop_FontSmoothing
         {
-            if (value == _remoteDesktop_FontSmoothing)
-                return;
+            get => _remoteDesktop_FontSmoothing;
+            set
+            {
+                if (value == _remoteDesktop_FontSmoothing)
+                    return;
 
-            _remoteDesktop_FontSmoothing = value;
-            OnPropertyChanged();
+                _remoteDesktop_FontSmoothing = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_DesktopComposition;
+        private bool _remoteDesktop_DesktopComposition;
 
-    public bool RemoteDesktop_DesktopComposition
-    {
-        get => _remoteDesktop_DesktopComposition;
-        set
+        public bool RemoteDesktop_DesktopComposition
         {
-            if (value == _remoteDesktop_DesktopComposition)
-                return;
+            get => _remoteDesktop_DesktopComposition;
+            set
+            {
+                if (value == _remoteDesktop_DesktopComposition)
+                    return;
 
-            _remoteDesktop_DesktopComposition = value;
-            OnPropertyChanged();
+                _remoteDesktop_DesktopComposition = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_ShowWindowContentsWhileDragging;
+        private bool _remoteDesktop_ShowWindowContentsWhileDragging;
 
-    public bool RemoteDesktop_ShowWindowContentsWhileDragging
-    {
-        get => _remoteDesktop_ShowWindowContentsWhileDragging;
-        set
+        public bool RemoteDesktop_ShowWindowContentsWhileDragging
         {
-            if (value == _remoteDesktop_ShowWindowContentsWhileDragging)
-                return;
+            get => _remoteDesktop_ShowWindowContentsWhileDragging;
+            set
+            {
+                if (value == _remoteDesktop_ShowWindowContentsWhileDragging)
+                    return;
 
-            _remoteDesktop_ShowWindowContentsWhileDragging = value;
-            OnPropertyChanged();
+                _remoteDesktop_ShowWindowContentsWhileDragging = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_MenuAndWindowAnimation;
+        private bool _remoteDesktop_MenuAndWindowAnimation;
 
-    public bool RemoteDesktop_MenuAndWindowAnimation
-    {
-        get => _remoteDesktop_MenuAndWindowAnimation;
-        set
+        public bool RemoteDesktop_MenuAndWindowAnimation
         {
-            if (value == _remoteDesktop_MenuAndWindowAnimation)
-                return;
+            get => _remoteDesktop_MenuAndWindowAnimation;
+            set
+            {
+                if (value == _remoteDesktop_MenuAndWindowAnimation)
+                    return;
 
-            _remoteDesktop_MenuAndWindowAnimation = value;
-            OnPropertyChanged();
+                _remoteDesktop_MenuAndWindowAnimation = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_VisualStyles;
+        private bool _remoteDesktop_VisualStyles;
 
-    public bool RemoteDesktop_VisualStyles
-    {
-        get => _remoteDesktop_VisualStyles;
-        set
+        public bool RemoteDesktop_VisualStyles
         {
-            if (value == _remoteDesktop_VisualStyles)
-                return;
+            get => _remoteDesktop_VisualStyles;
+            set
+            {
+                if (value == _remoteDesktop_VisualStyles)
+                    return;
 
-            _remoteDesktop_VisualStyles = value;
-            OnPropertyChanged();
+                _remoteDesktop_VisualStyles = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _remoteDesktop_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
+        private bool _remoteDesktop_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
 
-    public bool RemoteDesktop_ExpandProfileView
-    {
-        get => _remoteDesktop_ExpandProfileView;
-        set
+        public bool RemoteDesktop_ExpandProfileView
         {
-            if (value == _remoteDesktop_ExpandProfileView)
-                return;
+            get => _remoteDesktop_ExpandProfileView;
+            set
+            {
+                if (value == _remoteDesktop_ExpandProfileView)
+                    return;
 
-            _remoteDesktop_ExpandProfileView = value;
-            OnPropertyChanged();
+                _remoteDesktop_ExpandProfileView = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private double _remoteDesktop_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
+        private double _remoteDesktop_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
 
-    public double RemoteDesktop_ProfileWidth
-    {
-        get => _remoteDesktop_ProfileWidth;
-        set
+        public double RemoteDesktop_ProfileWidth
         {
-            if (Math.Abs(value - _remoteDesktop_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
-                return;
+            get => _remoteDesktop_ProfileWidth;
+            set
+            {
+                if (Math.Abs(value - _remoteDesktop_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
+                    return;
 
-            _remoteDesktop_ProfileWidth = value;
-            OnPropertyChanged();
+                _remoteDesktop_ProfileWidth = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region PowerShell
+        #region PowerShell
 
-    private ObservableCollection<string> _powerShell_HostHistory = new();
+        private ObservableCollection<string> _powerShell_HostHistory = new();
 
-    public ObservableCollection<string> PowerShell_HostHistory
-    {
-        get => _powerShell_HostHistory;
-        set
+        public ObservableCollection<string> PowerShell_HostHistory
         {
-            if (value == _powerShell_HostHistory)
-                return;
+            get => _powerShell_HostHistory;
+            set
+            {
+                if (value == _powerShell_HostHistory)
+                    return;
 
-            _powerShell_HostHistory = value;
-            OnPropertyChanged();
+                _powerShell_HostHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _powerShell_ApplicationFilePath;
+        private string _powerShell_ApplicationFilePath;
 
-    public string PowerShell_ApplicationFilePath
-    {
-        get => _powerShell_ApplicationFilePath;
-        set
+        public string PowerShell_ApplicationFilePath
         {
-            if (value == _powerShell_ApplicationFilePath)
-                return;
+            get => _powerShell_ApplicationFilePath;
+            set
+            {
+                if (value == _powerShell_ApplicationFilePath)
+                    return;
 
-            _powerShell_ApplicationFilePath = value;
-            OnPropertyChanged();
+                _powerShell_ApplicationFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _powerShell_Command = GlobalStaticConfiguration.PowerShell_Command;
+        private string _powerShell_Command = GlobalStaticConfiguration.PowerShell_Command;
 
-    public string PowerShell_Command
-    {
-        get => _powerShell_Command;
-        set
+        public string PowerShell_Command
         {
-            if (value == _powerShell_Command)
-                return;
+            get => _powerShell_Command;
+            set
+            {
+                if (value == _powerShell_Command)
+                    return;
 
-            _powerShell_Command = value;
-            OnPropertyChanged();
+                _powerShell_Command = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _powerShell_AdditionalCommandLine;
+        private string _powerShell_AdditionalCommandLine;
 
-    public string PowerShell_AdditionalCommandLine
-    {
-        get => _powerShell_AdditionalCommandLine;
-        set
+        public string PowerShell_AdditionalCommandLine
         {
-            if (value == _powerShell_AdditionalCommandLine)
-                return;
+            get => _powerShell_AdditionalCommandLine;
+            set
+            {
+                if (value == _powerShell_AdditionalCommandLine)
+                    return;
 
-            _powerShell_AdditionalCommandLine = value;
-            OnPropertyChanged();
+                _powerShell_AdditionalCommandLine = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ExecutionPolicy _powerShell_ExecutionPolicy =
-        GlobalStaticConfiguration.PowerShell_ExecutionPolicy;
+        private ExecutionPolicy _powerShell_ExecutionPolicy =
+            GlobalStaticConfiguration.PowerShell_ExecutionPolicy;
 
-    public ExecutionPolicy PowerShell_ExecutionPolicy
-    {
-        get => _powerShell_ExecutionPolicy;
-        set
+        public ExecutionPolicy PowerShell_ExecutionPolicy
         {
-            if (value == _powerShell_ExecutionPolicy)
-                return;
+            get => _powerShell_ExecutionPolicy;
+            set
+            {
+                if (value == _powerShell_ExecutionPolicy)
+                    return;
 
-            _powerShell_ExecutionPolicy = value;
-            OnPropertyChanged();
+                _powerShell_ExecutionPolicy = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _powerShell_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
+        private bool _powerShell_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
 
-    public bool PowerShell_ExpandProfileView
-    {
-        get => _powerShell_ExpandProfileView;
-        set
+        public bool PowerShell_ExpandProfileView
         {
-            if (value == _powerShell_ExpandProfileView)
-                return;
+            get => _powerShell_ExpandProfileView;
+            set
+            {
+                if (value == _powerShell_ExpandProfileView)
+                    return;
 
-            _powerShell_ExpandProfileView = value;
-            OnPropertyChanged();
+                _powerShell_ExpandProfileView = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private double _powerShell_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
+        private double _powerShell_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
 
-    public double PowerShell_ProfileWidth
-    {
-        get => _powerShell_ProfileWidth;
-        set
+        public double PowerShell_ProfileWidth
         {
-            if (Math.Abs(value - _powerShell_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
-                return;
+            get => _powerShell_ProfileWidth;
+            set
+            {
+                if (Math.Abs(value - _powerShell_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
+                    return;
 
-            _powerShell_ProfileWidth = value;
-            OnPropertyChanged();
+                _powerShell_ProfileWidth = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region PuTTY
+        #region PuTTY
 
-    private ObservableCollection<string> _puTTY_HostHistory = new();
+        private ObservableCollection<string> _puTTY_HostHistory = new();
 
-    public ObservableCollection<string> PuTTY_HostHistory
-    {
-        get => _puTTY_HostHistory;
-        set
+        public ObservableCollection<string> PuTTY_HostHistory
         {
-            if (value == _puTTY_HostHistory)
-                return;
+            get => _puTTY_HostHistory;
+            set
+            {
+                if (value == _puTTY_HostHistory)
+                    return;
 
-            _puTTY_HostHistory = value;
-            OnPropertyChanged();
+                _puTTY_HostHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ConnectionMode _puTTY_DefaultConnectionMode = GlobalStaticConfiguration.PuTTY_DefaultConnectionMode;
+        private ConnectionMode _puTTY_DefaultConnectionMode = GlobalStaticConfiguration.PuTTY_DefaultConnectionMode;
 
-    public ConnectionMode PuTTY_DefaultConnectionMode
-    {
-        get => _puTTY_DefaultConnectionMode;
-        set
+        public ConnectionMode PuTTY_DefaultConnectionMode
         {
-            if (value == _puTTY_DefaultConnectionMode)
-                return;
+            get => _puTTY_DefaultConnectionMode;
+            set
+            {
+                if (value == _puTTY_DefaultConnectionMode)
+                    return;
 
-            _puTTY_DefaultConnectionMode = value;
-            OnPropertyChanged();
+                _puTTY_DefaultConnectionMode = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _puTTY_Username;
+        private string _puTTY_Username;
 
-    public string PuTTY_Username
-    {
-        get => _puTTY_Username;
-        set
+        public string PuTTY_Username
         {
-            if (value == _puTTY_Username)
-                return;
+            get => _puTTY_Username;
+            set
+            {
+                if (value == _puTTY_Username)
+                    return;
 
-            _puTTY_Username = value;
-            OnPropertyChanged();
+                _puTTY_Username = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _puTTY_PrivateKeyFile;
+        private string _puTTY_PrivateKeyFile;
 
-    public string PuTTY_PrivateKeyFile
-    {
-        get => _puTTY_PrivateKeyFile;
-        set
+        public string PuTTY_PrivateKeyFile
         {
-            if (value == _puTTY_PrivateKeyFile)
-                return;
+            get => _puTTY_PrivateKeyFile;
+            set
+            {
+                if (value == _puTTY_PrivateKeyFile)
+                    return;
 
-            _puTTY_PrivateKeyFile = value;
-            OnPropertyChanged();
+                _puTTY_PrivateKeyFile = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _puTTY_Profile = GlobalStaticConfiguration.PuTTY_DefaultProfile;
+        private string _puTTY_Profile = GlobalStaticConfiguration.PuTTY_DefaultProfile;
 
-    public string PuTTY_Profile
-    {
-        get => _puTTY_Profile;
-        set
+        public string PuTTY_Profile
         {
-            if (value == _puTTY_Profile)
-                return;
+            get => _puTTY_Profile;
+            set
+            {
+                if (value == _puTTY_Profile)
+                    return;
 
-            _puTTY_Profile = value;
-            OnPropertyChanged();
+                _puTTY_Profile = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _puTTY_EnableSessionLog;
+        private bool _puTTY_EnableSessionLog;
 
-    public bool PuTTY_EnableSessionLog
-    {
-        get => _puTTY_EnableSessionLog;
-        set
+        public bool PuTTY_EnableSessionLog
         {
-            if (value == _puTTY_EnableSessionLog)
-                return;
+            get => _puTTY_EnableSessionLog;
+            set
+            {
+                if (value == _puTTY_EnableSessionLog)
+                    return;
 
-            _puTTY_EnableSessionLog = value;
-            OnPropertyChanged();
+                _puTTY_EnableSessionLog = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private LogMode _puTTY_LogMode = GlobalStaticConfiguration.PuTTY_LogMode;
+        private LogMode _puTTY_LogMode = GlobalStaticConfiguration.PuTTY_LogMode;
 
-    public LogMode PuTTY_LogMode
-    {
-        get => _puTTY_LogMode;
-        set
+        public LogMode PuTTY_LogMode
         {
-            if (value == _puTTY_LogMode)
-                return;
+            get => _puTTY_LogMode;
+            set
+            {
+                if (value == _puTTY_LogMode)
+                    return;
 
-            _puTTY_LogMode = value;
-            OnPropertyChanged();
+                _puTTY_LogMode = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _puTTY_LogPath = GlobalStaticConfiguration.PuTTY_LogPath;
+        private string _puTTY_LogPath = GlobalStaticConfiguration.PuTTY_LogPath;
 
-    public string PuTTY_LogPath
-    {
-        get => _puTTY_LogPath;
-        set
+        public string PuTTY_LogPath
         {
-            if (value == _puTTY_LogPath)
-                return;
+            get => _puTTY_LogPath;
+            set
+            {
+                if (value == _puTTY_LogPath)
+                    return;
 
-            _puTTY_LogPath = value;
-            OnPropertyChanged();
+                _puTTY_LogPath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _puTTY_LogFileName = GlobalStaticConfiguration.PuTTY_LogFileName;
+        private string _puTTY_LogFileName = GlobalStaticConfiguration.PuTTY_LogFileName;
 
-    public string PuTTY_LogFileName
-    {
-        get => _puTTY_LogFileName;
-        set
+        public string PuTTY_LogFileName
         {
-            if (value == _puTTY_LogFileName)
-                return;
+            get => _puTTY_LogFileName;
+            set
+            {
+                if (value == _puTTY_LogFileName)
+                    return;
 
-            _puTTY_LogFileName = value;
-            OnPropertyChanged();
+                _puTTY_LogFileName = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _puTTY_AdditionalCommandLine;
+        private string _puTTY_AdditionalCommandLine;
 
-    public string PuTTY_AdditionalCommandLine
-    {
-        get => _puTTY_AdditionalCommandLine;
-        set
+        public string PuTTY_AdditionalCommandLine
         {
-            if (value == _puTTY_AdditionalCommandLine)
-                return;
+            get => _puTTY_AdditionalCommandLine;
+            set
+            {
+                if (value == _puTTY_AdditionalCommandLine)
+                    return;
 
-            _puTTY_AdditionalCommandLine = value;
-            OnPropertyChanged();
+                _puTTY_AdditionalCommandLine = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<string> _puTTY_SerialLineHistory = new();
+        private ObservableCollection<string> _puTTY_SerialLineHistory = new();
 
-    public ObservableCollection<string> PuTTY_SerialLineHistory
-    {
-        get => _puTTY_SerialLineHistory;
-        set
+        public ObservableCollection<string> PuTTY_SerialLineHistory
         {
-            if (value == _puTTY_SerialLineHistory)
-                return;
+            get => _puTTY_SerialLineHistory;
+            set
+            {
+                if (value == _puTTY_SerialLineHistory)
+                    return;
 
-            _puTTY_SerialLineHistory = value;
-            OnPropertyChanged();
+                _puTTY_SerialLineHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<string> _puTTY_PortHistory = new();
+        private ObservableCollection<string> _puTTY_PortHistory = new();
 
-    public ObservableCollection<string> PuTTY_PortHistory
-    {
-        get => _puTTY_PortHistory;
-        set
+        public ObservableCollection<string> PuTTY_PortHistory
         {
-            if (value == _puTTY_PortHistory)
-                return;
+            get => _puTTY_PortHistory;
+            set
+            {
+                if (value == _puTTY_PortHistory)
+                    return;
 
-            _puTTY_PortHistory = value;
-            OnPropertyChanged();
+                _puTTY_PortHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<string> _puTTY_BaudHistory = new();
+        private ObservableCollection<string> _puTTY_BaudHistory = new();
 
-    public ObservableCollection<string> PuTTY_BaudHistory
-    {
-        get => _puTTY_BaudHistory;
-        set
+        public ObservableCollection<string> PuTTY_BaudHistory
         {
-            if (value == _puTTY_BaudHistory)
-                return;
+            get => _puTTY_BaudHistory;
+            set
+            {
+                if (value == _puTTY_BaudHistory)
+                    return;
 
-            _puTTY_BaudHistory = value;
-            OnPropertyChanged();
+                _puTTY_BaudHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<string> _puTTY_UsernameHistory = new();
+        private ObservableCollection<string> _puTTY_UsernameHistory = new();
 
-    public ObservableCollection<string> PuTTY_UsernameHistory
-    {
-        get => _puTTY_UsernameHistory;
-        set
+        public ObservableCollection<string> PuTTY_UsernameHistory
         {
-            if (value == _puTTY_UsernameHistory)
-                return;
+            get => _puTTY_UsernameHistory;
+            set
+            {
+                if (value == _puTTY_UsernameHistory)
+                    return;
 
-            _puTTY_UsernameHistory = value;
-            OnPropertyChanged();
+                _puTTY_UsernameHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<string> _puTTY_PrivateKeyFileHistory = new();
+        private ObservableCollection<string> _puTTY_PrivateKeyFileHistory = new();
 
-    public ObservableCollection<string> PuTTY_PrivateKeyFileHistory
-    {
-        get => _puTTY_PrivateKeyFileHistory;
-        set
+        public ObservableCollection<string> PuTTY_PrivateKeyFileHistory
         {
-            if (value == _puTTY_PrivateKeyFileHistory)
-                return;
+            get => _puTTY_PrivateKeyFileHistory;
+            set
+            {
+                if (value == _puTTY_PrivateKeyFileHistory)
+                    return;
 
-            _puTTY_PrivateKeyFileHistory = value;
-            OnPropertyChanged();
+                _puTTY_PrivateKeyFileHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<string> _puTTY_ProfileHistory = new();
+        private ObservableCollection<string> _puTTY_ProfileHistory = new();
 
-    public ObservableCollection<string> PuTTY_ProfileHistory
-    {
-        get => _puTTY_ProfileHistory;
-        set
+        public ObservableCollection<string> PuTTY_ProfileHistory
         {
-            if (value == _puTTY_ProfileHistory)
-                return;
+            get => _puTTY_ProfileHistory;
+            set
+            {
+                if (value == _puTTY_ProfileHistory)
+                    return;
 
-            _puTTY_ProfileHistory = value;
-            OnPropertyChanged();
+                _puTTY_ProfileHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _puTTY_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
+        private bool _puTTY_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
 
-    public bool PuTTY_ExpandProfileView
-    {
-        get => _puTTY_ExpandProfileView;
-        set
+        public bool PuTTY_ExpandProfileView
         {
-            if (value == _puTTY_ExpandProfileView)
-                return;
+            get => _puTTY_ExpandProfileView;
+            set
+            {
+                if (value == _puTTY_ExpandProfileView)
+                    return;
 
-            _puTTY_ExpandProfileView = value;
-            OnPropertyChanged();
+                _puTTY_ExpandProfileView = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private double _puTTY_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
+        private double _puTTY_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
 
-    public double PuTTY_ProfileWidth
-    {
-        get => _puTTY_ProfileWidth;
-        set
+        public double PuTTY_ProfileWidth
         {
-            if (Math.Abs(value - _puTTY_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
-                return;
+            get => _puTTY_ProfileWidth;
+            set
+            {
+                if (Math.Abs(value - _puTTY_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
+                    return;
 
-            _puTTY_ProfileWidth = value;
-            OnPropertyChanged();
+                _puTTY_ProfileWidth = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _puTTY_ApplicationFilePath;
+        private string _puTTY_ApplicationFilePath;
 
-    public string PuTTY_ApplicationFilePath
-    {
-        get => _puTTY_ApplicationFilePath;
-        set
+        public string PuTTY_ApplicationFilePath
         {
-            if (value == _puTTY_ApplicationFilePath)
-                return;
+            get => _puTTY_ApplicationFilePath;
+            set
+            {
+                if (value == _puTTY_ApplicationFilePath)
+                    return;
 
-            _puTTY_ApplicationFilePath = value;
-            OnPropertyChanged();
+                _puTTY_ApplicationFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _puTTY_SerialLine = GlobalStaticConfiguration.PuTTY_SerialLine;
+        private string _puTTY_SerialLine = GlobalStaticConfiguration.PuTTY_SerialLine;
 
-    public string PuTTY_SerialLine
-    {
-        get => _puTTY_SerialLine;
-        set
+        public string PuTTY_SerialLine
         {
-            if (value == _puTTY_SerialLine)
-                return;
+            get => _puTTY_SerialLine;
+            set
+            {
+                if (value == _puTTY_SerialLine)
+                    return;
 
-            _puTTY_SerialLine = value;
-            OnPropertyChanged();
+                _puTTY_SerialLine = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _puTTY_SSHPort = GlobalStaticConfiguration.PuTTY_SSHPort;
+        private int _puTTY_SSHPort = GlobalStaticConfiguration.PuTTY_SSHPort;
 
-    public int PuTTY_SSHPort
-    {
-        get => _puTTY_SSHPort;
-        set
+        public int PuTTY_SSHPort
         {
-            if (value == _puTTY_SSHPort)
-                return;
+            get => _puTTY_SSHPort;
+            set
+            {
+                if (value == _puTTY_SSHPort)
+                    return;
 
-            _puTTY_SSHPort = value;
-            OnPropertyChanged();
+                _puTTY_SSHPort = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _puTTY_TelnetPort = GlobalStaticConfiguration.PuTTY_TelnetPort;
+        private int _puTTY_TelnetPort = GlobalStaticConfiguration.PuTTY_TelnetPort;
 
-    public int PuTTY_TelnetPort
-    {
-        get => _puTTY_TelnetPort;
-        set
+        public int PuTTY_TelnetPort
         {
-            if (value == _puTTY_TelnetPort)
-                return;
+            get => _puTTY_TelnetPort;
+            set
+            {
+                if (value == _puTTY_TelnetPort)
+                    return;
 
-            _puTTY_TelnetPort = value;
-            OnPropertyChanged();
+                _puTTY_TelnetPort = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
 
-    private int _puTTY_BaudRate = GlobalStaticConfiguration.PuTTY_BaudRate;
+        private int _puTTY_BaudRate = GlobalStaticConfiguration.PuTTY_BaudRate;
 
-    public int PuTTY_BaudRate
-    {
-        get => _puTTY_BaudRate;
-        set
+        public int PuTTY_BaudRate
         {
-            if (value == _puTTY_BaudRate)
-                return;
+            get => _puTTY_BaudRate;
+            set
+            {
+                if (value == _puTTY_BaudRate)
+                    return;
 
-            _puTTY_BaudRate = value;
-            OnPropertyChanged();
+                _puTTY_BaudRate = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _puTTY_RloginPort = GlobalStaticConfiguration.PuTTY_RloginPort;
+        private int _puTTY_RloginPort = GlobalStaticConfiguration.PuTTY_RloginPort;
 
-    public int PuTTY_RloginPort
-    {
-        get => _puTTY_RloginPort;
-        set
+        public int PuTTY_RloginPort
         {
-            if (value == _puTTY_RloginPort)
-                return;
+            get => _puTTY_RloginPort;
+            set
+            {
+                if (value == _puTTY_RloginPort)
+                    return;
 
-            _puTTY_RloginPort = value;
-            OnPropertyChanged();
+                _puTTY_RloginPort = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _puTTY_RawPort = GlobalStaticConfiguration.PuTTY_RawPort;
+        private int _puTTY_RawPort = GlobalStaticConfiguration.PuTTY_RawPort;
 
-    public int PuTTY_RawPort
-    {
-        get => _puTTY_RawPort;
-        set
+        public int PuTTY_RawPort
         {
-            if (value == _puTTY_RawPort)
-                return;
+            get => _puTTY_RawPort;
+            set
+            {
+                if (value == _puTTY_RawPort)
+                    return;
 
-            _puTTY_RawPort = value;
-            OnPropertyChanged();
+                _puTTY_RawPort = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region AWS Session Manager
+        #region AWS Session Manager
 
-    private bool _awsSessionManager_EnableSyncInstanceIDsFromAWS =
-        GlobalStaticConfiguration.AWSSessionManager_EnableSyncInstanceIDsFromAWS;
+        private bool _awsSessionManager_EnableSyncInstanceIDsFromAWS =
+            GlobalStaticConfiguration.AWSSessionManager_EnableSyncInstanceIDsFromAWS;
 
-    public bool AWSSessionManager_EnableSyncInstanceIDsFromAWS
-    {
-        get => _awsSessionManager_EnableSyncInstanceIDsFromAWS;
-        set
+        public bool AWSSessionManager_EnableSyncInstanceIDsFromAWS
         {
-            if (value == _awsSessionManager_EnableSyncInstanceIDsFromAWS)
-                return;
+            get => _awsSessionManager_EnableSyncInstanceIDsFromAWS;
+            set
+            {
+                if (value == _awsSessionManager_EnableSyncInstanceIDsFromAWS)
+                    return;
 
-            _awsSessionManager_EnableSyncInstanceIDsFromAWS = value;
-            OnPropertyChanged();
+                _awsSessionManager_EnableSyncInstanceIDsFromAWS = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<AWSProfileInfo> _awsSessionManager_AWSProfiles = new();
+        private ObservableCollection<AWSProfileInfo> _awsSessionManager_AWSProfiles = new();
 
-    public ObservableCollection<AWSProfileInfo> AWSSessionManager_AWSProfiles
-    {
-        get => _awsSessionManager_AWSProfiles;
-        set
+        public ObservableCollection<AWSProfileInfo> AWSSessionManager_AWSProfiles
         {
-            if (value == _awsSessionManager_AWSProfiles)
-                return;
+            get => _awsSessionManager_AWSProfiles;
+            set
+            {
+                if (value == _awsSessionManager_AWSProfiles)
+                    return;
 
-            _awsSessionManager_AWSProfiles = value;
-            OnPropertyChanged();
+                _awsSessionManager_AWSProfiles = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool awsSessionManager_SyncOnlyRunningInstancesFromAWS =
-        GlobalStaticConfiguration.AWSSessionManager_SyncOnlyRunningInstancesFromAWS;
+        private bool awsSessionManager_SyncOnlyRunningInstancesFromAWS =
+            GlobalStaticConfiguration.AWSSessionManager_SyncOnlyRunningInstancesFromAWS;
 
-    public bool AWSSessionManager_SyncOnlyRunningInstancesFromAWS
-    {
-        get => awsSessionManager_SyncOnlyRunningInstancesFromAWS;
-        set
+        public bool AWSSessionManager_SyncOnlyRunningInstancesFromAWS
         {
-            if (value == awsSessionManager_SyncOnlyRunningInstancesFromAWS)
-                return;
+            get => awsSessionManager_SyncOnlyRunningInstancesFromAWS;
+            set
+            {
+                if (value == awsSessionManager_SyncOnlyRunningInstancesFromAWS)
+                    return;
 
-            awsSessionManager_SyncOnlyRunningInstancesFromAWS = value;
-            OnPropertyChanged();
+                awsSessionManager_SyncOnlyRunningInstancesFromAWS = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _awsSessionManager_Profile;
+        private string _awsSessionManager_Profile;
 
-    public string AWSSessionManager_Profile
-    {
-        get => _awsSessionManager_Profile;
-        set
+        public string AWSSessionManager_Profile
         {
-            if (value == _awsSessionManager_Profile)
-                return;
+            get => _awsSessionManager_Profile;
+            set
+            {
+                if (value == _awsSessionManager_Profile)
+                    return;
 
-            _awsSessionManager_Profile = value;
-            OnPropertyChanged();
+                _awsSessionManager_Profile = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _awsSessionManager_Region;
+        private string _awsSessionManager_Region;
 
-    public string AWSSessionManager_Region
-    {
-        get => _awsSessionManager_Region;
-        set
+        public string AWSSessionManager_Region
         {
-            if (value == _awsSessionManager_Region)
-                return;
+            get => _awsSessionManager_Region;
+            set
+            {
+                if (value == _awsSessionManager_Region)
+                    return;
 
-            _awsSessionManager_Region = value;
-            OnPropertyChanged();
+                _awsSessionManager_Region = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _awsSessionManager_ApplicationFilePath;
+        private string _awsSessionManager_ApplicationFilePath;
 
-    public string AWSSessionManager_ApplicationFilePath
-    {
-        get => _awsSessionManager_ApplicationFilePath;
-        set
+        public string AWSSessionManager_ApplicationFilePath
         {
-            if (value == _awsSessionManager_ApplicationFilePath)
-                return;
+            get => _awsSessionManager_ApplicationFilePath;
+            set
+            {
+                if (value == _awsSessionManager_ApplicationFilePath)
+                    return;
 
-            _awsSessionManager_ApplicationFilePath = value;
-            OnPropertyChanged();
+                _awsSessionManager_ApplicationFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<string> _awsSessionManager_InstanceIDHistory = new();
+        private ObservableCollection<string> _awsSessionManager_InstanceIDHistory = new();
 
-    public ObservableCollection<string> AWSSessionManager_InstanceIDHistory
-    {
-        get => _awsSessionManager_InstanceIDHistory;
-        set
+        public ObservableCollection<string> AWSSessionManager_InstanceIDHistory
         {
-            if (value == _awsSessionManager_InstanceIDHistory)
-                return;
+            get => _awsSessionManager_InstanceIDHistory;
+            set
+            {
+                if (value == _awsSessionManager_InstanceIDHistory)
+                    return;
 
-            _awsSessionManager_InstanceIDHistory = value;
-            OnPropertyChanged();
+                _awsSessionManager_InstanceIDHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<string> _awsSessionManager_ProfileHistory = new();
+        private ObservableCollection<string> _awsSessionManager_ProfileHistory = new();
 
-    public ObservableCollection<string> AWSSessionManager_ProfileHistory
-    {
-        get => _awsSessionManager_ProfileHistory;
-        set
+        public ObservableCollection<string> AWSSessionManager_ProfileHistory
         {
-            if (value == _awsSessionManager_ProfileHistory)
-                return;
+            get => _awsSessionManager_ProfileHistory;
+            set
+            {
+                if (value == _awsSessionManager_ProfileHistory)
+                    return;
 
-            _awsSessionManager_ProfileHistory = value;
-            OnPropertyChanged();
+                _awsSessionManager_ProfileHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<string> _awsSessionManager_RegionHistory = new();
+        private ObservableCollection<string> _awsSessionManager_RegionHistory = new();
 
-    public ObservableCollection<string> AWSSessionManager_RegionHistory
-    {
-        get => _awsSessionManager_RegionHistory;
-        set
+        public ObservableCollection<string> AWSSessionManager_RegionHistory
         {
-            if (value == _awsSessionManager_RegionHistory)
-                return;
+            get => _awsSessionManager_RegionHistory;
+            set
+            {
+                if (value == _awsSessionManager_RegionHistory)
+                    return;
 
-            _awsSessionManager_RegionHistory = value;
-            OnPropertyChanged();
+                _awsSessionManager_RegionHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _awsSessionManager_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
+        private bool _awsSessionManager_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
 
-    public bool AWSSessionManager_ExpandProfileView
-    {
-        get => _awsSessionManager_ExpandProfileView;
-        set
+        public bool AWSSessionManager_ExpandProfileView
         {
-            if (value == _awsSessionManager_ExpandProfileView)
-                return;
+            get => _awsSessionManager_ExpandProfileView;
+            set
+            {
+                if (value == _awsSessionManager_ExpandProfileView)
+                    return;
 
-            _awsSessionManager_ExpandProfileView = value;
-            OnPropertyChanged();
+                _awsSessionManager_ExpandProfileView = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private double _awsSessionManager_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
+        private double _awsSessionManager_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
 
-    public double AWSSessionManager_ProfileWidth
-    {
-        get => _awsSessionManager_ProfileWidth;
-        set
+        public double AWSSessionManager_ProfileWidth
         {
-            if (Math.Abs(value - _awsSessionManager_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
-                return;
+            get => _awsSessionManager_ProfileWidth;
+            set
+            {
+                if (Math.Abs(value - _awsSessionManager_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
+                    return;
 
-            _awsSessionManager_ProfileWidth = value;
-            OnPropertyChanged();
+                _awsSessionManager_ProfileWidth = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region TigerVNC
+        #region TigerVNC
 
-    private ObservableCollection<string> _tigerVNC_HostHistory = new();
+        private ObservableCollection<string> _tigerVNC_HostHistory = new();
 
-    public ObservableCollection<string> TigerVNC_HostHistory
-    {
-        get => _tigerVNC_HostHistory;
-        set
+        public ObservableCollection<string> TigerVNC_HostHistory
         {
-            if (value == _tigerVNC_HostHistory)
-                return;
+            get => _tigerVNC_HostHistory;
+            set
+            {
+                if (value == _tigerVNC_HostHistory)
+                    return;
 
-            _tigerVNC_HostHistory = value;
-            OnPropertyChanged();
+                _tigerVNC_HostHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<int> _tigerVNC_PortHistory = new();
+        private ObservableCollection<int> _tigerVNC_PortHistory = new();
 
-    public ObservableCollection<int> TigerVNC_PortHistory
-    {
-        get => _tigerVNC_PortHistory;
-        set
+        public ObservableCollection<int> TigerVNC_PortHistory
         {
-            if (value == _tigerVNC_PortHistory)
-                return;
+            get => _tigerVNC_PortHistory;
+            set
+            {
+                if (value == _tigerVNC_PortHistory)
+                    return;
 
-            _tigerVNC_PortHistory = value;
-            OnPropertyChanged();
+                _tigerVNC_PortHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _tigerVNC_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
+        private bool _tigerVNC_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
 
-    public bool TigerVNC_ExpandProfileView
-    {
-        get => _tigerVNC_ExpandProfileView;
-        set
+        public bool TigerVNC_ExpandProfileView
         {
-            if (value == _tigerVNC_ExpandProfileView)
-                return;
+            get => _tigerVNC_ExpandProfileView;
+            set
+            {
+                if (value == _tigerVNC_ExpandProfileView)
+                    return;
 
-            _tigerVNC_ExpandProfileView = value;
-            OnPropertyChanged();
+                _tigerVNC_ExpandProfileView = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private double _tigerVNC_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
+        private double _tigerVNC_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
 
-    public double TigerVNC_ProfileWidth
-    {
-        get => _tigerVNC_ProfileWidth;
-        set
+        public double TigerVNC_ProfileWidth
         {
-            if (Math.Abs(value - _tigerVNC_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
-                return;
+            get => _tigerVNC_ProfileWidth;
+            set
+            {
+                if (Math.Abs(value - _tigerVNC_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
+                    return;
 
-            _tigerVNC_ProfileWidth = value;
-            OnPropertyChanged();
+                _tigerVNC_ProfileWidth = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _tigerVNC_ApplicationFilePath;
+        private string _tigerVNC_ApplicationFilePath;
 
-    public string TigerVNC_ApplicationFilePath
-    {
-        get => _tigerVNC_ApplicationFilePath;
-        set
+        public string TigerVNC_ApplicationFilePath
         {
-            if (value == _tigerVNC_ApplicationFilePath)
-                return;
+            get => _tigerVNC_ApplicationFilePath;
+            set
+            {
+                if (value == _tigerVNC_ApplicationFilePath)
+                    return;
 
-            _tigerVNC_ApplicationFilePath = value;
-            OnPropertyChanged();
+                _tigerVNC_ApplicationFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _tigerVNC_Port = GlobalStaticConfiguration.TigerVNC_DefaultVNCPort;
+        private int _tigerVNC_Port = GlobalStaticConfiguration.TigerVNC_DefaultVNCPort;
 
-    public int TigerVNC_Port
-    {
-        get => _tigerVNC_Port;
-        set
+        public int TigerVNC_Port
         {
-            if (value == _tigerVNC_Port)
-                return;
+            get => _tigerVNC_Port;
+            set
+            {
+                if (value == _tigerVNC_Port)
+                    return;
 
-            _tigerVNC_Port = value;
-            OnPropertyChanged();
+                _tigerVNC_Port = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region Web Console
+        #region Web Console
 
-    private ObservableCollection<string> _webConsole_UrlHistory = new();
+        private ObservableCollection<string> _webConsole_UrlHistory = new();
 
-    public ObservableCollection<string> WebConsole_UrlHistory
-    {
-        get => _webConsole_UrlHistory;
-        set
+        public ObservableCollection<string> WebConsole_UrlHistory
         {
-            if (value == _webConsole_UrlHistory)
-                return;
+            get => _webConsole_UrlHistory;
+            set
+            {
+                if (value == _webConsole_UrlHistory)
+                    return;
 
-            _webConsole_UrlHistory = value;
-            OnPropertyChanged();
+                _webConsole_UrlHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _webConsole_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
+        private bool _webConsole_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
 
-    public bool WebConsole_ExpandProfileView
-    {
-        get => _webConsole_ExpandProfileView;
-        set
+        public bool WebConsole_ExpandProfileView
         {
-            if (value == _webConsole_ExpandProfileView)
-                return;
+            get => _webConsole_ExpandProfileView;
+            set
+            {
+                if (value == _webConsole_ExpandProfileView)
+                    return;
 
-            _webConsole_ExpandProfileView = value;
-            OnPropertyChanged();
+                _webConsole_ExpandProfileView = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private double _webConsole_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
+        private double _webConsole_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
 
-    public double WebConsole_ProfileWidth
-    {
-        get => _webConsole_ProfileWidth;
-        set
+        public double WebConsole_ProfileWidth
         {
-            if (Math.Abs(value - _webConsole_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
-                return;
+            get => _webConsole_ProfileWidth;
+            set
+            {
+                if (Math.Abs(value - _webConsole_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
+                    return;
 
-            _webConsole_ProfileWidth = value;
-            OnPropertyChanged();
+                _webConsole_ProfileWidth = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
 
-    private bool _webConsole_ShowAddressBar = GlobalStaticConfiguration.WebConsole_ShowAddressBar;
+        private bool _webConsole_ShowAddressBar = GlobalStaticConfiguration.WebConsole_ShowAddressBar;
 
-    public bool WebConsole_ShowAddressBar
-    {
-        get => _webConsole_ShowAddressBar;
-        set
+        public bool WebConsole_ShowAddressBar
         {
-            if (value == _webConsole_ShowAddressBar)
-                return;
+            get => _webConsole_ShowAddressBar;
+            set
+            {
+                if (value == _webConsole_ShowAddressBar)
+                    return;
 
-            _webConsole_ShowAddressBar = value;
-            OnPropertyChanged();
+                _webConsole_ShowAddressBar = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region SNMP
+        #region SNMP
 
-    private ObservableCollection<string> _snmp_HostHistory = new();
+        private ObservableCollection<string> _snmp_HostHistory = new();
 
-    public ObservableCollection<string> SNMP_HostHistory
-    {
-        get => _snmp_HostHistory;
-        set
+        public ObservableCollection<string> SNMP_HostHistory
         {
-            if (value == _snmp_HostHistory)
-                return;
+            get => _snmp_HostHistory;
+            set
+            {
+                if (value == _snmp_HostHistory)
+                    return;
 
-            _snmp_HostHistory = value;
-            OnPropertyChanged();
+                _snmp_HostHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<string> _snmp_OidHistory = new();
+        private ObservableCollection<string> _snmp_OidHistory = new();
 
-    public ObservableCollection<string> SNMP_OidHistory
-    {
-        get => _snmp_OidHistory;
-        set
+        public ObservableCollection<string> SNMP_OidHistory
         {
-            if (value == _snmp_OidHistory)
-                return;
+            get => _snmp_OidHistory;
+            set
+            {
+                if (value == _snmp_OidHistory)
+                    return;
 
-            _snmp_OidHistory = value;
-            OnPropertyChanged();
+                _snmp_OidHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<SNMPOIDProfileInfo> _snmp_OidProfiles = new();
+        private ObservableCollection<SNMPOIDProfileInfo> _snmp_OidProfiles = new();
 
-    public ObservableCollection<SNMPOIDProfileInfo> SNMP_OidProfiles
-    {
-        get => _snmp_OidProfiles;
-        set
+        public ObservableCollection<SNMPOIDProfileInfo> SNMP_OidProfiles
         {
-            if (value == _snmp_OidProfiles)
-                return;
+            get => _snmp_OidProfiles;
+            set
+            {
+                if (value == _snmp_OidProfiles)
+                    return;
 
-            _snmp_OidProfiles = value;
-            OnPropertyChanged();
+                _snmp_OidProfiles = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _snmp_Timeout = GlobalStaticConfiguration.SNMP_Timeout;
+        private int _snmp_Timeout = GlobalStaticConfiguration.SNMP_Timeout;
 
-    public int SNMP_Timeout
-    {
-        get => _snmp_Timeout;
-        set
+        public int SNMP_Timeout
         {
-            if (value == _snmp_Timeout)
-                return;
+            get => _snmp_Timeout;
+            set
+            {
+                if (value == _snmp_Timeout)
+                    return;
 
-            _snmp_Timeout = value;
-            OnPropertyChanged();
+                _snmp_Timeout = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private WalkMode _snmp_WalkMode = GlobalStaticConfiguration.SNMP_WalkMode;
+        private WalkMode _snmp_WalkMode = GlobalStaticConfiguration.SNMP_WalkMode;
 
-    public WalkMode SNMP_WalkMode
-    {
-        get => _snmp_WalkMode;
-        set
+        public WalkMode SNMP_WalkMode
         {
-            if (value == _snmp_WalkMode)
-                return;
+            get => _snmp_WalkMode;
+            set
+            {
+                if (value == _snmp_WalkMode)
+                    return;
 
-            _snmp_WalkMode = value;
-            OnPropertyChanged();
+                _snmp_WalkMode = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _snmp_port = 161;
+        private int _snmp_port = 161;
 
-    public int SNMP_Port
-    {
-        get => _snmp_port;
-        set
+        public int SNMP_Port
         {
-            if (value == _snmp_port)
-                return;
+            get => _snmp_port;
+            set
+            {
+                if (value == _snmp_port)
+                    return;
 
-            _snmp_port = value;
-            OnPropertyChanged();
+                _snmp_port = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private SNMPMode _snmp_Mode = GlobalStaticConfiguration.SNMP_Mode;
+        private SNMPMode _snmp_Mode = GlobalStaticConfiguration.SNMP_Mode;
 
-    public SNMPMode SNMP_Mode
-    {
-        get => _snmp_Mode;
-        set
+        public SNMPMode SNMP_Mode
         {
-            if (value == _snmp_Mode)
-                return;
+            get => _snmp_Mode;
+            set
+            {
+                if (value == _snmp_Mode)
+                    return;
 
-            _snmp_Mode = value;
-            OnPropertyChanged();
+                _snmp_Mode = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private SNMPVersion _snmp_Version = GlobalStaticConfiguration.SNMP_Version;
+        private SNMPVersion _snmp_Version = GlobalStaticConfiguration.SNMP_Version;
 
-    public SNMPVersion SNMP_Version
-    {
-        get => _snmp_Version;
-        set
+        public SNMPVersion SNMP_Version
         {
-            if (value == _snmp_Version)
-                return;
+            get => _snmp_Version;
+            set
+            {
+                if (value == _snmp_Version)
+                    return;
 
-            _snmp_Version = value;
-            OnPropertyChanged();
+                _snmp_Version = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private SNMPV3Security _snmp_Security = GlobalStaticConfiguration.SNMP_Security;
+        private SNMPV3Security _snmp_Security = GlobalStaticConfiguration.SNMP_Security;
 
-    public SNMPV3Security SNMP_Security
-    {
-        get => _snmp_Security;
-        set
+        public SNMPV3Security SNMP_Security
         {
-            if (value == _snmp_Security)
-                return;
+            get => _snmp_Security;
+            set
+            {
+                if (value == _snmp_Security)
+                    return;
 
-            _snmp_Security = value;
-            OnPropertyChanged();
+                _snmp_Security = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private SNMPV3AuthenticationProvider _snmp_AuthenticationProvider =
-        GlobalStaticConfiguration.SNMP_AuthenticationProvider;
+        private SNMPV3AuthenticationProvider _snmp_AuthenticationProvider =
+            GlobalStaticConfiguration.SNMP_AuthenticationProvider;
 
-    public SNMPV3AuthenticationProvider SNMP_AuthenticationProvider
-    {
-        get => _snmp_AuthenticationProvider;
-        set
+        public SNMPV3AuthenticationProvider SNMP_AuthenticationProvider
         {
-            if (value == _snmp_AuthenticationProvider)
-                return;
+            get => _snmp_AuthenticationProvider;
+            set
+            {
+                if (value == _snmp_AuthenticationProvider)
+                    return;
 
-            _snmp_AuthenticationProvider = value;
-            OnPropertyChanged();
+                _snmp_AuthenticationProvider = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private SNMPV3PrivacyProvider _snmp_PrivacyProvider = GlobalStaticConfiguration.SNMP_PrivacyProvider;
+        private SNMPV3PrivacyProvider _snmp_PrivacyProvider = GlobalStaticConfiguration.SNMP_PrivacyProvider;
 
-    public SNMPV3PrivacyProvider SNMP_PrivacyProvider
-    {
-        get => _snmp_PrivacyProvider;
-        set
+        public SNMPV3PrivacyProvider SNMP_PrivacyProvider
         {
-            if (value == _snmp_PrivacyProvider)
-                return;
+            get => _snmp_PrivacyProvider;
+            set
+            {
+                if (value == _snmp_PrivacyProvider)
+                    return;
 
-            _snmp_PrivacyProvider = value;
-            OnPropertyChanged();
+                _snmp_PrivacyProvider = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _snmp_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
+        private bool _snmp_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
 
-    public bool SNMP_ExpandProfileView
-    {
-        get => _snmp_ExpandProfileView;
-        set
+        public bool SNMP_ExpandProfileView
         {
-            if (value == _snmp_ExpandProfileView)
-                return;
+            get => _snmp_ExpandProfileView;
+            set
+            {
+                if (value == _snmp_ExpandProfileView)
+                    return;
 
-            _snmp_ExpandProfileView = value;
-            OnPropertyChanged();
+                _snmp_ExpandProfileView = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private double _snmp_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
+        private double _snmp_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
 
-    public double SNMP_ProfileWidth
-    {
-        get => _snmp_ProfileWidth;
-        set
+        public double SNMP_ProfileWidth
         {
-            if (Math.Abs(value - _snmp_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
-                return;
+            get => _snmp_ProfileWidth;
+            set
+            {
+                if (Math.Abs(value - _snmp_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
+                    return;
 
-            _snmp_ProfileWidth = value;
-            OnPropertyChanged();
+                _snmp_ProfileWidth = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
 
-    private string _snmp_ExportFilePath;
+        private string _snmp_ExportFilePath;
 
-    public string SNMP_ExportFilePath
-    {
-        get => _snmp_ExportFilePath;
-        set
+        public string SNMP_ExportFilePath
         {
-            if (value == _snmp_ExportFilePath)
-                return;
+            get => _snmp_ExportFilePath;
+            set
+            {
+                if (value == _snmp_ExportFilePath)
+                    return;
 
-            _snmp_ExportFilePath = value;
-            OnPropertyChanged();
+                _snmp_ExportFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ExportFileType _snmp_ExportFileType = GlobalStaticConfiguration.SNMP_ExportFileType;
+        private ExportFileType _snmp_ExportFileType = GlobalStaticConfiguration.SNMP_ExportFileType;
 
-    public ExportFileType SNMP_ExportFileType
-    {
-        get => _snmp_ExportFileType;
-        set
+        public ExportFileType SNMP_ExportFileType
         {
-            if (value == _snmp_ExportFileType)
-                return;
+            get => _snmp_ExportFileType;
+            set
+            {
+                if (value == _snmp_ExportFileType)
+                    return;
 
-            _snmp_ExportFileType = value;
-            OnPropertyChanged();
+                _snmp_ExportFileType = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region SNTP Lookup
+        #region SNTP Lookup
 
-    private ObservableCollection<ServerConnectionInfoProfile> _sntpLookup_SNTPServers = new();
+        private ObservableCollection<ServerConnectionInfoProfile> _sntpLookup_SNTPServers = new();
 
-    public ObservableCollection<ServerConnectionInfoProfile> SNTPLookup_SNTPServers
-    {
-        get => _sntpLookup_SNTPServers;
-        set
+        public ObservableCollection<ServerConnectionInfoProfile> SNTPLookup_SNTPServers
         {
-            if (value == _sntpLookup_SNTPServers)
-                return;
+            get => _sntpLookup_SNTPServers;
+            set
+            {
+                if (value == _sntpLookup_SNTPServers)
+                    return;
 
-            _sntpLookup_SNTPServers = value;
-            OnPropertyChanged();
+                _sntpLookup_SNTPServers = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ServerConnectionInfoProfile _sntpLookup_SelectedSNTPServer = new();
+        private ServerConnectionInfoProfile _sntpLookup_SelectedSNTPServer = new();
 
-    public ServerConnectionInfoProfile SNTPLookup_SelectedSNTPServer
-    {
-        get => _sntpLookup_SelectedSNTPServer;
-        set
+        public ServerConnectionInfoProfile SNTPLookup_SelectedSNTPServer
         {
-            if (value == _sntpLookup_SelectedSNTPServer)
-                return;
+            get => _sntpLookup_SelectedSNTPServer;
+            set
+            {
+                if (value == _sntpLookup_SelectedSNTPServer)
+                    return;
 
-            _sntpLookup_SelectedSNTPServer = value;
-            OnPropertyChanged();
+                _sntpLookup_SelectedSNTPServer = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _sntpLookup_Timeout = GlobalStaticConfiguration.SNTPLookup_Timeout;
+        private int _sntpLookup_Timeout = GlobalStaticConfiguration.SNTPLookup_Timeout;
 
-    public int SNTPLookup_Timeout
-    {
-        get => _sntpLookup_Timeout;
-        set
+        public int SNTPLookup_Timeout
         {
-            if (value == _sntpLookup_Timeout)
-                return;
+            get => _sntpLookup_Timeout;
+            set
+            {
+                if (value == _sntpLookup_Timeout)
+                    return;
 
-            _sntpLookup_Timeout = value;
-            OnPropertyChanged();
+                _sntpLookup_Timeout = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _sntpLookup_ExportFilePath;
+        private string _sntpLookup_ExportFilePath;
 
-    public string SNTPLookup_ExportFilePath
-    {
-        get => _sntpLookup_ExportFilePath;
-        set
+        public string SNTPLookup_ExportFilePath
         {
-            if (value == _sntpLookup_ExportFilePath)
-                return;
+            get => _sntpLookup_ExportFilePath;
+            set
+            {
+                if (value == _sntpLookup_ExportFilePath)
+                    return;
 
-            _sntpLookup_ExportFilePath = value;
-            OnPropertyChanged();
+                _sntpLookup_ExportFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ExportFileType _sntpLookup_ExportFileType = GlobalStaticConfiguration.SNTPLookup_ExportFileType;
+        private ExportFileType _sntpLookup_ExportFileType = GlobalStaticConfiguration.SNTPLookup_ExportFileType;
 
-    public ExportFileType SNTPLookup_ExportFileType
-    {
-        get => _sntpLookup_ExportFileType;
-        set
+        public ExportFileType SNTPLookup_ExportFileType
         {
-            if (value == _sntpLookup_ExportFileType)
-                return;
+            get => _sntpLookup_ExportFileType;
+            set
+            {
+                if (value == _sntpLookup_ExportFileType)
+                    return;
 
-            _sntpLookup_ExportFileType = value;
-            OnPropertyChanged();
+                _sntpLookup_ExportFileType = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region Discovery Protocol
+        #region Discovery Protocol
 
-    private DiscoveryProtocol _discoveryProtocol_Protocol = GlobalStaticConfiguration.DiscoveryProtocol_Protocol;
+        private DiscoveryProtocol _discoveryProtocol_Protocol = GlobalStaticConfiguration.DiscoveryProtocol_Protocol;
 
-    public DiscoveryProtocol DiscoveryProtocol_Protocol
-    {
-        get => _discoveryProtocol_Protocol;
-        set
+        public DiscoveryProtocol DiscoveryProtocol_Protocol
         {
-            if (value == _discoveryProtocol_Protocol)
-                return;
+            get => _discoveryProtocol_Protocol;
+            set
+            {
+                if (value == _discoveryProtocol_Protocol)
+                    return;
 
-            _discoveryProtocol_Protocol = value;
-            OnPropertyChanged();
+                _discoveryProtocol_Protocol = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _discoveryProtocol_Duration = GlobalStaticConfiguration.DiscoveryProtocol_Duration;
+        private int _discoveryProtocol_Duration = GlobalStaticConfiguration.DiscoveryProtocol_Duration;
 
-    public int DiscoveryProtocol_Duration
-    {
-        get => _discoveryProtocol_Duration;
-        set
+        public int DiscoveryProtocol_Duration
         {
-            if (value == _discoveryProtocol_Duration)
-                return;
+            get => _discoveryProtocol_Duration;
+            set
+            {
+                if (value == _discoveryProtocol_Duration)
+                    return;
 
-            _discoveryProtocol_Duration = value;
-            OnPropertyChanged();
+                _discoveryProtocol_Duration = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _discoveryProtocol_ExportFilePath;
+        private string _discoveryProtocol_ExportFilePath;
 
-    public string DiscoveryProtocol_ExportFilePath
-    {
-        get => _discoveryProtocol_ExportFilePath;
-        set
+        public string DiscoveryProtocol_ExportFilePath
         {
-            if (value == _discoveryProtocol_ExportFilePath)
-                return;
+            get => _discoveryProtocol_ExportFilePath;
+            set
+            {
+                if (value == _discoveryProtocol_ExportFilePath)
+                    return;
 
-            _discoveryProtocol_ExportFilePath = value;
-            OnPropertyChanged();
+                _discoveryProtocol_ExportFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ExportFileType _discoveryProtocol_ExportFileType =
-        GlobalStaticConfiguration.DiscoveryProtocol_ExportFileType;
+        private ExportFileType _discoveryProtocol_ExportFileType =
+            GlobalStaticConfiguration.DiscoveryProtocol_ExportFileType;
 
-    public ExportFileType DiscoveryProtocol_ExportFileType
-    {
-        get => _discoveryProtocol_ExportFileType;
-        set
+        public ExportFileType DiscoveryProtocol_ExportFileType
         {
-            if (value == _discoveryProtocol_ExportFileType)
-                return;
+            get => _discoveryProtocol_ExportFileType;
+            set
+            {
+                if (value == _discoveryProtocol_ExportFileType)
+                    return;
 
-            _discoveryProtocol_ExportFileType = value;
-            OnPropertyChanged();
+                _discoveryProtocol_ExportFileType = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region WakeOnLAN
+        #region WakeOnLAN
 
-    private int _wakeOnLAN_Port = GlobalStaticConfiguration.WakeOnLAN_Port;
+        private int _wakeOnLAN_Port = GlobalStaticConfiguration.WakeOnLAN_Port;
 
-    public int WakeOnLAN_Port
-    {
-        get => _wakeOnLAN_Port;
-        set
+        public int WakeOnLAN_Port
         {
-            if (value == _wakeOnLAN_Port)
-                return;
+            get => _wakeOnLAN_Port;
+            set
+            {
+                if (value == _wakeOnLAN_Port)
+                    return;
 
-            _wakeOnLAN_Port = value;
-            OnPropertyChanged();
+                _wakeOnLAN_Port = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<string> _wakeOnLan_MACAddressHistory = new();
+        private ObservableCollection<string> _wakeOnLan_MACAddressHistory = new();
 
-    public ObservableCollection<string> WakeOnLan_MACAddressHistory
-    {
-        get => _wakeOnLan_MACAddressHistory;
-        set
+        public ObservableCollection<string> WakeOnLan_MACAddressHistory
         {
-            if (value == _wakeOnLan_MACAddressHistory)
-                return;
+            get => _wakeOnLan_MACAddressHistory;
+            set
+            {
+                if (value == _wakeOnLan_MACAddressHistory)
+                    return;
 
-            _wakeOnLan_MACAddressHistory = value;
-            OnPropertyChanged();
+                _wakeOnLan_MACAddressHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<string> _wakeOnLan_BroadcastHistory = new();
+        private ObservableCollection<string> _wakeOnLan_BroadcastHistory = new();
 
-    public ObservableCollection<string> WakeOnLan_BroadcastHistory
-    {
-        get => _wakeOnLan_BroadcastHistory;
-        set
+        public ObservableCollection<string> WakeOnLan_BroadcastHistory
         {
-            if (value == _wakeOnLan_BroadcastHistory)
-                return;
+            get => _wakeOnLan_BroadcastHistory;
+            set
+            {
+                if (value == _wakeOnLan_BroadcastHistory)
+                    return;
 
-            _wakeOnLan_BroadcastHistory = value;
-            OnPropertyChanged();
+                _wakeOnLan_BroadcastHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _wakeOnLAN_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
+        private bool _wakeOnLAN_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
 
-    public bool WakeOnLAN_ExpandProfileView
-    {
-        get => _wakeOnLAN_ExpandProfileView;
-        set
+        public bool WakeOnLAN_ExpandProfileView
         {
-            if (value == _wakeOnLAN_ExpandProfileView)
-                return;
+            get => _wakeOnLAN_ExpandProfileView;
+            set
+            {
+                if (value == _wakeOnLAN_ExpandProfileView)
+                    return;
 
-            _wakeOnLAN_ExpandProfileView = value;
-            OnPropertyChanged();
+                _wakeOnLAN_ExpandProfileView = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private double _wakeOnLAN_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
+        private double _wakeOnLAN_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
 
-    public double WakeOnLAN_ProfileWidth
-    {
-        get => _wakeOnLAN_ProfileWidth;
-        set
+        public double WakeOnLAN_ProfileWidth
         {
-            if (Math.Abs(value - _wakeOnLAN_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
-                return;
+            get => _wakeOnLAN_ProfileWidth;
+            set
+            {
+                if (Math.Abs(value - _wakeOnLAN_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
+                    return;
 
-            _wakeOnLAN_ProfileWidth = value;
-            OnPropertyChanged();
+                _wakeOnLAN_ProfileWidth = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region Whois
+        #region Whois
 
-    private ObservableCollection<string> _whois_DomainHistory = new();
+        private ObservableCollection<string> _whois_DomainHistory = new();
 
-    public ObservableCollection<string> Whois_DomainHistory
-    {
-        get => _whois_DomainHistory;
-        set
+        public ObservableCollection<string> Whois_DomainHistory
         {
-            if (value == _whois_DomainHistory)
-                return;
+            get => _whois_DomainHistory;
+            set
+            {
+                if (value == _whois_DomainHistory)
+                    return;
 
-            _whois_DomainHistory = value;
-            OnPropertyChanged();
+                _whois_DomainHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _whois_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
+        private bool _whois_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
 
-    public bool Whois_ExpandProfileView
-    {
-        get => _whois_ExpandProfileView;
-        set
+        public bool Whois_ExpandProfileView
         {
-            if (value == _whois_ExpandProfileView)
-                return;
+            get => _whois_ExpandProfileView;
+            set
+            {
+                if (value == _whois_ExpandProfileView)
+                    return;
 
-            _whois_ExpandProfileView = value;
-            OnPropertyChanged();
+                _whois_ExpandProfileView = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private double _whois_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
+        private double _whois_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
 
-    public double Whois_ProfileWidth
-    {
-        get => _whois_ProfileWidth;
-        set
+        public double Whois_ProfileWidth
         {
-            if (Math.Abs(value - _whois_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
-                return;
+            get => _whois_ProfileWidth;
+            set
+            {
+                if (Math.Abs(value - _whois_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
+                    return;
 
-            _whois_ProfileWidth = value;
-            OnPropertyChanged();
+                _whois_ProfileWidth = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _whois_ExportFilePath;
+        private string _whois_ExportFilePath;
 
-    public string Whois_ExportFilePath
-    {
-        get => _whois_ExportFilePath;
-        set
+        public string Whois_ExportFilePath
         {
-            if (value == _whois_ExportFilePath)
-                return;
+            get => _whois_ExportFilePath;
+            set
+            {
+                if (value == _whois_ExportFilePath)
+                    return;
 
-            _whois_ExportFilePath = value;
-            OnPropertyChanged();
+                _whois_ExportFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ExportFileType _whois_ExportFileType = GlobalStaticConfiguration.Whois_ExportFileType;
+        private ExportFileType _whois_ExportFileType = GlobalStaticConfiguration.Whois_ExportFileType;
 
-    public ExportFileType Whois_ExportFileType
-    {
-        get => _whois_ExportFileType;
-        set
+        public ExportFileType Whois_ExportFileType
         {
-            if (value == _whois_ExportFileType)
-                return;
+            get => _whois_ExportFileType;
+            set
+            {
+                if (value == _whois_ExportFileType)
+                    return;
 
-            _whois_ExportFileType = value;
-            OnPropertyChanged();
+                _whois_ExportFileType = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region IP Geolocation
+        #region IP Geolocation
 
-    private ObservableCollection<string> _ipGeolocation_HostHistory = new();
+        private ObservableCollection<string> _ipGeolocation_HostHistory = new();
 
-    public ObservableCollection<string> IPGeolocation_HostHistory
-    {
-        get => _ipGeolocation_HostHistory;
-        set
+        public ObservableCollection<string> IPGeolocation_HostHistory
         {
-            if (value == _ipGeolocation_HostHistory)
-                return;
+            get => _ipGeolocation_HostHistory;
+            set
+            {
+                if (value == _ipGeolocation_HostHistory)
+                    return;
 
-            _ipGeolocation_HostHistory = value;
-            OnPropertyChanged();
+                _ipGeolocation_HostHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _ipGeolocation_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
+        private bool _ipGeolocation_ExpandProfileView = GlobalStaticConfiguration.Profile_ExpandProfileView;
 
-    public bool IPGeolocation_ExpandProfileView
-    {
-        get => _ipGeolocation_ExpandProfileView;
-        set
+        public bool IPGeolocation_ExpandProfileView
         {
-            if (value == _ipGeolocation_ExpandProfileView)
-                return;
+            get => _ipGeolocation_ExpandProfileView;
+            set
+            {
+                if (value == _ipGeolocation_ExpandProfileView)
+                    return;
 
-            _ipGeolocation_ExpandProfileView = value;
-            OnPropertyChanged();
+                _ipGeolocation_ExpandProfileView = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private double _ipGeolocation_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
+        private double _ipGeolocation_ProfileWidth = GlobalStaticConfiguration.Profile_DefaultWidthExpanded;
 
-    public double IPGeolocation_ProfileWidth
-    {
-        get => _ipGeolocation_ProfileWidth;
-        set
+        public double IPGeolocation_ProfileWidth
         {
-            if (Math.Abs(value - _ipGeolocation_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
-                return;
+            get => _ipGeolocation_ProfileWidth;
+            set
+            {
+                if (Math.Abs(value - _ipGeolocation_ProfileWidth) < GlobalStaticConfiguration.Profile_FloatPointFix)
+                    return;
 
-            _ipGeolocation_ProfileWidth = value;
-            OnPropertyChanged();
+                _ipGeolocation_ProfileWidth = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _ipGeolocation_ExportFilePath;
+        private string _ipGeolocation_ExportFilePath;
 
-    public string IPGeolocation_ExportFilePath
-    {
-        get => _ipGeolocation_ExportFilePath;
-        set
+        public string IPGeolocation_ExportFilePath
         {
-            if (value == _ipGeolocation_ExportFilePath)
-                return;
+            get => _ipGeolocation_ExportFilePath;
+            set
+            {
+                if (value == _ipGeolocation_ExportFilePath)
+                    return;
 
-            _ipGeolocation_ExportFilePath = value;
-            OnPropertyChanged();
+                _ipGeolocation_ExportFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ExportFileType _ipGeolocation_ExportFileType = GlobalStaticConfiguration.IPGeolocation_ExportFileType;
+        private ExportFileType _ipGeolocation_ExportFileType = GlobalStaticConfiguration.IPGeolocation_ExportFileType;
 
-    public ExportFileType IPGeolocation_ExportFileType
-    {
-        get => _ipGeolocation_ExportFileType;
-        set
+        public ExportFileType IPGeolocation_ExportFileType
         {
-            if (value == _ipGeolocation_ExportFileType)
-                return;
+            get => _ipGeolocation_ExportFileType;
+            set
+            {
+                if (value == _ipGeolocation_ExportFileType)
+                    return;
 
-            _ipGeolocation_ExportFileType = value;
-            OnPropertyChanged();
+                _ipGeolocation_ExportFileType = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region Subnet Calculator
+        #region Subnet Calculator
 
-    #region Calculator
+        #region Calculator
 
-    private ObservableCollection<string> _subnetCalculator_Calculator_SubnetHistory = new();
+        private ObservableCollection<string> _subnetCalculator_Calculator_SubnetHistory = new();
 
-    public ObservableCollection<string> SubnetCalculator_Calculator_SubnetHistory
-    {
-        get => _subnetCalculator_Calculator_SubnetHistory;
-        set
+        public ObservableCollection<string> SubnetCalculator_Calculator_SubnetHistory
         {
-            if (value == _subnetCalculator_Calculator_SubnetHistory)
-                return;
+            get => _subnetCalculator_Calculator_SubnetHistory;
+            set
+            {
+                if (value == _subnetCalculator_Calculator_SubnetHistory)
+                    return;
 
-            _subnetCalculator_Calculator_SubnetHistory = value;
-            OnPropertyChanged();
+                _subnetCalculator_Calculator_SubnetHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region Subnetting
+        #region Subnetting
 
-    private ObservableCollection<string> _subnetCalculator_Subnetting_SubnetHistory = new();
+        private ObservableCollection<string> _subnetCalculator_Subnetting_SubnetHistory = new();
 
-    public ObservableCollection<string> SubnetCalculator_Subnetting_SubnetHistory
-    {
-        get => _subnetCalculator_Subnetting_SubnetHistory;
-        set
+        public ObservableCollection<string> SubnetCalculator_Subnetting_SubnetHistory
         {
-            if (value == _subnetCalculator_Subnetting_SubnetHistory)
-                return;
+            get => _subnetCalculator_Subnetting_SubnetHistory;
+            set
+            {
+                if (value == _subnetCalculator_Subnetting_SubnetHistory)
+                    return;
 
-            _subnetCalculator_Subnetting_SubnetHistory = value;
-            OnPropertyChanged();
+                _subnetCalculator_Subnetting_SubnetHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<string> _subnetCalculator_Subnetting_NewSubnetmaskHistory = new();
+        private ObservableCollection<string> _subnetCalculator_Subnetting_NewSubnetmaskHistory = new();
 
-    public ObservableCollection<string> SubnetCalculator_Subnetting_NewSubnetmaskHistory
-    {
-        get => _subnetCalculator_Subnetting_NewSubnetmaskHistory;
-        set
+        public ObservableCollection<string> SubnetCalculator_Subnetting_NewSubnetmaskHistory
         {
-            if (value == _subnetCalculator_Subnetting_NewSubnetmaskHistory)
-                return;
+            get => _subnetCalculator_Subnetting_NewSubnetmaskHistory;
+            set
+            {
+                if (value == _subnetCalculator_Subnetting_NewSubnetmaskHistory)
+                    return;
 
-            _subnetCalculator_Subnetting_NewSubnetmaskHistory = value;
-            OnPropertyChanged();
+                _subnetCalculator_Subnetting_NewSubnetmaskHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _subnetCalculator_Subnetting_ExportFilePath;
+        private string _subnetCalculator_Subnetting_ExportFilePath;
 
-    public string SubnetCalculator_Subnetting_ExportFilePath
-    {
-        get => _subnetCalculator_Subnetting_ExportFilePath;
-        set
+        public string SubnetCalculator_Subnetting_ExportFilePath
         {
-            if (value == _subnetCalculator_Subnetting_ExportFilePath)
-                return;
+            get => _subnetCalculator_Subnetting_ExportFilePath;
+            set
+            {
+                if (value == _subnetCalculator_Subnetting_ExportFilePath)
+                    return;
 
-            _subnetCalculator_Subnetting_ExportFilePath = value;
-            OnPropertyChanged();
+                _subnetCalculator_Subnetting_ExportFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ExportFileType _subnetCalculator_Subnetting_ExportFileType =
-        GlobalStaticConfiguration.SubnetCalculator_Subnetting_ExportFileType;
+        private ExportFileType _subnetCalculator_Subnetting_ExportFileType =
+            GlobalStaticConfiguration.SubnetCalculator_Subnetting_ExportFileType;
 
-    public ExportFileType SubnetCalculator_Subnetting_ExportFileType
-    {
-        get => _subnetCalculator_Subnetting_ExportFileType;
-        set
+        public ExportFileType SubnetCalculator_Subnetting_ExportFileType
         {
-            if (value == _subnetCalculator_Subnetting_ExportFileType)
-                return;
+            get => _subnetCalculator_Subnetting_ExportFileType;
+            set
+            {
+                if (value == _subnetCalculator_Subnetting_ExportFileType)
+                    return;
 
-            _subnetCalculator_Subnetting_ExportFileType = value;
-            OnPropertyChanged();
+                _subnetCalculator_Subnetting_ExportFileType = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region WideSubnet
+        #region WideSubnet
 
-    private ObservableCollection<string> _subnetCalculator_WideSubnet_Subnet1 = new();
+        private ObservableCollection<string> _subnetCalculator_WideSubnet_Subnet1 = new();
 
-    public ObservableCollection<string> SubnetCalculator_WideSubnet_Subnet1
-    {
-        get => _subnetCalculator_WideSubnet_Subnet1;
-        set
+        public ObservableCollection<string> SubnetCalculator_WideSubnet_Subnet1
         {
-            if (value == _subnetCalculator_WideSubnet_Subnet1)
-                return;
+            get => _subnetCalculator_WideSubnet_Subnet1;
+            set
+            {
+                if (value == _subnetCalculator_WideSubnet_Subnet1)
+                    return;
 
-            _subnetCalculator_WideSubnet_Subnet1 = value;
-            OnPropertyChanged();
+                _subnetCalculator_WideSubnet_Subnet1 = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<string> _subnetCalculator_WideSubnet_Subnet2 = new();
+        private ObservableCollection<string> _subnetCalculator_WideSubnet_Subnet2 = new();
 
-    public ObservableCollection<string> SubnetCalculator_WideSubnet_Subnet2
-    {
-        get => _subnetCalculator_WideSubnet_Subnet2;
-        set
+        public ObservableCollection<string> SubnetCalculator_WideSubnet_Subnet2
         {
-            if (value == _subnetCalculator_WideSubnet_Subnet2)
-                return;
+            get => _subnetCalculator_WideSubnet_Subnet2;
+            set
+            {
+                if (value == _subnetCalculator_WideSubnet_Subnet2)
+                    return;
 
-            _subnetCalculator_WideSubnet_Subnet2 = value;
-            OnPropertyChanged();
+                _subnetCalculator_WideSubnet_Subnet2 = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #endregion
+        #endregion
 
-    #region Bit Calculator
+        #region Bit Calculator
 
-    private ObservableCollection<string> _bitCalculator_InputHistory = new();
+        private ObservableCollection<string> _bitCalculator_InputHistory = new();
 
-    public ObservableCollection<string> BitCalculator_InputHistory
-    {
-        get => _bitCalculator_InputHistory;
-        set
+        public ObservableCollection<string> BitCalculator_InputHistory
         {
-            if (value == _bitCalculator_InputHistory)
-                return;
+            get => _bitCalculator_InputHistory;
+            set
+            {
+                if (value == _bitCalculator_InputHistory)
+                    return;
 
-            _bitCalculator_InputHistory = value;
-            OnPropertyChanged();
+                _bitCalculator_InputHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private BitCaluclatorUnit _bitCalculator_Unit = GlobalStaticConfiguration.BitCalculator_Unit;
+        private BitCaluclatorUnit _bitCalculator_Unit = GlobalStaticConfiguration.BitCalculator_Unit;
 
-    public BitCaluclatorUnit BitCalculator_Unit
-    {
-        get => _bitCalculator_Unit;
-        set
+        public BitCaluclatorUnit BitCalculator_Unit
         {
-            if (value == _bitCalculator_Unit)
-                return;
+            get => _bitCalculator_Unit;
+            set
+            {
+                if (value == _bitCalculator_Unit)
+                    return;
 
-            _bitCalculator_Unit = value;
-            OnPropertyChanged();
+                _bitCalculator_Unit = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
 
-    private BitCaluclatorNotation _bitCalculator_Notation = GlobalStaticConfiguration.BitCalculator_Notation;
+        private BitCaluclatorNotation _bitCalculator_Notation = GlobalStaticConfiguration.BitCalculator_Notation;
 
-    public BitCaluclatorNotation BitCalculator_Notation
-    {
-        get => _bitCalculator_Notation;
-        set
+        public BitCaluclatorNotation BitCalculator_Notation
         {
-            if (value == _bitCalculator_Notation)
-                return;
+            get => _bitCalculator_Notation;
+            set
+            {
+                if (value == _bitCalculator_Notation)
+                    return;
 
-            _bitCalculator_Notation = value;
-            OnPropertyChanged();
+                _bitCalculator_Notation = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _bitCalculator_ExportFilePath;
+        private string _bitCalculator_ExportFilePath;
 
-    public string BitCalculator_ExportFilePath
-    {
-        get => _bitCalculator_ExportFilePath;
-        set
+        public string BitCalculator_ExportFilePath
         {
-            if (value == _bitCalculator_ExportFilePath)
-                return;
+            get => _bitCalculator_ExportFilePath;
+            set
+            {
+                if (value == _bitCalculator_ExportFilePath)
+                    return;
 
-            _bitCalculator_ExportFilePath = value;
-            OnPropertyChanged();
+                _bitCalculator_ExportFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ExportFileType _bitCalculator_ExportFileType = GlobalStaticConfiguration.BitCalculator_ExportFileType;
+        private ExportFileType _bitCalculator_ExportFileType = GlobalStaticConfiguration.BitCalculator_ExportFileType;
 
-    public ExportFileType BitCalculator_ExportFileType
-    {
-        get => _bitCalculator_ExportFileType;
-        set
+        public ExportFileType BitCalculator_ExportFileType
         {
-            if (value == _bitCalculator_ExportFileType)
-                return;
+            get => _bitCalculator_ExportFileType;
+            set
+            {
+                if (value == _bitCalculator_ExportFileType)
+                    return;
 
-            _bitCalculator_ExportFileType = value;
-            OnPropertyChanged();
+                _bitCalculator_ExportFileType = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region Lookup
+        #region Lookup
 
-    private ObservableCollection<string> _lookup_OUI_SearchHistory = new();
+        private ObservableCollection<string> _lookup_OUI_SearchHistory = new();
 
-    public ObservableCollection<string> Lookup_OUI_SearchHistory
-    {
-        get => _lookup_OUI_SearchHistory;
-        set
+        public ObservableCollection<string> Lookup_OUI_SearchHistory
         {
-            if (value == _lookup_OUI_SearchHistory)
-                return;
+            get => _lookup_OUI_SearchHistory;
+            set
+            {
+                if (value == _lookup_OUI_SearchHistory)
+                    return;
 
-            _lookup_OUI_SearchHistory = value;
-            OnPropertyChanged();
+                _lookup_OUI_SearchHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _lookup_OUI_ExportFilePath;
+        private string _lookup_OUI_ExportFilePath;
 
-    public string Lookup_OUI_ExportFilePath
-    {
-        get => _lookup_OUI_ExportFilePath;
-        set
+        public string Lookup_OUI_ExportFilePath
         {
-            if (value == _lookup_OUI_ExportFilePath)
-                return;
+            get => _lookup_OUI_ExportFilePath;
+            set
+            {
+                if (value == _lookup_OUI_ExportFilePath)
+                    return;
 
-            _lookup_OUI_ExportFilePath = value;
-            OnPropertyChanged();
+                _lookup_OUI_ExportFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ExportFileType _lookup_OUI_ExportFileType = GlobalStaticConfiguration.Lookup_OUI_ExportFileType;
+        private ExportFileType _lookup_OUI_ExportFileType = GlobalStaticConfiguration.Lookup_OUI_ExportFileType;
 
-    public ExportFileType Lookup_OUI_ExportFileType
-    {
-        get => _lookup_OUI_ExportFileType;
-        set
+        public ExportFileType Lookup_OUI_ExportFileType
         {
-            if (value == _lookup_OUI_ExportFileType)
-                return;
+            get => _lookup_OUI_ExportFileType;
+            set
+            {
+                if (value == _lookup_OUI_ExportFileType)
+                    return;
 
-            _lookup_OUI_ExportFileType = value;
-            OnPropertyChanged();
+                _lookup_OUI_ExportFileType = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ObservableCollection<string> _lookup_Port_SearchHistory = new();
+        private ObservableCollection<string> _lookup_Port_SearchHistory = new();
 
-    public ObservableCollection<string> Lookup_Port_SearchHistory
-    {
-        get => _lookup_Port_SearchHistory;
-        set
+        public ObservableCollection<string> Lookup_Port_SearchHistory
         {
-            if (value == _lookup_Port_SearchHistory)
-                return;
+            get => _lookup_Port_SearchHistory;
+            set
+            {
+                if (value == _lookup_Port_SearchHistory)
+                    return;
 
-            _lookup_Port_SearchHistory = value;
-            OnPropertyChanged();
+                _lookup_Port_SearchHistory = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _lookup_Port_ExportFilePath;
+        private string _lookup_Port_ExportFilePath;
 
-    public string Lookup_Port_ExportFilePath
-    {
-        get => _lookup_Port_ExportFilePath;
-        set
+        public string Lookup_Port_ExportFilePath
         {
-            if (value == _lookup_Port_ExportFilePath)
-                return;
+            get => _lookup_Port_ExportFilePath;
+            set
+            {
+                if (value == _lookup_Port_ExportFilePath)
+                    return;
 
-            _lookup_Port_ExportFilePath = value;
-            OnPropertyChanged();
+                _lookup_Port_ExportFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ExportFileType _lookup_Port_ExportFileType = GlobalStaticConfiguration.Lookup_Port_ExportFileType;
+        private ExportFileType _lookup_Port_ExportFileType = GlobalStaticConfiguration.Lookup_Port_ExportFileType;
 
-    public ExportFileType Lookup_Port_ExportFileType
-    {
-        get => _lookup_Port_ExportFileType;
-        set
+        public ExportFileType Lookup_Port_ExportFileType
         {
-            if (value == _lookup_Port_ExportFileType)
-                return;
+            get => _lookup_Port_ExportFileType;
+            set
+            {
+                if (value == _lookup_Port_ExportFileType)
+                    return;
 
-            _lookup_Port_ExportFileType = value;
-            OnPropertyChanged();
+                _lookup_Port_ExportFileType = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region Connections
+        #region Connections
 
-    private bool _connections_AutoRefreshEnabled;
+        private bool _connections_AutoRefreshEnabled;
 
-    public bool Connections_AutoRefreshEnabled
-    {
-        get => _connections_AutoRefreshEnabled;
-        set
+        public bool Connections_AutoRefreshEnabled
         {
-            if (value == _connections_AutoRefreshEnabled)
-                return;
+            get => _connections_AutoRefreshEnabled;
+            set
+            {
+                if (value == _connections_AutoRefreshEnabled)
+                    return;
 
-            _connections_AutoRefreshEnabled = value;
-            OnPropertyChanged();
+                _connections_AutoRefreshEnabled = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private AutoRefreshTimeInfo _connections_AutoRefreshTime = GlobalStaticConfiguration.Connections_AutoRefreshTime;
+        private AutoRefreshTimeInfo _connections_AutoRefreshTime = GlobalStaticConfiguration.Connections_AutoRefreshTime;
 
-    public AutoRefreshTimeInfo Connections_AutoRefreshTime
-    {
-        get => _connections_AutoRefreshTime;
-        set
+        public AutoRefreshTimeInfo Connections_AutoRefreshTime
         {
-            if (value == _connections_AutoRefreshTime)
-                return;
+            get => _connections_AutoRefreshTime;
+            set
+            {
+                if (value == _connections_AutoRefreshTime)
+                    return;
 
-            _connections_AutoRefreshTime = value;
-            OnPropertyChanged();
+                _connections_AutoRefreshTime = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _connections_ExportFilePath;
+        private string _connections_ExportFilePath;
 
-    public string Connections_ExportFilePath
-    {
-        get => _connections_ExportFilePath;
-        set
+        public string Connections_ExportFilePath
         {
-            if (value == _connections_ExportFilePath)
-                return;
+            get => _connections_ExportFilePath;
+            set
+            {
+                if (value == _connections_ExportFilePath)
+                    return;
 
-            _connections_ExportFilePath = value;
-            OnPropertyChanged();
+                _connections_ExportFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ExportFileType _connections_ExportFileType = GlobalStaticConfiguration.Connections_ExportFileType;
+        private ExportFileType _connections_ExportFileType = GlobalStaticConfiguration.Connections_ExportFileType;
 
-    public ExportFileType Connections_ExportFileType
-    {
-        get => _connections_ExportFileType;
-        set
+        public ExportFileType Connections_ExportFileType
         {
-            if (value == _connections_ExportFileType)
-                return;
+            get => _connections_ExportFileType;
+            set
+            {
+                if (value == _connections_ExportFileType)
+                    return;
 
-            _connections_ExportFileType = value;
-            OnPropertyChanged();
+                _connections_ExportFileType = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region Listeners
+        #region Listeners
 
-    private bool _listeners_AutoRefreshEnabled;
+        private bool _listeners_AutoRefreshEnabled;
 
-    public bool Listeners_AutoRefreshEnabled
-    {
-        get => _listeners_AutoRefreshEnabled;
-        set
+        public bool Listeners_AutoRefreshEnabled
         {
-            if (value == _listeners_AutoRefreshEnabled)
-                return;
+            get => _listeners_AutoRefreshEnabled;
+            set
+            {
+                if (value == _listeners_AutoRefreshEnabled)
+                    return;
 
-            _listeners_AutoRefreshEnabled = value;
-            OnPropertyChanged();
+                _listeners_AutoRefreshEnabled = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private AutoRefreshTimeInfo _listeners_AutoRefreshTime = GlobalStaticConfiguration.Listeners_AutoRefreshTime;
+        private AutoRefreshTimeInfo _listeners_AutoRefreshTime = GlobalStaticConfiguration.Listeners_AutoRefreshTime;
 
-    public AutoRefreshTimeInfo Listeners_AutoRefreshTime
-    {
-        get => _listeners_AutoRefreshTime;
-        set
+        public AutoRefreshTimeInfo Listeners_AutoRefreshTime
         {
-            if (value == _listeners_AutoRefreshTime)
-                return;
+            get => _listeners_AutoRefreshTime;
+            set
+            {
+                if (value == _listeners_AutoRefreshTime)
+                    return;
 
-            _listeners_AutoRefreshTime = value;
-            OnPropertyChanged();
+                _listeners_AutoRefreshTime = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _listeners_ExportFilePath;
+        private string _listeners_ExportFilePath;
 
-    public string Listeners_ExportFilePath
-    {
-        get => _listeners_ExportFilePath;
-        set
+        public string Listeners_ExportFilePath
         {
-            if (value == _listeners_ExportFilePath)
-                return;
+            get => _listeners_ExportFilePath;
+            set
+            {
+                if (value == _listeners_ExportFilePath)
+                    return;
 
-            _listeners_ExportFilePath = value;
-            OnPropertyChanged();
+                _listeners_ExportFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ExportFileType _listeners_ExportFileType = GlobalStaticConfiguration.Listeners_ExportFileType;
+        private ExportFileType _listeners_ExportFileType = GlobalStaticConfiguration.Listeners_ExportFileType;
 
-    public ExportFileType Listeners_ExportFileType
-    {
-        get => _listeners_ExportFileType;
-        set
+        public ExportFileType Listeners_ExportFileType
         {
-            if (value == _listeners_ExportFileType)
-                return;
+            get => _listeners_ExportFileType;
+            set
+            {
+                if (value == _listeners_ExportFileType)
+                    return;
 
-            _listeners_ExportFileType = value;
-            OnPropertyChanged();
+                _listeners_ExportFileType = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region ARPTable
+        #region ARPTable
 
-    private bool _arpTable_AutoRefreshEnabled;
+        private bool _arpTable_AutoRefreshEnabled;
 
-    public bool ARPTable_AutoRefreshEnabled
-    {
-        get => _arpTable_AutoRefreshEnabled;
-        set
+        public bool ARPTable_AutoRefreshEnabled
         {
-            if (value == _arpTable_AutoRefreshEnabled)
-                return;
+            get => _arpTable_AutoRefreshEnabled;
+            set
+            {
+                if (value == _arpTable_AutoRefreshEnabled)
+                    return;
 
-            _arpTable_AutoRefreshEnabled = value;
-            OnPropertyChanged();
+                _arpTable_AutoRefreshEnabled = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private AutoRefreshTimeInfo _arpTable_AutoRefreshTime = GlobalStaticConfiguration.ARPTable_AutoRefreshTime;
+        private AutoRefreshTimeInfo _arpTable_AutoRefreshTime = GlobalStaticConfiguration.ARPTable_AutoRefreshTime;
 
-    public AutoRefreshTimeInfo ARPTable_AutoRefreshTime
-    {
-        get => _arpTable_AutoRefreshTime;
-        set
+        public AutoRefreshTimeInfo ARPTable_AutoRefreshTime
         {
-            if (value == _arpTable_AutoRefreshTime)
-                return;
+            get => _arpTable_AutoRefreshTime;
+            set
+            {
+                if (value == _arpTable_AutoRefreshTime)
+                    return;
 
-            _arpTable_AutoRefreshTime = value;
-            OnPropertyChanged();
+                _arpTable_AutoRefreshTime = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _arpTable_ExportFilePath;
+        private string _arpTable_ExportFilePath;
 
-    public string ARPTable_ExportFilePath
-    {
-        get => _arpTable_ExportFilePath;
-        set
+        public string ARPTable_ExportFilePath
         {
-            if (value == _arpTable_ExportFilePath)
-                return;
+            get => _arpTable_ExportFilePath;
+            set
+            {
+                if (value == _arpTable_ExportFilePath)
+                    return;
 
-            _arpTable_ExportFilePath = value;
-            OnPropertyChanged();
+                _arpTable_ExportFilePath = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private ExportFileType _arpTable_ExportFileType = GlobalStaticConfiguration.ARPTable_ExportFileType;
+        private ExportFileType _arpTable_ExportFileType = GlobalStaticConfiguration.ARPTable_ExportFileType;
 
-    public ExportFileType ARPTable_ExportFileType
-    {
-        get => _arpTable_ExportFileType;
-        set
+        public ExportFileType ARPTable_ExportFileType
         {
-            if (value == _arpTable_ExportFileType)
-                return;
+            get => _arpTable_ExportFileType;
+            set
+            {
+                if (value == _arpTable_ExportFileType)
+                    return;
 
-            _arpTable_ExportFileType = value;
-            OnPropertyChanged();
+                _arpTable_ExportFileType = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #endregion
+        #endregion
 
-    #region Constructor
+        #region Constructor
 
-    public SettingsInfo()
-    {
-        // General
-        General_ApplicationList.CollectionChanged += CollectionChanged;
+        public SettingsInfo()
+        {
+            // General
+            General_ApplicationList.CollectionChanged += CollectionChanged;
 
-        // IP Scanner
-        IPScanner_HostHistory.CollectionChanged += CollectionChanged;
-        IPScanner_CustomCommands.CollectionChanged += CollectionChanged;
+            // IP Scanner
+            IPScanner_HostHistory.CollectionChanged += CollectionChanged;
+            IPScanner_CustomCommands.CollectionChanged += CollectionChanged;
 
-        // Port Scanner
-        PortScanner_HostHistory.CollectionChanged += CollectionChanged;
-        PortScanner_PortHistory.CollectionChanged += CollectionChanged;
-        PortScanner_PortProfiles.CollectionChanged += CollectionChanged;
+            // Port Scanner
+            PortScanner_HostHistory.CollectionChanged += CollectionChanged;
+            PortScanner_PortHistory.CollectionChanged += CollectionChanged;
+            PortScanner_PortProfiles.CollectionChanged += CollectionChanged;
 
-        // Ping Monitor
-        PingMonitor_HostHistory.CollectionChanged += CollectionChanged;
+            // Ping Monitor
+            PingMonitor_HostHistory.CollectionChanged += CollectionChanged;
 
-        // Traceroute
-        Traceroute_HostHistory.CollectionChanged += CollectionChanged;
+            // Traceroute
+            Traceroute_HostHistory.CollectionChanged += CollectionChanged;
 
-        // DNS Lookup
-        DNSLookup_HostHistory.CollectionChanged += CollectionChanged;
-        DNSLookup_DNSServers.CollectionChanged += CollectionChanged;
+            // DNS Lookup
+            DNSLookup_HostHistory.CollectionChanged += CollectionChanged;
+            DNSLookup_DNSServers.CollectionChanged += CollectionChanged;
 
-        // Remote Desktop
-        RemoteDesktop_HostHistory.CollectionChanged += CollectionChanged;
+            // Remote Desktop
+            RemoteDesktop_HostHistory.CollectionChanged += CollectionChanged;
 
-        // PowerShell
-        PowerShell_HostHistory.CollectionChanged += CollectionChanged;
+            // PowerShell
+            PowerShell_HostHistory.CollectionChanged += CollectionChanged;
 
-        // PuTTY
-        PuTTY_HostHistory.CollectionChanged += CollectionChanged;
-        PuTTY_SerialLineHistory.CollectionChanged += CollectionChanged;
-        PuTTY_PortHistory.CollectionChanged += CollectionChanged;
-        PuTTY_BaudHistory.CollectionChanged += CollectionChanged;
-        PuTTY_UsernameHistory.CollectionChanged += CollectionChanged;
-        PuTTY_PrivateKeyFileHistory.CollectionChanged += CollectionChanged;
-        PuTTY_ProfileHistory.CollectionChanged += CollectionChanged;
+            // PuTTY
+            PuTTY_HostHistory.CollectionChanged += CollectionChanged;
+            PuTTY_SerialLineHistory.CollectionChanged += CollectionChanged;
+            PuTTY_PortHistory.CollectionChanged += CollectionChanged;
+            PuTTY_BaudHistory.CollectionChanged += CollectionChanged;
+            PuTTY_UsernameHistory.CollectionChanged += CollectionChanged;
+            PuTTY_PrivateKeyFileHistory.CollectionChanged += CollectionChanged;
+            PuTTY_ProfileHistory.CollectionChanged += CollectionChanged;
 
-        // AWSSessionManager
-        AWSSessionManager_AWSProfiles.CollectionChanged += CollectionChanged;
-        AWSSessionManager_InstanceIDHistory.CollectionChanged += CollectionChanged;
-        AWSSessionManager_ProfileHistory.CollectionChanged += CollectionChanged;
-        AWSSessionManager_RegionHistory.CollectionChanged += CollectionChanged;
+            // AWSSessionManager
+            AWSSessionManager_AWSProfiles.CollectionChanged += CollectionChanged;
+            AWSSessionManager_InstanceIDHistory.CollectionChanged += CollectionChanged;
+            AWSSessionManager_ProfileHistory.CollectionChanged += CollectionChanged;
+            AWSSessionManager_RegionHistory.CollectionChanged += CollectionChanged;
 
-        // TigerVNC
-        TigerVNC_HostHistory.CollectionChanged += CollectionChanged;
-        TigerVNC_PortHistory.CollectionChanged += CollectionChanged;
+            // TigerVNC
+            TigerVNC_HostHistory.CollectionChanged += CollectionChanged;
+            TigerVNC_PortHistory.CollectionChanged += CollectionChanged;
 
-        // WebConsole
-        WebConsole_UrlHistory.CollectionChanged += CollectionChanged;
+            // WebConsole
+            WebConsole_UrlHistory.CollectionChanged += CollectionChanged;
 
-        // SNMP
-        SNMP_HostHistory.CollectionChanged += CollectionChanged;
-        SNMP_OidHistory.CollectionChanged += CollectionChanged;
-        SNMP_OidProfiles.CollectionChanged += CollectionChanged;
+            // SNMP
+            SNMP_HostHistory.CollectionChanged += CollectionChanged;
+            SNMP_OidHistory.CollectionChanged += CollectionChanged;
+            SNMP_OidProfiles.CollectionChanged += CollectionChanged;
 
-        // SNTP Lookup
-        SNTPLookup_SNTPServers.CollectionChanged += CollectionChanged;
+            // SNTP Lookup
+            SNTPLookup_SNTPServers.CollectionChanged += CollectionChanged;
 
-        // Wake on LAN
-        WakeOnLan_MACAddressHistory.CollectionChanged += CollectionChanged;
-        WakeOnLan_BroadcastHistory.CollectionChanged += CollectionChanged;
+            // Wake on LAN
+            WakeOnLan_MACAddressHistory.CollectionChanged += CollectionChanged;
+            WakeOnLan_BroadcastHistory.CollectionChanged += CollectionChanged;
 
-        // Whois
-        Whois_DomainHistory.CollectionChanged += CollectionChanged;
+            // Whois
+            Whois_DomainHistory.CollectionChanged += CollectionChanged;
 
-        // IP Geolocation
-        IPGeolocation_HostHistory.CollectionChanged += CollectionChanged;
+            // IP Geolocation
+            IPGeolocation_HostHistory.CollectionChanged += CollectionChanged;
 
-        // Subnet Calculator > Calculator
-        SubnetCalculator_Calculator_SubnetHistory.CollectionChanged += CollectionChanged;
+            // Subnet Calculator > Calculator
+            SubnetCalculator_Calculator_SubnetHistory.CollectionChanged += CollectionChanged;
 
-        // Subnet Calculator > Subnetting
-        SubnetCalculator_Subnetting_SubnetHistory.CollectionChanged += CollectionChanged;
-        SubnetCalculator_Subnetting_NewSubnetmaskHistory.CollectionChanged += CollectionChanged;
+            // Subnet Calculator > Subnetting
+            SubnetCalculator_Subnetting_SubnetHistory.CollectionChanged += CollectionChanged;
+            SubnetCalculator_Subnetting_NewSubnetmaskHistory.CollectionChanged += CollectionChanged;
 
-        // Subnet Calculator > Supernetting
-        SubnetCalculator_WideSubnet_Subnet1.CollectionChanged += CollectionChanged;
-        SubnetCalculator_WideSubnet_Subnet2.CollectionChanged += CollectionChanged;
+            // Subnet Calculator > Supernetting
+            SubnetCalculator_WideSubnet_Subnet1.CollectionChanged += CollectionChanged;
+            SubnetCalculator_WideSubnet_Subnet2.CollectionChanged += CollectionChanged;
 
-        // Bit Calculator
-        BitCalculator_InputHistory.CollectionChanged += CollectionChanged;
+            // Bit Calculator
+            BitCalculator_InputHistory.CollectionChanged += CollectionChanged;
 
-        // Lookup > OUI
-        Lookup_OUI_SearchHistory.CollectionChanged += CollectionChanged;
+            // Lookup > OUI
+            Lookup_OUI_SearchHistory.CollectionChanged += CollectionChanged;
 
-        // Lookup > Port
-        Lookup_Port_SearchHistory.CollectionChanged += CollectionChanged;
-    }
+            // Lookup > Port
+            Lookup_Port_SearchHistory.CollectionChanged += CollectionChanged;
+        }
 
-    private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-    {
-        SettingsChanged = true;
-    }
+        private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            SettingsChanged = true;
+        }
 
-    #endregion
+        #endregion
+    }
 }

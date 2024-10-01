@@ -1,7 +1,8 @@
-﻿namespace Ninja.Profiles;
-
-public enum ProfileGroup
+﻿namespace Ninja.Profiles
 {
-    General,
-    Application
+    public enum ProfileGroup
+    {
+        General,
+        Application
+    }
 }

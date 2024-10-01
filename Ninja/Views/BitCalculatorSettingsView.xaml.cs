@@ -1,16 +1,17 @@
 ﻿using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class BitCalculatorSettingsView
+namespace Ninja.Views
 {
-    private readonly BitCalculatorSettingsViewModel _viewModel = new();
+    using ViewModels;
 
-    public BitCalculatorSettingsView()
+    public partial class BitCalculatorSettingsView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
+        private readonly BitCalculatorSettingsViewModel _viewModel = new();
+
+        public BitCalculatorSettingsView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
     }
 }

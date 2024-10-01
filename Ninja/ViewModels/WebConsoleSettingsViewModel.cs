@@ -1,50 +1,51 @@
 ﻿using Ninja.Settings;
 
-namespace Ninja.ViewModels;
-
-using Settings;
-
-public class WebConsoleSettingsViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    #region Variables
+    using Settings;
 
-    private readonly bool _isLoading;
-
-    private bool _showAddressBar;
-
-    public bool ShowAddressBar
+    public class WebConsoleSettingsViewModel : ViewModelBase
     {
-        get => _showAddressBar;
-        set
+        #region Variables
+
+        private readonly bool _isLoading;
+
+        private bool _showAddressBar;
+
+        public bool ShowAddressBar
         {
-            if (value == _showAddressBar)
-                return;
+            get => _showAddressBar;
+            set
+            {
+                if (value == _showAddressBar)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.WebConsole_ShowAddressBar = value;
+                if (!_isLoading)
+                    SettingsManager.Current.WebConsole_ShowAddressBar = value;
 
-            _showAddressBar = value;
-            OnPropertyChanged();
+                _showAddressBar = value;
+                OnPropertyChanged();
+            }
         }
+
+        #endregion
+
+        #region Constructor, load settings
+
+        public WebConsoleSettingsViewModel()
+        {
+            _isLoading = true;
+
+            LoadSettings();
+
+            _isLoading = false;
+        }
+
+        private void LoadSettings()
+        {
+            ShowAddressBar = SettingsManager.Current.WebConsole_ShowAddressBar;
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region Constructor, load settings
-
-    public WebConsoleSettingsViewModel()
-    {
-        _isLoading = true;
-
-        LoadSettings();
-
-        _isLoading = false;
-    }
-
-    private void LoadSettings()
-    {
-        ShowAddressBar = SettingsManager.Current.WebConsole_ShowAddressBar;
-    }
-
-    #endregion
 }

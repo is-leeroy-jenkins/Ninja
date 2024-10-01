@@ -1,16 +1,17 @@
 ﻿using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class SettingsLanguageView
+namespace Ninja.Views
 {
-    private readonly SettingsLanguageViewModel _viewModel = new();
+    using ViewModels;
 
-    public SettingsLanguageView()
+    public partial class SettingsLanguageView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
+        private readonly SettingsLanguageViewModel _viewModel = new();
+
+        public SettingsLanguageView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
     }
 }

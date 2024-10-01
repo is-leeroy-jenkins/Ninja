@@ -1,12 +1,13 @@
-﻿namespace Ninja.Models.RemoteDesktop;
-
-/// <summary>
-///     Represents keystrokes which can be send into the remote session.
-/// </summary>
-public enum Keystroke
+﻿namespace Ninja.Models.RemoteDesktop
 {
     /// <summary>
-    ///     Ctrl + Alt + Del keystroke.
+    ///     Represents keystrokes which can be send into the remote session.
     /// </summary>
-    CtrlAltDel
+    public enum Keystroke
+    {
+        /// <summary>
+        ///     Ctrl + Alt + Del keystroke.
+        /// </summary>
+        CtrlAltDel
+    }
 }

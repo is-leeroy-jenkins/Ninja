@@ -10,264 +10,265 @@ using Ninja.Settings;
 using Ninja.Update;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Documentation;
-using Settings;
-using Update;
-using Utilities;
-
-public class AboutViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    #region Constructor
+    using Documentation;
+    using Settings;
+    using Update;
+    using Utilities;
 
-    public AboutViewModel()
+    public class AboutViewModel : ViewModelBase
     {
-        LibrariesView = CollectionViewSource.GetDefaultView(LibraryManager.List);
-        LibrariesView.SortDescriptions.Add(new SortDescription(nameof(LibraryInfo.Name), ListSortDirection.Ascending));
+        #region Constructor
 
-        ExternalServicesView = CollectionViewSource.GetDefaultView(ExternalServicesManager.List);
-        ExternalServicesView.SortDescriptions.Add(new SortDescription(nameof(ExternalServicesInfo.Name),
-            ListSortDirection.Ascending));
-
-        ResourcesView = CollectionViewSource.GetDefaultView(ResourceManager.List);
-        ResourcesView.SortDescriptions.Add(new SortDescription(nameof(ResourceInfo.Name), ListSortDirection.Ascending));
-    }
-
-    #endregion
-
-    #region Methods
-
-    private void CheckForUpdates()
-    {
-        IsUpdateAvailable = false;
-        ShowUpdaterMessage = false;
-
-        IsUpdateCheckRunning = true;
-
-        var updater = new Updater();
-
-        updater.UpdateAvailable += Updater_UpdateAvailable;
-        updater.NoUpdateAvailable += Updater_NoUpdateAvailable;
-        updater.Error += Updater_Error;
-
-        updater.CheckOnGitHub(Resources.Ninja_GitHub_User, Resources.Ninja_GitHub_Repo,
-            AssemblyManager.Current.Version, SettingsManager.Current.Update_CheckForPreReleases);
-    }
-
-    #endregion
-
-    #region Variables
-
-    public string Version => $"{Strings.Version} {AssemblyManager.Current.Version}";
-
-    public string DevelopedByText =>
-        string.Format(Strings.DevelopedAndMaintainedByX + " ", Resources.Ninja_GitHub_User);
-
-    private bool _isUpdateCheckRunning;
-
-    public bool IsUpdateCheckRunning
-    {
-        get => _isUpdateCheckRunning;
-        set
+        public AboutViewModel()
         {
-            if (value == _isUpdateCheckRunning)
-                return;
+            LibrariesView = CollectionViewSource.GetDefaultView(LibraryManager.List);
+            LibrariesView.SortDescriptions.Add(new SortDescription(nameof(LibraryInfo.Name), ListSortDirection.Ascending));
 
-            _isUpdateCheckRunning = value;
-            OnPropertyChanged();
+            ExternalServicesView = CollectionViewSource.GetDefaultView(ExternalServicesManager.List);
+            ExternalServicesView.SortDescriptions.Add(new SortDescription(nameof(ExternalServicesInfo.Name),
+                ListSortDirection.Ascending));
+
+            ResourcesView = CollectionViewSource.GetDefaultView(ResourceManager.List);
+            ResourcesView.SortDescriptions.Add(new SortDescription(nameof(ResourceInfo.Name), ListSortDirection.Ascending));
         }
-    }
 
-    private bool _isUpdateAvailable;
+        #endregion
 
-    public bool IsUpdateAvailable
-    {
-        get => _isUpdateAvailable;
-        set
+        #region Methods
+
+        private void CheckForUpdates()
         {
-            if (value == _isUpdateAvailable)
-                return;
+            IsUpdateAvailable = false;
+            ShowUpdaterMessage = false;
 
-            _isUpdateAvailable = value;
-            OnPropertyChanged();
+            IsUpdateCheckRunning = true;
+
+            var updater = new Updater();
+
+            updater.UpdateAvailable += Updater_UpdateAvailable;
+            updater.NoUpdateAvailable += Updater_NoUpdateAvailable;
+            updater.Error += Updater_Error;
+
+            updater.CheckOnGitHub(Resources.Ninja_GitHub_User, Resources.Ninja_GitHub_Repo,
+                AssemblyManager.Current.Version, SettingsManager.Current.Update_CheckForPreReleases);
         }
-    }
 
-    private string _updateText;
+        #endregion
 
-    public string UpdateText
-    {
-        get => _updateText;
-        private set
+        #region Variables
+
+        public string Version => $"{Strings.Version} {AssemblyManager.Current.Version}";
+
+        public string DevelopedByText =>
+            string.Format(Strings.DevelopedAndMaintainedByX + " ", Resources.Ninja_GitHub_User);
+
+        private bool _isUpdateCheckRunning;
+
+        public bool IsUpdateCheckRunning
         {
-            if (value == _updateText)
-                return;
+            get => _isUpdateCheckRunning;
+            set
+            {
+                if (value == _isUpdateCheckRunning)
+                    return;
 
-            _updateText = value;
-            OnPropertyChanged();
+                _isUpdateCheckRunning = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _updateReleaseUrl;
+        private bool _isUpdateAvailable;
 
-    public string UpdateReleaseUrl
-    {
-        get => _updateReleaseUrl;
-        private set
+        public bool IsUpdateAvailable
         {
-            if (value == _updateReleaseUrl)
-                return;
+            get => _isUpdateAvailable;
+            set
+            {
+                if (value == _isUpdateAvailable)
+                    return;
 
-            _updateReleaseUrl = value;
-            OnPropertyChanged();
+                _isUpdateAvailable = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _showUpdaterMessage;
+        private string _updateText;
 
-    public bool ShowUpdaterMessage
-    {
-        get => _showUpdaterMessage;
-        set
+        public string UpdateText
         {
-            if (value == _showUpdaterMessage)
-                return;
+            get => _updateText;
+            private set
+            {
+                if (value == _updateText)
+                    return;
 
-            _showUpdaterMessage = value;
-            OnPropertyChanged();
+                _updateText = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _updaterMessage;
+        private string _updateReleaseUrl;
 
-    public string UpdaterMessage
-    {
-        get => _updaterMessage;
-        private set
+        public string UpdateReleaseUrl
         {
-            if (value == _updaterMessage)
-                return;
+            get => _updateReleaseUrl;
+            private set
+            {
+                if (value == _updateReleaseUrl)
+                    return;
 
-            _updaterMessage = value;
-            OnPropertyChanged();
+                _updateReleaseUrl = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public ICollectionView LibrariesView { get; }
+        private bool _showUpdaterMessage;
 
-    private LibraryInfo _selectedLibraryInfo;
-
-    public LibraryInfo SelectedLibraryInfo
-    {
-        get => _selectedLibraryInfo;
-        set
+        public bool ShowUpdaterMessage
         {
-            if (value == _selectedLibraryInfo)
-                return;
+            get => _showUpdaterMessage;
+            set
+            {
+                if (value == _showUpdaterMessage)
+                    return;
 
-            _selectedLibraryInfo = value;
-            OnPropertyChanged();
+                _showUpdaterMessage = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public ICollectionView ExternalServicesView { get; }
+        private string _updaterMessage;
 
-    private ExternalServicesInfo _selectedExternalServicesInfo;
-
-    public ExternalServicesInfo SelectedExternalServicesInfo
-    {
-        get => _selectedExternalServicesInfo;
-        set
+        public string UpdaterMessage
         {
-            if (value == _selectedExternalServicesInfo)
-                return;
+            get => _updaterMessage;
+            private set
+            {
+                if (value == _updaterMessage)
+                    return;
 
-            _selectedExternalServicesInfo = value;
-            OnPropertyChanged();
+                _updaterMessage = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public ICollectionView ResourcesView { get; }
+        public ICollectionView LibrariesView { get; }
 
-    private ResourceInfo _selectedResourceInfo;
+        private LibraryInfo _selectedLibraryInfo;
 
-    public ResourceInfo SelectedResourceInfo
-    {
-        get => _selectedResourceInfo;
-        set
+        public LibraryInfo SelectedLibraryInfo
         {
-            if (value == _selectedResourceInfo)
-                return;
+            get => _selectedLibraryInfo;
+            set
+            {
+                if (value == _selectedLibraryInfo)
+                    return;
 
-            _selectedResourceInfo = value;
-            OnPropertyChanged();
+                _selectedLibraryInfo = value;
+                OnPropertyChanged();
+            }
         }
+
+        public ICollectionView ExternalServicesView { get; }
+
+        private ExternalServicesInfo _selectedExternalServicesInfo;
+
+        public ExternalServicesInfo SelectedExternalServicesInfo
+        {
+            get => _selectedExternalServicesInfo;
+            set
+            {
+                if (value == _selectedExternalServicesInfo)
+                    return;
+
+                _selectedExternalServicesInfo = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICollectionView ResourcesView { get; }
+
+        private ResourceInfo _selectedResourceInfo;
+
+        public ResourceInfo SelectedResourceInfo
+        {
+            get => _selectedResourceInfo;
+            set
+            {
+                if (value == _selectedResourceInfo)
+                    return;
+
+                _selectedResourceInfo = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region Commands & Actions
+
+        public ICommand CheckForUpdatesCommand => new RelayCommand(_ => CheckForUpdatesAction());
+
+        private void CheckForUpdatesAction()
+        {
+            CheckForUpdates();
+        }
+
+        public ICommand OpenWebsiteCommand => new RelayCommand(OpenWebsiteAction);
+
+        private static void OpenWebsiteAction(object url)
+        {
+            ExternalProcessStarter.OpenUrl((string)url);
+        }
+
+        public ICommand OpenDocumentationCommand
+        {
+            get { return new RelayCommand(_ => OpenDocumentationAction()); }
+        }
+
+        private void OpenDocumentationAction()
+        {
+            DocumentationManager.OpenDocumentation(DocumentationIdentifier.Default);
+        }
+
+        public ICommand OpenLicenseFolderCommand => new RelayCommand(_ => OpenLicenseFolderAction());
+
+        private void OpenLicenseFolderAction()
+        {
+            Process.Start("explorer.exe", LibraryManager.GetLicenseLocation());
+        }
+
+        #endregion
+
+        #region Events
+
+        private void Updater_UpdateAvailable(object sender, UpdateAvailableArgs e)
+        {
+            UpdateText = string.Format(Strings.VersionxxIsAvailable, e.Release.TagName);
+            UpdateReleaseUrl = e.Release.Prerelease ? e.Release.HtmlUrl : Resources.Ninja_LatestReleaseUrl;
+
+            IsUpdateCheckRunning = false;
+            IsUpdateAvailable = true;
+        }
+
+        private void Updater_NoUpdateAvailable(object sender, EventArgs e)
+        {
+            UpdaterMessage = Strings.NoUpdateAvailable;
+
+            IsUpdateCheckRunning = false;
+            ShowUpdaterMessage = true;
+        }
+
+        private void Updater_Error(object sender, EventArgs e)
+        {
+            UpdaterMessage = Strings.ErrorCheckingApiGithubComVerifyYourNetworkConnection;
+
+            IsUpdateCheckRunning = false;
+            ShowUpdaterMessage = true;
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region Commands & Actions
-
-    public ICommand CheckForUpdatesCommand => new RelayCommand(_ => CheckForUpdatesAction());
-
-    private void CheckForUpdatesAction()
-    {
-        CheckForUpdates();
-    }
-
-    public ICommand OpenWebsiteCommand => new RelayCommand(OpenWebsiteAction);
-
-    private static void OpenWebsiteAction(object url)
-    {
-        ExternalProcessStarter.OpenUrl((string)url);
-    }
-
-    public ICommand OpenDocumentationCommand
-    {
-        get { return new RelayCommand(_ => OpenDocumentationAction()); }
-    }
-
-    private void OpenDocumentationAction()
-    {
-        DocumentationManager.OpenDocumentation(DocumentationIdentifier.Default);
-    }
-
-    public ICommand OpenLicenseFolderCommand => new RelayCommand(_ => OpenLicenseFolderAction());
-
-    private void OpenLicenseFolderAction()
-    {
-        Process.Start("explorer.exe", LibraryManager.GetLicenseLocation());
-    }
-
-    #endregion
-
-    #region Events
-
-    private void Updater_UpdateAvailable(object sender, UpdateAvailableArgs e)
-    {
-        UpdateText = string.Format(Strings.VersionxxIsAvailable, e.Release.TagName);
-        UpdateReleaseUrl = e.Release.Prerelease ? e.Release.HtmlUrl : Resources.Ninja_LatestReleaseUrl;
-
-        IsUpdateCheckRunning = false;
-        IsUpdateAvailable = true;
-    }
-
-    private void Updater_NoUpdateAvailable(object sender, EventArgs e)
-    {
-        UpdaterMessage = Strings.NoUpdateAvailable;
-
-        IsUpdateCheckRunning = false;
-        ShowUpdaterMessage = true;
-    }
-
-    private void Updater_Error(object sender, EventArgs e)
-    {
-        UpdaterMessage = Strings.ErrorCheckingApiGithubComVerifyYourNetworkConnection;
-
-        IsUpdateCheckRunning = false;
-        ShowUpdaterMessage = true;
-    }
-
-    #endregion
 }

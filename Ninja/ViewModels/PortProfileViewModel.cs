@@ -3,115 +3,116 @@ using System.Windows.Input;
 using Ninja.Models.Network;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Models.Network;
-using Utilities;
-
-public class PortProfileViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    private readonly PortProfileInfo _info;
-    private readonly bool _isLoading;
+    using Models.Network;
+    using Utilities;
 
-    private readonly string _previousPortAsString;
-
-    private bool _infoChanged;
-
-    private bool _isEdited;
-
-    private string _name;
-
-    private string _ports;
-
-    public PortProfileViewModel(Action<PortProfileViewModel> saveCommand, Action<PortProfileViewModel> cancelHandler,
-        bool isEdited = false, PortProfileInfo info = null)
+    public class PortProfileViewModel : ViewModelBase
     {
-        _isLoading = true;
+        private readonly PortProfileInfo _info;
+        private readonly bool _isLoading;
 
-        SaveCommand = new RelayCommand(_ => saveCommand(this));
-        CancelCommand = new RelayCommand(_ => cancelHandler(this));
+        private readonly string _previousPortAsString;
 
-        IsEdited = isEdited;
+        private bool _infoChanged;
 
-        _info = info ?? new PortProfileInfo();
+        private bool _isEdited;
 
-        Name = _info.Name;
+        private string _name;
 
-        // List to string
-        if (_info.Ports != null)
-            Ports = _info.Ports;
+        private string _ports;
 
-        _previousPortAsString = Ports;
-
-        _isLoading = false;
-    }
-
-    public ICommand SaveCommand { get; }
-
-    public ICommand CancelCommand { get; }
-
-    public string Name
-    {
-        get => _name;
-        set
+        public PortProfileViewModel(Action<PortProfileViewModel> saveCommand, Action<PortProfileViewModel> cancelHandler,
+            bool isEdited = false, PortProfileInfo info = null)
         {
-            if (_name == value)
-                return;
+            _isLoading = true;
 
-            _name = value;
+            SaveCommand = new RelayCommand(_ => saveCommand(this));
+            CancelCommand = new RelayCommand(_ => cancelHandler(this));
 
-            if (!_isLoading)
-                Validate();
+            IsEdited = isEdited;
 
-            OnPropertyChanged();
+            _info = info ?? new PortProfileInfo();
+
+            Name = _info.Name;
+
+            // List to string
+            if (_info.Ports != null)
+                Ports = _info.Ports;
+
+            _previousPortAsString = Ports;
+
+            _isLoading = false;
         }
-    }
 
-    public string Ports
-    {
-        get => _ports;
-        set
+        public ICommand SaveCommand { get; }
+
+        public ICommand CancelCommand { get; }
+
+        public string Name
         {
-            if (_ports == value)
-                return;
+            get => _name;
+            set
+            {
+                if (_name == value)
+                    return;
 
-            _ports = value;
+                _name = value;
 
-            if (!_isLoading)
-                Validate();
+                if (!_isLoading)
+                    Validate();
 
-            OnPropertyChanged();
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public bool InfoChanged
-    {
-        get => _infoChanged;
-        set
+        public string Ports
         {
-            if (value == _infoChanged)
-                return;
+            get => _ports;
+            set
+            {
+                if (_ports == value)
+                    return;
 
-            _infoChanged = value;
-            OnPropertyChanged();
+                _ports = value;
+
+                if (!_isLoading)
+                    Validate();
+
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public bool IsEdited
-    {
-        get => _isEdited;
-        set
+        public bool InfoChanged
         {
-            if (value == _isEdited)
-                return;
+            get => _infoChanged;
+            set
+            {
+                if (value == _infoChanged)
+                    return;
 
-            _isEdited = value;
-            OnPropertyChanged();
+                _infoChanged = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private void Validate()
-    {
-        InfoChanged = _info.Name != Name || _previousPortAsString != Ports;
+        public bool IsEdited
+        {
+            get => _isEdited;
+            set
+            {
+                if (value == _isEdited)
+                    return;
+
+                _isEdited = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private void Validate()
+        {
+            InfoChanged = _info.Name != Name || _previousPortAsString != Ports;
+        }
     }
 }

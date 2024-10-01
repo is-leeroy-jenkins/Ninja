@@ -3,22 +3,23 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Ninja.Converters;
-
-public sealed class HostUpStyleConverter : IValueConverter
+namespace Ninja.Converters
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public sealed class HostUpStyleConverter : IValueConverter
     {
-        if (value is not bool isReachable)
-            return null;
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is not bool isReachable)
+                return null;
 
-        return isReachable
-            ? Application.Current.FindResource("HostUpRectangle")
-            : Application.Current.FindResource("HostDownRectangle");
-    }
+            return isReachable
+                ? Application.Current.FindResource("HostUpRectangle")
+                : Application.Current.FindResource("HostDownRectangle");
+        }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

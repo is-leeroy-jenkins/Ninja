@@ -2,25 +2,26 @@
 using System.Windows.Controls;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class ServerConnectionInfoProfileDialog
+namespace Ninja.Views
 {
-    public ServerConnectionInfoProfileDialog()
-    {
-        InitializeComponent();
-    }
+    using ViewModels;
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
+    public partial class ServerConnectionInfoProfileDialog
     {
-        TextBoxName.Focus();
-    }
+        public ServerConnectionInfoProfileDialog()
+        {
+            InitializeComponent();
+        }
 
-    private void ContextMenu_Opened(object sender, RoutedEventArgs e)
-    {
-        if (sender is ContextMenu menu)
-            menu.DataContext = (ServerConnectionInfoProfileViewModel)DataContext;
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextBoxName.Focus();
+        }
+
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            if (sender is ContextMenu menu)
+                menu.DataContext = (ServerConnectionInfoProfileViewModel)DataContext;
+        }
     }
 }

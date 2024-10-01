@@ -2,27 +2,28 @@
 using System.Windows.Input;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class PortProfilesDialog
+namespace Ninja.Views
 {
-    public PortProfilesDialog()
-    {
-        InitializeComponent();
-    }
+    using ViewModels;
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
+    public partial class PortProfilesDialog
     {
-        TextBoxSearch.Focus();
-    }
+        public PortProfilesDialog()
+        {
+            InitializeComponent();
+        }
 
-    private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-    {
-        var x = (PortProfilesViewModel)DataContext;
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextBoxSearch.Focus();
+        }
 
-        if (x.OKCommand.CanExecute(null))
-            x.OKCommand.Execute(null);
+        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var x = (PortProfilesViewModel)DataContext;
+
+            if (x.OKCommand.CanExecute(null))
+                x.OKCommand.Execute(null);
+        }
     }
 }

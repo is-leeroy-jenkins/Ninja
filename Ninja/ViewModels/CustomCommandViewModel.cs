@@ -2,144 +2,145 @@
 using System.Windows.Input;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Utilities;
-
-public class CustomCommandViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    private readonly Guid _id;
+    using Utilities;
 
-    private readonly CustomCommandInfo _info;
-    private readonly bool _isLoading;
-
-    private string _arguments;
-
-    private string _filePath;
-
-    private bool _infoChanged;
-
-    private bool _isEdited;
-
-    private string _name;
-
-    public CustomCommandViewModel(Action<CustomCommandViewModel> saveCommand,
-        Action<CustomCommandViewModel> cancelHandler, bool isEdited = false, CustomCommandInfo info = null)
+    public class CustomCommandViewModel : ViewModelBase
     {
-        _isLoading = true;
+        private readonly Guid _id;
 
-        SaveCommand = new RelayCommand(_ => saveCommand(this));
-        CancelCommand = new RelayCommand(_ => cancelHandler(this));
+        private readonly CustomCommandInfo _info;
+        private readonly bool _isLoading;
 
-        _isEdited = isEdited;
+        private string _arguments;
 
-        // Create new --> GUID
-        _info = info ?? new CustomCommandInfo();
+        private string _filePath;
 
-        ID = _info.ID;
-        Name = _info.Name;
-        FilePath = _info.FilePath;
-        Arguments = _info.Arguments;
+        private bool _infoChanged;
 
-        _isLoading = false;
-    }
+        private bool _isEdited;
 
-    public ICommand SaveCommand { get; }
+        private string _name;
 
-    public ICommand CancelCommand { get; }
-
-    public Guid ID
-    {
-        get => _id;
-        private init
+        public CustomCommandViewModel(Action<CustomCommandViewModel> saveCommand,
+            Action<CustomCommandViewModel> cancelHandler, bool isEdited = false, CustomCommandInfo info = null)
         {
-            if (_id == value)
-                return;
+            _isLoading = true;
 
-            _id = value;
-            OnPropertyChanged();
+            SaveCommand = new RelayCommand(_ => saveCommand(this));
+            CancelCommand = new RelayCommand(_ => cancelHandler(this));
+
+            _isEdited = isEdited;
+
+            // Create new --> GUID
+            _info = info ?? new CustomCommandInfo();
+
+            ID = _info.ID;
+            Name = _info.Name;
+            FilePath = _info.FilePath;
+            Arguments = _info.Arguments;
+
+            _isLoading = false;
         }
-    }
 
-    public string Name
-    {
-        get => _name;
-        set
+        public ICommand SaveCommand { get; }
+
+        public ICommand CancelCommand { get; }
+
+        public Guid ID
         {
-            if (_name == value)
-                return;
+            get => _id;
+            private init
+            {
+                if (_id == value)
+                    return;
 
-            _name = value;
-
-            if (!_isLoading)
-                CheckInfoChanged();
-
-            OnPropertyChanged();
+                _id = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public string FilePath
-    {
-        get => _filePath;
-        set
+        public string Name
         {
-            if (_filePath == value)
-                return;
+            get => _name;
+            set
+            {
+                if (_name == value)
+                    return;
 
-            _filePath = value;
+                _name = value;
 
-            if (!_isLoading)
-                CheckInfoChanged();
+                if (!_isLoading)
+                    CheckInfoChanged();
 
-            OnPropertyChanged();
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public string Arguments
-    {
-        get => _arguments;
-        set
+        public string FilePath
         {
-            if (_arguments == value)
-                return;
+            get => _filePath;
+            set
+            {
+                if (_filePath == value)
+                    return;
 
-            _arguments = value;
+                _filePath = value;
 
-            if (!_isLoading)
-                CheckInfoChanged();
+                if (!_isLoading)
+                    CheckInfoChanged();
 
-            OnPropertyChanged();
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public bool InfoChanged
-    {
-        get => _infoChanged;
-        set
+        public string Arguments
         {
-            if (value == _infoChanged)
-                return;
+            get => _arguments;
+            set
+            {
+                if (_arguments == value)
+                    return;
 
-            _infoChanged = value;
-            OnPropertyChanged();
+                _arguments = value;
+
+                if (!_isLoading)
+                    CheckInfoChanged();
+
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public bool IsEdited
-    {
-        get => _isEdited;
-        set
+        public bool InfoChanged
         {
-            if (value == _isEdited)
-                return;
+            get => _infoChanged;
+            set
+            {
+                if (value == _infoChanged)
+                    return;
 
-            _isEdited = value;
-            OnPropertyChanged();
+                _infoChanged = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private void CheckInfoChanged()
-    {
-        InfoChanged = _info.Name != null || _info.FilePath != FilePath || _info.Arguments != Arguments;
+        public bool IsEdited
+        {
+            get => _isEdited;
+            set
+            {
+                if (value == _isEdited)
+                    return;
+
+                _isEdited = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private void CheckInfoChanged()
+        {
+            InfoChanged = _info.Name != null || _info.FilePath != FilePath || _info.Arguments != Arguments;
+        }
     }
 }

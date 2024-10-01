@@ -2,48 +2,49 @@
 using System.Windows.Controls;
 using Ninja.Localization.Resources;
 
-namespace Ninja.Validators;
-
-public class PortRangeValidator : ValidationRule
+namespace Ninja.Validators
 {
-    public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+    public class PortRangeValidator : ValidationRule
     {
-        var isValid = true;
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            var isValid = true;
 
-        if (value == null)
-            return new ValidationResult(false, Strings.EnterValidPortOrPortRange);
+            if (value == null)
+                return new ValidationResult(false, Strings.EnterValidPortOrPortRange);
 
-        foreach (var portOrRange in ((string)value).Replace(" ", "").Split(';'))
-            if (portOrRange.Contains('-'))
-            {
-                var portRange = portOrRange.Split('-');
-
-                if (int.TryParse(portRange[0], out var startPort) && int.TryParse(portRange[1], out var endPort))
+            foreach (var portOrRange in ((string)value).Replace(" ", "").Split(';'))
+                if (portOrRange.Contains('-'))
                 {
-                    if (!(startPort > 0 && startPort < 65536 && endPort > 0 && endPort < 65536 &&
-                          startPort < endPort))
+                    var portRange = portOrRange.Split('-');
+
+                    if (int.TryParse(portRange[0], out var startPort) && int.TryParse(portRange[1], out var endPort))
+                    {
+                        if (!(startPort > 0 && startPort < 65536 && endPort > 0 && endPort < 65536 &&
+                            startPort < endPort))
+                            isValid = false;
+                    }
+                    else
+                    {
                         isValid = false;
+                    }
                 }
                 else
                 {
-                    isValid = false;
-                }
-            }
-            else
-            {
-                if (int.TryParse(portOrRange, out var portNumber))
-                {
-                    if (!(portNumber > 0 && portNumber < 65536))
+                    if (int.TryParse(portOrRange, out var portNumber))
+                    {
+                        if (!(portNumber > 0 && portNumber < 65536))
+                            isValid = false;
+                    }
+                    else
+                    {
                         isValid = false;
+                    }
                 }
-                else
-                {
-                    isValid = false;
-                }
-            }
 
-        return isValid
-            ? ValidationResult.ValidResult
-            : new ValidationResult(false, Strings.EnterValidPortOrPortRange);
+            return isValid
+                ? ValidationResult.ValidResult
+                : new ValidationResult(false, Strings.EnterValidPortOrPortRange);
+        }
     }
 }

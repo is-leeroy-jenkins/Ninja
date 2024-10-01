@@ -6,123 +6,124 @@ using Ninja.Models.IPApi;
 using Ninja.Settings;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Models.IPApi;
-using Settings;
-using Utilities;
-
-public class IPApiDNSResolverWidgetViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    #region Events
+    using Models.IPApi;
+    using Settings;
+    using Utilities;
 
-    private void SettingsManager_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    public class IPApiDNSResolverWidgetViewModel : ViewModelBase
     {
-        switch (e.PropertyName)
-        {
-            case nameof(SettingsInfo.Dashboard_CheckIPApiDNSResolver):
-                // Check if enabled via settings
-                if (SettingsManager.Current.Dashboard_CheckIPApiDNSResolver)
-                    Check();
+        #region Events
 
-                break;
+        private void SettingsManager_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(SettingsInfo.Dashboard_CheckIPApiDNSResolver):
+                    // Check if enabled via settings
+                    if (SettingsManager.Current.Dashboard_CheckIPApiDNSResolver)
+                        Check();
+
+                    break;
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    #region Variables
+        #region Variables
 
-    private bool _isRunning;
+        private bool _isRunning;
 
-    public bool IsRunning
-    {
-        get => _isRunning;
-        set
+        public bool IsRunning
         {
-            if (value == _isRunning)
+            get => _isRunning;
+            set
+            {
+                if (value == _isRunning)
+                    return;
+
+                _isRunning = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private DNSResolverResult _result;
+
+        public DNSResolverResult Result
+        {
+            get => _result;
+            private set
+            {
+                if (value == _result)
+                    return;
+
+                _result = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region Constructor, load settings
+
+        public IPApiDNSResolverWidgetViewModel()
+        {
+            // Detect if network address or status changed...
+            NetworkChange.NetworkAvailabilityChanged += (_, _) => Check();
+            NetworkChange.NetworkAddressChanged += (_, _) => Check();
+
+            LoadSettings();
+
+            // Detect if settings have changed...
+            SettingsManager.Current.PropertyChanged += SettingsManager_PropertyChanged;
+        }
+
+        private void LoadSettings()
+        {
+        }
+
+        #endregion
+
+        #region ICommands & Actions
+
+        public ICommand CheckViaHotkeyCommand => new RelayCommand(_ => CheckViaHotkeyAction());
+
+        private void CheckViaHotkeyAction()
+        {
+            Check();
+        }
+
+        #endregion
+
+        #region Methods
+
+        public void Check()
+        {
+            CheckAsync().ConfigureAwait(false);
+        }
+
+        private async Task CheckAsync()
+        {
+            // Check is disabled via settings
+            if (!SettingsManager.Current.Dashboard_CheckIPApiDNSResolver)
                 return;
 
-            _isRunning = value;
-            OnPropertyChanged();
-        }
-    }
-
-    private DNSResolverResult _result;
-
-    public DNSResolverResult Result
-    {
-        get => _result;
-        private set
-        {
-            if (value == _result)
+            // Don't check multiple times if already running
+            if (IsRunning)
                 return;
 
-            _result = value;
-            OnPropertyChanged();
+            IsRunning = true;
+            Result = null;
+
+            // Make the user happy, let him see a reload animation (and he cannot spam the reload command)        
+            await Task.Delay(2000);
+
+            Result = await DNSResolverService.GetInstance().GetDNSResolverAsync();
+
+            IsRunning = false;
         }
+
+        #endregion
     }
-
-    #endregion
-
-    #region Constructor, load settings
-
-    public IPApiDNSResolverWidgetViewModel()
-    {
-        // Detect if network address or status changed...
-        NetworkChange.NetworkAvailabilityChanged += (_, _) => Check();
-        NetworkChange.NetworkAddressChanged += (_, _) => Check();
-
-        LoadSettings();
-
-        // Detect if settings have changed...
-        SettingsManager.Current.PropertyChanged += SettingsManager_PropertyChanged;
-    }
-
-    private void LoadSettings()
-    {
-    }
-
-    #endregion
-
-    #region ICommands & Actions
-
-    public ICommand CheckViaHotkeyCommand => new RelayCommand(_ => CheckViaHotkeyAction());
-
-    private void CheckViaHotkeyAction()
-    {
-        Check();
-    }
-
-    #endregion
-
-    #region Methods
-
-    public void Check()
-    {
-        CheckAsync().ConfigureAwait(false);
-    }
-
-    private async Task CheckAsync()
-    {
-        // Check is disabled via settings
-        if (!SettingsManager.Current.Dashboard_CheckIPApiDNSResolver)
-            return;
-
-        // Don't check multiple times if already running
-        if (IsRunning)
-            return;
-
-        IsRunning = true;
-        Result = null;
-
-        // Make the user happy, let him see a reload animation (and he cannot spam the reload command)        
-        await Task.Delay(2000);
-
-        Result = await DNSResolverService.GetInstance().GetDNSResolverAsync();
-
-        IsRunning = false;
-    }
-
-    #endregion
 }

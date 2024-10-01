@@ -1,16 +1,17 @@
 ﻿using System.Windows;
 
-namespace Ninja.Views;
-
-public partial class IPAddressAndSubnetmaskDialog
+namespace Ninja.Views
 {
-    public IPAddressAndSubnetmaskDialog()
+    public partial class IPAddressAndSubnetmaskDialog
     {
-        InitializeComponent();
-    }
+        public IPAddressAndSubnetmaskDialog()
+        {
+            InitializeComponent();
+        }
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        TextBoxIPAddress.Focus();
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextBoxIPAddress.Focus();
+        }
     }
 }

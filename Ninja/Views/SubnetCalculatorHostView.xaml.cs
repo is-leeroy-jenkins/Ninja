@@ -1,26 +1,27 @@
 ﻿using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class SubnetCalculatorHostView
+namespace Ninja.Views
 {
-    private readonly SubnetCalculatorHostViewModel _viewModel = new();
+    using ViewModels;
 
-    public SubnetCalculatorHostView()
+    public partial class SubnetCalculatorHostView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly SubnetCalculatorHostViewModel _viewModel = new();
 
-    public void OnViewHide()
-    {
-        _viewModel.OnViewHide();
-    }
+        public SubnetCalculatorHostView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
 
-    public void OnViewVisible()
-    {
-        _viewModel.OnViewVisible();
+        public void OnViewHide()
+        {
+            _viewModel.OnViewHide();
+        }
+
+        public void OnViewVisible()
+        {
+            _viewModel.OnViewVisible();
+        }
     }
 }

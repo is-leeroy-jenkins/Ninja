@@ -4,39 +4,40 @@ using System.Windows.Input;
 using MahApps.Metro.Controls.Dialogs;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class WebConsoleHostView
+namespace Ninja.Views
 {
-    private readonly WebConsoleHostViewModel _viewModel = new(DialogCoordinator.Instance);
+    using ViewModels;
 
-    public WebConsoleHostView()
+    public partial class WebConsoleHostView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly WebConsoleHostViewModel _viewModel = new(DialogCoordinator.Instance);
 
-    private void ContextMenu_Opened(object sender, RoutedEventArgs e)
-    {
-        if (sender is ContextMenu menu)
-            menu.DataContext = _viewModel;
-    }
+        public WebConsoleHostView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
 
-    private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-    {
-        if (e.ChangedButton == MouseButton.Left)
-            _viewModel.ConnectProfileCommand.Execute(null);
-    }
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            if (sender is ContextMenu menu)
+                menu.DataContext = _viewModel;
+        }
 
-    public void OnViewHide()
-    {
-        _viewModel.OnViewHide();
-    }
+        private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                _viewModel.ConnectProfileCommand.Execute(null);
+        }
 
-    public void OnViewVisible()
-    {
-        _viewModel.OnViewVisible();
+        public void OnViewHide()
+        {
+            _viewModel.OnViewHide();
+        }
+
+        public void OnViewVisible()
+        {
+            _viewModel.OnViewVisible();
+        }
     }
 }

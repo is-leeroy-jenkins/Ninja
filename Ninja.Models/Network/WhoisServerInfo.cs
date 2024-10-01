@@ -1,13 +1,14 @@
-﻿namespace Ninja.Models.Network;
-
-public class WhoisServerInfo
+﻿namespace Ninja.Models.Network
 {
-    public WhoisServerInfo(string server, string tld)
+    public class WhoisServerInfo
     {
-        Server = server;
-        Tld = tld;
-    }
+        public WhoisServerInfo(string server, string tld)
+        {
+            Server = server;
+            Tld = tld;
+        }
 
-    public string Server { get; set; }
-    public string Tld { get; set; }
+        public string Server { get; set; }
+        public string Tld { get; set; }
+    }
 }

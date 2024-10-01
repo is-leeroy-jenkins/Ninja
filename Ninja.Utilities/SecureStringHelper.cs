@@ -2,35 +2,36 @@
 using System.Runtime.InteropServices;
 using System.Security;
 
-namespace Ninja.Utilities;
-
-public static class SecureStringHelper
+namespace Ninja.Utilities
 {
-    public static string ConvertToString(SecureString secureString)
+    public static class SecureStringHelper
     {
-        var valuePtr = IntPtr.Zero;
-        try
+        public static string ConvertToString(SecureString secureString)
         {
-            valuePtr = Marshal.SecureStringToGlobalAllocUnicode(secureString);
-            return Marshal.PtrToStringUni(valuePtr);
+            var valuePtr = IntPtr.Zero;
+            try
+            {
+                valuePtr = Marshal.SecureStringToGlobalAllocUnicode(secureString);
+                return Marshal.PtrToStringUni(valuePtr);
+            }
+            finally
+            {
+                Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
+            }
         }
-        finally
+
+        public static SecureString ConvertToSecureString(string clearText)
         {
-            Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
+            if (clearText == null)
+                throw new ArgumentNullException(nameof(clearText));
+
+            var securePassword = new SecureString();
+
+            foreach (var c in clearText)
+                securePassword.AppendChar(c);
+
+            securePassword.MakeReadOnly();
+            return securePassword;
         }
-    }
-
-    public static SecureString ConvertToSecureString(string clearText)
-    {
-        if (clearText == null)
-            throw new ArgumentNullException(nameof(clearText));
-
-        var securePassword = new SecureString();
-
-        foreach (var c in clearText)
-            securePassword.AppendChar(c);
-
-        securePassword.MakeReadOnly();
-        return securePassword;
     }
 }

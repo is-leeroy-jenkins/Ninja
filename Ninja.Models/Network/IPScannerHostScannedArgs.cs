@@ -1,23 +1,24 @@
 ﻿using System;
 
-namespace Ninja.Models.Network;
-
-/// <summary>
-///     Contains the information of a scanned host in a <see cref="IPScanner" />.
-/// </summary>
-public class IPScannerHostScannedArgs : EventArgs
+namespace Ninja.Models.Network
 {
     /// <summary>
-    ///     Creates a new instance of <see cref="IPScannerHostScannedArgs" /> with the given <see cref="IPScannerHostInfo" />.
+    ///     Contains the information of a scanned host in a <see cref="IPScanner" />.
     /// </summary>
-    /// <param name="args">IP Scanner host information.</param>
-    public IPScannerHostScannedArgs(IPScannerHostInfo args)
+    public class IPScannerHostScannedArgs : EventArgs
     {
-        Args = args;
-    }
+        /// <summary>
+        ///     Creates a new instance of <see cref="IPScannerHostScannedArgs" /> with the given <see cref="IPScannerHostInfo" />.
+        /// </summary>
+        /// <param name="args">IP Scanner host information.</param>
+        public IPScannerHostScannedArgs(IPScannerHostInfo args)
+        {
+            Args = args;
+        }
 
-    /// <summary>
-    ///     IP Scanner host information.
-    /// </summary>
-    public IPScannerHostInfo Args { get; }
+        /// <summary>
+        ///     IP Scanner host information.
+        /// </summary>
+        public IPScannerHostInfo Args { get; }
+    }
 }

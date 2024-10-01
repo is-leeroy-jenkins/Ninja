@@ -1,8 +1,9 @@
-﻿namespace Ninja.Profiles;
-
-public enum ProfileEditMode
+﻿namespace Ninja.Profiles
 {
-    Add,
-    Edit,
-    Copy
+    public enum ProfileEditMode
+    {
+        Add,
+        Edit,
+        Copy
+    }
 }

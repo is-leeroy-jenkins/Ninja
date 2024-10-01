@@ -1,17 +1,18 @@
 ﻿using Dragablz;
 
-namespace Ninja.Controls;
-
-/// <summary>
-///     Interface for a user control that is a <see cref="DragablzTabItem.View" /> in a <see cref="DragablzTabItem" /> in a
-///     <see cref="TabablzControl" />.
-/// </summary>
-public interface IDragablzTabItem
+namespace Ninja.Controls
 {
     /// <summary>
-    ///     Method to close the tab.
+    ///     Interface for a user control that is a <see cref="DragablzTabItem.View" /> in a <see cref="DragablzTabItem" /> in a
+    ///     <see cref="TabablzControl" />.
     /// </summary>
-    public void CloseTab()
+    public interface IDragablzTabItem
     {
+        /// <summary>
+        ///     Method to close the tab.
+        /// </summary>
+        public void CloseTab()
+        {
+        }
     }
 }

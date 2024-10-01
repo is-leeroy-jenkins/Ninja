@@ -4,37 +4,38 @@ using System.Windows.Controls;
 using Ninja.Localization.Resources;
 using Ninja.Utilities;
 
-namespace Ninja.Validators;
-
-using Utilities;
-
-public class ServerValidator : ValidationRule
+namespace Ninja.Validators
 {
-    public ServerDependencyObjectWrapper Wrapper { get; set; }
+    using Utilities;
 
-    public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+    public class ServerValidator : ValidationRule
     {
-        var allowOnlyIPAddress = Wrapper.AllowOnlyIPAddress;
-        var genericErrorResult =
-            allowOnlyIPAddress ? Strings.EnterValidIPAddress : Strings.EnterValidHostnameOrIPAddress;
+        public ServerDependencyObjectWrapper Wrapper { get; set; }
 
-        var input = (value as string)?.Trim();
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            var allowOnlyIPAddress = Wrapper.AllowOnlyIPAddress;
+            var genericErrorResult =
+                allowOnlyIPAddress ? Strings.EnterValidIPAddress : Strings.EnterValidHostnameOrIPAddress;
 
-        if (string.IsNullOrEmpty(input))
+            var input = (value as string)?.Trim();
+
+            if (string.IsNullOrEmpty(input))
+                return new ValidationResult(false, genericErrorResult);
+
+            // Check if it is a valid IPv4 address like 192.168.0.1
+            if (Regex.IsMatch(input, RegexHelper.IPv4AddressRegex))
+                return ValidationResult.ValidResult;
+
+            // Check if it is a valid IPv6 address like ::1
+            if (Regex.IsMatch(input, RegexHelper.IPv6AddressRegex))
+                return ValidationResult.ValidResult;
+
+            // Check if it is a valid hostname like server-01 or server-01.example.com
+            if (Regex.IsMatch(input, RegexHelper.HostnameOrDomainRegex) && !allowOnlyIPAddress)
+                return ValidationResult.ValidResult;
+
             return new ValidationResult(false, genericErrorResult);
-
-        // Check if it is a valid IPv4 address like 192.168.0.1
-        if (Regex.IsMatch(input, RegexHelper.IPv4AddressRegex))
-            return ValidationResult.ValidResult;
-
-        // Check if it is a valid IPv6 address like ::1
-        if (Regex.IsMatch(input, RegexHelper.IPv6AddressRegex))
-            return ValidationResult.ValidResult;
-
-        // Check if it is a valid hostname like server-01 or server-01.example.com
-        if (Regex.IsMatch(input, RegexHelper.HostnameOrDomainRegex) && !allowOnlyIPAddress)
-            return ValidationResult.ValidResult;
-
-        return new ValidationResult(false, genericErrorResult);
+        }
     }
 }

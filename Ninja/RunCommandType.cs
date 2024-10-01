@@ -1,8 +1,9 @@
-﻿namespace Ninja;
-
-public enum RunCommandType
+﻿namespace Ninja
 {
-    Application,
+    public enum RunCommandType
+    {
+        Application,
 
-    Setting
+        Setting
+    }
 }

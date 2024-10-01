@@ -8,133 +8,134 @@ using Ninja.Models.PowerShell;
 using Ninja.Settings;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Models.PowerShell;
-using Settings;
-using Utilities;
-
-public class PowerShellConnectViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    private string _additionalCommandLine;
+    using Models.PowerShell;
+    using Settings;
+    using Utilities;
 
-    private string _command;
-
-    private bool _enableRemoteConsole;
-
-    private List<ExecutionPolicy> _executionPolicies = new();
-
-    private ExecutionPolicy _executionPolicy;
-
-    private string _host;
-
-    public PowerShellConnectViewModel(Action<PowerShellConnectViewModel> connectCommand,
-        Action<PowerShellConnectViewModel> cancelHandler, string host = null)
+    public class PowerShellConnectViewModel : ViewModelBase
     {
-        ConnectCommand = new RelayCommand(_ => connectCommand(this));
-        CancelCommand = new RelayCommand(_ => cancelHandler(this));
+        private string _additionalCommandLine;
 
-        if (!string.IsNullOrEmpty(host))
+        private string _command;
+
+        private bool _enableRemoteConsole;
+
+        private List<ExecutionPolicy> _executionPolicies = new();
+
+        private ExecutionPolicy _executionPolicy;
+
+        private string _host;
+
+        public PowerShellConnectViewModel(Action<PowerShellConnectViewModel> connectCommand,
+            Action<PowerShellConnectViewModel> cancelHandler, string host = null)
         {
-            Host = host;
-            EnableRemoteConsole = true;
+            ConnectCommand = new RelayCommand(_ => connectCommand(this));
+            CancelCommand = new RelayCommand(_ => cancelHandler(this));
+
+            if (!string.IsNullOrEmpty(host))
+            {
+                Host = host;
+                EnableRemoteConsole = true;
+            }
+
+            HostHistoryView = CollectionViewSource.GetDefaultView(SettingsManager.Current.PowerShell_HostHistory);
+
+            LoadSettings();
         }
 
-        HostHistoryView = CollectionViewSource.GetDefaultView(SettingsManager.Current.PowerShell_HostHistory);
+        public ICommand ConnectCommand { get; }
+        public ICommand CancelCommand { get; }
 
-        LoadSettings();
-    }
-
-    public ICommand ConnectCommand { get; }
-    public ICommand CancelCommand { get; }
-
-    public bool EnableRemoteConsole
-    {
-        get => _enableRemoteConsole;
-        set
+        public bool EnableRemoteConsole
         {
-            if (value == _enableRemoteConsole)
-                return;
+            get => _enableRemoteConsole;
+            set
+            {
+                if (value == _enableRemoteConsole)
+                    return;
 
-            _enableRemoteConsole = value;
-            OnPropertyChanged();
+                _enableRemoteConsole = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public string Host
-    {
-        get => _host;
-        set
+        public string Host
         {
-            if (value == _host)
-                return;
+            get => _host;
+            set
+            {
+                if (value == _host)
+                    return;
 
-            _host = value;
-            OnPropertyChanged();
+                _host = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public ICollectionView HostHistoryView { get; }
+        public ICollectionView HostHistoryView { get; }
 
-    public string Command
-    {
-        get => _command;
-        set
+        public string Command
         {
-            if (value == _command)
-                return;
+            get => _command;
+            set
+            {
+                if (value == _command)
+                    return;
 
-            _command = value;
-            OnPropertyChanged();
+                _command = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public string AdditionalCommandLine
-    {
-        get => _additionalCommandLine;
-        set
+        public string AdditionalCommandLine
         {
-            if (value == _additionalCommandLine)
-                return;
+            get => _additionalCommandLine;
+            set
+            {
+                if (value == _additionalCommandLine)
+                    return;
 
-            _additionalCommandLine = value;
-            OnPropertyChanged();
+                _additionalCommandLine = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public List<ExecutionPolicy> ExecutionPolicies
-    {
-        get => _executionPolicies;
-        private set
+        public List<ExecutionPolicy> ExecutionPolicies
         {
-            if (value == _executionPolicies)
-                return;
+            get => _executionPolicies;
+            private set
+            {
+                if (value == _executionPolicies)
+                    return;
 
-            _executionPolicies = value;
-            OnPropertyChanged();
+                _executionPolicies = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public ExecutionPolicy ExecutionPolicy
-    {
-        get => _executionPolicy;
-        set
+        public ExecutionPolicy ExecutionPolicy
         {
-            if (value == _executionPolicy)
-                return;
+            get => _executionPolicy;
+            set
+            {
+                if (value == _executionPolicy)
+                    return;
 
-            _executionPolicy = value;
-            OnPropertyChanged();
+                _executionPolicy = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private void LoadSettings()
-    {
-        Command = SettingsManager.Current.PowerShell_Command;
-        AdditionalCommandLine = SettingsManager.Current.PowerShell_AdditionalCommandLine;
+        private void LoadSettings()
+        {
+            Command = SettingsManager.Current.PowerShell_Command;
+            AdditionalCommandLine = SettingsManager.Current.PowerShell_AdditionalCommandLine;
 
-        ExecutionPolicies = Enum.GetValues(typeof(ExecutionPolicy)).Cast<ExecutionPolicy>().ToList();
-        ExecutionPolicy =
-            ExecutionPolicies.FirstOrDefault(x => x == SettingsManager.Current.PowerShell_ExecutionPolicy);
+            ExecutionPolicies = Enum.GetValues(typeof(ExecutionPolicy)).Cast<ExecutionPolicy>().ToList();
+            ExecutionPolicy =
+                ExecutionPolicies.FirstOrDefault(x => x == SettingsManager.Current.PowerShell_ExecutionPolicy);
+        }
     }
 }

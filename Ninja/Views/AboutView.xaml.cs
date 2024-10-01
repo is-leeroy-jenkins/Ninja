@@ -3,32 +3,33 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class AboutView
+namespace Ninja.Views
 {
-    private readonly AboutViewModel _viewModel = new();
+    using ViewModels;
 
-    public AboutView()
+    public partial class AboutView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly AboutViewModel _viewModel = new();
 
-    private void ContextMenu_Opened(object sender, RoutedEventArgs e)
-    {
-        if (sender is ContextMenu menu) menu.DataContext = _viewModel;
-    }
+        public AboutView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
 
-    // Fix mouse wheel when using DataGrid (https://stackoverflow.com/a/16235785/4986782)
-    private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
-    {
-        var scv = (ScrollViewer)sender;
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            if (sender is ContextMenu menu) menu.DataContext = _viewModel;
+        }
 
-        scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
+        // Fix mouse wheel when using DataGrid (https://stackoverflow.com/a/16235785/4986782)
+        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            var scv = (ScrollViewer)sender;
 
-        e.Handled = true;
+            scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
+
+            e.Handled = true;
+        }
     }
 }

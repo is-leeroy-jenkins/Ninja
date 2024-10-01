@@ -1,17 +1,18 @@
 ﻿using MahApps.Metro.Controls.Dialogs;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class SettingsAutostartView
+namespace Ninja.Views
 {
-    private readonly SettingsAutostartViewModel _viewModel = new(DialogCoordinator.Instance);
+    using ViewModels;
 
-    public SettingsAutostartView()
+    public partial class SettingsAutostartView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
+        private readonly SettingsAutostartViewModel _viewModel = new(DialogCoordinator.Instance);
+
+        public SettingsAutostartView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
     }
 }

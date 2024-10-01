@@ -1,16 +1,17 @@
 ﻿using System.Windows;
 
-namespace Ninja.Views;
-
-public partial class SNMPOIDProfileDialog
+namespace Ninja.Views
 {
-    public SNMPOIDProfileDialog()
+    public partial class SNMPOIDProfileDialog
     {
-        InitializeComponent();
-    }
+        public SNMPOIDProfileDialog()
+        {
+            InitializeComponent();
+        }
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        TextBoxName.Focus();
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextBoxName.Focus();
+        }
     }
 }

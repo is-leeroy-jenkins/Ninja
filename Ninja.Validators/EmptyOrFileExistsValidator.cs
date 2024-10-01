@@ -3,17 +3,18 @@ using System.IO;
 using System.Windows.Controls;
 using Ninja.Localization.Resources;
 
-namespace Ninja.Validators;
-
-public class EmptyOrFileExistsValidator : ValidationRule
+namespace Ninja.Validators
 {
-    public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+    public class EmptyOrFileExistsValidator : ValidationRule
     {
-        if (string.IsNullOrEmpty(value as string))
-            return ValidationResult.ValidResult;
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            if (string.IsNullOrEmpty(value as string))
+                return ValidationResult.ValidResult;
 
-        return File.Exists((string)value)
-            ? ValidationResult.ValidResult
-            : new ValidationResult(false, Strings.FileDoesNotExist);
+            return File.Exists((string)value)
+                ? ValidationResult.ValidResult
+                : new ValidationResult(false, Strings.FileDoesNotExist);
+        }
     }
 }

@@ -2,27 +2,28 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Ninja.Controls;
-
-public class MultiSelectDataGrid : DataGrid
+namespace Ninja.Controls
 {
-    public static readonly DependencyProperty SelectedItemsListProperty =
-        DependencyProperty.Register("SelectedItemsList", typeof(IList), typeof(MultiSelectDataGrid),
-            new PropertyMetadata(null));
-
-    public MultiSelectDataGrid()
+    public class MultiSelectDataGrid : DataGrid
     {
-        SelectionChanged += DataGridMultiItemSelect_SelectionChanged;
-    }
+        public static readonly DependencyProperty SelectedItemsListProperty =
+            DependencyProperty.Register("SelectedItemsList", typeof(IList), typeof(MultiSelectDataGrid),
+                new PropertyMetadata(null));
 
-    public IList SelectedItemsList
-    {
-        get => (IList)GetValue(SelectedItemsListProperty);
-        set => SetValue(SelectedItemsListProperty, value);
-    }
+        public MultiSelectDataGrid()
+        {
+            SelectionChanged += DataGridMultiItemSelect_SelectionChanged;
+        }
 
-    private void DataGridMultiItemSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        SelectedItemsList = SelectedItems;
+        public IList SelectedItemsList
+        {
+            get => (IList)GetValue(SelectedItemsListProperty);
+            set => SetValue(SelectedItemsListProperty, value);
+        }
+
+        private void DataGridMultiItemSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectedItemsList = SelectedItems;
+        }
     }
 }

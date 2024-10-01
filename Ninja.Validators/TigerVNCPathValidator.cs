@@ -4,19 +4,20 @@ using System.Linq;
 using System.Windows.Controls;
 using Ninja.Localization.Resources;
 
-namespace Ninja.Validators;
-
-public class TigerVNCPathValidator : ValidationRule
+namespace Ninja.Validators
 {
-    private static readonly string[] fileNames = { "vncviewer-", "vncviewer64-" };
-
-    public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+    public class TigerVNCPathValidator : ValidationRule
     {
-        var fileName = Path.GetFileName((string)value).ToLower();
+        private static readonly string[] fileNames = { "vncviewer-", "vncviewer64-" };
 
-        if (fileNames.Any(x => fileName.StartsWith(x) && fileName.EndsWith(".exe")))
-            return ValidationResult.ValidResult;
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            var fileName = Path.GetFileName((string)value).ToLower();
 
-        return new ValidationResult(false, Strings.NoValidTigerVNCPath);
+            if (fileNames.Any(x => fileName.StartsWith(x) && fileName.EndsWith(".exe")))
+                return ValidationResult.ValidResult;
+
+            return new ValidationResult(false, Strings.NoValidTigerVNCPath);
+        }
     }
 }

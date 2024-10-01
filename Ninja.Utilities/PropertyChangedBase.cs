@@ -1,14 +1,15 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Ninja.Utilities;
-
-public abstract class PropertyChangedBase : INotifyPropertyChanged
+namespace Ninja.Utilities
 {
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    public abstract class PropertyChangedBase : INotifyPropertyChanged
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

@@ -1,12 +1,13 @@
-﻿namespace Ninja.ViewModels;
-
-public class LookupHostViewModel : ViewModelBase
+﻿namespace Ninja.ViewModels
 {
-    public void OnViewVisible()
+    public class LookupHostViewModel : ViewModelBase
     {
-    }
+        public void OnViewVisible()
+        {
+        }
 
-    public void OnViewHide()
-    {
+        public void OnViewHide()
+        {
+        }
     }
 }

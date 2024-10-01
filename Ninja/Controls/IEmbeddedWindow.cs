@@ -1,15 +1,16 @@
-﻿namespace Ninja.Controls;
-
-/// <summary>
-///     Interface for a user control that contains an embedded window like a <see cref="PowerShellControl" /> or
-///     <see cref="PuTTYControl" />.
-/// </summary>
-public interface IEmbeddedWindow
+﻿namespace Ninja.Controls
 {
     /// <summary>
-    ///     Method to focus the embedded window.
+    ///     Interface for a user control that contains an embedded window like a <see cref="PowerShellControl" /> or
+    ///     <see cref="PuTTYControl" />.
     /// </summary>
-    public void FocusEmbeddedWindow()
+    public interface IEmbeddedWindow
     {
+        /// <summary>
+        ///     Method to focus the embedded window.
+        /// </summary>
+        public void FocusEmbeddedWindow()
+        {
+        }
     }
 }

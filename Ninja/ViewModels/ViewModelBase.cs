@@ -1,16 +1,17 @@
 ﻿using System.Windows.Input;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Utilities;
-
-public abstract class ViewModelBase : PropertyChangedBase
+namespace Ninja.ViewModels
 {
-    public ICommand CopyDataToClipboardCommand => new RelayCommand(CopyDataToClipboardAction);
+    using Utilities;
 
-    private static void CopyDataToClipboardAction(object data)
+    public abstract class ViewModelBase : PropertyChangedBase
     {
-        ClipboardHelper.SetClipboard(data.ToString());
+        public ICommand CopyDataToClipboardCommand => new RelayCommand(CopyDataToClipboardAction);
+
+        private static void CopyDataToClipboardAction(object data)
+        {
+            ClipboardHelper.SetClipboard(data.ToString());
+        }
     }
 }

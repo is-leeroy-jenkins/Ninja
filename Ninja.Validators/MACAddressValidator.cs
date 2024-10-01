@@ -4,16 +4,17 @@ using System.Windows.Controls;
 using Ninja.Localization.Resources;
 using Ninja.Utilities;
 
-namespace Ninja.Validators;
-
-using Utilities;
-
-public class MACAddressValidator : ValidationRule
+namespace Ninja.Validators
 {
-    public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+    using Utilities;
+
+    public class MACAddressValidator : ValidationRule
     {
-        return value != null && Regex.IsMatch((string)value, RegexHelper.MACAddressRegex)
-            ? ValidationResult.ValidResult
-            : new ValidationResult(false, Strings.EnterValidMACAddress);
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            return value != null && Regex.IsMatch((string)value, RegexHelper.MACAddressRegex)
+                ? ValidationResult.ValidResult
+                : new ValidationResult(false, Strings.EnterValidMACAddress);
+        }
     }
 }

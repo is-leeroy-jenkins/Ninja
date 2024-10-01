@@ -1,7 +1,8 @@
-﻿namespace Ninja.Models.Network;
-
-public enum WiFiRadio
+﻿namespace Ninja.Models.Network
 {
-    One,
-    Two
+    public enum WiFiRadio
+    {
+        One,
+        Two
+    }
 }

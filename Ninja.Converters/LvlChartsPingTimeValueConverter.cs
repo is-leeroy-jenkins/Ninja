@@ -3,29 +3,30 @@ using System.Globalization;
 using System.Windows.Data;
 using Ninja.Utilities;
 
-namespace Ninja.Converters;
-
-using Utilities;
-
-public sealed class LvlChartsPingTimeValueConverter : IValueConverter
+namespace Ninja.Converters
 {
-    /// <summary>
-    /// </summary>
-    /// <param name="value">ChartPoint.Instance (object)</param>
-    /// <param name="targetType"></param>
-    /// <param name="parameter"></param>
-    /// <param name="culture"></param>
-    /// <returns></returns>
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        if (value is LvlChartsDefaultInfo info)
-            return $"{info.Value} ms";
+    using Utilities;
 
-        return "-/-";
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public sealed class LvlChartsPingTimeValueConverter : IValueConverter
     {
-        throw new NotImplementedException();
+        /// <summary>
+        /// </summary>
+        /// <param name="value">ChartPoint.Instance (object)</param>
+        /// <param name="targetType"></param>
+        /// <param name="parameter"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is LvlChartsDefaultInfo info)
+                return $"{info.Value} ms";
+
+            return "-/-";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

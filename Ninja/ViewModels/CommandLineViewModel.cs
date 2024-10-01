@@ -6,140 +6,141 @@ using Ninja.Models;
 using Ninja.Settings;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Documentation;
-using Models;
-using Settings;
-using Utilities;
-
-public class CommandLineViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    #region Constructor, load settings
+    using Documentation;
+    using Models;
+    using Settings;
+    using Utilities;
 
-    public CommandLineViewModel()
+    public class CommandLineViewModel : ViewModelBase
     {
-        if (!string.IsNullOrEmpty(CommandLineManager.Current.WrongParameter))
+        #region Constructor, load settings
+
+        public CommandLineViewModel()
         {
-            WrongParameter = CommandLineManager.Current.WrongParameter;
-            DisplayWrongParameter = true;
+            if (!string.IsNullOrEmpty(CommandLineManager.Current.WrongParameter))
+            {
+                WrongParameter = CommandLineManager.Current.WrongParameter;
+                DisplayWrongParameter = true;
+            }
+
+            ParameterHelp = CommandLineManager.ParameterHelp;
+            ParameterResetSettings = CommandLineManager.ParameterResetSettings;
+            ParameterApplication =
+                CommandLineManager.GetParameterWithSplitIdentifier(CommandLineManager.ParameterApplication);
+            ParameterApplicationValues = string.Join(", ",
+                Enum.GetValues(typeof(ApplicationName)).Cast<ApplicationName>().ToList());
         }
 
-        ParameterHelp = CommandLineManager.ParameterHelp;
-        ParameterResetSettings = CommandLineManager.ParameterResetSettings;
-        ParameterApplication =
-            CommandLineManager.GetParameterWithSplitIdentifier(CommandLineManager.ParameterApplication);
-        ParameterApplicationValues = string.Join(", ",
-            Enum.GetValues(typeof(ApplicationName)).Cast<ApplicationName>().ToList());
-    }
+        #endregion
 
-    #endregion
+        #region Variables
 
-    #region Variables
+        private bool _displayWrongParameter;
 
-    private bool _displayWrongParameter;
-
-    public bool DisplayWrongParameter
-    {
-        get => _displayWrongParameter;
-        set
+        public bool DisplayWrongParameter
         {
-            if (value == _displayWrongParameter)
-                return;
+            get => _displayWrongParameter;
+            set
+            {
+                if (value == _displayWrongParameter)
+                    return;
 
-            _displayWrongParameter = value;
-            OnPropertyChanged();
+                _displayWrongParameter = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _wrongParameter;
+        private string _wrongParameter;
 
-    public string WrongParameter
-    {
-        get => _wrongParameter;
-        set
+        public string WrongParameter
         {
-            if (value == _wrongParameter)
-                return;
+            get => _wrongParameter;
+            set
+            {
+                if (value == _wrongParameter)
+                    return;
 
-            _wrongParameter = value;
-            OnPropertyChanged();
+                _wrongParameter = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _parameterHelp;
+        private string _parameterHelp;
 
-    public string ParameterHelp
-    {
-        get => _parameterHelp;
-        set
+        public string ParameterHelp
         {
-            if (value == _parameterHelp)
-                return;
+            get => _parameterHelp;
+            set
+            {
+                if (value == _parameterHelp)
+                    return;
 
-            _parameterHelp = value;
-            OnPropertyChanged();
+                _parameterHelp = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _parameterResetSettings;
+        private string _parameterResetSettings;
 
-    public string ParameterResetSettings
-    {
-        get => _parameterResetSettings;
-        set
+        public string ParameterResetSettings
         {
-            if (value == _parameterResetSettings)
-                return;
+            get => _parameterResetSettings;
+            set
+            {
+                if (value == _parameterResetSettings)
+                    return;
 
-            _parameterResetSettings = value;
-            OnPropertyChanged();
+                _parameterResetSettings = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _parameterApplication;
+        private string _parameterApplication;
 
-    public string ParameterApplication
-    {
-        get => _parameterApplication;
-        set
+        public string ParameterApplication
         {
-            if (value == _parameterApplication)
-                return;
+            get => _parameterApplication;
+            set
+            {
+                if (value == _parameterApplication)
+                    return;
 
-            _parameterApplication = value;
-            OnPropertyChanged();
+                _parameterApplication = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _parameterApplicationValues;
+        private string _parameterApplicationValues;
 
-    public string ParameterApplicationValues
-    {
-        get => _parameterApplicationValues;
-        set
+        public string ParameterApplicationValues
         {
-            if (value == _parameterApplicationValues)
-                return;
+            get => _parameterApplicationValues;
+            set
+            {
+                if (value == _parameterApplicationValues)
+                    return;
 
-            _parameterApplicationValues = value;
-            OnPropertyChanged();
+                _parameterApplicationValues = value;
+                OnPropertyChanged();
+            }
         }
+
+        #endregion
+
+        #region ICommand & Actions
+
+        public ICommand OpenDocumentationCommand
+        {
+            get { return new RelayCommand(_ => OpenDocumentationAction()); }
+        }
+
+        private void OpenDocumentationAction()
+        {
+            DocumentationManager.OpenDocumentation(DocumentationIdentifier.CommandLineArguments);
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region ICommand & Actions
-
-    public ICommand OpenDocumentationCommand
-    {
-        get { return new RelayCommand(_ => OpenDocumentationAction()); }
-    }
-
-    private void OpenDocumentationAction()
-    {
-        DocumentationManager.OpenDocumentation(DocumentationIdentifier.CommandLineArguments);
-    }
-
-    #endregion
 }

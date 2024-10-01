@@ -4,70 +4,71 @@ using System.Linq;
 using System.Windows.Input;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Utilities;
-
-public class DropdownViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    private readonly string _valueDescription;
+    using Utilities;
 
-    private readonly List<string> _values;
-
-    private string _selectedValue;
-
-    public DropdownViewModel(Action<DropdownViewModel> okCommand, Action<DropdownViewModel> cancelHandler,
-        List<string> values, string valueDescription)
+    public class DropdownViewModel : ViewModelBase
     {
-        ValueDescription = valueDescription;
-        Values = values;
+        private readonly string _valueDescription;
 
-        SelectedValue = Values.FirstOrDefault();
+        private readonly List<string> _values;
 
-        OKCommand = new RelayCommand(_ => okCommand(this));
-        CancelCommand = new RelayCommand(_ => cancelHandler(this));
-    }
+        private string _selectedValue;
 
-    public ICommand OKCommand { get; }
-
-    public ICommand CancelCommand { get; }
-
-    public string ValueDescription
-    {
-        get => _valueDescription;
-        private init
+        public DropdownViewModel(Action<DropdownViewModel> okCommand, Action<DropdownViewModel> cancelHandler,
+            List<string> values, string valueDescription)
         {
-            if (value == _valueDescription)
-                return;
+            ValueDescription = valueDescription;
+            Values = values;
 
-            _valueDescription = value;
-            OnPropertyChanged();
+            SelectedValue = Values.FirstOrDefault();
+
+            OKCommand = new RelayCommand(_ => okCommand(this));
+            CancelCommand = new RelayCommand(_ => cancelHandler(this));
         }
-    }
 
-    public List<string> Values
-    {
-        get => _values;
-        private init
+        public ICommand OKCommand { get; }
+
+        public ICommand CancelCommand { get; }
+
+        public string ValueDescription
         {
-            if (value == _values)
-                return;
+            get => _valueDescription;
+            private init
+            {
+                if (value == _valueDescription)
+                    return;
 
-            _values = value;
-            OnPropertyChanged();
+                _valueDescription = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public string SelectedValue
-    {
-        get => _selectedValue;
-        set
+        public List<string> Values
         {
-            if (value == _selectedValue)
-                return;
+            get => _values;
+            private init
+            {
+                if (value == _values)
+                    return;
 
-            _selectedValue = value;
-            OnPropertyChanged();
+                _values = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string SelectedValue
+        {
+            get => _selectedValue;
+            set
+            {
+                if (value == _selectedValue)
+                    return;
+
+                _selectedValue = value;
+                OnPropertyChanged();
+            }
         }
     }
 }

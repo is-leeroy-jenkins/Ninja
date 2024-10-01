@@ -1,27 +1,28 @@
-﻿namespace Ninja.Models.Export;
-
-/// <summary>
-///     Enum for the export file type.
-/// </summary>
-public enum ExportFileType
+﻿namespace Ninja.Models.Export
 {
     /// <summary>
-    ///     Csv file.
+    ///     Enum for the export file type.
     /// </summary>
-    Csv,
+    public enum ExportFileType
+    {
+        /// <summary>
+        ///     Csv file.
+        /// </summary>
+        Csv,
 
-    /// <summary>
-    ///     Xml file.
-    /// </summary>
-    Xml,
+        /// <summary>
+        ///     Xml file.
+        /// </summary>
+        Xml,
 
-    /// <summary>
-    ///     Json file.
-    /// </summary>
-    Json,
+        /// <summary>
+        ///     Json file.
+        /// </summary>
+        Json,
 
-    /// <summary>
-    ///     Text file.
-    /// </summary>
-    Txt
+        /// <summary>
+        ///     Text file.
+        /// </summary>
+        Txt
+    }
 }

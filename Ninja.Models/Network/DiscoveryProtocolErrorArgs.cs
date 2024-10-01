@@ -1,23 +1,24 @@
 ﻿using System;
 
-namespace Ninja.Models.Network;
-
-/// <summary>
-///     Contains the error message of a <see cref="DiscoveryProtocol" /> error.
-/// </summary>
-public class DiscoveryProtocolErrorArgs : EventArgs
+namespace Ninja.Models.Network
 {
     /// <summary>
-    ///     Creates a new instance of <see cref="DiscoveryProtocolErrorArgs" /> with the given error message.
+    ///     Contains the error message of a <see cref="DiscoveryProtocol" /> error.
     /// </summary>
-    /// <param name="errorMessage">Error message of the <see cref="DiscoveryProtocol" /> error.</param>
-    public DiscoveryProtocolErrorArgs(string errorMessage)
+    public class DiscoveryProtocolErrorArgs : EventArgs
     {
-        Message = errorMessage;
-    }
+        /// <summary>
+        ///     Creates a new instance of <see cref="DiscoveryProtocolErrorArgs" /> with the given error message.
+        /// </summary>
+        /// <param name="errorMessage">Error message of the <see cref="DiscoveryProtocol" /> error.</param>
+        public DiscoveryProtocolErrorArgs(string errorMessage)
+        {
+            Message = errorMessage;
+        }
 
-    /// <summary>
-    ///     Error message of the <see cref="DiscoveryProtocol" /> error.
-    /// </summary>
-    public string Message { get; private set; }
+        /// <summary>
+        ///     Error message of the <see cref="DiscoveryProtocol" /> error.
+        /// </summary>
+        public string Message { get; private set; }
+    }
 }

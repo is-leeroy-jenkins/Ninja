@@ -4,28 +4,29 @@ using System.Windows.Input;
 using MahApps.Metro.Controls.Dialogs;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class SNMPSettingsView
+namespace Ninja.Views
 {
-    private readonly SNMPSettingsViewModel _viewModel = new(DialogCoordinator.Instance);
+    using ViewModels;
 
-    public SNMPSettingsView()
+    public partial class SNMPSettingsView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly SNMPSettingsViewModel _viewModel = new(DialogCoordinator.Instance);
 
-    private void RowContextMenu_OnOpened(object sender, RoutedEventArgs e)
-    {
-        if (sender is ContextMenu menu)
-            menu.DataContext = _viewModel;
-    }
+        public SNMPSettingsView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
 
-    private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-    {
-        _viewModel.EditOIDProfile().ConfigureAwait(false);
+        private void RowContextMenu_OnOpened(object sender, RoutedEventArgs e)
+        {
+            if (sender is ContextMenu menu)
+                menu.DataContext = _viewModel;
+        }
+
+        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            _viewModel.EditOIDProfile().ConfigureAwait(false);
+        }
     }
 }

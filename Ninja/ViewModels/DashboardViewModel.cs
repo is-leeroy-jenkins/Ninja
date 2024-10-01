@@ -1,21 +1,22 @@
-﻿namespace Ninja.ViewModels;
-
-public class DashboardViewModel : ViewModelBase
+﻿namespace Ninja.ViewModels
 {
-    public DashboardViewModel()
+    public class DashboardViewModel : ViewModelBase
     {
-        LoadSettings();
-    }
+        public DashboardViewModel()
+        {
+            LoadSettings();
+        }
 
-    private void LoadSettings()
-    {
-    }
+        private void LoadSettings()
+        {
+        }
 
-    public void OnViewVisible()
-    {
-    }
+        public void OnViewVisible()
+        {
+        }
 
-    public void OnViewHide()
-    {
+        public void OnViewHide()
+        {
+        }
     }
 }

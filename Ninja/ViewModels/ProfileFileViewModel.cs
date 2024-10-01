@@ -3,58 +3,59 @@ using System.Windows.Input;
 using Ninja.Profiles;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Profiles;
-using Utilities;
-
-public class ProfileFileViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    private bool _isEdit;
+    using Profiles;
+    using Utilities;
 
-    private string _name;
-
-    public ProfileFileViewModel(Action<ProfileFileViewModel> addCommand, Action<ProfileFileViewModel> cancelHandler,
-        ProfileFileInfo info = null)
+    public class ProfileFileViewModel : ViewModelBase
     {
-        AcceptCommand = new RelayCommand(_ => addCommand(this));
-        CancelCommand = new RelayCommand(_ => cancelHandler(this));
+        private bool _isEdit;
 
-        if (info == null)
-            return;
+        private string _name;
 
-        Name = info.Name;
-
-        IsEdit = true;
-    }
-
-    public ICommand AcceptCommand { get; }
-
-    public ICommand CancelCommand { get; }
-
-    public string Name
-    {
-        get => _name;
-        set
+        public ProfileFileViewModel(Action<ProfileFileViewModel> addCommand, Action<ProfileFileViewModel> cancelHandler,
+            ProfileFileInfo info = null)
         {
-            if (value == _name)
+            AcceptCommand = new RelayCommand(_ => addCommand(this));
+            CancelCommand = new RelayCommand(_ => cancelHandler(this));
+
+            if (info == null)
                 return;
 
-            _name = value;
-            OnPropertyChanged();
+            Name = info.Name;
+
+            IsEdit = true;
         }
-    }
 
-    public bool IsEdit
-    {
-        get => _isEdit;
-        set
+        public ICommand AcceptCommand { get; }
+
+        public ICommand CancelCommand { get; }
+
+        public string Name
         {
-            if (value == _isEdit)
-                return;
+            get => _name;
+            set
+            {
+                if (value == _name)
+                    return;
 
-            _isEdit = value;
-            OnPropertyChanged();
+                _name = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsEdit
+        {
+            get => _isEdit;
+            set
+            {
+                if (value == _isEdit)
+                    return;
+
+                _isEdit = value;
+                OnPropertyChanged();
+            }
         }
     }
 }

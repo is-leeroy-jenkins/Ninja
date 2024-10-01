@@ -1,22 +1,23 @@
-﻿namespace Ninja.Profiles;
-
-/// <summary>
-///     Interface for the profile manager.
-///     Minimal implementation to get the view model.
-/// </summary>
-public interface IProfileManagerMinimal
+﻿namespace Ninja.Profiles
 {
     /// <summary>
-    ///     Event is fired when a dialog in the <see cref="ProfileManager" /> is opened.
+    ///     Interface for the profile manager.
+    ///     Minimal implementation to get the view model.
     /// </summary>
-    public void OnProfileManagerDialogOpen()
+    public interface IProfileManagerMinimal
     {
-    }
+        /// <summary>
+        ///     Event is fired when a dialog in the <see cref="ProfileManager" /> is opened.
+        /// </summary>
+        public void OnProfileManagerDialogOpen()
+        {
+        }
 
-    /// <summary>
-    ///     Event is fired when a dialog in the <see cref="ProfileManager" /> is closed.
-    /// </summary>
-    public void OnProfileManagerDialogClose()
-    {
+        /// <summary>
+        ///     Event is fired when a dialog in the <see cref="ProfileManager" /> is closed.
+        /// </summary>
+        public void OnProfileManagerDialogClose()
+        {
+        }
     }
 }

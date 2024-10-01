@@ -4,16 +4,17 @@ using System.Linq;
 using System.Windows.Controls;
 using Ninja.Localization.Resources;
 
-namespace Ninja.Validators;
-
-public class PuTTYPathValidator : ValidationRule
+namespace Ninja.Validators
 {
-    private static readonly string[] fileNames = { "putty.exe" };
-
-    public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+    public class PuTTYPathValidator : ValidationRule
     {
-        return fileNames.Contains(Path.GetFileName((string)value).ToLower())
-            ? ValidationResult.ValidResult
-            : new ValidationResult(false, Strings.NoValidPuTTYPath);
+        private static readonly string[] fileNames = { "putty.exe" };
+
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            return fileNames.Contains(Path.GetFileName((string)value).ToLower())
+                ? ValidationResult.ValidResult
+                : new ValidationResult(false, Strings.NoValidPuTTYPath);
+        }
     }
 }

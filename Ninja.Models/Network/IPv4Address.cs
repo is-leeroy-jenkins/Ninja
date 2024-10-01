@@ -3,134 +3,135 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 
-namespace Ninja.Models.Network;
-
-/// <summary>
-///     Class provides static methods to convert an IPv4 address.
-/// </summary>
-public static class IPv4Address
+namespace Ninja.Models.Network
 {
     /// <summary>
-    ///     First possible IPv4 multicast address.
+    ///     Class provides static methods to convert an IPv4 address.
     /// </summary>
-    private const int IPv4MulticastStart = -536870912;
-
-    /// <summary>
-    ///     Last possible IPv4 multicast address.
-    /// </summary>
-    private const int IPv4MulticastEnd = -268435457;
-
-    /// <summary>
-    ///     Method to convert a IPv4 address binary string ("11000000.10101000.00000001.00000001") to human readable string
-    ///     ("192.168.1.1").
-    /// </summary>
-    /// <param name="binaryString">IPv4 address as binary string ("11111111111111111111111100000000").</param>
-    /// <returns>Converted IPv4 address as human readable string ("255.255.255.0").</returns>
-    public static string ToHumanString(string binaryString)
+    public static class IPv4Address
     {
-        var ipv4AddressBinary = binaryString.Replace(".", "");
+        /// <summary>
+        ///     First possible IPv4 multicast address.
+        /// </summary>
+        private const int IPv4MulticastStart = -536870912;
 
-        var ipv4AddressOctets = new List<string>();
+        /// <summary>
+        ///     Last possible IPv4 multicast address.
+        /// </summary>
+        private const int IPv4MulticastEnd = -268435457;
 
-        for (var i = 0; i < ipv4AddressBinary.Length; i += 8)
-            ipv4AddressOctets.Add(Convert.ToInt32(ipv4AddressBinary.Substring(i, 8), 2).ToString());
-
-        return string.Join(".", ipv4AddressOctets);
-    }
-
-    /// <summary>
-    ///     Method to convert an human readable IPv4 address ("192.168.1.1") to binary string
-    ///     ("11000000.10101000.00000001.00000001").
-    /// </summary>
-    /// <param name="humanString">IPv4 address as human readable string ("192.168.1.1").</param>
-    /// <returns>Converted IPv4-Address as binary string ("11000000.10101000.00000001.00000001").</returns>
-    public static string ToBinaryString(string humanString)
-    {
-        return string.Join(".",
-            humanString.Split('.').Select(x => Convert.ToString(int.Parse(x), 2).PadLeft(8, '0')).ToArray());
-    }
-
-    /// <summary>
-    ///     Method to convert an <see cref="IPAddress" /> to <see cref="int" />.
-    /// </summary>
-    /// <param name="ipAddress"><see cref="IPAddress" />.</param>
-    /// <returns>IP address as <see cref="int" /></returns>
-    public static int ToInt32(IPAddress ipAddress)
-    {
-        var bytes = ipAddress.GetAddressBytes();
-
-        if (BitConverter.IsLittleEndian)
-            Array.Reverse(bytes);
-
-        return BitConverter.ToInt32(bytes, 0);
-    }
-
-    /// <summary>
-    ///     Method to convert an <see cref="int" /> to an <see cref="IPAddress" />.
-    /// </summary>
-    /// <param name="i">IP address as <see cref="int" />.</param>
-    /// <returns>Converted <see cref="IPAddress" />.</returns>
-    public static IPAddress FromInt32(int i)
-    {
-        var bytes = BitConverter.GetBytes(i);
-
-        if (BitConverter.IsLittleEndian)
-            Array.Reverse(bytes);
-
-        return new IPAddress(bytes);
-    }
-
-    /// <summary>
-    ///     Method to check if an IPv4 address is a multicast address.
-    /// </summary>
-    /// <param name="ipAddress">IPv4 address as <see cref="IPAddress" />.</param>
-    /// <returns>True if it is a multicast address. False if not.</returns>
-    public static bool IsMulticast(IPAddress ipAddress)
-    {
-        var ip = ToInt32(ipAddress);
-
-        return ip >= IPv4MulticastStart && ip <= IPv4MulticastEnd;
-    }
-
-    /// <summary>
-    ///     Convert a list of IP addresses to a string.
-    /// </summary>
-    /// <param name="ipAddresses">IP addresses.</param>
-    /// <param name="delimiter">Delimiter to separate the IP addresses. Null for new line. (Default: null)</param>
-    /// <returns>IP addresses as string.</returns>
-    public static object ConvertIPAddressListToString(IEnumerable<IPAddress> ipAddresses, string delimiter = null)
-    {
-        var result = string.Empty;
-
-        foreach (var ipAddr in ipAddresses)
+        /// <summary>
+        ///     Method to convert a IPv4 address binary string ("11000000.10101000.00000001.00000001") to human readable string
+        ///     ("192.168.1.1").
+        /// </summary>
+        /// <param name="binaryString">IPv4 address as binary string ("11111111111111111111111100000000").</param>
+        /// <returns>Converted IPv4 address as human readable string ("255.255.255.0").</returns>
+        public static string ToHumanString(string binaryString)
         {
-            if (!string.IsNullOrEmpty(result))
-                result += delimiter ?? Environment.NewLine;
+            var ipv4AddressBinary = binaryString.Replace(".", "");
 
-            result += ipAddr.ToString();
+            var ipv4AddressOctets = new List<string>();
+
+            for (var i = 0; i < ipv4AddressBinary.Length; i += 8)
+                ipv4AddressOctets.Add(Convert.ToInt32(ipv4AddressBinary.Substring(i, 8), 2).ToString());
+
+            return string.Join(".", ipv4AddressOctets);
         }
 
-        return result;
-    }
-
-    /// <summary>
-    ///     Convert a list of IP addresses with subnetmasks to a string.
-    /// </summary>
-    /// <param name="ipAddresses">IP addresses with subnetmasks.</param>
-    /// <returns>IP addresses with subnetmasks as string.</returns>
-    public static object ConvertIPAddressWithSubnetmaskListToString(Tuple<IPAddress, IPAddress>[] ipAddresses,
-        string delimiter = null)
-    {
-        var result = string.Empty;
-
-        foreach (var ipAddr in ipAddresses)
+        /// <summary>
+        ///     Method to convert an human readable IPv4 address ("192.168.1.1") to binary string
+        ///     ("11000000.10101000.00000001.00000001").
+        /// </summary>
+        /// <param name="humanString">IPv4 address as human readable string ("192.168.1.1").</param>
+        /// <returns>Converted IPv4-Address as binary string ("11000000.10101000.00000001.00000001").</returns>
+        public static string ToBinaryString(string humanString)
         {
-            if (!string.IsNullOrEmpty(result))
-                result += delimiter ?? Environment.NewLine;
-
-            result += ipAddr.Item1 + "/" + Subnetmask.ConvertSubnetmaskToCidr(ipAddr.Item2);
+            return string.Join(".",
+                humanString.Split('.').Select(x => Convert.ToString(int.Parse(x), 2).PadLeft(8, '0')).ToArray());
         }
 
-        return result;
+        /// <summary>
+        ///     Method to convert an <see cref="IPAddress" /> to <see cref="int" />.
+        /// </summary>
+        /// <param name="ipAddress"><see cref="IPAddress" />.</param>
+        /// <returns>IP address as <see cref="int" /></returns>
+        public static int ToInt32(IPAddress ipAddress)
+        {
+            var bytes = ipAddress.GetAddressBytes();
+
+            if (BitConverter.IsLittleEndian)
+                Array.Reverse(bytes);
+
+            return BitConverter.ToInt32(bytes, 0);
+        }
+
+        /// <summary>
+        ///     Method to convert an <see cref="int" /> to an <see cref="IPAddress" />.
+        /// </summary>
+        /// <param name="i">IP address as <see cref="int" />.</param>
+        /// <returns>Converted <see cref="IPAddress" />.</returns>
+        public static IPAddress FromInt32(int i)
+        {
+            var bytes = BitConverter.GetBytes(i);
+
+            if (BitConverter.IsLittleEndian)
+                Array.Reverse(bytes);
+
+            return new IPAddress(bytes);
+        }
+
+        /// <summary>
+        ///     Method to check if an IPv4 address is a multicast address.
+        /// </summary>
+        /// <param name="ipAddress">IPv4 address as <see cref="IPAddress" />.</param>
+        /// <returns>True if it is a multicast address. False if not.</returns>
+        public static bool IsMulticast(IPAddress ipAddress)
+        {
+            var ip = ToInt32(ipAddress);
+
+            return ip >= IPv4MulticastStart && ip <= IPv4MulticastEnd;
+        }
+
+        /// <summary>
+        ///     Convert a list of IP addresses to a string.
+        /// </summary>
+        /// <param name="ipAddresses">IP addresses.</param>
+        /// <param name="delimiter">Delimiter to separate the IP addresses. Null for new line. (Default: null)</param>
+        /// <returns>IP addresses as string.</returns>
+        public static object ConvertIPAddressListToString(IEnumerable<IPAddress> ipAddresses, string delimiter = null)
+        {
+            var result = string.Empty;
+
+            foreach (var ipAddr in ipAddresses)
+            {
+                if (!string.IsNullOrEmpty(result))
+                    result += delimiter ?? Environment.NewLine;
+
+                result += ipAddr.ToString();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        ///     Convert a list of IP addresses with subnetmasks to a string.
+        /// </summary>
+        /// <param name="ipAddresses">IP addresses with subnetmasks.</param>
+        /// <returns>IP addresses with subnetmasks as string.</returns>
+        public static object ConvertIPAddressWithSubnetmaskListToString(Tuple<IPAddress, IPAddress>[] ipAddresses,
+            string delimiter = null)
+        {
+            var result = string.Empty;
+
+            foreach (var ipAddr in ipAddresses)
+            {
+                if (!string.IsNullOrEmpty(result))
+                    result += delimiter ?? Environment.NewLine;
+
+                result += ipAddr.Item1 + "/" + Subnetmask.ConvertSubnetmaskToCidr(ipAddr.Item2);
+            }
+
+            return result;
+        }
     }
 }

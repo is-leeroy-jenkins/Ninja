@@ -1,27 +1,28 @@
-﻿namespace Ninja.Models.Network;
-
-/// <summary>
-///     Enum for the transport protocol.
-/// </summary>
-public enum TransportProtocol
+﻿namespace Ninja.Models.Network
 {
     /// <summary>
-    ///     Transmission Control Protocol (TCP).
+    ///     Enum for the transport protocol.
     /// </summary>
-    Tcp,
+    public enum TransportProtocol
+    {
+        /// <summary>
+        ///     Transmission Control Protocol (TCP).
+        /// </summary>
+        Tcp,
 
-    /// <summary>
-    ///     User Datagram Protocol (UDP).
-    /// </summary>
-    Udp,
+        /// <summary>
+        ///     User Datagram Protocol (UDP).
+        /// </summary>
+        Udp,
 
-    /// <summary>
-    ///     Stream Control Transmission Protocol (SCTP).
-    /// </summary>
-    Sctp,
+        /// <summary>
+        ///     Stream Control Transmission Protocol (SCTP).
+        /// </summary>
+        Sctp,
 
-    /// <summary>
-    ///     Datagram Congestion Control Protocol (DCCP).
-    /// </summary>
-    Dccp
+        /// <summary>
+        ///     Datagram Congestion Control Protocol (DCCP).
+        /// </summary>
+        Dccp
+    }
 }

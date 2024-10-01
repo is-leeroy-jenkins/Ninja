@@ -5,44 +5,45 @@ using MahApps.Metro.Controls.Dialogs;
 using Ninja.Controls;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using Controls;
-using ViewModels;
-
-public partial class TracerouteView : IDragablzTabItem
+namespace Ninja.Views
 {
-    private readonly TracerouteViewModel _viewModel;
+    using Controls;
+    using ViewModels;
 
-    public TracerouteView(Guid tabId, string host = null)
+    public partial class TracerouteView : IDragablzTabItem
     {
-        InitializeComponent();
+        private readonly TracerouteViewModel _viewModel;
 
-        _viewModel = new TracerouteViewModel(DialogCoordinator.Instance, tabId, host);
+        public TracerouteView(Guid tabId, string host = null)
+        {
+            InitializeComponent();
 
-        DataContext = _viewModel;
+            _viewModel = new TracerouteViewModel(DialogCoordinator.Instance, tabId, host);
 
-        Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
-    }
+            DataContext = _viewModel;
 
-    public void CloseTab()
-    {
-        _viewModel.OnClose();
-    }
+            Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
+        }
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        _viewModel.OnLoaded();
-    }
+        public void CloseTab()
+        {
+            _viewModel.OnClose();
+        }
 
-    private void Dispatcher_ShutdownStarted(object sender, EventArgs e)
-    {
-        _viewModel.OnClose();
-    }
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            _viewModel.OnLoaded();
+        }
 
-    private void ContextMenu_Opened(object sender, RoutedEventArgs e)
-    {
-        if (sender is ContextMenu menu)
-            menu.DataContext = _viewModel;
+        private void Dispatcher_ShutdownStarted(object sender, EventArgs e)
+        {
+            _viewModel.OnClose();
+        }
+
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            if (sender is ContextMenu menu)
+                menu.DataContext = _viewModel;
+        }
     }
 }

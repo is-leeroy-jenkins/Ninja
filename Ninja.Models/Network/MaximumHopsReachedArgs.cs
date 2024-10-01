@@ -1,17 +1,18 @@
 ﻿using System;
 
-namespace Ninja.Models.Network;
-
-public class MaximumHopsReachedArgs : EventArgs
+namespace Ninja.Models.Network
 {
-    public MaximumHopsReachedArgs()
+    public class MaximumHopsReachedArgs : EventArgs
     {
-    }
+        public MaximumHopsReachedArgs()
+        {
+        }
 
-    public MaximumHopsReachedArgs(int hops)
-    {
-        Hops = hops;
-    }
+        public MaximumHopsReachedArgs(int hops)
+        {
+            Hops = hops;
+        }
 
-    public int Hops { get; set; }
+        public int Hops { get; set; }
+    }
 }

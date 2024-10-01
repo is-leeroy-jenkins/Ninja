@@ -2,14 +2,15 @@
 using System.Windows.Controls;
 using Ninja.Localization.Resources;
 
-namespace Ninja.Validators;
-
-public class EmptyValidator : ValidationRule
+namespace Ninja.Validators
 {
-    public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+    public class EmptyValidator : ValidationRule
     {
-        return string.IsNullOrEmpty((string)value)
-            ? new ValidationResult(false, Strings.FieldCannotBeEmpty)
-            : ValidationResult.ValidResult;
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            return string.IsNullOrEmpty((string)value)
+                ? new ValidationResult(false, Strings.FieldCannotBeEmpty)
+                : ValidationResult.ValidResult;
+        }
     }
 }

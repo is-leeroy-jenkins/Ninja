@@ -1,16 +1,17 @@
 ﻿using System.Windows;
 
-namespace Ninja.Views;
-
-public partial class IPAddressDialog
+namespace Ninja.Views
 {
-    public IPAddressDialog()
+    public partial class IPAddressDialog
     {
-        InitializeComponent();
-    }
+        public IPAddressDialog()
+        {
+            InitializeComponent();
+        }
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        TextBoxIPAddress.Focus();
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextBoxIPAddress.Focus();
+        }
     }
 }

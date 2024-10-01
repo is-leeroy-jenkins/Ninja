@@ -1,458 +1,459 @@
 ﻿using Ninja.Models;
 using Ninja.Utilities;
 
-namespace Ninja.Settings;
-
-using Models;
-using Utilities;
-
-/*
- * This class is used to store static and dynamic configuration used in the application
- * across multiple windows, views, dialogs, etc.
- */
-public class ConfigurationInfo : PropertyChangedBase
+namespace Ninja.Settings
 {
-    #region Constructor
+    using Models;
+    using Utilities;
 
-    /// <summary>
-    ///     Create a new instance of <see cref="ConfigurationInfo" /> with static configuration.
-    /// </summary>
-    public ConfigurationInfo(bool isAdmin, string executionPath, string applicationFullName, string applicationName,
-        bool isPortable)
+    /*
+     * This class is used to store static and dynamic configuration used in the application
+     * across multiple windows, views, dialogs, etc.
+     */
+    public class ConfigurationInfo : PropertyChangedBase
     {
-        IsAdmin = isAdmin;
-        ExecutionPath = executionPath;
-        ApplicationFullName = applicationFullName;
-        ApplicationName = applicationName;
-        IsPortable = isPortable;
-    }
+        #region Constructor
 
-    #endregion
-
-    #region Static properties set at startup
-
-    /// <summary>
-    ///     Indicates that the application is running as administrator.
-    /// </summary>
-    public bool IsAdmin { get; set; }
-
-    /// <summary>
-    ///     Execution path of the application like "C:\Program Files\NETworkManager".
-    /// </summary>
-    public string ExecutionPath { get; }
-
-    /// <summary>
-    ///     Full path of the application like "C:\Program Files\NETworkManager\NETworkManager.exe"
-    /// </summary>
-    public string ApplicationFullName { get; }
-
-    /// <summary>
-    ///     Application name like "NETworkManager".
-    /// </summary>
-    public string ApplicationName { get; }
-
-    /// <summary>
-    ///     Indicates if the application is running in portable mode.
-    /// </summary>
-    public bool IsPortable { get; }
-
-    #endregion
-
-    #region Dynamic properties set at runtime
-
-    /// <summary>
-    ///     Shows a reset notice if the settings were corrupted and reset.
-    /// </summary>
-    public bool ShowSettingsResetNoteOnStartup { get; set; }
-
-    /// <summary>
-    ///     Currently selected application.
-    /// </summary>
-    public ApplicationName CurrentApplication { get; set; } = Models.ApplicationName.None;
-
-    private int _ipScannerTabCount;
-
-    public int IPScannerTabCount
-    {
-        get => _ipScannerTabCount;
-        set
+        /// <summary>
+        ///     Create a new instance of <see cref="ConfigurationInfo" /> with static configuration.
+        /// </summary>
+        public ConfigurationInfo(bool isAdmin, string executionPath, string applicationFullName, string applicationName,
+            bool isPortable)
         {
-            if (value == _ipScannerTabCount)
-                return;
-
-            _ipScannerTabCount = value;
-            OnPropertyChanged();
+            IsAdmin = isAdmin;
+            ExecutionPath = executionPath;
+            ApplicationFullName = applicationFullName;
+            ApplicationName = applicationName;
+            IsPortable = isPortable;
         }
-    }
 
-    private int _portScannerTabCount;
+        #endregion
 
-    public int PortScannerTabCount
-    {
-        get => _portScannerTabCount;
-        set
+        #region Static properties set at startup
+
+        /// <summary>
+        ///     Indicates that the application is running as administrator.
+        /// </summary>
+        public bool IsAdmin { get; set; }
+
+        /// <summary>
+        ///     Execution path of the application like "C:\Program Files\NETworkManager".
+        /// </summary>
+        public string ExecutionPath { get; }
+
+        /// <summary>
+        ///     Full path of the application like "C:\Program Files\NETworkManager\NETworkManager.exe"
+        /// </summary>
+        public string ApplicationFullName { get; }
+
+        /// <summary>
+        ///     Application name like "NETworkManager".
+        /// </summary>
+        public string ApplicationName { get; }
+
+        /// <summary>
+        ///     Indicates if the application is running in portable mode.
+        /// </summary>
+        public bool IsPortable { get; }
+
+        #endregion
+
+        #region Dynamic properties set at runtime
+
+        /// <summary>
+        ///     Shows a reset notice if the settings were corrupted and reset.
+        /// </summary>
+        public bool ShowSettingsResetNoteOnStartup { get; set; }
+
+        /// <summary>
+        ///     Currently selected application.
+        /// </summary>
+        public ApplicationName CurrentApplication { get; set; } = Models.ApplicationName.None;
+
+        private int _ipScannerTabCount;
+
+        public int IPScannerTabCount
         {
-            if (value == _portScannerTabCount)
-                return;
+            get => _ipScannerTabCount;
+            set
+            {
+                if (value == _ipScannerTabCount)
+                    return;
 
-            _portScannerTabCount = value;
-            OnPropertyChanged();
+                _ipScannerTabCount = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _tracerouteTabCount;
+        private int _portScannerTabCount;
 
-    public int TracerouteTabCount
-    {
-        get => _tracerouteTabCount;
-        set
+        public int PortScannerTabCount
         {
-            if (value == _tracerouteTabCount)
-                return;
+            get => _portScannerTabCount;
+            set
+            {
+                if (value == _portScannerTabCount)
+                    return;
 
-            _tracerouteTabCount = value;
-            OnPropertyChanged();
+                _portScannerTabCount = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _dnsLookupTabCount;
+        private int _tracerouteTabCount;
 
-    public int DNSLookupTabCount
-    {
-        get => _dnsLookupTabCount;
-        set
+        public int TracerouteTabCount
         {
-            if (value == _dnsLookupTabCount)
-                return;
+            get => _tracerouteTabCount;
+            set
+            {
+                if (value == _tracerouteTabCount)
+                    return;
 
-            _dnsLookupTabCount = value;
-            OnPropertyChanged();
+                _tracerouteTabCount = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _remoteDesktopTabCount;
+        private int _dnsLookupTabCount;
 
-    public int RemoteDesktopTabCount
-    {
-        get => _remoteDesktopTabCount;
-        set
+        public int DNSLookupTabCount
         {
-            if (value == _remoteDesktopTabCount)
-                return;
+            get => _dnsLookupTabCount;
+            set
+            {
+                if (value == _dnsLookupTabCount)
+                    return;
 
-            _remoteDesktopTabCount = value;
-            OnPropertyChanged();
+                _dnsLookupTabCount = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _isRemoteDesktopWindowDragging;
+        private int _remoteDesktopTabCount;
 
-    public bool IsRemoteDesktopWindowDragging
-    {
-        get => _isRemoteDesktopWindowDragging;
-        set
+        public int RemoteDesktopTabCount
         {
-            if (value == _isRemoteDesktopWindowDragging)
-                return;
+            get => _remoteDesktopTabCount;
+            set
+            {
+                if (value == _remoteDesktopTabCount)
+                    return;
 
-            _isRemoteDesktopWindowDragging = value;
-            OnPropertyChanged();
+                _remoteDesktopTabCount = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _powerShellTabCount;
+        private bool _isRemoteDesktopWindowDragging;
 
-    public int PowerShellTabCount
-    {
-        get => _powerShellTabCount;
-        set
+        public bool IsRemoteDesktopWindowDragging
         {
-            if (value == _powerShellTabCount)
-                return;
+            get => _isRemoteDesktopWindowDragging;
+            set
+            {
+                if (value == _isRemoteDesktopWindowDragging)
+                    return;
 
-            _powerShellTabCount = value;
-            OnPropertyChanged();
+                _isRemoteDesktopWindowDragging = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _isPowerShellWindowDragging;
+        private int _powerShellTabCount;
 
-    public bool IsPowerShellWindowDragging
-    {
-        get => _isPowerShellWindowDragging;
-        set
+        public int PowerShellTabCount
         {
-            if (value == _isPowerShellWindowDragging)
-                return;
+            get => _powerShellTabCount;
+            set
+            {
+                if (value == _powerShellTabCount)
+                    return;
 
-            _isPowerShellWindowDragging = value;
-            OnPropertyChanged();
+                _powerShellTabCount = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _puTTYTabCount;
+        private bool _isPowerShellWindowDragging;
 
-    public int PuTTYTabCount
-    {
-        get => _puTTYTabCount;
-        set
+        public bool IsPowerShellWindowDragging
         {
-            if (value == _puTTYTabCount)
-                return;
+            get => _isPowerShellWindowDragging;
+            set
+            {
+                if (value == _isPowerShellWindowDragging)
+                    return;
 
-            _puTTYTabCount = value;
-            OnPropertyChanged();
+                _isPowerShellWindowDragging = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _isPuTTYWindowDragging;
+        private int _puTTYTabCount;
 
-    public bool IsPuTTYWindowDragging
-    {
-        get => _isPuTTYWindowDragging;
-        set
+        public int PuTTYTabCount
         {
-            if (value == _isPuTTYWindowDragging)
-                return;
+            get => _puTTYTabCount;
+            set
+            {
+                if (value == _puTTYTabCount)
+                    return;
 
-            _isPuTTYWindowDragging = value;
-            OnPropertyChanged();
+                _puTTYTabCount = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _awsSessionManagerTabCount;
+        private bool _isPuTTYWindowDragging;
 
-    public int AWSSessionManagerTabCount
-    {
-        get => _awsSessionManagerTabCount;
-        set
+        public bool IsPuTTYWindowDragging
         {
-            if (value == _awsSessionManagerTabCount)
-                return;
+            get => _isPuTTYWindowDragging;
+            set
+            {
+                if (value == _isPuTTYWindowDragging)
+                    return;
 
-            _awsSessionManagerTabCount = value;
-            OnPropertyChanged();
+                _isPuTTYWindowDragging = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _isAWSSessionManagerWindowDragging;
+        private int _awsSessionManagerTabCount;
 
-    public bool IsAWSSessionManagerWindowDragging
-    {
-        get => _isAWSSessionManagerWindowDragging;
-        set
+        public int AWSSessionManagerTabCount
         {
-            if (value == _isAWSSessionManagerWindowDragging)
-                return;
+            get => _awsSessionManagerTabCount;
+            set
+            {
+                if (value == _awsSessionManagerTabCount)
+                    return;
 
-            _isAWSSessionManagerWindowDragging = value;
-            OnPropertyChanged();
+                _awsSessionManagerTabCount = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _tigerVNCTabCount;
+        private bool _isAWSSessionManagerWindowDragging;
 
-    public int TigerVNCTabCount
-    {
-        get => _tigerVNCTabCount;
-        set
+        public bool IsAWSSessionManagerWindowDragging
         {
-            if (value == _tigerVNCTabCount)
-                return;
+            get => _isAWSSessionManagerWindowDragging;
+            set
+            {
+                if (value == _isAWSSessionManagerWindowDragging)
+                    return;
 
-            _tigerVNCTabCount = value;
-            OnPropertyChanged();
+                _isAWSSessionManagerWindowDragging = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _isTigerVNCWindowDragging;
+        private int _tigerVNCTabCount;
 
-    public bool IsTigerVNCWindowDragging
-    {
-        get => _isTigerVNCWindowDragging;
-        set
+        public int TigerVNCTabCount
         {
-            if (value == _isTigerVNCWindowDragging)
-                return;
+            get => _tigerVNCTabCount;
+            set
+            {
+                if (value == _tigerVNCTabCount)
+                    return;
 
-            _isTigerVNCWindowDragging = value;
-            OnPropertyChanged();
+                _tigerVNCTabCount = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _webConsoleTabCount;
+        private bool _isTigerVNCWindowDragging;
 
-    public int WebConsoleTabCount
-    {
-        get => _webConsoleTabCount;
-        set
+        public bool IsTigerVNCWindowDragging
         {
-            if (value == _webConsoleTabCount)
-                return;
+            get => _isTigerVNCWindowDragging;
+            set
+            {
+                if (value == _isTigerVNCWindowDragging)
+                    return;
 
-            _webConsoleTabCount = value;
-            OnPropertyChanged();
+                _isTigerVNCWindowDragging = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _isWebConsoleWindowDragging;
+        private int _webConsoleTabCount;
 
-    public bool IsWebConsoleWindowDragging
-    {
-        get => _isWebConsoleWindowDragging;
-        set
+        public int WebConsoleTabCount
         {
-            if (value == _isWebConsoleWindowDragging)
-                return;
+            get => _webConsoleTabCount;
+            set
+            {
+                if (value == _webConsoleTabCount)
+                    return;
 
-            _isWebConsoleWindowDragging = value;
-            OnPropertyChanged();
+                _webConsoleTabCount = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _snmpTabCount;
+        private bool _isWebConsoleWindowDragging;
 
-    public int SNMPTabCount
-    {
-        get => _snmpTabCount;
-        set
+        public bool IsWebConsoleWindowDragging
         {
-            if (value == _snmpTabCount)
-                return;
+            get => _isWebConsoleWindowDragging;
+            set
+            {
+                if (value == _isWebConsoleWindowDragging)
+                    return;
 
-            _snmpTabCount = value;
-            OnPropertyChanged();
+                _isWebConsoleWindowDragging = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _sntpLookupTabCount;
+        private int _snmpTabCount;
 
-    public int SNTPLookupTabCount
-    {
-        get => _sntpLookupTabCount;
-        set
+        public int SNMPTabCount
         {
-            if (value == _sntpLookupTabCount)
-                return;
+            get => _snmpTabCount;
+            set
+            {
+                if (value == _snmpTabCount)
+                    return;
 
-            _sntpLookupTabCount = value;
-            OnPropertyChanged();
+                _snmpTabCount = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _whoisTabCount;
+        private int _sntpLookupTabCount;
 
-    public int WhoisTabCount
-    {
-        get => _whoisTabCount;
-        set
+        public int SNTPLookupTabCount
         {
-            if (value == _whoisTabCount)
-                return;
+            get => _sntpLookupTabCount;
+            set
+            {
+                if (value == _sntpLookupTabCount)
+                    return;
 
-            _whoisTabCount = value;
-            OnPropertyChanged();
+                _sntpLookupTabCount = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _ipGeolocationTabCount;
+        private int _whoisTabCount;
 
-    public int IPGeolocationTabCount
-    {
-        get => _ipGeolocationTabCount;
-        set
+        public int WhoisTabCount
         {
-            if (value == _ipGeolocationTabCount)
-                return;
+            get => _whoisTabCount;
+            set
+            {
+                if (value == _whoisTabCount)
+                    return;
 
-            _ipGeolocationTabCount = value;
-            OnPropertyChanged();
+                _whoisTabCount = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    /// <summary>
-    ///     Private variable for <see cref="ProfileManagerIsEnabled" />.
-    /// </summary>
-    private bool _profileManagerIsEnabled;
+        private int _ipGeolocationTabCount;
 
-    /// <summary>
-    ///     Indicates if the profile manager is enabled.
-    /// </summary>
-    public bool ProfileManagerIsEnabled
-    {
-        get => _profileManagerIsEnabled;
-        set
+        public int IPGeolocationTabCount
         {
-            if (value == _profileManagerIsEnabled)
-                return;
+            get => _ipGeolocationTabCount;
+            set
+            {
+                if (value == _ipGeolocationTabCount)
+                    return;
 
-            _profileManagerIsEnabled = value;
-            OnPropertyChanged();
+                _ipGeolocationTabCount = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    /// <summary>
-    ///     Private variable for <see cref="ProfileManagerShowUnlock" />.
-    /// </summary>
-    private bool _profileManagerShowUnlock;
+        /// <summary>
+        ///     Private variable for <see cref="ProfileManagerIsEnabled" />.
+        /// </summary>
+        private bool _profileManagerIsEnabled;
 
-    /// <summary>
-    ///     Indicates if the profile manager should show an unlock option.
-    /// </summary>
-    public bool ProfileManagerShowUnlock
-    {
-        get => _profileManagerShowUnlock;
-        set
+        /// <summary>
+        ///     Indicates if the profile manager is enabled.
+        /// </summary>
+        public bool ProfileManagerIsEnabled
         {
-            if (value == _profileManagerShowUnlock)
-                return;
+            get => _profileManagerIsEnabled;
+            set
+            {
+                if (value == _profileManagerIsEnabled)
+                    return;
 
-            _profileManagerShowUnlock = value;
-            OnPropertyChanged();
+                _profileManagerIsEnabled = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    /// <summary>
-    ///     Private variable for <see cref="ProfileManagerErrorMessage" />.
-    /// </summary>
-    private string _profileManagerErrorMessage = string.Empty;
+        /// <summary>
+        ///     Private variable for <see cref="ProfileManagerShowUnlock" />.
+        /// </summary>
+        private bool _profileManagerShowUnlock;
 
-    /// <summary>
-    ///     Error message if the profile manager is not enabled.
-    /// </summary>
-    public string ProfileManagerErrorMessage
-    {
-        get => _profileManagerErrorMessage;
-        set
+        /// <summary>
+        ///     Indicates if the profile manager should show an unlock option.
+        /// </summary>
+        public bool ProfileManagerShowUnlock
         {
-            if (value == _profileManagerErrorMessage)
-                return;
+            get => _profileManagerShowUnlock;
+            set
+            {
+                if (value == _profileManagerShowUnlock)
+                    return;
 
-            _profileManagerErrorMessage = value;
-            OnPropertyChanged();
+                _profileManagerShowUnlock = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    /// <summary>
-    ///     Private variable for <see cref="FixAirspace" />.
-    /// </summary>
-    private bool _fixAirspace;
+        /// <summary>
+        ///     Private variable for <see cref="ProfileManagerErrorMessage" />.
+        /// </summary>
+        private string _profileManagerErrorMessage = string.Empty;
 
-    /// <summary>
-    ///     Indicates if there may be an airspace issue that needs to be fixed.
-    /// </summary>
-    public bool FixAirspace
-    {
-        get => _fixAirspace;
-        set
+        /// <summary>
+        ///     Error message if the profile manager is not enabled.
+        /// </summary>
+        public string ProfileManagerErrorMessage
         {
-            if (value == _fixAirspace)
-                return;
+            get => _profileManagerErrorMessage;
+            set
+            {
+                if (value == _profileManagerErrorMessage)
+                    return;
 
-            _fixAirspace = value;
-            OnPropertyChanged();
+                _profileManagerErrorMessage = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        /// <summary>
+        ///     Private variable for <see cref="FixAirspace" />.
+        /// </summary>
+        private bool _fixAirspace;
+
+        /// <summary>
+        ///     Indicates if there may be an airspace issue that needs to be fixed.
+        /// </summary>
+        public bool FixAirspace
+        {
+            get => _fixAirspace;
+            set
+            {
+                if (value == _fixAirspace)
+                    return;
+
+                _fixAirspace = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+    }
 }

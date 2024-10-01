@@ -1,5 +1,6 @@
-﻿namespace Ninja.Utilities;
-
-public static class SubnetmaskHelper
+﻿namespace Ninja.Utilities
 {
+    public static class SubnetmaskHelper
+    {
+    }
 }

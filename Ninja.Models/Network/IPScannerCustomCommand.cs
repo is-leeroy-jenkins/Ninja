@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using Ninja.Utilities;
 
-namespace Ninja.Models.Network;
-
-using Utilities;
-
-public static class IPScannerCustomCommand
+namespace Ninja.Models.Network
 {
-    public static List<CustomCommandInfo> GetDefaultList()
+    using Utilities;
+
+    public static class IPScannerCustomCommand
     {
-        return new List<CustomCommandInfo>
+        public static List<CustomCommandInfo> GetDefaultList()
         {
-            new(Guid.NewGuid(), "Edge", "cmd.exe", @"/c start microsoft-edge:http://$$ipaddress$$/"),
-            new(Guid.NewGuid(), "Edge (https)", "cmd.exe",
-                @"/c start microsoft-edge:https://$$ipaddress$$/"),
-            new(Guid.NewGuid(), "Windows Explorer (c$)", "explorer.exe", @"\\$$ipaddress$$\c$")
-        };
+            return new List<CustomCommandInfo>
+            {
+                new(Guid.NewGuid(), "Edge", "cmd.exe", @"/c start microsoft-edge:http://$$ipaddress$$/"),
+                new(Guid.NewGuid(), "Edge (https)", "cmd.exe",
+                    @"/c start microsoft-edge:https://$$ipaddress$$/"),
+                new(Guid.NewGuid(), "Windows Explorer (c$)", "explorer.exe", @"\\$$ipaddress$$\c$")
+            };
+        }
     }
 }

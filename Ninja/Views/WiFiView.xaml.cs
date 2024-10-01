@@ -3,34 +3,35 @@ using System.Windows.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class WiFiView
+namespace Ninja.Views
 {
-    private readonly WiFiViewModel _viewModel;
+    using ViewModels;
 
-    public WiFiView()
+    public partial class WiFiView
     {
-        _viewModel = new WiFiViewModel(DialogCoordinator.Instance);
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly WiFiViewModel _viewModel;
 
-    public void OnViewHide()
-    {
-        _viewModel.OnViewHide();
-    }
+        public WiFiView()
+        {
+            _viewModel = new WiFiViewModel(DialogCoordinator.Instance);
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
 
-    public void OnViewVisible()
-    {
-        _viewModel.OnViewVisible();
-    }
+        public void OnViewHide()
+        {
+            _viewModel.OnViewHide();
+        }
 
-    private void ContextMenu_Opened(object sender, RoutedEventArgs e)
-    {
-        if (sender is ContextMenu menu)
-            menu.DataContext = _viewModel;
+        public void OnViewVisible()
+        {
+            _viewModel.OnViewVisible();
+        }
+
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            if (sender is ContextMenu menu)
+                menu.DataContext = _viewModel;
+        }
     }
 }

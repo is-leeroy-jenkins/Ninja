@@ -1,32 +1,33 @@
-﻿namespace Ninja.Models.PuTTY;
-
-/// <summary>
-///     Connection modes for PuTTY.
-/// </summary>
-public enum ConnectionMode
+﻿namespace Ninja.Models.PuTTY
 {
     /// <summary>
-    ///     SSH connection.
+    ///     Connection modes for PuTTY.
     /// </summary>
-    SSH,
+    public enum ConnectionMode
+    {
+        /// <summary>
+        ///     SSH connection.
+        /// </summary>
+        SSH,
 
-    /// <summary>
-    ///     Telnet connection.
-    /// </summary>
-    Telnet,
+        /// <summary>
+        ///     Telnet connection.
+        /// </summary>
+        Telnet,
 
-    /// <summary>
-    ///     Serial connection.
-    /// </summary>
-    Serial,
+        /// <summary>
+        ///     Serial connection.
+        /// </summary>
+        Serial,
 
-    /// <summary>
-    ///     Rlogin connection.
-    /// </summary>
-    Rlogin,
+        /// <summary>
+        ///     Rlogin connection.
+        /// </summary>
+        Rlogin,
 
-    /// <summary>
-    ///     RAW connection.
-    /// </summary>
-    RAW
+        /// <summary>
+        ///     RAW connection.
+        /// </summary>
+        RAW
+    }
 }

@@ -5,67 +5,68 @@ using System.Windows.Input;
 using Ninja.Settings;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Settings;
-using Utilities;
-
-public class TigerVNCConnectViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    private string _host;
+    using Settings;
+    using Utilities;
 
-    private int _port;
-
-    public TigerVNCConnectViewModel(Action<TigerVNCConnectViewModel> connectCommand,
-        Action<TigerVNCConnectViewModel> cancelHandler, string host = null)
+    public class TigerVNCConnectViewModel : ViewModelBase
     {
-        ConnectCommand = new RelayCommand(_ => connectCommand(this));
-        CancelCommand = new RelayCommand(_ => cancelHandler(this));
+        private string _host;
 
-        if (!string.IsNullOrEmpty(host))
-            Host = host;
+        private int _port;
 
-        HostHistoryView = CollectionViewSource.GetDefaultView(SettingsManager.Current.TigerVNC_HostHistory);
-        PortHistoryView = CollectionViewSource.GetDefaultView(SettingsManager.Current.TigerVNC_PortHistory);
-
-        LoadSettings();
-    }
-
-    public ICommand ConnectCommand { get; }
-    public ICommand CancelCommand { get; }
-
-    public string Host
-    {
-        get => _host;
-        set
+        public TigerVNCConnectViewModel(Action<TigerVNCConnectViewModel> connectCommand,
+            Action<TigerVNCConnectViewModel> cancelHandler, string host = null)
         {
-            if (value == _host)
-                return;
+            ConnectCommand = new RelayCommand(_ => connectCommand(this));
+            CancelCommand = new RelayCommand(_ => cancelHandler(this));
 
-            _host = value;
-            OnPropertyChanged();
+            if (!string.IsNullOrEmpty(host))
+                Host = host;
+
+            HostHistoryView = CollectionViewSource.GetDefaultView(SettingsManager.Current.TigerVNC_HostHistory);
+            PortHistoryView = CollectionViewSource.GetDefaultView(SettingsManager.Current.TigerVNC_PortHistory);
+
+            LoadSettings();
         }
-    }
 
-    public ICollectionView HostHistoryView { get; }
+        public ICommand ConnectCommand { get; }
+        public ICommand CancelCommand { get; }
 
-    public int Port
-    {
-        get => _port;
-        set
+        public string Host
         {
-            if (value == _port)
-                return;
+            get => _host;
+            set
+            {
+                if (value == _host)
+                    return;
 
-            _port = value;
-            OnPropertyChanged();
+                _host = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public ICollectionView PortHistoryView { get; }
+        public ICollectionView HostHistoryView { get; }
 
-    private void LoadSettings()
-    {
-        Port = SettingsManager.Current.TigerVNC_Port;
+        public int Port
+        {
+            get => _port;
+            set
+            {
+                if (value == _port)
+                    return;
+
+                _port = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICollectionView PortHistoryView { get; }
+
+        private void LoadSettings()
+        {
+            Port = SettingsManager.Current.TigerVNC_Port;
+        }
     }
 }

@@ -3,33 +3,34 @@ using System.Windows.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class WakeOnLANView
+namespace Ninja.Views
 {
-    private readonly WakeOnLANViewModel _viewModel = new(DialogCoordinator.Instance);
+    using ViewModels;
 
-    public WakeOnLANView()
+    public partial class WakeOnLANView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly WakeOnLANViewModel _viewModel = new(DialogCoordinator.Instance);
 
-    private void ContextMenu_Opened(object sender, RoutedEventArgs e)
-    {
-        if (sender is ContextMenu menu)
-            menu.DataContext = _viewModel;
-    }
+        public WakeOnLANView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
 
-    public void OnViewHide()
-    {
-        _viewModel.OnViewHide();
-    }
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            if (sender is ContextMenu menu)
+                menu.DataContext = _viewModel;
+        }
 
-    public void OnViewVisible()
-    {
-        _viewModel.OnViewVisible();
+        public void OnViewHide()
+        {
+            _viewModel.OnViewHide();
+        }
+
+        public void OnViewVisible()
+        {
+            _viewModel.OnViewVisible();
+        }
     }
 }

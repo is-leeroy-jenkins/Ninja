@@ -4,41 +4,42 @@ using System.Windows.Data;
 using Ninja.Localization;
 using Ninja.Models;
 
-namespace Ninja.Converters;
-
-using Localization;
-using Models;
-
-/// <summary>
-///     Convert <see cref="ApplicationName" /> to translated <see cref="string" /> or wise versa.
-/// </summary>
-public sealed class ApplicationNameToTranslatedStringConverter : IValueConverter
+namespace Ninja.Converters
 {
-    /// <summary>
-    ///     Convert <see cref="ApplicationName" /> to translated <see cref="string" />.
-    /// </summary>
-    /// <param name="value">Object from type <see cref="ApplicationName" />.</param>
-    /// <param name="targetType"></param>
-    /// <param name="parameter"></param>
-    /// <param name="culture"></param>
-    /// <returns>Translated <see cref="ApplicationName" />.</returns>
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return value is not ApplicationName name
-            ? "-/-"
-            : ResourceTranslator.Translate(ResourceIdentifier.ApplicationName, name);
-    }
+    using Localization;
+    using Models;
 
     /// <summary>
-    ///     !!! Method not implemented !!!
+    ///     Convert <see cref="ApplicationName" /> to translated <see cref="string" /> or wise versa.
     /// </summary>
-    /// <param name="value"></param>
-    /// <param name="targetType"></param>
-    /// <param name="parameter"></param>
-    /// <param name="culture"></param>
-    /// <returns></returns>
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public sealed class ApplicationNameToTranslatedStringConverter : IValueConverter
     {
-        throw new NotImplementedException();
+        /// <summary>
+        ///     Convert <see cref="ApplicationName" /> to translated <see cref="string" />.
+        /// </summary>
+        /// <param name="value">Object from type <see cref="ApplicationName" />.</param>
+        /// <param name="targetType"></param>
+        /// <param name="parameter"></param>
+        /// <param name="culture"></param>
+        /// <returns>Translated <see cref="ApplicationName" />.</returns>
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value is not ApplicationName name
+                ? "-/-"
+                : ResourceTranslator.Translate(ResourceIdentifier.ApplicationName, name);
+        }
+
+        /// <summary>
+        ///     !!! Method not implemented !!!
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="targetType"></param>
+        /// <param name="parameter"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

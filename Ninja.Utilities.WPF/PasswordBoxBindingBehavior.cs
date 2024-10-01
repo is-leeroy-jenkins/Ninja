@@ -4,35 +4,36 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using Microsoft.Xaml.Behaviors;
 
-namespace Ninja.Utilities.WPF;
-
-public class PasswordBoxBindingBehavior : Behavior<PasswordBox>
+namespace Ninja.Utilities.WPF
 {
-    public static readonly DependencyProperty PasswordProperty = DependencyProperty.Register("Password",
-        typeof(SecureString), typeof(PasswordBoxBindingBehavior), new PropertyMetadata(null));
-
-    public SecureString Password
+    public class PasswordBoxBindingBehavior : Behavior<PasswordBox>
     {
-        get => (SecureString)GetValue(PasswordProperty);
-        set => SetValue(PasswordProperty, value);
-    }
+        public static readonly DependencyProperty PasswordProperty = DependencyProperty.Register("Password",
+            typeof(SecureString), typeof(PasswordBoxBindingBehavior), new PropertyMetadata(null));
 
-    /// <summary>
-    /// </summary>
-    protected override void OnAttached()
-    {
-        AssociatedObject.PasswordChanged += OnPasswordBoxValueChanged;
-    }
+        public SecureString Password
+        {
+            get => (SecureString)GetValue(PasswordProperty);
+            set => SetValue(PasswordProperty, value);
+        }
 
-    private void OnPasswordBoxValueChanged(object sender, RoutedEventArgs e)
-    {
-        var binding = BindingOperations.GetBindingExpression(this, PasswordProperty);
+        /// <summary>
+        /// </summary>
+        protected override void OnAttached()
+        {
+            AssociatedObject.PasswordChanged += OnPasswordBoxValueChanged;
+        }
 
-        if (binding == null)
-            return;
+        private void OnPasswordBoxValueChanged(object sender, RoutedEventArgs e)
+        {
+            var binding = BindingOperations.GetBindingExpression(this, PasswordProperty);
 
-        var property = binding.DataItem.GetType().GetProperty(binding.ParentBinding.Path.Path);
+            if (binding == null)
+                return;
 
-        property?.SetValue(binding.DataItem, AssociatedObject.SecurePassword, null);
+            var property = binding.DataItem.GetType().GetProperty(binding.ParentBinding.Path.Path);
+
+            property?.SetValue(binding.DataItem, AssociatedObject.SecurePassword, null);
+        }
     }
 }

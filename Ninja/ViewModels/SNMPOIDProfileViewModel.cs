@@ -5,135 +5,136 @@ using System.Windows.Input;
 using Ninja.Models.Network;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Models.Network;
-using Utilities;
-
-public class SNMPOIDProfileViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    private readonly SNMPOIDProfileInfo _info;
-    private readonly bool _isLoading;
+    using Models.Network;
+    using Utilities;
 
-    private bool _infoChanged;
-
-    private bool _isEdited;
-
-    private SNMPMode _mode;
-
-    private string _name;
-
-    private string _oid;
-
-    public SNMPOIDProfileViewModel(Action<SNMPOIDProfileViewModel> saveCommand,
-        Action<SNMPOIDProfileViewModel> cancelHandler, bool isEdited = false, SNMPOIDProfileInfo info = null)
+    public class SNMPOIDProfileViewModel : ViewModelBase
     {
-        _isLoading = true;
+        private readonly SNMPOIDProfileInfo _info;
+        private readonly bool _isLoading;
 
-        SaveCommand = new RelayCommand(_ => saveCommand(this));
-        CancelCommand = new RelayCommand(_ => cancelHandler(this));
+        private bool _infoChanged;
 
-        Modes = new List<SNMPMode> { SNMPMode.Get, SNMPMode.Walk, SNMPMode.Set };
+        private bool _isEdited;
 
-        IsEdited = isEdited;
+        private SNMPMode _mode;
 
-        _info = info ?? new SNMPOIDProfileInfo();
+        private string _name;
 
-        Name = _info.Name;
-        OID = _info.OID;
-        Mode = Modes.FirstOrDefault(x => x == _info.Mode);
+        private string _oid;
 
-        _isLoading = false;
-    }
-
-    public ICommand SaveCommand { get; }
-
-    public ICommand CancelCommand { get; }
-
-    public string Name
-    {
-        get => _name;
-        set
+        public SNMPOIDProfileViewModel(Action<SNMPOIDProfileViewModel> saveCommand,
+            Action<SNMPOIDProfileViewModel> cancelHandler, bool isEdited = false, SNMPOIDProfileInfo info = null)
         {
-            if (_name == value)
-                return;
+            _isLoading = true;
 
-            _name = value;
+            SaveCommand = new RelayCommand(_ => saveCommand(this));
+            CancelCommand = new RelayCommand(_ => cancelHandler(this));
 
-            if (!_isLoading)
-                Validate();
+            Modes = new List<SNMPMode> { SNMPMode.Get, SNMPMode.Walk, SNMPMode.Set };
 
-            OnPropertyChanged();
+            IsEdited = isEdited;
+
+            _info = info ?? new SNMPOIDProfileInfo();
+
+            Name = _info.Name;
+            OID = _info.OID;
+            Mode = Modes.FirstOrDefault(x => x == _info.Mode);
+
+            _isLoading = false;
         }
-    }
 
-    public string OID
-    {
-        get => _oid;
-        set
+        public ICommand SaveCommand { get; }
+
+        public ICommand CancelCommand { get; }
+
+        public string Name
         {
-            if (_oid == value)
-                return;
+            get => _name;
+            set
+            {
+                if (_name == value)
+                    return;
 
-            _oid = value;
+                _name = value;
 
-            if (!_isLoading)
-                Validate();
+                if (!_isLoading)
+                    Validate();
 
-            OnPropertyChanged();
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public List<SNMPMode> Modes { get; }
-
-    public SNMPMode Mode
-    {
-        get => _mode;
-        set
+        public string OID
         {
-            if (value == _mode)
-                return;
+            get => _oid;
+            set
+            {
+                if (_oid == value)
+                    return;
 
-            _mode = value;
+                _oid = value;
 
-            if (!_isLoading)
-                Validate();
+                if (!_isLoading)
+                    Validate();
 
-            OnPropertyChanged();
-
-            // Re-validate OID if mode changed
-            OnPropertyChanged(nameof(OID));
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public bool InfoChanged
-    {
-        get => _infoChanged;
-        set
+        public List<SNMPMode> Modes { get; }
+
+        public SNMPMode Mode
         {
-            if (value == _infoChanged)
-                return;
+            get => _mode;
+            set
+            {
+                if (value == _mode)
+                    return;
 
-            _infoChanged = value;
-            OnPropertyChanged();
+                _mode = value;
+
+                if (!_isLoading)
+                    Validate();
+
+                OnPropertyChanged();
+
+                // Re-validate OID if mode changed
+                OnPropertyChanged(nameof(OID));
+            }
         }
-    }
 
-    public bool IsEdited
-    {
-        get => _isEdited;
-        set
+        public bool InfoChanged
         {
-            if (value == _isEdited)
-                return;
+            get => _infoChanged;
+            set
+            {
+                if (value == _infoChanged)
+                    return;
 
-            _isEdited = value;
-            OnPropertyChanged();
+                _infoChanged = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private void Validate()
-    {
-        InfoChanged = _info.Name != Name || _info.OID != OID || _info.Mode != Mode;
+        public bool IsEdited
+        {
+            get => _isEdited;
+            set
+            {
+                if (value == _isEdited)
+                    return;
+
+                _isEdited = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private void Validate()
+        {
+            InfoChanged = _info.Name != Name || _info.OID != OID || _info.Mode != Mode;
+        }
     }
 }

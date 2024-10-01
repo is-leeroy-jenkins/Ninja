@@ -1,19 +1,20 @@
 ﻿using System;
 
-namespace Ninja.Models.Network;
-
-/// <summary>
-///     Contains the information of a DNS lookup record in a <see cref="DNSLookup" />.
-/// </summary>
-public class DNSLookupRecordReceivedArgs : EventArgs
+namespace Ninja.Models.Network
 {
-    public DNSLookupRecordReceivedArgs(DNSLookupRecordInfo args)
-    {
-        Args = args;
-    }
-
     /// <summary>
-    ///     DNS Lookup record information.
+    ///     Contains the information of a DNS lookup record in a <see cref="DNSLookup" />.
     /// </summary>
-    public DNSLookupRecordInfo Args { get; }
+    public class DNSLookupRecordReceivedArgs : EventArgs
+    {
+        public DNSLookupRecordReceivedArgs(DNSLookupRecordInfo args)
+        {
+            Args = args;
+        }
+
+        /// <summary>
+        ///     DNS Lookup record information.
+        /// </summary>
+        public DNSLookupRecordInfo Args { get; }
+    }
 }

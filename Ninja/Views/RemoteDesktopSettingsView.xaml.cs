@@ -1,16 +1,17 @@
 ﻿using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class RemoteDesktopSettingsView
+namespace Ninja.Views
 {
-    private readonly RemoteDesktopSettingsViewModel _viewModel = new();
+    using ViewModels;
 
-    public RemoteDesktopSettingsView()
+    public partial class RemoteDesktopSettingsView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
+        private readonly RemoteDesktopSettingsViewModel _viewModel = new();
+
+        public RemoteDesktopSettingsView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
     }
 }

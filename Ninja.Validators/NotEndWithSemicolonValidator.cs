@@ -4,16 +4,17 @@ using System.Windows.Controls;
 using Ninja.Localization.Resources;
 using Ninja.Utilities;
 
-namespace Ninja.Validators;
-
-using Utilities;
-
-public class NotEndWithSemicolonValidator : ValidationRule
+namespace Ninja.Validators
 {
-    public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+    using Utilities;
+
+    public class NotEndWithSemicolonValidator : ValidationRule
     {
-        return Regex.IsMatch(((string)value).Trim(), RegexHelper.StringNotEndWithSemicolonRegex)
-            ? ValidationResult.ValidResult
-            : new ValidationResult(false, Strings.InputCannotEndWithSemicolon);
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            return Regex.IsMatch(((string)value).Trim(), RegexHelper.StringNotEndWithSemicolonRegex)
+                ? ValidationResult.ValidResult
+                : new ValidationResult(false, Strings.InputCannotEndWithSemicolon);
+        }
     }
 }

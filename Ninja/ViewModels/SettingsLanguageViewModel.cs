@@ -7,105 +7,106 @@ using Ninja.Localization;
 using Ninja.Settings;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Localization;
-using Settings;
-using Utilities;
-
-public class SettingsLanguageViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    #region Construtor, LoadSettings
+    using Localization;
+    using Settings;
+    using Utilities;
 
-    public SettingsLanguageViewModel()
+    public class SettingsLanguageViewModel : ViewModelBase
     {
-        _isLoading = true;
+        #region Construtor, LoadSettings
 
-        Languages = CollectionViewSource.GetDefaultView(LocalizationManager.List);
-        Languages.SortDescriptions.Add(new SortDescription(nameof(LocalizationInfo.IsOfficial),
-            ListSortDirection.Descending));
-        Languages.SortDescriptions.Add(new SortDescription(nameof(LocalizationInfo.Name), ListSortDirection.Ascending));
-
-        Languages.Filter = o =>
+        public SettingsLanguageViewModel()
         {
-            if (string.IsNullOrEmpty(Search))
-                return true;
+            _isLoading = true;
 
-            if (!(o is LocalizationInfo info))
-                return false;
+            Languages = CollectionViewSource.GetDefaultView(LocalizationManager.List);
+            Languages.SortDescriptions.Add(new SortDescription(nameof(LocalizationInfo.IsOfficial),
+                ListSortDirection.Descending));
+            Languages.SortDescriptions.Add(new SortDescription(nameof(LocalizationInfo.Name), ListSortDirection.Ascending));
 
-            var search = Search.Trim();
-
-            // Search by: Name, NativeName
-            return info.Name.IndexOf(search, StringComparison.OrdinalIgnoreCase) > -1 ||
-                   info.NativeName.IndexOf(search, StringComparison.OrdinalIgnoreCase) > -1;
-        };
-
-        SelectedLanguage = Languages.Cast<LocalizationInfo>()
-            .FirstOrDefault(x => x.Code == LocalizationManager.GetInstance().Current.Code);
-
-        _isLoading = false;
-    }
-
-    #endregion
-
-    #region Variables
-
-    private readonly bool _isLoading;
-
-    public ICollectionView Languages { get; }
-
-    private LocalizationInfo _selectedLanguage;
-
-    public LocalizationInfo SelectedLanguage
-    {
-        get => _selectedLanguage;
-        set
-        {
-            if (value == _selectedLanguage)
-                return;
-
-            if (!_isLoading &&
-                value != null) // Don't change if the value is null (can happen when a user search for a language....)
+            Languages.Filter = o =>
             {
-                LocalizationManager.GetInstance().Change(value);
+                if (string.IsNullOrEmpty(Search))
+                    return true;
 
-                SettingsManager.Current.Localization_CultureCode = value.Code;
-            }
+                if (!(o is LocalizationInfo info))
+                    return false;
 
-            _selectedLanguage = value;
-            OnPropertyChanged();
+                var search = Search.Trim();
+
+                // Search by: Name, NativeName
+                return info.Name.IndexOf(search, StringComparison.OrdinalIgnoreCase) > -1 ||
+                    info.NativeName.IndexOf(search, StringComparison.OrdinalIgnoreCase) > -1;
+            };
+
+            SelectedLanguage = Languages.Cast<LocalizationInfo>()
+                .FirstOrDefault(x => x.Code == LocalizationManager.GetInstance().Current.Code);
+
+            _isLoading = false;
         }
-    }
 
-    private string _search;
+        #endregion
 
-    public string Search
-    {
-        get => _search;
-        set
+        #region Variables
+
+        private readonly bool _isLoading;
+
+        public ICollectionView Languages { get; }
+
+        private LocalizationInfo _selectedLanguage;
+
+        public LocalizationInfo SelectedLanguage
         {
-            if (value == _search)
-                return;
+            get => _selectedLanguage;
+            set
+            {
+                if (value == _selectedLanguage)
+                    return;
 
-            _search = value;
+                if (!_isLoading &&
+                    value != null) // Don't change if the value is null (can happen when a user search for a language....)
+                {
+                    LocalizationManager.GetInstance().Change(value);
 
-            Languages.Refresh();
+                    SettingsManager.Current.Localization_CultureCode = value.Code;
+                }
 
-            OnPropertyChanged();
+                _selectedLanguage = value;
+                OnPropertyChanged();
+            }
         }
+
+        private string _search;
+
+        public string Search
+        {
+            get => _search;
+            set
+            {
+                if (value == _search)
+                    return;
+
+                _search = value;
+
+                Languages.Refresh();
+
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region ICommands & Actions
+
+        public ICommand ClearSearchCommand => new RelayCommand(_ => ClearSearchAction());
+
+        private void ClearSearchAction()
+        {
+            Search = string.Empty;
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region ICommands & Actions
-
-    public ICommand ClearSearchCommand => new RelayCommand(_ => ClearSearchAction());
-
-    private void ClearSearchAction()
-    {
-        Search = string.Empty;
-    }
-
-    #endregion
 }

@@ -1,11 +1,12 @@
 ﻿using System;
 
-namespace Ninja.Utilities;
-
-public static class TimestampHelper
+namespace Ninja.Utilities
 {
-    public static string GetTimestamp()
+    public static class TimestampHelper
     {
-        return DateTime.Now.ToString("yyyyMMddHHmmss");
+        public static string GetTimestamp()
+        {
+            return DateTime.Now.ToString("yyyyMMddHHmmss");
+        }
     }
 }

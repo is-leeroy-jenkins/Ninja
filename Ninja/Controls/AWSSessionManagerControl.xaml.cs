@@ -11,257 +11,258 @@ using Ninja.Models.AWS;
 using Ninja.Settings;
 using Ninja.Utilities;
 
-namespace Ninja.Controls;
-
-using Models.AWS;
-using Settings;
-using Utilities;
-
-public partial class AWSSessionManagerControl : UserControlBase, IDragablzTabItem, IEmbeddedWindow
+namespace Ninja.Controls
 {
-    #region Events
+    using Models.AWS;
+    using Settings;
+    using Utilities;
 
-    private void WindowGrid_SizeChanged(object sender, SizeChangedEventArgs e)
+    public partial class AWSSessionManagerControl : UserControlBase, IDragablzTabItem, IEmbeddedWindow
     {
-        ResizeEmbeddedWindow();
-    }
+        #region Events
 
-    #endregion
-
-    #region Variables
-
-    private bool _initialized;
-    private bool _closed;
-
-    private readonly IDialogCoordinator _dialogCoordinator;
-
-    private readonly Guid _tabId;
-    private readonly AWSSessionManagerSessionInfo _sessionInfo;
-
-    private Process _process;
-    private IntPtr _appWin;
-
-    private bool _isConnected;
-
-    public bool IsConnected
-    {
-        get => _isConnected;
-        set
+        private void WindowGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (value == _isConnected)
-                return;
-
-            _isConnected = value;
-            OnPropertyChanged();
+            ResizeEmbeddedWindow();
         }
-    }
 
-    private bool _isConnecting;
+        #endregion
 
-    public bool IsConnecting
-    {
-        get => _isConnecting;
-        set
+        #region Variables
+
+        private bool _initialized;
+        private bool _closed;
+
+        private readonly IDialogCoordinator _dialogCoordinator;
+
+        private readonly Guid _tabId;
+        private readonly AWSSessionManagerSessionInfo _sessionInfo;
+
+        private Process _process;
+        private IntPtr _appWin;
+
+        private bool _isConnected;
+
+        public bool IsConnected
         {
-            if (value == _isConnecting)
-                return;
-
-            _isConnecting = value;
-            OnPropertyChanged();
-        }
-    }
-
-    #endregion
-
-    #region Constructor, load
-
-    public AWSSessionManagerControl(Guid tabId, AWSSessionManagerSessionInfo sessionInfo)
-    {
-        InitializeComponent();
-        DataContext = this;
-
-        _dialogCoordinator = DialogCoordinator.Instance;
-
-        ConfigurationManager.Current.AWSSessionManagerTabCount++;
-
-        _tabId = tabId;
-        _sessionInfo = sessionInfo;
-
-        Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
-    }
-
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        // Connect after the control is drawn and only on the first init
-        if (_initialized)
-            return;
-
-        // Fix 1: The control is not visible by default, thus height and width is not set. If the values are not set, the size does not scale properly
-        // Fix 2: Somehow the initial size need to be 20px smaller than the actual size after using Dragablz (https://github.com/is-leeroy-jenkins/NETworkManager/pull/2678)
-        WindowHost.Height = (int)ActualHeight - 20;
-        WindowHost.Width = (int)ActualWidth - 20;
-
-        Connect().ConfigureAwait(false);
-        _initialized = true;
-    }
-
-    private void Dispatcher_ShutdownStarted(object sender, EventArgs e)
-    {
-        CloseTab();
-    }
-
-    #endregion
-
-    #region ICommands & Actions
-
-    public ICommand ReconnectCommand
-    {
-        get { return new RelayCommand(_ => ReconnectAction()); }
-    }
-
-    private void ReconnectAction()
-    {
-        Reconnect();
-    }
-
-    #endregion
-
-    #region Methods
-
-    private async Task Connect()
-    {
-        IsConnecting = true;
-
-        var info = new ProcessStartInfo
-        {
-            FileName = _sessionInfo.ApplicationFilePath,
-            Arguments = AWSSessionManager.BuildCommandLine(_sessionInfo)
-        };
-
-        try
-        {
-            _process = Process.Start(info);
-
-            if (_process != null)
+            get => _isConnected;
+            set
             {
-                _process.EnableRaisingEvents = true;
-                _process.Exited += Process_Exited;
+                if (value == _isConnected)
+                    return;
 
-                // Embed window into panel, remove border etc.
-                //  _process.WaitForInputIdle();
-                _appWin = _process.MainWindowHandle;
+                _isConnected = value;
+                OnPropertyChanged();
+            }
+        }
 
-                if (_appWin == IntPtr.Zero)
+        private bool _isConnecting;
+
+        public bool IsConnecting
+        {
+            get => _isConnecting;
+            set
+            {
+                if (value == _isConnecting)
+                    return;
+
+                _isConnecting = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region Constructor, load
+
+        public AWSSessionManagerControl(Guid tabId, AWSSessionManagerSessionInfo sessionInfo)
+        {
+            InitializeComponent();
+            DataContext = this;
+
+            _dialogCoordinator = DialogCoordinator.Instance;
+
+            ConfigurationManager.Current.AWSSessionManagerTabCount++;
+
+            _tabId = tabId;
+            _sessionInfo = sessionInfo;
+
+            Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Connect after the control is drawn and only on the first init
+            if (_initialized)
+                return;
+
+            // Fix 1: The control is not visible by default, thus height and width is not set. If the values are not set, the size does not scale properly
+            // Fix 2: Somehow the initial size need to be 20px smaller than the actual size after using Dragablz (https://github.com/is-leeroy-jenkins/NETworkManager/pull/2678)
+            WindowHost.Height = (int)ActualHeight - 20;
+            WindowHost.Width = (int)ActualWidth - 20;
+
+            Connect().ConfigureAwait(false);
+            _initialized = true;
+        }
+
+        private void Dispatcher_ShutdownStarted(object sender, EventArgs e)
+        {
+            CloseTab();
+        }
+
+        #endregion
+
+        #region ICommands & Actions
+
+        public ICommand ReconnectCommand
+        {
+            get { return new RelayCommand(_ => ReconnectAction()); }
+        }
+
+        private void ReconnectAction()
+        {
+            Reconnect();
+        }
+
+        #endregion
+
+        #region Methods
+
+        private async Task Connect()
+        {
+            IsConnecting = true;
+
+            var info = new ProcessStartInfo
+            {
+                FileName = _sessionInfo.ApplicationFilePath,
+                Arguments = AWSSessionManager.BuildCommandLine(_sessionInfo)
+            };
+
+            try
+            {
+                _process = Process.Start(info);
+
+                if (_process != null)
                 {
-                    var startTime = DateTime.Now;
+                    _process.EnableRaisingEvents = true;
+                    _process.Exited += Process_Exited;
 
-                    while ((DateTime.Now - startTime).TotalSeconds < 10)
+                    // Embed window into panel, remove border etc.
+                    //  _process.WaitForInputIdle();
+                    _appWin = _process.MainWindowHandle;
+
+                    if (_appWin == IntPtr.Zero)
                     {
-                        _process.Refresh();
+                        var startTime = DateTime.Now;
 
-                        if (_process.HasExited)
-                            break;
+                        while ((DateTime.Now - startTime).TotalSeconds < 10)
+                        {
+                            _process.Refresh();
+
+                            if (_process.HasExited)
+                                break;
 
 
-                        _appWin = _process.MainWindowHandle;
+                            _appWin = _process.MainWindowHandle;
 
-                        if (IntPtr.Zero != _appWin)
-                            break;
+                            if (IntPtr.Zero != _appWin)
+                                break;
 
-                        await Task.Delay(100);
+                            await Task.Delay(100);
+                        }
+                    }
+
+                    if (_appWin != IntPtr.Zero)
+                    {
+                        NativeMethods.SetParent(_appWin, WindowHost.Handle);
+
+                        // Show window before set style and resize
+                        NativeMethods.ShowWindow(_appWin, NativeMethods.WindowShowStyle.Maximize);
+
+                        // Remove border etc.
+                        long style = (int)NativeMethods.GetWindowLong(_appWin, NativeMethods.GWL_STYLE);
+                        style &= ~(NativeMethods.WS_CAPTION | NativeMethods.WS_POPUP | NativeMethods.WS_THICKFRAME);
+                        NativeMethods.SetWindowLongPtr(_appWin, NativeMethods.GWL_STYLE, new IntPtr(style));
+
+                        IsConnected = true;
+
+                        // Resize embedded application & refresh
+                        // Requires a short delay because it's not applied immediately
+                        await Task.Delay(250);
+                        ResizeEmbeddedWindow();
                     }
                 }
-
-                if (_appWin != IntPtr.Zero)
+                else
                 {
-                    NativeMethods.SetParent(_appWin, WindowHost.Handle);
-
-                    // Show window before set style and resize
-                    NativeMethods.ShowWindow(_appWin, NativeMethods.WindowShowStyle.Maximize);
-
-                    // Remove border etc.
-                    long style = (int)NativeMethods.GetWindowLong(_appWin, NativeMethods.GWL_STYLE);
-                    style &= ~(NativeMethods.WS_CAPTION | NativeMethods.WS_POPUP | NativeMethods.WS_THICKFRAME);
-                    NativeMethods.SetWindowLongPtr(_appWin, NativeMethods.GWL_STYLE, new IntPtr(style));
-
-                    IsConnected = true;
-
-                    // Resize embedded application & refresh
-                    // Requires a short delay because it's not applied immediately
-                    await Task.Delay(250);
-                    ResizeEmbeddedWindow();
+                    throw new Exception("Process could not be started!");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                throw new Exception("Process could not be started!");
+                if (!_closed)
+                {
+                    var settings = AppearanceManager.MetroDialog;
+                    settings.AffirmativeButtonText = Strings.OK;
+
+                    ConfigurationManager.OnDialogOpen();
+
+                    await _dialogCoordinator.ShowMessageAsync(this, Strings.Error,
+                        ex.Message, MessageDialogStyle.Affirmative, settings);
+
+                    ConfigurationManager.OnDialogClose();
+                }
             }
+
+            IsConnecting = false;
         }
-        catch (Exception ex)
+
+        private void Process_Exited(object sender, EventArgs e)
         {
-            if (!_closed)
-            {
-                var settings = AppearanceManager.MetroDialog;
-                settings.AffirmativeButtonText = Strings.OK;
-
-                ConfigurationManager.OnDialogOpen();
-
-                await _dialogCoordinator.ShowMessageAsync(this, Strings.Error,
-                    ex.Message, MessageDialogStyle.Affirmative, settings);
-
-                ConfigurationManager.OnDialogClose();
-            }
+            // This happens when the user exit the process
+            IsConnected = false;
         }
 
-        IsConnecting = false;
-    }
+        public void FocusEmbeddedWindow()
+        {
+            if (IsConnected)
+                NativeMethods.SetForegroundWindow(_process.MainWindowHandle);
+        }
 
-    private void Process_Exited(object sender, EventArgs e)
-    {
-        // This happens when the user exit the process
-        IsConnected = false;
-    }
+        public void ResizeEmbeddedWindow()
+        {
+            if (IsConnected)
+                NativeMethods.SetWindowPos(_process.MainWindowHandle, IntPtr.Zero, 0, 0, WindowHost.ClientSize.Width,
+                    WindowHost.ClientSize.Height, NativeMethods.SWP_NOZORDER | NativeMethods.SWP_NOACTIVATE);
+        }
 
-    public void FocusEmbeddedWindow()
-    {
-        if (IsConnected)
-            NativeMethods.SetForegroundWindow(_process.MainWindowHandle);
-    }
+        private void Disconnect()
+        {
+            if (IsConnected)
+                _process.Kill();
+        }
 
-    public void ResizeEmbeddedWindow()
-    {
-        if (IsConnected)
-            NativeMethods.SetWindowPos(_process.MainWindowHandle, IntPtr.Zero, 0, 0, WindowHost.ClientSize.Width,
-                WindowHost.ClientSize.Height, NativeMethods.SWP_NOZORDER | NativeMethods.SWP_NOACTIVATE);
-    }
+        private void Reconnect()
+        {
+            if (IsConnected)
+                Disconnect();
 
-    private void Disconnect()
-    {
-        if (IsConnected)
-            _process.Kill();
-    }
+            Connect().ConfigureAwait(false);
+        }
 
-    private void Reconnect()
-    {
-        if (IsConnected)
+        public void CloseTab()
+        {
+            // Prevent multiple calls
+            if (_closed)
+                return;
+
+            _closed = true;
+
+            // Disconnect the session
             Disconnect();
 
-        Connect().ConfigureAwait(false);
+            ConfigurationManager.Current.AWSSessionManagerTabCount--;
+        }
+
+        #endregion
     }
-
-    public void CloseTab()
-    {
-        // Prevent multiple calls
-        if (_closed)
-            return;
-
-        _closed = true;
-
-        // Disconnect the session
-        Disconnect();
-
-        ConfigurationManager.Current.AWSSessionManagerTabCount--;
-    }
-
-    #endregion
 }

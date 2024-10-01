@@ -6,25 +6,26 @@ using System.Windows;
 using System.Windows.Data;
 using Ninja.Models.Network;
 
-namespace Ninja.Converters;
-
-using Models.Network;
-
-public sealed class IPAddressArrayToStringConverter : IValueConverter
+namespace Ninja.Converters
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    using Models.Network;
+
+    public sealed class IPAddressArrayToStringConverter : IValueConverter
     {
-        if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
-            return "-/-";
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+                return "-/-";
 
-        if (value is not IPAddress[] ipAddresses)
-            return "-/-";
+            if (value is not IPAddress[] ipAddresses)
+                return "-/-";
 
-        return IPv4Address.ConvertIPAddressListToString(ipAddresses);
-    }
+            return IPv4Address.ConvertIPAddressListToString(ipAddresses);
+        }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

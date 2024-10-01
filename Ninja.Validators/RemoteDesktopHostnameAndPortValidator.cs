@@ -4,30 +4,31 @@ using System.Windows.Controls;
 using Ninja.Localization.Resources;
 using Ninja.Utilities;
 
-namespace Ninja.Validators;
-
-using Utilities;
-
-public class RemoteDesktopHostnameAndPortValidator : ValidationRule
+namespace Ninja.Validators
 {
-    public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+    using Utilities;
+
+    public class RemoteDesktopHostnameAndPortValidator : ValidationRule
     {
-        var hostnameAndPort = (string)value;
-
-        if (hostnameAndPort.Contains(':'))
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            var hostnameAndPortValues = hostnameAndPort.Split(':');
+            var hostnameAndPort = (string)value;
 
-            if (Regex.IsMatch(hostnameAndPortValues[0], RegexHelper.HostnameOrDomainRegex) &&
-                !string.IsNullOrEmpty(hostnameAndPortValues[1]) &&
-                Regex.IsMatch(hostnameAndPortValues[1], RegexHelper.PortRegex))
-                return ValidationResult.ValidResult;
+            if (hostnameAndPort.Contains(':'))
+            {
+                var hostnameAndPortValues = hostnameAndPort.Split(':');
 
-            return new ValidationResult(false, Strings.EnterValidHostnameAndPort);
+                if (Regex.IsMatch(hostnameAndPortValues[0], RegexHelper.HostnameOrDomainRegex) &&
+                    !string.IsNullOrEmpty(hostnameAndPortValues[1]) &&
+                    Regex.IsMatch(hostnameAndPortValues[1], RegexHelper.PortRegex))
+                    return ValidationResult.ValidResult;
+
+                return new ValidationResult(false, Strings.EnterValidHostnameAndPort);
+            }
+
+            return Regex.IsMatch((string)value, RegexHelper.HostnameOrDomainRegex)
+                ? ValidationResult.ValidResult
+                : new ValidationResult(false, Strings.EnterValidHostname);
         }
-
-        return Regex.IsMatch((string)value, RegexHelper.HostnameOrDomainRegex)
-            ? ValidationResult.ValidResult
-            : new ValidationResult(false, Strings.EnterValidHostname);
     }
 }

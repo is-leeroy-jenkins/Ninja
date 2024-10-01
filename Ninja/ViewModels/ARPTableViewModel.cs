@@ -18,336 +18,265 @@ using Ninja.Settings;
 using Ninja.Utilities;
 using Ninja.Views;
 
-namespace Ninja.ViewModels;
-
-using Models.Export;
-using Models.Network;
-using Settings;
-using Utilities;
-using Views;
-
-public class ARPTableViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    #region Contructor, load settings
+    using Models.Export;
+    using Models.Network;
+    using Settings;
+    using Utilities;
+    using Views;
 
-    public ARPTableViewModel(IDialogCoordinator instance)
+    public class ARPTableViewModel : ViewModelBase
     {
-        _isLoading = true;
-        _dialogCoordinator = instance;
+        #region Contructor, load settings
 
-        // Result view + search
-        ResultsView = CollectionViewSource.GetDefaultView(Results);
-
-        ((ListCollectionView)ResultsView).CustomSort = Comparer<ARPInfo>.Create((x, y) =>
-            IPAddressHelper.CompareIPAddresses(x.IPAddress, y.IPAddress));
-
-        ResultsView.Filter = o =>
+        public ARPTableViewModel(IDialogCoordinator instance)
         {
-            if (o is not ARPInfo info)
-                return false;
+            _isLoading = true;
+            _dialogCoordinator = instance;
 
-            if (string.IsNullOrEmpty(Search))
-                return true;
+            // Result view + search
+            ResultsView = CollectionViewSource.GetDefaultView(Results);
 
-            // Search by IPAddress and MACAddress
-            return info.IPAddress.ToString().IndexOf(Search, StringComparison.OrdinalIgnoreCase) > -1 ||
-                   info.MACAddress.ToString().IndexOf(Search.Replace("-", "").Replace(":", ""),
-                       StringComparison.OrdinalIgnoreCase) > -1 ||
-                   (info.IsMulticast ? Strings.Yes : Strings.No).IndexOf(
-                       Search, StringComparison.OrdinalIgnoreCase) > -1;
-        };
+            ((ListCollectionView)ResultsView).CustomSort = Comparer<ARPInfo>.Create((x, y) =>
+                IPAddressHelper.CompareIPAddresses(x.IPAddress, y.IPAddress));
 
-        // Get ARP table
-        Refresh().ConfigureAwait(false);
-
-        // Auto refresh
-        _autoRefreshTimer.Tick += AutoRefreshTimer_Tick;
-
-        AutoRefreshTimes = CollectionViewSource.GetDefaultView(AutoRefreshTime.GetDefaults);
-        SelectedAutoRefreshTime = AutoRefreshTimes.SourceCollection.Cast<AutoRefreshTimeInfo>().FirstOrDefault(x =>
-            x.Value == SettingsManager.Current.ARPTable_AutoRefreshTime.Value &&
-            x.TimeUnit == SettingsManager.Current.ARPTable_AutoRefreshTime.TimeUnit);
-        AutoRefreshEnabled = SettingsManager.Current.ARPTable_AutoRefreshEnabled;
-
-        _isLoading = false;
-    }
-
-    #endregion
-
-    #region Variables
-
-    private readonly IDialogCoordinator _dialogCoordinator;
-
-    private readonly bool _isLoading;
-    private readonly DispatcherTimer _autoRefreshTimer = new();
-
-    private string _search;
-
-    public string Search
-    {
-        get => _search;
-        set
-        {
-            if (value == _search)
-                return;
-
-            _search = value;
-
-            ResultsView.Refresh();
-
-            OnPropertyChanged();
-        }
-    }
-
-    private ObservableCollection<ARPInfo> _results = new();
-
-    public ObservableCollection<ARPInfo> Results
-    {
-        get => _results;
-        set
-        {
-            if (value == _results)
-                return;
-
-            _results = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public ICollectionView ResultsView { get; }
-
-    private ARPInfo _selectedResult;
-
-    public ARPInfo SelectedResult
-    {
-        get => _selectedResult;
-        set
-        {
-            if (value == _selectedResult)
-                return;
-
-            _selectedResult = value;
-            OnPropertyChanged();
-        }
-    }
-
-    private IList _selectedResults = new ArrayList();
-
-    public IList SelectedResults
-    {
-        get => _selectedResults;
-        set
-        {
-            if (Equals(value, _selectedResults))
-                return;
-
-            _selectedResults = value;
-            OnPropertyChanged();
-        }
-    }
-
-    private bool _autoRefreshEnabled;
-
-    public bool AutoRefreshEnabled
-    {
-        get => _autoRefreshEnabled;
-        set
-        {
-            if (value == _autoRefreshEnabled)
-                return;
-
-            if (!_isLoading)
-                SettingsManager.Current.ARPTable_AutoRefreshEnabled = value;
-
-            _autoRefreshEnabled = value;
-
-            // Start timer to refresh automatically
-            if (value)
+            ResultsView.Filter = o =>
             {
-                _autoRefreshTimer.Interval = AutoRefreshTime.CalculateTimeSpan(SelectedAutoRefreshTime);
-                _autoRefreshTimer.Start();
-            }
-            else
+                if (o is not ARPInfo info)
+                    return false;
+
+                if (string.IsNullOrEmpty(Search))
+                    return true;
+
+                // Search by IPAddress and MACAddress
+                return info.IPAddress.ToString().IndexOf(Search, StringComparison.OrdinalIgnoreCase) > -1 ||
+                    info.MACAddress.ToString().IndexOf(Search.Replace("-", "").Replace(":", ""),
+                        StringComparison.OrdinalIgnoreCase) > -1 ||
+                    (info.IsMulticast ? Strings.Yes : Strings.No).IndexOf(
+                        Search, StringComparison.OrdinalIgnoreCase) > -1;
+            };
+
+            // Get ARP table
+            Refresh().ConfigureAwait(false);
+
+            // Auto refresh
+            _autoRefreshTimer.Tick += AutoRefreshTimer_Tick;
+
+            AutoRefreshTimes = CollectionViewSource.GetDefaultView(AutoRefreshTime.GetDefaults);
+            SelectedAutoRefreshTime = AutoRefreshTimes.SourceCollection.Cast<AutoRefreshTimeInfo>().FirstOrDefault(x =>
+                x.Value == SettingsManager.Current.ARPTable_AutoRefreshTime.Value &&
+                x.TimeUnit == SettingsManager.Current.ARPTable_AutoRefreshTime.TimeUnit);
+            AutoRefreshEnabled = SettingsManager.Current.ARPTable_AutoRefreshEnabled;
+
+            _isLoading = false;
+        }
+
+        #endregion
+
+        #region Variables
+
+        private readonly IDialogCoordinator _dialogCoordinator;
+
+        private readonly bool _isLoading;
+        private readonly DispatcherTimer _autoRefreshTimer = new();
+
+        private string _search;
+
+        public string Search
+        {
+            get => _search;
+            set
             {
-                _autoRefreshTimer.Stop();
+                if (value == _search)
+                    return;
+
+                _search = value;
+
+                ResultsView.Refresh();
+
+                OnPropertyChanged();
             }
-
-            OnPropertyChanged();
         }
-    }
 
-    public ICollectionView AutoRefreshTimes { get; }
+        private ObservableCollection<ARPInfo> _results = new();
 
-    private AutoRefreshTimeInfo _selectedAutoRefreshTime;
-
-    public AutoRefreshTimeInfo SelectedAutoRefreshTime
-    {
-        get => _selectedAutoRefreshTime;
-        set
+        public ObservableCollection<ARPInfo> Results
         {
-            if (value == _selectedAutoRefreshTime)
-                return;
-
-            if (!_isLoading)
-                SettingsManager.Current.ARPTable_AutoRefreshTime = value;
-
-            _selectedAutoRefreshTime = value;
-
-            if (AutoRefreshEnabled)
+            get => _results;
+            set
             {
-                _autoRefreshTimer.Interval = AutoRefreshTime.CalculateTimeSpan(value);
-                _autoRefreshTimer.Start();
+                if (value == _results)
+                    return;
+
+                _results = value;
+                OnPropertyChanged();
             }
-
-            OnPropertyChanged();
         }
-    }
 
-    private bool _isRefreshing;
+        public ICollectionView ResultsView { get; }
 
-    public bool IsRefreshing
-    {
-        get => _isRefreshing;
-        set
+        private ARPInfo _selectedResult;
+
+        public ARPInfo SelectedResult
         {
-            if (value == _isRefreshing)
-                return;
+            get => _selectedResult;
+            set
+            {
+                if (value == _selectedResult)
+                    return;
 
-            _isRefreshing = value;
-            OnPropertyChanged();
+                _selectedResult = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private bool _isStatusMessageDisplayed;
+        private IList _selectedResults = new ArrayList();
 
-    public bool IsStatusMessageDisplayed
-    {
-        get => _isStatusMessageDisplayed;
-        set
+        public IList SelectedResults
         {
-            if (value == _isStatusMessageDisplayed)
-                return;
+            get => _selectedResults;
+            set
+            {
+                if (Equals(value, _selectedResults))
+                    return;
 
-            _isStatusMessageDisplayed = value;
-            OnPropertyChanged();
+                _selectedResults = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private string _statusMessage;
+        private bool _autoRefreshEnabled;
 
-    public string StatusMessage
-    {
-        get => _statusMessage;
-        private set
+        public bool AutoRefreshEnabled
         {
-            if (value == _statusMessage)
-                return;
+            get => _autoRefreshEnabled;
+            set
+            {
+                if (value == _autoRefreshEnabled)
+                    return;
 
-            _statusMessage = value;
-            OnPropertyChanged();
+                if (!_isLoading)
+                    SettingsManager.Current.ARPTable_AutoRefreshEnabled = value;
+
+                _autoRefreshEnabled = value;
+
+                // Start timer to refresh automatically
+                if (value)
+                {
+                    _autoRefreshTimer.Interval = AutoRefreshTime.CalculateTimeSpan(SelectedAutoRefreshTime);
+                    _autoRefreshTimer.Start();
+                }
+                else
+                {
+                    _autoRefreshTimer.Stop();
+                }
+
+                OnPropertyChanged();
+            }
         }
-    }
 
-    #endregion
+        public ICollectionView AutoRefreshTimes { get; }
 
-    #region ICommands & Actions
+        private AutoRefreshTimeInfo _selectedAutoRefreshTime;
 
-    public ICommand RefreshCommand => new RelayCommand(_ => RefreshAction().ConfigureAwait(false), Refresh_CanExecute);
-
-    private bool Refresh_CanExecute(object parameter)
-    {
-        return Application.Current.MainWindow != null && !((MetroWindow)Application.Current.MainWindow).IsAnyDialogOpen;
-    }
-
-    private async Task RefreshAction()
-    {
-        IsStatusMessageDisplayed = false;
-
-        await Refresh();
-    }
-
-    public ICommand DeleteTableCommand =>
-        new RelayCommand(_ => DeleteTableAction().ConfigureAwait(false), DeleteTable_CanExecute);
-
-    private bool DeleteTable_CanExecute(object parameter)
-    {
-        return Application.Current.MainWindow != null && !((MetroWindow)Application.Current.MainWindow).IsAnyDialogOpen;
-    }
-
-    private async Task DeleteTableAction()
-    {
-        IsStatusMessageDisplayed = false;
-
-        try
+        public AutoRefreshTimeInfo SelectedAutoRefreshTime
         {
-            var arpTable = new ARP();
+            get => _selectedAutoRefreshTime;
+            set
+            {
+                if (value == _selectedAutoRefreshTime)
+                    return;
 
-            arpTable.UserHasCanceled += ArpTable_UserHasCanceled;
+                if (!_isLoading)
+                    SettingsManager.Current.ARPTable_AutoRefreshTime = value;
 
-            await arpTable.DeleteTableAsync();
+                _selectedAutoRefreshTime = value;
+
+                if (AutoRefreshEnabled)
+                {
+                    _autoRefreshTimer.Interval = AutoRefreshTime.CalculateTimeSpan(value);
+                    _autoRefreshTimer.Start();
+                }
+
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _isRefreshing;
+
+        public bool IsRefreshing
+        {
+            get => _isRefreshing;
+            set
+            {
+                if (value == _isRefreshing)
+                    return;
+
+                _isRefreshing = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _isStatusMessageDisplayed;
+
+        public bool IsStatusMessageDisplayed
+        {
+            get => _isStatusMessageDisplayed;
+            set
+            {
+                if (value == _isStatusMessageDisplayed)
+                    return;
+
+                _isStatusMessageDisplayed = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _statusMessage;
+
+        public string StatusMessage
+        {
+            get => _statusMessage;
+            private set
+            {
+                if (value == _statusMessage)
+                    return;
+
+                _statusMessage = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region ICommands & Actions
+
+        public ICommand RefreshCommand => new RelayCommand(_ => RefreshAction().ConfigureAwait(false), Refresh_CanExecute);
+
+        private bool Refresh_CanExecute(object parameter)
+        {
+            return Application.Current.MainWindow != null && !((MetroWindow)Application.Current.MainWindow).IsAnyDialogOpen;
+        }
+
+        private async Task RefreshAction()
+        {
+            IsStatusMessageDisplayed = false;
 
             await Refresh();
         }
-        catch (Exception ex)
+
+        public ICommand DeleteTableCommand =>
+            new RelayCommand(_ => DeleteTableAction().ConfigureAwait(false), DeleteTable_CanExecute);
+
+        private bool DeleteTable_CanExecute(object parameter)
         {
-            StatusMessage = ex.Message;
-            IsStatusMessageDisplayed = true;
+            return Application.Current.MainWindow != null && !((MetroWindow)Application.Current.MainWindow).IsAnyDialogOpen;
         }
-    }
 
-    public ICommand DeleteEntryCommand =>
-        new RelayCommand(_ => DeleteEntryAction().ConfigureAwait(false), DeleteEntry_CanExecute);
-
-    private bool DeleteEntry_CanExecute(object parameter)
-    {
-        return Application.Current.MainWindow != null &&
-               !((MetroWindow)Application.Current.MainWindow)
-                   .IsAnyDialogOpen;
-    }
-
-    private async Task DeleteEntryAction()
-    {
-        IsStatusMessageDisplayed = false;
-
-        try
+        private async Task DeleteTableAction()
         {
-            var arpTable = new ARP();
-
-            arpTable.UserHasCanceled += ArpTable_UserHasCanceled;
-
-            await arpTable.DeleteEntryAsync(SelectedResult.IPAddress.ToString());
-
-            await Refresh();
-        }
-        catch (Exception ex)
-        {
-            StatusMessage = ex.Message;
-            IsStatusMessageDisplayed = true;
-        }
-    }
-
-    public ICommand AddEntryCommand =>
-        new RelayCommand(_ => AddEntryAction().ConfigureAwait(false), AddEntry_CanExecute);
-
-    private bool AddEntry_CanExecute(object parameter)
-    {
-        return Application.Current.MainWindow != null &&
-               !((MetroWindow)Application.Current.MainWindow)
-                   .IsAnyDialogOpen;
-    }
-
-    private async Task AddEntryAction()
-    {
-        IsStatusMessageDisplayed = false;
-
-        var customDialog = new CustomDialog
-        {
-            Title = Strings.AddEntry
-        };
-
-        var arpTableAddEntryViewModel = new ArpTableAddEntryViewModel(async instance =>
-        {
-            await _dialogCoordinator.HideMetroDialogAsync(this, customDialog);
+            IsStatusMessageDisplayed = false;
 
             try
             {
@@ -355,7 +284,7 @@ public class ARPTableViewModel : ViewModelBase
 
                 arpTable.UserHasCanceled += ArpTable_UserHasCanceled;
 
-                await arpTable.AddEntryAsync(instance.IPAddress, MACAddressHelper.Format(instance.MACAddress, "-"));
+                await arpTable.DeleteTableAsync();
 
                 await Refresh();
             }
@@ -364,110 +293,182 @@ public class ARPTableViewModel : ViewModelBase
                 StatusMessage = ex.Message;
                 IsStatusMessageDisplayed = true;
             }
-        }, _ => { _dialogCoordinator.HideMetroDialogAsync(this, customDialog); });
+        }
 
-        customDialog.Content = new ARPTableAddEntryDialog
+        public ICommand DeleteEntryCommand =>
+            new RelayCommand(_ => DeleteEntryAction().ConfigureAwait(false), DeleteEntry_CanExecute);
+
+        private bool DeleteEntry_CanExecute(object parameter)
         {
-            DataContext = arpTableAddEntryViewModel
-        };
+            return Application.Current.MainWindow != null &&
+                !((MetroWindow)Application.Current.MainWindow)
+                    .IsAnyDialogOpen;
+        }
 
-        await _dialogCoordinator.ShowMetroDialogAsync(this, customDialog);
-    }
-
-    public ICommand ExportCommand => new RelayCommand(_ => ExportAction().ConfigureAwait(false));
-
-    private async Task ExportAction()
-    {
-        var customDialog = new CustomDialog
+        private async Task DeleteEntryAction()
         {
-            Title = Strings.Export
-        };
-
-        var exportViewModel = new ExportViewModel(async instance =>
-        {
-            await _dialogCoordinator.HideMetroDialogAsync(this, customDialog);
+            IsStatusMessageDisplayed = false;
 
             try
             {
-                ExportManager.Export(instance.FilePath, instance.FileType,
-                    instance.ExportAll
-                        ? Results
-                        : new ObservableCollection<ARPInfo>(SelectedResults.Cast<ARPInfo>().ToArray()));
+                var arpTable = new ARP();
+
+                arpTable.UserHasCanceled += ArpTable_UserHasCanceled;
+
+                await arpTable.DeleteEntryAsync(SelectedResult.IPAddress.ToString());
+
+                await Refresh();
             }
             catch (Exception ex)
             {
-                var settings = AppearanceManager.MetroDialog;
-                settings.AffirmativeButtonText = Strings.OK;
-
-                await _dialogCoordinator.ShowMessageAsync(this, Strings.Error,
-                    Strings.AnErrorOccurredWhileExportingTheData + Environment.NewLine +
-                    Environment.NewLine + ex.Message, MessageDialogStyle.Affirmative, settings);
+                StatusMessage = ex.Message;
+                IsStatusMessageDisplayed = true;
             }
+        }
 
-            SettingsManager.Current.ARPTable_ExportFileType = instance.FileType;
-            SettingsManager.Current.ARPTable_ExportFilePath = instance.FilePath;
-        }, _ => { _dialogCoordinator.HideMetroDialogAsync(this, customDialog); }, [
-            ExportFileType.Csv, ExportFileType.Xml, ExportFileType.Json
-        ], true, SettingsManager.Current.ARPTable_ExportFileType, SettingsManager.Current.ARPTable_ExportFilePath);
+        public ICommand AddEntryCommand =>
+            new RelayCommand(_ => AddEntryAction().ConfigureAwait(false), AddEntry_CanExecute);
 
-        customDialog.Content = new ExportDialog
+        private bool AddEntry_CanExecute(object parameter)
         {
-            DataContext = exportViewModel
-        };
+            return Application.Current.MainWindow != null &&
+                !((MetroWindow)Application.Current.MainWindow)
+                    .IsAnyDialogOpen;
+        }
 
-        await _dialogCoordinator.ShowMetroDialogAsync(this, customDialog);
-    }
+        private async Task AddEntryAction()
+        {
+            IsStatusMessageDisplayed = false;
 
-    #endregion
+            var customDialog = new CustomDialog
+            {
+                Title = Strings.AddEntry
+            };
 
-    #region Methods
+            var arpTableAddEntryViewModel = new ArpTableAddEntryViewModel(async instance =>
+            {
+                await _dialogCoordinator.HideMetroDialogAsync(this, customDialog);
 
-    private async Task Refresh()
-    {
-        IsRefreshing = true;
+                try
+                {
+                    var arpTable = new ARP();
 
-        Results.Clear();
+                    arpTable.UserHasCanceled += ArpTable_UserHasCanceled;
 
-        (await ARP.GetTableAsync()).ForEach(x => Results.Add(x));
+                    await arpTable.AddEntryAsync(instance.IPAddress, MACAddressHelper.Format(instance.MACAddress, "-"));
 
-        IsRefreshing = false;
-    }
+                    await Refresh();
+                }
+                catch (Exception ex)
+                {
+                    StatusMessage = ex.Message;
+                    IsStatusMessageDisplayed = true;
+                }
+            }, _ => { _dialogCoordinator.HideMetroDialogAsync(this, customDialog); });
 
-    public void OnViewVisible()
-    {
-        // Restart timer...
-        if (AutoRefreshEnabled)
-            _autoRefreshTimer.Start();
-    }
+            customDialog.Content = new ARPTableAddEntryDialog
+            {
+                DataContext = arpTableAddEntryViewModel
+            };
 
-    public void OnViewHide()
-    {
-        // Temporarily stop timer...
-        if (AutoRefreshEnabled)
+            await _dialogCoordinator.ShowMetroDialogAsync(this, customDialog);
+        }
+
+        public ICommand ExportCommand => new RelayCommand(_ => ExportAction().ConfigureAwait(false));
+
+        private async Task ExportAction()
+        {
+            var customDialog = new CustomDialog
+            {
+                Title = Strings.Export
+            };
+
+            var exportViewModel = new ExportViewModel(async instance =>
+            {
+                await _dialogCoordinator.HideMetroDialogAsync(this, customDialog);
+
+                try
+                {
+                    ExportManager.Export(instance.FilePath, instance.FileType,
+                        instance.ExportAll
+                            ? Results
+                            : new ObservableCollection<ARPInfo>(SelectedResults.Cast<ARPInfo>().ToArray()));
+                }
+                catch (Exception ex)
+                {
+                    var settings = AppearanceManager.MetroDialog;
+                    settings.AffirmativeButtonText = Strings.OK;
+
+                    await _dialogCoordinator.ShowMessageAsync(this, Strings.Error,
+                        Strings.AnErrorOccurredWhileExportingTheData + Environment.NewLine +
+                        Environment.NewLine + ex.Message, MessageDialogStyle.Affirmative, settings);
+                }
+
+                SettingsManager.Current.ARPTable_ExportFileType = instance.FileType;
+                SettingsManager.Current.ARPTable_ExportFilePath = instance.FilePath;
+            }, _ => { _dialogCoordinator.HideMetroDialogAsync(this, customDialog); }, [
+                ExportFileType.Csv, ExportFileType.Xml, ExportFileType.Json
+            ], true, SettingsManager.Current.ARPTable_ExportFileType, SettingsManager.Current.ARPTable_ExportFilePath);
+
+            customDialog.Content = new ExportDialog
+            {
+                DataContext = exportViewModel
+            };
+
+            await _dialogCoordinator.ShowMetroDialogAsync(this, customDialog);
+        }
+
+        #endregion
+
+        #region Methods
+
+        private async Task Refresh()
+        {
+            IsRefreshing = true;
+
+            Results.Clear();
+
+            (await ARP.GetTableAsync()).ForEach(x => Results.Add(x));
+
+            IsRefreshing = false;
+        }
+
+        public void OnViewVisible()
+        {
+            // Restart timer...
+            if (AutoRefreshEnabled)
+                _autoRefreshTimer.Start();
+        }
+
+        public void OnViewHide()
+        {
+            // Temporarily stop timer...
+            if (AutoRefreshEnabled)
+                _autoRefreshTimer.Stop();
+        }
+
+        #endregion
+
+        #region Events
+
+        private void ArpTable_UserHasCanceled(object sender, EventArgs e)
+        {
+            StatusMessage = Strings.CanceledByUserMessage;
+            IsStatusMessageDisplayed = true;
+        }
+
+        private async void AutoRefreshTimer_Tick(object sender, EventArgs e)
+        {
+            // Stop timer...
             _autoRefreshTimer.Stop();
+
+            // Refresh
+            await Refresh();
+
+            // Restart timer...
+            _autoRefreshTimer.Start();
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region Events
-
-    private void ArpTable_UserHasCanceled(object sender, EventArgs e)
-    {
-        StatusMessage = Strings.CanceledByUserMessage;
-        IsStatusMessageDisplayed = true;
-    }
-
-    private async void AutoRefreshTimer_Tick(object sender, EventArgs e)
-    {
-        // Stop timer...
-        _autoRefreshTimer.Stop();
-
-        // Refresh
-        await Refresh();
-
-        // Restart timer...
-        _autoRefreshTimer.Start();
-    }
-
-    #endregion
 }

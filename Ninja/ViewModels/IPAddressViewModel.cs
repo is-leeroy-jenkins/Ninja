@@ -2,34 +2,35 @@
 using System.Windows.Input;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Utilities;
-
-public abstract class IPAddressViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    private string _ipAddress;
+    using Utilities;
 
-    protected IPAddressViewModel(Action<IPAddressViewModel> okCommand, Action<IPAddressViewModel> cancelHandler)
+    public abstract class IPAddressViewModel : ViewModelBase
     {
-        OKCommand = new RelayCommand(_ => okCommand(this));
-        CancelCommand = new RelayCommand(_ => cancelHandler(this));
-    }
+        private string _ipAddress;
 
-    public ICommand OKCommand { get; }
-
-    public ICommand CancelCommand { get; }
-
-    public string IPAddress
-    {
-        get => _ipAddress;
-        set
+        protected IPAddressViewModel(Action<IPAddressViewModel> okCommand, Action<IPAddressViewModel> cancelHandler)
         {
-            if (value == _ipAddress)
-                return;
+            OKCommand = new RelayCommand(_ => okCommand(this));
+            CancelCommand = new RelayCommand(_ => cancelHandler(this));
+        }
 
-            _ipAddress = value;
-            OnPropertyChanged();
+        public ICommand OKCommand { get; }
+
+        public ICommand CancelCommand { get; }
+
+        public string IPAddress
+        {
+            get => _ipAddress;
+            set
+            {
+                if (value == _ipAddress)
+                    return;
+
+                _ipAddress = value;
+                OnPropertyChanged();
+            }
         }
     }
 }

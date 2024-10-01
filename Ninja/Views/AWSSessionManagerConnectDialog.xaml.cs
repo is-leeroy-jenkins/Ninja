@@ -1,16 +1,17 @@
 ﻿using System.Windows;
 
-namespace Ninja.Views;
-
-public partial class AWSSessionManagerConnectDialog
+namespace Ninja.Views
 {
-    public AWSSessionManagerConnectDialog()
+    public partial class AWSSessionManagerConnectDialog
     {
-        InitializeComponent();
-    }
+        public AWSSessionManagerConnectDialog()
+        {
+            InitializeComponent();
+        }
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        ComboBoxInstanceID.Focus();
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            ComboBoxInstanceID.Focus();
+        }
     }
 }

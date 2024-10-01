@@ -3,92 +3,93 @@ using System.Windows.Input;
 using Ninja.Settings;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Settings;
-using Utilities;
-
-public class WelcomeViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    private bool _checkForUpdatesAtStartup = GlobalStaticConfiguration.Update_CheckForUpdatesAtStartup;
+    using Settings;
+    using Utilities;
 
-    private bool _checkIPApiDNSResolver = GlobalStaticConfiguration.Dashboard_CheckIPApiDNSResolver;
-
-    private bool _checkIPApiIPGeolocation = GlobalStaticConfiguration.Dashboard_CheckIPApiIPGeolocation;
-
-    private bool _checkPublicIPAddress = GlobalStaticConfiguration.Dashboard_CheckPublicIPAddress;
-
-    private bool _powerShellModifyGlobalProfile;
-
-    public WelcomeViewModel(Action<WelcomeViewModel> continueCommand)
+    public class WelcomeViewModel : ViewModelBase
     {
-        ContinueCommand = new RelayCommand(_ => continueCommand(this));
-    }
+        private bool _checkForUpdatesAtStartup = GlobalStaticConfiguration.Update_CheckForUpdatesAtStartup;
 
-    public ICommand ContinueCommand { get; }
+        private bool _checkIPApiDNSResolver = GlobalStaticConfiguration.Dashboard_CheckIPApiDNSResolver;
 
-    public bool CheckForUpdatesAtStartup
-    {
-        get => _checkForUpdatesAtStartup;
-        set
+        private bool _checkIPApiIPGeolocation = GlobalStaticConfiguration.Dashboard_CheckIPApiIPGeolocation;
+
+        private bool _checkPublicIPAddress = GlobalStaticConfiguration.Dashboard_CheckPublicIPAddress;
+
+        private bool _powerShellModifyGlobalProfile;
+
+        public WelcomeViewModel(Action<WelcomeViewModel> continueCommand)
         {
-            if (value == _checkForUpdatesAtStartup)
-                return;
-
-            _checkForUpdatesAtStartup = value;
-            OnPropertyChanged();
+            ContinueCommand = new RelayCommand(_ => continueCommand(this));
         }
-    }
 
-    public bool CheckPublicIPAddress
-    {
-        get => _checkPublicIPAddress;
-        set
+        public ICommand ContinueCommand { get; }
+
+        public bool CheckForUpdatesAtStartup
         {
-            if (value == _checkPublicIPAddress)
-                return;
+            get => _checkForUpdatesAtStartup;
+            set
+            {
+                if (value == _checkForUpdatesAtStartup)
+                    return;
 
-            _checkPublicIPAddress = value;
-            OnPropertyChanged();
+                _checkForUpdatesAtStartup = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public bool CheckIPApiIPGeolocation
-    {
-        get => _checkIPApiIPGeolocation;
-        set
+        public bool CheckPublicIPAddress
         {
-            if (value == _checkIPApiIPGeolocation)
-                return;
+            get => _checkPublicIPAddress;
+            set
+            {
+                if (value == _checkPublicIPAddress)
+                    return;
 
-            _checkIPApiIPGeolocation = value;
-            OnPropertyChanged();
+                _checkPublicIPAddress = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public bool CheckIPApiDNSResolver
-    {
-        get => _checkIPApiDNSResolver;
-        set
+        public bool CheckIPApiIPGeolocation
         {
-            if (value == _checkIPApiDNSResolver)
-                return;
+            get => _checkIPApiIPGeolocation;
+            set
+            {
+                if (value == _checkIPApiIPGeolocation)
+                    return;
 
-            _checkIPApiDNSResolver = value;
-            OnPropertyChanged();
+                _checkIPApiIPGeolocation = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public bool PowerShellModifyGlobalProfile
-    {
-        get => _powerShellModifyGlobalProfile;
-        set
+        public bool CheckIPApiDNSResolver
         {
-            if (value == _powerShellModifyGlobalProfile)
-                return;
+            get => _checkIPApiDNSResolver;
+            set
+            {
+                if (value == _checkIPApiDNSResolver)
+                    return;
 
-            _powerShellModifyGlobalProfile = value;
-            OnPropertyChanged();
+                _checkIPApiDNSResolver = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool PowerShellModifyGlobalProfile
+        {
+            get => _powerShellModifyGlobalProfile;
+            set
+            {
+                if (value == _powerShellModifyGlobalProfile)
+                    return;
+
+                _powerShellModifyGlobalProfile = value;
+                OnPropertyChanged();
+            }
         }
     }
 }

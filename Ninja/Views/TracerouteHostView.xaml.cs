@@ -5,50 +5,51 @@ using MahApps.Metro.Controls.Dialogs;
 using Ninja.Profiles;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using Profiles;
-using ViewModels;
-
-public partial class TracerouteHostView
+namespace Ninja.Views
 {
-    private readonly TracerouteHostViewModel _viewModel = new(DialogCoordinator.Instance);
+    using Profiles;
+    using ViewModels;
 
-    public TracerouteHostView()
+    public partial class TracerouteHostView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
-    }
+        private readonly TracerouteHostViewModel _viewModel = new(DialogCoordinator.Instance);
 
-    private void ContextMenu_Opened(object sender, RoutedEventArgs e)
-    {
-        if (sender is ContextMenu menu)
-            menu.DataContext = _viewModel;
-    }
+        public TracerouteHostView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
 
-    private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-    {
-        if (e.ChangedButton == MouseButton.Left)
-            _viewModel.TraceProfileCommand.Execute(null);
-    }
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            if (sender is ContextMenu menu)
+                menu.DataContext = _viewModel;
+        }
 
-    public void AddTab(string host)
-    {
-        _viewModel.AddTab(host);
-    }
+        private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                _viewModel.TraceProfileCommand.Execute(null);
+        }
 
-    public void AddTab(ProfileInfo profile)
-    {
-        _viewModel.AddTab(profile);
-    }
+        public void AddTab(string host)
+        {
+            _viewModel.AddTab(host);
+        }
 
-    public void OnViewHide()
-    {
-        _viewModel.OnViewHide();
-    }
+        public void AddTab(ProfileInfo profile)
+        {
+            _viewModel.AddTab(profile);
+        }
 
-    public void OnViewVisible()
-    {
-        _viewModel.OnViewVisible();
+        public void OnViewHide()
+        {
+            _viewModel.OnViewHide();
+        }
+
+        public void OnViewVisible()
+        {
+            _viewModel.OnViewVisible();
+        }
     }
 }

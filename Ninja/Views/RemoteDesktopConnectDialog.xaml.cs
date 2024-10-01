@@ -1,16 +1,17 @@
 ﻿using System.Windows;
 
-namespace Ninja.Views;
-
-public partial class RemoteDesktopConnectDialog
+namespace Ninja.Views
 {
-    public RemoteDesktopConnectDialog()
+    public partial class RemoteDesktopConnectDialog
     {
-        InitializeComponent();
-    }
+        public RemoteDesktopConnectDialog()
+        {
+            InitializeComponent();
+        }
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        ComboBoxHost.Focus();
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            ComboBoxHost.Focus();
+        }
     }
 }

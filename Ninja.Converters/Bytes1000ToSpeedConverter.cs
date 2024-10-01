@@ -2,30 +2,31 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Ninja.Converters;
-
-public sealed class Bytes1000ToSpeedConverter : IValueConverter
+namespace Ninja.Converters
 {
-    private readonly string[] _sizes = { "Bit/s", "KBit/s", "MBit/s", "GBit/s", "TBit/s" };
-
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public sealed class Bytes1000ToSpeedConverter : IValueConverter
     {
-        if (value == null)
-            return "-/-";
+        private readonly string[] _sizes = { "Bit/s", "KBit/s", "MBit/s", "GBit/s", "TBit/s" };
 
-        if (!double.TryParse(value.ToString(), out var bits))
-            return "-/-";
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value == null)
+                return "-/-";
 
-        var sizeCount = 0;
+            if (!double.TryParse(value.ToString(), out var bits))
+                return "-/-";
 
-        while (bits >= 1000 && ++sizeCount < _sizes.Length)
-            bits /= 1000;
+            var sizeCount = 0;
 
-        return $"{bits} {_sizes[sizeCount]}";
-    }
+            while (bits >= 1000 && ++sizeCount < _sizes.Length)
+                bits /= 1000;
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
+            return $"{bits} {_sizes[sizeCount]}";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

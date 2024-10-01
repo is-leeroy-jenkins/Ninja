@@ -1,24 +1,25 @@
 ﻿using System;
 using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class SubnetCalculatorWideSubnetView
+namespace Ninja.Views
 {
-    private readonly SubnetCalculatorWideSubnetViewModel _viewModel = new();
+    using ViewModels;
 
-    public SubnetCalculatorWideSubnetView()
+    public partial class SubnetCalculatorWideSubnetView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
+        private readonly SubnetCalculatorWideSubnetViewModel _viewModel = new();
 
-        Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
-    }
+        public SubnetCalculatorWideSubnetView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
 
-    private void Dispatcher_ShutdownStarted(object sender, EventArgs e)
-    {
-        _viewModel.OnShutdown();
+            Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
+        }
+
+        private void Dispatcher_ShutdownStarted(object sender, EventArgs e)
+        {
+            _viewModel.OnShutdown();
+        }
     }
 }

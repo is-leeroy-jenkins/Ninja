@@ -1,22 +1,23 @@
 ﻿using System;
 
-namespace Ninja.Models.Network;
-
-public class BandwidthMeterSpeedArgs : EventArgs
+namespace Ninja.Models.Network
 {
-    public BandwidthMeterSpeedArgs(DateTime dateTime, long totoTotalBytesReceived, long totalBytesSent,
-        long byteReceivedSpeed, long byteSentSpeed)
+    public class BandwidthMeterSpeedArgs : EventArgs
     {
-        DateTime = dateTime;
-        TotalBytesReceived = totoTotalBytesReceived;
-        TotalBytesSent = totalBytesSent;
-        ByteReceivedSpeed = byteReceivedSpeed;
-        ByteSentSpeed = byteSentSpeed;
-    }
+        public BandwidthMeterSpeedArgs(DateTime dateTime, long totoTotalBytesReceived, long totalBytesSent,
+            long byteReceivedSpeed, long byteSentSpeed)
+        {
+            DateTime = dateTime;
+            TotalBytesReceived = totoTotalBytesReceived;
+            TotalBytesSent = totalBytesSent;
+            ByteReceivedSpeed = byteReceivedSpeed;
+            ByteSentSpeed = byteSentSpeed;
+        }
 
-    public DateTime DateTime { get; }
-    public long TotalBytesReceived { get; }
-    public long TotalBytesSent { get; }
-    public long ByteReceivedSpeed { get; }
-    public long ByteSentSpeed { get; }
+        public DateTime DateTime { get; }
+        public long TotalBytesReceived { get; }
+        public long TotalBytesSent { get; }
+        public long ByteReceivedSpeed { get; }
+        public long ByteSentSpeed { get; }
+    }
 }

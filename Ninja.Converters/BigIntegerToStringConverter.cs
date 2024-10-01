@@ -5,20 +5,21 @@ using System.Numerics;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Ninja.Converters;
-
-public sealed class BigIntegerToStringConverter : IValueConverter
+namespace Ninja.Converters
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public sealed class BigIntegerToStringConverter : IValueConverter
     {
-        if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
-            return "-/-";
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+                return "-/-";
 
-        return value != null ? ((BigInteger)value).ToString() : "-/-";
-    }
+            return value != null ? ((BigInteger)value).ToString() : "-/-";
+        }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

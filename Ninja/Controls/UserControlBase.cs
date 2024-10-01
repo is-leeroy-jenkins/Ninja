@@ -2,18 +2,19 @@
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 
-namespace Ninja.Controls;
-
-public abstract class UserControlBase : UserControl, INotifyPropertyChanged
+namespace Ninja.Controls
 {
-    #region PropertyChangedEventHandler
-
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    public abstract class UserControlBase : UserControl, INotifyPropertyChanged
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
+        #region PropertyChangedEventHandler
 
-    #endregion
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+    }
 }

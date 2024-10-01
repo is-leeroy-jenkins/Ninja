@@ -1,69 +1,70 @@
 ﻿using Ninja.Settings;
 
-namespace Ninja.ViewModels;
-
-using Settings;
-
-public class SettingsStatusViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    #region Variables
+    using Settings;
 
-    private readonly bool _isLoading;
-
-    private bool _showWindowOnNetworkChange;
-
-    public bool ShowWindowOnNetworkChange
+    public class SettingsStatusViewModel : ViewModelBase
     {
-        get => _showWindowOnNetworkChange;
-        set
+        #region Variables
+
+        private readonly bool _isLoading;
+
+        private bool _showWindowOnNetworkChange;
+
+        public bool ShowWindowOnNetworkChange
         {
-            if (value == _showWindowOnNetworkChange)
-                return;
+            get => _showWindowOnNetworkChange;
+            set
+            {
+                if (value == _showWindowOnNetworkChange)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.Status_ShowWindowOnNetworkChange = value;
+                if (!_isLoading)
+                    SettingsManager.Current.Status_ShowWindowOnNetworkChange = value;
 
-            _showWindowOnNetworkChange = value;
-            OnPropertyChanged();
+                _showWindowOnNetworkChange = value;
+                OnPropertyChanged();
+            }
         }
-    }
 
-    private int _windowCloseTime;
+        private int _windowCloseTime;
 
-    public int WindowCloseTime
-    {
-        get => _windowCloseTime;
-        set
+        public int WindowCloseTime
         {
-            if (value == _windowCloseTime)
-                return;
+            get => _windowCloseTime;
+            set
+            {
+                if (value == _windowCloseTime)
+                    return;
 
-            if (!_isLoading)
-                SettingsManager.Current.Status_WindowCloseTime = value;
+                if (!_isLoading)
+                    SettingsManager.Current.Status_WindowCloseTime = value;
 
-            _windowCloseTime = value;
-            OnPropertyChanged();
+                _windowCloseTime = value;
+                OnPropertyChanged();
+            }
         }
+
+        #endregion
+
+        #region Contructor, load settings
+
+        public SettingsStatusViewModel()
+        {
+            _isLoading = true;
+
+            LoadSettings();
+
+            _isLoading = false;
+        }
+
+        private void LoadSettings()
+        {
+            ShowWindowOnNetworkChange = SettingsManager.Current.Status_ShowWindowOnNetworkChange;
+            WindowCloseTime = SettingsManager.Current.Status_WindowCloseTime;
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region Contructor, load settings
-
-    public SettingsStatusViewModel()
-    {
-        _isLoading = true;
-
-        LoadSettings();
-
-        _isLoading = false;
-    }
-
-    private void LoadSettings()
-    {
-        ShowWindowOnNetworkChange = SettingsManager.Current.Status_ShowWindowOnNetworkChange;
-        WindowCloseTime = SettingsManager.Current.Status_WindowCloseTime;
-    }
-
-    #endregion
 }

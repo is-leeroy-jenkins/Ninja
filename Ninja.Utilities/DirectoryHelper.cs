@@ -1,19 +1,20 @@
 ﻿using System;
 using System.IO;
 
-namespace Ninja.Utilities;
-
-/// <summary>
-///     Contains methods interact with directories.
-/// </summary>
-public static class DirectoryHelper
+namespace Ninja.Utilities
 {
     /// <summary>
-    ///     Create a directory with subdirectories and resolve environment variables.
+    ///     Contains methods interact with directories.
     /// </summary>
-    /// <param name="path">Path like "%AppDataLocal%\Folder1".</param>
-    public static void CreateWithEnvironmentVariables(string path)
+    public static class DirectoryHelper
     {
-        Directory.CreateDirectory(Environment.ExpandEnvironmentVariables(path));
+        /// <summary>
+        ///     Create a directory with subdirectories and resolve environment variables.
+        /// </summary>
+        /// <param name="path">Path like "%AppDataLocal%\Folder1".</param>
+        public static void CreateWithEnvironmentVariables(string path)
+        {
+            Directory.CreateDirectory(Environment.ExpandEnvironmentVariables(path));
+        }
     }
 }

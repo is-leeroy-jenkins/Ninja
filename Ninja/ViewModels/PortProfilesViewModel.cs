@@ -9,79 +9,80 @@ using Ninja.Models.Network;
 using Ninja.Settings;
 using Ninja.Utilities;
 
-namespace Ninja.ViewModels;
-
-using Models.Network;
-using Settings;
-using Utilities;
-
-public class PortProfilesViewModel : ViewModelBase
+namespace Ninja.ViewModels
 {
-    private string _search;
+    using Models.Network;
+    using Settings;
+    using Utilities;
 
-    private IList _selectedPortProfiles = new ArrayList();
-
-    public PortProfilesViewModel(Action<PortProfilesViewModel> okCommand, Action<PortProfilesViewModel> cancelHandler)
+    public class PortProfilesViewModel : ViewModelBase
     {
-        OKCommand = new RelayCommand(_ => okCommand(this));
-        CancelCommand = new RelayCommand(_ => cancelHandler(this));
+        private string _search;
 
-        PortProfiles = CollectionViewSource.GetDefaultView(SettingsManager.Current.PortScanner_PortProfiles);
-        PortProfiles.SortDescriptions.Add(
-            new SortDescription(nameof(PortProfileInfo.Name), ListSortDirection.Ascending));
-        PortProfiles.Filter = o =>
+        private IList _selectedPortProfiles = new ArrayList();
+
+        public PortProfilesViewModel(Action<PortProfilesViewModel> okCommand, Action<PortProfilesViewModel> cancelHandler)
         {
-            if (string.IsNullOrEmpty(Search))
-                return true;
+            OKCommand = new RelayCommand(_ => okCommand(this));
+            CancelCommand = new RelayCommand(_ => cancelHandler(this));
 
-            if (o is not PortProfileInfo info)
-                return false;
+            PortProfiles = CollectionViewSource.GetDefaultView(SettingsManager.Current.PortScanner_PortProfiles);
+            PortProfiles.SortDescriptions.Add(
+                new SortDescription(nameof(PortProfileInfo.Name), ListSortDirection.Ascending));
+            PortProfiles.Filter = o =>
+            {
+                if (string.IsNullOrEmpty(Search))
+                    return true;
 
-            var search = Search.Trim();
+                if (o is not PortProfileInfo info)
+                    return false;
 
-            // Search: Name, Ports
-            return info.Name.IndexOf(search, StringComparison.OrdinalIgnoreCase) > -1 ||
-                   info.Ports.IndexOf(search, StringComparison.OrdinalIgnoreCase) > -1;
-        };
-    }
+                var search = Search.Trim();
 
-    public ICommand OKCommand { get; }
-
-    public ICommand CancelCommand { get; }
-
-    public string Search
-    {
-        get => _search;
-        set
-        {
-            if (value == _search)
-                return;
-
-            _search = value;
-
-            PortProfiles.Refresh();
-
-            OnPropertyChanged();
+                // Search: Name, Ports
+                return info.Name.IndexOf(search, StringComparison.OrdinalIgnoreCase) > -1 ||
+                    info.Ports.IndexOf(search, StringComparison.OrdinalIgnoreCase) > -1;
+            };
         }
-    }
 
-    public ICollectionView PortProfiles { get; }
+        public ICommand OKCommand { get; }
 
-    public IList SelectedPortProfiles
-    {
-        get => _selectedPortProfiles;
-        set
+        public ICommand CancelCommand { get; }
+
+        public string Search
         {
-            if (Equals(value, _selectedPortProfiles))
-                return;
+            get => _search;
+            set
+            {
+                if (value == _search)
+                    return;
 
-            _selectedPortProfiles = value;
-            OnPropertyChanged();
+                _search = value;
+
+                PortProfiles.Refresh();
+
+                OnPropertyChanged();
+            }
         }
-    }
 
-    public IEnumerable<PortProfileInfo> GetSelectedPortProfiles()
-    {
-        return new List<PortProfileInfo>(SelectedPortProfiles.Cast<PortProfileInfo>());
+        public ICollectionView PortProfiles { get; }
+
+        public IList SelectedPortProfiles
+        {
+            get => _selectedPortProfiles;
+            set
+            {
+                if (Equals(value, _selectedPortProfiles))
+                    return;
+
+                _selectedPortProfiles = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public IEnumerable<PortProfileInfo> GetSelectedPortProfiles()
+        {
+            return new List<PortProfileInfo>(SelectedPortProfiles.Cast<PortProfileInfo>());
+        }
     }
 }

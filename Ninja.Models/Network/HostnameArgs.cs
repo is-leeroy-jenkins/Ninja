@@ -1,23 +1,24 @@
 ﻿using System;
 
-namespace Ninja.Models.Network;
-
-/// <summary>
-///     Contains the information of a resolved hostname in a <see cref="Ping" />.
-/// </summary>
-public class HostnameArgs : EventArgs
+namespace Ninja.Models.Network
 {
     /// <summary>
-    ///     Creates a new instance of <see cref="HostnameArgs" /> with the given hostname.
+    ///     Contains the information of a resolved hostname in a <see cref="Ping" />.
     /// </summary>
-    /// <param name="args"></param>
-    public HostnameArgs(string hostname)
+    public class HostnameArgs : EventArgs
     {
-        Hostname = hostname;
-    }
+        /// <summary>
+        ///     Creates a new instance of <see cref="HostnameArgs" /> with the given hostname.
+        /// </summary>
+        /// <param name="args"></param>
+        public HostnameArgs(string hostname)
+        {
+            Hostname = hostname;
+        }
 
-    /// <summary>
-    ///     Hostname.
-    /// </summary>
-    public string Hostname { get; }
+        /// <summary>
+        ///     Hostname.
+        /// </summary>
+        public string Hostname { get; }
+    }
 }

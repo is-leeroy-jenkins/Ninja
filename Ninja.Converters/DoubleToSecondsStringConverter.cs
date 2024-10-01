@@ -2,17 +2,18 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Ninja.Converters;
-
-public sealed class IntToSecondsStringConverter : IValueConverter
+namespace Ninja.Converters
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public sealed class IntToSecondsStringConverter : IValueConverter
     {
-        return value is double seconds ? $"{seconds} s" : "-/-";
-    }
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value is double seconds ? $"{seconds} s" : "-/-";
+        }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,16 +1,17 @@
 ﻿using Ninja.ViewModels;
 
-namespace Ninja.Views;
-
-using ViewModels;
-
-public partial class SettingsUpdateView
+namespace Ninja.Views
 {
-    private readonly SettingsUpdateViewModel _viewModel = new();
+    using ViewModels;
 
-    public SettingsUpdateView()
+    public partial class SettingsUpdateView
     {
-        InitializeComponent();
-        DataContext = _viewModel;
+        private readonly SettingsUpdateViewModel _viewModel = new();
+
+        public SettingsUpdateView()
+        {
+            InitializeComponent();
+            DataContext = _viewModel;
+        }
     }
 }

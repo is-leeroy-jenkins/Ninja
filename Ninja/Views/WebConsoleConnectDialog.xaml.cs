@@ -1,16 +1,17 @@
 ﻿using System.Windows;
 
-namespace Ninja.Views;
-
-public partial class WebConsoleConnectDialog
+namespace Ninja.Views
 {
-    public WebConsoleConnectDialog()
+    public partial class WebConsoleConnectDialog
     {
-        InitializeComponent();
-    }
+        public WebConsoleConnectDialog()
+        {
+            InitializeComponent();
+        }
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        ComboBoxUrl.Focus();
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            ComboBoxUrl.Focus();
+        }
     }
 }

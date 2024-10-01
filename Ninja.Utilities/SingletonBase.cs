@@ -1,24 +1,25 @@
-﻿namespace Ninja.Utilities;
-
-/// <summary>
-///     Abstract class to implement a generic singleton.
-/// </summary>
-/// <typeparam name="T">Class</typeparam>
-public abstract class SingletonBase<T> where T : class, new()
+﻿namespace Ninja.Utilities
 {
     /// <summary>
-    ///     Holds the instance of the class.
+    ///     Abstract class to implement a generic singleton.
     /// </summary>
-    private static T _instance;
-
-    /// <summary>
-    ///     Returns the current instance of the class.
-    /// </summary>
-    /// <returns>Instance of the class.</returns>
-    public static T GetInstance()
+    /// <typeparam name="T">Class</typeparam>
+    public abstract class SingletonBase<T> where T : class, new()
     {
-        _instance ??= new T();
+        /// <summary>
+        ///     Holds the instance of the class.
+        /// </summary>
+        private static T _instance;
 
-        return _instance;
+        /// <summary>
+        ///     Returns the current instance of the class.
+        /// </summary>
+        /// <returns>Instance of the class.</returns>
+        public static T GetInstance()
+        {
+            _instance ??= new T();
+
+            return _instance;
+        }
     }
 }

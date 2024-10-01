@@ -1,22 +1,23 @@
 ﻿using System;
 
-namespace Ninja.Models.EventSystem;
-
-public static class EventSystem
+namespace Ninja.Models.EventSystem
 {
-    // This will notify the main window, to change the view to another application and redirect some data (hostname, ip)
-    public static event EventHandler OnRedirectDataToApplicationEvent;
-
-    public static void RedirectToApplication(ApplicationName application, string data)
+    public static class EventSystem
     {
-        OnRedirectDataToApplicationEvent?.Invoke(null, new EventSystemRedirectArgs(application, data));
-    }
+        // This will notify the main window, to change the view to another application and redirect some data (hostname, ip)
+        public static event EventHandler OnRedirectDataToApplicationEvent;
 
-    // This will notify the main window, to change the view to the settings...
-    public static event EventHandler OnRedirectToSettingsEvent;
+        public static void RedirectToApplication(ApplicationName application, string data)
+        {
+            OnRedirectDataToApplicationEvent?.Invoke(null, new EventSystemRedirectArgs(application, data));
+        }
 
-    public static void RedirectToSettings()
-    {
-        OnRedirectToSettingsEvent?.Invoke(null, EventArgs.Empty);
+        // This will notify the main window, to change the view to the settings...
+        public static event EventHandler OnRedirectToSettingsEvent;
+
+        public static void RedirectToSettings()
+        {
+            OnRedirectToSettingsEvent?.Invoke(null, EventArgs.Empty);
+        }
     }
 }

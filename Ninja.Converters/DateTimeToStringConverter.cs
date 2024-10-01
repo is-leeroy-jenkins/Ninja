@@ -3,19 +3,20 @@ using System.Globalization;
 using System.Windows.Data;
 using Ninja.Utilities;
 
-namespace Ninja.Converters;
-
-using Utilities;
-
-public sealed class DateTimeToStringConverter : IValueConverter
+namespace Ninja.Converters
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return value is DateTime dateTime ? DateTimeHelper.DateTimeToFullDateTimeString(dateTime) : "-/-";
-    }
+    using Utilities;
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public sealed class DateTimeToStringConverter : IValueConverter
     {
-        throw new NotImplementedException();
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value is DateTime dateTime ? DateTimeHelper.DateTimeToFullDateTimeString(dateTime) : "-/-";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,19 +1,20 @@
-﻿namespace Ninja.Models.RemoteDesktop;
-
-/// <summary>
-///     Represents whether the default audio input is redirected from the client to the remote session.
-///     See also:
-///     https://docs.microsoft.com/en-us/windows/win32/termserv/imsrdpclientadvancedsettings7-audiocaptureredirectionmode
-/// </summary>
-public enum AudioCaptureRedirectionMode
+﻿namespace Ninja.Models.RemoteDesktop
 {
     /// <summary>
-    ///     Redirect the default audio input device to the remote session.
+    ///     Represents whether the default audio input is redirected from the client to the remote session.
+    ///     See also:
+    ///     https://docs.microsoft.com/en-us/windows/win32/termserv/imsrdpclientadvancedsettings7-audiocaptureredirectionmode
     /// </summary>
-    RecordFromThisComputer,
+    public enum AudioCaptureRedirectionMode
+    {
+        /// <summary>
+        ///     Redirect the default audio input device to the remote session.
+        /// </summary>
+        RecordFromThisComputer,
 
-    /// <summary>
-    ///     Don't redirect the default audio input device to the remote session.
-    /// </summary>
-    DoNotRecord
+        /// <summary>
+        ///     Don't redirect the default audio input device to the remote session.
+        /// </summary>
+        DoNotRecord
+    }
 }

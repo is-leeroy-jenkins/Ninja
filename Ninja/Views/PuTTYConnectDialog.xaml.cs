@@ -1,16 +1,17 @@
 ﻿using System.Windows;
 
-namespace Ninja.Views;
-
-public partial class PuTTYConnectDialog
+namespace Ninja.Views
 {
-    public PuTTYConnectDialog()
+    public partial class PuTTYConnectDialog
     {
-        InitializeComponent();
-    }
+        public PuTTYConnectDialog()
+        {
+            InitializeComponent();
+        }
 
-    private void UserControl_Loaded(object sender, RoutedEventArgs e)
-    {
-        ComboBoxHost.Focus();
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            ComboBoxHost.Focus();
+        }
     }
 }
