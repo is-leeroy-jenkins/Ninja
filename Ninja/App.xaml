@@ -63,6 +63,10 @@
                 <!--  Requires tooltip styles  -->
                 <ResourceDictionary Source="/Resources/Styles/ListBoxStyle.xaml" />
                 <!--  Requires ScrollViewer/ScrollBar styles  -->
+                <!--  Notifications  -->
+                <ResourceDictionary Source="pack://application:,,,/ToastNotifications.Messages;component/Themes/Default.xaml" />
+                <!--  UI THemes  -->
+                <ResourceDictionary Source="/Themes/Colors/Colors.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

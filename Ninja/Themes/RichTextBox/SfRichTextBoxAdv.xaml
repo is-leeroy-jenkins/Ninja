@@ -1,0 +1,416 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:resources="clr-namespace:Syncfusion.Windows.Controls.RichTextBoxAdv;assembly=Syncfusion.SfRichTextBoxAdv.WPF"
+    xmlns:richtextboxadv="clr-namespace:Syncfusion.Windows.Controls.RichTextBoxAdv;assembly=Syncfusion.SfRichTextBoxAdv.WPF">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/SfRichTextBoxAdv/Dialogs.xaml" />
+        <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/SfRichTextBoxAdv/ContextMenu.xaml" />
+        <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/SfRichTextBoxAdv/FormatDialogs.xaml" />
+        <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/SfRichTextBoxAdv/MiniToolBar.xaml" />
+        <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/SfRichTextBoxAdv/StyleDialogs.xaml" />
+        <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/SfRichTextBoxAdv/TableDialogs.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="richtextboxadv:SfRichTextBoxAdv">
+        <Setter Property="Background" Value="{StaticResource ContentBackground}" />
+        <Setter Property="Foreground" Value="{StaticResource ContentForeground}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderAlt}" />
+        <Setter Property="FontWeight" Value="{StaticResource FluentDark.FontWeightNormal}" />
+        <Setter Property="FontFamily" Value="{StaticResource FluentDark.ThemeFontFamily}" />
+        <Setter Property="BorderThickness" Value="{StaticResource FluentDark.BorderThickness1}" />
+        <Setter Property="SelectionBrush" Value="{StaticResource ContentBackgroundSelected}" />
+        <Setter Property="ContextMenu" Value="{StaticResource RichTextBoxAdvContextMenu}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="richtextboxadv:SfRichTextBoxAdv">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid
+                                x:Name="OptionsPane"
+                                Width="280"
+                                Background="{StaticResource ContentBackground}"
+                                Visibility="Collapsed">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="12" />
+                                    <RowDefinition Height="34" />
+                                    <RowDefinition Height="12" />
+                                    <RowDefinition Height="18" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="8" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="20" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="26" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="26" />
+                                </Grid.ColumnDefinitions>
+                                <Rectangle
+                                    Grid.RowSpan="10"
+                                    Grid.Column="2"
+                                    Width="1"
+                                    HorizontalAlignment="Right"
+                                    Fill="{StaticResource BorderAlt}"
+                                    Opacity="0.5" />
+                                <TextBlock
+                                    x:Name="PaneHeaderBlock"
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Center"
+                                    FontSize="{StaticResource FluentDark.HeaderTextStyle}"
+                                    Foreground="{StaticResource ContentForeground}"
+                                    Text="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=OptionsPaneSearch}" />
+                                <Button
+                                    x:Name="ClosePaneButton"
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="2"
+                                    Width="16"
+                                    Height="16"
+                                    Margin="0,0,20,0"
+                                    HorizontalAlignment="Right"
+                                    Style="{StaticResource WPFGlyphButtonStyle}"
+                                    ToolTip="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=OptionPaneCloseButtonToolTip}">
+                                    <Path
+                                        x:Name="pathFill"
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Width="10"
+                                        Height="10"
+                                        Data="F1M306,369.225L15.3,74.7L0,90L0,120.401L279.225,396L0,671.599L0,702L15.3,717.3L306,422.775L596.7,717.3L612,702L612,671.599L332.775,396L612,120.401L612,90L596.7,74.7z"
+                                        Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
+                                        Stretch="Fill" />
+                                </Button>
+                                <Grid
+                                    Grid.Row="3"
+                                    Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="5*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox
+                                        x:Name="SearchTextBox"
+                                        Grid.ColumnSpan="3"
+                                        MinHeight="32"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Center"
+                                        FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                        HorizontalScrollBarVisibility="Hidden"
+                                        VerticalScrollBarVisibility="Hidden" />
+                                    <Button
+                                        x:Name="SearchButton"
+                                        Grid.Column="2"
+                                        Width="20"
+                                        Height="20"
+                                        Margin="0"
+                                        HorizontalAlignment="Right"
+                                        Background="Transparent"
+                                        Style="{StaticResource WPFGlyphButtonStyle}"
+                                        ToolTip="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=SearchButtonToolTip}">
+                                        <Path
+                                            x:Name="path"
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Width="12"
+                                            Height="12"
+                                            Data="F1M401.625,472.5C306,472.5,229.5,396,229.5,300.375C229.5,204.75,306,128.25,401.625,128.25C497.25,128.25,573.75,204.75,573.75,300.375C573.75,396,497.25,472.5,401.625,472.5 M401.625,90C286.875,90,191.25,185.625,191.25,300.375C191.25,346.275,206.55,384.525,229.5,418.95L19.125,629.325C7.64999999999998,640.8,7.64999999999998,656.1,19.125,663.75L38.25,682.875C49.725,694.35,65.025,694.35,72.675,682.875L283.05,472.5C317.475,495.45,359.55,510.75,401.625,510.75C516.375,510.75,612,415.125,612,300.375C612,185.625,516.375,90,401.625,90"
+                                            Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
+                                            Stretch="Fill" />
+                                    </Button>
+                                </Grid>
+                                <Grid
+                                    Grid.Row="5"
+                                    Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="12" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Center"
+                                        FontSize="{StaticResource FluentDark.TitleTextStyle}"
+                                        Foreground="{StaticResource ContentForeground}"
+                                        Text="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=OptionsPaneResultsHeader}" />
+                                    <Button
+                                        x:Name="NavigatePreviousResultButton"
+                                        Grid.Column="1"
+                                        Width="16"
+                                        Height="16"
+                                        Padding="2"
+                                        Background="Transparent"
+                                        Style="{StaticResource WPFGlyphButtonStyle}"
+                                        Visibility="Collapsed">
+                                        <Path
+                                            x:Name="navigatePrevious"
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Width="12"
+                                            Data="F1M512.55,327.15L340.425,151.2C332.775,143.55,321.3,143.55,313.65,151.2L137.7,327.15L164.475,353.925L306,212.4L306,663.75L344.25,663.75L344.25,212.4L485.775,353.925z"
+                                            Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
+                                            Stretch="Uniform" />
+                                    </Button>
+                                    <Button
+                                        x:Name="NavigateNextResultButton"
+                                        Grid.Column="3"
+                                        Width="16"
+                                        Height="16"
+                                        Padding="2"
+                                        Background="Transparent"
+                                        Style="{StaticResource WPFGlyphButtonStyle}"
+                                        Visibility="Collapsed">
+                                        <Path
+                                            x:Name="navigateNext"
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Width="12"
+                                            Data="F1M512.55,327.15L340.425,151.2C332.775,143.55,321.3,143.55,313.65,151.2L137.7,327.15L164.475,353.925L306,212.4L306,663.75L344.25,663.75L344.25,212.4L485.775,353.925z"
+                                            Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
+                                            RenderTransformOrigin="0.5,0.5"
+                                            Stretch="Uniform">
+                                            <Path.RenderTransform>
+                                                <RotateTransform Angle="180" />
+                                            </Path.RenderTransform>
+                                        </Path>
+                                    </Button>
+                                </Grid>
+                                <TextBox
+                                    x:Name="SearchResultsCountTextBox"
+                                    Grid.Row="6"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    VerticalContentAlignment="Top"
+                                    IsEnabled="False"
+                                    IsReadOnly="True"
+                                    Visibility="Collapsed" />
+                                <TextBox
+                                    x:Name="SearchResultsTextBox"
+                                    Grid.Row="8"
+                                    Grid.Column="1"
+                                    Padding="0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Top"
+                                    IsEnabled="False"
+                                    Text="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=OptionsPaneDescription}"
+                                    TextWrapping="Wrap" />
+                                <ListBox
+                                    x:Name="SearchResultsListBox"
+                                    Grid.Row="8"
+                                    Grid.Column="1"
+                                    VerticalContentAlignment="Stretch"
+                                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                    SelectionMode="Single"
+                                    Visibility="Collapsed" />
+                            </Grid>
+                            <Grid
+                                Grid.Column="1"
+                                ClipToBounds="True">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <ContentControl
+                                    x:Name="content"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch" />
+                                <ScrollBar
+                                    x:Name="HorizontalScrollBar"
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Height="16"
+                                    IsTabStop="False"
+                                    Minimum="0"
+                                    Orientation="Horizontal"
+                                    Visibility="Collapsed" />
+                                <ScrollBar
+                                    x:Name="VerticalScrollBar"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Width="16"
+                                    IsTabStop="False"
+                                    Minimum="0"
+                                    Orientation="Vertical"
+                                    Visibility="Collapsed" />
+                            </Grid>
+                            <Grid
+                                x:Name="SpellingPane"
+                                Grid.Column="2"
+                                Width="300"
+                                Background="{StaticResource ContentBackground}"
+                                SnapsToDevicePixels="False"
+                                Visibility="Collapsed">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="41" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="27" />
+                                    <RowDefinition Height="25" />
+                                    <RowDefinition Height="17" />
+                                    <RowDefinition Height="25" />
+                                    <RowDefinition Height="15" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="15" />
+                                    <RowDefinition Height="25" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="13" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="13" />
+                                </Grid.ColumnDefinitions>
+                                <Rectangle
+                                    Grid.RowSpan="11"
+                                    Width="1"
+                                    HorizontalAlignment="Left"
+                                    Fill="{StaticResource BorderAlt}"
+                                    Opacity="0.5" />
+                                <TextBlock
+                                    x:Name="SpellingPaneHeaderBlock"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Center"
+                                    FontSize="{StaticResource FluentDark.HeaderTextStyle}"
+                                    Foreground="{StaticResource ContentForeground}"
+                                    Text="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=SpellingPaneSpelling}" />
+                                <Button
+                                    x:Name="SpellingPaneCloseButton"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Width="16"
+                                    Height="16"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource WPFGlyphButtonStyle}"
+                                    ToolTip="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=OptionPaneCloseButtonToolTip}">
+                                    <Path
+                                        x:Name="closeButton"
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Width="10"
+                                        Height="10"
+                                        Data="F1M306,369.225L15.3,74.7L0,90L0,120.401L279.225,396L0,671.599L0,702L15.3,717.3L306,422.775L596.7,717.3L612,702L612,671.599L332.775,396L612,120.401L612,90L596.7,74.7z"
+                                        Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
+                                        Stretch="Fill" />
+                                </Button>
+                                <Separator
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    VerticalAlignment="Bottom"
+                                    IsEnabled="False"
+                                    Opacity="0.5" />
+                                <TextBlock
+                                    x:Name="SpellingPaneMisspelledWordBlock"
+                                    Grid.Row="3"
+                                    Grid.Column="1"
+                                    Margin="0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Center"
+                                    FontSize="{StaticResource FluentDark.TitleTextStyle}"
+                                    FontWeight="SemiBold"
+                                    Foreground="{StaticResource ContentForeground}" />
+                                <Grid
+                                    Grid.Row="5"
+                                    Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button
+                                        x:Name="SpellingPaneResumeButton"
+                                        Padding="5"
+                                        Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=SpellingPaneResume}"
+                                        Style="{StaticResource WPFFlatButtonStyle}"
+                                        Visibility="Collapsed" />
+                                    <Button
+                                        x:Name="SpellingPaneIgnoreAllButton"
+                                        Grid.Column="1"
+                                        Margin="0,0,0,0"
+                                        Padding="4,1,1,2"
+                                        Command="richtextboxadv:SfRichTextBoxAdv.IgnoreAllSpellingErrorsCommand"
+                                        CommandParameter="{Binding Text, ElementName=SpellingPaneMisspelledWordBlock}"
+                                        Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=SpellingPaneIgnoreAll}"
+                                        Style="{StaticResource WPFFlatButtonStyle}" />
+                                    <Button
+                                        x:Name="SpellingPaneAddToDictionaryButton"
+                                        Grid.Column="2"
+                                        Margin="15,0,0,0"
+                                        Padding="5"
+                                        Command="richtextboxadv:SfRichTextBoxAdv.AddToDictionaryCommand"
+                                        CommandParameter="{Binding Text, ElementName=SpellingPaneMisspelledWordBlock}"
+                                        Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=SpellingPaneAddToDictionary}"
+                                        Style="{StaticResource WPFFlatButtonStyle}" />
+                                </Grid>
+                                <ListBox
+                                    x:Name="SpellingPaneSuggestionListBox"
+                                    Grid.Row="7"
+                                    Grid.Column="1"
+                                    Height="152"
+                                    VerticalContentAlignment="Stretch"
+                                    BorderThickness="1"
+                                    SelectionMode="Single" />
+                                <Grid
+                                    Grid.Row="9"
+                                    Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button
+                                        x:Name="SpellingPaneChangeButton"
+                                        Padding="3"
+                                        Command="richtextboxadv:SfRichTextBoxAdv.ChangeSpellingCommand"
+                                        CommandParameter="{Binding ElementName=SpellingPaneSuggestionListBox, Path=SelectedValue}"
+                                        Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=SpellingPaneChange}" />
+                                    <Button
+                                        x:Name="SpellingPaneChangeAllButton"
+                                        Grid.Column="1"
+                                        Margin="15,0,0,0"
+                                        Padding="3"
+                                        Command="richtextboxadv:SfRichTextBoxAdv.ChangeAllSpellingCommand"
+                                        CommandParameter="{Binding ElementName=SpellingPaneSuggestionListBox, Path=SelectedValue}"
+                                        Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=SpellingPaneChangeAll}" />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="BorderBrush" Value="{StaticResource BorderAlt}" />
+                            <Setter Property="Background" Value="{StaticResource ContentBackground}" />
+                            <Setter Property="Foreground" Value="{StaticResource DisabledForeground}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter Property="BorderBrush" Value="{StaticResource Border}" />
+                            <Setter Property="Background" Value="{StaticResource ContentBackground}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

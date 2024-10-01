@@ -1,0 +1,476 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:notify="clr-namespace:Syncfusion.Windows.Controls.Notification;assembly=Syncfusion.SfBusyIndicator.WPF"
+    xmlns:skin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
+    xmlns:tree="clr-namespace:Syncfusion.UI.Xaml.TreeView;assembly=Syncfusion.SfTreeView.WPF"
+    xmlns:wpf="clr-namespace:Syncfusion.Themes.FluentDark.WPF;assembly=Syncfusion.Themes.FluentDark.WPF">
+
+    <ResourceDictionary.MergedDictionaries>
+        <skin:ResourceDictionaryProvider
+            DictionaryName="Common"
+            ThemeName="FluentDark" />
+        <skin:ResourceDictionaryProvider
+            DictionaryName="Brushes"
+            ThemeName="FluentDark" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <SolidColorBrush
+        x:Key="SfTreeView.CurrentItem.InnerBorder.Static.Border"
+        Color="#FAFAFA" />
+
+    <wpf:RevealItem
+        x:Key="sfTreeViewRevealItem"
+        CornerRadius="{StaticResource FluentDark.CornerRadius2}"
+        HoverBackground="{StaticResource ContentBackgroundHovered}"
+        HoverBorder="{StaticResource RevealBorder}" />
+
+    <BooleanToVisibilityConverter x:Key="boolToVisibilityConverter" />
+
+    <DataTemplate x:Key="busyIndicatorTemplate">
+        <notify:SfBusyIndicator
+            x:Name="PART_BusyIndicator"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center"
+            AnimationType="DotCircle"
+            IsBusy="True"
+            ViewboxWidth="{TemplateBinding Width}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="SfTreeViewStartExpanderTemplate">
+        <Border
+            x:Name="border"
+            Width="{TemplateBinding Width}"
+            Height="{TemplateBinding Height}"
+            Background="Transparent"
+            BorderBrush="Transparent"
+            CornerRadius="{StaticResource FluentDark.CornerRadius2}">
+            <StackPanel
+                x:Name="panel"
+                VerticalAlignment="Center">
+                <Path
+                    x:Name="PART_CollapseCellPath"
+                    Width="6.27"
+                    Height="10.008"
+                    VerticalAlignment="Center"
+                    Fill="{StaticResource IconColor}"
+                    Stretch="Uniform">
+                    <Path.Data>
+                        M0.68398996,0 L6.2700001,4.9960007 0.66699173,10.007999 0,9.2629985 4.7700011,4.9960007 0.016998228,0.74499984 z
+                    </Path.Data>
+                </Path>
+                <Path
+                    x:Name="PART_ExpanderCellPath"
+                    Width="10.008"
+                    Height="6.27"
+                    VerticalAlignment="Center"
+                    Fill="{StaticResource IconColor}"
+                    Stretch="Uniform">
+                    <Path.Data>
+                        M0.74499548,0 L5.0119957,4.7700001 9.2630047,0.017000169 10.008001,0.68400005 5.0119957,6.2700001 0,0.66699985 z
+                    </Path.Data>
+                </Path>
+            </StackPanel>
+        </Border>
+        <DataTemplate.Triggers>
+            <DataTrigger
+                Binding="{Binding IsExpanded}"
+                Value="True">
+                <Setter TargetName="PART_ExpanderCellPath" Property="Visibility" Value="Visible" />
+                <Setter TargetName="PART_CollapseCellPath" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger
+                Binding="{Binding IsExpanded}"
+                Value="False">
+                <Setter TargetName="PART_ExpanderCellPath" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="PART_CollapseCellPath" Property="Visibility" Value="Visible" />
+            </DataTrigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter TargetName="border" Property="Background" Value="Transparent" />
+                <Setter TargetName="border" Property="BorderBrush" Value="Transparent" />
+                <Setter TargetName="PART_CollapseCellPath" Property="Fill" Value="{StaticResource IconColorDisabled}" />
+                <Setter TargetName="PART_ExpanderCellPath" Property="Fill" Value="{StaticResource IconColorDisabled}" />
+            </Trigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SfTreeViewEndExpanderTemplate">
+        <Border
+            x:Name="border"
+            Width="{TemplateBinding Width}"
+            Height="{TemplateBinding Height}"
+            Background="Transparent"
+            BorderBrush="Transparent"
+            CornerRadius="{StaticResource FluentDark.CornerRadius2}">
+            <StackPanel
+                x:Name="panel"
+                VerticalAlignment="Center">
+                <Path
+                    x:Name="PART_CollapseCellPath"
+                    Width="6.27"
+                    Height="10.08"
+                    VerticalAlignment="Center"
+                    Fill="{StaticResource IconColor}"
+                    Stretch="Uniform">
+                    <Path.Data>
+                        M5.6040074,0 L6.2710001,0.74499984 1.5000009,5.0119996 6.2529947,9.2629985 5.5860021,10.007999 0,5.0119996 z
+                    </Path.Data>
+                </Path>
+                <Path
+                    x:Name="PART_ExpanderCellPath"
+                    Width="10.008"
+                    Height="6.27"
+                    VerticalAlignment="Center"
+                    Fill="{StaticResource IconColor}"
+                    Stretch="Uniform">
+                    <Path.Data>
+                        M0.74499548,0 L5.0119957,4.7700001 9.2630047,0.017000169 10.008001,0.68400005 5.0119957,6.2700001 0,0.66699985 z
+                    </Path.Data>
+                </Path>
+            </StackPanel>
+        </Border>
+        <DataTemplate.Triggers>
+            <DataTrigger
+                Binding="{Binding IsExpanded}"
+                Value="True">
+                <Setter TargetName="PART_ExpanderCellPath" Property="Visibility" Value="Visible" />
+                <Setter TargetName="PART_CollapseCellPath" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger
+                Binding="{Binding IsExpanded}"
+                Value="False">
+                <Setter TargetName="PART_ExpanderCellPath" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="PART_CollapseCellPath" Property="Visibility" Value="Visible" />
+            </DataTrigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter TargetName="border" Property="Background" Value="Transparent" />
+                <Setter TargetName="border" Property="BorderBrush" Value="Transparent" />
+                <Setter TargetName="PART_CollapseCellPath" Property="Fill" Value="{StaticResource IconColorDisabled}" />
+                <Setter TargetName="PART_ExpanderCellPath" Property="Fill" Value="{StaticResource IconColorDisabled}" />
+            </Trigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <Style
+        x:Key="SyncfusionTreeViewItemStyle"
+        TargetType="tree:TreeViewItem">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderAlt}" />
+        <Setter Property="Foreground" Value="{StaticResource ContentForeground}" />
+        <Setter Property="FontFamily" Value="{StaticResource FluentDark.ThemeFontFamily}" />
+        <Setter Property="FontWeight" Value="{StaticResource FluentDark.FontWeightNormal}" />
+        <Setter Property="FontSize" Value="{StaticResource FluentDark.BodyTextStyle}" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type tree:TreeViewItem}">
+                    <Grid
+                        x:Name="ROOT"
+                        Background="{TemplateBinding Background}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MaxWidth="{TemplateBinding IndentationWidth}" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Border
+                            x:Name="BorderContent"
+                            Background="Transparent"
+                            BorderBrush="{StaticResource BorderAlt}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{StaticResource FluentDark.CornerRadius2}" />
+                        <Border
+                            x:Name="PART_CurrentItemBorder"
+                            CornerRadius="{StaticResource FluentDark.CornerRadius2}"
+                            Visibility="Collapsed">
+                            <Border
+                                x:Name="PART_CurrentItemInnerBorder"
+                                BorderBrush="{StaticResource SfTreeView.CurrentItem.InnerBorder.Static.Border}"
+                                BorderThickness="{StaticResource FluentDark.BorderThickness1}"
+                                CornerRadius="{StaticResource FluentDark.CornerRadius2}"
+                                Visibility="Collapsed" />
+                        </Border>
+                        <Border
+                            x:Name="PART_HoverBorder"
+                            wpf:FluentHelper.RevealItem="{StaticResource sfTreeViewRevealItem}"
+                            Background="{StaticResource ContentBackgroundHovered}"
+                            BorderBrush="{StaticResource BorderAlt}"
+                            CornerRadius="{StaticResource FluentDark.CornerRadius2}"
+                            Visibility="Collapsed" />
+                        <StackPanel
+                            x:Name="PART_IndentContainer"
+                            Grid.Column="0"
+                            Panel.ZIndex="0"
+                            Orientation="Horizontal">
+                            <Rectangle
+                                x:Name="PART_IndentLine"
+                                HorizontalAlignment="Stretch"
+                                StrokeDashArray="2,2"
+                                Visibility="Hidden" />
+                        </StackPanel>
+
+                        <Grid
+                            x:Name="PART_LineGrid"
+                            Grid.Column="1"
+                            Width="{TemplateBinding ExpanderWidth}"
+                            Panel.ZIndex="0"
+                            Visibility="Hidden">
+                            <Rectangle
+                                x:Name="PART_HorizontalLine"
+                                Width="10"
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                StrokeDashArray="2,2" />
+                            <Rectangle
+                                x:Name="PART_VerticalLine"
+                                HorizontalAlignment="Stretch"
+                                StrokeDashArray="2,2" />
+                        </Grid>
+
+                        <ContentControl
+                            x:Name="PART_ExpanderView"
+                            Width="{TemplateBinding ExpanderWidth}"
+                            ContentTemplate="{TemplateBinding ExpanderTemplate}"
+                            Focusable="False"
+                            Visibility="{Binding HasChildNodes, Converter={StaticResource boolToVisibilityConverter}}" />
+
+                        <tree:TreeNodeView
+                            x:Name="PART_ContentView"
+                            Grid.Column="2"
+                            VerticalAlignment="Center"
+                            ContentTemplate="{TemplateBinding ItemTemplate}"
+                            Focusable="False">
+                            <tree:TreeNodeView.Margin>
+                                <Thickness>4,0,4,0</Thickness>
+                            </tree:TreeNodeView.Margin>
+                        </tree:TreeNodeView>
+
+                        <Border
+                            x:Name="PART_DragLine"
+                            Grid.ColumnSpan="3"
+                            BorderBrush="{StaticResource PrimaryBackground}"
+                            Visibility="Collapsed" />
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="DropStates">
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames
+                                            BeginTime="00:00:00"
+                                            Storyboard.TargetName="PART_ContentView"
+                                            Storyboard.TargetProperty="Foreground"
+                                            Duration="00:00:00">
+                                            <DiscreteObjectKeyFrame
+                                                KeyTime="00:00:00"
+                                                Value="{StaticResource ContentForeground}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="DropAsChild">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames
+                                            BeginTime="00:00:00"
+                                            Storyboard.TargetName="BorderContent"
+                                            Storyboard.TargetProperty="Background"
+                                            Duration="00:00:00">
+                                            <DiscreteObjectKeyFrame
+                                                KeyTime="0"
+                                                Value="{StaticResource ContentBackgroundAlt2}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames
+                                            BeginTime="00:00:00"
+                                            Storyboard.TargetName="BorderContent"
+                                            Storyboard.TargetProperty="BorderBrush"
+                                            Duration="00:00:00">
+                                            <DiscreteObjectKeyFrame
+                                                KeyTime="0"
+                                                Value="{StaticResource PrimaryBackground}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames
+                                            BeginTime="00:00:00"
+                                            Storyboard.TargetName="BorderContent"
+                                            Storyboard.TargetProperty="BorderThickness"
+                                            Duration="00:00:00">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Thickness>1</Thickness>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames
+                                            BeginTime="00:00:00"
+                                            Storyboard.TargetName="PART_ContentView"
+                                            Storyboard.TargetProperty="Foreground"
+                                            Duration="00:00:00">
+                                            <DiscreteObjectKeyFrame
+                                                KeyTime="00:00:00"
+                                                Value="{StaticResource ContentForeground}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames
+                                            BeginTime="00:00:00"
+                                            Storyboard.TargetName="PART_ExpanderView"
+                                            Storyboard.TargetProperty="Background"
+                                            Duration="00:00:00">
+                                            <DiscreteObjectKeyFrame
+                                                KeyTime="00:00:00"
+                                                Value="{StaticResource PrimaryBackground}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="skin:SkinManagerHelper.FocusVisualKind" Value="HighVisibility">
+                            <Setter TargetName="PART_CurrentItemInnerBorder" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="FullRowSelect" Value="True">
+                            <Setter TargetName="BorderContent" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="BorderContent" Property="Grid.ColumnSpan" Value="4" />
+                            <Setter TargetName="PART_CurrentItemBorder" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="PART_CurrentItemBorder" Property="Grid.ColumnSpan" Value="4" />
+                            <Setter TargetName="PART_HoverBorder" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="PART_HoverBorder" Property="Grid.ColumnSpan" Value="4" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="FullRowSelect" Value="False" />
+                                <Condition Property="ExpanderPosition" Value="Start" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="BorderContent" Property="Grid.Column" Value="2" />
+                            <Setter TargetName="BorderContent" Property="Grid.ColumnSpan" Value="1" />
+                            <Setter TargetName="PART_CurrentItemBorder" Property="Grid.Column" Value="2" />
+                            <Setter TargetName="PART_CurrentItemBorder" Property="Grid.ColumnSpan" Value="1" />
+                            <Setter TargetName="PART_HoverBorder" Property="Grid.Column" Value="2" />
+                            <Setter TargetName="PART_HoverBorder" Property="Grid.ColumnSpan" Value="1" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="FullRowSelect" Value="False" />
+                                <Condition Property="ExpanderPosition" Value="End" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="BorderContent" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="BorderContent" Property="Grid.ColumnSpan" Value="3" />
+                            <Setter TargetName="PART_CurrentItemBorder" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="PART_CurrentItemBorder" Property="Grid.ColumnSpan" Value="3" />
+                            <Setter TargetName="PART_HoverBorder" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="PART_HoverBorder" Property="Grid.ColumnSpan" Value="3" />
+                        </MultiTrigger>
+                        <Trigger Property="ExpanderPosition" Value="Start">
+                            <Setter TargetName="PART_ExpanderView" Property="Grid.Column" Value="1" />
+                        </Trigger>
+                        <Trigger Property="ExpanderPosition" Value="End">
+                            <Setter TargetName="PART_ExpanderView" Property="Grid.Column" Value="3" />
+                        </Trigger>
+                        <Trigger Property="ShowLines" Value="True">
+                            <Setter TargetName="PART_LineGrid" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <DataTrigger
+                            Binding="{Binding ShowExpanderAnimation}"
+                            Value="True">
+                            <Setter TargetName="PART_ExpanderView" Property="ContentTemplate" Value="{StaticResource busyIndicatorTemplate}" />
+                        </DataTrigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="PART_ContentView" Property="Foreground" Value="{StaticResource HoveredForeground}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionTreeViewItemStyle}"
+        TargetType="tree:TreeViewItem" />
+
+    <Style
+        x:Key="SyncfusionSfTreeViewStyle"
+        TargetType="tree:SfTreeView">
+        <Setter Property="SelectionBackgroundColor" Value="{StaticResource ContentBackgroundSelected}" />
+        <Setter Property="SelectionForegroundColor" Value="{StaticResource SelectedForeground}" />
+        <Setter Property="FocusBorderColor" Value="{StaticResource BorderAlt2}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderAlt}" />
+        <Setter Property="LineStroke" Value="{StaticResource BorderAlt}" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="ExpanderTemplate" Value="{StaticResource SfTreeViewStartExpanderTemplate}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="tree:SfTreeView">
+                    <Grid
+                        x:Name="treeViewGrid"
+                        Background="Transparent">
+                        <Border
+                            x:Name="PART_TreeViewBorder"
+                            Background="Transparent"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="1"
+                            SnapsToDevicePixels="True">
+                            <ScrollViewer
+                                x:Name="PART_ScrollViewer"
+                                Background="Transparent"
+                                CanContentScroll="True"
+                                FlowDirection="{TemplateBinding FlowDirection}"
+                                HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                                IsTabStop="False"
+                                PanningMode="{TemplateBinding ScrollViewer.PanningMode}"
+                                PanningRatio="{TemplateBinding ScrollViewer.PanningRatio}"
+                                VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+                                <tree:TreeNodeContainer
+                                    x:Name="PART_TreeNodeContainer"
+                                    Background="Transparent" />
+                            </ScrollViewer>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ExpanderPosition" Value="End">
+                            <Setter Property="ExpanderTemplate" Value="{StaticResource SfTreeViewEndExpanderTemplate}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="PART_TreeNodeContainer" Property="Background" Value="Transparent" />
+                            <Setter TargetName="PART_TreeViewBorder" Property="BorderBrush" Value="{StaticResource BorderAlt}" />
+                        </Trigger>
+                        <Trigger Property="skin:SfSkinManager.SizeMode" Value="Touch">
+                            <Setter Property="ItemHeight" Value="{StaticResource TouchMode.MinHeight}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionSfTreeViewStyle}"
+        TargetType="tree:SfTreeView" />
+
+    <Style
+        x:Key="SyncfusionTreeViewDragPreviewControlStyle"
+        TargetType="tree:TreeViewDragPreviewControl">
+        <Setter Property="Background" Value="{StaticResource ContentBackgroundAlt1}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderAlt}" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="tree:TreeViewDragPreviewControl">
+                    <Border
+                        x:Name="PART_Border"
+                        Padding="5"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="{StaticResource FluentDark.CornerRadius2}">
+                        <ItemsControl
+                            x:Name="PART_ItemsControl"
+                            Margin="2" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionTreeViewDragPreviewControlStyle}"
+        TargetType="tree:TreeViewDragPreviewControl" />
+
+</ResourceDictionary>

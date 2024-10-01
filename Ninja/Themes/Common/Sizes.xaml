@@ -1,0 +1,26 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:Double x:Key="LargeControlHeight">46</sys:Double>
+    <sys:Double x:Key="DefaultControlHeight">30</sys:Double>
+    <sys:Double x:Key="SmallControlHeight">30</sys:Double>
+    <sys:Double x:Key="ExtraSmallControlHeight">22</sys:Double>
+
+    <Thickness x:Key="LargeControlPadding">16,10</Thickness>
+    <Thickness x:Key="DefaultControlPadding">12,6</Thickness>
+    <Thickness x:Key="SmallControlPadding">10,5</Thickness>
+    <Thickness x:Key="ExtraSmallControlPadding">5,1</Thickness>
+    <Thickness x:Key="CodePadding">4,2</Thickness>
+
+    <Thickness x:Key="PanelTitlePadding">15,10</Thickness>
+    <Thickness x:Key="PanelBodyPadding">15</Thickness>
+    <Thickness x:Key="PanelFooterPadding">15,10</Thickness>
+
+
+    <Thickness x:Key="HMargin">0,20,0,10</Thickness>
+
+
+    <Thickness x:Key="SmallMargin">0,10</Thickness>
+</ResourceDictionary>

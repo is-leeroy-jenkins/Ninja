@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Input;
+﻿
 
 namespace Ninja.Controls
 {
+    using Views;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Windows.Controls;
+    using System.Windows.Controls.Primitives;
+    using System.Windows.Data;
+    using System.Windows.Input;
+
     /*
      * Modified from https://stackoverflow.com/a/58066259
      */

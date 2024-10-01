@@ -305,7 +305,7 @@ namespace Ninja.ViewModels
         {
             var customDialog = new CustomDialog
             {
-                Title = Strings.AddDNSServer
+                Title = Strings.AddDnsServer
             };
 
             var viewModel = new ServerConnectionInfoProfileViewModel(instance =>

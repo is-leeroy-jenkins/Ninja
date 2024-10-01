@@ -1,0 +1,34 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:progressbar="clr-namespace:Syncfusion.UI.Xaml.ProgressBar;assembly=Syncfusion.SfProgressBar.WPF"
+    xmlns:sfskin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF">
+    <ResourceDictionary.MergedDictionaries>
+        <sfskin:ResourceDictionaryProvider
+            DictionaryName="Common"
+            ThemeName="FluentDark" />
+        <sfskin:ResourceDictionaryProvider
+            DictionaryName="Brushes"
+            ThemeName="FluentDark" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style
+        x:Key="SyncfusionSfLinearProgressBarStyle"
+        TargetType="{x:Type progressbar:SfLinearProgressBar}">
+        <Setter Property="ProgressColor" Value="{StaticResource PrimaryBackground}" />
+        <Setter Property="SecondaryProgressColor" Value="{StaticResource ContentForeground}" />
+        <Setter Property="TrackColor" Value="{StaticResource BorderAlt}" />
+        <Setter Property="IndicatorCornerRadius" Value="0" />
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="ProgressColor" Value="{StaticResource BorderAlt}" />
+                <Setter Property="SecondaryProgressColor" Value="{StaticResource BorderAlt}" />
+                <Setter Property="TrackColor" Value="{StaticResource BorderAlt}" />
+                <Setter Property="IndicatorCornerRadius" Value="0" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style
+        BasedOn="{StaticResource SyncfusionSfLinearProgressBarStyle}"
+        TargetType="{x:Type progressbar:SfLinearProgressBar}" />
+</ResourceDictionary>

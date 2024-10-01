@@ -28,7 +28,7 @@
             Command="{Binding RefreshCommand}" />
     </UserControl.InputBindings>
     <TabControl Style="{StaticResource DefaultTabControl}">
-        <TabItem Header="{x:Static localization:Strings.ARPTable}">
+        <TabItem Header="{x:Static localization:Strings.ArpTable}">
             <Grid Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />

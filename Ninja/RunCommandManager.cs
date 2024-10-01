@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Ninja.Localization;
-using Ninja.Localization.Resources;
-using Ninja.Models;
+﻿
 
 namespace Ninja
 {
     using Localization;
     using Models;
+    using Views;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Ninja.Localization;
+    using Ninja.Localization.Resources;
+    using Ninja.Models;
 
     public static class RunCommandManager
     {

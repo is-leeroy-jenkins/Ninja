@@ -89,7 +89,7 @@
                             <TextBlock.InputBindings>
                                 <MouseBinding
                                     Command="{Binding OpenWebsiteCommand}"
-                                    CommandParameter="{x:Static resources:Resources.Ninja_Contributors}"
+                                    CommandParameter="{x:Static resources:Resources.Ninja_GitHub_User}"
                                     MouseAction="LeftClick" />
                             </TextBlock.InputBindings>
                         </TextBlock>
@@ -214,7 +214,7 @@
                         <Button
                             Margin="10,0,0,0"
                             Command="{Binding OpenWebsiteCommand}"
-                            CommandParameter="{x:Static resources:Resources.Ninja_TwitterUrl}"
+                            CommandParameter="{x:Static resources:Resources.Ninja_GitHub_Repo}"
                             ToolTip="{x:Static localization:Strings.ToolTip_TwitterContactUrl}">
                             <Rectangle
                                 Width="24"

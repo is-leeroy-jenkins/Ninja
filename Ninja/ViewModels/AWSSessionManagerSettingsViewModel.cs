@@ -236,7 +236,7 @@ namespace Ninja.ViewModels
         {
             var customDialog = new CustomDialog
             {
-                Title = Strings.AddAWSProfile
+                Title = Strings.AddAwsProfile
             };
 
             var viewModel = new AWSProfileViewModel(instance =>

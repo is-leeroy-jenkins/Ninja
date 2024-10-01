@@ -1,54 +1,75 @@
-﻿<UserControl x:Class="Ninja.Views.SNTPLookupHostView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
-             xmlns:dockablz="clr-namespace:Dragablz.Dockablz;assembly=Dragablz"
-             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             xmlns:converters="clr-namespace:Ninja.Converters;assembly=Ninja.Converters"
-             xmlns:viewModels="clr-namespace:Ninja.ViewModels"
-             xmlns:localization="clr-namespace:Ninja.Localization.Resources;assembly=Ninja.Localization"
-             xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
-             xmlns:settings="clr-namespace:Ninja.Settings;assembly=Ninja.Settings"
-             dialogs:DialogParticipation.Register="{Binding}"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:SNTPLookupHostViewModel}">
+﻿<UserControl
+    x:Class="Ninja.Views.SNTPLookupHostView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:Ninja.Converters;assembly=Ninja.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+    xmlns:dockablz="clr-namespace:Dragablz.Dockablz;assembly=Dragablz"
+    xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:localization="clr-namespace:Ninja.Localization.Resources;assembly=Ninja.Localization"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:settings="clr-namespace:Ninja.Settings;assembly=Ninja.Settings"
+    xmlns:viewModels="clr-namespace:Ninja.ViewModels"
+    d:DataContext="{d:DesignInstance viewModels:SNTPLookupHostViewModel}"
+    dialogs:DialogParticipation.Register="{Binding}"
+    mc:Ignorable="d">
     <UserControl.Resources>
         <converters:IntZeroToVisibilityCollapsedConverter x:Key="IntZeroToVisibilityCollapsedConverter" />
     </UserControl.Resources>
     <UserControl.InputBindings>
-        <KeyBinding Key="T" Modifiers="Ctrl" Command="{Binding AddTabCommand}" />
+        <KeyBinding
+            Key="T"
+            Command="{Binding AddTabCommand}"
+            Modifiers="Ctrl" />
     </UserControl.InputBindings>
     <Grid>
-        <dockablz:Layout Grid.Column="0" Grid.Row="0"
-                         Partition="{Binding InterTabPartition}">
+        <dockablz:Layout
+            Grid.Row="0"
+            Grid.Column="0"
+            Partition="{Binding InterTabPartition}">
             <dockablz:Layout.BranchTemplate>
                 <DataTemplate>
-                    <dragablz:TabablzControl DataContext="{Binding}" ClosingItemCallback="{Binding CloseItemCommand}">
+                    <dragablz:TabablzControl
+                        ClosingItemCallback="{Binding CloseItemCommand}"
+                        DataContext="{Binding}">
                         <dragablz:TabablzControl.InterTabController>
-                            <dragablz:InterTabController DataContext="{Binding}"
-                                                         InterTabClient="{Binding InterTabClient}"
-                                                         Partition="{Binding InterTabPartition}" />
+                            <dragablz:InterTabController
+                                DataContext="{Binding}"
+                                InterTabClient="{Binding InterTabClient}"
+                                Partition="{Binding InterTabPartition}" />
                         </dragablz:TabablzControl.InterTabController>
                     </dragablz:TabablzControl>
                 </DataTemplate>
             </dockablz:Layout.BranchTemplate>
-            <dragablz:TabablzControl ClosingItemCallback="{Binding CloseItemCommand}"
-                                     ItemsSource="{Binding TabItems}"
-                                     SelectedIndex="{Binding SelectedTabIndex}"
-                                     DisableBranchConsolidation="True">
+            <dragablz:TabablzControl
+                ClosingItemCallback="{Binding CloseItemCommand}"
+                DisableBranchConsolidation="True"
+                ItemsSource="{Binding TabItems}"
+                SelectedIndex="{Binding SelectedTabIndex}">
                 <dragablz:TabablzControl.InterTabController>
-                    <dragablz:InterTabController InterTabClient="{Binding InterTabClient}"
-                                                 Partition="{Binding InterTabPartition}"
-                                                 MoveWindowWithSolitaryTabs="False" />
+                    <dragablz:InterTabController
+                        InterTabClient="{Binding InterTabClient}"
+                        MoveWindowWithSolitaryTabs="False"
+                        Partition="{Binding InterTabPartition}" />
                 </dragablz:TabablzControl.InterTabController>
                 <dragablz:TabablzControl.HeaderSuffixContent>
-                    <Grid HorizontalAlignment="Right" Width="32" Height="32">
-                        <Button Style="{StaticResource CleanButton}" Command="{Binding AddTabCommand}"
-                                ToolTip="{x:Static localization:Strings.NewTab}">
-                            <Rectangle Width="16" Height="16">
+                    <Grid
+                        Width="32"
+                        Height="32"
+                        HorizontalAlignment="Right">
+                        <Button
+                            Command="{Binding AddTabCommand}"
+                            Style="{StaticResource CleanButton}"
+                            ToolTip="{x:Static localization:Strings.NewTab}">
+                            <Rectangle
+                                Width="16"
+                                Height="16">
                                 <Rectangle.OpacityMask>
-                                    <VisualBrush Stretch="Fill" Visual="{iconPacks:Material Kind=Plus}" />
+                                    <VisualBrush
+                                        Stretch="Fill"
+                                        Visual="{iconPacks:Material Kind=Plus}" />
                                 </Rectangle.OpacityMask>
                                 <Rectangle.Style>
                                     <Style TargetType="{x:Type Rectangle}">
@@ -68,19 +89,28 @@
                 </dragablz:TabablzControl.HeaderSuffixContent>
             </dragablz:TabablzControl>
         </dockablz:Layout>
-        <Grid Grid.Column="0" Grid.Row="0"
-              VerticalAlignment="Center"
-              Visibility="{Binding Source={x:Static settings:ConfigurationManager.Current}, Path=SNTPLookupTabCount, Converter={StaticResource IntZeroToVisibilityCollapsedConverter}}">
-            <Button HorizontalAlignment="Center" Command="{Binding AddTabCommand}" Style="{StaticResource CleanButton}">
+        <Grid
+            Grid.Row="0"
+            Grid.Column="0"
+            VerticalAlignment="Center"
+            Visibility="{Binding Source={x:Static settings:ConfigurationManager.Current}, Path=SNTPLookupTabCount, Converter={StaticResource IntZeroToVisibilityCollapsedConverter}}">
+            <Button
+                HorizontalAlignment="Center"
+                Command="{Binding AddTabCommand}"
+                Style="{StaticResource CleanButton}">
                 <Button.Content>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Rectangle Width="20" Height="20">
+                        <Rectangle
+                            Width="20"
+                            Height="20">
                             <Rectangle.OpacityMask>
-                                <VisualBrush Stretch="Fill" Visual="{iconPacks:Material Kind=Plus}" />
+                                <VisualBrush
+                                    Stretch="Fill"
+                                    Visual="{iconPacks:Material Kind=Plus}" />
                             </Rectangle.OpacityMask>
                             <Rectangle.Style>
                                 <Style TargetType="{x:Type Rectangle}">
@@ -95,15 +125,18 @@
                                 </Style>
                             </Rectangle.Style>
                         </Rectangle>
-                        <TextBlock Grid.Column="1" Text="{x:Static localization:Strings.AddATabToPerformASNTPLookup}">
+                        <TextBlock
+                            Grid.Column="1"
+                            Text="{x:Static localization:Strings.AddATabToPerformSntpLookup}">
                             <TextBlock.Style>
-                                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MessageTextBlock}">
+                                <Style
+                                    BasedOn="{StaticResource MessageTextBlock}"
+                                    TargetType="{x:Type TextBlock}">
                                     <Style.Triggers>
                                         <DataTrigger
                                             Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path=IsMouseOver}"
                                             Value="True">
-                                            <Setter Property="Foreground"
-                                                    Value="{DynamicResource MahApps.Brushes.Gray5}" />
+                                            <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Gray5}" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>

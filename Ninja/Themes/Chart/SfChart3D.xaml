@@ -1,0 +1,209 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Syncfusion.UI.Xaml.Charts;assembly=Syncfusion.SfChart.WPF"
+    xmlns:sfskin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF">
+
+    <ResourceDictionary.MergedDictionaries>
+        <sfskin:ResourceDictionaryProvider
+            DictionaryName="Common"
+            ThemeName="FluentDark" />
+        <sfskin:ResourceDictionaryProvider
+            DictionaryName="Brushes"
+            ThemeName="FluentDark" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style
+        x:Key="SyncfusionSfChart3DlineStyle"
+        TargetType="Line">
+        <Setter Property="Stroke" Value="{StaticResource Border}" />
+        <Setter Property="StrokeThickness" Value="1" />
+    </Style>
+
+    <Style
+        x:Key="3dLineStyle"
+        TargetType="Line">
+        <Setter Property="Stroke" Value="{StaticResource Border}" />
+    </Style>
+
+    <Style
+        x:Key="3Dgridlinestyle"
+        TargetType="Line">
+        <Setter Property="Stroke" Value="{StaticResource BorderAlt}" />
+        <Setter Property="StrokeThickness" Value="1" />
+    </Style>
+
+    <DataTemplate x:Key="Default3DTooltipTemplate">
+        <Border
+            Padding="4"
+            Background="{StaticResource TooltipBackground}"
+            BorderBrush="{StaticResource TooltipBorder}"
+            BorderThickness="{StaticResource FluentDark.BorderThickness1}"
+            CornerRadius="3">
+            <TextBlock
+                FontSize="{StaticResource FluentDark.CaptionText}"
+                Foreground="{StaticResource ContentForeground}"
+                Text="{Binding YData}" />
+        </Border>
+    </DataTemplate>
+
+    <Style
+        x:Key="SyncfusionBarSeries3DStyle"
+        TargetType="local:BarSeries3D">
+        <Setter Property="TooltipTemplate" Value="{StaticResource Default3DTooltipTemplate}" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionBarSeries3DStyle}"
+        TargetType="local:BarSeries3D" />
+
+    <Style
+        x:Key="SyncfusionStackingBarSeries3DStyle"
+        TargetType="local:StackingBarSeries3D">
+        <Setter Property="TooltipTemplate" Value="{StaticResource Default3DTooltipTemplate}" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionStackingBarSeries3DStyle}"
+        TargetType="local:StackingBarSeries3D" />
+
+    <Style
+        x:Key="SyncfusionStackingBar100Series3DStyle"
+        TargetType="local:StackingBar100Series3D">
+        <Setter Property="TooltipTemplate" Value="{StaticResource Default3DTooltipTemplate}" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionStackingBar100Series3DStyle}"
+        TargetType="local:StackingBar100Series3D" />
+
+    <Style
+        x:Key="SyncfusionStackingColumn100Series3DStyle"
+        TargetType="local:StackingColumn100Series3D">
+        <Setter Property="TooltipTemplate" Value="{StaticResource Default3DTooltipTemplate}" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionStackingColumn100Series3DStyle}"
+        TargetType="local:StackingColumn100Series3D" />
+
+    <Style
+        x:Key="SyncfusionStackingColumnSeries3DStyle"
+        TargetType="local:StackingColumnSeries3D">
+        <Setter Property="TooltipTemplate" Value="{StaticResource Default3DTooltipTemplate}" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionStackingColumnSeries3DStyle}"
+        TargetType="local:StackingColumnSeries3D" />
+
+    <Style
+        x:Key="SyncfusionScatterSeries3DStyle"
+        TargetType="local:ScatterSeries3D">
+        <Setter Property="TooltipTemplate" Value="{StaticResource Default3DTooltipTemplate}" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionScatterSeries3DStyle}"
+        TargetType="local:ScatterSeries3D" />
+
+    <Style
+        x:Key="SyncfusionAreaSeries3DStyle"
+        TargetType="local:AreaSeries3D">
+        <Setter Property="TooltipTemplate" Value="{StaticResource Default3DTooltipTemplate}" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionAreaSeries3DStyle}"
+        TargetType="local:AreaSeries3D" />
+
+    <Style
+        x:Key="SyncfusionDoughnutSeries3DStyle"
+        TargetType="local:DoughnutSeries3D">
+        <Setter Property="TooltipTemplate" Value="{StaticResource Default3DTooltipTemplate}" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionDoughnutSeries3DStyle}"
+        TargetType="local:DoughnutSeries3D" />
+
+    <Style
+        x:Key="SyncfusionPieSeries3DStyle"
+        TargetType="local:PieSeries3D">
+        <Setter Property="TooltipTemplate" Value="{StaticResource Default3DTooltipTemplate}" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionPieSeries3DStyle}"
+        TargetType="local:PieSeries3D" />
+
+    <Style
+        x:Key="SyncfusionColumnSeries3DStyle"
+        TargetType="local:ColumnSeries3D">
+        <Setter Property="TooltipTemplate" Value="{StaticResource Default3DTooltipTemplate}" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionColumnSeries3DStyle}"
+        TargetType="local:ColumnSeries3D" />
+
+    <Style
+        x:Key="SyncfusionLineSeries3DStyle"
+        TargetType="local:LineSeries3D">
+        <Setter Property="TooltipTemplate" Value="{StaticResource Default3DTooltipTemplate}" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionLineSeries3DStyle}"
+        TargetType="local:LineSeries3D" />
+
+    <Style
+        x:Key="SyncfusionChartAxisBase3DStyle"
+        TargetType="local:ChartAxisBase3D">
+        <Setter Property="MajorTickLineStyle" Value="{StaticResource 3dLineStyle}" />
+        <Setter Property="MinorTickLineStyle" Value="{StaticResource 3dLineStyle}" />
+        <Setter Property="MajorGridLineStyle" Value="{StaticResource 3Dgridlinestyle}" />
+        <Setter Property="MinorGridLineStyle" Value="{StaticResource 3Dgridlinestyle}" />
+        <Setter Property="AxisLineStyle" Value="{StaticResource SyncfusionSfChart3DlineStyle}" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionChartAxisBase3DStyle}"
+        TargetType="local:CategoryAxis3D" />
+    <Style
+        BasedOn="{StaticResource SyncfusionChartAxisBase3DStyle}"
+        TargetType="local:DateTimeAxis3D" />
+    <Style
+        BasedOn="{StaticResource SyncfusionChartAxisBase3DStyle}"
+        TargetType="local:LogarithmicAxis3D" />
+    <Style
+        BasedOn="{StaticResource SyncfusionChartAxisBase3DStyle}"
+        TargetType="local:NumericalAxis3D" />
+    <Style
+        BasedOn="{StaticResource SyncfusionChartAxisBase3DStyle}"
+        TargetType="local:TimeSpanAxis3D" />
+
+    <Style
+        x:Key="SyncfusionSfChart3DStyle"
+        TargetType="local:SfChart3D">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BackWallBrush" Value="{StaticResource ContentBackgroundAlt2}" />
+        <Setter Property="LeftWallBrush" Value="{StaticResource ContentBackgroundAlt2}" />
+        <Setter Property="RightWallBrush" Value="{StaticResource ContentBackgroundAlt2}" />
+        <Setter Property="BottomWallBrush" Value="{StaticResource ContentBackgroundAlt2}" />
+        <Setter Property="Foreground" Value="{StaticResource ContentForeground}" />
+        <Setter Property="FontSize" Value="{StaticResource FluentDark.CaptionText}" />
+        <Setter Property="FontFamily" Value="{StaticResource FluentDark.ThemeFontFamily}" />
+        <Setter Property="FontWeight" Value="{StaticResource FluentDark.FontWeightNormal}" />
+        <Setter Property="ChartResourceDictionary">
+            <Setter.Value>
+                <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/SfChart/SfChartCommon.xaml" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionSfChart3DStyle}"
+        TargetType="local:SfChart3D" />
+
+</ResourceDictionary>

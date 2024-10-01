@@ -16,6 +16,9 @@
     xmlns:networkManager="clr-namespace:Ninja"
     xmlns:resources="clr-namespace:Ninja.Properties"
     xmlns:settings="clr-namespace:Ninja.Settings;assembly=Ninja.Settings"
+    xmlns:skin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
+    xmlns:sync="http://schemas.syncfusion.com/wpf"
+    xmlns:views="clr-namespace:Ninja.Views"
     x:Name="MetroMainWindow"
     Title="Network Ninja"
     Width="1350"
@@ -24,6 +27,7 @@
     MinHeight="600"
     d:DataContext="{d:DesignInstance networkManager:MainWindow}"
     dialogs:DialogParticipation.Register="{Binding}"
+    sync:SfSkinManager.Theme="{skin:SkinManagerExtension ThemeName=FluentDark}"
     Activated="MetroMainWindow_Activated"
     Closing="MetroWindowMain_Closing"
     ContentRendered="MetroMainWindow_ContentRendered"
@@ -403,7 +407,7 @@
                         SelectionMode="Single"
                         Style="{StaticResource DefaultListBox}">
                         <ListView.ItemTemplate>
-                            <DataTemplate DataType="{x:Type networkManager:RunCommandInfo}">
+                            <DataTemplate DataType="{x:Type views:RunCommandInfo}">
                                 <Border BorderThickness="1">
                                     <Grid Margin="5">
                                         <Grid.ColumnDefinitions>

@@ -1,5 +1,8 @@
-﻿namespace Ninja
+﻿
+namespace Ninja.Views
 {
+    using System;
+
     public class RunCommandInfo
     {
         public RunCommandType Type { get; init; }

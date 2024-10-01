@@ -1,8 +1,9 @@
-﻿using Ninja.Utilities;
+﻿
 
 namespace Ninja.Models
 {
     using Utilities;
+    using Ninja.Utilities;
 
     /// <summary>
     ///     Stores information's about an application.

@@ -1,0 +1,97 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:charts="clr-namespace:Syncfusion.UI.Xaml.Charts;assembly=Syncfusion.SfChart.WPF"
+    xmlns:sfskin="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/SfChart/ChartArea.xaml" />
+        <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/SfChart/ChartToolbar.xaml" />
+        <ResourceDictionary Source="/Syncfusion.SfChart.WPF;component/Sparkline/Themes/Sparkline.xaml" />
+        <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/SfChart/Resizer.xaml" />
+        <sfskin:ResourceDictionaryProvider
+            DictionaryName="Common"
+            ThemeName="FluentDark" />
+        <sfskin:ResourceDictionaryProvider
+            DictionaryName="Brushes"
+            ThemeName="FluentDark" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style
+        x:Key="SyncfusionChartPrintDialogStyle"
+        TargetType="charts:ChartPrintDialog">
+        <Setter Property="BorderBrush" Value="{StaticResource BorderAlt}" />
+        <Setter Property="Background" Value="{StaticResource PopupBackground}" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionChartPrintDialogStyle}"
+        TargetType="charts:ChartPrintDialog" />
+
+    <Style
+        x:Key="SyncfusionShapeAnnotationStyle"
+        TargetType="charts:ShapeAnnotation">
+        <Setter Property="Stroke" Value="{StaticResource BorderAlt3}" />
+        <Setter Property="Fill" Value="{StaticResource White}" />
+        <Setter Property="Foreground" Value="{StaticResource ContentForeground}" />
+        <Setter Property="FontSize" Value="{StaticResource FluentDark.CaptionText}" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionShapeAnnotationStyle}"
+        TargetType="charts:ShapeAnnotation" />
+
+    <Style
+        x:Key="SyncfusionHorizontalLineAnnotationStyle"
+        TargetType="charts:HorizontalLineAnnotation">
+        <Setter Property="Stroke" Value="{StaticResource BorderAlt3}" />
+        <Setter Property="Fill" Value="{StaticResource White}" />
+        <Setter Property="Foreground" Value="{StaticResource ContentForeground}" />
+        <Setter Property="FontSize" Value="{StaticResource FluentDark.CaptionText}" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionHorizontalLineAnnotationStyle}"
+        TargetType="charts:HorizontalLineAnnotation" />
+
+    <Style
+        x:Key="SyncfusionVerticalLineAnnotationStyle"
+        TargetType="charts:VerticalLineAnnotation">
+        <Setter Property="Stroke" Value="{StaticResource BorderAlt3}" />
+        <Setter Property="Fill" Value="{StaticResource White}" />
+        <Setter Property="Foreground" Value="{StaticResource ContentForeground}" />
+        <Setter Property="FontSize" Value="{StaticResource FluentDark.CaptionText}" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionVerticalLineAnnotationStyle}"
+        TargetType="charts:VerticalLineAnnotation" />
+
+    <Style
+        x:Key="SyncfusionEllipseAnnotationStyle"
+        TargetType="charts:EllipseAnnotation">
+        <Setter Property="Stroke" Value="{StaticResource BorderAlt3}" />
+        <Setter Property="Fill" Value="{StaticResource White}" />
+        <Setter Property="Foreground" Value="{StaticResource ContentForeground}" />
+        <Setter Property="FontSize" Value="{StaticResource FluentDark.CaptionText}" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionEllipseAnnotationStyle}"
+        TargetType="charts:EllipseAnnotation" />
+
+    <Style
+        x:Key="SyncfusionRectangleAnnotationStyle"
+        TargetType="charts:RectangleAnnotation">
+        <Setter Property="Stroke" Value="{StaticResource BorderAlt3}" />
+        <Setter Property="Fill" Value="{StaticResource White}" />
+        <Setter Property="Foreground" Value="{StaticResource ContentForeground}" />
+        <Setter Property="FontSize" Value="{StaticResource FluentDark.CaptionText}" />
+        <Setter Property="Opacity" Value="0.4" />
+    </Style>
+
+    <Style
+        BasedOn="{StaticResource SyncfusionRectangleAnnotationStyle}"
+        TargetType="charts:RectangleAnnotation" />
+
+</ResourceDictionary>

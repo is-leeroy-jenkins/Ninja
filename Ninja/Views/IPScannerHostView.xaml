@@ -140,7 +140,7 @@
                         </Rectangle>
                         <TextBlock
                             Grid.Column="1"
-                            Text="{x:Static localization:Strings.AddATabToPerformANetworkScan}">
+                            Text="{x:Static localization:Strings.AddATabToPerformNetworkScan}">
                             <TextBlock.Style>
                                 <Style
                                     BasedOn="{StaticResource MessageTextBlock}"

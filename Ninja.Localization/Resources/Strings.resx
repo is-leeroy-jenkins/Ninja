@@ -138,7 +138,7 @@
   <data name="ARP" xml:space="preserve">
     <value>ARP</value>
   </data>
-  <data name="ARPTable" xml:space="preserve">
+  <data name="ArpTable" xml:space="preserve">
     <value>ARP Table</value>
   </data>
   <data name="Authentication" xml:space="preserve">
@@ -234,7 +234,7 @@
   <data name="HotKeys" xml:space="preserve">
     <value>HotKeys</value>
   </data>
-  <data name="HTTPHeaders" xml:space="preserve">
+  <data name="HyypHeaders" xml:space="preserve">
     <value>HTTP Headers</value>
   </data>
   <data name="Import" xml:space="preserve">
@@ -636,22 +636,22 @@
   <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
-  <data name="AddATabToPerformADNSLookup" xml:space="preserve">
+  <data name="AddATabToPerformDnsLookup" xml:space="preserve">
     <value>Add a tab to perform a DNS lookup...</value>
   </data>
-  <data name="AddATabToPerformANetworkScan" xml:space="preserve">
+  <data name="AddATabToPerformNetworkScan" xml:space="preserve">
     <value>Add a tab to perform a network scan...</value>
   </data>
-  <data name="AddATabToPerformAnSNMPAction" xml:space="preserve">
+  <data name="AddATabToPerformSnmpAction" xml:space="preserve">
     <value>Add a tab to perform an SNMP action...</value>
   </data>
-  <data name="AddATabToPerformAPing" xml:space="preserve">
+  <data name="AddATabToPerformPing" xml:space="preserve">
     <value>Add a tab to perform a ping...</value>
   </data>
-  <data name="AddATabToPerformAPortScan" xml:space="preserve">
+  <data name="AddATabToPerformPortScan" xml:space="preserve">
     <value>Add a tab to perform a port scan...</value>
   </data>
-  <data name="AddATabToPerformATrace" xml:space="preserve">
+  <data name="AddATabToPerformTrace" xml:space="preserve">
     <value>Add a tab to perform a trace...</value>
   </data>
   <data name="AddDNSSuffixToHostname" xml:space="preserve">
@@ -869,7 +869,7 @@ First make a backup copy of your profile files before enabling encryption!</valu
   <data name="Host" xml:space="preserve">
     <value>Host</value>
   </data>
-  <data name="HostnameOrIPAddress" xml:space="preserve">
+  <data name="HostnameOrIpAddress" xml:space="preserve">
     <value>Hostname or IP address</value>
   </data>
   <data name="Hosts" xml:space="preserve">
@@ -1774,7 +1774,7 @@ Profile files are not affected!</value>
   <data name="DeleteDNSServerMessage" xml:space="preserve">
     <value>The selected DNS server will be deleted permanently.</value>
   </data>
-  <data name="AddDNSServer" xml:space="preserve">
+  <data name="AddDnsServer" xml:space="preserve">
     <value>Add DNS server</value>
   </data>
   <data name="EditDNSServer" xml:space="preserve">
@@ -2469,7 +2469,7 @@ $$hostname$$	--&gt;	Hostname</value>
   <data name="MicrosoftWindowsSDKContractsIsNotAvailable" xml:space="preserve">
     <value>Microsoft.Windows.SDK.Contracts is required for this feature but not available on this system (e.g. on Windows Server).</value>
   </data>
-  <data name="ApplicationName_ARPTable" xml:space="preserve">
+  <data name="ApplicationName_ArpTable" xml:space="preserve">
     <value>ARP Table</value>
   </data>
   <data name="ApplicationName_Connections" xml:space="preserve">
@@ -2481,13 +2481,13 @@ $$hostname$$	--&gt;	Hostname</value>
   <data name="ApplicationName_DiscoveryProtocol" xml:space="preserve">
     <value>Discovery Protocol</value>
   </data>
-  <data name="ApplicationName_DNSLookup" xml:space="preserve">
+  <data name="ApplicationName_DnsLookup" xml:space="preserve">
     <value>DNS Lookup</value>
   </data>
-  <data name="ApplicationName_HTTPHeaders" xml:space="preserve">
+  <data name="ApplicationName_HttpHeaders" xml:space="preserve">
     <value>HTTP Headers</value>
   </data>
-  <data name="ApplicationName_IPScanner" xml:space="preserve">
+  <data name="ApplicationName_IpScanner" xml:space="preserve">
     <value>IP Scanner</value>
   </data>
   <data name="ApplicationName_Listeners" xml:space="preserve">
@@ -2517,19 +2517,19 @@ $$hostname$$	--&gt;	Hostname</value>
   <data name="ApplicationName_RemoteDesktop" xml:space="preserve">
     <value>Remote Desktop</value>
   </data>
-  <data name="ApplicationName_SNMP" xml:space="preserve">
+  <data name="ApplicationName_Snmp" xml:space="preserve">
     <value>SNMP</value>
   </data>
   <data name="ApplicationName_SubnetCalculator" xml:space="preserve">
     <value>Subnet Calculator</value>
   </data>
-  <data name="ApplicationName_TigerVNC" xml:space="preserve">
+  <data name="ApplicationName_TigerVnc" xml:space="preserve">
     <value>TigerVNC</value>
   </data>
   <data name="ApplicationName_Traceroute" xml:space="preserve">
     <value>Traceroute</value>
   </data>
-  <data name="ApplicationName_WakeOnLAN" xml:space="preserve">
+  <data name="ApplicationName_WakeOnLan" xml:space="preserve">
     <value>Wake on LAN</value>
   </data>
   <data name="ApplicationName_WebConsole" xml:space="preserve">
@@ -2538,7 +2538,7 @@ $$hostname$$	--&gt;	Hostname</value>
   <data name="ApplicationName_Whois" xml:space="preserve">
     <value>Whois</value>
   </data>
-  <data name="ApplicationName_WiFi" xml:space="preserve">
+  <data name="ApplicationName_Wifi" xml:space="preserve">
     <value>WiFi</value>
   </data>
   <data name="Accent_Amber" xml:space="preserve">
@@ -2993,7 +2993,7 @@ Enable profile file encryption in Settings&gt;Profile to store credentials secur
   <data name="SettingsResetExclamationMark" xml:space="preserve">
     <value>Settings reset!</value>
   </data>
-  <data name="ApplicationName_AWSSessionManager" xml:space="preserve">
+  <data name="ApplicationName_AwsSessionManager" xml:space="preserve">
     <value>AWS Session Manager</value>
   </data>
   <data name="InstanceId" xml:space="preserve">
@@ -3020,7 +3020,7 @@ Enable profile file encryption in Settings&gt;Profile to store credentials secur
   <data name="SyncEC2InstancesFromAWS" xml:space="preserve">
     <value>Synchronize EC2 instances from AWS</value>
   </data>
-  <data name="AddAWSProfile" xml:space="preserve">
+  <data name="AddAwsProfile" xml:space="preserve">
     <value>Add AWS profile</value>
   </data>
   <data name="DeleteAWSProfile" xml:space="preserve">
@@ -3188,13 +3188,13 @@ If the option is disabled again, the values are no longer modified. However, the
   <data name="NoValidTigerVNCPath" xml:space="preserve">
     <value>A valid path to TigerVNC should end with "vncviewer-*.exe" or "vncviewer64-*.exe"!</value>
   </data>
-  <data name="ApplicationName_SNTPLookup" xml:space="preserve">
+  <data name="ApplicationName_SntpLookup" xml:space="preserve">
     <value>SNTP Lookup</value>
   </data>
   <data name="Library_nulastudioNetBeauty_Description" xml:space="preserve">
     <value>Move a .NET Framework/.NET Core app runtime components and dependencies into a sub-directory and make it beauty.</value>
   </data>
-  <data name="AddATabToPerformASNTPLookup" xml:space="preserve">
+  <data name="AddATabToPerformSntpLookup" xml:space="preserve">
     <value>Add a tab to perform a SNTP lookup...</value>
   </data>
   <data name="SNTPServers" xml:space="preserve">
@@ -3548,7 +3548,7 @@ Changes to this value will take effect after the application is restarted. Wheth
   <data name="ASN" xml:space="preserve">
     <value>ASN</value>
   </data>
-  <data name="ASName" xml:space="preserve">
+  <data name="AsName" xml:space="preserve">
     <value>AS Name</value>
   </data>
   <data name="City" xml:space="preserve">
@@ -3640,10 +3640,10 @@ URL: http://ip-api.com/</value>
     <value>ip-api.com rate limit reached (too many requests from your network)!
 Try again in a few seconds.</value>
   </data>
-  <data name="HTTPStatusCode" xml:space="preserve">
+  <data name="HttpStatusCode" xml:space="preserve">
     <value>HTTP status code</value>
   </data>
-  <data name="Accen_Steel" xml:space="preserve">
+  <data name="Accent_Steel" xml:space="preserve">
     <value>Steel</value>
   </data>
   <data name="RateLimitReachedTryAgainInXSeconds" xml:space="preserve">
@@ -3673,10 +3673,10 @@ Try again in a few seconds.</value>
   <data name="Watermark_RunCommand" xml:space="preserve">
     <value>Run command...</value>
   </data>
-  <data name="ApplicationName_IPGeolocation" xml:space="preserve">
+  <data name="ApplicationName_IpGeolocation" xml:space="preserve">
     <value>IP Geolocation</value>
   </data>
-  <data name="AddATabToQueryTheIPGeolocation" xml:space="preserve">
+  <data name="AddATabToQueryIpGeolocation" xml:space="preserve">
     <value>Add a tab to query the IP geolocation...</value>
   </data>
   <data name="EnterADomainToQueryWhoisDots" xml:space="preserve">

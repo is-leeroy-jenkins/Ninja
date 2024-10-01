@@ -13,7 +13,7 @@
         <RootNamespace>Ninja</RootNamespace>
         <AssemblyName>Ninja</AssemblyName>
         <UseWPF>true</UseWPF>
-        <UseWindowsForms>False</UseWindowsForms>
+        <UseWindowsForms>True</UseWindowsForms>
         <StartupObject>Ninja.App</StartupObject>
         <ApplicationIcon>Ninja.ico</ApplicationIcon>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -49,7 +49,7 @@
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
         <AnalysisLevel>6.0-recommended</AnalysisLevel>
         <Title>Network Ninja</Title>
-        <Copyright>Terry Eppler</Copyright>
+        <Copyright>2016-2024 Terry D. Eppler</Copyright>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
       <Optimize>True</Optimize>
@@ -173,7 +173,11 @@
         <PackageReference Include="AWSSDK.EC2" Version="3.7.406.4" />
         <PackageReference Include="AxMSTSCLib" Version="1.0.1" />
         <PackageReference Include="DnsClient" Version="1.8.0" />
+        <PackageReference Include="EPPlus" Version="7.3.2" />
+        <PackageReference Include="EPPlus.Interfaces" Version="6.1.1" />
+        <PackageReference Include="EPPlus.System.Drawing" Version="6.1.1" />
         <PackageReference Include="gong-wpf-dragdrop" Version="3.2.1" />
+        <PackageReference Include="Google.Apis.CustomSearchAPI.v1" Version="1.68.0.3520" />
         <PackageReference Include="IPNetwork2" Version="3.0.667" />
         <PackageReference Include="Lextm.SharpSnmpLib" Version="12.5.3" />
         <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
@@ -185,20 +189,47 @@
         <PackageReference Include="MahApps.Metro.IconPacks.MaterialLight" Version="5.0.0" />
         <PackageReference Include="MahApps.Metro.IconPacks.Modern" Version="5.0.0" />
         <PackageReference Include="MahApps.Metro.IconPacks.Octicons" Version="5.0.0" />
+        <PackageReference Include="Microsoft.Office.Interop.Outlook" Version="15.0.4797.1004" />
         <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2792.45" />
         <PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.1.3" />
         <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+        <PackageReference Include="ModernWpfUI" Version="0.9.6" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.4.5" />
         <PackageReference Include="nulastudio.NetBeauty" Version="2.1.4.5" />
+        <PackageReference Include="SkiaSharp" Version="2.88.8" />
+        <PackageReference Include="Syncfusion.SfSkinManager.WPF" Version="24.1.41" />
+        <PackageReference Include="Syncfusion.Shared.Base" Version="24.1.41" />
+        <PackageReference Include="Syncfusion.Shared.WPF" Version="24.1.41" />
+        <PackageReference Include="Syncfusion.Themes.FluentDark.WPF" Version="24.1.41" />
+        <PackageReference Include="Syncfusion.Tools.WPF" Version="24.1.41" />
+        <PackageReference Include="Syncfusion.UI.WPF.NET" Version="24.1.41" />
+        <PackageReference Include="System.Data.OleDb" Version="8.0.0" />
+        <PackageReference Include="ToastNotifications.Messages.Net6" Version="1.0.4" />
+        <PackageReference Include="ToastNotifications.Net6" Version="1.0.4" />
         <Reference Include="AxMSTSCLib">
             <HintPath>$(TargetDir)\lib\AxMSTSCLib.dll</HintPath>
         </Reference>
         <Reference Include="Dragablz">
           <HintPath>Libraries\Draggablz\Dragablz.dll</HintPath>
         </Reference>
+        <Reference Include="LinqStatistics">
+          <HintPath>Libraries\LinqStatistics\LinqStatistics.dll</HintPath>
+        </Reference>
         <Reference Include="MSTSCLib">
             <HintPath>$(TargetDir)\lib\MSTSCLib.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Data.SQLite">
+          <HintPath>Libraries\System.Data\System.Data.SQLite.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Data.SQLite.EF6">
+          <HintPath>Libraries\System.Data\System.Data.SQLite.EF6.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Data.SQLite.Linq">
+          <HintPath>Libraries\System.Data\System.Data.SQLite.Linq.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Data.SqlServerCe">
+          <HintPath>Libraries\System.Data\System.Data.SqlServerCe.dll</HintPath>
         </Reference>
         <Compile Include="..\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
     </ItemGroup>
@@ -349,5 +380,11 @@
             <XamlRuntime>Wpf</XamlRuntime>
             <SubType>Designer</SubType>
         </Page>
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Extensions\" />
+      <Folder Include="Libraries\UI\" />
+      <Folder Include="IO\" />
+      <Folder Include="Static\" />
     </ItemGroup>
 </Project>

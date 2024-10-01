@@ -1,0 +1,1846 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:resources="clr-namespace:Syncfusion.Windows.Controls.RichTextBoxAdv;assembly=Syncfusion.SfRichTextBoxAdv.WPF"
+    xmlns:richtextboxadv="clr-namespace:Syncfusion.Windows.Controls.RichTextBoxAdv;assembly=Syncfusion.SfRichTextBoxAdv.WPF"
+    xmlns:shared="clr-namespace:Syncfusion.Windows.Shared;assembly=Syncfusion.Shared.WPF"
+    xmlns:tools_controls_shared="clr-namespace:Syncfusion.Windows.Tools.Controls;assembly=Syncfusion.shared.WPF">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/SfRichTextBoxAdv/SfRichTextBoxCommon.xaml" />
+        <ResourceDictionary Source="/Syncfusion.Themes.FluentDark.WPF;component/MSControl/PrimaryButton.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="richtextboxadv:TableDialog">
+        <Setter Property="Width" Value="500" />
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="richtextboxadv:TableDialog">
+                    <Grid Background="{StaticResource PopupBackground}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="16" />
+                            <RowDefinition Height="38" />
+                        </Grid.RowDefinitions>
+                        <TabControl
+                            x:Name="PART_TablePropetiesTab"
+                            Grid.Row="0"
+                            Height="380"
+                            Margin="12"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                            <TabControl.Items>
+                                <TabItem
+                                    x:Name="PART_TableTab"
+                                    Padding="14,3,14,3"
+                                    Header="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=Table}">
+                                    <Grid Margin="12,0,12,0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="16" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="20" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="20" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="16" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="12" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="8" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="8" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Grid.ColumnSpan="5"
+                                            VerticalAlignment="Center"
+                                            Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableDialogSize}"
+                                            Foreground="{StaticResource ContentForeground}" />
+                                        <StackPanel
+                                            Grid.Row="2"
+                                            Grid.Column="1"
+                                            Grid.ColumnSpan="4"
+                                            Orientation="Horizontal">
+                                            <CheckBox
+                                                x:Name="PART_TableWidthCheckBox"
+                                                Margin="5"
+                                                VerticalAlignment="Center"
+                                                Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableDialogPreferredWidth}"
+                                                IsChecked="{Binding HasTableWidth, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                            <shared:UpDown
+                                                x:Name="PART_TableWidthButton"
+                                                Width="80"
+                                                Height="25"
+                                                Margin="5,5,5,13"
+                                                Padding="4,1,1,2"
+                                                IsEnabled="{Binding IsChecked, Mode=OneWay, ElementName=PART_TableWidthCheckBox}"
+                                                MaxValue="2112"
+                                                MinValue="0"
+                                                Step="1"
+                                                UseNullOption="True"
+                                                Value="{Binding TablePreferredWidth, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        </StackPanel>
+                                        <StackPanel
+                                            Grid.Row="2"
+                                            Grid.Column="4"
+                                            Grid.ColumnSpan="2"
+                                            HorizontalAlignment="Right"
+                                            Orientation="Horizontal">
+                                            <Label
+                                                Margin="5"
+                                                VerticalAlignment="Center"
+                                                Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableDialogPreferredWidthType}"
+                                                IsEnabled="{Binding IsChecked, Mode=OneWay, ElementName=PART_TableWidthCheckBox}" />
+                                            <ComboBox
+                                                x:Name="PART_TableWidthTypeBox"
+                                                Width="80"
+                                                Height="25"
+                                                Margin="5,5,5,13"
+                                                Padding="4,1,1,2"
+                                                VerticalAlignment="Center"
+                                                IsEnabled="{Binding IsChecked, Mode=OneWay, ElementName=PART_TableWidthCheckBox}"
+                                                ItemsSource="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=WidthTypeCollection}"
+                                                SelectedValue="{Binding TablePreferredWidthType, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource WidthTypeStringConverter}}" />
+                                        </StackPanel>
+                                        <Border
+                                            Grid.Row="3"
+                                            Grid.Column="1"
+                                            Grid.ColumnSpan="7"
+                                            Height="1"
+                                            Margin="5,12,5,5"
+                                            Padding="4,2,2,2"
+                                            VerticalAlignment="Center"
+                                            Background="{TemplateBinding BorderBrush}"
+                                            BorderThickness="0,0,0,1"
+                                            Opacity="0.5" />
+                                        <Label
+                                            Grid.Row="4"
+                                            Grid.Column="1"
+                                            Grid.ColumnSpan="5"
+                                            VerticalAlignment="Center"
+                                            Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableDialogAlignment}"
+                                            Foreground="{TemplateBinding Foreground}" />
+                                        <Border
+                                            Grid.Row="5"
+                                            Grid.Column="1"
+                                            Width="60"
+                                            Height="62"
+                                            Margin="5"
+                                            BorderBrush="{StaticResource BorderAlt}"
+                                            BorderThickness="1">
+                                            <ToggleButton
+                                                Width="50"
+                                                Height="50"
+                                                Padding="1"
+                                                HorizontalAlignment="Center"
+                                                IsChecked="{Binding TableAlignment, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TableAlignmentToggleConverter}, ConverterParameter=Left}"
+                                                Style="{StaticResource WPFHighlightBorderToggleButtonStyle}">
+                                                <Image
+                                                    Width="50"
+                                                    Height="50"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Source="/Syncfusion.SfRichTextBoxAdv.WPF;component/Images/TableleftAlignment_Icon.png" />
+                                            </ToggleButton>
+                                        </Border>
+                                        <Label
+                                            Grid.Row="6"
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=LeftAlignment}"
+                                            Foreground="{TemplateBinding Foreground}" />
+                                        <Border
+                                            Grid.Row="5"
+                                            Grid.Column="2"
+                                            Width="60"
+                                            Height="62"
+                                            Margin="5"
+                                            BorderBrush="{StaticResource BorderAlt}"
+                                            BorderThickness="1">
+                                            <ToggleButton
+                                                Width="50"
+                                                Height="50"
+                                                Padding="1"
+                                                HorizontalAlignment="Center"
+                                                IsChecked="{Binding TableAlignment, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TableAlignmentToggleConverter}, ConverterParameter=Center}"
+                                                Style="{StaticResource WPFHighlightBorderToggleButtonStyle}">
+                                                <Image
+                                                    Width="50"
+                                                    Height="50"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Source="/Syncfusion.SfRichTextBoxAdv.WPF;component/Images/TableCenterAlignment_Icon.png" />
+                                            </ToggleButton>
+                                        </Border>
+                                        <Label
+                                            Grid.Row="6"
+                                            Grid.Column="2"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=CenteredAlignment}"
+                                            Foreground="{TemplateBinding Foreground}" />
+                                        <Border
+                                            Grid.Row="5"
+                                            Grid.Column="3"
+                                            Width="60"
+                                            Height="62"
+                                            Margin="5"
+                                            BorderBrush="{StaticResource BorderAlt}"
+                                            BorderThickness="1">
+                                            <ToggleButton
+                                                Width="50"
+                                                Height="50"
+                                                Padding="1"
+                                                HorizontalAlignment="Center"
+                                                IsChecked="{Binding TableAlignment, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TableAlignmentToggleConverter}, ConverterParameter=Right}"
+                                                Style="{StaticResource WPFHighlightBorderToggleButtonStyle}">
+                                                <Image
+                                                    Width="50"
+                                                    Height="50"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Source="/Syncfusion.SfRichTextBoxAdv.WPF;component/Images/TableRightAlignment_Icon.png" />
+                                            </ToggleButton>
+                                        </Border>
+                                        <Label
+                                            Grid.Row="6"
+                                            Grid.Column="3"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=RightAlignment}"
+                                            Foreground="{TemplateBinding Foreground}" />
+                                        <StackPanel
+                                            Grid.Row="5"
+                                            Grid.Column="4"
+                                            Grid.ColumnSpan="2"
+                                            HorizontalAlignment="Right"
+                                            Orientation="Horizontal">
+                                            <Label
+                                                x:Name="PART_IndentLabel"
+                                                Margin="5"
+                                                VerticalAlignment="Center"
+                                                Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableDialogLeftIndent}"
+                                                Foreground="{TemplateBinding Foreground}" />
+                                            <shared:UpDown
+                                                x:Name="PART_LeftIndentButton"
+                                                Width="80"
+                                                Height="25"
+                                                Margin="5,5,5,13"
+                                                Padding="4,1,1,2"
+                                                MaxValue="1440"
+                                                MinValue="-1440"
+                                                Step="1"
+                                                UseNullOption="True"
+                                                Value="{Binding LeftIndent, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        </StackPanel>
+                                        <Border
+                                            Grid.Row="7"
+                                            Grid.Column="1"
+                                            Grid.ColumnSpan="7"
+                                            Height="1"
+                                            Margin="5,12,5,5"
+                                            Padding="4,2,2,2"
+                                            VerticalAlignment="Center"
+                                            Background="{TemplateBinding BorderBrush}"
+                                            BorderThickness="0,0,0,1"
+                                            Opacity="0.5" />
+                                        <Label
+                                            Grid.Row="8"
+                                            Grid.Column="1"
+                                            Grid.ColumnSpan="5"
+                                            VerticalAlignment="Center"
+                                            Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableDialogTableDirection}"
+                                            Foreground="{TemplateBinding Foreground}" />
+                                        <StackPanel
+                                            Grid.Row="9"
+                                            Grid.Column="1"
+                                            Grid.ColumnSpan="4"
+                                            HorizontalAlignment="Left"
+                                            Orientation="Horizontal">
+                                            <RadioButton
+                                                x:Name="PART_RtlRadioButton"
+                                                Margin="5"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=DirectionRightToLeft}"
+                                                GroupName="PART_TableBidi"
+                                                IsChecked="{Binding Bidi, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ToggleBooleanConverter}, ConverterParameter={StaticResource True}}" />
+                                            <RadioButton
+                                                x:Name="PART_LtrRadioButton"
+                                                Margin="5"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=DirectionLeftToRight}"
+                                                GroupName="PART_TableBidi"
+                                                IsChecked="{Binding Bidi, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ToggleBooleanConverter}, ConverterParameter={StaticResource False}}" />
+                                        </StackPanel>
+                                        <StackPanel
+                                            Grid.Row="12"
+                                            Grid.Column="1"
+                                            Grid.ColumnSpan="5"
+                                            Margin="0,0,-8,0"
+                                            HorizontalAlignment="Right"
+                                            Orientation="Horizontal">
+                                            <Button
+                                                x:Name="PART_BordersShadingButton"
+                                                Width="150"
+                                                Height="24"
+                                                Margin="0,0,6,0"
+                                                Padding="12,2,12,2"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center"
+                                                Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=BordersShadingDialogTitle}" />
+                                            <Button
+                                                x:Name="PART_TableOptionsButton"
+                                                Width="80"
+                                                Height="24"
+                                                Margin="0,0,6,0"
+                                                Padding="12,2,12,2"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center"
+                                                Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=DialogBoxOptions}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem
+                                    x:Name="PART_RowTab"
+                                    Padding="14,3,14,3"
+                                    Header="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=Row}"
+                                    TabIndex="1">
+                                    <Grid Margin="12,0,12,0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="16" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="20" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="8" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="20" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="8" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label
+                                            Grid.Row="2"
+                                            Grid.Column="1"
+                                            Grid.ColumnSpan="3"
+                                            VerticalAlignment="Center"
+                                            Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableDialogSize}"
+                                            Foreground="{TemplateBinding Foreground}" />
+                                        <StackPanel
+                                            Grid.Row="3"
+                                            Grid.Column="1"
+                                            Orientation="Horizontal">
+                                            <CheckBox
+                                                x:Name="PART_RowHeightCheckBox"
+                                                Margin="5"
+                                                VerticalAlignment="Center"
+                                                Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableDialogRowHeight}"
+                                                IsChecked="{Binding HasRowHeight, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                            <shared:UpDown
+                                                x:Name="PART_RowHeightButton"
+                                                Width="80"
+                                                Height="25"
+                                                Margin="5,5,5,13"
+                                                Padding="4,1,1,2"
+                                                IsEnabled="{Binding IsChecked, Mode=OneWay, ElementName=PART_RowHeightCheckBox}"
+                                                MaxValue="2112"
+                                                MinValue="0"
+                                                Step="1"
+                                                UseNullOption="True"
+                                                Value="{Binding RowHeight, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        </StackPanel>
+                                        <StackPanel
+                                            Grid.Row="3"
+                                            Grid.Column="3"
+                                            HorizontalAlignment="Right"
+                                            Orientation="Horizontal">
+                                            <Label
+                                                Margin="5"
+                                                VerticalAlignment="Center"
+                                                Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableDialogRowHeightType}"
+                                                IsEnabled="{Binding IsChecked, Mode=OneWay, ElementName=PART_RowHeightCheckBox}" />
+                                            <ComboBox
+                                                x:Name="PART_RowHeightBox"
+                                                Width="80"
+                                                Height="25"
+                                                Margin="5,5,5,13"
+                                                Padding="4,1,1,2"
+                                                VerticalAlignment="Center"
+                                                IsEnabled="{Binding IsChecked, Mode=OneWay, ElementName=PART_RowHeightCheckBox}"
+                                                ItemsSource="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=HeightTypeCollection}"
+                                                SelectedValue="{Binding RowHeightType, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource HeightTypeStringConverter}}" />
+                                        </StackPanel>
+                                        <Border
+                                            Grid.Row="4"
+                                            Grid.Column="1"
+                                            Grid.ColumnSpan="5"
+                                            Height="1"
+                                            Margin="5,12,5,5"
+                                            Padding="4,2,2,2"
+                                            VerticalAlignment="Center"
+                                            Background="{TemplateBinding BorderBrush}"
+                                            BorderThickness="0,0,0,1"
+                                            Opacity="0.5" />
+                                        <Label
+                                            Grid.Row="5"
+                                            Grid.Column="1"
+                                            Grid.ColumnSpan="5"
+                                            VerticalAlignment="Center"
+                                            Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=DialogBoxOptions}"
+                                            Foreground="{TemplateBinding Foreground}" />
+                                        <CheckBox
+                                            Grid.Row="6"
+                                            Grid.Column="1"
+                                            Grid.ColumnSpan="3"
+                                            Margin="5"
+                                            Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableDialogAllowRowBreak}"
+                                            IsChecked="{Binding AllowBreakAcrossPages, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        <CheckBox
+                                            Grid.Row="7"
+                                            Grid.Column="1"
+                                            Grid.ColumnSpan="3"
+                                            Margin="5"
+                                            Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableDialogRepeatHeader}"
+                                            IsChecked="{Binding IsHeader, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                    </Grid>
+                                </TabItem>
+                                <TabItem
+                                    x:Name="PART_CellTab"
+                                    Padding="14,3,14,3"
+                                    Header="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=Cell}"
+                                    TabIndex="1">
+                                    <Grid Margin="12,0,12,0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="16" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="20" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="16" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="12" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="8" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="8" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Grid.ColumnSpan="5"
+                                            VerticalAlignment="Center"
+                                            Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableDialogSize}"
+                                            Foreground="{TemplateBinding Foreground}" />
+                                        <StackPanel
+                                            Grid.Row="2"
+                                            Grid.Column="1"
+                                            Grid.ColumnSpan="4"
+                                            Orientation="Horizontal">
+                                            <CheckBox
+                                                x:Name="PART_CellWidthCheckBox"
+                                                Margin="5"
+                                                VerticalAlignment="Center"
+                                                Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableDialogPreferredWidth}"
+                                                IsChecked="{Binding HasCellWidth, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                            <shared:UpDown
+                                                x:Name="PART_CellWidthButton"
+                                                Width="80"
+                                                Height="25"
+                                                Margin="5,5,5,13"
+                                                Padding="4,1,1,2"
+                                                IsEnabled="{Binding IsChecked, Mode=OneWay, ElementName=PART_CellWidthCheckBox}"
+                                                MaxValue="2112"
+                                                MinValue="0"
+                                                Step="1"
+                                                UseNullOption="True"
+                                                Value="{Binding CellPreferredWidth, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        </StackPanel>
+                                        <StackPanel
+                                            Grid.Row="2"
+                                            Grid.Column="4"
+                                            Grid.ColumnSpan="2"
+                                            HorizontalAlignment="Right"
+                                            Orientation="Horizontal">
+                                            <Label
+                                                Margin="5"
+                                                VerticalAlignment="Center"
+                                                Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableDialogPreferredWidthType}"
+                                                IsEnabled="{Binding IsChecked, Mode=OneWay, ElementName=PART_CellWidthCheckBox}" />
+                                            <ComboBox
+                                                x:Name="PART_CellWidthTypeBox"
+                                                Width="80"
+                                                Height="25"
+                                                Margin="5,5,5,13"
+                                                Padding="4,1,1,2"
+                                                VerticalAlignment="Center"
+                                                IsEnabled="{Binding IsChecked, Mode=OneWay, ElementName=PART_CellWidthCheckBox}"
+                                                ItemsSource="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=WidthTypeCollection}"
+                                                SelectedValue="{Binding CellPreferredWidthType, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource WidthTypeStringConverter}}" />
+                                        </StackPanel>
+                                        <Border
+                                            Grid.Row="3"
+                                            Grid.Column="1"
+                                            Grid.ColumnSpan="7"
+                                            Height="1"
+                                            Margin="5,12,5,5"
+                                            Padding="4,2,2,2"
+                                            VerticalAlignment="Center"
+                                            Background="{TemplateBinding BorderBrush}"
+                                            BorderThickness="0,0,0,1"
+                                            Opacity="0.5" />
+                                        <Label
+                                            Grid.Row="4"
+                                            Grid.Column="1"
+                                            Grid.ColumnSpan="5"
+                                            VerticalAlignment="Center"
+                                            Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableDialogVerticalAlignment}" />
+                                        <Border
+                                            Grid.Row="5"
+                                            Grid.Column="1"
+                                            Width="60"
+                                            Height="62"
+                                            Margin="5"
+                                            BorderBrush="{StaticResource BorderAlt}"
+                                            BorderThickness="1">
+                                            <ToggleButton
+                                                Width="50"
+                                                Height="50"
+                                                Padding="1"
+                                                HorizontalAlignment="Center"
+                                                IsChecked="{Binding CellContentAlignment, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VerticalAlignmentToggleConverter}, ConverterParameter=Top}"
+                                                Style="{StaticResource WPFHighlightBorderToggleButtonStyle}">
+                                                <Image
+                                                    Width="50"
+                                                    Height="50"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Source="/Syncfusion.SfRichTextBoxAdv.WPF;component/Images/CellTopAlignment_Icon.png" />
+                                            </ToggleButton>
+                                        </Border>
+                                        <Label
+                                            Grid.Row="6"
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TopAlignment}"
+                                            Foreground="{TemplateBinding Foreground}" />
+                                        <Border
+                                            Grid.Row="5"
+                                            Grid.Column="2"
+                                            Width="60"
+                                            Height="62"
+                                            Margin="5"
+                                            BorderBrush="{StaticResource BorderAlt}"
+                                            BorderThickness="1">
+                                            <ToggleButton
+                                                Width="50"
+                                                Height="50"
+                                                Padding="1"
+                                                HorizontalAlignment="Center"
+                                                IsChecked="{Binding CellContentAlignment, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VerticalAlignmentToggleConverter}, ConverterParameter=Center}"
+                                                Style="{StaticResource WPFHighlightBorderToggleButtonStyle}">
+                                                <Image
+                                                    Width="50"
+                                                    Height="50"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Source="/Syncfusion.SfRichTextBoxAdv.WPF;component/Images/CellCenterAlignment_Icon.png" />
+                                            </ToggleButton>
+                                        </Border>
+                                        <Label
+                                            Grid.Row="6"
+                                            Grid.Column="2"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=CenteredAlignment}"
+                                            Foreground="{TemplateBinding Foreground}" />
+                                        <Border
+                                            Grid.Row="5"
+                                            Grid.Column="3"
+                                            Width="60"
+                                            Height="62"
+                                            Margin="5"
+                                            BorderBrush="{StaticResource BorderAlt}"
+                                            BorderThickness="1">
+                                            <ToggleButton
+                                                Width="50"
+                                                Height="50"
+                                                Padding="1"
+                                                HorizontalAlignment="Center"
+                                                IsChecked="{Binding CellContentAlignment, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VerticalAlignmentToggleConverter}, ConverterParameter=Bottom}"
+                                                Style="{StaticResource WPFHighlightBorderToggleButtonStyle}">
+                                                <Image
+                                                    Width="50"
+                                                    Height="50"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Source="/Syncfusion.SfRichTextBoxAdv.WPF;component/Images/CellBottomAlignment_Icon.png" />
+                                            </ToggleButton>
+                                        </Border>
+                                        <Label
+                                            Grid.Row="6"
+                                            Grid.Column="3"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=BottomAlignment}"
+                                            Foreground="{TemplateBinding Foreground}" />
+                                        <StackPanel
+                                            Grid.Row="9"
+                                            Grid.Column="1"
+                                            Grid.ColumnSpan="5"
+                                            Margin="0,0,-8,0"
+                                            HorizontalAlignment="Right"
+                                            Orientation="Horizontal">
+                                            <Button
+                                                x:Name="PART_CellOptionsButton"
+                                                Width="80"
+                                                Height="24"
+                                                Margin="0,0,6,0"
+                                                Padding="12,2,12,2"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center"
+                                                Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=DialogBoxOptions}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </TabItem>
+                            </TabControl.Items>
+                        </TabControl>
+                        <Border
+                            Grid.Row="2"
+                            Grid.ColumnSpan="3"
+                            Width="Auto"
+                            Background="{StaticResource PopupBackground}"
+                            BorderBrush="{StaticResource BorderAlt}"
+                            BorderThickness="0,1,0,0">
+                            <StackPanel
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal">
+                                <Button
+                                    x:Name="PART_ApplyTablePropertiesButton"
+                                    Width="52"
+                                    Height="24"
+                                    Margin="0,5,9,5"
+                                    Padding="12,2,12,2"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=DialogBoxOk}"
+                                    FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                    FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                    IsDefault="True"
+                                    TabIndex="11" />
+                                <Button
+                                    x:Name="PART_CancelButton"
+                                    Width="69"
+                                    Height="24"
+                                    Margin="0,5,9,5"
+                                    Padding="12,2,12,2"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=DialogBoxCancel}"
+                                    FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                    FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                    TabIndex="13" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="richtextboxadv:CellOptionsDialog">
+        <Setter Property="Width" Value="340" />
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="richtextboxadv:CellOptionsDialog">
+                    <Grid Background="{StaticResource PopupBackground}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="20" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="12" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="38" />
+                        </Grid.RowDefinitions>
+                        <Grid
+                            Grid.Row="1"
+                            Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="16" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="12" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="0.4*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                Grid.Row="0"
+                                Grid.ColumnSpan="4"
+                                VerticalAlignment="Center"
+                                Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableDialogCellMargin}"
+                                Foreground="{TemplateBinding Foreground}" />
+                            <CheckBox
+                                Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                Margin="5"
+                                Padding="4,2,2,2"
+                                Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableDialogMarginSameAsTable}"
+                                IsChecked="{Binding SameAsTable, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <StackPanel
+                                Grid.Row="2"
+                                Grid.Column="0">
+                                <Label
+                                    VerticalAlignment="Center"
+                                    Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TopMargin}"
+                                    IsEnabled="{Binding HasCellMargin, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                <shared:UpDown
+                                    x:Name="PART_CellTopMarginButton"
+                                    Height="25"
+                                    Margin="5"
+                                    Padding="4,1,1,2"
+                                    IsEnabled="{Binding HasCellMargin, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                    MaxValue="2112"
+                                    MinValue="0"
+                                    Step="1"
+                                    UseNullOption="True"
+                                    Value="{Binding TopMargin, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                            </StackPanel>
+                            <StackPanel
+                                Grid.Row="2"
+                                Grid.Column="3">
+                                <Label
+                                    VerticalAlignment="Center"
+                                    Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=LeftMargin}"
+                                    IsEnabled="{Binding HasCellMargin, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                <shared:UpDown
+                                    x:Name="PART_CellLeftMarginButton"
+                                    Height="25"
+                                    Margin="5"
+                                    Padding="4,1,1,2"
+                                    IsEnabled="{Binding HasCellMargin, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                    MaxValue="2112"
+                                    MinValue="0"
+                                    Step="1"
+                                    UseNullOption="True"
+                                    Value="{Binding LeftMargin, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                            </StackPanel>
+                            <StackPanel
+                                Grid.Row="3"
+                                Grid.Column="0">
+                                <Label
+                                    VerticalAlignment="Center"
+                                    Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=BottomMargin}"
+                                    IsEnabled="{Binding HasCellMargin, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                <shared:UpDown
+                                    x:Name="PART_CellBottomMarginButton"
+                                    Height="25"
+                                    Margin="5"
+                                    Padding="4,1,1,2"
+                                    IsEnabled="{Binding HasCellMargin, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                    MaxValue="2112"
+                                    MinValue="0"
+                                    Step="1"
+                                    UseNullOption="True"
+                                    Value="{Binding BottomMargin, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                            </StackPanel>
+                            <StackPanel
+                                Grid.Row="3"
+                                Grid.Column="3">
+                                <Label
+                                    VerticalAlignment="Center"
+                                    Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=RightMargin}"
+                                    IsEnabled="{Binding HasCellMargin, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                <shared:UpDown
+                                    x:Name="PART_CellRightMarginButton"
+                                    Height="25"
+                                    Margin="5"
+                                    Padding="4,1,1,2"
+                                    IsEnabled="{Binding HasCellMargin, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                    MaxValue="2112"
+                                    MinValue="0"
+                                    Step="1"
+                                    UseNullOption="True"
+                                    Value="{Binding RightMargin, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                            </StackPanel>
+                        </Grid>
+                        <Border
+                            Grid.Row="2"
+                            Grid.ColumnSpan="3"
+                            Width="Auto"
+                            Background="{StaticResource PopupBackground}"
+                            BorderBrush="{StaticResource BorderAlt}"
+                            BorderThickness="0,1,0,0">
+                            <StackPanel
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal">
+                                <Button
+                                    x:Name="PART_ApplyCellOptionsButton"
+                                    Width="52"
+                                    Height="24"
+                                    Margin="0,5,9,5"
+                                    Padding="12,2,12,2"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=DialogBoxOk}"
+                                    FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                    FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                    IsDefault="True"
+                                    TabIndex="10" />
+                                <Button
+                                    x:Name="PART_CancelButton"
+                                    Width="69"
+                                    Height="24"
+                                    Margin="0,5,9,5"
+                                    Padding="12,2,12,2"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=DialogBoxCancel}"
+                                    FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                    FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                    TabIndex="11" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="richtextboxadv:TableOptionsDialog">
+        <Setter Property="Width" Value="391" />
+        <Setter Property="Height" Value="341" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="richtextboxadv:TableOptionsDialog">
+                    <Grid
+                        x:Name="PART_Root"
+                        Background="{StaticResource PopupBackground}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="12" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="1" />
+                        <Grid
+                            Grid.Row="1"
+                            Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="12" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="10" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="10" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="11" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="10" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="10" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="10" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="24" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="36" />
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Padding="0"
+                                VerticalAlignment="Center"
+                                Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableDialogDefaultCellMargin}"
+                                FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                Foreground="{TemplateBinding Foreground}" />
+                            <StackPanel
+                                Grid.Row="2"
+                                Grid.Column="0">
+                                <Label
+                                    Margin="0"
+                                    Padding="0,5,0,5"
+                                    VerticalAlignment="Center"
+                                    Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TopMargin}"
+                                    FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                    FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                    Foreground="{TemplateBinding Foreground}" />
+                                <shared:UpDown
+                                    x:Name="PART_CellTopMarginButton"
+                                    Width="159"
+                                    Height="25"
+                                    Margin="0,0,5,5"
+                                    Padding="0,1,1,2"
+                                    FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                    FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                    MaxValue="2112"
+                                    MinValue="0"
+                                    Step="1"
+                                    UseNullOption="True"
+                                    Value="{Binding TopMargin, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                            </StackPanel>
+                            <StackPanel
+                                Grid.Row="2"
+                                Grid.Column="2">
+                                <Label
+                                    Padding="0,5,0,5"
+                                    VerticalAlignment="Center"
+                                    Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=LeftMargin}"
+                                    FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                    FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                    Foreground="{TemplateBinding Foreground}" />
+                                <shared:UpDown
+                                    x:Name="PART_CellLeftMarginButton"
+                                    Width="159"
+                                    Height="25"
+                                    Margin="0,0,5,5"
+                                    Padding="0,1,1,2"
+                                    FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                    FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                    MaxValue="2112"
+                                    MinValue="0"
+                                    Step="1"
+                                    UseNullOption="True"
+                                    Value="{Binding LeftMargin, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                            </StackPanel>
+                            <StackPanel
+                                Grid.Row="4"
+                                Grid.Column="0">
+                                <Label
+                                    Padding="0,5,0,5"
+                                    VerticalAlignment="Center"
+                                    Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=BottomMargin}"
+                                    FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                    FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                    Foreground="{TemplateBinding Foreground}" />
+                                <shared:UpDown
+                                    x:Name="PART_CellBottomMarginButton"
+                                    Width="159"
+                                    Height="25"
+                                    Margin="0,0,5,5"
+                                    Padding="0,1,1,2"
+                                    FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                    FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                    MaxValue="2112"
+                                    MinValue="0"
+                                    Step="1"
+                                    UseNullOption="True"
+                                    Value="{Binding BottomMargin, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                            </StackPanel>
+                            <StackPanel
+                                Grid.Row="4"
+                                Grid.Column="2">
+                                <Label
+                                    Padding="0,5,0,5"
+                                    VerticalAlignment="Center"
+                                    Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=RightMargin}"
+                                    FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                    FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                    Foreground="{TemplateBinding Foreground}" />
+                                <shared:UpDown
+                                    x:Name="PART_CellRightMarginButton"
+                                    Width="159"
+                                    Height="25"
+                                    Margin="0,0,5,5"
+                                    Padding="0,1,1,2"
+                                    FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                    FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                    MaxValue="2112"
+                                    MinValue="0"
+                                    Step="1"
+                                    UseNullOption="True"
+                                    Value="{Binding RightMargin, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                            </StackPanel>
+                            <Label
+                                Grid.Row="6"
+                                Grid.ColumnSpan="4"
+                                Margin="0"
+                                Padding="1,5,1,5"
+                                VerticalAlignment="Center"
+                                Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableDialogDefaultCellSpacing}"
+                                FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                Foreground="{TemplateBinding Foreground}" />
+                            <CheckBox
+                                x:Name="PART_AllowCellSpacingCheckBox"
+                                Grid.Row="8"
+                                Grid.ColumnSpan="2"
+                                Margin="0,0,5,5"
+                                Padding="4,2,2,2"
+                                Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableDialogAllowCellSpacing}"
+                                FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                IsChecked="{Binding AllowCellSpacing, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <shared:UpDown
+                                x:Name="PART_CellSpacingButton"
+                                Grid.Row="7"
+                                Grid.RowSpan="2"
+                                Grid.Column="2"
+                                Width="159"
+                                Height="24"
+                                Margin="0,0,1,5"
+                                Padding="0,0,2,2"
+                                FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                IsEnabled="{Binding AllowCellSpacing, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                MaxValue="264"
+                                MinValue="0"
+                                Step="1"
+                                UseNullOption="True"
+                                Value="{Binding CellSpacing, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Border
+                                Grid.Row="9"
+                                Grid.ColumnSpan="4"
+                                Height="1"
+                                Margin="5,12,5,5"
+                                Padding="4,2,2,2"
+                                VerticalAlignment="Center"
+                                Background="{TemplateBinding BorderBrush}"
+                                BorderThickness="0,0,0,1"
+                                Opacity="0.5" />
+                            <Label
+                                Grid.Row="10"
+                                Grid.ColumnSpan="4"
+                                Padding="1,0,5,5"
+                                VerticalAlignment="Center"
+                                Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableOptionsDialogOptions}"
+                                FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                Foreground="{TemplateBinding Foreground}" />
+                            <CheckBox
+                                x:Name="PART_AllowAutoFit"
+                                Grid.Row="12"
+                                Grid.ColumnSpan="7"
+                                Padding="4,2,2,2"
+                                Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableOptionsDialogAllowAutoFit}"
+                                FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                IsChecked="{Binding AllowAutoFit, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Grid>
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            Width="Auto"
+                            Background="{StaticResource PopupBackground}"
+                            BorderBrush="{StaticResource BorderAlt}"
+                            BorderThickness="0,1,0,0">
+                            <StackPanel
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal">
+                                <Button
+                                    x:Name="PART_ApplyTableOptionsButton"
+                                    Width="50"
+                                    Height="24"
+                                    Margin="0,0,9,1"
+                                    Padding="12,2,12,2"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=DialogBoxOk}"
+                                    FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                    FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                    IsDefault="True"
+                                    TabIndex="8" />
+                                <Button
+                                    x:Name="PART_CancelButton"
+                                    Width="69"
+                                    Height="24"
+                                    Margin="0,0,7,1"
+                                    Padding="12,2,12,2"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=DialogBoxCancel}"
+                                    FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                    FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                    TabIndex="9" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="richtextboxadv:BordersAndShadingDialog">
+        <Setter Property="Width" Value="489" />
+        <Setter Property="Height" Value="407" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="richtextboxadv:BordersAndShadingDialog">
+                    <Grid
+                        x:Name="PART_Root"
+                        Background="{StaticResource PopupBackground}">
+                        <Grid.Resources>
+                            <richtextboxadv:BrushOpacityConverter x:Key="BrushOpacityConverter" />
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="12" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="12" />
+                            <RowDefinition Height="2" />
+                            <RowDefinition Height="12" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="12" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="38" />
+                        </Grid.RowDefinitions>
+                        <Grid
+                            Grid.Row="1"
+                            Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="12" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                VerticalAlignment="Center"
+                                Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=BordersShadingDialogBorders}"
+                                FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                Foreground="{StaticResource ContentForeground}" />
+                            <Grid
+                                Grid.Row="1"
+                                Grid.ColumnSpan="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="24" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="26" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="8" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="8" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="8" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="8" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Label
+                                        HorizontalAlignment="Left"
+                                        Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=BordersShadingDialogSetting}"
+                                        FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                        FontSize="{StaticResource FluentDark.BodyTextStyle}" />
+                                    <StackPanel
+                                        Grid.Row="2"
+                                        Orientation="Horizontal">
+                                        <Border
+                                            Width="40"
+                                            Height="40"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="1">
+                                            <ToggleButton
+                                                Width="36"
+                                                Height="36"
+                                                Padding="9,8,9,8"
+                                                HorizontalAlignment="Center"
+                                                BorderThickness="1"
+                                                IsChecked="{Binding NoBorder, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                Style="{StaticResource WPFHighlightBorderToggleButtonStyle}">
+                                                <ToggleButton.Content>
+                                                    <Image
+                                                        Width="36"
+                                                        Height="36"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        Source="/Syncfusion.SfRichTextBoxAdv.WPF;component/Images/NoBorder_Icon.png" />
+                                                </ToggleButton.Content>
+                                            </ToggleButton>
+                                        </Border>
+                                        <Label
+                                            Margin="12,0,0,0"
+                                            Padding="0"
+                                            VerticalAlignment="Center"
+                                            Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=BordersShadingDialogNoBorder}"
+                                            FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                            FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                            Foreground="{TemplateBinding Foreground}" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        Grid.Row="4"
+                                        Orientation="Horizontal">
+                                        <Border
+                                            Width="40"
+                                            Height="40"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="1">
+                                            <ToggleButton
+                                                Width="36"
+                                                Height="36"
+                                                Padding="1"
+                                                HorizontalAlignment="Center"
+                                                BorderThickness="1"
+                                                IsChecked="{Binding BoxBorder, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                Style="{StaticResource WPFHighlightBorderToggleButtonStyle}">
+                                                <ToggleButton.Content>
+                                                    <Image
+                                                        Width="36"
+                                                        Height="36"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        Source="/Syncfusion.SfRichTextBoxAdv.WPF;component/Images/BoxBorder_Icon.png" />
+                                                </ToggleButton.Content>
+                                            </ToggleButton>
+                                        </Border>
+                                        <Label
+                                            Margin="12,0,0,0"
+                                            Padding="0"
+                                            VerticalAlignment="Center"
+                                            Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=BordersShadingDialogBoxBorder}"
+                                            FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                            FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                            Foreground="{TemplateBinding Foreground}" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        Grid.Row="6"
+                                        Orientation="Horizontal">
+                                        <Border
+                                            Width="40"
+                                            Height="40"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="1">
+                                            <ToggleButton
+                                                Width="36"
+                                                Height="36"
+                                                Padding="9,8,9,8"
+                                                HorizontalAlignment="Center"
+                                                BorderThickness="1"
+                                                IsChecked="{Binding AllBorder, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                Style="{StaticResource WPFHighlightBorderToggleButtonStyle}">
+                                                <ToggleButton.Content>
+                                                    <Image
+                                                        Width="36"
+                                                        Height="36"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        Source="/Syncfusion.SfRichTextBoxAdv.WPF;component/Images/AllBorder_Icon.png" />
+                                                </ToggleButton.Content>
+                                            </ToggleButton>
+                                        </Border>
+                                        <Label
+                                            Margin="12,0,0,0"
+                                            Padding="0"
+                                            VerticalAlignment="Center"
+                                            Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=BordersShadingDialogAllBorder}"
+                                            FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                            FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                            Foreground="{TemplateBinding Foreground}" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        Grid.Row="8"
+                                        Orientation="Horizontal">
+                                        <Border
+                                            Width="40"
+                                            Height="40"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="1">
+                                            <ToggleButton
+                                                Width="36"
+                                                Height="36"
+                                                Padding="9,8,9,8"
+                                                HorizontalAlignment="Center"
+                                                BorderThickness="1"
+                                                IsChecked="{Binding CustomBorder, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                Style="{StaticResource WPFHighlightBorderToggleButtonStyle}">
+                                                <ToggleButton.Content>
+                                                    <Image
+                                                        Width="36"
+                                                        Height="36"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        Source="/Syncfusion.SfRichTextBoxAdv.WPF;component/Images/CustomBorder_Icon.png" />
+                                                </ToggleButton.Content>
+                                            </ToggleButton>
+                                        </Border>
+                                        <Label
+                                            Margin="12,0,0,0"
+                                            Padding="0"
+                                            VerticalAlignment="Center"
+                                            Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=BordersShadingDialogCustomBorder}"
+                                            FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                            FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                            Foreground="{TemplateBinding Foreground}" />
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Column="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="18" />
+                                        <RowDefinition Height="13" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="5" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="8" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="5" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="8" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="5" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Label
+                                        Grid.Row="2"
+                                        Padding="0"
+                                        Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=BordersShadingDialogStyle}"
+                                        FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                        FontSize="{StaticResource FluentDark.BodyTextStyle}" />
+                                    <ComboBox
+                                        Grid.Row="4"
+                                        Width="129"
+                                        Height="24"
+                                        Margin="0"
+                                        Padding="2,2,2,2"
+                                        VerticalAlignment="Center"
+                                        ItemsSource="{Binding LineStyleCollection, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                        SelectedIndex="{Binding LineStyle, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                    <Label
+                                        Grid.Row="6"
+                                        Padding="0"
+                                        Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=BordersShadingDialogWidth}"
+                                        FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                        FontSize="{StaticResource FluentDark.BodyTextStyle}" />
+                                    <shared:UpDown
+                                        Grid.Row="8"
+                                        Width="129"
+                                        Height="25"
+                                        Margin="0"
+                                        Padding="2,1,1,2"
+                                        MaxValue="6"
+                                        MinValue="0.25"
+                                        Step="0.25"
+                                        Value="{Binding LineWidth, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                    <Label
+                                        Grid.Row="10"
+                                        Padding="0"
+                                        Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=BordersShadingDialogColor}"
+                                        FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                        FontSize="{StaticResource FluentDark.BodyTextStyle}" />
+                                    <tools_controls_shared:ColorPickerPalette
+                                        x:Name="PART_BorderColorPicker"
+                                        Grid.Row="12"
+                                        Width="129"
+                                        Height="24"
+                                        Margin="0"
+                                        Padding="2,2,2,2"
+                                        HorizontalAlignment="Left"
+                                        BlackWhiteVisibility="Both"
+                                        BorderBrush="{StaticResource BorderAlt}"
+                                        MoreColorOptionVisibility="Collapsed"
+                                        Color="{Binding BorderColor, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                </Grid>
+                                <Grid Grid.Column="4">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="12" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Label
+                                        Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=BordersShadingDialogPreview}"
+                                        FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                        FontSize="{StaticResource FluentDark.BodyTextStyle}" />
+                                    <Grid Grid.Row="2">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="8" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="8" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="45" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="12" />
+                                            <ColumnDefinition Width="17" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="8" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="8" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="17" />
+                                            <ColumnDefinition Width="12" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <ToggleButton
+                                            Grid.Row="0"
+                                            Grid.Column="0"
+                                            Width="24"
+                                            Height="24"
+                                            Padding="1"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            IsChecked="{Binding TopBorder, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Style="{StaticResource WPFHighlightBorderToggleButtonStyle}">
+                                            <Image
+                                                Width="16"
+                                                Height="16"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Source="/Syncfusion.SfRichTextBoxAdv.WPF;component/Images/TopBorder_Icon.png" />
+                                        </ToggleButton>
+                                        <ToggleButton
+                                            Grid.Row="2"
+                                            Grid.Column="0"
+                                            Width="24"
+                                            Height="24"
+                                            Padding="1"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            IsChecked="{Binding HorizontalBorder, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Style="{StaticResource WPFHighlightBorderToggleButtonStyle}">
+                                            <Image
+                                                Width="16"
+                                                Height="16"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Source="/Syncfusion.SfRichTextBoxAdv.WPF;component/Images/HorizontalBorder_Icon.png" />
+                                        </ToggleButton>
+                                        <ToggleButton
+                                            Grid.Row="4"
+                                            Grid.Column="0"
+                                            Width="24"
+                                            Height="24"
+                                            Padding="1"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            IsChecked="{Binding BottomBorder, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Style="{StaticResource WPFHighlightBorderToggleButtonStyle}">
+                                            <Image
+                                                Width="16"
+                                                Height="16"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Source="/Syncfusion.SfRichTextBoxAdv.WPF;component/Images/BottomBorder_Icon.png" />
+                                        </ToggleButton>
+                                        <Grid
+                                            Grid.Row="0"
+                                            Grid.RowSpan="6"
+                                            Grid.Column="2"
+                                            Grid.ColumnSpan="7"
+                                            Width="120"
+                                            Height="120"
+                                            Background="{Binding ShadingFill, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ColorBrushConverter}}">
+                                            <Border
+                                                Height="1"
+                                                VerticalAlignment="Top"
+                                                BorderBrush="{Binding BorderColor, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ColorBrushConverter}}"
+                                                BorderThickness="1"
+                                                Visibility="{Binding TopBorder, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ToggleVisibilityConverter}}" />
+                                            <Border
+                                                Width="1"
+                                                HorizontalAlignment="Left"
+                                                BorderBrush="{Binding BorderColor, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ColorBrushConverter}}"
+                                                BorderThickness="1"
+                                                Visibility="{Binding LeftBorder, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ToggleVisibilityConverter}}" />
+                                            <Border
+                                                Width="1"
+                                                HorizontalAlignment="Center"
+                                                BorderBrush="{Binding BorderColor, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ColorBrushConverter}}"
+                                                BorderThickness="1"
+                                                Visibility="{Binding VerticalBorder, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ToggleVisibilityConverter}}" />
+                                            <Border
+                                                Width="1"
+                                                HorizontalAlignment="Right"
+                                                BorderBrush="{Binding BorderColor, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ColorBrushConverter}}"
+                                                BorderThickness="1"
+                                                Visibility="{Binding RightBorder, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ToggleVisibilityConverter}}" />
+                                            <Border
+                                                Height="1"
+                                                VerticalAlignment="Bottom"
+                                                BorderBrush="{Binding BorderColor, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ColorBrushConverter}}"
+                                                BorderThickness="1"
+                                                Visibility="{Binding BottomBorder, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ToggleVisibilityConverter}}" />
+                                            <Border
+                                                Height="1"
+                                                VerticalAlignment="Center"
+                                                BorderBrush="{Binding BorderColor, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ColorBrushConverter}}"
+                                                BorderThickness="1"
+                                                Visibility="{Binding HorizontalBorder, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ToggleVisibilityConverter}}" />
+                                            <Line
+                                                Stroke="{Binding BorderColor, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ColorBrushConverter}}"
+                                                Visibility="{Binding DiagonalDownBorder, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ToggleVisibilityConverter}}"
+                                                X2="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=ActualWidth}"
+                                                Y2="{Binding RelativeSource={RelativeSource AncestorType=Grid, AncestorLevel=1}, Path=ActualHeight}" />
+                                            <Line
+                                                Stroke="{Binding BorderColor, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ColorBrushConverter}}"
+                                                Visibility="{Binding DiagonalUpBorder, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ToggleVisibilityConverter}}"
+                                                X1="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=ActualWidth}"
+                                                Y2="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=ActualHeight}" />
+                                        </Grid>
+                                        <ToggleButton
+                                            Grid.Row="6"
+                                            Grid.Column="0"
+                                            Width="24"
+                                            Height="24"
+                                            Padding="1"
+                                            HorizontalAlignment="Center"
+                                            IsChecked="{Binding DiagonalUpBorder, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Style="{StaticResource WPFHighlightBorderToggleButtonStyle}">
+                                            <Image
+                                                Width="16"
+                                                Height="16"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Source="/Syncfusion.SfRichTextBoxAdv.WPF;component/Images/DiagonalUpBorder_Icon.png" />
+                                        </ToggleButton>
+                                        <ToggleButton
+                                            Grid.Row="6"
+                                            Grid.Column="3"
+                                            Width="24"
+                                            Height="24"
+                                            Padding="1"
+                                            HorizontalAlignment="Center"
+                                            IsChecked="{Binding LeftBorder, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Style="{StaticResource WPFHighlightBorderToggleButtonStyle}">
+                                            <Image
+                                                Width="16"
+                                                Height="16"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Source="/Syncfusion.SfRichTextBoxAdv.WPF;component/Images/LeftBorder_Icon.png" />
+                                        </ToggleButton>
+                                        <ToggleButton
+                                            Grid.Row="6"
+                                            Grid.Column="5"
+                                            Width="24"
+                                            Height="24"
+                                            Padding="1"
+                                            HorizontalAlignment="Center"
+                                            IsChecked="{Binding VerticalBorder, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Style="{StaticResource WPFHighlightBorderToggleButtonStyle}">
+                                            <ToggleButton.Content>
+                                                <Image
+                                                    Width="16"
+                                                    Height="16"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Source="/Syncfusion.SfRichTextBoxAdv.WPF;component/Images/VerticalBorder_Icon.png" />
+                                            </ToggleButton.Content>
+                                        </ToggleButton>
+                                        <ToggleButton
+                                            Grid.Row="6"
+                                            Grid.Column="7"
+                                            Width="24"
+                                            Height="24"
+                                            Padding="1"
+                                            HorizontalAlignment="Center"
+                                            IsChecked="{Binding RightBorder, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Style="{StaticResource WPFHighlightBorderToggleButtonStyle}">
+                                            <ToggleButton.Content>
+                                                <Image
+                                                    Width="16"
+                                                    Height="16"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Source="/Syncfusion.SfRichTextBoxAdv.WPF;component/Images/RightBorder_Icon.png" />
+                                            </ToggleButton.Content>
+                                        </ToggleButton>
+                                        <ToggleButton
+                                            Grid.Row="6"
+                                            Grid.Column="10"
+                                            Width="24"
+                                            Height="24"
+                                            Padding="1"
+                                            HorizontalAlignment="Center"
+                                            IsChecked="{Binding DiagonalDownBorder, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Style="{StaticResource WPFHighlightBorderToggleButtonStyle}">
+                                            <ToggleButton.Content>
+                                                <Image
+                                                    Width="16"
+                                                    Height="16"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Source="/Syncfusion.SfRichTextBoxAdv.WPF;component/Images/DiagonalDownBorder_Icon.png" />
+                                            </ToggleButton.Content>
+                                        </ToggleButton>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Border
+                            Grid.Row="3"
+                            Grid.ColumnSpan="3"
+                            Height="1"
+                            VerticalAlignment="Center"
+                            Background="{StaticResource BorderAlt}"
+                            BorderBrush="{StaticResource BorderAlt}"
+                            BorderThickness="0,1,0,0"
+                            Opacity="0.5" />
+                        <Label
+                            Grid.Row="5"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            VerticalAlignment="Center"
+                            Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=BordersShadingDialogShading}"
+                            FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                            FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                            Foreground="{TemplateBinding Foreground}" />
+                        <Grid
+                            Grid.Row="7"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="12" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <Label
+                                    VerticalAlignment="Center"
+                                    Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=BordersShadingDialogFill}"
+                                    FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                    FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                    Foreground="{TemplateBinding Foreground}" />
+                                <tools_controls_shared:ColorPickerPalette
+                                    x:Name="PART_ShadingFillColorPicker"
+                                    Width="127"
+                                    Height="22"
+                                    Margin="5,0,5,5"
+                                    Padding="4,2,2,2"
+                                    BlackWhiteVisibility="Both"
+                                    BorderBrush="{StaticResource BorderAlt}"
+                                    BorderThickness="1"
+                                    MoreColorOptionVisibility="Collapsed"
+                                    Color="{Binding ShadingFill, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                            </StackPanel>
+                            <StackPanel
+                                Grid.Column="2"
+                                HorizontalAlignment="Right">
+                                <Label
+                                    Margin="0"
+                                    VerticalAlignment="Center"
+                                    Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=BordersShadingDialogApplyTo}"
+                                    FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                    FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                    Foreground="{TemplateBinding Foreground}" />
+                                <ComboBox
+                                    Width="127"
+                                    Height="22"
+                                    Margin="4,0,0,0"
+                                    VerticalAlignment="Center"
+                                    ItemsSource="{Binding ApplyToCollection, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                    SelectedIndex="{Binding ApplyTo, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                            </StackPanel>
+                        </Grid>
+                        <Border
+                            Grid.Row="8"
+                            Grid.ColumnSpan="3"
+                            Width="Auto"
+                            Background="{StaticResource PopupBackground}"
+                            BorderBrush="{StaticResource BorderAlt}"
+                            BorderThickness="0,1,0,0">
+                            <StackPanel
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal">
+                                <Button
+                                    x:Name="PART_ApplyBordersAndShadingButton"
+                                    Width="50"
+                                    Height="24"
+                                    Margin="0,-5,6,0"
+                                    Padding="12,2,12,2"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=DialogBoxOk}"
+                                    FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                    FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                    IsDefault="True"
+                                    TabIndex="9" />
+                                <Button
+                                    x:Name="PART_CancelButton"
+                                    Width="67"
+                                    Height="24"
+                                    Margin="0,-5,6,0"
+                                    Padding="12,2,12,2"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=DialogBoxCancel}"
+                                    FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                    FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                    TabIndex="10" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="richtextboxadv:InsertTableDialog">
+        <Setter Property="Width" Value="340" />
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="richtextboxadv:InsertTableDialog">
+                    <Grid Background="{StaticResource PopupBackground}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="12" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="38" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="20" />
+                        </Grid.ColumnDefinitions>
+                        <Grid
+                            Grid.Row="1"
+                            Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="24" />
+                                <RowDefinition Height="12" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="12" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Margin="0,12,0,6"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center"
+                                FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                Foreground="{TemplateBinding Foreground}"
+                                Text="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableDialogColumnSize}" />
+                            <shared:UpDown
+                                x:Name="PART_ColumnSizeBox"
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                Margin="5"
+                                Padding="0"
+                                MaxValue="63"
+                                MinValue="1"
+                                NumberDecimalDigits="0"
+                                Step="1"
+                                TabIndex="1"
+                                Value="2" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Margin="0,12,0,6"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center"
+                                FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                Foreground="{TemplateBinding Foreground}"
+                                Text="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=TableDialogRowSize}" />
+                            <shared:UpDown
+                                x:Name="PART_RowSizeBox"
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                Margin="5"
+                                MaxValue="32767"
+                                MinValue="1"
+                                NumberDecimalDigits="0"
+                                Step="1"
+                                TabIndex="2"
+                                Value="2" />
+                        </Grid>
+                        <Border
+                            Grid.Row="2"
+                            Grid.ColumnSpan="3"
+                            Width="Auto"
+                            Background="{StaticResource PopupBackground}"
+                            BorderBrush="{StaticResource BorderAlt}"
+                            BorderThickness="0,1,0,0">
+                            <StackPanel
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal">
+                                <Button
+                                    x:Name="PART_AddTableButton"
+                                    Width="52"
+                                    Height="24"
+                                    Margin="0,5,9,5"
+                                    Padding="12,2,12,2"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=DialogBoxOk}"
+                                    FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                    FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                    IsDefault="True"
+                                    TabIndex="3" />
+                                <Button
+                                    x:Name="PART_CancelButton"
+                                    Width="69"
+                                    Height="24"
+                                    Margin="0,5,9,5"
+                                    Padding="12,2,12,2"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Content="{resources:RichTextBoxAdvLocalizationResourceExtension ResourceName=DialogBoxCancel}"
+                                    FontFamily="{StaticResource FluentDark.ThemeFontFamily}"
+                                    FontSize="{StaticResource FluentDark.BodyTextStyle}"
+                                    TabIndex="4" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

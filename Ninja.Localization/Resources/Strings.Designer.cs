@@ -70,15 +70,6 @@ namespace Ninja.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Steel.
-        /// </summary>
-        public static string Accen_Steel {
-            get {
-                return ResourceManager.GetString("Accen_Steel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Accent.
         /// </summary>
         public static string Accent {
@@ -315,72 +306,72 @@ namespace Ninja.Localization.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Add a tab to perform a DNS lookup....
         /// </summary>
-        public static string AddATabToPerformADNSLookup {
+        public static string AddATabToPerformDnsLookup {
             get {
-                return ResourceManager.GetString("AddATabToPerformADNSLookup", resourceCulture);
+                return ResourceManager.GetString("AddATabToPerformDnsLookup", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Add a tab to perform a network scan....
         /// </summary>
-        public static string AddATabToPerformANetworkScan {
+        public static string AddATabToPerformNetworkScan {
             get {
-                return ResourceManager.GetString("AddATabToPerformANetworkScan", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add a tab to perform an SNMP action....
-        /// </summary>
-        public static string AddATabToPerformAnSNMPAction {
-            get {
-                return ResourceManager.GetString("AddATabToPerformAnSNMPAction", resourceCulture);
+                return ResourceManager.GetString("AddATabToPerformNetworkScan", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Add a tab to perform a ping....
         /// </summary>
-        public static string AddATabToPerformAPing {
+        public static string AddATabToPerformPing {
             get {
-                return ResourceManager.GetString("AddATabToPerformAPing", resourceCulture);
+                return ResourceManager.GetString("AddATabToPerformPing", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Add a tab to perform a port scan....
         /// </summary>
-        public static string AddATabToPerformAPortScan {
+        public static string AddATabToPerformPortScan {
             get {
-                return ResourceManager.GetString("AddATabToPerformAPortScan", resourceCulture);
+                return ResourceManager.GetString("AddATabToPerformPortScan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a tab to perform an SNMP action....
+        /// </summary>
+        public static string AddATabToPerformSnmpAction {
+            get {
+                return ResourceManager.GetString("AddATabToPerformSnmpAction", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Add a tab to perform a SNTP lookup....
         /// </summary>
-        public static string AddATabToPerformASNTPLookup {
+        public static string AddATabToPerformSntpLookup {
             get {
-                return ResourceManager.GetString("AddATabToPerformASNTPLookup", resourceCulture);
+                return ResourceManager.GetString("AddATabToPerformSntpLookup", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Add a tab to perform a trace....
         /// </summary>
-        public static string AddATabToPerformATrace {
+        public static string AddATabToPerformTrace {
             get {
-                return ResourceManager.GetString("AddATabToPerformATrace", resourceCulture);
+                return ResourceManager.GetString("AddATabToPerformTrace", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Add a tab to query the IP geolocation....
         /// </summary>
-        public static string AddATabToQueryTheIPGeolocation {
+        public static string AddATabToQueryIpGeolocation {
             get {
-                return ResourceManager.GetString("AddATabToQueryTheIPGeolocation", resourceCulture);
+                return ResourceManager.GetString("AddATabToQueryIpGeolocation", resourceCulture);
             }
         }
         
@@ -396,9 +387,9 @@ namespace Ninja.Localization.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Add AWS profile.
         /// </summary>
-        public static string AddAWSProfile {
+        public static string AddAwsProfile {
             get {
-                return ResourceManager.GetString("AddAWSProfile", resourceCulture);
+                return ResourceManager.GetString("AddAwsProfile", resourceCulture);
             }
         }
         
@@ -423,9 +414,9 @@ namespace Ninja.Localization.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Add DNS server.
         /// </summary>
-        public static string AddDNSServer {
+        public static string AddDnsServer {
             get {
-                return ResourceManager.GetString("AddDNSServer", resourceCulture);
+                return ResourceManager.GetString("AddDnsServer", resourceCulture);
             }
         }
         
@@ -711,18 +702,18 @@ namespace Ninja.Localization.Resources {
         /// <summary>
         ///   Looks up a localized string similar to ARP Table.
         /// </summary>
-        public static string ApplicationName_ARPTable {
+        public static string ApplicationName_ArpTable {
             get {
-                return ResourceManager.GetString("ApplicationName_ARPTable", resourceCulture);
+                return ResourceManager.GetString("ApplicationName_ArpTable", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to AWS Session Manager.
         /// </summary>
-        public static string ApplicationName_AWSSessionManager {
+        public static string ApplicationName_AwsSessionManager {
             get {
-                return ResourceManager.GetString("ApplicationName_AWSSessionManager", resourceCulture);
+                return ResourceManager.GetString("ApplicationName_AwsSessionManager", resourceCulture);
             }
         }
         
@@ -765,36 +756,36 @@ namespace Ninja.Localization.Resources {
         /// <summary>
         ///   Looks up a localized string similar to DNS Lookup.
         /// </summary>
-        public static string ApplicationName_DNSLookup {
+        public static string ApplicationName_DnsLookup {
             get {
-                return ResourceManager.GetString("ApplicationName_DNSLookup", resourceCulture);
+                return ResourceManager.GetString("ApplicationName_DnsLookup", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to HTTP Headers.
         /// </summary>
-        public static string ApplicationName_HTTPHeaders {
+        public static string ApplicationName_HttpHeaders {
             get {
-                return ResourceManager.GetString("ApplicationName_HTTPHeaders", resourceCulture);
+                return ResourceManager.GetString("ApplicationName_HttpHeaders", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to IP Geolocation.
         /// </summary>
-        public static string ApplicationName_IPGeolocation {
+        public static string ApplicationName_IpGeolocation {
             get {
-                return ResourceManager.GetString("ApplicationName_IPGeolocation", resourceCulture);
+                return ResourceManager.GetString("ApplicationName_IpGeolocation", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to IP Scanner.
         /// </summary>
-        public static string ApplicationName_IPScanner {
+        public static string ApplicationName_IpScanner {
             get {
-                return ResourceManager.GetString("ApplicationName_IPScanner", resourceCulture);
+                return ResourceManager.GetString("ApplicationName_IpScanner", resourceCulture);
             }
         }
         
@@ -882,18 +873,18 @@ namespace Ninja.Localization.Resources {
         /// <summary>
         ///   Looks up a localized string similar to SNMP.
         /// </summary>
-        public static string ApplicationName_SNMP {
+        public static string ApplicationName_Snmp {
             get {
-                return ResourceManager.GetString("ApplicationName_SNMP", resourceCulture);
+                return ResourceManager.GetString("ApplicationName_Snmp", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to SNTP Lookup.
         /// </summary>
-        public static string ApplicationName_SNTPLookup {
+        public static string ApplicationName_SntpLookup {
             get {
-                return ResourceManager.GetString("ApplicationName_SNTPLookup", resourceCulture);
+                return ResourceManager.GetString("ApplicationName_SntpLookup", resourceCulture);
             }
         }
         
@@ -909,9 +900,9 @@ namespace Ninja.Localization.Resources {
         /// <summary>
         ///   Looks up a localized string similar to TigerVNC.
         /// </summary>
-        public static string ApplicationName_TigerVNC {
+        public static string ApplicationName_TigerVnc {
             get {
-                return ResourceManager.GetString("ApplicationName_TigerVNC", resourceCulture);
+                return ResourceManager.GetString("ApplicationName_TigerVnc", resourceCulture);
             }
         }
         
@@ -927,9 +918,9 @@ namespace Ninja.Localization.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Wake on LAN.
         /// </summary>
-        public static string ApplicationName_WakeOnLAN {
+        public static string ApplicationName_WakeOnLan {
             get {
-                return ResourceManager.GetString("ApplicationName_WakeOnLAN", resourceCulture);
+                return ResourceManager.GetString("ApplicationName_WakeOnLan", resourceCulture);
             }
         }
         
@@ -954,9 +945,9 @@ namespace Ninja.Localization.Resources {
         /// <summary>
         ///   Looks up a localized string similar to WiFi.
         /// </summary>
-        public static string ApplicationName_WiFi {
+        public static string ApplicationName_Wifi {
             get {
-                return ResourceManager.GetString("ApplicationName_WiFi", resourceCulture);
+                return ResourceManager.GetString("ApplicationName_Wifi", resourceCulture);
             }
         }
         
@@ -1044,9 +1035,9 @@ namespace Ninja.Localization.Resources {
         /// <summary>
         ///   Looks up a localized string similar to ARP Table.
         /// </summary>
-        public static string ARPTable {
+        public static string ArpTable {
             get {
-                return ResourceManager.GetString("ARPTable", resourceCulture);
+                return ResourceManager.GetString("ArpTable", resourceCulture);
             }
         }
         
@@ -1062,9 +1053,9 @@ namespace Ninja.Localization.Resources {
         /// <summary>
         ///   Looks up a localized string similar to AS Name.
         /// </summary>
-        public static string ASName {
+        public static string AsName {
             get {
-                return ResourceManager.GetString("ASName", resourceCulture);
+                return ResourceManager.GetString("AsName", resourceCulture);
             }
         }
         
@@ -4481,9 +4472,9 @@ namespace Ninja.Localization.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Hostname or IP address.
         /// </summary>
-        public static string HostnameOrIPAddress {
+        public static string HostnameOrIpAddress {
             get {
-                return ResourceManager.GetString("HostnameOrIPAddress", resourceCulture);
+                return ResourceManager.GetString("HostnameOrIpAddress", resourceCulture);
             }
         }
         
@@ -4506,20 +4497,20 @@ namespace Ninja.Localization.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HTTP Headers.
+        ///   Looks up a localized string similar to HTTP status code.
         /// </summary>
-        public static string HTTPHeaders {
+        public static string HttpStatusCode {
             get {
-                return ResourceManager.GetString("HTTPHeaders", resourceCulture);
+                return ResourceManager.GetString("HttpStatusCode", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HTTP status code.
+        ///   Looks up a localized string similar to HTTP Headers.
         /// </summary>
-        public static string HTTPStatusCode {
+        public static string HyypHeaders {
             get {
-                return ResourceManager.GetString("HTTPStatusCode", resourceCulture);
+                return ResourceManager.GetString("HyypHeaders", resourceCulture);
             }
         }
         

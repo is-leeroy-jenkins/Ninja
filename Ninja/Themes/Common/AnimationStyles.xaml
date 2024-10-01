@@ -1,0 +1,50 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style
+        x:Key="AnimatedPageStyle"
+        BasedOn="{StaticResource {x:Type Page}}"
+        TargetType="Page">
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ThicknessAnimation
+                            EasingFunction="{DynamicResource ease}"
+                            Storyboard.TargetProperty="Margin"
+                            From="0 5 0 0"
+                            To="0"
+                            Duration="0:0:0.200" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style
+        x:Key="AnimatedListItemStyle"
+        BasedOn="{StaticResource {x:Type ListBoxItem}}"
+        TargetType="ListBoxItem">
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TranslateTransform />
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation
+                            EasingFunction="{DynamicResource ease}"
+                            Storyboard.TargetProperty="RenderTransform.Y"
+                            From="5"
+                            To="0"
+                            Duration="0:0:0.200" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

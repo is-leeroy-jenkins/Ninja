@@ -70,15 +70,6 @@ namespace Ninja.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://github.com/is-leeroy-jenkins/Ninja/blob/main/Contributors.md.
-        /// </summary>
-        public static string Ninja_Contributors {
-            get {
-                return ResourceManager.GetString("Ninja_Contributors", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Ninja.
         /// </summary>
         public static string Ninja_GitHub_Repo {
@@ -88,7 +79,7 @@ namespace Ninja.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to BornToBeRoot.
+        ///   Looks up a localized string similar to is-leeroy-jenkins.
         /// </summary>
         public static string Ninja_GitHub_User {
             get {
@@ -106,7 +97,7 @@ namespace Ninja.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GNU General Public License v3.0.
+        ///   Looks up a localized string similar to MIT General Public License.
         /// </summary>
         public static string Ninja_License {
             get {
@@ -165,15 +156,6 @@ namespace Ninja.Properties {
         public static string Ninja_TranslationUrl {
             get {
                 return ResourceManager.GetString("Ninja_TranslationUrl", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to https://twitter.com/_BornToBeRoot.
-        /// </summary>
-        public static string Ninja_TwitterUrl {
-            get {
-                return ResourceManager.GetString("Ninja_TwitterUrl", resourceCulture);
             }
         }
     }

@@ -120,14 +120,11 @@
   <data name="MicrosoftEdgeWebView2Runtime_DownloadUrl" xml:space="preserve">
     <value>https://developer.microsoft.com/en-us/microsoft-edge/webview2/</value>
   </data>
-  <data name="Ninja_Contributors" xml:space="preserve">
-    <value>https://github.com/is-leeroy-jenkins/Ninja/blob/main/Contributors.md</value>
-  </data>
   <data name="Ninja_GitHub_Repo" xml:space="preserve">
     <value>Ninja</value>
   </data>
   <data name="Ninja_GitHub_User" xml:space="preserve">
-    <value>BornToBeRoot</value>
+    <value>is-leeroy-jenkins</value>
   </data>
   <data name="Ninja_LatestReleaseUrl" xml:space="preserve">
     <value>https://borntoberoot.net/Ninja/Download</value>
@@ -152,8 +149,5 @@
   </data>
   <data name="Ninja_TranslationUrl" xml:space="preserve">
     <value>https://www.transifex.com/is-leeroy-jenkins/Ninja/</value>
-  </data>
-  <data name="Ninja_TwitterUrl" xml:space="preserve">
-    <value>https://twitter.com/_BornToBeRoot</value>
   </data>
 </root>

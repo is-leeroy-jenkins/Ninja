@@ -1,0 +1,503 @@
+﻿<NewDataSet>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="NewDataSet" xmlns="">
+<xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="Dictionary"
+            msdata:UseCurrentLocale="true">
+<xs:complexType>
+<xs:choice minOccurs="0" maxOccurs="unbounded">
+<xs:element name="Dictionary">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Key" type="xs:string" minOccurs="0" />
+<xs:element name="Value" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:choice>
+</xs:complexType>
+</xs:element>
+</xs:schema>
+<Dictionary>
+<Key> TranslationInfo </Key>
+<Value> English translation by Iván Costales Suárez (CompactView) </Value>
+</Dictionary>
+<Dictionary>
+<Key> OpenDatabase </Key>
+<Value> Open database </Value>
+</Dictionary>
+<Dictionary>
+<Key> ReadOnly </Key>
+<Value> Read only </Value>
+</Dictionary>
+<Dictionary>
+<Key> AllowEditing </Key>
+<Value> Allow editing </Value>
+</Dictionary>
+<Dictionary>
+<Key> Query </Key>
+<Value> Query </Value>
+</Dictionary>
+<Dictionary>
+<Key> Execute </Key>
+<Value> Execute </Value>
+</Dictionary>
+<Dictionary>
+<Key> Clear </Key>
+<Value> Clear </Value>
+</Dictionary>
+<Dictionary>
+<Key> Tools </Key>
+<Value> Tools </Value>
+</Dictionary>
+<Dictionary>
+<Key> About </Key>
+<Value> About </Value>
+</Dictionary>
+<Dictionary>
+<Key> Database </Key>
+<Value> Database </Value>
+</Dictionary>
+<Dictionary>
+<Key> Data </Key>
+<Value> Data </Value>
+</Dictionary>
+<Dictionary>
+<Key> SqlSchema </Key>
+<Value> SQL Schema </Value>
+</Dictionary>
+<Dictionary>
+<Key> FileName </Key>
+<Value> File name </Value>
+</Dictionary>
+<Dictionary>
+<Key> Password </Key>
+<Value> Password </Value>
+</Dictionary>
+<Dictionary>
+<Key> FileNameTip </Key>
+<Value> Database file name. Press the button to the right to select a file </Value>
+</Dictionary>
+<Dictionary>
+<Key> PasswordTip </Key>
+<Value> Database password. Leave blank if none </Value>
+</Dictionary>
+<Dictionary>
+<Key> SelectTip </Key>
+<Value> Select database file </Value>
+</Dictionary>
+<Dictionary>
+<Key> UpgradeToVersion </Key>
+<Value> Upgrade to version </Value>
+</Dictionary>
+<Dictionary>
+<Key> Action </Key>
+<Value> Action </Value>
+</Dictionary>
+<Dictionary>
+<Key> Create </Key>
+<Value> Create </Value>
+</Dictionary>
+<Dictionary>
+<Key> Compact </Key>
+<Value> Compact </Value>
+</Dictionary>
+<Dictionary>
+<Key> Repair </Key>
+<Value> Repair </Value>
+</Dictionary>
+<Dictionary>
+<Key> Shrink </Key>
+<Value> Shrink </Value>
+</Dictionary>
+<Dictionary>
+<Key> Upgrade </Key>
+<Value> Upgrade </Value>
+</Dictionary>
+<Dictionary>
+<Key> Verify </Key>
+<Value> Verify </Value>
+</Dictionary>
+<Dictionary>
+<Key> CreateTip </Key>
+<Value> Create a new database file </Value>
+</Dictionary>
+<Dictionary>
+<Key> CompactTip </Key>
+<Value> Reclaims wasted space in the database by creating a new database file from the existing
+file </Value>
+</Dictionary>
+<Dictionary>
+<Key> RepairTip </Key>
+<Value> Repair a corrupted database. First try to recover the corrupted rows, then remove the
+remaining corrupted rows </Value>
+</Dictionary>
+<Dictionary>
+<Key> ShrinkTip </Key>
+<Value> Reclaims wasted space in the database by moving empty pages to the end of the file, and
+then truncating the file </Value>
+</Dictionary>
+<Dictionary>
+<Key> UpgradeTip </Key>
+<Value> Upgrades a database from version 3.1 to 3.5. After the upgrade, the database will be
+encrypted if the source database was encrypted </Value>
+</Dictionary>
+<Dictionary>
+<Key> VerifyTip </Key>
+<Value> Recalculates the checksums for each page in the database and compares the new checksums to
+the expected values </Value>
+</Dictionary>
+<Dictionary>
+<Key> ToolsNote </Key>
+<Value> Before every action a copy of the database file will be created by appending 001, 002, 003
+etc to the file name </Value>
+</Dictionary>
+<Dictionary>
+<Key> Close </Key>
+<Value> Close </Value>
+</Dictionary>
+<Dictionary>
+<Key> Version </Key>
+<Value> Version </Value>
+</Dictionary>
+<Dictionary>
+<Key> AboutDescription </Key>
+<Value> SQL Server Compact Edition Database viewer and editor </Value>
+</Dictionary>
+<Dictionary>
+<Key> PasswordNote </Key>
+<Value> The database is encrypted, please provide the password to continue </Value>
+</Dictionary>
+<Dictionary>
+<Key> Ok </Key>
+<Value> OK </Value>
+</Dictionary>
+<Dictionary>
+<Key> Cancel </Key>
+<Value> Cancel </Value>
+</Dictionary>
+<Dictionary>
+<Key> FileNotFound </Key>
+<Value> File not found </Value>
+</Dictionary>
+<Dictionary>
+<Key> UnableToOpen </Key>
+<Value> Unable to open the database </Value>
+</Dictionary>
+<Dictionary>
+<Key> Error </Key>
+<Value> Error </Value>
+</Dictionary>
+<Dictionary>
+<Key> ChangingDataError </Key>
+<Value> Error changing the data </Value>
+</Dictionary>
+<Dictionary>
+<Key> Rows </Key>
+<Value> rows </Value>
+</Dictionary>
+<Dictionary>
+<Key> Milliseconds </Key>
+<Value> milliseconds </Value>
+</Dictionary>
+<Dictionary>
+<Key> QueryNote </Key>
+<Value> By clicking on any field bracketed in the SQL Schema, it is added to the query </Value>
+</Dictionary>
+<Dictionary>
+<Key> NoDatabaseSelect </Key>
+<Value> No database selected! </Value>
+</Dictionary>
+<Dictionary>
+<Key> DatabaseMissing </Key>
+<Value> Database file is missing! </Value>
+</Dictionary>
+<Dictionary>
+<Key> BackupError </Key>
+<Value> Error creating backup </Value>
+</Dictionary>
+<Dictionary>
+<Key> CreateError </Key>
+<Value> Error creating database </Value>
+</Dictionary>
+<Dictionary>
+<Key> CompactError </Key>
+<Value> Error compacting database </Value>
+</Dictionary>
+<Dictionary>
+<Key> RepairError </Key>
+<Value> Error repairing database </Value>
+</Dictionary>
+<Dictionary>
+<Key> ShrinkError </Key>
+<Value> Error shrinking database </Value>
+</Dictionary>
+<Dictionary>
+<Key> UpgradeError </Key>
+<Value> Error upgrading database </Value>
+</Dictionary>
+<Dictionary>
+<Key> VerifyError </Key>
+<Value> Error verifying database </Value>
+</Dictionary>
+<Dictionary>
+<Key> Information </Key>
+<Value> Information </Value>
+</Dictionary>
+<Dictionary>
+<Key> CreateDone </Key>
+<Value> Database created successfully </Value>
+</Dictionary>
+<Dictionary>
+<Key> CompactDone </Key>
+<Value> Database compacted successfully </Value>
+</Dictionary>
+<Dictionary>
+<Key> RepairDone </Key>
+<Value> Repairing completed successfully </Value>
+</Dictionary>
+<Dictionary>
+<Key> ShrinkDone </Key>
+<Value> Shrinking completed successfully </Value>
+</Dictionary>
+<Dictionary>
+<Key> UpgradeDone </Key>
+<Value> Upgrading completed successfully </Value>
+</Dictionary>
+<Dictionary>
+<Key> VerifyDone </Key>
+<Value> Verifying completed successfully </Value>
+</Dictionary>
+<Dictionary>
+<Key> VerifyFault </Key>
+<Value> Database is corrupted. In case of encrypted databases this may also indicate wrong password </Value>
+</Dictionary>
+<Dictionary>
+<Key> DatabaseInfoError </Key>
+<Value> Error getting database information </Value>
+</Dictionary>
+<Dictionary>
+<Key> Options </Key>
+<Value> Options </Value>
+</Dictionary>
+<Dictionary>
+<Key> Colors </Key>
+<Value> Colors </Value>
+</Dictionary>
+<Dictionary>
+<Key> FontColor </Key>
+<Value> Font Color </Value>
+</Dictionary>
+<Dictionary>
+<Key> BackgroundColor </Key>
+<Value> Background Color </Value>
+</Dictionary>
+<Dictionary>
+<Key> Line </Key>
+<Value> Line </Value>
+</Dictionary>
+<Dictionary>
+<Key> ColorSet </Key>
+<Value> Color Set </Value>
+</Dictionary>
+<Dictionary>
+<Key> UserDefined </Key>
+<Value> User defined </Value>
+</Dictionary>
+<Dictionary>
+<Key> Cut </Key>
+<Value> Cut </Value>
+</Dictionary>
+<Dictionary>
+<Key> Copy </Key>
+<Value> Copy </Value>
+</Dictionary>
+<Dictionary>
+<Key> Paste </Key>
+<Value> Paste </Value>
+</Dictionary>
+<Dictionary>
+<Key> LoadFromFile </Key>
+<Value> Load from file </Value>
+</Dictionary>
+<Dictionary>
+<Key> SaveToFile </Key>
+<Value> Save to file </Value>
+</Dictionary>
+<Dictionary>
+<Key> Querys </Key>
+<Value> Querys </Value>
+</Dictionary>
+<Dictionary>
+<Key> Print </Key>
+<Value> Print </Value>
+</Dictionary>
+<Dictionary>
+<Key> File </Key>
+<Value> File </Value>
+</Dictionary>
+<Dictionary>
+<Key> RecentFiles </Key>
+<Value> RecentFiles </Value>
+</Dictionary>
+<Dictionary>
+<Key> Import </Key>
+<Value> Import </Value>
+</Dictionary>
+<Dictionary>
+<Key> Export </Key>
+<Value> Export </Value>
+</Dictionary>
+<Dictionary>
+<Key> Exit </Key>
+<Value> Exit </Value>
+</Dictionary>
+<Dictionary>
+<Key> Edit </Key>
+<Value> Edit </Value>
+</Dictionary>
+<Dictionary>
+<Key> Delete </Key>
+<Value> Delete </Value>
+</Dictionary>
+<Dictionary>
+<Key> ShowEditor </Key>
+<Value> ShowEditor </Value>
+</Dictionary>
+<Dictionary>
+<Key> DatabaseTools </Key>
+<Value> DatabaseTools </Value>
+</Dictionary>
+<Dictionary>
+<Key> Help </Key>
+<Value> Help </Value>
+</Dictionary>
+<Dictionary>
+<Key> LoadSqlQuery </Key>
+<Value> Load SQL query </Value>
+</Dictionary>
+<Dictionary>
+<Key> SaveSqlQuery </Key>
+<Value> Save SQL query </Value>
+</Dictionary>
+<Dictionary>
+<Key> SaveSqlSchema </Key>
+<Value> Save SQL schema </Value>
+</Dictionary>
+<Dictionary>
+<Key> CloseDatabase </Key>
+<Value> Close database </Value>
+</Dictionary>
+<Dictionary>
+<Key> All </Key>
+<Value> All </Value>
+</Dictionary>
+<Dictionary>
+<Key> OnlySchema </Key>
+<Value> Only schema </Value>
+</Dictionary>
+<Dictionary>
+<Key> OnlyData </Key>
+<Value> Only data </Value>
+</Dictionary>
+<Dictionary>
+<Key> UsedAsAForeignKey </Key>
+<Value> is used as a foreign key by </Value>
+</Dictionary>
+<Dictionary>
+<Key> Warning </Key>
+<Value> Warning </Value>
+</Dictionary>
+<Dictionary>
+<Key> Schema </Key>
+<Value> Schema </Value>
+</Dictionary>
+<Dictionary>
+<Key> ImportFormatError </Key>
+<Value> File format to be imported is not correct </Value>
+</Dictionary>
+<Dictionary>
+<Key> ErrorImportingTablesSchema </Key>
+<Value> Error importing sql schema. Some tables to be imported already exist in the current
+database </Value>
+</Dictionary>
+<Dictionary>
+<Key> ErrorImportingTablesData </Key>
+<Value> Error importing sql data. Missing some table in which data should be imported </Value>
+</Dictionary>
+<Dictionary>
+<Key> ImportOk </Key>
+<Value> Import process completed successfully </Value>
+</Dictionary>
+<Dictionary>
+<Key> ImportError </Key>
+<Value> Error when running the import process </Value>
+</Dictionary>
+<Dictionary>
+<Key> Confirm </Key>
+<Value> Confirm </Value>
+</Dictionary>
+<Dictionary>
+<Key> SelectedTextQuery </Key>
+<Value> Do you want to execute the selected text only? </Value>
+</Dictionary>
+<Dictionary>
+<Key> Preview </Key>
+<Value> Print preview </Value>
+</Dictionary>
+<Dictionary>
+<Key> Property </Key>
+<Value> Property </Value>
+</Dictionary>
+<Dictionary>
+<Key> Value </Key>
+<Value> Value </Value>
+</Dictionary>
+<Dictionary>
+<Key> FilePath </Key>
+<Value> File Path </Value>
+</Dictionary>
+<Dictionary>
+<Key> FileSize </Key>
+<Value> File Size </Value>
+</Dictionary>
+<Dictionary>
+<Key> LocaleIdentifier </Key>
+<Value> Locale Identifier </Value>
+</Dictionary>
+<Dictionary>
+<Key> EncryptionMode </Key>
+<Value> Encryption Mode </Value>
+</Dictionary>
+<Dictionary>
+<Key> CaseSensitive </Key>
+<Value> Case Sensitive </Value>
+</Dictionary>
+<Dictionary>
+<Key> True </Key>
+<Value> Yes </Value>
+</Dictionary>
+<Dictionary>
+<Key> False </Key>
+<Value> No </Value>
+</Dictionary>
+<Dictionary>
+<Key> Tables </Key>
+<Value> Tables </Value>
+</Dictionary>
+<Dictionary>
+<Key> Indexes </Key>
+<Value> Indexes </Value>
+</Dictionary>
+<Dictionary>
+<Key> Keys </Key>
+<Value> Keys </Value>
+</Dictionary>
+<Dictionary>
+<Key> TableConstraints </Key>
+<Value> Table Constraints </Value>
+</Dictionary>
+<Dictionary>
+<Key> ForeignConstraints </Key>
+<Value> Foreign Constraints </Value>
+</Dictionary>
+</NewDataSet>
