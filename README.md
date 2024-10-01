@@ -2,7 +2,7 @@
 
 <div align="left">
   <p>
-    <a href="https://github.com/is-leeroy-jenkins/Ninja/blob/master/Ninja/Resources/Github/Users.md">Download</a> •  <a href="">Documentation</a> •<a href="https://github.com/is-leeroy-jenkins/Ninja/blob/master/Ninja/Resources/Github/Compilation.md">Build</a> • <a href="https://github.com/is-leeroy-jenkins/Ninja/blob/master/Ninja.Documentation/Licenses/Ninja.txt">License</a>
+    <a href="https://github.com/is-leeroy-jenkins/Ninja/blob/master/Ninja/Resources/Github/Compilation.md">Download</a> •  <a href="https://github.com/is-leeroy-jenkins/Ninja/tree/master?tab=readme-ov-file#--documentation">Documentation</a> • <a href="https://github.com/is-leeroy-jenkins/Ninja/blob/master/Ninja.Documentation/Licenses/Ninja.txt">License</a>
   </p>
   <p>
     <b>An open source tool for managing networks and troubleshooting network problems!</b>
