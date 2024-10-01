@@ -134,6 +134,6 @@ Ninja has integrated the following services for additional functions, which can 
 
 ## 📝 License
 
-Ninja is published under the [GNU General Public License v3](https://github.com/is-leeroy-jenkins/Ninja/blob/main/LICENSE).
+Ninja is published under the [MIT Public License](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Ninja.Documentation/Licenses/Ninja.txt).
 
-The licenses of the libraries used can be found [here](https://github.com/is-leeroy-jenkins/Ninja/tree/main/Source/Ninja.Documentation/Licenses).
+The licenses of the libraries used can be found [here](https://github.com/is-leeroy-jenkins/Ninja/blob/master/Ninja.Documentation/Licenses).
