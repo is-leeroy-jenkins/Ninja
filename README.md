@@ -2,7 +2,7 @@
 
 <div align="left">
   <p>
-    <a href="#-download">Download</a> •  <a href="#--documentation">Documentation</a> •<a href="#-build">Build</a> • <a href="#-license">License</a>
+    <a href="#-download">Download</a> •  <a href="https://github.com/is-leeroy-jenkins/Ninja/blob/master/Ninja/Resources/Github/Compilation.md">Documentation</a> •<a href="#-build">Build</a> • <a href="#-license">License</a>
   </p>
   <p>
     <b>A powerful open source tool for managing networks and troubleshooting network problems!</b>
